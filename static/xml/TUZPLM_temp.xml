@@ -1,0 +1,939 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<conference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://bel.gsi.de/docs/xml/conference.xsd" name="IPAC 2019, Melbourne, Australia">
+<session type="Oral">
+<name abbr="TUZPLM">Invited Orals: Beam Instrumentation, Controls, Feedback and Operational Aspects</name>
+<date btime="1400" etime="1500">21-May-19</date>
+<location type="Afternoon Invited Oral">Main Plenary (plenary 2)</location>
+<chairs>
+<chair>
+<lname>Minty</lname>
+<fname>Michiko</fname>
+<iname>M.G.</iname>
+<author_id>40303</author_id>
+<institutions>
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>minty@bnl.gov</email>
+<email>minty@bnl.gov</email>
+</emails>
+</chair>
+</chairs>
+<papers>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Leng</lname>
+<fname>Yongbin</fname>
+<iname>Y.B.</iname>
+<author_id>30859</author_id>
+<institutions>
+<institute>
+<full_name abbrev="SINAP" type="Academy of Sciences">Shanghai Institute of Applied Physics</full_name>
+<name1>Shanghai Institute of Applied Physics</name1>
+<URL>www.sinap.ac.cn</URL>
+<address1>2019 Jia Luo Road</address1>
+<po_box>PO Box 800-204</po_box>
+<town>Shanghai</town>
+<zip_code>201800</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="SSRF" type="Research Centre">Shanghai Synchrotron Radiation Facility</full_name>
+<name1>Shanghai Synchrotron Radiation Facility</name1>
+<address1>2019 Jia Luo Road</address1>
+<po_box>800-204</po_box>
+<town>Shanghai</town>
+<postal_code>201800</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="SINAP" type="Academy of Sciences">Shanghai Institute of Applied Physics</full_name>
+<name1>Shanghai Institute of Applied Physics</name1>
+<URL>www.sinap.ac.cn</URL>
+<address1>Zhangheng Road 239</address1>
+<address2>Pudong New District</address2>
+<town>Shanghai</town>
+<zip_code>201204</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>leng@sinap.ac.cn</email>
+<email>leng@sinap.ac.cn</email>
+<email>lengyongbin@sinap.ac.cn</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>1348</abstract_id>
+<pages>7</pages>
+<toc>1191</toc>
+<main_class>MC6: Beam Instrumentation, Controls, Feedback and Operational Aspects</main_class>
+<sub_class>T33 Online Modeling and Software Tools</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">TUZPLM1</code>
+<presentation type="Oral">Invited Oral</presentation>
+<start_time>1400</start_time>
+<duration>30</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>Adding Data Science and More Intelligence to Our Accelerator Toolbox</title>
+<abstract>Requirements for recent accelerators are becoming more and more stringent and sophisticated machine tuning is necessary. A large amount of data is acquired from accelerator components as an assistant of machine tuning. It is hard for operators to utilize all the accelerator data for machine tuning. Therefore, machine learning, data mining and big data handling are recently applied to accelerators. For instance, Bayesian optimization is used for maximizing a target performance, a clustering algorithm is used for anomaly detection, and hidden correlation finding is utilized for discovering new aspects of a machine. This talk reviews recent progress of machine learning applications and big data handling in accelerators.</abstract>
+<contributors>
+<contributor type="Co-Author">
+<lname>Biedron</lname>
+<fname>Sandra</fname>
+<iname>S.</iname>
+<author_id>2769</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="Industry">Element Aero</full_name>
+<name1>Element Aero</name1>
+<address1>9634 S Longwood Drive</address1>
+<town>Chicago</town>
+<zip_code>IL 60643</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>sgbiedron@elementaero.com</email>
+<email>biedron@unm.edu</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Biedron</lname>
+<fname>Sandra</fname>
+<iname>S.</iname>
+<author_id>2769</author_id>
+<institutions>
+<institute>
+<full_name abbrev="CSU" type="University">Colorado State University Department of Electrical and Computer Engineering</full_name>
+<name1>Colorado State University</name1>
+<department>Department of Electrical and Computer Engineering</department>
+<address1>Engineering Room B104</address1>
+<address2>1373 Campus Delivery</address2>
+<town>Fort Collins, Colorado</town>
+<zip_code>CO 80523-1373</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name type="Laboratory">Argonne National Laboratory Office of Naval Research Project</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Office of Naval Research Project</name2>
+<address1>9700 South Cass Avenue</address1>
+<address2>Building 200</address2>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name>Elettra-Sincrotrone Trieste S.C.p.A.</full_name>
+<name1>Elettra-Sincrotrone Trieste S.C.p.A.</name1>
+<URL>http://www.elettra.trieste.it/</URL>
+<address1>SS 14 - km 163,5 in Area Science Park</address1>
+<town>Basovizza</town>
+<postal_code>34149</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+<institute>
+<full_name type="University">University of Ljubljana Faculty of Electrical Engineering</full_name>
+<name1>University of Ljubljana</name1>
+<name2>Faculty of Electrical Engineering</name2>
+<address1>Trzaska 25</address1>
+<town>Ljubljana</town>
+<postal_code>1000</postal_code>
+<country_code abbrev="SI">Slovenia</country_code>
+</institute>
+<institute>
+<full_name type="Industry">Element Aero</full_name>
+<name1>Element Aero</name1>
+<address1>9634 S Longwood Drive</address1>
+<town>Chicago</town>
+<zip_code>IL 60643</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name type="University Department">University of New Mexico Department of Electrical and Computer Engineering</full_name>
+<name1>University of New Mexico</name1>
+<department>Department of Electrical and Computer Engineering</department>
+<address1>MSC01 100</address1>
+<address2>University of New Mexcio</address2>
+<town>Albuquerque</town>
+<zip_code>NM 87131</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>sgbiedron@elementaero.com</email>
+<email>biedron@unm.edu</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Biedron</lname>
+<fname>Sandra</fname>
+<iname>S.</iname>
+<author_id>2769</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name type="University Department">University of New Mexico Department of Electrical and Computer Engineering</full_name>
+<name1>University of New Mexico</name1>
+<department>Department of Electrical and Computer Engineering</department>
+<address1>MSC01 100</address1>
+<address2>University of New Mexcio</address2>
+<town>Albuquerque</town>
+<zip_code>NM 87131</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>sgbiedron@elementaero.com</email>
+<email>biedron@unm.edu</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Biedron</lname>
+<fname>Sandra</fname>
+<iname>S.</iname>
+<author_id>2769</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name type="University Department">University of New Mexico Department of Electrical and Computer Engineering</full_name>
+<name1>University of New Mexico</name1>
+<department>Department of Electrical and Computer Engineering</department>
+<address1>MSC01 100</address1>
+<address2>University of New Mexcio</address2>
+<town>Albuquerque</town>
+<zip_code>NM 87131</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>sgbiedron@elementaero.com</email>
+<email>biedron@unm.edu</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>TUZPLM1_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>TUZPLM1_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>TUZPLM1_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>TUZPLM1_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>TUZPLM1.docx</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>TUZPLM1.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>TUZPLM1.docx</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLM1&amp;wanted_file=TUZPLM1.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLM1&amp;wanted_file=TUZPLM1.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLM1&amp;wanted_file=TUZPLM1.docx</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLM1&amp;wanted_file=TUZPLM1_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLM1&amp;wanted_file=TUZPLM1_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLM1&amp;wanted_file=TUZPLM1_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLM1&amp;wanted_file=TUZPLM1_TALK.PDF</fileURL>
+</fileURLs>
+<editor>David Taylor Button</editor>
+<final_qa>Todd Satogata</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>03-Apr-2018 03:00:56</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>29-May-2018 06:56:52</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>29-May-2018 06:56:52</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AOC">Abstract Owner Changed</log_status>
+<timestamp>27-Jun-2018 00:26:03</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>20-Sep-2018 04:50:45</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>20-Sep-2018 04:50:45</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 23:30:08</timestamp>
+<comments>TUZPLM1_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 23:41:17</timestamp>
+<comments>TUZPLM1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>21-May-2019 23:10:23</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 23:31:04</timestamp>
+<comments>TUZPLM1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 23:34:12</timestamp>
+<comments>TUZPLM1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>21-May-2019 23:35:19</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Sandra,
+Your PowerPoint slides were converted successfully to PDF (with backup slides removed) and will be published in the conference proceedings. 
+Please download the PDF slides file (TUZPLM1_TALK.pdf) and check that all is OK. 
+In case of problems, please contact:
+jan.chrin@psi.ch 
+Thank you.
+</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>07-Jun-2019 02:08:19</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>07-Jun-2019 02:11:02</timestamp>
+<comments>TUZPLM1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>13-Jun-2019 01:07:25</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>13-Jun-2019 01:07:25</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>13-Jun-2019 01:29:30</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>13-Jun-2019 06:58:12</timestamp>
+<comments>TUZPLM1.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>13-Jun-2019 06:59:02</timestamp>
+<comments>TUZPLM1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>13-Jun-2019 07:02:41</timestamp>
+<editor_status code="G">Green</editor_status>
+<comments>Dear Sandra,
+
+Thank you for your well prepared paper.  I have just made slight tweaks to bring it up to the current template, including the conversion of doi's and urls to liberation mono.  Thanks once again for you submission.
+
+David  </comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>16-Jun-2019 01:58:35</timestamp>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Leng</lname>
+<fname>Yongbin</fname>
+<iname>Y.B.</iname>
+<author_id>30859</author_id>
+<institutions>
+<institute>
+<full_name abbrev="SINAP" type="Academy of Sciences">Shanghai Institute of Applied Physics</full_name>
+<name1>Shanghai Institute of Applied Physics</name1>
+<URL>www.sinap.ac.cn</URL>
+<address1>2019 Jia Luo Road</address1>
+<po_box>PO Box 800-204</po_box>
+<town>Shanghai</town>
+<zip_code>201800</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="SSRF" type="Research Centre">Shanghai Synchrotron Radiation Facility</full_name>
+<name1>Shanghai Synchrotron Radiation Facility</name1>
+<address1>2019 Jia Luo Road</address1>
+<po_box>800-204</po_box>
+<town>Shanghai</town>
+<postal_code>201800</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="SINAP" type="Academy of Sciences">Shanghai Institute of Applied Physics</full_name>
+<name1>Shanghai Institute of Applied Physics</name1>
+<URL>www.sinap.ac.cn</URL>
+<address1>Zhangheng Road 239</address1>
+<address2>Pudong New District</address2>
+<town>Shanghai</town>
+<zip_code>201204</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>leng@sinap.ac.cn</email>
+<email>leng@sinap.ac.cn</email>
+<email>lengyongbin@sinap.ac.cn</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>1436</abstract_id>
+<pages>5</pages>
+<toc>1198</toc>
+<main_class>MC6: Beam Instrumentation, Controls, Feedback and Operational Aspects</main_class>
+<sub_class>T03 Beam Diagnostics and Instrumentation</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">TUZPLM2</code>
+<presentation type="Oral">Invited Oral</presentation>
+<start_time>1430</start_time>
+<duration>30</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>Optics Measurements at SuperKEKB Using Beam Based Calibration for BPM and BBA</title>
+<abstract>The beam-based calibration(BBC) technique for Beam-Position-Monitor(BPM) is applied in order to establish reliable optics measurement. In the BBC, a response model between beam position, charge and output signals of the BPM electrodes are introduced to calibrate the relative gain of the BPM electrodes. The gains are adjusted by total squares fitting so that the model reproduces the measured BPM signals. The Beam-Based Alignment(BBA) is also performed to determine the magnetic center of a quadrupole. Using BBC and BBA, the performance of the BPM system and optics correction are successfully improved. This talk presents what we experienced during the beam commissioning focusing on beam optics measurement and some details on the beam-based calibration scheme for BPM system.</abstract>
+<contributors>
+<contributor type="Co-Author">
+<lname>Koiso</lname>
+<fname>Haruyo</fname>
+<iname>H.</iname>
+<author_id>922</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="KEK" type="Laboratory">High Energy Accelerator Research Organization</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<URL>http://www.kek.jp/intra.html</URL>
+<address1>1-1 Oho</address1>
+<address2>Tsukuba</address2>
+<town>Ibaraki</town>
+<zip_code>305-0801</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>haruyo.koiso@kek.jp</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Mori</lname>
+<fname>Kenji</fname>
+<iname>K.</iname>
+<author_id>12765</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="KEK" type="Laboratory">High Energy Accelerator Research Organization</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<URL>http://www.kek.jp/intra.html</URL>
+<address1>1-1 Oho</address1>
+<address2>Tsukuba</address2>
+<town>Ibaraki</town>
+<zip_code>305-0801</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>kenji.mori@kek.jp</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Morita</lname>
+<fname>Akio</fname>
+<iname>A.</iname>
+<author_id>2997</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="KEK" type="Laboratory">High Energy Accelerator Research Organization</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<URL>http://www.kek.jp/intra.html</URL>
+<address1>1-1 Oho</address1>
+<address2>Tsukuba</address2>
+<town>Ibaraki</town>
+<zip_code>305-0801</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>akio.morita@kek.jp</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Ohnishi</lname>
+<fname>Yukiyoshi</fname>
+<iname>Y.</iname>
+<author_id>956</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="KEK" type="Laboratory">High Energy Accelerator Research Organization</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<URL>http://www.kek.jp/intra.html</URL>
+<address1>1-1 Oho</address1>
+<address2>Tsukuba</address2>
+<town>Ibaraki</town>
+<zip_code>305-0801</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>yukiyoshi.onishi@kek.jp</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Tejima</lname>
+<fname>Masaki</fname>
+<iname>M.</iname>
+<author_id>914</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="KEK" type="Laboratory">High Energy Accelerator Research Organization</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<URL>http://www.kek.jp/intra.html</URL>
+<address1>1-1 Oho</address1>
+<address2>Tsukuba</address2>
+<town>Ibaraki</town>
+<zip_code>305-0801</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>masaki.tejima@kek.jp</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Sugimoto</lname>
+<fname>Hiroshi</fname>
+<iname>H.</iname>
+<author_id>32582</author_id>
+<institutions>
+<institute>
+<full_name abbrev="KEK" type="Laboratory">High Energy Accelerator Research Organization</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<URL>http://www.kek.jp/intra.html</URL>
+<address1>1-1 Oho</address1>
+<address2>Tsukuba</address2>
+<town>Ibaraki</town>
+<zip_code>305-0801</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="HU/AdSM" type="University Department">Hiroshima University Graduate School of Advanced Sciences of Matter Department of Quantum Matter</full_name>
+<name1>Hiroshima University</name1>
+<name2>Graduate School of Advanced Sciences of Matter</name2>
+<department>Department of Quantum Matter</department>
+<URL>http://www.adsm.hiroshima-u.ac.jp/english/</URL>
+<address1>1-3-1 Kagamiyama</address1>
+<town>Higashi-Hiroshima</town>
+<zip_code>739-8530</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>hiroshi.sugimoto@kek.jp</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Sugimoto</lname>
+<fname>Hiroshi</fname>
+<iname>H.</iname>
+<author_id>32582</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="KEK" type="Laboratory">High Energy Accelerator Research Organization</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<URL>http://www.kek.jp/intra.html</URL>
+<address1>1-1 Oho</address1>
+<address2>Tsukuba</address2>
+<town>Ibaraki</town>
+<zip_code>305-0801</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>hiroshi.sugimoto@kek.jp</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Sugimoto</lname>
+<fname>Hiroshi</fname>
+<iname>H.</iname>
+<author_id>32582</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="KEK" type="Laboratory">High Energy Accelerator Research Organization</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<URL>http://www.kek.jp/intra.html</URL>
+<address1>1-1 Oho</address1>
+<address2>Tsukuba</address2>
+<town>Ibaraki</town>
+<zip_code>305-0801</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>hiroshi.sugimoto@kek.jp</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>TUZPLM2f1.eps</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>TUZPLM2f2.eps</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>TUZPLM2f3.eps</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>TUZPLM2f4.eps</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>TUZPLM2f5.png</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>TUZPLM2f6.eps</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>TUZPLM2f7.eps</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>TUZPLM2f8.eps</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>TUZPLM2.tex</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>TUZPLM2_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>TUZPLM2.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>TUZPLM2_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>TUZPLM2_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>TUZPLM2_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>TUZPLM2.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLM2&amp;wanted_file=TUZPLM2f3.eps</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLM2&amp;wanted_file=TUZPLM2f1.eps</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLM2&amp;wanted_file=TUZPLM2f8.eps</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLM2&amp;wanted_file=TUZPLM2f7.eps</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLM2&amp;wanted_file=TUZPLM2f5.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLM2&amp;wanted_file=TUZPLM2f6.eps</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLM2&amp;wanted_file=TUZPLM2f4.eps</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLM2&amp;wanted_file=TUZPLM2f2.eps</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLM2&amp;wanted_file=TUZPLM2.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLM2&amp;wanted_file=TUZPLM2_AUTHOR.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLM2&amp;wanted_file=TUZPLM2.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLM2&amp;wanted_file=TUZPLM2.tex</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLM2&amp;wanted_file=TUZPLM2_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLM2&amp;wanted_file=TUZPLM2_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLM2&amp;wanted_file=TUZPLM2_TALK.PDF</fileURL>
+</fileURLs>
+<editor>Jana Leah Thomson</editor>
+<final_qa>Evelyn Akers</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>04-Apr-2018 11:06:03</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>29-May-2018 06:58:33</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>29-May-2018 06:58:33</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>31-May-2018 03:22:32</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>31-May-2018 03:22:32</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AOC">Abstract Owner Changed</log_status>
+<timestamp>27-Jun-2018 00:26:03</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>20-Sep-2018 04:51:53</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>20-Sep-2018 04:51:53</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 07:35:25</timestamp>
+<comments>TUZPLM2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 07:35:44</timestamp>
+<comments>TUZPLM2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 07:36:44</timestamp>
+<comments>TUZPLM2f1.eps</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 07:36:58</timestamp>
+<comments>TUZPLM2f2.eps</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 07:37:08</timestamp>
+<comments>TUZPLM2f3.eps</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 07:37:17</timestamp>
+<comments>TUZPLM2f4.eps</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 07:37:33</timestamp>
+<comments>TUZPLM2f5.eps</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 07:38:42</timestamp>
+<comments>TUZPLM2f5.eps</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 07:38:53</timestamp>
+<comments>TUZPLM2f5.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 07:39:06</timestamp>
+<comments>TUZPLM2f6.eps</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 07:39:28</timestamp>
+<comments>TUZPLM2f7.eps</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 07:39:38</timestamp>
+<comments>TUZPLM2f8.eps</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 11:39:50</timestamp>
+<comments>TUZPLM2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 11:39:53</timestamp>
+<comments>TUZPLM2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 11:40:29</timestamp>
+<comments>TUZPLM2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 11:40:44</timestamp>
+<comments>TUZPLM2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 13:46:50</timestamp>
+<comments>TUZPLM2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 13:46:52</timestamp>
+<comments>TUZPLM2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 13:47:25</timestamp>
+<comments>TUZPLM2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 13:47:41</timestamp>
+<comments>TUZPLM2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>18-May-2019 09:41:18</timestamp>
+<comments>TUZPLM2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>18-May-2019 09:41:21</timestamp>
+<comments>TUZPLM2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>18-May-2019 09:41:40</timestamp>
+<comments>TUZPLM2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>18-May-2019 09:41:57</timestamp>
+<comments>TUZPLM2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>19-May-2019 05:22:40</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 05:31:16</timestamp>
+<comments>TUZPLM2.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>19-May-2019 05:31:52</timestamp>
+<editor_status code="G">Green</editor_status>
+<comments>Thank you  - enjoy the conference.
+Jana (TRIUMF)</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 09:58:19</timestamp>
+<comments>TUZPLM2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 10:20:35</timestamp>
+<comments>TUZPLM2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>21-May-2019 23:10:28</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 23:44:13</timestamp>
+<comments>TUZPLM2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>21-May-2019 23:45:51</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Author,
+The pdf of your talk has been processed (intermediate and backup slides removed) and will be included in the proceedings.
+Please download the PDF
+slides file (TUZPLM2_TALK.pdf) and check that all is OK. 
+In the event of a problem, please contact:
+jan.chrin@psi.ch 
+Thank you.
+</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 03:47:39</timestamp>
+<comments>TUZPLM2.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>22-May-2019 03:48:21</timestamp>
+<comments>Minor adjustment to column up/down alignment page 5, column 2.</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+</papers>
+</session>
+</conference>

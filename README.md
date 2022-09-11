@@ -1,8 +1,12 @@
-# Sample GitLab Project
+# JPSP-NG - README
 
-This sample project shows how a project in GitLab looks for demonstration purposes. It contains issues, merge requests and Markdown files in many branches,
-named and filled with lorem ipsum.
+JPSP-NG (JACoW Proceedings Script Package New Generation) is a collection of tools and scripts to generate
+the proceedings from data managed in SPMS and stored on PSI or JLab file servers to be
+published on JACoW at CERN and KEK.
 
-You can look around to get an idea how to structure your project and, when done, you can safely delete this project.
+JPSP can be used pre-conference to generate abstract booklets, during conference
+to check on errors in the processed PDFs, and post-conference to generate the proceedings.
 
-[Learn more about creating GitLab projects.](https://docs.gitlab.com/ee/gitlab-basics/create-project.html)
+The Joint Accelerator Conferences Website (JACoW) is an international collaboration that publishes the proceedings of accelerator conferences held around the world.
+
+[Joint Accelerator Conferences Website](https://www.jacow.org/)

@@ -1,0 +1,865 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<conference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://bel.gsi.de/docs/xml/conference.xsd" name="IPAC 2019, Melbourne, Australia">
+<session type="Oral">
+<name abbr="THYPLS">Invited Orals: Beam Instrumentation, Controls, Feedback and Operation</name>
+<date btime="1100" etime="1130">23-May-19</date>
+<location type="After Coffee Invited Oral">Secondary Plenary (plenary 3)</location>
+<chairs>
+<chair>
+<lname>Mitsuhashi</lname>
+<fname>Toshiyuki</fname>
+<iname>T.M.</iname>
+<author_id>985</author_id>
+<institutions>
+<institute>
+<full_name abbrev="KEK" type="Laboratory">High Energy Accelerator Research Organization</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<URL>http://www.kek.jp/intra.html</URL>
+<address1>1-1 Oho</address1>
+<address2>Tsukuba</address2>
+<town>Ibaraki</town>
+<zip_code>305-0801</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>toshiyuki.mitsuhashi@kek.jp</email>
+<email>toshiyuki.mitsuhashi@kek.jp</email>
+<email>toshiyuki.mitsuhashi@kek.jp</email>
+</emails>
+</chair>
+</chairs>
+<papers>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Leng</lname>
+<fname>Yongbin</fname>
+<iname>Y.B.</iname>
+<author_id>30859</author_id>
+<institutions>
+<institute>
+<full_name abbrev="SINAP" type="Academy of Sciences">Shanghai Institute of Applied Physics</full_name>
+<name1>Shanghai Institute of Applied Physics</name1>
+<URL>www.sinap.ac.cn</URL>
+<address1>2019 Jia Luo Road</address1>
+<po_box>PO Box 800-204</po_box>
+<town>Shanghai</town>
+<zip_code>201800</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="SSRF" type="Research Centre">Shanghai Synchrotron Radiation Facility</full_name>
+<name1>Shanghai Synchrotron Radiation Facility</name1>
+<address1>2019 Jia Luo Road</address1>
+<po_box>800-204</po_box>
+<town>Shanghai</town>
+<postal_code>201800</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="SINAP" type="Academy of Sciences">Shanghai Institute of Applied Physics</full_name>
+<name1>Shanghai Institute of Applied Physics</name1>
+<URL>www.sinap.ac.cn</URL>
+<address1>Zhangheng Road 239</address1>
+<address2>Pudong New District</address2>
+<town>Shanghai</town>
+<zip_code>201204</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>leng@sinap.ac.cn</email>
+<email>leng@sinap.ac.cn</email>
+<email>lengyongbin@sinap.ac.cn</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>1239</abstract_id>
+<pages>5</pages>
+<toc>3414</toc>
+<main_class>MC6: Beam Instrumentation, Controls, Feedback and Operational Aspects</main_class>
+<sub_class>T27 Low Level RF</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">THYPLS1</code>
+<presentation type="Oral">Invited Oral</presentation>
+<start_time>1100</start_time>
+<duration>30</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>RF Controls Towards Femtosecond and Attosecond Precision</title>
+<abstract>In the past two decades, RF controls have improved by two orders in magnitude achieving meanwhile sub-10 fs phase stabilities and 10-4 amplitude precision. Advances are through improved field detection methods and massive usage of digital signal procession on very powerful field programmable gate arrays (FPGAs). The question rise, what can be achieved in the next 10 years? In this talk, a review is given of existing systems and strategies, current stability limitations of RF control system and new technologies with the potential to achieve attosecond resolutions.</abstract>
+<contributors>
+<contributor type="Co-Author">
+<lname>Branlard</lname>
+<fname>Julien</fname>
+<iname>J.</iname>
+<author_id>23910</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>julien.branlard@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Butkowski</lname>
+<fname>Lukasz</fname>
+<iname>L.</iname>
+<author_id>41081</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>lukasz.butkowski@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Czwalinna</lname>
+<fname>Marie</fname>
+<mname>Kristin</mname>
+<iname>M.K.</iname>
+<author_id>41105</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY" type="Research Centre">Deutsches Elektronen-Synchrotron MSK Department</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<department>MSK Department</department>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>marie.kristin.czwalinna@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Hierholzer</lname>
+<fname>Martin</fname>
+<iname>M.</iname>
+<author_id>84608</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY" type="Research Centre">Deutsches Elektronen-Synchrotron MSK Department</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<department>MSK Department</department>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>martin.christoph.hierholzer@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Hoffmann</lname>
+<fname>Matthias</fname>
+<iname>M.</iname>
+<author_id>22381</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>m.hoffmann@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Killenberg</lname>
+<fname>Martin</fname>
+<iname>M.</iname>
+<author_id>69013</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY" type="Research Centre">Deutsches Elektronen-Synchrotron MSK Department</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<department>MSK Department</department>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>martin.killenberg@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Kuntzsch</lname>
+<fname>Michael</fname>
+<iname>M.</iname>
+<author_id>41572</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="HZDR" type="Institute">Helmholtz-Zentrum Dresden-Rossendorf Institute of Radiation Physics Radiation Source ELBE</full_name>
+<name1>Helmholtz-Zentrum Dresden-Rossendorf</name1>
+<name2>Institute of Radiation Physics</name2>
+<department>Radiation Source ELBE</department>
+<URL>https://www.hzdr.de/</URL>
+<address1>Bautzner Landstrasse 400</address1>
+<po_box>VAT DE 140 213 784</po_box>
+<town>Dresden</town>
+<postal_code>01328</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>m.kuntzsch@hzdr.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Lamb</lname>
+<fname>Thorsten</fname>
+<iname>T.</iname>
+<author_id>47099</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>thorsten.lamb@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Marjanovic</lname>
+<fname>Jan</fname>
+<iname>J.</iname>
+<author_id>107649</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY" type="Research Centre">Deutsches Elektronen-Synchrotron MSK Department</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<department>MSK Department</department>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jan.marjanovic@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Mavric</lname>
+<fname>Uros</fname>
+<iname>U.</iname>
+<author_id>41658</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>uros.mavric@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Mueller</lname>
+<fname>Jost</fname>
+<iname>J.M.</iname>
+<author_id>29907</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jost.mueller@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Pfeiffer</lname>
+<fname>Sven</fname>
+<iname>S.</iname>
+<author_id>52703</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>sven.pfeiffer@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Schlarb</lname>
+<fname>Holger</fname>
+<iname>H.</iname>
+<author_id>376</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>holger.schlarb@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Schmidt</lname>
+<fname>Christian</fname>
+<iname>Ch.</iname>
+<author_id>40233</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>christian.schmidt@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Springer</lname>
+<fname>Louise</fname>
+<iname>L.</iname>
+<author_id>114017</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY" type="Research Centre">Deutsches Elektronen-Synchrotron MSK Department</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<department>MSK Department</department>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>louise.springer@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Zenker</lname>
+<fname>Klaus</fname>
+<iname>K.</iname>
+<author_id>112128</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="HZDR" type="Institute">Helmholtz-Zentrum Dresden-Rossendorf Institute of Radiation Physics Radiation Source ELBE</full_name>
+<name1>Helmholtz-Zentrum Dresden-Rossendorf</name1>
+<name2>Institute of Radiation Physics</name2>
+<department>Radiation Source ELBE</department>
+<URL>https://www.hzdr.de/</URL>
+<address1>Bautzner Landstrasse 400</address1>
+<po_box>VAT DE 140 213 784</po_box>
+<town>Dresden</town>
+<postal_code>01328</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>k.zenker@hzdr.de</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Ludwig</lname>
+<fname>Frank</fname>
+<iname>F.</iname>
+<author_id>5589</author_id>
+<institutions>
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>frank.ludwig@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Ludwig</lname>
+<fname>Frank</fname>
+<iname>F.</iname>
+<author_id>5589</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>frank.ludwig@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Ludwig</lname>
+<fname>Frank</fname>
+<iname>F.</iname>
+<author_id>5589</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>frank.ludwig@desy.de</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYPLS1f1.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYPLS1f2.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYPLS1f4.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYPLS1f5.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYPLS1f6.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYPLS1f7.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYPLS1f3.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYPLS1f8.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>THYPLS1.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>THYPLS1_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>THYPLS1.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>THYPLS1.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="MOV">Talk Movies</file_type>
+<name>THYPLS1f4.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="MOV">Talk Movies</file_type>
+<name>THYPLS1f8.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>THYPLS1.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>THYPLS1.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THYPLS1_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THYPLS1_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>THYPLS1.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THYPLS1_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Talk Movies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYPLS1&amp;wanted_file=THYPLS1f4.png</fileURL>
+<fileURL type="Talk Movies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYPLS1&amp;wanted_file=THYPLS1f8.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYPLS1&amp;wanted_file=THYPLS1f5.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYPLS1&amp;wanted_file=THYPLS1f6.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYPLS1&amp;wanted_file=THYPLS1f3.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYPLS1&amp;wanted_file=THYPLS1f8.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYPLS1&amp;wanted_file=THYPLS1f4.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYPLS1&amp;wanted_file=THYPLS1f7.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYPLS1&amp;wanted_file=THYPLS1f1.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYPLS1&amp;wanted_file=THYPLS1f2.png</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYPLS1&amp;wanted_file=THYPLS1.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYPLS1&amp;wanted_file=THYPLS1.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYPLS1&amp;wanted_file=THYPLS1_AUTHOR.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYPLS1&amp;wanted_file=THYPLS1.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYPLS1&amp;wanted_file=THYPLS1.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYPLS1&amp;wanted_file=THYPLS1.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYPLS1&amp;wanted_file=THYPLS1.docx</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYPLS1&amp;wanted_file=THYPLS1_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYPLS1&amp;wanted_file=THYPLS1_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYPLS1&amp;wanted_file=THYPLS1_TALK.PDF</fileURL>
+</fileURLs>
+<editor>Akihiro Shirakawa</editor>
+<final_qa>Kathleen Riches</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>28-Mar-2018 13:47:49</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>29-Mar-2018 07:19:40</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>29-May-2018 07:12:59</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>29-May-2018 07:12:59</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AOC">Abstract Owner Changed</log_status>
+<timestamp>27-Jun-2018 00:26:03</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>20-Sep-2018 04:51:16</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>20-Sep-2018 04:51:16</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>28-Nov-2018 23:53:07</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>28-Nov-2018 23:53:07</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 15:59:06</timestamp>
+<comments>THYPLS1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 15:59:33</timestamp>
+<comments>THYPLS1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 16:02:44</timestamp>
+<comments>THYPLS1f1.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 16:02:57</timestamp>
+<comments>THYPLS1f2.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 16:03:32</timestamp>
+<comments>THYPLS1f3.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 16:04:12</timestamp>
+<comments>THYPLS1f4.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 16:06:55</timestamp>
+<comments>THYPLS1f5.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 16:07:12</timestamp>
+<comments>THYPLS1f6.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 16:07:28</timestamp>
+<comments>THYPLS1f7.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 16:12:23</timestamp>
+<comments>THYPLS1f8.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 19:15:20</timestamp>
+<comments>THYPLS1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 19:15:26</timestamp>
+<comments>THYPLS1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 19:18:54</timestamp>
+<comments>THYPLS1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 19:19:10</timestamp>
+<comments>THYPLS1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 19:48:31</timestamp>
+<comments>THYPLS1f3.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 19:48:37</timestamp>
+<comments>THYPLS1f8.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 19:49:17</timestamp>
+<comments>THYPLS1f3.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 19:49:32</timestamp>
+<comments>THYPLS1f8.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 19:49:39</timestamp>
+<comments>THYPLS1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 19:49:44</timestamp>
+<comments>THYPLS1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 19:50:20</timestamp>
+<comments>THYPLS1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 19:56:13</timestamp>
+<comments>THYPLS1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 19:56:39</timestamp>
+<comments>THYPLS1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 19:56:54</timestamp>
+<comments>THYPLS1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>18-May-2019 22:51:49</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>18-May-2019 23:55:51</timestamp>
+<comments>THYPLS1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>18-May-2019 23:56:04</timestamp>
+<comments>THYPLS1.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>18-May-2019 23:56:43</timestamp>
+<editor_status code="Y">Yellow</editor_status>
+<comments>Modified breaking line point at author list; 
+Capitalized &quot;S&quot; in &quot;Stability&quot; in subsection heading in page 3; 
+Modified References. 
+</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="REDC">Author rejected the Editor's changes</log_status>
+<timestamp>19-May-2019 01:43:15</timestamp>
+<comments>All comments are accepted, but I'm uploading a new *.docx and *.pdf with 3 modifications:
+1. Figure 4 is updated, Figure 4 description is updated
+2. Figure 8 is updated
+3. Last sentence in paragraph &quot;Receiver Concepts &quot; is changed.</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 01:46:19</timestamp>
+<comments>THYPLS1f4.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 01:46:53</timestamp>
+<comments>THYPLS1f8.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 02:04:46</timestamp>
+<comments>THYPLS1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 02:05:09</timestamp>
+<comments>THYPLS1.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>19-May-2019 02:05:43</timestamp>
+<editor_status code="Y">Yellow</editor_status>
+<comments>Updated as per Author's request. 
+</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="DR">Dot Reassignment</log_status>
+<timestamp>20-May-2019 00:57:32</timestamp>
+<editor_status code="G">Green</editor_status>
+<comments>Author agreed to change status to green</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 03:56:07</timestamp>
+<comments>THYPLS1_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 04:15:20</timestamp>
+<comments>THYPLS1_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>23-May-2019 00:37:15</timestamp>
+<comments>THYPLS1.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>23-May-2019 00:37:28</timestamp>
+<comments>Corrected figure citations</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>24-May-2019 00:02:36</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>24-May-2019 00:07:04</timestamp>
+<comments>THYPLS1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>24-May-2019 00:08:21</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Frank,
+Your PowerPoint slides were successfully converted to PDF (with intermediate and backup slides removed and will be published in the conference proceedings. 
+Please download the PDF slides file (THYPLS1_TALK.pdf) and check that all is OK. 
+In case of problems, please contact:
+Jan.chrin@psi.ch
+Thank you.
+</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+</papers>
+</session>
+</conference>

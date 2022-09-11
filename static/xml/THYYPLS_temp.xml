@@ -1,0 +1,2768 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<conference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://bel.gsi.de/docs/xml/conference.xsd" name="IPAC 2019, Melbourne, Australia">
+<session type="Oral">
+<name abbr="THYYPLS">Contributed Orals: Beam Instrumentation, Controls, Feedback and Operation</name>
+<date btime="1130" etime="1230">23-May-19</date>
+<location type="After Coffee Contributed Oral">Secondary Plenary (plenary 3)</location>
+<chairs>
+<chair>
+<lname>Mitsuhashi</lname>
+<fname>Toshiyuki</fname>
+<iname>T.M.</iname>
+<author_id>985</author_id>
+<institutions>
+<institute>
+<full_name abbrev="KEK" type="Laboratory">High Energy Accelerator Research Organization</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<URL>http://www.kek.jp/intra.html</URL>
+<address1>1-1 Oho</address1>
+<address2>Tsukuba</address2>
+<town>Ibaraki</town>
+<zip_code>305-0801</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>toshiyuki.mitsuhashi@kek.jp</email>
+<email>toshiyuki.mitsuhashi@kek.jp</email>
+<email>toshiyuki.mitsuhashi@kek.jp</email>
+</emails>
+</chair>
+</chairs>
+<papers>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Leng</lname>
+<fname>Yongbin</fname>
+<iname>Y.B.</iname>
+<author_id>30859</author_id>
+<institutions>
+<institute>
+<full_name abbrev="SINAP" type="Academy of Sciences">Shanghai Institute of Applied Physics</full_name>
+<name1>Shanghai Institute of Applied Physics</name1>
+<URL>www.sinap.ac.cn</URL>
+<address1>2019 Jia Luo Road</address1>
+<po_box>PO Box 800-204</po_box>
+<town>Shanghai</town>
+<zip_code>201800</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="SSRF" type="Research Centre">Shanghai Synchrotron Radiation Facility</full_name>
+<name1>Shanghai Synchrotron Radiation Facility</name1>
+<address1>2019 Jia Luo Road</address1>
+<po_box>800-204</po_box>
+<town>Shanghai</town>
+<postal_code>201800</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="SINAP" type="Academy of Sciences">Shanghai Institute of Applied Physics</full_name>
+<name1>Shanghai Institute of Applied Physics</name1>
+<URL>www.sinap.ac.cn</URL>
+<address1>Zhangheng Road 239</address1>
+<address2>Pudong New District</address2>
+<town>Shanghai</town>
+<zip_code>201204</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>leng@sinap.ac.cn</email>
+<email>leng@sinap.ac.cn</email>
+<email>lengyongbin@sinap.ac.cn</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>2048</abstract_id>
+<pages>4</pages>
+<toc>3427</toc>
+<main_class>MC6: Beam Instrumentation, Controls, Feedback and Operational Aspects</main_class>
+<sub_class>T27 Low Level RF</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">THYYPLS1</code>
+<presentation type="Oral">Contributed Oral</presentation>
+<start_time>1130</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>On-Demand Beam Route and RF Parameter Switching System for Time-Sharing of a Linac for X-ray Free-Electron Laser as an Injector to a 4th-Generation Synchrotron Radiation Source</title>
+<abstract>We have an upgrade plan of the SPring-8 storage ring to provide much more brilliant X-rays with a low-emittance electron beam. Since the upgraded ring requires a low-emittance injection beam, we are planning to timeshare the linac of the X-ray free electron laser (XFEL) facility, SACLA, as an injector for the upgraded ring. The SACLA linac delivers low-emittance and short-bunch electron beams to two XFEL beamlines with a 60 Hz repetition rate. The beam route is right now equally changed by a kicker magnet at a switchyard. The beam parameter is also optimized for each XFEL beamline by changing RF parameters pulse-by-pulse with simple software at this moment*. Since the number of beam injection shots to the storage ring is much less frequent than XFEL shots, one of the XFEL shots must be overridden by an injection with on-demand basis. In addition, the beam quality, such as 1 mm mrad normalized emittance, 10 fs bunch length and 10 kA peak current, must be maintained not to deteriorate the XFEL performance. Therefore, we have developed an on-demand beam route and RF parameter switching system with sufficient speed, precision and reliability. A beam route data is transmitted to each accelerator unit by a reflective memory network, and special software changes the parameters of each accelerator unit pulse-by-pulse according to the received data. We tested the on-demand switching system at a test bench and the SACLA linac. The beam parameters were appropriately controlled with a negligible failure rate. The user service of the beam injection from SACLA to SPring-8 is scheduled in 2020 and the on-demand switching system is almost ready for the time-sharing operation of multiple XFEL beamlines and a SPring-8 injection.</abstract>
+<footnote>* T. Hara et al., Phys. Rev. Accel. Beams 21, 040701 (2018).</footnote>
+<contributors>
+<contributor type="Co-Author">
+<lname>Fukui</lname>
+<fname>Toru</fname>
+<iname>T.</iname>
+<author_id>24697</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="Research Centre">RIKEN SPring-8 Center XFEL Research and Development Division</full_name>
+<name1>RIKEN SPring-8 Center</name1>
+<department>XFEL Research and Development Division</department>
+<address1>1-1-1, Kouto</address1>
+<town>Sayo-cho, Sayo-gun, Hyogo</town>
+<zip_code>679-5148</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>fukui@spring8.or.jp</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Hara</lname>
+<fname>Toru</fname>
+<iname>T.</iname>
+<author_id>287</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="Research Centre">RIKEN SPring-8 Center XFEL Research and Development Division</full_name>
+<name1>RIKEN SPring-8 Center</name1>
+<department>XFEL Research and Development Division</department>
+<address1>1-1-1, Kouto</address1>
+<town>Sayo-cho, Sayo-gun, Hyogo</town>
+<zip_code>679-5148</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>toru@spring8.or.jp</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Hasegawa</lname>
+<fname>Taichi</fname>
+<iname>T.</iname>
+<author_id>41363</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="SES">SPring-8 Service Co. Ltd.</full_name>
+<name1>SPring-8 Service Co. Ltd.</name1>
+<address1>2-23-1 Kouto</address1>
+<address2>Kamigouri-cho</address2>
+<address3>Ako-gun</address3>
+<town>Hyogo-pref.</town>
+<zip_code>678-1205</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>hasegawa-t@spring8.or.jp</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Hosoda</lname>
+<fname>Naoyasu</fname>
+<iname>N.</iname>
+<author_id>3827</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="JASRI/SPring-8">Japan Synchrotron Radiation Research Institute Accelerator Division</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<name2>Accelerator Division</name2>
+<URL>http://www.spring8.or.jp/e/index.html</URL>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo-ken</town>
+<zip_code>679 5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>hosoda@spring8.or.jp</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Inagaki</lname>
+<fname>Takahiro</fname>
+<iname>T.</iname>
+<author_id>21967</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="Research Centre">RIKEN SPring-8 Center XFEL Research and Development Division</full_name>
+<name1>RIKEN SPring-8 Center</name1>
+<department>XFEL Research and Development Division</department>
+<address1>1-1-1, Kouto</address1>
+<town>Sayo-cho, Sayo-gun, Hyogo</town>
+<zip_code>679-5148</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>inagaki@spring8.or.jp</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Kondo</lname>
+<fname>Chikara</fname>
+<iname>C.</iname>
+<author_id>32792</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="JASRI" type="Institute">Japan Synchrotron Radiation Research Institute Accelerator Division</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<department>Accelerator Division</department>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679 5148</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>ckondo@spring8.or.jp</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Matsubara</lname>
+<fname>Shin-ichi</fname>
+<iname>S.</iname>
+<author_id>38934</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="JASRI/SPring-8" type="Research Centre">Japan Synchrotron Radiation Research Institute XFEL Division</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<name2>XFEL Division</name2>
+<address1>1-1-1 Kouto, Sayo-cho, Sayo-gun</address1>
+<town>Hyogo</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>matsubara@spring8.or.jp</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Morimoto</lname>
+<fname>Osamu</fname>
+<iname>O.</iname>
+<author_id>101868</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="SES">SPring-8 Service Co. Ltd.</full_name>
+<name1>SPring-8 Service Co. Ltd.</name1>
+<address1>2-23-1 Kouto</address1>
+<address2>Kamigouri-cho</address2>
+<address3>Ako-gun</address3>
+<town>Hyogo-pref.</town>
+<zip_code>678-1205</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>morimoto@ses-spring8.co.jp</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Ohshima</lname>
+<fname>Takashi</fname>
+<iname>T.</iname>
+<author_id>1036</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="JASRI/SPring-8">Japan Synchrotron Radiation Research Institute Accelerator Division</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<name2>Accelerator Division</name2>
+<URL>http://www.spring8.or.jp/e/index.html</URL>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo-ken</town>
+<zip_code>679 5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>ohshima@spring8.or.jp</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Okada</lname>
+<fname>Kensuke</fname>
+<iname>K.</iname>
+<author_id>62469</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="JASRI" type="Institute">Japan Synchrotron Radiation Research Institute</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>k.okada@spring8.or.jp</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Tajiri</lname>
+<fname>Yasuyuki</fname>
+<iname>Y.</iname>
+<author_id>41360</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="SES">SPring-8 Service Co. Ltd.</full_name>
+<name1>SPring-8 Service Co. Ltd.</name1>
+<address1>2-23-1 Kouto</address1>
+<address2>Kamigouri-cho</address2>
+<address3>Ako-gun</address3>
+<town>Hyogo-pref.</town>
+<zip_code>678-1205</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>y-tajiri@spring8.or.jp</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Tanaka</lname>
+<fname>Hitoshi</fname>
+<iname>H.</iname>
+<author_id>3112</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="Research Centre">RIKEN SPring-8 Center XFEL Research and Development Division</full_name>
+<name1>RIKEN SPring-8 Center</name1>
+<department>XFEL Research and Development Division</department>
+<address1>1-1-1, Kouto</address1>
+<town>Sayo-cho, Sayo-gun, Hyogo</town>
+<zip_code>679-5148</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>tanaka@spring8.or.jp</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Tanaka</lname>
+<fname>Shinichiro</fname>
+<iname>S.</iname>
+<author_id>34978</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="SES">SPring-8 Service Co. Ltd.</full_name>
+<name1>SPring-8 Service Co. Ltd.</name1>
+<address1>2-23-1 Kouto</address1>
+<address2>Kamigouri-cho</address2>
+<address3>Ako-gun</address3>
+<town>Hyogo-pref.</town>
+<zip_code>678-1205</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>tanakas@spring8.or.jp</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Yamaga</lname>
+<fname>Mitsuhiro</fname>
+<iname>M.</iname>
+<author_id>40464</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="JASRI" type="Institute">Japan Synchrotron Radiation Research Institute</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>myamaga@spring8.or.jp</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Yoshioka</lname>
+<fname>Masamichi</fname>
+<iname>M.</iname>
+<author_id>4102</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="SES">SPring-8 Service Co. Ltd.</full_name>
+<name1>SPring-8 Service Co. Ltd.</name1>
+<address1>2-23-1 Kouto</address1>
+<address2>Kamigouri-cho</address2>
+<address3>Ako-gun</address3>
+<town>Hyogo-pref.</town>
+<zip_code>678-1205</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>yosioka@spring8.or.jp</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Maesaka</lname>
+<fname>Hirokazu</fname>
+<iname>H.</iname>
+<author_id>24698</author_id>
+<institutions>
+<institute>
+<full_name abbrev="RIKEN Spring-8 Harima" type="Institute">The Institute of Physical and Chemical Research Division of Spring-8 Harima Institute</full_name>
+<name1>The Institute of Physical and Chemical Research</name1>
+<name2>Division of Spring-8</name2>
+<department>Harima Institute</department>
+<URL>http://www.riken.go.jp/</URL>
+<address1>Kouto 1-1-1</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5148</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name>Private Address</full_name>
+<name1>Private Address</name1>
+<address1>Tobo 132-18</address1>
+<town>Hyogo-ken, Ibo-gun, Taishi-cho</town>
+<postal_code>679-4313</postal_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="RIKEN/SPring-8" type="Institute">The Institute of Physical and Chemical Research SPring-8 Joint-Project for XFEL</full_name>
+<name1>The Institute of Physical and Chemical Research</name1>
+<name2>SPring-8 Joint-Project for XFEL</name2>
+<URL>http://www.harima.riken.jp/xfel/</URL>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5148</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name type="Research Centre">RIKEN SPring-8 Center XFEL Research and Development Division</full_name>
+<name1>RIKEN SPring-8 Center</name1>
+<department>XFEL Research and Development Division</department>
+<address1>1-1-1, Kouto</address1>
+<town>Sayo-cho, Sayo-gun, Hyogo</town>
+<zip_code>679-5148</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name type="Institute">RIKEN SPring-8 Center Innovative Light Sources Division</full_name>
+<name1>RIKEN SPring-8 Center</name1>
+<name2>Innovative Light Sources Division</name2>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5148</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>maesaka@spring8.or.jp</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Maesaka</lname>
+<fname>Hirokazu</fname>
+<iname>H.</iname>
+<author_id>24698</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name type="Research Centre">RIKEN SPring-8 Center XFEL Research and Development Division</full_name>
+<name1>RIKEN SPring-8 Center</name1>
+<department>XFEL Research and Development Division</department>
+<address1>1-1-1, Kouto</address1>
+<town>Sayo-cho, Sayo-gun, Hyogo</town>
+<zip_code>679-5148</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>maesaka@spring8.or.jp</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Maesaka</lname>
+<fname>Hirokazu</fname>
+<iname>H.</iname>
+<author_id>24698</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name type="Research Centre">RIKEN SPring-8 Center XFEL Research and Development Division</full_name>
+<name1>RIKEN SPring-8 Center</name1>
+<department>XFEL Research and Development Division</department>
+<address1>1-1-1, Kouto</address1>
+<town>Sayo-cho, Sayo-gun, Hyogo</town>
+<zip_code>679-5148</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>maesaka@spring8.or.jp</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>THYYPLS1.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>THYYPLS1_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>THYYPLS1.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>THYYPLS1.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THYYPLS1_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THYYPLS1_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS1&amp;wanted_file=THYYPLS1.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS1&amp;wanted_file=THYYPLS1_AUTHOR.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS1&amp;wanted_file=THYYPLS1.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS1&amp;wanted_file=THYYPLS1.docx</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS1&amp;wanted_file=THYYPLS1_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS1&amp;wanted_file=THYYPLS1_TALK.PDF</fileURL>
+</fileURLs>
+<editor>Laurent Serani</editor>
+<final_qa>Magdalena Montes-Loera</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>30-Nov-2018 07:20:00</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>03-Dec-2018 09:49:45</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>04-Dec-2018 12:57:42</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>05-Dec-2018 13:36:42</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>08-Dec-2018 07:20:36</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>08-Dec-2018 07:20:36</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>31-Jan-2019 11:27:38</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>31-Jan-2019 11:27:38</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>16-May-2019 09:24:25</timestamp>
+<comments>THYYPLS1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>16-May-2019 09:24:59</timestamp>
+<comments>THYYPLS1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>18-May-2019 22:59:32</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>18-May-2019 23:41:48</timestamp>
+<comments>THYYPLS1.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>18-May-2019 23:42:08</timestamp>
+<comments>THYYPLS1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>18-May-2019 23:43:02</timestamp>
+<editor_status code="G">Green</editor_status>
+<comments>thanks for your paper according to JACoW standard publication</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 10:07:05</timestamp>
+<comments>THYYPLS1_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>23-May-2019 01:35:04</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>24-May-2019 00:14:52</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>24-May-2019 00:48:41</timestamp>
+<comments>THYYPLS1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>24-May-2019 00:51:46</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Speaker,
+A PDF (THYYPLS1_TALK.PDF) was generated from your slides as given in THYYPLS1_TALK.PPTX. I only removed the backup slides. THYYPLS1_TALK.PDF will be published in the conference proceedings. In case of any problems, please email me at pdyer@bnl.gov.</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Leng</lname>
+<fname>Yongbin</fname>
+<iname>Y.B.</iname>
+<author_id>30859</author_id>
+<institutions>
+<institute>
+<full_name abbrev="SINAP" type="Academy of Sciences">Shanghai Institute of Applied Physics</full_name>
+<name1>Shanghai Institute of Applied Physics</name1>
+<URL>www.sinap.ac.cn</URL>
+<address1>2019 Jia Luo Road</address1>
+<po_box>PO Box 800-204</po_box>
+<town>Shanghai</town>
+<zip_code>201800</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="SSRF" type="Research Centre">Shanghai Synchrotron Radiation Facility</full_name>
+<name1>Shanghai Synchrotron Radiation Facility</name1>
+<address1>2019 Jia Luo Road</address1>
+<po_box>800-204</po_box>
+<town>Shanghai</town>
+<postal_code>201800</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="SINAP" type="Academy of Sciences">Shanghai Institute of Applied Physics</full_name>
+<name1>Shanghai Institute of Applied Physics</name1>
+<URL>www.sinap.ac.cn</URL>
+<address1>Zhangheng Road 239</address1>
+<address2>Pudong New District</address2>
+<town>Shanghai</town>
+<zip_code>201204</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>leng@sinap.ac.cn</email>
+<email>leng@sinap.ac.cn</email>
+<email>lengyongbin@sinap.ac.cn</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>2884</abstract_id>
+<pages>4</pages>
+<toc>3431</toc>
+<main_class>MC6: Beam Instrumentation, Controls, Feedback and Operational Aspects</main_class>
+<sub_class>T03 Beam Diagnostics and Instrumentation</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">THYYPLS2</code>
+<presentation type="Oral">Contributed Oral</presentation>
+<start_time>1150</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>Different Versions of Cryogenic Current Comparators with Magnetic Core for Beam Current Measurements</title>
+<abstract>For more than 20 years Cryogenic Current Comparators (CCC) are used to measure the current of charged particle beams with low intensity (nA-range). The device was first established at GSI in Darmstadt and was improved over the past two decades by the cooperation of institutes in Jena, GSI and CERN. The improved versions differ in material parameters and electronics to increase the resolution and in dimensions in order to meet the requirements of the respective application. The device allows non-destructive measurements of the charged particle beam current. The azimuthal magnetic field which is generated by the beam current is detected by low temperature Superconducting Quantum Interference Device (SQUID) current sensors. A complex shaped superconductor cooled down to 4.2 K is used as magnetic shielding and a high permeability core serves as flux concentrator. Three versions of the CCC shall be presented in this work: (1) GSI-Pb-CCC which was running at GSI Darmstadt in a transfer line, (2) CERN-Nb-CCC currently installed in the Antiproton Decelerator at CERN and (3) GSI-Nb-CCC-XD which will be operating in the CRYRING at GSI 2019. Noise, signal and drift measurements were performed in the Cryo-Detector Lab at the University of Jena.</abstract>
+<contributors>
+<contributor type="Co-Author">
+<lname>De Gersem</lname>
+<fname>Herbert</fname>
+<iname>H.</iname>
+<author_id>12947</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="TEMF, TU Darmstadt" type="University Institute">Technische Universitaet Darmstadt Institut fuer Theorie Elektromagnetischer Felder Dept. FB 18</full_name>
+<name1>Technische Universitaet Darmstadt</name1>
+<name2>Institut fuer Theorie Elektromagnetischer Felder</name2>
+<department>Dept. FB 18</department>
+<URL>https://www.temf.tu-darmstadt.de</URL>
+<address1>Schloßgartenstr. 8</address1>
+<town>Darmstadt</town>
+<postal_code>64289</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>degersem@temf.tu-darmstadt.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Fernandes</lname>
+<fname>Miguel</fname>
+<mname>Filipe</mname>
+<iname>M.F.</iname>
+<author_id>64342</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="Institute">Cockcroft Institute</full_name>
+<name1>Cockcroft Institute</name1>
+<URL>http://www.lancs.ac.uk/cockcroft-institute/</URL>
+<address1>Daresbury Laboratory</address1>
+<town>Warrington, Cheshire</town>
+<zip_code>WA4 4AD</zip_code>
+<country_code abbrev="UK">United Kingdom</country_code>
+</institute>
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+<institute>
+<full_name type="University Department">The University of Liverpool Department of Physics</full_name>
+<name1>The University of Liverpool</name1>
+<department>Department of Physics</department>
+<URL>http://www.ph.liv.ac.uk/</URL>
+<address1>Oxford Street</address1>
+<po_box>P.O. Box 147</po_box>
+<town>Liverpool</town>
+<zip_code>L69 7ZE</zip_code>
+<country_code abbrev="UK">United Kingdom</country_code>
+</institute>
+</institutions>
+<emails>
+<email>miguel.fernandes@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Haider</lname>
+<fname>David</fname>
+<mname>Manuel</mname>
+<iname>D.M.</iname>
+<author_id>104488</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="GSI" type="Research Centre">GSI Helmholtzzentrum für Schwerionenforschung GmbH Beam Diagnostics Group</full_name>
+<name1>GSI Helmholtzzentrum für Schwerionenforschung GmbH</name1>
+<department>Beam Diagnostics Group</department>
+<address1>Planckstraße 1</address1>
+<town>Darmstadt</town>
+<postal_code>64291</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>d.haider@gsi.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Kurian</lname>
+<fname>Febin</fname>
+<iname>F.</iname>
+<author_id>49353</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="GSI" type="Research Centre">GSI Helmholtzzentrum für Schwerionenforschung GmbH</full_name>
+<name1>GSI Helmholtzzentrum für Schwerionenforschung GmbH</name1>
+<URL>http://www.gsi.de/gsi.html</URL>
+<address1>Planckstr. 1</address1>
+<town>Darmstadt</town>
+<postal_code>64291</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>f.kurian@gsi.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Marsic</lname>
+<fname>Nicolas</fname>
+<iname>N.</iname>
+<author_id>93489</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="TEMF, TU Darmstadt" type="University Institute">Technische Universitaet Darmstadt Institut fuer Theorie Elektromagnetischer Felder Dept. FB 18</full_name>
+<name1>Technische Universitaet Darmstadt</name1>
+<name2>Institut fuer Theorie Elektromagnetischer Felder</name2>
+<department>Dept. FB 18</department>
+<URL>https://www.temf.tu-darmstadt.de</URL>
+<address1>Schloßgartenstr. 8</address1>
+<town>Darmstadt</town>
+<postal_code>64289</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>marsic@temf.tu-darmstadt.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Müller</lname>
+<fname>Wolfgang</fname>
+<mname>F.O.</mname>
+<iname>W.F.O.</iname>
+<author_id>3023</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="TEMF, TU Darmstadt" type="University Institute">Technische Universitaet Darmstadt Institut fuer Theorie Elektromagnetischer Felder Dept. FB 18</full_name>
+<name1>Technische Universitaet Darmstadt</name1>
+<name2>Institut fuer Theorie Elektromagnetischer Felder</name2>
+<department>Dept. FB 18</department>
+<URL>https://www.temf.tu-darmstadt.de</URL>
+<address1>Schloßgartenstr. 8</address1>
+<town>Darmstadt</town>
+<postal_code>64289</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>mueller@temf.tu-darmstadt.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Neubert</lname>
+<fname>Ralf</fname>
+<iname>R.</iname>
+<author_id>15260</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="Institute">Thuringia Observatory Tautenburg</full_name>
+<name1>Thuringia Observatory Tautenburg</name1>
+<address1>Sternwarte 5</address1>
+<town>Tautenburg</town>
+<postal_code>07778</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>neubert@tls-tautenburg.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Schmelz</lname>
+<fname>Matthias</fname>
+<iname>M.</iname>
+<author_id>90371</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IPHT" type="Institute">Leibniz Institute of Photonic Technology</full_name>
+<name1>Leibniz Institute of Photonic Technology</name1>
+<URL>http://www.ipht-jena.de</URL>
+<address1>Albert-Einstein-Straße 9</address1>
+<town>Jena</town>
+<postal_code>07745</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>matthias.schmelz@ipht-jena.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Schmidl</lname>
+<fname>Frank</fname>
+<iname>F.</iname>
+<author_id>100478</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="FSU Jena" type="University">Friedrich-Schiller-Universität Institut für Festkörperphysik</full_name>
+<name1>Friedrich-Schiller-Universität</name1>
+<name2>Institut für Festkörperphysik</name2>
+<URL>www.uni-jena.de</URL>
+<address1>Helmholtzweg 5</address1>
+<town>Jena</town>
+<postal_code>07743</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>frank.schmidl@uni-jena.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Schwickert</lname>
+<fname>Marcus</fname>
+<iname>M.</iname>
+<author_id>4211</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="GSI" type="Research Centre">GSI Helmholtzzentrum für Schwerionenforschung GmbH Beam Diagnostics Group</full_name>
+<name1>GSI Helmholtzzentrum für Schwerionenforschung GmbH</name1>
+<department>Beam Diagnostics Group</department>
+<address1>Planckstraße 1</address1>
+<town>Darmstadt</town>
+<postal_code>64291</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>m.schwickert@gsi.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Seidel</lname>
+<fname>Paul</fname>
+<iname>P.</iname>
+<author_id>40527</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="FSU Jena" type="University">Friedrich-Schiller-Universität Institut für Festkörperphysik</full_name>
+<name1>Friedrich-Schiller-Universität</name1>
+<name2>Institut für Festkörperphysik</name2>
+<URL>www.uni-jena.de</URL>
+<address1>Helmholtzweg 5</address1>
+<town>Jena</town>
+<postal_code>07743</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>paul.seidel@uni-jena.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Sieber</lname>
+<fname>Thomas</fname>
+<iname>T.</iname>
+<author_id>5216</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="GSI" type="Research Centre">GSI Helmholtzzentrum für Schwerionenforschung GmbH Beam Diagnostics Group</full_name>
+<name1>GSI Helmholtzzentrum für Schwerionenforschung GmbH</name1>
+<department>Beam Diagnostics Group</department>
+<address1>Planckstraße 1</address1>
+<town>Darmstadt</town>
+<postal_code>64291</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>t.sieber@gsi.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Stoehlker</lname>
+<fname>Thomas</fname>
+<iname>T.</iname>
+<author_id>36278</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="GSI" type="Research Centre">GSI Helmholtzzentrum für Schwerionenforschung GmbH</full_name>
+<name1>GSI Helmholtzzentrum für Schwerionenforschung GmbH</name1>
+<URL>http://www.gsi.de/gsi.html</URL>
+<address1>Planckstr. 1</address1>
+<town>Darmstadt</town>
+<postal_code>64291</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+<institute>
+<full_name abbrev="IOQ" type="University Institute">Friedrich-Schiller-Universitaet Jena Institut fuer Optik und Quantenelektronik</full_name>
+<name1>Friedrich-Schiller-Universitaet Jena</name1>
+<department>Institut fuer Optik und Quantenelektronik</department>
+<address1>Max-Wien-Platz 1</address1>
+<town>Jena</town>
+<postal_code>07743</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+<institute>
+<full_name abbrev="HIJ">Helmholtz-Institut Jena</full_name>
+<name1>Helmholtz-Institut Jena</name1>
+<address1>Fröbelstieg 3</address1>
+<town>Jena</town>
+<postal_code>07743</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>t.stoehlker@gsi.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Stolz</lname>
+<fname>Ronny</fname>
+<iname>R.</iname>
+<author_id>90372</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IPHT" type="Institute">Leibniz Institute of Photonic Technology</full_name>
+<name1>Leibniz Institute of Photonic Technology</name1>
+<URL>http://www.ipht-jena.de</URL>
+<address1>Albert-Einstein-Straße 9</address1>
+<town>Jena</town>
+<postal_code>07745</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>ronny.stolz@leibniz-ipht.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Tan</lname>
+<fname>Jocelyn</fname>
+<iname>J.</iname>
+<author_id>18413</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jocelyn.tan@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Tympel</lname>
+<fname>Volker</fname>
+<iname>V.</iname>
+<author_id>90364</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="HIJ">Helmholtz-Institut Jena</full_name>
+<name1>Helmholtz-Institut Jena</name1>
+<address1>Fröbelstieg 3</address1>
+<town>Jena</town>
+<postal_code>07743</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>volker.tympel@uni-jena.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Welsch</lname>
+<fname>Carsten</fname>
+<mname>Peter</mname>
+<iname>C.P.</iname>
+<author_id>587</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="University Department">The University of Liverpool Department of Physics</full_name>
+<name1>The University of Liverpool</name1>
+<department>Department of Physics</department>
+<URL>http://www.ph.liv.ac.uk/</URL>
+<address1>Oxford Street</address1>
+<po_box>P.O. Box 147</po_box>
+<town>Liverpool</town>
+<zip_code>L69 7ZE</zip_code>
+<country_code abbrev="UK">United Kingdom</country_code>
+</institute>
+<institute>
+<full_name type="Institute">Cockcroft Institute</full_name>
+<name1>Cockcroft Institute</name1>
+<URL>http://www.lancs.ac.uk/cockcroft-institute/</URL>
+<address1>Daresbury Laboratory</address1>
+<town>Warrington, Cheshire</town>
+<zip_code>WA4 4AD</zip_code>
+<country_code abbrev="UK">United Kingdom</country_code>
+</institute>
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research AB Department</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>AB Department</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanades de Particules 1</address1>
+<town>Meyrin</town>
+<postal_code>1217</postal_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>c.p.welsch@liverpool.ac.uk</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Zakosarenko</lname>
+<fname>Vyacheslav</fname>
+<iname>V.</iname>
+<author_id>90373</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="Industry">Supracon AG</full_name>
+<name1>Supracon AG</name1>
+<URL>http://www.supracon.com/</URL>
+<address1>An der Lehmgrube 11</address1>
+<town>Jena</town>
+<postal_code>07751</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+<institute>
+<full_name abbrev="IPHT" type="Institute">Leibniz Institute of Photonic Technology</full_name>
+<name1>Leibniz Institute of Photonic Technology</name1>
+<URL>http://www.ipht-jena.de</URL>
+<address1>Albert-Einstein-Straße 9</address1>
+<town>Jena</town>
+<postal_code>07745</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>zakosarenko@supracon.com</email>
+<email>vyacheslav.zakosarenko@leibniz-ipht.de</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Golm</lname>
+<fname>Jessica</fname>
+<iname>J.</iname>
+<author_id>90370</author_id>
+<institutions>
+<institute>
+<full_name abbrev="HIJ">Helmholtz-Institut Jena</full_name>
+<name1>Helmholtz-Institut Jena</name1>
+<address1>Fröbelstieg 3</address1>
+<town>Jena</town>
+<postal_code>07743</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+<institute>
+<full_name abbrev="FSU Jena" type="University">Friedrich-Schiller-Universität Institut für Festkörperphysik</full_name>
+<name1>Friedrich-Schiller-Universität</name1>
+<name2>Institut für Festkörperphysik</name2>
+<URL>www.uni-jena.de</URL>
+<address1>Helmholtzweg 5</address1>
+<town>Jena</town>
+<postal_code>07743</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanades de Particules 1</address1>
+<town>Meyrin</town>
+<postal_code>1217</postal_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jessica.golm@uni-jena.de</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Golm</lname>
+<fname>Jessica</fname>
+<iname>J.</iname>
+<author_id>90370</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="FSU Jena" type="University">Friedrich-Schiller-Universität Institut für Festkörperphysik</full_name>
+<name1>Friedrich-Schiller-Universität</name1>
+<name2>Institut für Festkörperphysik</name2>
+<URL>www.uni-jena.de</URL>
+<address1>Helmholtzweg 5</address1>
+<town>Jena</town>
+<postal_code>07743</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jessica.golm@uni-jena.de</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Golm</lname>
+<fname>Jessica</fname>
+<iname>J.</iname>
+<author_id>90370</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="FSU Jena" type="University">Friedrich-Schiller-Universität Institut für Festkörperphysik</full_name>
+<name1>Friedrich-Schiller-Universität</name1>
+<name2>Institut für Festkörperphysik</name2>
+<URL>www.uni-jena.de</URL>
+<address1>Helmholtzweg 5</address1>
+<town>Jena</town>
+<postal_code>07743</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jessica.golm@uni-jena.de</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>THYYPLS2.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>THYYPLS2_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYYPLS2f1.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYYPLS2f2.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYYPLS2f3.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYYPLS2f4.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYYPLS2f5.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>THYYPLS2.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>THYYPLS2.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>THYYPLS2_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>THYYPLS2.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>THYYPLS2.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>THYYPLS2.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="MOV">Talk Movies</file_type>
+<name>THYYPLS2.pptx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THYYPLS2_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THYYPLS2_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="MOV">Talk Movies</file_type>
+<name>THYYPLS2_slides.pdf</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THYYPLS2_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THYYPLS2_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Talk Movies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS2&amp;wanted_file=THYYPLS2_slides.pdf</fileURL>
+<fileURL type="Talk Movies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS2&amp;wanted_file=THYYPLS2.pptx</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS2&amp;wanted_file=THYYPLS2f2.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS2&amp;wanted_file=THYYPLS2f3.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS2&amp;wanted_file=THYYPLS2f1.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS2&amp;wanted_file=THYYPLS2f4.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS2&amp;wanted_file=THYYPLS2f5.png</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS2&amp;wanted_file=THYYPLS2_AUTHOR.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS2&amp;wanted_file=THYYPLS2.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS2&amp;wanted_file=THYYPLS2.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS2&amp;wanted_file=THYYPLS2_AUTHOR.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS2&amp;wanted_file=THYYPLS2.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS2&amp;wanted_file=THYYPLS2.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS2&amp;wanted_file=THYYPLS2.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS2&amp;wanted_file=THYYPLS2.docx</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS2&amp;wanted_file=THYYPLS2_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS2&amp;wanted_file=THYYPLS2_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS2&amp;wanted_file=THYYPLS2_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS2&amp;wanted_file=THYYPLS2_TALK.PPTX</fileURL>
+</fileURLs>
+<editor>Stefano Deiuri</editor>
+<final_qa>Johan Olander</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>04-Dec-2018 17:24:58</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>07-Dec-2018 11:40:55</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>07-Feb-2019 06:33:48</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>07-Feb-2019 06:33:48</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>23-Mar-2019 07:54:36</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 13:02:15</timestamp>
+<comments>THYYPLS2.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 13:02:52</timestamp>
+<comments>THYYPLS2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 13:04:47</timestamp>
+<comments>THYYPLS2f1.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 13:05:09</timestamp>
+<comments>THYYPLS2f2.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 13:05:26</timestamp>
+<comments>THYYPLS2f3.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 13:05:46</timestamp>
+<comments>THYYPLS2f4.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 13:05:58</timestamp>
+<comments>THYYPLS2f5.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>18-May-2019 23:34:26</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>18-May-2019 23:46:42</timestamp>
+<comments>THYYPLS2.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>18-May-2019 23:47:02</timestamp>
+<editor_status code="R">Red</editor_status>
+<comments>4th page is allowed only for the references
+
+Please use the doc file I have uploaded because I have fixed:
+- sub-section headings style (Title Case)
+- some paragraphs indentation
+- references style and format (hyperlinks are not allowed)</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 02:47:18</timestamp>
+<comments>THYYPLS2.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 02:47:52</timestamp>
+<comments>THYYPLS2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 05:20:29</timestamp>
+<comments>THYYPLS2.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 05:20:41</timestamp>
+<comments>THYYPLS2.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>21-May-2019 05:21:21</timestamp>
+<editor_status code="G">Green</editor_status>
+<editor_notes>I have updated the citation of Fig. 5 as Figure 5 (page 3)</editor_notes>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 05:22:46</timestamp>
+<comments>THYYPLS2.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 23:30:03</timestamp>
+<comments>THYYPLS2.pptx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 23:33:14</timestamp>
+<comments>THYYPLS2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 02:36:17</timestamp>
+<comments>THYYPLS2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 02:38:18</timestamp>
+<comments>THYYPLS2_slides.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>22-May-2019 04:59:09</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 05:00:46</timestamp>
+<comments>THYYPLS2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>24-May-2019 00:15:07</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>24-May-2019 00:54:58</timestamp>
+<comments>THYYPLS2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>24-May-2019 01:59:15</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Speaker,
+I have uploaded THYYPLS2_TALK.PDF, which will be used in the conference proceedings. It was created from your slides, THYYPLS2_TALK.PPTX. Please take a look at it and check that it is OK. If you have any questions or concerns, please email me at pdyer@bnl.gov.</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Leng</lname>
+<fname>Yongbin</fname>
+<iname>Y.B.</iname>
+<author_id>30859</author_id>
+<institutions>
+<institute>
+<full_name abbrev="SINAP" type="Academy of Sciences">Shanghai Institute of Applied Physics</full_name>
+<name1>Shanghai Institute of Applied Physics</name1>
+<URL>www.sinap.ac.cn</URL>
+<address1>2019 Jia Luo Road</address1>
+<po_box>PO Box 800-204</po_box>
+<town>Shanghai</town>
+<zip_code>201800</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="SSRF" type="Research Centre">Shanghai Synchrotron Radiation Facility</full_name>
+<name1>Shanghai Synchrotron Radiation Facility</name1>
+<address1>2019 Jia Luo Road</address1>
+<po_box>800-204</po_box>
+<town>Shanghai</town>
+<postal_code>201800</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="SINAP" type="Academy of Sciences">Shanghai Institute of Applied Physics</full_name>
+<name1>Shanghai Institute of Applied Physics</name1>
+<URL>www.sinap.ac.cn</URL>
+<address1>Zhangheng Road 239</address1>
+<address2>Pudong New District</address2>
+<town>Shanghai</town>
+<zip_code>201204</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>leng@sinap.ac.cn</email>
+<email>leng@sinap.ac.cn</email>
+<email>lengyongbin@sinap.ac.cn</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>1740</abstract_id>
+<pages>4</pages>
+<toc>3435</toc>
+<main_class>MC6: Beam Instrumentation, Controls, Feedback and Operational Aspects</main_class>
+<sub_class>T22 Reliability and Operability</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">THYYPLS3</code>
+<presentation type="Oral">Contributed Oral</presentation>
+<start_time>1210</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>A Remote-Controlled Robot-Car in the TPS Tunnel</title>
+<abstract>A remote-controlled robot-car named ¿PhotonBot¿ was put into the TPS accelerator tunnel and is equipped with a 360 degrees LiDAR for SLAM and navigation, two cameras for perception and first-person view, and a thermal imaging system. The robot can be remotely controlled and can send data to a remote PC through Wi-Fi. With SLAM, it can go more freely without being restricted to a designated path. In order to ensure it can work continuously, there is a wireless charging station in case of a low battery.</abstract>
+<contributors>
+<contributor type="Co-Author">
+<lname>Chen</lname>
+<fname>Bo-Ying</fname>
+<iname>B.Y.</iname>
+<author_id>68148</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="NSRRC" type="Research Centre">National Synchrotron Radiation Research Center</full_name>
+<name1>National Synchrotron Radiation Research Center</name1>
+<URL>www.nsrrc.org.tw</URL>
+<address1>101 Hsin-Ann Road.</address1>
+<address2>Hsinchu Science Park</address2>
+<town>Hsinchu</town>
+<zip_code>30076</zip_code>
+<country_code abbrev="ROC">Taiwan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>chen.bob@nsrrc.org.tw</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Hsu</lname>
+<fname>Ting-Wei</fname>
+<iname>T.W.</iname>
+<author_id>116808</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="NSRRC" type="Research Centre">National Synchrotron Radiation Research Center</full_name>
+<name1>National Synchrotron Radiation Research Center</name1>
+<URL>www.nsrrc.org.tw</URL>
+<address1>101 Hsin-Ann Road.</address1>
+<address2>Hsinchu Science Park</address2>
+<town>Hsinchu</town>
+<zip_code>30076</zip_code>
+<country_code abbrev="ROC">Taiwan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>hsu.hubert@nsrrc.org.tw</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Huang</lname>
+<fname>Bin Yuan</fname>
+<iname>B.Y.</iname>
+<author_id>118340</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="NSRRC" type="Research Centre">National Synchrotron Radiation Research Center</full_name>
+<name1>National Synchrotron Radiation Research Center</name1>
+<URL>www.nsrrc.org.tw</URL>
+<address1>101 Hsin-Ann Road.</address1>
+<address2>Hsinchu Science Park</address2>
+<town>Hsinchu</town>
+<zip_code>30076</zip_code>
+<country_code abbrev="ROC">Taiwan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>huang.by@nsrrc.org.tw</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Kuo</lname>
+<fname>Chang-Hor</fname>
+<iname>C.H.</iname>
+<author_id>1803</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="NSRRC" type="Research Centre">National Synchrotron Radiation Research Center</full_name>
+<name1>National Synchrotron Radiation Research Center</name1>
+<URL>www.nsrrc.org.tw</URL>
+<address1>101 Hsin-Ann Road.</address1>
+<address2>Hsinchu Science Park</address2>
+<town>Hsinchu</town>
+<zip_code>30076</zip_code>
+<country_code abbrev="ROC">Taiwan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>chkuo@nsrrc.org.tw</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Lin</lname>
+<fname>Wei-Yu</fname>
+<iname>W.Y.</iname>
+<author_id>96868</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="NSRRC" type="Research Centre">National Synchrotron Radiation Research Center</full_name>
+<name1>National Synchrotron Radiation Research Center</name1>
+<URL>www.nsrrc.org.tw</URL>
+<address1>101 Hsin-Ann Road.</address1>
+<address2>Hsinchu Science Park</address2>
+<town>Hsinchu</town>
+<zip_code>30076</zip_code>
+<country_code abbrev="ROC">Taiwan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>lin.lucien@nsrrc.org.tw</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Lee</lname>
+<fname>Tsung-Yu</fname>
+<iname>T.Y.</iname>
+<author_id>51827</author_id>
+<institutions>
+<institute>
+<full_name abbrev="NSRRC" type="Research Centre">National Synchrotron Radiation Research Center</full_name>
+<name1>National Synchrotron Radiation Research Center</name1>
+<URL>www.nsrrc.org.tw</URL>
+<address1>101 Hsin-Ann Road.</address1>
+<address2>Hsinchu Science Park</address2>
+<town>Hsinchu</town>
+<zip_code>30076</zip_code>
+<country_code abbrev="ROC">Taiwan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>lee.ty@nsrrc.org.tw</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Lee</lname>
+<fname>Tsung-Yu</fname>
+<iname>T.Y.</iname>
+<author_id>51827</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="NSRRC" type="Research Centre">National Synchrotron Radiation Research Center</full_name>
+<name1>National Synchrotron Radiation Research Center</name1>
+<URL>www.nsrrc.org.tw</URL>
+<address1>101 Hsin-Ann Road.</address1>
+<address2>Hsinchu Science Park</address2>
+<town>Hsinchu</town>
+<zip_code>30076</zip_code>
+<country_code abbrev="ROC">Taiwan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>lee.ty@nsrrc.org.tw</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Lee</lname>
+<fname>Tsung-Yu</fname>
+<iname>T.Y.</iname>
+<author_id>51827</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="NSRRC" type="Research Centre">National Synchrotron Radiation Research Center</full_name>
+<name1>National Synchrotron Radiation Research Center</name1>
+<URL>www.nsrrc.org.tw</URL>
+<address1>101 Hsin-Ann Road.</address1>
+<address2>Hsinchu Science Park</address2>
+<town>Hsinchu</town>
+<zip_code>30076</zip_code>
+<country_code abbrev="ROC">Taiwan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>lee.ty@nsrrc.org.tw</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>THYYPLS3.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>THYYPLS3_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYYPLS3f1.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYYPLS3f2.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYYPLS3f3.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYYPLS3f4.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYYPLS3f5.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYYPLS3f6.jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYYPLS3f7.jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>THYYPLS3.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>THYYPLS3_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYYPLS3f8.jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYYPLS3f9.jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYYPLS3f10.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYYPLS3f11.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYYPLS3f12.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYYPLS3f13.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>THYYPLS3.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>THYYPLS3_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>THYYPLS3.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>THYYPLS3_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THYYPLS3_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THYYPLS3_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>THYYPLS3.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>THYYPLS3.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THYYPLS3_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THYYPLS3_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>THYYPLS3.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THYYPLS3_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3f1.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3f11.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3f10.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3f9.jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3f8.jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3f12.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3f13.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3f6.jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3f5.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3f3.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3f4.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3f2.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3f7.jpg</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3_AUTHOR.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3_AUTHOR.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3_AUTHOR.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3_AUTHOR.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3.docx</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLS3&amp;wanted_file=THYYPLS3_TALK.PDF</fileURL>
+</fileURLs>
+<editor>Philip Scott Dyer</editor>
+<final_qa>Kathleen Riches</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>16-Nov-2018 14:22:04</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>08-Dec-2018 06:57:44</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>30-Jan-2019 22:28:01</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>30-Jan-2019 22:28:01</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>15-Feb-2019 01:16:08</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>19-Feb-2019 11:55:56</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>20-Mar-2019 06:07:54</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>09-Apr-2019 03:25:59</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="PRR">Peer Review Requested</log_status>
+<timestamp>09-Apr-2019 03:25:59</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>09-Apr-2019 04:06:45</timestamp>
+<comments>THYYPLS3.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>09-Apr-2019 04:08:54</timestamp>
+<comments>THYYPLS3_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>09-Apr-2019 04:10:15</timestamp>
+<comments>THYYPLS3_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>09-Apr-2019 04:10:45</timestamp>
+<comments>THYYPLS3_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>21-Apr-2019 09:17:14</timestamp>
+<comments>THYYPLS3_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-Apr-2019 09:17:52</timestamp>
+<comments>THYYPLS3_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-Apr-2019 09:19:49</timestamp>
+<comments>THYYPLS3f1.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-Apr-2019 09:20:06</timestamp>
+<comments>THYYPLS3f2.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-Apr-2019 09:20:18</timestamp>
+<comments>THYYPLS3f3.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-Apr-2019 09:20:31</timestamp>
+<comments>THYYPLS3f4.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-Apr-2019 09:20:45</timestamp>
+<comments>THYYPLS3f5.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-Apr-2019 09:20:59</timestamp>
+<comments>THYYPLS3f6.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-Apr-2019 09:21:14</timestamp>
+<comments>THYYPLS3f7.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-Apr-2019 09:21:31</timestamp>
+<comments>THYYPLS3f8.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-Apr-2019 09:21:45</timestamp>
+<comments>THYYPLS3f9.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-Apr-2019 09:22:03</timestamp>
+<comments>THYYPLS3f10.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-Apr-2019 09:22:19</timestamp>
+<comments>THYYPLS3f11.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-Apr-2019 09:23:00</timestamp>
+<comments>THYYPLS3f12.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-Apr-2019 09:23:14</timestamp>
+<comments>THYYPLS3f13.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-Apr-2019 09:23:25</timestamp>
+<comments>THYYPLS3f14.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>25-Apr-2019 07:05:16</timestamp>
+<comments>THYYPLS3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>29-Apr-2019 01:26:11</timestamp>
+<comments>THYYPLS3_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="PRG">Peer Review Granted</log_status>
+<timestamp>02-May-2019 19:17:52</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="REFA">Referee Assigned</log_status>
+<timestamp>02-May-2019 19:18:09</timestamp>
+<editor_notes>Referee: Junichiro Kamiya</editor_notes>
+</abstract_log>
+<abstract_log>
+<log_status code="REFA">Referee Assigned</log_status>
+<timestamp>02-May-2019 19:18:09</timestamp>
+<editor_notes>Referee: Weixing Cheng</editor_notes>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>03-May-2019 04:17:02</timestamp>
+<comments>THYYPLS3_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>03-May-2019 04:17:11</timestamp>
+<comments>THYYPLS3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>03-May-2019 04:19:51</timestamp>
+<comments>THYYPLS3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>03-May-2019 04:20:26</timestamp>
+<comments>THYYPLS3_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>04-May-2019 14:42:09</timestamp>
+<comments>THYYPLS3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>04-May-2019 14:44:56</timestamp>
+<comments>THYYPLS3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ3">3) Is some aspect or part of the work original or demonstrate clear progress?</log_status>
+<timestamp>07-May-2019 03:22:26</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ4">4) Is the presentation of methods, results and conclusion understandable?</log_status>
+<timestamp>07-May-2019 03:22:26</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ5">5) Is the paper written in good English?</log_status>
+<timestamp>07-May-2019 03:22:26</timestamp>
+<comments>No</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="REF">Referee</log_status>
+<timestamp>07-May-2019 03:22:26</timestamp>
+<referee_status code="c">to be corrected</referee_status>
+<comments>Technical comments:
+The devices in the robots may be vulnerable against radiation. Is it no problem in photon sources like TPS? Does authors estimate the life-time of the robot against the radiation.
+
+Why the height is extended only to 1100 mm, while the beam line is at the height of 1350 mm.
+
+Fig. 2-5: Difficult to exactly understand the meaning of the figure. It is better to put the explanation in the figure. For example, what is the meaning of the many red arrows in Fig. 3, where is the robot and which is the direction of the camera in Fig. 4, what the blue area in Fig. 5 represents?
+
+Fig. 11-14: It is helpful to put a bar graph in the figure to show which color in the contour plots represent what temperature.
+
+If there are any references for the robot monitor in the accelerator tunnel, the authors should include them in the references.
+
+Typos or comments for sentences.
+P. 1: Put the email address on the left footnote according to the JACoW template.
+
+All text: Improve English in the article by native.
+
+All figure captions: Wright the figure caption in full justification style.
+
+All text: Put space before the unit ¿mA¿.
+
+P. 1 left: LiDar may not a familiar word for many readers. Describe the meaning of the abbreviation, when it first appears in the text, like Laser Imaging Detection and Ranging (LiDar).
+
+P. 1: It is better to write the reference for ROBOTIS in the text not in the figure caption. It means ¿The PhotonBot is developed from a model called ¿Turtlebot3 waffle-Pi¿, which is a product from the company ROBOTIS [1].¿
+
+All text: It is better to use ¿&amp;#8728;¿instead of ¿degrees¿.
+
+P. 1 left: Change ¿ROS (Robot Operating System)¿ to ¿Robot Operating System (ROS)¿
+
+P. 1 right: Change ¿0.26m/s.[1]¿ to ¿0.26m/s [1].¿.
+
+P. 1 right: Change ¿some basic operations:¿ to ¿some basic operations.¿.
+
+P. 1 right: Describe the meaning of ¿RViz¿.
+
+Fig. 2 caption: Change &quot;interact¿ to ¿Interact¿
+
+Fig. 2 caption: Change ¿Point Operation¿ to ¿`Poit operation¿
+
+
+P. 2 right: Put the space before ¿mm¿.
+
+P. 2 left: Change ¿a few modifications had to be made:¿ to ¿ a few modifications had to be made.¿.
+
+P. 2 Left: Remove one of double spaces between ¿to¿ and ¿the¿ in ¿which brings the sensors closer to  the main accelerator components (Fig. 6).¿
+
+Fig. 6 caption: Put a period.
+
+P. 2 left: Put a space before ¿mAh¿.
+
+Fig. 8 caption: Remove the reference ¿[2]¿. There is the same expression in the text. It¿s enough.
+
+Fig. 8 caption: Put a period.
+
+P. 3 right: Write the text in full justification style.
+
+Fig. 10-14 caption: Use capital for the first letter in the captions.
+
+
+
+</comments>
+<editor_notes>Technical comments:
+The devices in the robots may be vulnerable against radiation. Is it no problem in photon sources like TPS? Does authors estimate the life-time of the robot against the radiation.
+
+Why the height is extended only to 1100 mm, while the beam line is at the height of 1350 mm.
+
+Fig. 2-5: Difficult to exactly understand the meaning of the figure. It is better to put the explanation in the figure. For example, what is the meaning of the many red arrows in Fig. 3, where is the robot and which is the direction of the camera in Fig. 4, what the blue area in Fig. 5 represents?
+
+Fig. 11-14: It is helpful to put a bar graph in the figure to show which color in the contour plots represent what temperature.
+
+If there are any references for the robot monitor in the accelerator tunnel, the authors should include them in the references.
+
+Typos or comments for sentences.
+P. 1: Put the email address on the left footnote according to the JACoW template.
+
+All text: Improve English in the article by native.
+
+All figure captions: Wright the figure caption in full justification style.
+
+All text: Put space before the unit ¿mA¿.
+
+P. 1 left: LiDar may not a familiar word for many readers. Describe the meaning of the abbreviation, when it first appears in the text, like Laser Imaging Detection and Ranging (LiDar).
+
+P. 1: It is better to write the reference for ROBOTIS in the text not in the figure caption. It means ¿The PhotonBot is developed from a model called ¿Turtlebot3 waffle-Pi¿, which is a product from the company ROBOTIS [1].¿
+
+All text: It is better to use ¿&amp;#8728;¿instead of ¿degrees¿.
+
+P. 1 left: Change ¿ROS (Robot Operating System)¿ to ¿Robot Operating System (ROS)¿
+
+P. 1 right: Change ¿0.26m/s.[1]¿ to ¿0.26m/s [1].¿.
+
+P. 1 right: Change ¿some basic operations:¿ to ¿some basic operations.¿.
+
+P. 1 right: Describe the meaning of ¿RViz¿.
+
+Fig. 2 caption: Change &quot;interact¿ to ¿Interact¿
+
+Fig. 2 caption: Change ¿Point Operation¿ to ¿`Poit operation¿
+
+
+P. 2 right: Put the space before ¿mm¿.
+
+P. 2 left: Change ¿a few modifications had to be made:¿ to ¿ a few modifications had to be made.¿.
+
+P. 2 Left: Remove one of double spaces between ¿to¿ and ¿the¿ in ¿which brings the sensors closer to  the main accelerator components (Fig. 6).¿
+
+Fig. 6 caption: Put a period.
+
+P. 2 left: Put a space before ¿mAh¿.
+
+Fig. 8 caption: Remove the reference ¿[2]¿. There is the same expression in the text. It¿s enough.
+
+Fig. 8 caption: Put a period.
+
+P. 3 right: Write the text in full justification style.
+
+Fig. 10-14 caption: Use capital for the first letter in the captions.
+
+
+
+</editor_notes>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ7">7) Does the paper include appropriate references to the literature?</log_status>
+<timestamp>07-May-2019 03:22:26</timestamp>
+<comments>No</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RVAL">2) Does the paper include own work, performed by the authors and not published elsewhere?</log_status>
+<timestamp>07-May-2019 03:22:26</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RORI">1) Is the work free of obvious scientific or technical errors and important factual mistakes?</log_status>
+<timestamp>07-May-2019 03:22:26</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ6">6) Does the paper acknowledge the work of others in the same field?</log_status>
+<timestamp>07-May-2019 03:22:26</timestamp>
+<comments>No</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>10-May-2019 04:19:37</timestamp>
+<comments>THYYPLS3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>10-May-2019 04:19:43</timestamp>
+<comments>THYYPLS3_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 04:30:35</timestamp>
+<comments>THYYPLS3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 04:34:56</timestamp>
+<comments>THYYPLS3_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 04:37:35</timestamp>
+<comments>THYYPLS3.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 04:38:22</timestamp>
+<comments>THYYPLS3_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>11-May-2019 15:46:59</timestamp>
+<comments>THYYPLS3_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>11-May-2019 15:47:04</timestamp>
+<comments>THYYPLS3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>11-May-2019 15:48:23</timestamp>
+<comments>THYYPLS3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>11-May-2019 15:48:47</timestamp>
+<comments>THYYPLS3_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ3">3) Is some aspect or part of the work original or demonstrate clear progress?</log_status>
+<timestamp>12-May-2019 02:17:13</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ4">4) Is the presentation of methods, results and conclusion understandable?</log_status>
+<timestamp>12-May-2019 02:17:13</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ5">5) Is the paper written in good English?</log_status>
+<timestamp>12-May-2019 02:17:13</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="REF">Referee</log_status>
+<timestamp>12-May-2019 02:17:13</timestamp>
+<referee_status code="c">to be corrected</referee_status>
+<comments>Technical comments:
+The manuscript was improved from the technical point of view.
+The remaining comment is the following.
+The author added the bar graph in Fig. 11-14. However, there is no scale. I meant that it would be helpful for readers to understand the temperature value from the figure. For example, putting the maximum and minimum temperature value on the bar graph would be helpful.
+
+Typos or comments for sentences.
+The length of the manuscript exceeds the page limit (up to 3 pages). If there are many references, some of them can be carried over an extra page. Consider making the manuscript shorter.
+
+P. 1 left: Describe the meaning of the abbreviation, when it first appears in the text, not in the abstract. Maybe in the abstract only the abbreviation is no problem. Write like ¿Laser Imaging Detection and Ranging (LiDar)¿ not ¿LiDAR (Laser Imaging Detection and Ranging)¿.
+
+P. 2 left: Put the space before m in (x = 1m, y = 1m).
+
+P. 1 right to P2. left: Change ¿RViz  (ROS visualization)¿ to ¿ROS visualization (RViz)¿.
+
+Fig. 6 caption: Put a period.
+
+Reference: There are strange TAB spaces in the references.
+</comments>
+<editor_notes>Technical comments:
+The manuscript was improved from the technical point of view.
+The remaining comment is the following.
+The author added the bar graph in Fig. 11-14. However, there is no scale. I meant that it would be helpful for readers to understand the temperature value from the figure. For example, putting the maximum and minimum temperature value on the bar graph would be helpful.
+
+Typos or comments for sentences.
+The length of the manuscript exceeds the page limit (up to 3 pages). If there are many references, some of them can be carried over an extra page. Consider making the manuscript shorter.
+
+P. 1 left: Describe the meaning of the abbreviation, when it first appears in the text, not in the abstract. Maybe in the abstract only the abbreviation is no problem. Write like ¿Laser Imaging Detection and Ranging (LiDar)¿ not ¿LiDAR (Laser Imaging Detection and Ranging)¿.
+
+P. 2 left: Put the space before m in (x = 1m, y = 1m).
+
+P. 1 right to P2. left: Change ¿RViz  (ROS visualization)¿ to ¿ROS visualization (RViz)¿.
+
+Fig. 6 caption: Put a period.
+
+Reference: There are strange TAB spaces in the references.
+</editor_notes>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ7">7) Does the paper include appropriate references to the literature?</log_status>
+<timestamp>12-May-2019 02:17:13</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RVAL">2) Does the paper include own work, performed by the authors and not published elsewhere?</log_status>
+<timestamp>12-May-2019 02:17:13</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RORI">1) Is the work free of obvious scientific or technical errors and important factual mistakes?</log_status>
+<timestamp>12-May-2019 02:17:13</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ6">6) Does the paper acknowledge the work of others in the same field?</log_status>
+<timestamp>12-May-2019 02:17:13</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>14-May-2019 00:39:35</timestamp>
+<comments>THYYPLS3f14.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>14-May-2019 00:39:41</timestamp>
+<comments>THYYPLS3f13.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>14-May-2019 00:39:46</timestamp>
+<comments>THYYPLS3f12.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>14-May-2019 00:39:51</timestamp>
+<comments>THYYPLS3f11.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>14-May-2019 00:39:55</timestamp>
+<comments>THYYPLS3f10.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>14-May-2019 00:40:07</timestamp>
+<comments>THYYPLS3f9.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>14-May-2019 00:40:19</timestamp>
+<comments>THYYPLS3f8.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 00:40:46</timestamp>
+<comments>THYYPLS3f8.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 00:41:08</timestamp>
+<comments>THYYPLS3f9.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 00:41:24</timestamp>
+<comments>THYYPLS3f10.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 00:41:39</timestamp>
+<comments>THYYPLS3f11.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 00:42:02</timestamp>
+<comments>THYYPLS3f12.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 00:42:17</timestamp>
+<comments>THYYPLS3f13.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 00:45:25</timestamp>
+<comments>THYYPLS3.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 00:51:25</timestamp>
+<comments>THYYPLS3_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ7">7) Does the paper include appropriate references to the literature?</log_status>
+<timestamp>14-May-2019 03:31:21</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ4">4) Is the presentation of methods, results and conclusion understandable?</log_status>
+<timestamp>14-May-2019 03:31:21</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="REF">Referee</log_status>
+<timestamp>14-May-2019 03:31:21</timestamp>
+<referee_status code="c">to be corrected</referee_status>
+<comments>The author responds to some of the comments. But there are still some points to be corrected.
+
+[Technical comments]
+
+The author added the bar graph in Fig. 11-14. However, there is no scale. I meant that it would be helpful for readers to understand the temperature value from the figure. For example, putting the maximum and minimum temperature value on the bar graph would be helpful.
+
+[Typos or comments for sentences.]
+
+P. 2 left: Describe the meaning of the abbreviation when it first appears in the text, not in the abstract. Write like ¿Laser Imaging Detection and Ranging (LiDar)¿ not ¿LiDAR (Laser Imaging Detection and Ranging)¿.
+
+P1-3: The author uses Lidar and LiDAR. Please standardize one of them.
+
+P. 1 right to P2. left: Change ¿RViz  (ROS visualization)¿ to ¿ROS visualization (RViz)¿.
+
+Reference: There are strange TAB spaces in the references.
+</comments>
+<editor_notes>The author responds to some of the comments. But there are still some points to be corrected.
+
+[Technical comments]
+
+The author added the bar graph in Fig. 11-14. However, there is no scale. I meant that it would be helpful for readers to understand the temperature value from the figure. For example, putting the maximum and minimum temperature value on the bar graph would be helpful.
+
+[Typos or comments for sentences.]
+
+P. 2 left: Describe the meaning of the abbreviation when it first appears in the text, not in the abstract. Write like ¿Laser Imaging Detection and Ranging (LiDar)¿ not ¿LiDAR (Laser Imaging Detection and Ranging)¿.
+
+P1-3: The author uses Lidar and LiDAR. Please standardize one of them.
+
+P. 1 right to P2. left: Change ¿RViz  (ROS visualization)¿ to ¿ROS visualization (RViz)¿.
+
+Reference: There are strange TAB spaces in the references.
+</editor_notes>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ5">5) Is the paper written in good English?</log_status>
+<timestamp>14-May-2019 03:31:21</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RORI">1) Is the work free of obvious scientific or technical errors and important factual mistakes?</log_status>
+<timestamp>14-May-2019 03:31:21</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ6">6) Does the paper acknowledge the work of others in the same field?</log_status>
+<timestamp>14-May-2019 03:31:21</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RVAL">2) Does the paper include own work, performed by the authors and not published elsewhere?</log_status>
+<timestamp>14-May-2019 03:31:21</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ3">3) Is some aspect or part of the work original or demonstrate clear progress?</log_status>
+<timestamp>14-May-2019 03:31:21</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>14-May-2019 08:46:30</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 08:47:23</timestamp>
+<comments>THYYPLS3.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 08:48:47</timestamp>
+<comments>THYYPLS3_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>14-May-2019 09:01:20</timestamp>
+<comments>THYYPLS3_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>14-May-2019 09:01:25</timestamp>
+<comments>THYYPLS3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ5">5) Is the paper written in good English?</log_status>
+<timestamp>14-May-2019 09:07:13</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ4">4) Is the presentation of methods, results and conclusion understandable?</log_status>
+<timestamp>14-May-2019 09:07:13</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RVAL">2) Does the paper include own work, performed by the authors and not published elsewhere?</log_status>
+<timestamp>14-May-2019 09:07:13</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="REF">Referee</log_status>
+<timestamp>14-May-2019 09:07:13</timestamp>
+<referee_status code="a">approved</referee_status>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ6">6) Does the paper acknowledge the work of others in the same field?</log_status>
+<timestamp>14-May-2019 09:07:13</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RORI">1) Is the work free of obvious scientific or technical errors and important factual mistakes?</log_status>
+<timestamp>14-May-2019 09:07:13</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ7">7) Does the paper include appropriate references to the literature?</log_status>
+<timestamp>14-May-2019 09:07:13</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ3">3) Is some aspect or part of the work original or demonstrate clear progress?</log_status>
+<timestamp>14-May-2019 09:07:13</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 09:10:10</timestamp>
+<comments>THYYPLS3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 09:11:21</timestamp>
+<comments>THYYPLS3_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 13:10:06</timestamp>
+<comments>THYYPLS3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 13:10:56</timestamp>
+<comments>THYYPLS3_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 13:11:05</timestamp>
+<comments>THYYPLS3_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 13:11:11</timestamp>
+<comments>THYYPLS3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ3">3) Is some aspect or part of the work original or demonstrate clear progress?</log_status>
+<timestamp>16-May-2019 10:34:29</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ4">4) Is the presentation of methods, results and conclusion understandable?</log_status>
+<timestamp>16-May-2019 10:34:29</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ5">5) Is the paper written in good English?</log_status>
+<timestamp>16-May-2019 10:34:29</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ6">6) Does the paper acknowledge the work of others in the same field?</log_status>
+<timestamp>16-May-2019 10:34:29</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="REF">Referee</log_status>
+<timestamp>16-May-2019 10:34:29</timestamp>
+<referee_status code="a">approved</referee_status>
+</abstract_log>
+<abstract_log>
+<log_status code="RVAL">2) Does the paper include own work, performed by the authors and not published elsewhere?</log_status>
+<timestamp>16-May-2019 10:34:29</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RORI">1) Is the work free of obvious scientific or technical errors and important factual mistakes?</log_status>
+<timestamp>16-May-2019 10:34:29</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="REF">Referee</log_status>
+<timestamp>16-May-2019 10:34:29</timestamp>
+<referee_status code="a">approved</referee_status>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ7">7) Does the paper include appropriate references to the literature?</log_status>
+<timestamp>16-May-2019 10:34:29</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>18-May-2019 23:35:06</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 01:28:48</timestamp>
+<comments>THYYPLS3.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 01:29:07</timestamp>
+<comments>THYYPLS3.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>19-May-2019 01:36:48</timestamp>
+<editor_status code="Y">Yellow</editor_status>
+<comments>I made a few minor changes to the paper. Please review.</comments>
+<editor_notes>PAGE 1
+fixed affiliation text
+removed footnote reference
+added text box to hold footnote
+PAGE 2
+Spelling fix: encorders -&gt; encoders
+Changed &quot;The navigation allows the robot to move&quot; to &quot;The robot moves&quot;
+OVERALL
+Moved all pictures into column borders
+Add periods to end of figure captions when missing
+Added spacing before each figure when preceded by text</editor_notes>
+</abstract_log>
+<abstract_log>
+<log_status code="DR">Dot Reassignment</log_status>
+<timestamp>19-May-2019 05:56:35</timestamp>
+<editor_status code="G">Green</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 06:34:53</timestamp>
+<comments>THYYPLS3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 03:57:52</timestamp>
+<comments>THYYPLS3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>23-May-2019 01:08:20</timestamp>
+<comments>THYYPLS3.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>23-May-2019 01:08:25</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>24-May-2019 01:49:45</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>24-May-2019 02:00:57</timestamp>
+<comments>THYYPLS3_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>24-May-2019 02:01:41</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Speaker,
+Your PowerPoint slides were successfully converted to PDF (with intermediate slides removed) and will be published in the conference proceedings. 
+Please download the PDF slides file (THYYPLS3_TALK.pdf) and check that all is OK. 
+In case of problems, please contact:
+Jan.chrin@psi.ch
+Thank you.
+
+</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+</papers>
+</session>
+</conference>

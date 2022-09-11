@@ -1,0 +1,984 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<conference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://bel.gsi.de/docs/xml/conference.xsd" name="IPAC 2019, Melbourne, Australia">
+<session type="Oral">
+<name abbr="MOZPLM">Invited Orals: Hadron Accelerators </name>
+<date btime="1400" etime="1500">20-May-19</date>
+<location type="Afternoon Invited Oral">Main Plenary (plenary 2)</location>
+<chairs>
+<chair>
+<lname>Bai</lname>
+<fname>Mei</fname>
+<iname>M.</iname>
+<author_id>2726</author_id>
+<institutions>
+<institute>
+<full_name abbrev="GSI" type="Research Centre">GSI Helmholtzzentrum für Schwerionenforschung GmbH</full_name>
+<name1>GSI Helmholtzzentrum für Schwerionenforschung GmbH</name1>
+<URL>http://www.gsi.de/gsi.html</URL>
+<address1>Planckstr. 1</address1>
+<town>Darmstadt</town>
+<postal_code>64291</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>mbai@bnl.gov</email>
+<email>m.bai@fz-juelich.de</email>
+<email>m.bai@gsi.de</email>
+</emails>
+</chair>
+</chairs>
+<papers>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Koseki</lname>
+<fname>Tadashi</fname>
+<iname>T.</iname>
+<author_id>2965</author_id>
+<institutions>
+<institute>
+<full_name abbrev="KEK">High Energy Accelerator Research Organization Accelerator Laboratory</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<department>Accelerator Laboratory</department>
+<address1>1-1 Oho</address1>
+<address2>Tsukuba</address2>
+<town>Ibaraki</town>
+<zip_code>305-0801</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="KEK" type="Laboratory">High Energy Accelerator Research Organization J-PARC Center</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<department>J-PARC Center</department>
+<address1>2-4 Shirakata Shirane</address1>
+<town>Tokai, Ibaraki</town>
+<zip_code>319-1195</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="RIKEN/RARF/CC">The Institute of Physical and Chemical Research Accelerator Research Facility Cyclotron Center</full_name>
+<name1>The Institute of Physical and Chemical Research</name1>
+<name2>Accelerator Research Facility</name2>
+<department>Cyclotron Center</department>
+<URL>http://www.rarf.riken.go.jp/rarf/rarf.html</URL>
+<address1>Wako Main Campus</address1>
+<address2>2-1 Hirosawa</address2>
+<address3>Wako</address3>
+<town>Saitama</town>
+<zip_code>351-0198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="J-PARC, KEK &amp; JAEA" type="University Laboratory">Japan Proton Accelerator Research Complex High Energy Accelerator Research Organization Tokai Campus</full_name>
+<name1>Japan Proton Accelerator Research Complex</name1>
+<name2>High Energy Accelerator Research Organization</name2>
+<department>Tokai Campus</department>
+<address1>Shirakata-Shirane 2-4</address1>
+<address2>Tokai-mura</address2>
+<address3>Naka-gun</address3>
+<town>Ibaraki-ken</town>
+<zip_code>319-1195</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>tadashi.koseki@kek.jp</email>
+<email>tadashi.koseki@kek.jp</email>
+<email>koseki@riken.go.jp</email>
+<email>tadashi.koseki@kek.jp</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>1224</abstract_id>
+<pages>5</pages>
+<toc>23</toc>
+<main_class>MC4: Hadron Accelerators</main_class>
+<sub_class>A14 Neutron Spallation Facilities</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">MOZPLM1</code>
+<presentation type="Oral">Invited Oral</presentation>
+<start_time>1400</start_time>
+<duration>30</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>Operation Status and Upgrade of CSNS</title>
+<abstract>China Spallation Neutron Source (CSNS) accelerator complex consists of a front end, an 80MeV DTL linac, and a 1.6GeV Rapid Cycling Synchrotron (RCS).It is designed with a beam power of 100kW in the first phase and reserves upgrade capability to 500kW in the second phase. It has completed initial beam commissioning and has started user operation in 2018. And meanwhile the beam power is quickly going up from the initially above 10kW to 50kW during the user operation, and we can foresee that the designed beam power of 100 kW can be reached in the next year. This talk gives the most recent status of beam power ramping in CSNS, as well as future upgrade plan to increase the beam power up to 500 kW.</abstract>
+<contributors>
+<contributor type="Co-Author">
+<lname>Wang</lname>
+<fname>Sheng</fname>
+<iname>S.</iname>
+<author_id>12774</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Accelerator Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<department>Accelerator Center</department>
+<address1>19B Yuquan Road</address1>
+<address2>Shijingshang District</address2>
+<town>Beijing</town>
+<postal_code>100049</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>wangs@ihep.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Fu</lname>
+<fname>Shinian</fname>
+<iname>S.</iname>
+<author_id>11327</author_id>
+<institutions>
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Accelerator Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<department>Accelerator Center</department>
+<address1>19B Yuquan Road</address1>
+<address2>Shijingshang District</address2>
+<town>Beijing</town>
+<postal_code>100049</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>fusn@mail.ihep.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Fu</lname>
+<fname>Shinian</fname>
+<iname>S.</iname>
+<author_id>11327</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Accelerator Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<department>Accelerator Center</department>
+<address1>19B Yuquan Road</address1>
+<address2>Shijingshang District</address2>
+<town>Beijing</town>
+<postal_code>100049</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>fusn@mail.ihep.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Fu</lname>
+<fname>Shinian</fname>
+<iname>S.</iname>
+<author_id>11327</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Accelerator Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<department>Accelerator Center</department>
+<address1>19B Yuquan Road</address1>
+<address2>Shijingshang District</address2>
+<town>Beijing</town>
+<postal_code>100049</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>fusn@mail.ihep.ac.cn</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOZPLM1_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOZPLM1_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>MOZPLM1.doc</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>MOZPLM1_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>Fig-1.jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>Fig-2.jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>Fig-3.jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>Fig-4.jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>Fig-5(left).jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>Fig-5(right).jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>Fig-6(left).jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>Fig-6(right).jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>Fig-7(lower).jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>Fig-7(upper).jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>Fig-8(lower).jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>Fig-8(upper).jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>Fig-9.jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>Fig-10.jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>Fig-11.jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>Fig-12.jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>Fig-13.jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>Fig-14.jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>Fig-15.jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>Fig-16.jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>Fig-17(left).jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>Fig-17(right).jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>MOZPLM1.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>MOZPLM1.doc</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOZPLM1_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>MOZPLM1.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>MOZPLM1.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>MOZPLM1.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>MOZPLM1.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>MOZPLM1.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>MOZPLM1.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>MOZPLM1.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>MOZPLM1.docx</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=Fig-5(right).jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=Fig-6(left).jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=Fig-16.jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=Fig-4.jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=Fig-3.jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=Fig-2.jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=Fig-1.jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=Fig-17(left).jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=Fig-13.jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=Fig-11.jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=Fig-10.jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=Fig-8(lower).jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=Fig-6(right).jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=Fig-5(left).jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=Fig-17(right).jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=Fig-12.jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=Fig-14.jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=Fig-15.jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=Fig-7(lower).jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=Fig-7(upper).jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=Fig-8(upper).jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=Fig-9.jpg</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=MOZPLM1.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=MOZPLM1_AUTHOR.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=MOZPLM1.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=MOZPLM1.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=MOZPLM1.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=MOZPLM1.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=MOZPLM1.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=MOZPLM1.doc</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=MOZPLM1.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=MOZPLM1.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=MOZPLM1.doc</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=MOZPLM1.docx</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=MOZPLM1_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=MOZPLM1_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM1&amp;wanted_file=MOZPLM1_TALK.PPTX</fileURL>
+</fileURLs>
+<editor>Laurent Serani</editor>
+<final_qa>Toshinari Tanaka</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>27-Mar-2018 09:44:12</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>23-May-2018 19:38:27</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>31-May-2018 02:08:04</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>31-May-2018 02:08:04</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AOC">Abstract Owner Changed</log_status>
+<timestamp>27-Jun-2018 00:26:03</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>20-Sep-2018 04:31:36</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>20-Sep-2018 04:31:36</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>01-Apr-2019 08:30:00</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>01-Apr-2019 08:50:48</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>02-Apr-2019 09:16:38</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>09-Apr-2019 08:55:18</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>06-May-2019 01:56:50</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 09:28:30</timestamp>
+<comments>MOZPLM1.doc</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 03:35:14</timestamp>
+<comments>MOZPLM1_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 03:37:50</timestamp>
+<comments>MOZPLM1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>17-May-2019 05:59:52</timestamp>
+<comments>MOZPLM1.doc</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 07:57:48</timestamp>
+<comments>MOZPLM1.doc</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 07:58:22</timestamp>
+<comments>MOZPLM1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 08:00:17</timestamp>
+<comments>Fig-1.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 08:00:37</timestamp>
+<comments>Fig-2.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 08:00:51</timestamp>
+<comments>Fig-3.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 08:01:21</timestamp>
+<comments>Fig-4.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 08:01:45</timestamp>
+<comments>Fig-5(left).jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 08:02:01</timestamp>
+<comments>Fig-5(right).jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 08:02:15</timestamp>
+<comments>Fig-6(left).jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 08:02:29</timestamp>
+<comments>Fig-6(right).jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 08:02:48</timestamp>
+<comments>Fig-7(lower).jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 08:03:10</timestamp>
+<comments>Fig-7(upper).jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 08:03:25</timestamp>
+<comments>Fig-8(lower).jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 08:03:44</timestamp>
+<comments>Fig-8(upper).jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 08:03:58</timestamp>
+<comments>Fig-9.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 08:04:08</timestamp>
+<comments>Fig-10.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 08:04:18</timestamp>
+<comments>Fig-11.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 08:04:30</timestamp>
+<comments>Fig-12.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 08:04:44</timestamp>
+<comments>Fig-13.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 08:04:57</timestamp>
+<comments>Fig-14.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 08:05:07</timestamp>
+<comments>Fig-15.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 08:05:23</timestamp>
+<comments>Fig-16.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 08:05:36</timestamp>
+<comments>Fig-17(left).jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 08:05:49</timestamp>
+<comments>Fig-17(right).jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>18-May-2019 06:34:19</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>18-May-2019 07:25:35</timestamp>
+<comments>MOZPLM1.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>18-May-2019 07:25:50</timestamp>
+<comments>MOZPLM1.doc</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>18-May-2019 07:28:29</timestamp>
+<editor_status code="Y">Yellow</editor_status>
+<comments>several changes are need to be in accordance with the JACoW standard publication.
+Check the PDF file on your SPMS account.
+When agree put the file GREEN using the offered link otherwise reject changes and give comments</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="DR">Dot Reassignment</log_status>
+<timestamp>18-May-2019 09:09:27</timestamp>
+<editor_status code="G">Green</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="QAF">Final QA Failed</log_status>
+<timestamp>20-May-2019 04:19:36</timestamp>
+<comments>Reference to [4] is missing in the text. In Table 1 title, &quot;from&quot; was capitalized.</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>20-May-2019 04:34:24</timestamp>
+<editor_status code="R">Red</editor_status>
+<comments>dear authors
+after QA you don't use the ref [4] in your text.
+please revise this point and resubmit your paper.
+thanks for your comprehension</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>21-May-2019 00:34:53</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 00:47:52</timestamp>
+<comments>MOZPLM1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>21-May-2019 00:53:25</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Speaker,
+Your PowerPoint slides were converted successfully to PDF and will
+be published in the conference proceedings. Please download the PDF
+slides file (MOZPLM1_TALK.pdf) and check that all is OK. In the event of a problem, please contact:
+jan.chrin@psi.ch 
+Thank you.</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 04:44:19</timestamp>
+<comments>MOZPLM1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 04:57:26</timestamp>
+<comments>MOZPLM1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 05:18:35</timestamp>
+<comments>MOZPLM1.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 05:19:29</timestamp>
+<comments>MOZPLM1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>22-May-2019 05:33:02</timestamp>
+<editor_status code="G">Green</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 05:57:31</timestamp>
+<comments>MOZPLM1.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 05:58:09</timestamp>
+<comments>MOZPLM1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>22-May-2019 05:58:17</timestamp>
+<editor_status code="G">Green</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 06:04:08</timestamp>
+<comments>MOZPLM1.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 06:04:49</timestamp>
+<comments>MOZPLM1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>23-May-2019 00:54:35</timestamp>
+<comments>QA ok.</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Koseki</lname>
+<fname>Tadashi</fname>
+<iname>T.</iname>
+<author_id>2965</author_id>
+<institutions>
+<institute>
+<full_name abbrev="KEK">High Energy Accelerator Research Organization Accelerator Laboratory</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<department>Accelerator Laboratory</department>
+<address1>1-1 Oho</address1>
+<address2>Tsukuba</address2>
+<town>Ibaraki</town>
+<zip_code>305-0801</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="KEK" type="Laboratory">High Energy Accelerator Research Organization J-PARC Center</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<department>J-PARC Center</department>
+<address1>2-4 Shirakata Shirane</address1>
+<town>Tokai, Ibaraki</town>
+<zip_code>319-1195</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="RIKEN/RARF/CC">The Institute of Physical and Chemical Research Accelerator Research Facility Cyclotron Center</full_name>
+<name1>The Institute of Physical and Chemical Research</name1>
+<name2>Accelerator Research Facility</name2>
+<department>Cyclotron Center</department>
+<URL>http://www.rarf.riken.go.jp/rarf/rarf.html</URL>
+<address1>Wako Main Campus</address1>
+<address2>2-1 Hirosawa</address2>
+<address3>Wako</address3>
+<town>Saitama</town>
+<zip_code>351-0198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="J-PARC, KEK &amp; JAEA" type="University Laboratory">Japan Proton Accelerator Research Complex High Energy Accelerator Research Organization Tokai Campus</full_name>
+<name1>Japan Proton Accelerator Research Complex</name1>
+<name2>High Energy Accelerator Research Organization</name2>
+<department>Tokai Campus</department>
+<address1>Shirakata-Shirane 2-4</address1>
+<address2>Tokai-mura</address2>
+<address3>Naka-gun</address3>
+<town>Ibaraki-ken</town>
+<zip_code>319-1195</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>tadashi.koseki@kek.jp</email>
+<email>tadashi.koseki@kek.jp</email>
+<email>koseki@riken.go.jp</email>
+<email>tadashi.koseki@kek.jp</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>1223</abstract_id>
+<main_class>MC4: Hadron Accelerators</main_class>
+<sub_class>A17 High Intensity Accelerators</sub_class>
+<publishable>No, Editor Status Code is not Publishable, Final QA Not Publishable</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">MOZPLM2</code>
+<presentation type="Oral">Invited Oral</presentation>
+<start_time>1430</start_time>
+<duration>30</duration>
+</program_code>
+</program_codes>
+<title>Overview of Worldwide High Intensity Heavy Ion Linacs</title>
+<abstract>This talk will present an overview of worldwide developments of linear accelerators that are dedicated to accelerate high intensity heavy ions. Advantages and challenges of various technologies such as superconducting or room-temperature linac, pulsed or CW linacs, will be reviewed. A comparison of the pro's and con's for pulsed and CW operated facilities will be done for some example cases.</abstract>
+<contributors>
+<contributor type="Owner">
+<lname>Ratzinger</lname>
+<fname>Ulrich</fname>
+<iname>U.</iname>
+<author_id>566</author_id>
+<institutions>
+<institute>
+<full_name abbrev="IAP" type="Institute">Goethe Universität Frankfurt Institut für Angewandte Physik</full_name>
+<name1>Goethe Universität Frankfurt</name1>
+<department>Institut für Angewandte Physik</department>
+<URL>http://www.uni-frankfurt.de/fb13/iap/</URL>
+<address1>Max-von-Laue-Str. 1</address1>
+<town>Frankfurt am Main</town>
+<postal_code>60438</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+<institute>
+<full_name type="Industry">BEVATECH</full_name>
+<name1>BEVATECH</name1>
+<address1>Altenhöferallee 3</address1>
+<town>Frankfurt</town>
+<postal_code>60348</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>u.ratzinger@iap.uni-frankfurt.de</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Ratzinger</lname>
+<fname>Ulrich</fname>
+<iname>U.</iname>
+<author_id>566</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="IAP" type="Institute">Goethe Universität Frankfurt Institut für Angewandte Physik</full_name>
+<name1>Goethe Universität Frankfurt</name1>
+<department>Institut für Angewandte Physik</department>
+<URL>http://www.uni-frankfurt.de/fb13/iap/</URL>
+<address1>Max-von-Laue-Str. 1</address1>
+<town>Frankfurt am Main</town>
+<postal_code>60438</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>u.ratzinger@iap.uni-frankfurt.de</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Ratzinger</lname>
+<fname>Ulrich</fname>
+<iname>U.</iname>
+<author_id>566</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="IAP" type="Institute">Goethe Universität Frankfurt Institut für Angewandte Physik</full_name>
+<name1>Goethe Universität Frankfurt</name1>
+<department>Institut für Angewandte Physik</department>
+<URL>http://www.uni-frankfurt.de/fb13/iap/</URL>
+<address1>Max-von-Laue-Str. 1</address1>
+<town>Frankfurt am Main</town>
+<postal_code>60438</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>u.ratzinger@iap.uni-frankfurt.de</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOZPLM2_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOZPLM2_TALK.PPTX</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM2&amp;wanted_file=MOZPLM2_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZPLM2&amp;wanted_file=MOZPLM2_TALK.PDF</fileURL>
+</fileURLs>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>27-Mar-2018 09:37:35</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>24-May-2018 14:30:11</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>29-May-2018 06:15:00</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>29-May-2018 06:15:00</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>31-May-2018 02:08:39</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>31-May-2018 02:08:39</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AOC">Abstract Owner Changed</log_status>
+<timestamp>27-Jun-2018 00:26:03</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>20-Sep-2018 04:29:14</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>20-Sep-2018 04:29:14</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>28-Jan-2019 15:10:01</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>18-May-2019 14:05:01</timestamp>
+<comments>MOZPLM2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>18-May-2019 14:06:03</timestamp>
+<comments>MOZPLM2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 14:20:02</timestamp>
+<comments>MOZPLM2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 14:21:11</timestamp>
+<comments>MOZPLM2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>19-May-2019 14:21:40</timestamp>
+<comments>MOZPLM2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>19-May-2019 14:21:55</timestamp>
+<comments>MOZPLM2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>21-May-2019 00:54:02</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>21-May-2019 00:59:39</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Ulrich,
+The submitted pdf of your talk is suitable for publication and will be included in the proceedings as submitted.
+Kind Regards,
+jan.chrin@psi.ch</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+</papers>
+</session>
+</conference>

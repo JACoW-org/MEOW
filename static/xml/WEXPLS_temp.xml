@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<conference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://bel.gsi.de/docs/xml/conference.xsd" name="IPAC 2019, Melbourne, Australia">
+<session type="Oral">
+<name abbr="WEXPLS">Invited Orals: Accelerator Technology</name>
+<date btime="0900" etime="0930">22-May-19</date>
+<location type="Before Coffee Invited Oral">Secondary Plenary (plenary 3)</location>
+<chairs>
+<chair>
+<lname>Raparia</lname>
+<fname>Deepak</fname>
+<iname>D.</iname>
+<author_id>2131</author_id>
+<institutions>
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>raparia@bnl.gov</email>
+<email>raparia@bnl.gov</email>
+</emails>
+</chair>
+</chairs>
+<papers>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Hsu</lname>
+<fname>Kuo-Tung</fname>
+<iname>K.T.</iname>
+<author_id>1799</author_id>
+<institutions>
+<institute>
+<full_name abbrev="NSRRC" type="Research Centre">National Synchrotron Radiation Research Center</full_name>
+<name1>National Synchrotron Radiation Research Center</name1>
+<URL>www.nsrrc.org.tw</URL>
+<address1>101 Hsin-Ann Road.</address1>
+<address2>Hsinchu Science Park</address2>
+<town>Hsinchu</town>
+<zip_code>30076</zip_code>
+<country_code abbrev="ROC">Taiwan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>kuotung@nsrrc.org.tw</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>1490</abstract_id>
+<pages>6</pages>
+<toc>2224</toc>
+<main_class>MC7: Accelerator Technology</main_class>
+<sub_class>T10 Superconducting Magnets</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">WEXPLS1</code>
+<presentation type="Oral">Invited Oral</presentation>
+<start_time>900</start_time>
+<duration>30</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>High Performance ECR Sources for Next-Generation Nuclear Science Facilities</title>
+<abstract>Modern heavy-ion accelerators require intense heavy-ion beams with high charge state. Electron Cyclotron Resonance (ECR) sources are the primary tool for generating such beams. Advances in magnet technology and an improved understanding of the ECR ion source plasma physics have led to significant improvements in ECR source performance over the last several decades. The current state of the art is represented by third-generation sources operating at frequencies around 28 GHz and peak coil fields of about 7 T using NbTi conductor. Fourth-generation ECR ion sources with an operating frequency above 40 GHz have the potential to quadruple the source output beam current. These sources will need to incorporate advanced conductor technologies and/or novel coil configurations in order to exceed the limitations of the present structures. This talk will present worldwide efforts currently underway to develop high-performance ECR sources using new design approaches in support of next-generation nuclear physics facilities.</abstract>
+<contributors>
+<contributor type="Owner">
+<lname>Leitner</lname>
+<fname>Daniela</fname>
+<iname>D.</iname>
+<author_id>2366</author_id>
+<institutions>
+<institute>
+<full_name abbrev="FRIB" type="University Laboratory">Facility for Rare Isotope Beams Michigan State University Cyclotron Laboratory</full_name>
+<name1>Facility for Rare Isotope Beams</name1>
+<name2>Michigan State University</name2>
+<department>Cyclotron Laboratory</department>
+<URL>http://www.frib.msu.edu/</URL>
+<town>East Lansing, Michigan</town>
+<zip_code>MI 48824-1321</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name abbrev="NSCL" type="University Laboratory">Michigan State University National Superconducting Cyclotron Laboratory</full_name>
+<name1>Michigan State University</name1>
+<name2>National Superconducting Cyclotron Laboratory</name2>
+<URL>http://www.nscl.msu.edu/</URL>
+<address1>640 South Shaw Lane</address1>
+<town>East Lansing, Michigan</town>
+<zip_code>MI 48824</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name abbrev="LBNL" type="Laboratory">Lawrence Berkeley National Laboratory</full_name>
+<name1>Lawrence Berkeley National Laboratory</name1>
+<URL>http://www.lbl.gov/</URL>
+<address1>One Cyclotron Road</address1>
+<town>Berkeley, California</town>
+<zip_code>CA 94720-8211</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name abbrev="FRIB" type="University Laboratory">Facility for Rare Isotope Beams, Michigan State University</full_name>
+<name1>Facility for Rare Isotope Beams, Michigan State University</name1>
+<address1>640 S. Shaw Lane</address1>
+<town>East Lansing, Michigan</town>
+<zip_code>MI 48864</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>dleitner@lbl.gov</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Leitner</lname>
+<fname>Daniela</fname>
+<iname>D.</iname>
+<author_id>2366</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="LBNL" type="Laboratory">Lawrence Berkeley National Laboratory</full_name>
+<name1>Lawrence Berkeley National Laboratory</name1>
+<URL>http://www.lbl.gov/</URL>
+<address1>One Cyclotron Road</address1>
+<town>Berkeley, California</town>
+<zip_code>CA 94720-8211</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>dleitner@lbl.gov</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Leitner</lname>
+<fname>Daniela</fname>
+<iname>D.</iname>
+<author_id>2366</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="LBNL" type="Laboratory">Lawrence Berkeley National Laboratory</full_name>
+<name1>Lawrence Berkeley National Laboratory</name1>
+<URL>http://www.lbl.gov/</URL>
+<address1>One Cyclotron Road</address1>
+<town>Berkeley, California</town>
+<zip_code>CA 94720-8211</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>dleitner@lbl.gov</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>Leitner-f1.PNG</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>Leitner-f2.PNG</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEXPLS1_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>WEXPLS1.tex</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>WEXPLS1.tex</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEXPLS1.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEXPLS1_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEXPLS1_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXPLS1&amp;wanted_file=Leitner-f1.PNG</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXPLS1&amp;wanted_file=Leitner-f2.PNG</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXPLS1&amp;wanted_file=WEXPLS1_AUTHOR.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXPLS1&amp;wanted_file=WEXPLS1.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXPLS1&amp;wanted_file=WEXPLS1.tex</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXPLS1&amp;wanted_file=WEXPLS1.tex</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXPLS1&amp;wanted_file=WEXPLS1_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXPLS1&amp;wanted_file=WEXPLS1_TALK.PDF</fileURL>
+</fileURLs>
+<editor>Todd Satogata</editor>
+<final_qa>Dong Eon Kim</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>04-Apr-2018 23:49:35</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>29-May-2018 07:02:51</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>29-May-2018 07:02:51</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>31-May-2018 03:28:04</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>31-May-2018 03:28:04</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AOC">Abstract Owner Changed</log_status>
+<timestamp>27-Jun-2018 00:26:03</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>20-Sep-2018 04:55:30</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>20-Sep-2018 04:55:30</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>21-Nov-2018 19:33:30</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="PRR">Peer Review Requested</log_status>
+<timestamp>21-Nov-2018 20:07:34</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>12-Dec-2018 00:54:33</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>16-May-2019 21:47:16</timestamp>
+<comments>WEXPLS1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>16-May-2019 21:51:01</timestamp>
+<comments>Figure 1_ALS-U.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>16-May-2019 21:51:29</timestamp>
+<comments>Figure 1_ALS-U.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>16-May-2019 21:51:37</timestamp>
+<comments>Figure 1_ALS-U.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>16-May-2019 21:52:44</timestamp>
+<comments>AR_assembly.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>16-May-2019 21:52:57</timestamp>
+<comments>Figure3_workflow1.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>16-May-2019 21:53:18</timestamp>
+<comments>Egress1.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>16-May-2019 21:53:35</timestamp>
+<comments>figure5.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>19-May-2019 04:10:58</timestamp>
+<comments>figure5.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>19-May-2019 04:11:07</timestamp>
+<comments>Egress1.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>19-May-2019 04:11:15</timestamp>
+<comments>Figure3_workflow1.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>19-May-2019 04:11:25</timestamp>
+<comments>AR_assembly.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>19-May-2019 04:11:34</timestamp>
+<comments>Figure 1_ALS-U.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>19-May-2019 04:32:16</timestamp>
+<comments>WEXPLS1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 04:32:47</timestamp>
+<comments>Leitner-f1.PNG</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 04:33:05</timestamp>
+<comments>Leitner-f2.PNG</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 04:33:37</timestamp>
+<comments>WEXPLS1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>19-May-2019 04:40:37</timestamp>
+<comments>WEXPLS1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 04:41:01</timestamp>
+<comments>WEXPLS1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 04:42:28</timestamp>
+<comments>WEXPLS1.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>19-May-2019 05:42:31</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 06:19:28</timestamp>
+<comments>WEXPLS1.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 06:19:39</timestamp>
+<comments>WEXPLS1.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>19-May-2019 06:43:55</timestamp>
+<editor_status code="Y">Yellow</editor_status>
+<comments>Hi Daniela -- thank you for submission of your paper to IPAC'19! I have made quite a few changes to your paper and reprocessed it from source so it is a yellow dot -- please verify them and accept or reject the changes in the IPAC'19 SPMS: (*) Corrected many descriptive subscripts to _\mathrm{}; IUPAC standard is that descriptive subscripts are upright, not italic (*) Corrected many units to upright to follow IUPAC as well (*) Fixed typos (kev, GHZ) (*) inserted ~--- em dashes instead of &quot; - &quot; in text (*) Elements removed from math italic (*) Table captions changed to Title Case per JACoW template (*) Changed &quot;Tab.&quot; to &quot;Table&quot; per JACoW template. (*) Table \hline changed to toprule,midrule,bottomrule. Thank you again! -Todd Satogata / satogata@jlab.org</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="DR">Dot Reassignment</log_status>
+<timestamp>19-May-2019 07:11:58</timestamp>
+<editor_status code="G">Green</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 00:20:31</timestamp>
+<comments>WEXPLS1_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>22-May-2019 03:34:23</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 03:53:18</timestamp>
+<comments>WEXPLS1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>22-May-2019 03:54:22</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Speaker,
+Your PowerPoint slides were converted successfully to PDF (with intermediate slides removed) and will
+be published in the conference proceedings. Please download the PDF
+slides file (TUXXPLS3_TALK.pdf) and check that all is OK. 
+In the event of a problem, please contact:
+jan.chrin@psi.ch 
+Thank you
+</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>22-May-2019 05:07:23</timestamp>
+</abstract_log>
+</abstract_logs>
+</paper>
+</papers>
+</session>
+</conference>

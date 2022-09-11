@@ -1,0 +1,1534 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<conference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://bel.gsi.de/docs/xml/conference.xsd" name="IPAC 2019, Melbourne, Australia">
+<session type="Oral">
+<name abbr="WEXXPLM">Contributed Orals: Photon Sources and Electron Accelerators</name>
+<date btime="0930" etime="1030">22-May-19</date>
+<location type="Before Coffee Contributed Oral">Main Plenary (plenary 2)</location>
+<chairs>
+<chair>
+<lname>Raubenheimer</lname>
+<fname>Tor</fname>
+<iname>T.O.</iname>
+<author_id>2602</author_id>
+<institutions>
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>tor@slac.stanford.edu</email>
+<email>tor@slac.stanford.edu</email>
+</emails>
+</chair>
+</chairs>
+<papers>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Watanabe</lname>
+<fname>Takahiro</fname>
+<iname>T.</iname>
+<author_id>1053</author_id>
+<institutions>
+<institute>
+<full_name abbrev="JASRI/SPring-8" type="Institute">Japan Synchrotron Radiation Research Institute SPring-8 Joint-Project for XFEL</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<name2>SPring-8 Joint-Project for XFEL</name2>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho, Sayo-gun</address2>
+<town>Hyogo-ken</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="JASRI/SPring-8">Japan Synchrotron Radiation Research Institute Accelerator Division</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<name2>Accelerator Division</name2>
+<URL>http://www.spring8.or.jp/e/index.html</URL>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo-ken</town>
+<zip_code>679 5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="JASRI/SPring-8" type="Research Centre">Japan Synchrotron Radiation Research Institute</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name type="Institute">Japan Synchrotron Radiation Research Institute (JASRI) RIKEN SPring-8 Center</full_name>
+<name1>Japan Synchrotron Radiation Research Institute (JASRI)</name1>
+<name2>RIKEN SPring-8 Center</name2>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory National Synchrotron Light Source</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<name2>National Synchrotron Light Source</name2>
+<URL>http://nslsweb.nsls.bnl.gov/nsls/default.htm</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>NY 11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name type="Research Centre">RIKEN SPring-8 Center</full_name>
+<name1>RIKEN SPring-8 Center</name1>
+<address1>1-1-1, Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5148</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="JASRI" type="Institute">Japan Synchrotron Radiation Research Institute</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@bnl.gov</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>2779</abstract_id>
+<pages>3</pages>
+<toc>2230</toc>
+<main_class>MC2: Photon Sources and Electron Accelerators</main_class>
+<sub_class>A06 Free Electron Lasers</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">WEXXPLM1</code>
+<presentation type="Oral">Contributed Oral</presentation>
+<start_time>930</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>Amplified Emission of a Soft-X Ray Free-Electron Laser Based on Echo-Enabled Harmonic Generation</title>
+<abstract>We report the first evidence of substantial gain in a soft-X ray Free Electron Laser (FEL) based on Echo-Enabled Harmonic Generation (EEHG). The experiment was focused on harmonics 36 (~7.3nm) and 45 (5.8 nm) and clearly demonstrated the expected EEHG capability of generating powerful and coherent FEL pulses, with strongly reduced sensitivity to electron-beam fluctuations. The experiment was carried out at FERMI, the seeded FEL user facility at Elettra-Sincrotrone Trieste.</abstract>
+<contributors>
+<contributor type="Co-Author">
+<lname>Badano</lname>
+<fname>Laura</fname>
+<iname>L.</iname>
+<author_id>3058</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name>Elettra-Sincrotrone Trieste S.C.p.A.</full_name>
+<name1>Elettra-Sincrotrone Trieste S.C.p.A.</name1>
+<URL>http://www.elettra.trieste.it/</URL>
+<address1>SS 14 - km 163,5 in Area Science Park</address1>
+<town>Basovizza</town>
+<postal_code>34149</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>laura.badano@elettra.eu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>De Ninno</lname>
+<fname>Giovanni</fname>
+<iname>G.</iname>
+<author_id>300</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name>Elettra-Sincrotrone Trieste S.C.p.A.</full_name>
+<name1>Elettra-Sincrotrone Trieste S.C.p.A.</name1>
+<URL>http://www.elettra.trieste.it/</URL>
+<address1>SS 14 - km 163,5 in Area Science Park</address1>
+<town>Basovizza</town>
+<postal_code>34149</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+<institute>
+<full_name type="University Department">University of Nova Gorica Physics Department</full_name>
+<name1>University of Nova Gorica</name1>
+<department>Physics Department</department>
+<URL>http://www.p-ng.si/en/</URL>
+<address1>Vipavska 13,</address1>
+<po_box>Box 301</po_box>
+<town>Nova Gorica</town>
+<postal_code>5000</postal_code>
+<country_code abbrev="SI">Slovenia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>giovanni.deninno@elettra.trieste.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Di Mitri</lname>
+<fname>Simone</fname>
+<iname>S.</iname>
+<author_id>4342</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name>Elettra-Sincrotrone Trieste S.C.p.A.</full_name>
+<name1>Elettra-Sincrotrone Trieste S.C.p.A.</name1>
+<URL>http://www.elettra.trieste.it/</URL>
+<address1>SS 14 - km 163,5 in Area Science Park</address1>
+<town>Basovizza</town>
+<postal_code>34149</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>simone.dimitri@elettra.eu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Diviacco</lname>
+<fname>Bruno</fname>
+<iname>B.</iname>
+<author_id>708</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name>Elettra-Sincrotrone Trieste S.C.p.A.</full_name>
+<name1>Elettra-Sincrotrone Trieste S.C.p.A.</name1>
+<URL>http://www.elettra.trieste.it/</URL>
+<address1>SS 14 - km 163,5 in Area Science Park</address1>
+<town>Basovizza</town>
+<postal_code>34149</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>bruno.diviacco@elettra.trieste.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Fawley</lname>
+<fname>William</fname>
+<mname>M.</mname>
+<iname>W.M.</iname>
+<author_id>2395</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name>Elettra-Sincrotrone Trieste S.C.p.A.</full_name>
+<name1>Elettra-Sincrotrone Trieste S.C.p.A.</name1>
+<URL>http://www.elettra.trieste.it/</URL>
+<address1>SS 14 - km 163,5 in Area Science Park</address1>
+<town>Basovizza</town>
+<postal_code>34149</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>wmfawley@lbl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Ferrari</lname>
+<fname>Eugenio</fname>
+<iname>E.</iname>
+<author_id>44406</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="PSI">Paul Scherrer Institut</full_name>
+<name1>Paul Scherrer Institut</name1>
+<URL>http://www.psi.ch/</URL>
+<address1>Forschungsstrasse 111</address1>
+<town>Villigen PSI</town>
+<postal_code>5232</postal_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>thongrim@gmail.com</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Garzella</lname>
+<fname>David</fname>
+<iname>D.</iname>
+<author_id>2942</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CEA" type="Atomic Energy Commission">Commissariat à l'Energie Atomique</full_name>
+<name1>Commissariat à l'Energie Atomique</name1>
+<URL>www.cea.fr</URL>
+<town>Gif-sur-Yvette</town>
+<postal_code>91191</postal_code>
+<zip_code>Cedex</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>david.garzella@cea.fr</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Grattoni</lname>
+<fname>Vanessa</fname>
+<iname>V.</iname>
+<author_id>95111</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY" type="Research Centre">Deutsches Elektronen-Synchrotron MPY</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<name2>MPY</name2>
+<URL>http://www.desy.de/html/home/index.html</URL>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>vanessa.grattoni@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Hemsing</lname>
+<fname>Erik</fname>
+<iname>E.</iname>
+<author_id>28321</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>ehemsing@slac.stanford.edu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Mirian</lname>
+<fname>Najmeh</fname>
+<mname>Sadat</mname>
+<iname>N.S.</iname>
+<author_id>67248</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name>Elettra-Sincrotrone Trieste S.C.p.A.</full_name>
+<name1>Elettra-Sincrotrone Trieste S.C.p.A.</name1>
+<URL>http://www.elettra.trieste.it/</URL>
+<address1>SS 14 - km 163,5 in Area Science Park</address1>
+<town>Basovizza</town>
+<postal_code>34149</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>najmeh.mirian@elettra.eu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Penco</lname>
+<fname>Giuseppe</fname>
+<iname>G.</iname>
+<author_id>4347</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name>Elettra-Sincrotrone Trieste S.C.p.A.</full_name>
+<name1>Elettra-Sincrotrone Trieste S.C.p.A.</name1>
+<URL>http://www.elettra.trieste.it/</URL>
+<address1>SS 14 - km 163,5 in Area Science Park</address1>
+<town>Basovizza</town>
+<postal_code>34149</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>giuseppe.penco@elettra.trieste.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Pop</lname>
+<fname>Mihai</fname>
+<mname>Alexandru</mname>
+<iname>M.A.</iname>
+<author_id>94454</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="University Laboratory">MAX IV Laboratory Lund University</full_name>
+<name1>MAX IV Laboratory</name1>
+<name2>Lund University</name2>
+<address1>Fotongatan 2</address1>
+<po_box>P.O. Box 118</po_box>
+<town>Lund</town>
+<postal_code>22100</postal_code>
+<country_code abbrev="SE">Sweden</country_code>
+</institute>
+</institutions>
+<emails>
+<email>mihai.pop@maxiv.lu.se</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Prat</lname>
+<fname>Eduard</fname>
+<iname>E.</iname>
+<author_id>21469</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="PSI">Paul Scherrer Institut</full_name>
+<name1>Paul Scherrer Institut</name1>
+<URL>http://www.psi.ch/</URL>
+<address1>Forschungsstrasse 111</address1>
+<town>Villigen PSI</town>
+<postal_code>5232</postal_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>eduard.prat@psi.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Rebernik Ribic</lname>
+<fname>Primoz</fname>
+<iname>P.</iname>
+<author_id>71291</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name>Elettra-Sincrotrone Trieste S.C.p.A.</full_name>
+<name1>Elettra-Sincrotrone Trieste S.C.p.A.</name1>
+<URL>http://www.elettra.trieste.it/</URL>
+<address1>SS 14 - km 163,5 in Area Science Park</address1>
+<town>Basovizza</town>
+<postal_code>34149</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>primoz.rebernik@elettra.eu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Roussel</lname>
+<fname>Eléonore</fname>
+<iname>E.</iname>
+<author_id>55320</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="PhLAM/CERLA" type="University">Laboratoire de Physique des Lasers, Atomes et Molécules Centre d'Etudes et de Recherches Lasers et Applications</full_name>
+<name1>Laboratoire de Physique des Lasers, Atomes et Molécules</name1>
+<name2>Centre d'Etudes et de Recherches Lasers et Applications</name2>
+<address1>Université Lille 1</address1>
+<address2>Bat. P5</address2>
+<town>Villeneuve d'Ascq</town>
+<postal_code>59655 CEDEX</postal_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>eleonore.roussel@univ-lille.fr</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Spampinati</lname>
+<fname>Simone</fname>
+<iname>S.</iname>
+<author_id>17833</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name>Elettra-Sincrotrone Trieste S.C.p.A.</full_name>
+<name1>Elettra-Sincrotrone Trieste S.C.p.A.</name1>
+<URL>http://www.elettra.trieste.it/</URL>
+<address1>SS 14 - km 163,5 in Area Science Park</address1>
+<town>Basovizza</town>
+<postal_code>34149</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>simone.spampinati@elettra.eu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Spezzani</lname>
+<fname>Carlo</fname>
+<iname>C.</iname>
+<author_id>24639</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name>Elettra-Sincrotrone Trieste S.C.p.A.</full_name>
+<name1>Elettra-Sincrotrone Trieste S.C.p.A.</name1>
+<URL>http://www.elettra.trieste.it/</URL>
+<address1>SS 14 - km 163,5 in Area Science Park</address1>
+<town>Basovizza</town>
+<postal_code>34149</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>carlo.spezzani@elettra.trieste.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Trovo</lname>
+<fname>Mauro</fname>
+<iname>M.</iname>
+<author_id>4613</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name>Elettra-Sincrotrone Trieste S.C.p.A.</full_name>
+<name1>Elettra-Sincrotrone Trieste S.C.p.A.</name1>
+<URL>http://www.elettra.trieste.it/</URL>
+<address1>SS 14 - km 163,5 in Area Science Park</address1>
+<town>Basovizza</town>
+<postal_code>34149</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>mauro.trovo@elettra.trieste.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Xiang</lname>
+<fname>Dao</fname>
+<iname>D.</iname>
+<author_id>12793</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="University">Shanghai Jiao Tong University Department of Physics</full_name>
+<name1>Shanghai Jiao Tong University</name1>
+<department>Department of Physics</department>
+<town>Shanghai</town>
+<zip_code>200240</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>dxiang@sjtu.edu.cn</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Allaria</lname>
+<fname>Enrico</fname>
+<iname>E.</iname>
+<author_id>5803</author_id>
+<institutions>
+<institute>
+<full_name>Elettra-Sincrotrone Trieste S.C.p.A.</full_name>
+<name1>Elettra-Sincrotrone Trieste S.C.p.A.</name1>
+<URL>http://www.elettra.trieste.it/</URL>
+<address1>SS 14 - km 163,5 in Area Science Park</address1>
+<town>Basovizza</town>
+<postal_code>34149</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>enrico.allaria@elettra.eu</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Allaria</lname>
+<fname>Enrico</fname>
+<iname>E.</iname>
+<author_id>5803</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name>Elettra-Sincrotrone Trieste S.C.p.A.</full_name>
+<name1>Elettra-Sincrotrone Trieste S.C.p.A.</name1>
+<URL>http://www.elettra.trieste.it/</URL>
+<address1>SS 14 - km 163,5 in Area Science Park</address1>
+<town>Basovizza</town>
+<postal_code>34149</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>enrico.allaria@elettra.eu</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Allaria</lname>
+<fname>Enrico</fname>
+<iname>E.</iname>
+<author_id>5803</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name>Elettra-Sincrotrone Trieste S.C.p.A.</full_name>
+<name1>Elettra-Sincrotrone Trieste S.C.p.A.</name1>
+<URL>http://www.elettra.trieste.it/</URL>
+<address1>SS 14 - km 163,5 in Area Science Park</address1>
+<town>Basovizza</town>
+<postal_code>34149</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>enrico.allaria@elettra.eu</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>WEXXPLM1.docx</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>WEXXPLM1.docx</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEXXPLM1.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>WEXXPLM1.docx</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEXXPLM1_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>WEXXPLM1.docx</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEXXPLM1.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEXXPLM1_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEXXPLM1.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEXXPLM1_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXXPLM1&amp;wanted_file=WEXXPLM1.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXXPLM1&amp;wanted_file=WEXXPLM1_AUTHOR.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXXPLM1&amp;wanted_file=WEXXPLM1.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXXPLM1&amp;wanted_file=WEXXPLM1.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXXPLM1&amp;wanted_file=WEXXPLM1.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXXPLM1&amp;wanted_file=WEXXPLM1.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXXPLM1&amp;wanted_file=WEXXPLM1.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXXPLM1&amp;wanted_file=WEXXPLM1.docx</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXXPLM1&amp;wanted_file=WEXXPLM1_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXXPLM1&amp;wanted_file=WEXXPLM1_TALK.PPTX</fileURL>
+</fileURLs>
+<editor>Christine Petit-Jean-Genaz</editor>
+<final_qa>Gustavo Barbosa Monteiro Bruno</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>04-Dec-2018 15:01:42</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>04-Dec-2018 16:09:54</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>11-Dec-2018 23:09:25</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>11-Dec-2018 23:09:25</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>18-Feb-2019 00:14:30</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>18-Feb-2019 00:14:30</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>17-May-2019 07:56:26</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 08:06:26</timestamp>
+<comments>WEXXPLM1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>19-May-2019 06:28:52</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 06:57:30</timestamp>
+<comments>WEXXPLM1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 06:57:44</timestamp>
+<comments>WEXXPLM1.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>19-May-2019 06:59:32</timestamp>
+<editor_status code="Y">Yellow</editor_status>
+<comments>No pdf file submitted. Editor used the docx. Set Title in title case to all caps. Fixed errors in formatting of figure captions: Figure captions should be centred when single line, justified when multiline without indents. Adjusted line spacing around figure captions, etc. Removed unwanted line spacing. Fixed formatting of several references. Table 2 in the doc file contains some strange characters. The author is requested to check carefully the edited files and to let us know whether the strange characters should be there or not. If they should not be there, the author should reject the editor¿s files and request the status to be switched to red to be able to correct (using the editor¿s edited doc file) and re-upload.</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="REDC">Author rejected the Editor's changes</log_status>
+<timestamp>19-May-2019 12:53:04</timestamp>
+<comments>formatting of few words has been lost and strange characters as reported by editor appear</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>20-May-2019 04:07:07</timestamp>
+<editor_status code="R">Red</editor_status>
+<comments>Set the paper to red so the author can download editor's corrected file, and correct the strange characters on page 1. Author to upload new files.</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 04:10:57</timestamp>
+<comments>WEXXPLM1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 04:11:23</timestamp>
+<comments>WEXXPLM1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 04:51:37</timestamp>
+<comments>WEXXPLM1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 04:52:21</timestamp>
+<comments>WEXXPLM1.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>20-May-2019 04:52:42</timestamp>
+<editor_status code="G">Green</editor_status>
+<comments>Font problem cleared. OK to go to QA.</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 23:12:04</timestamp>
+<comments>WEXXPLM1_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 04:32:28</timestamp>
+<comments>WEXXPLM1.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>22-May-2019 03:34:27</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 04:07:22</timestamp>
+<comments>WEXXPLM1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>22-May-2019 04:08:31</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Speaker,
+Your PowerPoint slides were converted successfully to PDF (with intermediate and backup slides removed) and will
+be published in the conference proceedings. Please download the PDF
+slides file (WEXXPLM1_TALK.pdf) and check that all is OK. 
+In the event of a problem, please contact:
+jan.chrin@psi.ch 
+Thank you.
+</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>23-May-2019 01:53:00</timestamp>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Watanabe</lname>
+<fname>Takahiro</fname>
+<iname>T.</iname>
+<author_id>1053</author_id>
+<institutions>
+<institute>
+<full_name abbrev="JASRI/SPring-8" type="Institute">Japan Synchrotron Radiation Research Institute SPring-8 Joint-Project for XFEL</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<name2>SPring-8 Joint-Project for XFEL</name2>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho, Sayo-gun</address2>
+<town>Hyogo-ken</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="JASRI/SPring-8">Japan Synchrotron Radiation Research Institute Accelerator Division</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<name2>Accelerator Division</name2>
+<URL>http://www.spring8.or.jp/e/index.html</URL>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo-ken</town>
+<zip_code>679 5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="JASRI/SPring-8" type="Research Centre">Japan Synchrotron Radiation Research Institute</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name type="Institute">Japan Synchrotron Radiation Research Institute (JASRI) RIKEN SPring-8 Center</full_name>
+<name1>Japan Synchrotron Radiation Research Institute (JASRI)</name1>
+<name2>RIKEN SPring-8 Center</name2>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory National Synchrotron Light Source</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<name2>National Synchrotron Light Source</name2>
+<URL>http://nslsweb.nsls.bnl.gov/nsls/default.htm</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>NY 11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name type="Research Centre">RIKEN SPring-8 Center</full_name>
+<name1>RIKEN SPring-8 Center</name1>
+<address1>1-1-1, Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5148</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="JASRI" type="Institute">Japan Synchrotron Radiation Research Institute</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@bnl.gov</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>1968</abstract_id>
+<main_class>MC2: Photon Sources and Electron Accelerators</main_class>
+<sub_class>A06 Free Electron Lasers</sub_class>
+<publishable>No, Editor Status Code is not Publishable, Final QA Not Publishable</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">WEXXPLM2</code>
+<presentation type="Oral">Contributed Oral</presentation>
+<start_time>950</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<title>Slippage Boosted Spectral Cleaning in a Seeded Free-Electron Laser</title>
+<abstract>The realization of fully coherent X-ray radiation pulse has been a long-standing challenge for free-electron lasers. A promising way for producing stable transform-limited pulses is based on the harmonic up-conversion techniques with a conventional laser as the seed. However, it is found that the insignificant phase error in the seed laser will be eventually multiplied by the harmonic number, leading to a degradation of the output temporal coherence at short wavelength. Here, we report the demonstration of a slippage boosted spectral cleaning technique to mitigate the impact of seed laser induced phase errors and to improve the temporal coherence of a seeded FEL. Experimental results show that fully coherent radiation pulses can be generated in a seeded FEL with the help of the proposed technique.</abstract>
+<contributors>
+<contributor type="Owner">
+<lname>Feng</lname>
+<fname>Chao</fname>
+<iname>C.</iname>
+<author_id>41803</author_id>
+<institutions>
+<institute>
+<full_name abbrev="SINAP" type="Academy of Sciences">Shanghai Institute of Applied Physics</full_name>
+<name1>Shanghai Institute of Applied Physics</name1>
+<URL>www.sinap.ac.cn</URL>
+<address1>2019 Jia Luo Road</address1>
+<po_box>PO Box 800-204</po_box>
+<town>Shanghai</town>
+<zip_code>201800</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name abbrev="SARI-CAS" type="Institute">Shanghai Advanced Research Institute Chinese Academy of Sciences</full_name>
+<name1>Shanghai Advanced Research Institute</name1>
+<name2>Chinese Academy of Sciences</name2>
+<address1>No. 99 Haike Road</address1>
+<address2>Zhangjiang Hi-Tech Park</address2>
+<town>Pudong, Shanghai</town>
+<zip_code>201210</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="SINAP" type="Academy of Sciences">Shanghai Institute of Applied Physics</full_name>
+<name1>Shanghai Institute of Applied Physics</name1>
+<URL>www.sinap.ac.cn</URL>
+<address1>Zhangheng Road 239</address1>
+<address2>Pudong New District</address2>
+<town>Shanghai</town>
+<zip_code>201204</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="SSRF" type="Academy of Sciences">Shanghai Synchrotron Radiation Facility Shanghai Advanced Research Institute</full_name>
+<name1>Shanghai Synchrotron Radiation Facility</name1>
+<name2>Shanghai Advanced Research Institute</name2>
+<address1>239 Zhangheng Road</address1>
+<town>Shanghai</town>
+<zip_code>201204</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name type="Academy of Sciences">Shanghai Advanced Research Institute</full_name>
+<name1>Shanghai Advanced Research Institute</name1>
+<address1>No.99 Haike Road</address1>
+<town>Pudong, Shanghai</town>
+<zip_code>201210</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>fengchao@sinap.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Feng</lname>
+<fname>Chao</fname>
+<iname>C.</iname>
+<author_id>41803</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="SARI-CAS" type="Institute">Shanghai Advanced Research Institute Chinese Academy of Sciences</full_name>
+<name1>Shanghai Advanced Research Institute</name1>
+<name2>Chinese Academy of Sciences</name2>
+<address1>No. 99 Haike Road</address1>
+<address2>Zhangjiang Hi-Tech Park</address2>
+<town>Pudong, Shanghai</town>
+<zip_code>201210</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>fengchao@sinap.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Feng</lname>
+<fname>Chao</fname>
+<iname>C.</iname>
+<author_id>41803</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="SARI-CAS" type="Institute">Shanghai Advanced Research Institute Chinese Academy of Sciences</full_name>
+<name1>Shanghai Advanced Research Institute</name1>
+<name2>Chinese Academy of Sciences</name2>
+<address1>No. 99 Haike Road</address1>
+<address2>Zhangjiang Hi-Tech Park</address2>
+<town>Pudong, Shanghai</town>
+<zip_code>201210</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>fengchao@sinap.ac.cn</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEXXPLM2_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEXXPLM2_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXXPLM2&amp;wanted_file=WEXXPLM2_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXXPLM2&amp;wanted_file=WEXXPLM2_TALK.PPTX</fileURL>
+</fileURLs>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>28-Nov-2018 12:55:44</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>11-Dec-2018 23:17:27</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>11-Dec-2018 23:17:27</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>29-Jan-2019 14:02:00</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>29-Jan-2019 14:02:00</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 14:28:57</timestamp>
+<comments>WEXXPLM2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>21-May-2019 01:28:59</timestamp>
+<comments>WEXXPLM2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 01:31:15</timestamp>
+<comments>WEXXPLM2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>21-May-2019 02:17:37</timestamp>
+<comments>WEXXPLM2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 02:19:01</timestamp>
+<comments>WEXXPLM2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>22-May-2019 03:34:32</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 04:18:14</timestamp>
+<comments>WEXXPLM2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>22-May-2019 04:19:09</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Chao,
+Your PowerPoint slides were converted successfully to PDF and will
+be published in the conference proceedings. Please download the PDF
+slides file (WEXXPLM2_TALK.pdf) and check that all is OK. 
+In the event of a problem, please contact:
+jan.chrin@psi.ch 
+Thank you.
+</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Watanabe</lname>
+<fname>Takahiro</fname>
+<iname>T.</iname>
+<author_id>1053</author_id>
+<institutions>
+<institute>
+<full_name abbrev="JASRI/SPring-8" type="Institute">Japan Synchrotron Radiation Research Institute SPring-8 Joint-Project for XFEL</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<name2>SPring-8 Joint-Project for XFEL</name2>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho, Sayo-gun</address2>
+<town>Hyogo-ken</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="JASRI/SPring-8">Japan Synchrotron Radiation Research Institute Accelerator Division</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<name2>Accelerator Division</name2>
+<URL>http://www.spring8.or.jp/e/index.html</URL>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo-ken</town>
+<zip_code>679 5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="JASRI/SPring-8" type="Research Centre">Japan Synchrotron Radiation Research Institute</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name type="Institute">Japan Synchrotron Radiation Research Institute (JASRI) RIKEN SPring-8 Center</full_name>
+<name1>Japan Synchrotron Radiation Research Institute (JASRI)</name1>
+<name2>RIKEN SPring-8 Center</name2>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory National Synchrotron Light Source</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<name2>National Synchrotron Light Source</name2>
+<URL>http://nslsweb.nsls.bnl.gov/nsls/default.htm</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>NY 11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name type="Research Centre">RIKEN SPring-8 Center</full_name>
+<name1>RIKEN SPring-8 Center</name1>
+<address1>1-1-1, Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5148</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="JASRI" type="Institute">Japan Synchrotron Radiation Research Institute</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@bnl.gov</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>2753</abstract_id>
+<main_class>MC2: Photon Sources and Electron Accelerators</main_class>
+<sub_class>T02 Electron Sources</sub_class>
+<publishable>No, Editor Status Code is not Publishable, Final QA Not Publishable</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">WEXXPLM3</code>
+<presentation type="Oral">Contributed Oral</presentation>
+<start_time>1010</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<title>Photocathodes Research Activities for High Brigtheness Beams, Spin Polarized Sources and Large Area Photon Detectors at Cornell University</title>
+<abstract>We will a give broad description of recent results from Cornell University on improving the state of the art in the production of high brightness photoemitted electron beams for future light sources and ultrafast electron scattering. We will also discuss recent results on improving the lifetime of photocathode for spin polarized electron beam and on the production of large area photocathodes for single photon detection applications</abstract>
+<agency>NSF award no. PHY-1549132, DOE awards no. DE-SC0011643 and DE-SC0019122</agency>
+<contributors>
+<contributor type="Co-Author">
+<lname>Bae</lname>
+<fname>Jai Kwan</fname>
+<iname>J.</iname>
+<author_id>104270</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="University">Cornell University (CLASSE) Cornell Laboratory for Accelerator-Based Sciences and Education</full_name>
+<name1>Cornell University (CLASSE)</name1>
+<name2>Cornell Laboratory for Accelerator-Based Sciences and Education</name2>
+<address1>F.R. Newman Laboratory</address1>
+<address2>Garden Avenue</address2>
+<town>Ithaca, New York</town>
+<zip_code>NY 14853-5001</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jb2483@cornell.edu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Bazarov</lname>
+<fname>Ivan</fname>
+<mname>Vasilyevich</mname>
+<iname>I.V.</iname>
+<author_id>2022</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="University">Cornell University (CLASSE) Cornell Laboratory for Accelerator-Based Sciences and Education</full_name>
+<name1>Cornell University (CLASSE)</name1>
+<name2>Cornell Laboratory for Accelerator-Based Sciences and Education</name2>
+<address1>F.R. Newman Laboratory</address1>
+<address2>Garden Avenue</address2>
+<town>Ithaca, New York</town>
+<zip_code>NY 14853-5001</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>ib38@cornell.edu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Duncan</lname>
+<fname>Cameron</fname>
+<mname>James Richard</mname>
+<iname>C.J.R.</iname>
+<author_id>106769</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="University">Cornell University (CLASSE) Cornell Laboratory for Accelerator-Based Sciences and Education</full_name>
+<name1>Cornell University (CLASSE)</name1>
+<name2>Cornell Laboratory for Accelerator-Based Sciences and Education</name2>
+<address1>Wilson Synchrotron Laboratory</address1>
+<address2>Dryden Rd</address2>
+<town>Ithaca, New York</town>
+<zip_code>NY 14853-8001</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>cjd257@cornell.edu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Galdi</lname>
+<fname>Alice</fname>
+<iname>A.</iname>
+<author_id>104052</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="University">Cornell University (CLASSE) Cornell Laboratory for Accelerator-Based Sciences and Education</full_name>
+<name1>Cornell University (CLASSE)</name1>
+<name2>Cornell Laboratory for Accelerator-Based Sciences and Education</name2>
+<address1>F.R. Newman Laboratory</address1>
+<address2>Garden Avenue</address2>
+<town>Ithaca, New York</town>
+<zip_code>NY 14853-5001</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>ag733@cornell.edu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Ikponmwen</lname>
+<fname>Frank</fname>
+<iname>F.</iname>
+<author_id>113775</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="University">Cornell University (CLASSE) Cornell Laboratory for Accelerator-Based Sciences and Education</full_name>
+<name1>Cornell University (CLASSE)</name1>
+<name2>Cornell Laboratory for Accelerator-Based Sciences and Education</name2>
+<address1>F.R. Newman Laboratory</address1>
+<address2>Garden Avenue</address2>
+<town>Ithaca, New York</town>
+<zip_code>NY 14853-5001</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>fi49@cornell.edu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Li</lname>
+<fname>William</fname>
+<mname>H</mname>
+<iname>W. H.</iname>
+<author_id>104160</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="University">Cornell University (CLASSE) Cornell Laboratory for Accelerator-Based Sciences and Education</full_name>
+<name1>Cornell University (CLASSE)</name1>
+<name2>Cornell Laboratory for Accelerator-Based Sciences and Education</name2>
+<address1>F.R. Newman Laboratory</address1>
+<address2>Garden Avenue</address2>
+<town>Ithaca, New York</town>
+<zip_code>NY 14853-5001</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>whl64@cornell.edu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Maxson</lname>
+<fname>Jared</fname>
+<mname>Michael</mname>
+<iname>J.M.</iname>
+<author_id>48404</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="University">Cornell University (CLASSE) Cornell Laboratory for Accelerator-Based Sciences and Education</full_name>
+<name1>Cornell University (CLASSE)</name1>
+<name2>Cornell Laboratory for Accelerator-Based Sciences and Education</name2>
+<address1>F.R. Newman Laboratory</address1>
+<address2>Garden Avenue</address2>
+<town>Ithaca, New York</town>
+<zip_code>NY 14853-5001</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jmm586@cornell.edu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Pierce</lname>
+<fname>Christopher</fname>
+<mname>Morrison</mname>
+<iname>C. M.</iname>
+<author_id>104216</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="University">Cornell University (CLASSE) Cornell Laboratory for Accelerator-Based Sciences and Education</full_name>
+<name1>Cornell University (CLASSE)</name1>
+<name2>Cornell Laboratory for Accelerator-Based Sciences and Education</name2>
+<address1>Wilson Synchrotron Laboratory</address1>
+<address2>Dryden Rd</address2>
+<town>Ithaca, New York</town>
+<zip_code>NY 14853-8001</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>cpierce963@gmail.com</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Cultrera</lname>
+<fname>Luca</fname>
+<iname>L.</iname>
+<author_id>12382</author_id>
+<institutions>
+<institute>
+<full_name abbrev="INFN/LNF" type="Research Centre">Istituto Nazionale di Fisica Nucleare Laboratori Nazionali di Frascati</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare</name1>
+<name2>Laboratori Nazionali di Frascati</name2>
+<URL>http://www.lnf.infn.it/</URL>
+<address1>Via E. Fermi, 40</address1>
+<po_box>P.O. Box 13</po_box>
+<town>Frascati</town>
+<postal_code>00044</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+<institute>
+<full_name type="University">Cornell University (CLASSE) Cornell Laboratory for Accelerator-Based Sciences and Education</full_name>
+<name1>Cornell University (CLASSE)</name1>
+<name2>Cornell Laboratory for Accelerator-Based Sciences and Education</name2>
+<address1>Wilson Synchrotron Laboratory</address1>
+<address2>Dryden Rd</address2>
+<town>Ithaca, New York</town>
+<zip_code>NY 14853-8001</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>lc572@cornell.edu</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Cultrera</lname>
+<fname>Luca</fname>
+<iname>L.</iname>
+<author_id>12382</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name type="University">Cornell University (CLASSE) Cornell Laboratory for Accelerator-Based Sciences and Education</full_name>
+<name1>Cornell University (CLASSE)</name1>
+<name2>Cornell Laboratory for Accelerator-Based Sciences and Education</name2>
+<address1>Wilson Synchrotron Laboratory</address1>
+<address2>Dryden Rd</address2>
+<town>Ithaca, New York</town>
+<zip_code>NY 14853-8001</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>lc572@cornell.edu</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Maxson</lname>
+<fname>Jared</fname>
+<mname>Michael</mname>
+<iname>J.M.</iname>
+<author_id>48404</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name type="University">Cornell University (CLASSE) Cornell Laboratory for Accelerator-Based Sciences and Education</full_name>
+<name1>Cornell University (CLASSE)</name1>
+<name2>Cornell Laboratory for Accelerator-Based Sciences and Education</name2>
+<address1>F.R. Newman Laboratory</address1>
+<address2>Garden Avenue</address2>
+<town>Ithaca, New York</town>
+<zip_code>NY 14853-5001</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jmm586@cornell.edu</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEXXPLM3_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEXXPLM3_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXXPLM3&amp;wanted_file=WEXXPLM3_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXXPLM3&amp;wanted_file=WEXXPLM3_TALK.PPTX</fileURL>
+</fileURLs>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>04-Dec-2018 14:29:21</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>11-Dec-2018 23:45:51</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>11-Dec-2018 23:45:51</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>06-Feb-2019 23:17:11</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>06-Feb-2019 23:17:11</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 02:11:06</timestamp>
+<comments>WEXXPLM3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>22-May-2019 03:34:36</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 04:22:29</timestamp>
+<comments>WEXXPLM3_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>22-May-2019 04:23:24</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Jared,
+Your PowerPoint slides were converted successfully to PDF and will
+be published in the conference proceedings. Please download the PDF
+slides file (WEXXPLSM3_TALK.pdf) and check that all is OK. 
+In case of a problems, please contact:
+jan.chrin@psi.ch 
+Thank you.
+</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+</papers>
+</session>
+</conference>

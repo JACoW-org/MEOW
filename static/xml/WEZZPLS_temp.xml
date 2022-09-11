@@ -1,0 +1,3194 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<conference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://bel.gsi.de/docs/xml/conference.xsd" name="IPAC 2019, Melbourne, Australia">
+<session type="Oral">
+<name abbr="WEZZPLS">Contributed Orals: Novel Particle Sources and Acceleration Techniques</name>
+<date btime="1500" etime="1600">22-May-19</date>
+<location type="Afternoon Contributed Oral">Secondary Plenary (plenary 3)</location>
+<chairs>
+<chair>
+<lname>Kang</lname>
+<fname>Heung-Sik</fname>
+<iname>H.-S.</iname>
+<author_id>1123</author_id>
+<institutions>
+<institute>
+<full_name abbrev="PAL" type="Institute">Pohang Accelerator Laboratory</full_name>
+<name1>Pohang Accelerator Laboratory</name1>
+<URL>http://pal.postech.ac.kr/kor/index.html</URL>
+<address1>San-31 Hyoja-dong, Nam-gu</address1>
+<town>Pohang, Kyungbuk</town>
+<zip_code>790-784</zip_code>
+<country_code abbrev="KOR">Republic of Korea</country_code>
+</institute>
+</institutions>
+<emails>
+<email>hskang@postech.ac.kr</email>
+</emails>
+</chair>
+</chairs>
+<papers>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Kang</lname>
+<fname>Heung-Sik</fname>
+<iname>H.-S.</iname>
+<author_id>1123</author_id>
+<institutions>
+<institute>
+<full_name abbrev="PAL" type="Institute">Pohang Accelerator Laboratory</full_name>
+<name1>Pohang Accelerator Laboratory</name1>
+<URL>http://pal.postech.ac.kr/kor/index.html</URL>
+<address1>San-31 Hyoja-dong, Nam-gu</address1>
+<town>Pohang, Kyungbuk</town>
+<zip_code>790-784</zip_code>
+<country_code abbrev="KOR">Republic of Korea</country_code>
+</institute>
+</institutions>
+<emails>
+<email>hskang@postech.ac.kr</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>2298</abstract_id>
+<main_class>MC3: Novel Particle Sources and Acceleration Techniques</main_class>
+<sub_class>A22 Plasma Wakefield Acceleration</sub_class>
+<publishable>No, Editor Status Code is not Publishable, Final QA Not Publishable</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">WEZZPLS1</code>
+<presentation type="Oral">Contributed Oral</presentation>
+<start_time>1500</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<title>Experimental Demonstration of External Injection From a Linac into a LWFA with ~100% Capture Efficiency</title>
+<abstract>Staging of conventional accelerators and advanced plasma-based accelerators can boost the beam energy while at the same time better control the beam quality, therefore it is essential for high-energy applications such as TeV-level colliders. Here we present the first successful demonstration of external injection from a linear accelerator (LINAC) into a laser wakefield accelerator (LWFA) and the subsequent acceleration with ~100% capture efficiency. Stable 31MeV, 20fC electron beams from the LINAC were velocity bunched to the length of ~15fs (r.m.s.) in the high-gradient photocathode RF gun and then external injected into the linear wakefield excited by the 10TW, 42fs laser. The experimental results show that nearly all the electrons can be mono-energetically accelerated and the maximum energy gain reaches 1.8MeV in a 6-mm long plasma, corresponding to an average gradient of about 300MV/m. High capture efficiency of external injection has also been systematically validated by 3D PIC simulations. This paves the way toward the development of high-energy particle accelerators for future colliders.</abstract>
+<contributors>
+<contributor type="Co-Author">
+<lname>Du</lname>
+<fname>Yingchao</fname>
+<iname>Y. C.</iname>
+<author_id>100514</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="TUB" type="University">Tsinghua University in Beijing Accelerator Laboratory Department of Engineering Physics</full_name>
+<name1>Tsinghua University in Beijing</name1>
+<name2>Accelerator Laboratory</name2>
+<department>Department of Engineering Physics</department>
+<URL>http://www.tsinghua.edu.cn/eng/</URL>
+<town>Beijing</town>
+<zip_code>100084</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>dych@tsinghua.edu.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Fang</lname>
+<fname>Yu</fname>
+<iname>Y.</iname>
+<author_id>113935</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="TUB" type="University">Tsinghua University in Beijing Accelerator Laboratory Department of Engineering Physics</full_name>
+<name1>Tsinghua University in Beijing</name1>
+<name2>Accelerator Laboratory</name2>
+<department>Department of Engineering Physics</department>
+<URL>http://www.tsinghua.edu.cn/eng/</URL>
+<town>Beijing</town>
+<zip_code>100084</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>fang-y16@mails.tsinghua.edu.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Liu</lname>
+<fname>Shuang</fname>
+<iname>S.</iname>
+<author_id>113933</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="TUB" type="University">Tsinghua University in Beijing Accelerator Laboratory Department of Engineering Physics</full_name>
+<name1>Tsinghua University in Beijing</name1>
+<name2>Accelerator Laboratory</name2>
+<department>Department of Engineering Physics</department>
+<URL>http://www.tsinghua.edu.cn/eng/</URL>
+<town>Beijing</town>
+<zip_code>100084</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>inovaliu@gmail.com</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Lu</lname>
+<fname>Wei</fname>
+<iname>W.</iname>
+<author_id>2644</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="TUB" type="University">Tsinghua University in Beijing Accelerator Laboratory Department of Engineering Physics</full_name>
+<name1>Tsinghua University in Beijing</name1>
+<name2>Accelerator Laboratory</name2>
+<department>Department of Engineering Physics</department>
+<URL>http://www.tsinghua.edu.cn/eng/</URL>
+<town>Beijing</town>
+<zip_code>100084</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>weilu@tsinghua.edu.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Pai</lname>
+<fname>Chih-Hao</fname>
+<iname>C.H.</iname>
+<author_id>71290</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="TUB" type="University">Tsinghua University in Beijing Accelerator Laboratory Department of Engineering Physics</full_name>
+<name1>Tsinghua University in Beijing</name1>
+<name2>Accelerator Laboratory</name2>
+<department>Department of Engineering Physics</department>
+<URL>http://www.tsinghua.edu.cn/eng/</URL>
+<town>Beijing</town>
+<zip_code>100084</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>chpai@tsinghua.edu.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Peng</lname>
+<fname>Bo</fname>
+<iname>B.</iname>
+<author_id>113934</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="TUB" type="University">Tsinghua University in Beijing Accelerator Laboratory Department of Engineering Physics</full_name>
+<name1>Tsinghua University in Beijing</name1>
+<name2>Accelerator Laboratory</name2>
+<department>Department of Engineering Physics</department>
+<URL>http://www.tsinghua.edu.cn/eng/</URL>
+<town>Beijing</town>
+<zip_code>100084</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>pengb16@mails.tsinghua.edu.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Wu</lname>
+<fname>Yipeng</fname>
+<iname>Y.P.</iname>
+<author_id>60668</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="TUB" type="University">Tsinghua University in Beijing Accelerator Laboratory Department of Engineering Physics</full_name>
+<name1>Tsinghua University in Beijing</name1>
+<name2>Accelerator Laboratory</name2>
+<department>Department of Engineering Physics</department>
+<URL>http://www.tsinghua.edu.cn/eng/</URL>
+<town>Beijing</town>
+<zip_code>100084</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>weapon.thu@gmail.com</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Zhang</lname>
+<fname>Jie</fname>
+<iname>J.</iname>
+<author_id>95189</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="TUB" type="University">Tsinghua University in Beijing Accelerator Laboratory Department of Engineering Physics</full_name>
+<name1>Tsinghua University in Beijing</name1>
+<name2>Accelerator Laboratory</name2>
+<department>Department of Engineering Physics</department>
+<URL>http://www.tsinghua.edu.cn/eng/</URL>
+<town>Beijing</town>
+<zip_code>100084</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jie-zhan14@mails.tsinghua.edu.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Zhou</lname>
+<fname>Zheng</fname>
+<iname>Z.</iname>
+<author_id>77131</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="TUB" type="University">Tsinghua University in Beijing Accelerator Laboratory Department of Engineering Physics</full_name>
+<name1>Tsinghua University in Beijing</name1>
+<name2>Accelerator Laboratory</name2>
+<department>Department of Engineering Physics</department>
+<URL>http://www.tsinghua.edu.cn/eng/</URL>
+<town>Beijing</town>
+<zip_code>100084</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>z-zhou14@mails.tsinghua.edu.cn</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Hua</lname>
+<fname>Jianfei</fname>
+<iname>J.F.</iname>
+<author_id>21785</author_id>
+<institutions>
+<institute>
+<full_name abbrev="TUB" type="University">Tsinghua University in Beijing Accelerator Laboratory Department of Engineering Physics</full_name>
+<name1>Tsinghua University in Beijing</name1>
+<name2>Accelerator Laboratory</name2>
+<department>Department of Engineering Physics</department>
+<URL>http://www.tsinghua.edu.cn/eng/</URL>
+<town>Beijing</town>
+<zip_code>100084</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jfhua@mail.tsinghua.edu.cn</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Hua</lname>
+<fname>Jianfei</fname>
+<iname>J.F.</iname>
+<author_id>21785</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="TUB" type="University">Tsinghua University in Beijing Accelerator Laboratory Department of Engineering Physics</full_name>
+<name1>Tsinghua University in Beijing</name1>
+<name2>Accelerator Laboratory</name2>
+<department>Department of Engineering Physics</department>
+<URL>http://www.tsinghua.edu.cn/eng/</URL>
+<town>Beijing</town>
+<zip_code>100084</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jfhua@mail.tsinghua.edu.cn</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Hua</lname>
+<fname>Jianfei</fname>
+<iname>J.F.</iname>
+<author_id>21785</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="TUB" type="University">Tsinghua University in Beijing Accelerator Laboratory Department of Engineering Physics</full_name>
+<name1>Tsinghua University in Beijing</name1>
+<name2>Accelerator Laboratory</name2>
+<department>Department of Engineering Physics</department>
+<URL>http://www.tsinghua.edu.cn/eng/</URL>
+<town>Beijing</town>
+<zip_code>100084</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jfhua@mail.tsinghua.edu.cn</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEZZPLS1_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>DO_NOT_PROCESS_OR_PUBLISH.txt</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS1&amp;wanted_file=DO_NOT_PROCESS_OR_PUBLISH.txt</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS1&amp;wanted_file=WEZZPLS1_TALK.PPTX</fileURL>
+</fileURLs>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>03-Dec-2018 11:40:06</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>05-Dec-2018 09:14:14</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>05-Dec-2018 09:19:27</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>10-Dec-2018 03:24:38</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>10-Dec-2018 03:24:38</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>06-Feb-2019 02:47:25</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>06-Feb-2019 02:47:25</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 22:47:17</timestamp>
+<comments>WEZZPLS1_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 06:10:42</timestamp>
+<comments>DO_NOT_PROCESS_OR_PUBLISH.txt</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>22-May-2019 06:10:51</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>22-May-2019 06:14:14</timestamp>
+<transparency_status code="R">Red</transparency_status>
+<comments>WEZZPLS1 requests that NO slides be published from this talk. Therefore the status is et to RED.
+Volker RW Schaa</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Kang</lname>
+<fname>Heung-Sik</fname>
+<iname>H.-S.</iname>
+<author_id>1123</author_id>
+<institutions>
+<institute>
+<full_name abbrev="PAL" type="Institute">Pohang Accelerator Laboratory</full_name>
+<name1>Pohang Accelerator Laboratory</name1>
+<URL>http://pal.postech.ac.kr/kor/index.html</URL>
+<address1>San-31 Hyoja-dong, Nam-gu</address1>
+<town>Pohang, Kyungbuk</town>
+<zip_code>790-784</zip_code>
+<country_code abbrev="KOR">Republic of Korea</country_code>
+</institute>
+</institutions>
+<emails>
+<email>hskang@postech.ac.kr</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>2686</abstract_id>
+<pages>5</pages>
+<toc>2291</toc>
+<main_class>MC3: Novel Particle Sources and Acceleration Techniques</main_class>
+<sub_class>A22 Plasma Wakefield Acceleration</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">WEZZPLS2</code>
+<presentation type="Oral">Contributed Oral</presentation>
+<start_time>1520</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>EuPRAXIA, a Step Toward a Plasma-Wakefield Based Accelerator With High Beam Quality</title>
+<abstract>The EuPRAXIA project aims at designing the world's first accelerator based on plasma-wakefield advanced technique, which can deliver a 5 GeV electron beam with simultaneously high charge, low emittance and low energy spread to user's communities. Such challenging objectives can only have a chance to be achieved when particular efforts are dedicated to identify the subsequent issues and to find the way to solve them. Many injection/acceleration schemes and techniques have been explored by means of thorough simulations in more than ten European institutes to sort out the most appropriate ones. The specific issues of high charge, high beam quality and beam extraction then transfer to the user's applications, have been tackled with many innovative approaches*. This article highlights the different advanced methods that have been employed by the EuPRAXIA collaboration and the preliminary results obtained. The needs in terms of laser and plasma parameters for such an accelerator are also summarized.</abstract>
+<agency>European Union's Horizon 2020 research and innovation programme under grant agreement No. 653782</agency>
+<footnote>*- in 2017: Phys.Plasmas,24,10,103120; Nat.Commun.8,15705; - in 2018: NIMA,909,84-89; NIMA,909,49-53; Phys.Rev.Acc.Beams,21,111301; NIMA,909,54-57; Phys.Rev.Acc.Beams,21,052802; NIMA,909,282-285</footnote>
+<contributors>
+<contributor type="Co-Author">
+<lname>Alesini</lname>
+<fname>David</fname>
+<iname>D.</iname>
+<author_id>785</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INFN/LNF" type="Research Centre">Istituto Nazionale di Fisica Nucleare Laboratori Nazionali di Frascati</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare</name1>
+<name2>Laboratori Nazionali di Frascati</name2>
+<URL>http://www.lnf.infn.it/</URL>
+<address1>Via E. Fermi, 40</address1>
+<po_box>P.O. Box 13</po_box>
+<town>Frascati</town>
+<postal_code>00044</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>david.alesini@lnf.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Aschikhin</lname>
+<fname>Alexander</fname>
+<iname>A.</iname>
+<author_id>86036</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY" type="Research Centre">Deutsches Elektronen-Synchrotron FLA Department</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<department>FLA Department</department>
+<URL>http://tesla.desy.de/fla/</URL>
+<address1>Notkestr. 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>alexander.aschikhin@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Assmann</lname>
+<fname>Ralph</fname>
+<mname>Wolfgang</mname>
+<iname>R.W.</iname>
+<author_id>1677</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>ralph.assmann@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Audet</lname>
+<fname>Thomas</fname>
+<iname>T.</iname>
+<author_id>86059</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CNRS LPGP Univ Paris Sud" type="Governmental Body">Université Paris Saclay CNRS Laboratoire de Physique des Gaz et des Plasmas</full_name>
+<name1>Université Paris Saclay</name1>
+<name2>CNRS Laboratoire de Physique des Gaz et des Plasmas</name2>
+<address1>Bâtiment 210</address1>
+<town>Orsay</town>
+<postal_code>91405</postal_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>thomas.audet@u-psud.fr</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Beck</lname>
+<fname>Arnaud</fname>
+<iname>A.</iname>
+<author_id>94857</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="LLR" type="Laboratory">Laboratoire Leprince-Ringuet École polytechnique, CNRS/IN2P3</full_name>
+<name1>Laboratoire Leprince-Ringuet</name1>
+<name2>École polytechnique, CNRS/IN2P3</name2>
+<address1>Route de Saclay</address1>
+<town>Palaiseau</town>
+<postal_code>91128 Cedex</postal_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>beck@llr.in2p3.fr</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Chance</lname>
+<fname>Antoine</fname>
+<iname>A.</iname>
+<author_id>11744</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CEA-IRFU" type="Research Centre">Commissariat à l'Energie Atomique et aux Energies Alternatives Institut de Recherche sur les lois Fondamentales de l'Univers</full_name>
+<name1>Commissariat à l'Energie Atomique et aux Energies Alternatives</name1>
+<name2>Institut de Recherche sur les lois Fondamentales de l'Univers</name2>
+<address1>Université Paris-Saclay</address1>
+<town>Gif-sur-Yvette</town>
+<postal_code>91191</postal_code>
+<zip_code>Cedex</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>achance@cea.fr</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Chen</lname>
+<fname>Min</fname>
+<iname>M.</iname>
+<author_id>43457</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="University">Shanghai Jiao Tong University Department of Physics</full_name>
+<name1>Shanghai Jiao Tong University</name1>
+<department>Department of Physics</department>
+<town>Shanghai</town>
+<zip_code>200240</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>minchen@sjtu.edu.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Chiadroni</lname>
+<fname>Enrica</fname>
+<iname>E.</iname>
+<author_id>4298</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INFN/LNF" type="Research Centre">Istituto Nazionale di Fisica Nucleare Laboratori Nazionali di Frascati</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare</name1>
+<name2>Laboratori Nazionali di Frascati</name2>
+<URL>http://www.lnf.infn.it/</URL>
+<address1>Via E. Fermi, 40</address1>
+<po_box>P.O. Box 13</po_box>
+<town>Frascati</town>
+<postal_code>00044</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>enrica.chiadroni@lnf.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Cianchi</lname>
+<fname>Alessandro</fname>
+<iname>A.</iname>
+<author_id>4212</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name>Università di Roma II Tor Vergata Physics Department</full_name>
+<name1>Università di Roma II Tor Vergata</name1>
+<department>Physics Department</department>
+<URL>http://www.fisica.uniroma2.it/</URL>
+<address1>Via della Ricerca Scientifica, 1</address1>
+<town>Roma</town>
+<postal_code>133</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>alessandro.cianchi@uniroma2.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Clarke</lname>
+<fname>James</fname>
+<iname>J.A.</iname>
+<author_id>1949</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="STFC/DL/ASTeC">Science and Technology Facilities Council Daresbury Laboratory Accelerator Science and Technology Centre</full_name>
+<name1>Science and Technology Facilities Council</name1>
+<name2>Daresbury Laboratory</name2>
+<department>Accelerator Science and Technology Centre</department>
+<URL>http://www.dl.ac.uk/</URL>
+<town>Daresbury, Warrington, Cheshire</town>
+<zip_code>WA4 4AD</zip_code>
+<country_code abbrev="UK">United Kingdom</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jim.clarke@stfc.ac.uk</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Couprie</lname>
+<fname>Marie-Emmanuelle</fname>
+<iname>M.-E.</iname>
+<author_id>284</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="SOLEIL">Synchrotron Soleil</full_name>
+<name1>Synchrotron Soleil</name1>
+<URL>http://www.soleil.u-psud.fr/</URL>
+<address1>L'Orme des Merisiers</address1>
+<address2>Saint-Aubin</address2>
+<po_box>BP 48</po_box>
+<town>Gif-sur-Yvette</town>
+<postal_code>91192</postal_code>
+<zip_code>Cedex</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>marie-emmanuelle.couprie@synchrotron-soleil.fr</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Croia</lname>
+<fname>Michele</fname>
+<iname>M.</iname>
+<author_id>99440</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INFN/LNF" type="Research Centre">Istituto Nazionale di Fisica Nucleare Laboratori Nazionali di Frascati</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare</name1>
+<name2>Laboratori Nazionali di Frascati</name2>
+<URL>http://www.lnf.infn.it/</URL>
+<address1>Via E. Fermi, 40</address1>
+<po_box>P.O. Box 13</po_box>
+<town>Frascati</town>
+<postal_code>00044</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>michele.croia@lnf.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Cros</lname>
+<fname>Brigitte</fname>
+<iname>B.</iname>
+<author_id>44825</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CNRS LPGP Univ Paris Sud" type="Governmental Body">Université Paris Saclay CNRS Laboratoire de Physique des Gaz et des Plasmas</full_name>
+<name1>Université Paris Saclay</name1>
+<name2>CNRS Laboratoire de Physique des Gaz et des Plasmas</name2>
+<address1>Bâtiment 210</address1>
+<town>Orsay</town>
+<postal_code>91405</postal_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>brigitte.cros@u-psud.fr</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Dattoli</lname>
+<fname>Giuseppe</fname>
+<iname>G.</iname>
+<author_id>714</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ENEA C.R. Frascati" type="Research Centre">Ente per le Nuove Tecnologie, l'Energie e l'Ambiente Sede di Frascati</full_name>
+<name1>Ente per le Nuove Tecnologie, l'Energie e l'Ambiente</name1>
+<name2>Sede di Frascati</name2>
+<URL>http://www.frascati.enea.it/</URL>
+<address1>Via E. Fermi, 45</address1>
+<town>Frascati (Roma)</town>
+<postal_code>00044</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>giuseppe.dattoli@enea.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Del Dotto</lname>
+<fname>Alessio</fname>
+<iname>A.</iname>
+<author_id>116728</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INFN/LNF" type="Research Centre">Istituto Nazionale di Fisica Nucleare Laboratori Nazionali di Frascati</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare</name1>
+<name2>Laboratori Nazionali di Frascati</name2>
+<URL>http://www.lnf.infn.it/</URL>
+<address1>Via E. Fermi, 40</address1>
+<po_box>P.O. Box 13</po_box>
+<town>Frascati</town>
+<postal_code>00044</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>alessio.deldotto@lnf.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Delerue</lname>
+<fname>Nicolas</fname>
+<iname>N.</iname>
+<author_id>12704</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="LAL" type="Laboratory">Laboratoire de l'Accélérateur Linéaire CNRS/IN2P3 Université Paris-Saclay</full_name>
+<name1>Laboratoire de l'Accélérateur Linéaire</name1>
+<name2>CNRS/IN2P3</name2>
+<department>Université Paris-Saclay</department>
+<URL>http://www.lal.in2p3.fr/</URL>
+<address1>Univ. Paris-Sud</address1>
+<po_box>BP 34</po_box>
+<town>Orsay</town>
+<postal_code>91898</postal_code>
+<zip_code>Cedex</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>delerue@lal.in2p3.fr</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Dorda</lname>
+<fname>Ulrich</fname>
+<iname>U.</iname>
+<author_id>21056</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>ulrich.dorda@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Ferran Pousa</lname>
+<fname>Ángel</fname>
+<iname>A.</iname>
+<author_id>94835</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>angel.ferran.pousa@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Ferrario</lname>
+<fname>Massimo</fname>
+<iname>M.</iname>
+<author_id>789</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INFN/LNF" type="Research Centre">Istituto Nazionale di Fisica Nucleare Laboratori Nazionali di Frascati</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare</name1>
+<name2>Laboratori Nazionali di Frascati</name2>
+<URL>http://www.lnf.infn.it/</URL>
+<address1>Via E. Fermi, 40</address1>
+<po_box>P.O. Box 13</po_box>
+<town>Frascati</town>
+<postal_code>00044</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>massimo.ferrario@lnf.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Fonseca</lname>
+<fname>Ricardo</fname>
+<mname>A.</mname>
+<iname>R.A.</iname>
+<author_id>13255</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="University Institute">Instituto Superior Tecnico Lasers and Plasmas Group</full_name>
+<name1>Instituto Superior Tecnico</name1>
+<department>Lasers and Plasmas Group</department>
+<address1>Av Rovisco Pais</address1>
+<town>Lisbon</town>
+<postal_code>1049-001</postal_code>
+<country_code abbrev="PT">Portugal</country_code>
+</institute>
+</institutions>
+<emails>
+<email>ricardo.fonseca@ist.utl.pt</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Ghaith</lname>
+<fname>Amin</fname>
+<iname>A.</iname>
+<author_id>94459</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="SOLEIL">Synchrotron Soleil</full_name>
+<name1>Synchrotron Soleil</name1>
+<URL>http://www.soleil.u-psud.fr/</URL>
+<address1>L'Orme des Merisiers</address1>
+<address2>Saint-Aubin</address2>
+<po_box>BP 48</po_box>
+<town>Gif-sur-Yvette</town>
+<postal_code>91192</postal_code>
+<zip_code>Cedex</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>amin.ghaith@synchrotron-soleil.fr</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Giribono</lname>
+<fname>Anna</fname>
+<iname>A.</iname>
+<author_id>72073</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INFN/LNF" type="Laboratory">Istituto Nazionale di Fisica Nucleare Laboratori Nazionali di Frascati Accelerator Division</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare</name1>
+<name2>Laboratori Nazionali di Frascati</name2>
+<department>Accelerator Division</department>
+<URL>http://www.lnf.infn.it/</URL>
+<address1>Via E. Fermi, 40</address1>
+<po_box>C.P. 13</po_box>
+<town>Frascati (Roma)</town>
+<postal_code>00044</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>anna.giribono@lnf.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Gizzi</lname>
+<fname>Leonida</fname>
+<mname>Antonio</mname>
+<iname>L.A.</iname>
+<author_id>13771</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INO-CNR" type="Institute">Istituto Nazionale di Ottica Area della Ricerca del CNR</full_name>
+<name1>Istituto Nazionale di Ottica</name1>
+<name2>Area della Ricerca del CNR</name2>
+<address1>Via Moruzzi, 1</address1>
+<town>Pisa</town>
+<postal_code>56124</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>la.gizzi@ino.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Helm</lname>
+<fname>Anton</fname>
+<iname>A.</iname>
+<author_id>116248</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IST-UTL" type="University Department">Technical University of Lisbon Instituto Superior Técnico Department of Electrical and Computers Engineering - Energy Group</full_name>
+<name1>Technical University of Lisbon</name1>
+<name2>Instituto Superior Técnico</name2>
+<department>Department of Electrical and Computers Engineering - Energy Group</department>
+<URL>http://www.ist.utl.pt/</URL>
+<address1>Av. Rovisco Pais, 1</address1>
+<town>Lisbon</town>
+<postal_code>1049-001</postal_code>
+<country_code abbrev="PT">Portugal</country_code>
+</institute>
+</institutions>
+<emails>
+<email>anton.helm@tecnico.ulisboa.pt</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Hidding</lname>
+<fname>Bernhard</fname>
+<iname>B.</iname>
+<author_id>51214</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="Institute">Cockcroft Institute</full_name>
+<name1>Cockcroft Institute</name1>
+<URL>http://www.lancs.ac.uk/cockcroft-institute/</URL>
+<address1>Daresbury Laboratory</address1>
+<town>Warrington, Cheshire</town>
+<zip_code>WA4 4AD</zip_code>
+<country_code abbrev="UK">United Kingdom</country_code>
+</institute>
+</institutions>
+<emails>
+<email>bernhard.hidding@strath.ac.uk</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Hooker</lname>
+<fname>Simon</fname>
+<mname>Martin</mname>
+<iname>S.M.</iname>
+<author_id>13188</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="University Department">Oxford University Physics Department Particle and Nuclear Physics</full_name>
+<name1>Oxford University</name1>
+<name2>Physics Department</name2>
+<department>Particle and Nuclear Physics</department>
+<URL>http://www.physics.ox.ac.uk/pnp/default.asp?page=contacts</URL>
+<address1>Denys Wilkinson Building</address1>
+<address2>Keble Road</address2>
+<town>Oxford, Oxon</town>
+<zip_code>OX1 3RH</zip_code>
+<country_code abbrev="UK">United Kingdom</country_code>
+</institute>
+</institutions>
+<emails>
+<email>s.hooker1@physics.ox.ac.uk</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Ibison</lname>
+<fname>Mark</fname>
+<mname>Gerard</mname>
+<iname>M.G.</iname>
+<author_id>44689</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="University Department">The University of Liverpool Department of Physics</full_name>
+<name1>The University of Liverpool</name1>
+<department>Department of Physics</department>
+<URL>http://www.ph.liv.ac.uk/</URL>
+<address1>Oxford Street</address1>
+<po_box>P.O. Box 147</po_box>
+<town>Liverpool</town>
+<zip_code>L69 7ZE</zip_code>
+<country_code abbrev="UK">United Kingdom</country_code>
+</institute>
+</institutions>
+<emails>
+<email>ibisonm@liverpool.ac.uk</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Jaroszynski</lname>
+<fname>Dino</fname>
+<mname>Anthony</mname>
+<iname>D.A.</iname>
+<author_id>24447</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="USTRAT/SUPA" type="University Department">University of Strathclyde Scottish Universities Physics Alliance Department of Physics</full_name>
+<name1>University of Strathclyde</name1>
+<name2>Scottish Universities Physics Alliance</name2>
+<department>Department of Physics</department>
+<URL>http://phys.strath.ac.uk/</URL>
+<address1>John Anderson Building</address1>
+<address2>107 Rottenrow</address2>
+<town>Glasgow</town>
+<zip_code>G4 0NG</zip_code>
+<country_code abbrev="UK">United Kingdom</country_code>
+</institute>
+</institutions>
+<emails>
+<email>dino@phys.strath.ac.uk</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Kruchinin</lname>
+<fname>Konstantin</fname>
+<iname>K.O.</iname>
+<author_id>60794</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ELI-BEAMS" type="Academy of Sciences">ELI Beamlines Czech Republic Institute of Physics</full_name>
+<name1>ELI Beamlines Czech Republic</name1>
+<name2>Institute of Physics</name2>
+<URL>www.eli-beams.eu</URL>
+<address1>Na Slovance 2</address1>
+<town>Prague</town>
+<postal_code>18221</postal_code>
+<country_code abbrev="CZ">Czech Republic</country_code>
+</institute>
+</institutions>
+<emails>
+<email>konstantin.kruchinin@eli-beams.eu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Labate</lname>
+<fname>Luca</fname>
+<iname>L.</iname>
+<author_id>13773</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CNR/IPP" type="Research Centre">Consiglio Nazionale delle Ricerche Istituto per i Processi Chimico-Fisici</full_name>
+<name1>Consiglio Nazionale delle Ricerche</name1>
+<name2>Istituto per i Processi Chimico-Fisici</name2>
+<address1>Via G. Moruzzi, 1</address1>
+<town>Pisa</town>
+<postal_code>56124</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>luca.labate@ino.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Lee</lname>
+<fname>Patrick</fname>
+<iname>P.</iname>
+<author_id>83549</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CNRS LPGP Univ Paris Sud" type="Governmental Body">Université Paris Saclay CNRS Laboratoire de Physique des Gaz et des Plasmas</full_name>
+<name1>Université Paris Saclay</name1>
+<name2>CNRS Laboratoire de Physique des Gaz et des Plasmas</name2>
+<address1>Bâtiment 210</address1>
+<town>Orsay</town>
+<postal_code>91405</postal_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>patrick.lee@u-psud.fr</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Li</lname>
+<fname>Feiyu</fname>
+<iname>F.Y.</iname>
+<author_id>86221</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="USTRAT/SUPA" type="University Department">University of Strathclyde Scottish Universities Physics Alliance Department of Physics</full_name>
+<name1>University of Strathclyde</name1>
+<name2>Scottish Universities Physics Alliance</name2>
+<department>Department of Physics</department>
+<URL>http://phys.strath.ac.uk/</URL>
+<address1>John Anderson Building</address1>
+<address2>107 Rottenrow</address2>
+<town>Glasgow</town>
+<zip_code>G4 0NG</zip_code>
+<country_code abbrev="UK">United Kingdom</country_code>
+</institute>
+</institutions>
+<emails>
+<email>feiyu.li@strath.ac.uk</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Li</lname>
+<fname>Xiangkun</fname>
+<iname>X.</iname>
+<author_id>52362</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY Zeuthen" type="Research Centre">Deutsches Elektronen-Synchrotron DESY at Zeuthen</full_name>
+<name1>Deutsches Elektronen-Synchrotron DESY at Zeuthen</name1>
+<URL>http://www-zeuthen.desy.de/main/html/home/</URL>
+<address1>Platanenallee 6</address1>
+<town>Zeuthen</town>
+<postal_code>15738</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>xiangkun.li@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Libov</lname>
+<fname>Vladyslav</fname>
+<iname>V.</iname>
+<author_id>68659</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY" type="Research Centre">Deutsches Elektronen-Synchrotron FLA Department</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<department>FLA Department</department>
+<URL>http://tesla.desy.de/fla/</URL>
+<address1>Notkestr. 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>vladyslav.libov@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Marchetti</lname>
+<fname>Barbara</fname>
+<iname>B.</iname>
+<author_id>35566</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>barbara.marchetti@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Martinez de la Ossa</lname>
+<fname>Alberto</fname>
+<iname>A.</iname>
+<author_id>68694</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>delaossa@mail.desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Marx</lname>
+<fname>Daniel</fname>
+<iname>D.</iname>
+<author_id>94596</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>daniel.marx@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Massimo</lname>
+<fname>Francesco</fname>
+<iname>F.</iname>
+<author_id>83709</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="LLR" type="Laboratory">Laboratoire Leprince-Ringuet École polytechnique, CNRS/IN2P3</full_name>
+<name1>Laboratoire Leprince-Ringuet</name1>
+<name2>École polytechnique, CNRS/IN2P3</name2>
+<address1>Route de Saclay</address1>
+<town>Palaiseau</town>
+<postal_code>91128 Cedex</postal_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>massimo@llr.in2p3.fr</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Mathieu</lname>
+<fname>Francois</fname>
+<iname>F.</iname>
+<author_id>88028</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="LULI" type="Laboratory">Ecole Polytechnique Laboratoire pour l'Utilisation des Lasers Intenses</full_name>
+<name1>Ecole Polytechnique</name1>
+<name2>Laboratoire pour l'Utilisation des Lasers Intenses</name2>
+<town>Palaiseau</town>
+<postal_code>91128</postal_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>francois.mathieu@polytechnique.edu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Maynard</lname>
+<fname>Gilles</fname>
+<iname>G.</iname>
+<author_id>86058</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CNRS LPGP Univ Paris Sud" type="Governmental Body">Université Paris Saclay CNRS Laboratoire de Physique des Gaz et des Plasmas</full_name>
+<name1>Université Paris Saclay</name1>
+<name2>CNRS Laboratoire de Physique des Gaz et des Plasmas</name2>
+<address1>Bâtiment 210</address1>
+<town>Orsay</town>
+<postal_code>91405</postal_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>gilles.maynard@u-psud.fr</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Mazzotta</lname>
+<fname>Zeudi</fname>
+<iname>Z.</iname>
+<author_id>116493</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name>Ecole Polytechnique</full_name>
+<name1>Ecole Polytechnique</name1>
+<URL>http://www.polytechnique.fr/</URL>
+<town>Palaiseau</town>
+<postal_code>91128</postal_code>
+<zip_code>Cedex</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>z.mazzotta@arcnl.nl</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Mehrling</lname>
+<fname>Timon</fname>
+<mname>Johannes</mname>
+<iname>T.J.</iname>
+<author_id>57314</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="LBNL" type="Research Centre">Lawrence Berkeley National Laboratory Accelerator Technology &amp; Applied Physics</full_name>
+<name1>Lawrence Berkeley National Laboratory</name1>
+<department>Accelerator Technology &amp; Applied Physics</department>
+<URL>atap.lbl.gov</URL>
+<address1>1 Cyclotron Road</address1>
+<town>Berkeley</town>
+<zip_code>CA 94720</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>tjmehrling@lbl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Molodozhentsev</lname>
+<fname>Alexander</fname>
+<mname>Yu.</mname>
+<iname>A.Y.</iname>
+<author_id>986</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ELI-BEAMS" type="Academy of Sciences">ELI Beamlines Czech Republic Institute of Physics</full_name>
+<name1>ELI Beamlines Czech Republic</name1>
+<name2>Institute of Physics</name2>
+<URL>www.eli-beams.eu</URL>
+<address1>Na Slovance 2</address1>
+<town>Prague</town>
+<postal_code>18221</postal_code>
+<country_code abbrev="CZ">Czech Republic</country_code>
+</institute>
+</institutions>
+<emails>
+<email>alexander.molodojentsev@kek.jp</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Mosnier</lname>
+<fname>Alban</fname>
+<iname>A.</iname>
+<author_id>152</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CEA" type="Atomic Energy Commission">Commissariat à l'Energie Atomique</full_name>
+<name1>Commissariat à l'Energie Atomique</name1>
+<URL>www.cea.fr</URL>
+<town>Gif-sur-Yvette</town>
+<postal_code>91191</postal_code>
+<zip_code>Cedex</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>amosnier@cea.fr</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Mostacci</lname>
+<fname>Andrea</fname>
+<iname>A.</iname>
+<author_id>679</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name>Rome University La Sapienza Energetics Department</full_name>
+<name1>Rome University La Sapienza</name1>
+<department>Energetics Department</department>
+<URL>http://w3.uniroma1.it/energ/english/index.htm</URL>
+<address1>Via A. Scarpa 14</address1>
+<town>Roma</town>
+<postal_code>161</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>andrea.mostacci@uniroma1.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Najmudin</lname>
+<fname>Zulfikar</fname>
+<iname>Z.</iname>
+<author_id>22619</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name>Imperial College of Science and Technology Department of Physics Blackett Laboratory</full_name>
+<name1>Imperial College of Science and Technology</name1>
+<name2>Department of Physics</name2>
+<department>Blackett Laboratory</department>
+<URL>http://www.ph.ic.ac.uk/</URL>
+<address1>Prince Consort Road</address1>
+<town>London</town>
+<zip_code>SW7 2BW</zip_code>
+<country_code abbrev="UK">United Kingdom</country_code>
+</institute>
+</institutions>
+<emails>
+<email>z.najmudin@imperial.ac.uk</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Nguyen</lname>
+<fname>Federico</fname>
+<iname>F.</iname>
+<author_id>94873</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ENEA C.R. Frascati" type="Research Centre">Ente per le Nuove Tecnologie, l'Energie e l'Ambiente Sede di Frascati</full_name>
+<name1>Ente per le Nuove Tecnologie, l'Energie e l'Ambiente</name1>
+<name2>Sede di Frascati</name2>
+<URL>http://www.frascati.enea.it/</URL>
+<address1>Via E. Fermi, 45</address1>
+<town>Frascati (Roma)</town>
+<postal_code>00044</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>federico.nguyen@enea.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Niknejadi</lname>
+<fname>Pardis</fname>
+<iname>P.</iname>
+<author_id>48287</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>pardis.niknejadi@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Oumbarek Espinos</lname>
+<fname>Driss</fname>
+<iname>D.</iname>
+<author_id>104018</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="SOLEIL">Synchrotron Soleil</full_name>
+<name1>Synchrotron Soleil</name1>
+<URL>http://www.soleil.u-psud.fr/</URL>
+<address1>L'Orme des Merisiers</address1>
+<address2>Saint-Aubin</address2>
+<po_box>BP 48</po_box>
+<town>Gif-sur-Yvette</town>
+<postal_code>91192</postal_code>
+<zip_code>Cedex</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>driss.oumbarek-espinos@synchrotron-soleil.fr</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Pattathil</lname>
+<fname>Rajeev</fname>
+<iname>R.</iname>
+<author_id>39763</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="STFC/RAL">Science and Technology Facilities Council Rutherford Appleton Laboratory</full_name>
+<name1>Science and Technology Facilities Council</name1>
+<name2>Rutherford Appleton Laboratory</name2>
+<URL>http://www.clrc.ac.uk/Activity/ACTIVITY=RAL;SECTION=908;</URL>
+<town>Chilton, Didcot, Oxon</town>
+<zip_code>OX11 0QX</zip_code>
+<country_code abbrev="UK">United Kingdom</country_code>
+</institute>
+</institutions>
+<emails>
+<email>rajeev.pattathil@stfc.ac.uk</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Pompili</lname>
+<fname>Riccardo</fname>
+<iname>R.</iname>
+<author_id>57520</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INFN/LNF" type="Research Centre">Istituto Nazionale di Fisica Nucleare Laboratori Nazionali di Frascati</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare</name1>
+<name2>Laboratori Nazionali di Frascati</name2>
+<URL>http://www.lnf.infn.it/</URL>
+<address1>Via E. Fermi, 40</address1>
+<po_box>P.O. Box 13</po_box>
+<town>Frascati</town>
+<postal_code>00044</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>riccardo.pompili@lnf.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Romeo</lname>
+<fname>Stefano</fname>
+<iname>S.</iname>
+<author_id>72074</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INFN/LNF" type="Research Centre">Istituto Nazionale di Fisica Nucleare Laboratori Nazionali di Frascati</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare</name1>
+<name2>Laboratori Nazionali di Frascati</name2>
+<URL>http://www.lnf.infn.it/</URL>
+<address1>Via E. Fermi, 40</address1>
+<po_box>P.O. Box 13</po_box>
+<town>Frascati</town>
+<postal_code>00044</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>stefano.romeo@lnf.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Rossi</lname>
+<fname>Andrea</fname>
+<mname>Renato</mname>
+<iname>A.R.</iname>
+<author_id>21804</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INFN-Milano" type="National Research Council">Istituto Nazionale di Fisica Nucleare Sezione di Milano</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare</name1>
+<department>Sezione di Milano</department>
+<address1>Via G. Celoria 16</address1>
+<town>Milano</town>
+<postal_code>20133</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>andrea.rossi@mi.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Schaper</lname>
+<fname>Lucas</fname>
+<iname>L.</iname>
+<author_id>68695</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>lucas.schaper@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Sheng</lname>
+<fname>Zhengming</fname>
+<iname>Z.M.</iname>
+<author_id>44952</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="USTRAT/SUPA" type="University Department">University of Strathclyde Scottish Universities Physics Alliance Department of Physics</full_name>
+<name1>University of Strathclyde</name1>
+<name2>Scottish Universities Physics Alliance</name2>
+<department>Department of Physics</department>
+<URL>http://phys.strath.ac.uk/</URL>
+<address1>John Anderson Building</address1>
+<address2>107 Rottenrow</address2>
+<town>Glasgow</town>
+<zip_code>G4 0NG</zip_code>
+<country_code abbrev="UK">United Kingdom</country_code>
+</institute>
+</institutions>
+<emails>
+<email>z.sheng@strath.ac.uk</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Shpakov</lname>
+<fname>Vladimir</fname>
+<iname>V.</iname>
+<author_id>72075</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INFN/LNF" type="Research Centre">Istituto Nazionale di Fisica Nucleare Laboratori Nazionali di Frascati</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare</name1>
+<name2>Laboratori Nazionali di Frascati</name2>
+<URL>http://www.lnf.infn.it/</URL>
+<address1>Via E. Fermi, 40</address1>
+<po_box>P.O. Box 13</po_box>
+<town>Frascati</town>
+<postal_code>00044</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>vladimir.shpakov@lnf.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Silva</lname>
+<fname>Luis</fname>
+<mname>O.</mname>
+<iname>L.O.</iname>
+<author_id>13173</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="University Institute">Instituto Superior Tecnico Lasers and Plasmas Group</full_name>
+<name1>Instituto Superior Tecnico</name1>
+<department>Lasers and Plasmas Group</department>
+<address1>Av Rovisco Pais</address1>
+<town>Lisbon</town>
+<postal_code>1049-001</postal_code>
+<country_code abbrev="PT">Portugal</country_code>
+</institute>
+</institutions>
+<emails>
+<email>luis.silva@ist.utl.pt</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Silva</lname>
+<fname>Thales</fname>
+<iname>T.</iname>
+<author_id>113740</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IPFN" type="University Institute">Instituto de Plasmas e Fusão Nuclear Instituto Superior Técnico</full_name>
+<name1>Instituto de Plasmas e Fusão Nuclear</name1>
+<name2>Instituto Superior Técnico</name2>
+<URL>http://www.ipfn.ist.utl.pt/</URL>
+<address1>Av. Rovisco Pais</address1>
+<town>Lisbon</town>
+<postal_code>1049-001</postal_code>
+<country_code abbrev="PT">Portugal</country_code>
+</institute>
+</institutions>
+<emails>
+<email>thales.silva@tecnico.ulisboa.pt</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Simon</lname>
+<fname>Claire</fname>
+<iname>C.</iname>
+<author_id>21462</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CEA" type="Atomic Energy Commission">Commissariat à l'Energie Atomique</full_name>
+<name1>Commissariat à l'Energie Atomique</name1>
+<URL>www.cea.fr</URL>
+<town>Gif-sur-Yvette</town>
+<postal_code>91191</postal_code>
+<zip_code>Cedex</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>claire.simon@cea.fr</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Specka</lname>
+<fname>Arnd</fname>
+<iname>A.</iname>
+<author_id>278</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="LLR" type="Laboratory">Laboratoire Leprince-Ringuet École polytechnique, CNRS/IN2P3</full_name>
+<name1>Laboratoire Leprince-Ringuet</name1>
+<name2>École polytechnique, CNRS/IN2P3</name2>
+<address1>Route de Saclay</address1>
+<town>Palaiseau</town>
+<postal_code>91128 Cedex</postal_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>specka@llr.in2p3.fr</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Stella</lname>
+<fname>Angelo</fname>
+<iname>A.</iname>
+<author_id>4158</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INFN/LNF" type="Research Centre">Istituto Nazionale di Fisica Nucleare Laboratori Nazionali di Frascati</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare</name1>
+<name2>Laboratori Nazionali di Frascati</name2>
+<URL>http://www.lnf.infn.it/</URL>
+<address1>Via E. Fermi, 40</address1>
+<po_box>P.O. Box 13</po_box>
+<town>Frascati</town>
+<postal_code>00044</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>angelo.stella@lnf.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Streeter</lname>
+<fname>Matthew</fname>
+<iname>M.J.V.</iname>
+<author_id>86290</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="JAI" type="Institute">John Adams Institute</full_name>
+<name1>John Adams Institute</name1>
+<address1>Imperial College London</address1>
+<address2>Prince Consort Road</address2>
+<address3>South Kensington Campus</address3>
+<town>London</town>
+<postal_code>SW7 2AZ</postal_code>
+<country_code abbrev="UK">United Kingdom</country_code>
+</institute>
+</institutions>
+<emails>
+<email>m.streeter09@imperial.ac.uk</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Svystun</lname>
+<fname>Elena</fname>
+<mname>N.</mname>
+<iname>E.N.</iname>
+<author_id>48420</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>elena.svystun@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Symes</lname>
+<fname>Daniel</fname>
+<iname>D.</iname>
+<author_id>94875</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="STFC/RAL">Science and Technology Facilities Council Rutherford Appleton Laboratory</full_name>
+<name1>Science and Technology Facilities Council</name1>
+<name2>Rutherford Appleton Laboratory</name2>
+<URL>http://www.clrc.ac.uk/Activity/ACTIVITY=RAL;SECTION=908;</URL>
+<town>Chilton, Didcot, Oxon</town>
+<zip_code>OX11 0QX</zip_code>
+<country_code abbrev="UK">United Kingdom</country_code>
+</institute>
+</institutions>
+<emails>
+<email>dan.symes@stfc.ac.uk</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Terzani</lname>
+<fname>Davide</fname>
+<iname>D.</iname>
+<author_id>113796</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="UniNa" type="University Department">Università di Napoli Federico II CNR SPIN e INFN- Napoli Dipartimento di Fisica</full_name>
+<name1>Università di Napoli Federico II</name1>
+<name2>CNR SPIN e INFN- Napoli</name2>
+<department>Dipartimento di Fisica</department>
+<address1>Piazzale Tecchio 80</address1>
+<town>Napoli</town>
+<postal_code>I-80125</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>titoiride@gmail.com</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Toci</lname>
+<fname>Guido</fname>
+<iname>G.</iname>
+<author_id>94881</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INO-CNR" type="Institute">Istituto Nazionale di Ottica Consiglio Nazionale delle Ricerche</full_name>
+<name1>Istituto Nazionale di Ottica Consiglio Nazionale delle Ricerche</name1>
+<address1>Via Madonna del Piano 10</address1>
+<town>Sesto Fiorentino</town>
+<postal_code>50019</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>guido.toci@ino.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Tomassini</lname>
+<fname>Paolo</fname>
+<iname>P.</iname>
+<author_id>21464</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INO-CNR" type="Institute">Istituto Nazionale di Ottica Area della Ricerca del CNR</full_name>
+<name1>Istituto Nazionale di Ottica</name1>
+<name2>Area della Ricerca del CNR</name2>
+<address1>Via Moruzzi, 1</address1>
+<town>Pisa</town>
+<postal_code>56124</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>paolo.tomassini@ino.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Vaccarezza</lname>
+<fname>Cristina</fname>
+<iname>C.</iname>
+<author_id>773</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INFN/LNF" type="Research Centre">Istituto Nazionale di Fisica Nucleare Laboratori Nazionali di Frascati</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare</name1>
+<name2>Laboratori Nazionali di Frascati</name2>
+<URL>http://www.lnf.infn.it/</URL>
+<address1>Via E. Fermi, 40</address1>
+<po_box>P.O. Box 13</po_box>
+<town>Frascati</town>
+<postal_code>00044</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>cristina.vaccarezza@lnf.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Vieira</lname>
+<fname>Jorge</fname>
+<mname>Miguel</mname>
+<iname>J.M.</iname>
+<author_id>25690</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IPFN" type="University Institute">Instituto de Plasmas e Fusão Nuclear Instituto Superior Técnico</full_name>
+<name1>Instituto de Plasmas e Fusão Nuclear</name1>
+<name2>Instituto Superior Técnico</name2>
+<URL>http://www.ipfn.ist.utl.pt/</URL>
+<address1>Av. Rovisco Pais</address1>
+<town>Lisbon</town>
+<postal_code>1049-001</postal_code>
+<country_code abbrev="PT">Portugal</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jorge.vieira@ist.utl.pt</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Vujanovic</lname>
+<fname>Milena</fname>
+<iname>M.</iname>
+<author_id>116250</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="University Department">The University of Liverpool Department of Physics</full_name>
+<name1>The University of Liverpool</name1>
+<department>Department of Physics</department>
+<URL>http://www.ph.liv.ac.uk/</URL>
+<address1>Oxford Street</address1>
+<po_box>P.O. Box 147</po_box>
+<town>Liverpool</town>
+<zip_code>L69 7ZE</zip_code>
+<country_code abbrev="UK">United Kingdom</country_code>
+</institute>
+</institutions>
+<emails>
+<email>m.vujanovic@liverpool.ac.uk</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Walczak</lname>
+<fname>Roman</fname>
+<iname>R.</iname>
+<author_id>33023</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="University Department">Oxford University Physics Department Particle and Nuclear Physics</full_name>
+<name1>Oxford University</name1>
+<name2>Physics Department</name2>
+<department>Particle and Nuclear Physics</department>
+<URL>http://www.physics.ox.ac.uk/pnp/default.asp?page=contacts</URL>
+<address1>Denys Wilkinson Building</address1>
+<address2>Keble Road</address2>
+<town>Oxford, Oxon</town>
+<zip_code>OX1 3RH</zip_code>
+<country_code abbrev="UK">United Kingdom</country_code>
+</institute>
+</institutions>
+<emails>
+<email>r.walczak1@physics.ox.ac.uk</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Walker</lname>
+<fname>Paul Andreas</fname>
+<iname>P.A.</iname>
+<author_id>39218</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>andreas.walker@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Weikum</lname>
+<fname>Maria</fname>
+<mname>Katharina</mname>
+<iname>M.K.</iname>
+<author_id>85029</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>maria.weikum@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Welsch</lname>
+<fname>Carsten</fname>
+<mname>Peter</mname>
+<iname>C.P.</iname>
+<author_id>587</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="University Department">The University of Liverpool Department of Physics</full_name>
+<name1>The University of Liverpool</name1>
+<department>Department of Physics</department>
+<URL>http://www.ph.liv.ac.uk/</URL>
+<address1>Oxford Street</address1>
+<po_box>P.O. Box 147</po_box>
+<town>Liverpool</town>
+<zip_code>L69 7ZE</zip_code>
+<country_code abbrev="UK">United Kingdom</country_code>
+</institute>
+</institutions>
+<emails>
+<email>c.p.welsch@liverpool.ac.uk</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Weng</lname>
+<fname>Suming</fname>
+<iname>S.M.</iname>
+<author_id>116730</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="University">Shanghai Jiao Tong University Department of Physics</full_name>
+<name1>Shanghai Jiao Tong University</name1>
+<department>Department of Physics</department>
+<town>Shanghai</town>
+<zip_code>200240</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>wengsuming@sjtu.edu.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Wiggins</lname>
+<fname>Samuel</fname>
+<mname>Mark</mname>
+<iname>S.M.</iname>
+<author_id>25366</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="USTRAT/SUPA" type="University Department">University of Strathclyde Scottish Universities Physics Alliance Department of Physics</full_name>
+<name1>University of Strathclyde</name1>
+<name2>Scottish Universities Physics Alliance</name2>
+<department>Department of Physics</department>
+<URL>http://phys.strath.ac.uk/</URL>
+<address1>John Anderson Building</address1>
+<address2>107 Rottenrow</address2>
+<town>Glasgow</town>
+<zip_code>G4 0NG</zip_code>
+<country_code abbrev="UK">United Kingdom</country_code>
+</institute>
+</institutions>
+<emails>
+<email>m.wiggins@phys.strath.ac.uk</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Wolfenden</lname>
+<fname>Joseph</fname>
+<iname>J.</iname>
+<author_id>85611</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="University Department">The University of Liverpool Department of Physics</full_name>
+<name1>The University of Liverpool</name1>
+<department>Department of Physics</department>
+<URL>http://www.ph.liv.ac.uk/</URL>
+<address1>Oxford Street</address1>
+<po_box>P.O. Box 147</po_box>
+<town>Liverpool</town>
+<zip_code>L69 7ZE</zip_code>
+<country_code abbrev="UK">United Kingdom</country_code>
+</institute>
+</institutions>
+<emails>
+<email>joseph.wolfenden@cockcroft.ac.uk</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Yoffe</lname>
+<fname>Samuel</fname>
+<iname>S.</iname>
+<author_id>116268</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="USTRAT/SUPA" type="University Department">University of Strathclyde Scottish Universities Physics Alliance Department of Physics</full_name>
+<name1>University of Strathclyde</name1>
+<name2>Scottish Universities Physics Alliance</name2>
+<department>Department of Physics</department>
+<URL>http://phys.strath.ac.uk/</URL>
+<address1>John Anderson Building</address1>
+<address2>107 Rottenrow</address2>
+<town>Glasgow</town>
+<zip_code>G4 0NG</zip_code>
+<country_code abbrev="UK">United Kingdom</country_code>
+</institute>
+</institutions>
+<emails>
+<email>sam.yoffe@strath.ac.uk</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Zhu</lname>
+<fname>Jun</fname>
+<iname>J.</iname>
+<author_id>50934</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jun.zhu@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Nghiem</lname>
+<fname>Phu Anh Phi</fname>
+<iname>P.A.P.</iname>
+<author_id>307</author_id>
+<institutions>
+<institute>
+<full_name abbrev="CEA-DRF-IRFU" type="Atomic Energy Commission">Commissariat à l'Energie Atomique Direction de la Recherche Fondamentale Institut de Recherche sur les lois Fondamentales de l'Univers</full_name>
+<name1>Commissariat à l'Energie Atomique</name1>
+<name2>Direction de la Recherche Fondamentale</name2>
+<department>Institut de Recherche sur les lois Fondamentales de l'Univers</department>
+<URL>http://www-dapnia.cea.fr/</URL>
+<postal_code>Gif-sur-Yvette Cedex</postal_code>
+<zip_code>91191</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+<institute>
+<full_name abbrev="CEA-IRFU" type="Research Centre">Commissariat à l'Energie Atomique et aux Energies Alternatives Institut de Recherche sur les lois Fondamentales de l'Univers</full_name>
+<name1>Commissariat à l'Energie Atomique et aux Energies Alternatives</name1>
+<name2>Institut de Recherche sur les lois Fondamentales de l'Univers</name2>
+<address1>Université Paris-Saclay</address1>
+<town>Gif-sur-Yvette</town>
+<postal_code>91191</postal_code>
+<zip_code>Cedex</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+<institute>
+<full_name abbrev="CEA" type="Atomic Energy Commission">French Atomic Energy Commission CEA/DEN/DANS/DM2S</full_name>
+<name1>French Atomic Energy Commission</name1>
+<department>CEA/DEN/DANS/DM2S</department>
+<address1>CEA-SACLAY</address1>
+<town>Gif-sur-Yvette</town>
+<postal_code>91191</postal_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>phu-anh-phi.nghiem@cea.fr</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Nghiem</lname>
+<fname>Phu Anh Phi</fname>
+<iname>P.A.P.</iname>
+<author_id>307</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="CEA-IRFU" type="Research Centre">Commissariat à l'Energie Atomique et aux Energies Alternatives Institut de Recherche sur les lois Fondamentales de l'Univers</full_name>
+<name1>Commissariat à l'Energie Atomique et aux Energies Alternatives</name1>
+<name2>Institut de Recherche sur les lois Fondamentales de l'Univers</name2>
+<address1>Université Paris-Saclay</address1>
+<town>Gif-sur-Yvette</town>
+<postal_code>91191</postal_code>
+<zip_code>Cedex</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>phu-anh-phi.nghiem@cea.fr</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Nghiem</lname>
+<fname>Phu Anh Phi</fname>
+<iname>P.A.P.</iname>
+<author_id>307</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="CEA-IRFU" type="Research Centre">Commissariat à l'Energie Atomique et aux Energies Alternatives Institut de Recherche sur les lois Fondamentales de l'Univers</full_name>
+<name1>Commissariat à l'Energie Atomique et aux Energies Alternatives</name1>
+<name2>Institut de Recherche sur les lois Fondamentales de l'Univers</name2>
+<address1>Université Paris-Saclay</address1>
+<town>Gif-sur-Yvette</town>
+<postal_code>91191</postal_code>
+<zip_code>Cedex</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>phu-anh-phi.nghiem@cea.fr</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEZZPLS2f1.jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEZZPLS2f2.jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEZZPLS2f3.jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEZZPLS2f4.jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEZZPLS2_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>WEZZPLS2.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEZZPLS2.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEZZPLS2_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>WEZZPLS2.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEZZPLS2.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>WEZZPLS2.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEZZPLS2.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>WEZZPLS2.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEZZPLS2.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEZZPLS2_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEZZPLS2_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS2&amp;wanted_file=WEZZPLS2f3.jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS2&amp;wanted_file=WEZZPLS2f4.jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS2&amp;wanted_file=WEZZPLS2f1.jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS2&amp;wanted_file=WEZZPLS2f2.jpg</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS2&amp;wanted_file=WEZZPLS2_AUTHOR.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS2&amp;wanted_file=WEZZPLS2_AUTHOR.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS2&amp;wanted_file=WEZZPLS2.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS2&amp;wanted_file=WEZZPLS2.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS2&amp;wanted_file=WEZZPLS2.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS2&amp;wanted_file=WEZZPLS2.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS2&amp;wanted_file=WEZZPLS2.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS2&amp;wanted_file=WEZZPLS2.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS2&amp;wanted_file=WEZZPLS2.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS2&amp;wanted_file=WEZZPLS2.docx</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS2&amp;wanted_file=WEZZPLS2_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS2&amp;wanted_file=WEZZPLS2_TALK.PPTX</fileURL>
+</fileURLs>
+<editor>David Taylor Button</editor>
+<final_qa>Johan Olander</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>04-Dec-2018 12:30:49</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="PRR">Peer Review Requested</log_status>
+<timestamp>04-Dec-2018 13:25:49</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>04-Dec-2018 13:27:18</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>10-Dec-2018 03:36:12</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>10-Dec-2018 03:36:12</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>30-Jan-2019 22:35:37</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>30-Jan-2019 22:35:37</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>12-Apr-2019 11:11:55</timestamp>
+<comments>WEZZPLS2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>12-Apr-2019 11:30:37</timestamp>
+<comments>WEZZPLS2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>12-Apr-2019 11:33:04</timestamp>
+<comments>WEZZPLS2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>12-Apr-2019 12:35:36</timestamp>
+<comments>WEZZPLS2.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>12-Apr-2019 12:35:54</timestamp>
+<comments>WEZZPLS2f1.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>12-Apr-2019 12:36:26</timestamp>
+<comments>WEZZPLS2f2.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>12-Apr-2019 12:36:40</timestamp>
+<comments>WEZZPLS2f3.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>12-Apr-2019 12:36:55</timestamp>
+<comments>WEZZPLS2f4.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="PRG">Peer Review Granted</log_status>
+<timestamp>02-May-2019 19:17:52</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="REFA">Referee Assigned</log_status>
+<timestamp>02-May-2019 19:18:07</timestamp>
+<editor_notes>Referee: Liangliang Shi</editor_notes>
+</abstract_log>
+<abstract_log>
+<log_status code="REFA">Referee Assigned</log_status>
+<timestamp>02-May-2019 19:18:07</timestamp>
+<editor_notes>Referee: Kimberley Nichols</editor_notes>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>09-May-2019 08:59:26</timestamp>
+<comments>WEZZPLS2.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>09-May-2019 08:59:38</timestamp>
+<comments>WEZZPLS2.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>09-May-2019 08:59:48</timestamp>
+<comments>WEZZPLS2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>09-May-2019 09:00:12</timestamp>
+<comments>WEZZPLS2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ3">3) Is some aspect or part of the work original or demonstrate clear progress?</log_status>
+<timestamp>09-May-2019 22:31:03</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ4">4) Is the presentation of methods, results and conclusion understandable?</log_status>
+<timestamp>09-May-2019 22:31:03</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ5">5) Is the paper written in good English?</log_status>
+<timestamp>09-May-2019 22:31:03</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ6">6) Does the paper acknowledge the work of others in the same field?</log_status>
+<timestamp>09-May-2019 22:31:03</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ7">7) Does the paper include appropriate references to the literature?</log_status>
+<timestamp>09-May-2019 22:31:03</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RVAL">2) Does the paper include own work, performed by the authors and not published elsewhere?</log_status>
+<timestamp>09-May-2019 22:31:03</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RORI">1) Is the work free of obvious scientific or technical errors and important factual mistakes?</log_status>
+<timestamp>09-May-2019 22:31:03</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="REF">Referee</log_status>
+<timestamp>09-May-2019 22:31:03</timestamp>
+<referee_status code="c">to be corrected</referee_status>
+<comments>In the introduction part, the authors mentioned the aim of a user facility. It is not clear what the target applications are since beam requirements vary greatly depending on potential users. In Figures 2 and 3, the authors mentioned there is one solution meeting EuPRAXIA, it is better to point out which one in the text. Is this one to be used for the EuPRAXIA implementation? The percentage of energy spread and mrad scale divergence make the beam transport difficult. It is unclear what is the requirement for EuPRAXIA and the length scale for transport. The authors mentioned 20% emittance mitigation with plasma, but I think the main growth is during the transport to application site, e.g. undulator line, from published works. 
+Some minor thing like in Para. 2 ¿In order to progress from acceleration ¿¿ I think here you mean with high beam qualities rather than high beam requirements.  
+I would also suggest citing Tajima and Dowson¿s original paper.
+</comments>
+<editor_notes>The paper provides an overview of the EuPRAXIA project with some possible schemes to meet the beam requirements. The authors discussed some of the facing issues, which are mostly common for the plasma acceleration community as well. Some points are not thoroughly presented and I think it is due to limited space. I agree to publish it with some amendments.</editor_notes>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>13-May-2019 09:02:39</timestamp>
+<comments>WEZZPLS2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>13-May-2019 09:02:48</timestamp>
+<comments>WEZZPLS2.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>13-May-2019 09:04:21</timestamp>
+<comments>WEZZPLS2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>13-May-2019 09:06:04</timestamp>
+<comments>WEZZPLS2.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>13-May-2019 09:16:41</timestamp>
+<comments>WEZZPLS2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>13-May-2019 09:16:55</timestamp>
+<comments>WEZZPLS2.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>13-May-2019 09:19:33</timestamp>
+<comments>WEZZPLS2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>13-May-2019 09:20:55</timestamp>
+<comments>WEZZPLS2.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RORI">1) Is the work free of obvious scientific or technical errors and important factual mistakes?</log_status>
+<timestamp>14-May-2019 15:17:54</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RVAL">2) Does the paper include own work, performed by the authors and not published elsewhere?</log_status>
+<timestamp>14-May-2019 15:17:54</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ7">7) Does the paper include appropriate references to the literature?</log_status>
+<timestamp>14-May-2019 15:17:54</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ6">6) Does the paper acknowledge the work of others in the same field?</log_status>
+<timestamp>14-May-2019 15:17:54</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ5">5) Is the paper written in good English?</log_status>
+<timestamp>14-May-2019 15:17:54</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ4">4) Is the presentation of methods, results and conclusion understandable?</log_status>
+<timestamp>14-May-2019 15:17:54</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="REF">Referee</log_status>
+<timestamp>14-May-2019 15:17:54</timestamp>
+<referee_status code="a">approved</referee_status>
+<editor_notes>I recommend to publish as a overview paper for IOP.</editor_notes>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ3">3) Is some aspect or part of the work original or demonstrate clear progress?</log_status>
+<timestamp>14-May-2019 15:17:54</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>15-May-2019 06:36:06</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>15-May-2019 06:43:11</timestamp>
+<editor_status code="R">Red</editor_status>
+<comments>Dear Author,
+
+As originally agreed your paper was given only one extra page, and currently it is spilling onto a 6th page.  Please reduce content of references to ensure it all fits in the 5 pages, with only references allowed on the 5th page.
+
+Many thanks,
+
+David  </comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 06:54:21</timestamp>
+<comments>WEZZPLS2.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>15-May-2019 06:55:03</timestamp>
+<editor_status code="G">Green</editor_status>
+<comments>PDF was ok and processed, thanks so much for all your efforts.
+
+David</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>15-May-2019 07:08:23</timestamp>
+<editor_status code="R">Red</editor_status>
+<comments>Sorry I looked again with the cat scan editor and checked the PDF and the authors in SPMS  do not match the Paper.  They must be identical and a requirement for the extra page allowance.
+
+David</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>15-May-2019 11:51:38</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 14:02:44</timestamp>
+<comments>WEZZPLS2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 14:03:55</timestamp>
+<comments>WEZZPLS2.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ5">5) Is the paper written in good English?</log_status>
+<timestamp>15-May-2019 14:05:21</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ6">6) Does the paper acknowledge the work of others in the same field?</log_status>
+<timestamp>15-May-2019 14:05:21</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ7">7) Does the paper include appropriate references to the literature?</log_status>
+<timestamp>15-May-2019 14:05:21</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RVAL">2) Does the paper include own work, performed by the authors and not published elsewhere?</log_status>
+<timestamp>15-May-2019 14:05:21</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="REF">Referee</log_status>
+<timestamp>15-May-2019 14:05:21</timestamp>
+<referee_status code="a">approved</referee_status>
+</abstract_log>
+<abstract_log>
+<log_status code="REF">Referee</log_status>
+<timestamp>15-May-2019 14:05:21</timestamp>
+<referee_status code="a">approved</referee_status>
+</abstract_log>
+<abstract_log>
+<log_status code="RORI">1) Is the work free of obvious scientific or technical errors and important factual mistakes?</log_status>
+<timestamp>15-May-2019 14:05:21</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ3">3) Is some aspect or part of the work original or demonstrate clear progress?</log_status>
+<timestamp>15-May-2019 14:05:21</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ4">4) Is the presentation of methods, results and conclusion understandable?</log_status>
+<timestamp>15-May-2019 14:05:21</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 01:33:50</timestamp>
+<comments>WEZZPLS2.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 01:34:07</timestamp>
+<comments>WEZZPLS2.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 01:44:12</timestamp>
+<comments>WEZZPLS2.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 01:46:39</timestamp>
+<comments>WEZZPLS2.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>17-May-2019 01:47:31</timestamp>
+<editor_status code="G">Green</editor_status>
+<comments>Just fixed the Table title to be written in Title case no sentence case.
+
+All the best,
+
+David</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 04:06:10</timestamp>
+<comments>WEZZPLS2.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>17-May-2019 04:20:40</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 05:22:23</timestamp>
+<comments>WEZZPLS2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>23-May-2019 04:29:04</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>23-May-2019 04:34:09</timestamp>
+<comments>WEZZPLS2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>23-May-2019 04:35:22</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Speaker,
+Your PowerPoint slides were successfully converted to PDF (with intermediate slides removed) and will
+be published in the conference proceedings. Please download the PDF
+slides file (WEZZPLS2_TALK.pdf) and check that all is OK. 
+In case of problems, please contact:
+jan.chrin@psi.ch
+Thank you.
+</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Kang</lname>
+<fname>Heung-Sik</fname>
+<iname>H.-S.</iname>
+<author_id>1123</author_id>
+<institutions>
+<institute>
+<full_name abbrev="PAL" type="Institute">Pohang Accelerator Laboratory</full_name>
+<name1>Pohang Accelerator Laboratory</name1>
+<URL>http://pal.postech.ac.kr/kor/index.html</URL>
+<address1>San-31 Hyoja-dong, Nam-gu</address1>
+<town>Pohang, Kyungbuk</town>
+<zip_code>790-784</zip_code>
+<country_code abbrev="KOR">Republic of Korea</country_code>
+</institute>
+</institutions>
+<emails>
+<email>hskang@postech.ac.kr</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>2184</abstract_id>
+<pages>4</pages>
+<toc>2296</toc>
+<main_class>MC3: Novel Particle Sources and Acceleration Techniques</main_class>
+<sub_class>A15 New Acceleration Techniques </sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="N">SUSPFO040</code>
+<presentation type="Poster">Poster</presentation>
+</program_code>
+<program_code>
+<code primary="Y">WEZZPLS3</code>
+<presentation type="Oral">Contributed Oral</presentation>
+<start_time>1540</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>Longitudinal-Phase-Space Manipulation for Efficient Beam-Driven Structure Wakefield Acceleration</title>
+<abstract>Collinear beam-driven structure wakefield acceleration (SWFA) is an advanced acceleration technique that could support the compact generation of high-energy beams for future multi-user x-ray free-electron-laser facilities*. Producing an ideal shaped drive beam through phase space manipulation is crucial for an efficient SWFA. Controlling the final longitudinal-phase space of the drive beam necessitate staged beam manipulations during acceleration. This paper describes the preliminary design of an accelerator beamline capable of producing drive beam with tailored current distribution and longitudinal-phase-space correlation. The proposed design is based on simple analytical models combined in a 1-D longitudinal beam-dynamics simulation tracking program supporting forward and backward (time reversal) tracking.</abstract>
+<agency>This work is funded by the United States Department of Energy awards DE-SC0018656 with Northern Illinois University and DE-AC02-06CH11357 with Argonne National Laboratory.</agency>
+<footnote>* A. Zholents, et al., Dielectric wakefield accelerator to drive the future FEL light source</footnote>
+<contributors>
+<contributor type="Co-Author">
+<lname>Piot</lname>
+<fname>Philippe</fname>
+<mname>Regis-Guy</mname>
+<iname>P.</iname>
+<author_id>5693</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="Fermilab" type="Laboratory">Fermi National Accelerator Laboratory Accelerator Division</full_name>
+<name1>Fermi National Accelerator Laboratory</name1>
+<name2>Accelerator Division</name2>
+<URL>http://www.fnal.gov/</URL>
+<po_box>P.O. Box 500</po_box>
+<town>Batavia, Illinois</town>
+<zip_code>IL 60510-0500</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name>Northern Illinois University Department of Physics</full_name>
+<name1>Northern Illinois University</name1>
+<department>Department of Physics</department>
+<URL>http://www.physics.niu.edu/</URL>
+<town>DeKalb, Illinois</town>
+<zip_code>IL 60115</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>piot@fnal.gov</email>
+<email>piot@nicadd.niu.edu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Zholents</lname>
+<fname>Alexander</fname>
+<iname>A.</iname>
+<author_id>2984</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory</full_name>
+<name1>Argonne National Laboratory</name1>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>azholents@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Tan</lname>
+<fname>Wei Hou</fname>
+<iname>W.H.</iname>
+<author_id>112988</author_id>
+<institutions>
+<institute>
+<full_name>Northern Illinois University Department of Physics</full_name>
+<name1>Northern Illinois University</name1>
+<department>Department of Physics</department>
+<URL>http://www.physics.niu.edu/</URL>
+<town>DeKalb, Illinois</town>
+<zip_code>IL 60115</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>z1829753@students.niu.edu</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Tan</lname>
+<fname>Wei Hou</fname>
+<iname>W.H.</iname>
+<author_id>112988</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name>Northern Illinois University Department of Physics</full_name>
+<name1>Northern Illinois University</name1>
+<department>Department of Physics</department>
+<URL>http://www.physics.niu.edu/</URL>
+<town>DeKalb, Illinois</town>
+<zip_code>IL 60115</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>z1829753@students.niu.edu</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Tan</lname>
+<fname>Wei Hou</fname>
+<iname>W.H.</iname>
+<author_id>112988</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name>Northern Illinois University Department of Physics</full_name>
+<name1>Northern Illinois University</name1>
+<department>Department of Physics</department>
+<URL>http://www.physics.niu.edu/</URL>
+<town>DeKalb, Illinois</town>
+<zip_code>IL 60115</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>z1829753@students.niu.edu</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEZZPLS3_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>WEZZPLS3.tex</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEZZPLS3.bib</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEZZPLS3f1.pdf</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEZZPLS3f2.pdf</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEZZPLS3f3.pdf</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEZZPLS3f4.pdf</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEZZPLS3f5.pdf</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEZZPLS3f6.pdf</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEZZPLS3_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEZZPLS3_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEZZPLS3.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEZZPLS3.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEZZPLS3_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEZZPLS3_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEZZPLS3_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEZZPLS3_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEZZPLS3_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEZZPLS3_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>WEZZPLS3.tex</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEZZPLS3.bib</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEZZPLS3.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS3&amp;wanted_file=WEZZPLS3f1.pdf</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS3&amp;wanted_file=WEZZPLS3f2.pdf</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS3&amp;wanted_file=WEZZPLS3f4.pdf</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS3&amp;wanted_file=WEZZPLS3f5.pdf</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS3&amp;wanted_file=WEZZPLS3f6.pdf</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS3&amp;wanted_file=WEZZPLS3.bib</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS3&amp;wanted_file=WEZZPLS3.bib</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS3&amp;wanted_file=WEZZPLS3f3.pdf</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS3&amp;wanted_file=WEZZPLS3_AUTHOR.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS3&amp;wanted_file=WEZZPLS3.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS3&amp;wanted_file=WEZZPLS3.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS3&amp;wanted_file=WEZZPLS3.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS3&amp;wanted_file=WEZZPLS3.tex</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS3&amp;wanted_file=WEZZPLS3.tex</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS3&amp;wanted_file=WEZZPLS3_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS3&amp;wanted_file=WEZZPLS3_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS3&amp;wanted_file=WEZZPLS3_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS3&amp;wanted_file=WEZZPLS3_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS3&amp;wanted_file=WEZZPLS3_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS3&amp;wanted_file=WEZZPLS3_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS3&amp;wanted_file=WEZZPLS3_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEZZPLS3&amp;wanted_file=WEZZPLS3_TALK.PPTX</fileURL>
+</fileURLs>
+<editor>Jan Chrin</editor>
+<final_qa>Maxim Kuzin</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="PRR">Peer Review Requested</log_status>
+<timestamp>02-Dec-2018 23:33:42</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>02-Dec-2018 23:33:42</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>05-Dec-2018 02:16:53</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>05-Dec-2018 17:23:32</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>09-Dec-2018 23:40:28</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>06-Feb-2019 23:07:20</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>06-Feb-2019 23:07:20</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 02:33:13</timestamp>
+<comments>WEZZPLS3_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>14-May-2019 02:38:27</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 02:41:23</timestamp>
+<comments>WEZZPLS3.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 02:42:32</timestamp>
+<comments>WEZZPLS3.bib</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 02:43:03</timestamp>
+<comments>WEZZPLS3f1.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 02:43:18</timestamp>
+<comments>WEZZPLS3f2.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 02:43:29</timestamp>
+<comments>WEZZPLS3f3.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 02:43:42</timestamp>
+<comments>WEZZPLS3f4.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 02:43:58</timestamp>
+<comments>WEZZPLS3f5.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 02:44:09</timestamp>
+<comments>WEZZPLS3f6.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 02:46:53</timestamp>
+<comments>WEZZPLS3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 02:47:17</timestamp>
+<comments>WEZZPLS3_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>19-May-2019 06:00:58</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 06:14:25</timestamp>
+<comments>WEZZPLS3.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>19-May-2019 06:18:03</timestamp>
+<editor_status code="G">Green</editor_status>
+<comments>Dear author,
+
+There were some corrections done to this paper:
+
+Subsection headers were changed to Title Case
+Table headers were changed to Title Case
+
+The references, on the other hand, were good from the start!
+
+Best regards,
+Gustavo Bruno
+
+</comments>
+<editor_notes>
+</editor_notes>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 06:19:59</timestamp>
+<comments>WEZZPLS3.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 04:08:16</timestamp>
+<comments>WEZZPLS3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>20-May-2019 05:28:05</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 01:28:34</timestamp>
+<comments>WEZZPLS3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 01:28:50</timestamp>
+<comments>WEZZPLS3_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 03:56:09</timestamp>
+<comments>WEZZPLS3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 03:56:37</timestamp>
+<comments>WEZZPLS3_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>23-May-2019 04:35:27</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>23-May-2019 04:38:33</timestamp>
+<comments>WEZZPLS3_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>23-May-2019 04:40:15</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Author,
+The pdf of your talk has been processed, with backup slides removed, for inclusion in the proceedings.
+In case of problems, please contact
+jan.chrin@psi.ch</comments>
+<editor_notes>pdf to ps to pdf to embed fonts</editor_notes>
+</abstract_log>
+<abstract_log>
+<log_status code="PR">Paper Re-assigned</log_status>
+<timestamp>23-May-2019 23:17:22</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>23-May-2019 23:34:30</timestamp>
+<comments>WEZZPLS3.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>23-May-2019 23:34:41</timestamp>
+<comments>WEZZPLS3.bib</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>23-May-2019 23:34:56</timestamp>
+<comments>WEZZPLS3.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>23-May-2019 23:36:38</timestamp>
+<editor_status code="Y">Yellow</editor_status>
+<comments>Responded to author's request to add an extra reference. New tex, bib and pdf files uploaded.
+jan.chrin@psi.ch
+
+Here is the paper.
+https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.118.104801
+
+it should be cited along with the original citation 7 in the introduction section, near &quot;transverse-to-longitudinal phasespace emittance exchange [7]&quot;.</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>23-May-2019 23:36:53</timestamp>
+<editor_status code="G">Green</editor_status>
+<comments>change to green for pre-press release</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+</papers>
+</session>
+</conference>

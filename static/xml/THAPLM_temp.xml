@@ -1,0 +1,833 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<conference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://bel.gsi.de/docs/xml/conference.xsd" name="IPAC 2019, Melbourne, Australia">
+<session type="Oral">
+<name abbr="THAPLM">Awards Session</name>
+<date btime="1400" etime="1530">23-May-19</date>
+<location type="Awards Session">Main Plenary (plenary 2)</location>
+<chairs>
+<chair>
+<lname>Boland</lname>
+<fname>Mark</fname>
+<mname>James</mname>
+<iname>M.J.</iname>
+<author_id>6562</author_id>
+<institutions>
+<institute>
+<full_name abbrev="CLS" type="University Laboratory">Canadian Light Source Inc. University of Saskatchewan</full_name>
+<name1>Canadian Light Source Inc.</name1>
+<name2>University of Saskatchewan</name2>
+<URL>http://www.cls.usask.ca/</URL>
+<address1>44 Innovation Boulevard</address1>
+<town>Saskatoon, Saskatchewan</town>
+<zip_code>SK S7N 2V3</zip_code>
+<country_code abbrev="CDN">Canada</country_code>
+</institute>
+</institutions>
+<emails>
+<email>mboland@unimelb.edu.au</email>
+<email>mark.boland@synchrotron.org.au</email>
+<email>mark.boland@synchrotron.org.au</email>
+<email>mark.boland@usask.ca</email>
+<email>mark.boland@lightsource.ca</email>
+</emails>
+</chair>
+</chairs>
+<papers>
+<paper>
+<abstract_id>3939</abstract_id>
+<main_class>NMC: Non MC Talk</main_class>
+<sub_class>Non-MC Talk</sub_class>
+<publishable>No, Editor Status Code is not Publishable, Final QA Not Publishable</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">THAPLM2</code>
+<presentation type="Oral">Invited Oral</presentation>
+<start_time>1400</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<title>Xie Jialin Prize for Outstanding Work in the Accelerator Field, With No Age Limit</title>
+<abstract>For his pioneering studies on instabilities in particle beam physics, the introduction of the impedance concept in storage rings and, in the course of his academic career, for disseminating knowledge in accelerator physics throughout many generations of young scientists.</abstract>
+<contributors>
+<contributor type="Owner">
+<lname>Vaccaro</lname>
+<fname>Vittorio</fname>
+<mname>Giorgio</mname>
+<iname>V.G.</iname>
+<author_id>676</author_id>
+<institutions>
+<institute>
+<full_name>Naples University Federico II and INFN</full_name>
+<name1>Naples University Federico II and INFN</name1>
+<URL>http://www.scienze.unina.it/</URL>
+<address1>Complesso Universitario di Monte Sant'Angelo</address1>
+<address2>Via Cinthia ed. G</address2>
+<town>Napoli</town>
+<postal_code>80126</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+<institute>
+<full_name>Naples University Federico II Mathematical, Physical and Natural Sciences Faculty Physical Sciences Department</full_name>
+<name1>Naples University Federico II</name1>
+<name2>Mathematical, Physical and Natural Sciences Faculty</name2>
+<department>Physical Sciences Department</department>
+<URL>http://www.scienze.unina.it/</URL>
+<address1>Complesso Universitario di Monte Sant'Angelo</address1>
+<address2>Via Cinthia ed. G</address2>
+<town>Napoli</town>
+<postal_code>80126</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>vaccaro@na.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Vaccaro</lname>
+<fname>Vittorio</fname>
+<mname>Giorgio</mname>
+<iname>V.G.</iname>
+<author_id>676</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name>Naples University Federico II and INFN</full_name>
+<name1>Naples University Federico II and INFN</name1>
+<URL>http://www.scienze.unina.it/</URL>
+<address1>Complesso Universitario di Monte Sant'Angelo</address1>
+<address2>Via Cinthia ed. G</address2>
+<town>Napoli</town>
+<postal_code>80126</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>vaccaro@na.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Vaccaro</lname>
+<fname>Vittorio</fname>
+<mname>Giorgio</mname>
+<iname>V.G.</iname>
+<author_id>676</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name>Naples University Federico II and INFN</full_name>
+<name1>Naples University Federico II and INFN</name1>
+<URL>http://www.scienze.unina.it/</URL>
+<address1>Complesso Universitario di Monte Sant'Angelo</address1>
+<address2>Via Cinthia ed. G</address2>
+<town>Napoli</town>
+<postal_code>80126</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>vaccaro@na.infn.it</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THAPLM2_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THAPLM2_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THAPLM2&amp;wanted_file=THAPLM2_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THAPLM2&amp;wanted_file=THAPLM2_TALK.PDF</fileURL>
+</fileURLs>
+<abstract_logs>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>17-May-2019 04:42:27</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>17-May-2019 04:42:27</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AOC">Abstract Owner Changed</log_status>
+<timestamp>17-May-2019 04:43:27</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>19-May-2019 07:41:39</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>19-May-2019 07:41:39</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 23:18:25</timestamp>
+<comments>THAPLM2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>23-May-2019 05:24:14</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>23-May-2019 05:33:56</timestamp>
+<comments>THAPLM2.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>23-May-2019 05:36:03</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Author,
+See THAPLM2.PDF for the slides that will be included in the proceedings. They are modified from your original THAPLM2_TALK.PDF in that I have deleted the intermediate slides. If you have any questions or concerns, please email me at pdyer@bnl.gov.</comments>
+<editor_notes>deleted intermediate slides</editor_notes>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>23-May-2019 22:16:37</timestamp>
+<comments>THAPLM2.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>23-May-2019 22:17:27</timestamp>
+<comments>THAPLM2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>23-May-2019 22:19:25</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Author,
+Apologies for the previous mixup. You should see only THAPLM2_TALK.PDF in your files now. This contains the slides that will be included in the proceedings. They were created from your original THAPLM2_TALK.PDF, but I have deleted unnecessary intermediate slides. If you have any questions or concerns, please email me at pdyer@bnl.gov.</comments>
+<editor_notes>uploaded correctly named file and deleted incorrectly named file</editor_notes>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>13-Jun-2019 01:15:48</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>13-Jun-2019 01:15:48</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>13-Jun-2019 01:19:50</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>13-Jun-2019 01:19:50</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>20-Jun-2019 11:10:42</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>20-Jun-2019 11:10:42</timestamp>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<abstract_id>3940</abstract_id>
+<pages>5</pages>
+<toc>3439</toc>
+<main_class>NMC: Non MC Talk</main_class>
+<sub_class>Non-MC Talk</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">THAPLM3</code>
+<presentation type="Oral">Invited Oral</presentation>
+<start_time>1420</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>2019 Nishikawa Tetsuji Prize Talk</title>
+<abstract>For his original work on electron lenses in synchrotron colliders, his outstanding contribution to the construction and operation of high-energy, high-luminosity hadron colliders and for his tireless leadership in the accelerator community.</abstract>
+<contributors>
+<contributor type="Owner">
+<lname>Shiltsev</lname>
+<fname>Vladimir</fname>
+<iname>V.D.</iname>
+<author_id>2220</author_id>
+<institutions>
+<institute>
+<full_name abbrev="Fermilab" type="Laboratory">Fermi National Accelerator Laboratory</full_name>
+<name1>Fermi National Accelerator Laboratory</name1>
+<URL>http://www.fnal.gov/</URL>
+<po_box>P.O. Box 500</po_box>
+<town>Batavia, Illinois</town>
+<zip_code>IL 60510-0500</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>shiltsev@fnal.gov</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Shiltsev</lname>
+<fname>Vladimir</fname>
+<iname>V.D.</iname>
+<author_id>2220</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="Fermilab" type="Laboratory">Fermi National Accelerator Laboratory</full_name>
+<name1>Fermi National Accelerator Laboratory</name1>
+<URL>http://www.fnal.gov/</URL>
+<po_box>P.O. Box 500</po_box>
+<town>Batavia, Illinois</town>
+<zip_code>IL 60510-0500</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>shiltsev@fnal.gov</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Shiltsev</lname>
+<fname>Vladimir</fname>
+<iname>V.D.</iname>
+<author_id>2220</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="Fermilab" type="Laboratory">Fermi National Accelerator Laboratory</full_name>
+<name1>Fermi National Accelerator Laboratory</name1>
+<URL>http://www.fnal.gov/</URL>
+<po_box>P.O. Box 500</po_box>
+<town>Batavia, Illinois</town>
+<zip_code>IL 60510-0500</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>shiltsev@fnal.gov</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>THAPLM3_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>THAPLM3.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>THAPLM3.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>THAPLM3.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THAPLM3_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>THAPLM3.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>THAPLM3.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THAPLM3_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THAPLM3_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THAPLM3_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THAPLM3&amp;wanted_file=THAPLM3_AUTHOR.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THAPLM3&amp;wanted_file=THAPLM3.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THAPLM3&amp;wanted_file=THAPLM3.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THAPLM3&amp;wanted_file=THAPLM3.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THAPLM3&amp;wanted_file=THAPLM3.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THAPLM3&amp;wanted_file=THAPLM3.docx</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THAPLM3&amp;wanted_file=THAPLM3_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THAPLM3&amp;wanted_file=THAPLM3_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THAPLM3&amp;wanted_file=THAPLM3_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THAPLM3&amp;wanted_file=THAPLM3_TALK.PPTX</fileURL>
+</fileURLs>
+<editor>Laurent Serani</editor>
+<final_qa>Magdalena Montes-Loera</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>17-May-2019 04:51:45</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>17-May-2019 04:51:45</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AOC">Abstract Owner Changed</log_status>
+<timestamp>17-May-2019 04:52:36</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>19-May-2019 07:40:26</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>19-May-2019 07:40:26</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 15:25:31</timestamp>
+<comments>THAPLM3.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 15:26:03</timestamp>
+<comments>THAPLM3_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>19-May-2019 15:30:58</timestamp>
+<comments>THAPLM3.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 15:31:57</timestamp>
+<comments>THAPLM3.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>19-May-2019 23:09:46</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 00:15:43</timestamp>
+<comments>THAPLM3.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>20-May-2019 00:21:25</timestamp>
+<editor_status code="R">Red</editor_status>
+<comments>dear author,
+
+please download the new docx file with cosmetic changes on references.
+Please add program code for ref 21, 22, 25, and 45.
+Please review all changes in the references paragraph and resubmit your doc.
+thanks  </comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 12:20:51</timestamp>
+<comments>THAPLM3.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 12:52:36</timestamp>
+<comments>THAPLM3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 01:05:52</timestamp>
+<comments>THAPLM3.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 01:06:29</timestamp>
+<comments>THAPLM3.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>21-May-2019 01:12:47</timestamp>
+<editor_status code="Y">Yellow</editor_status>
+<comments>thanks for reloaded your documents.
+some cosmetic actions have been dome on references, putting italic fomnt on paper name and so on. 
+On 'major' change are on ref 61. You propose 2 ref 61 we suggest 1 as you can see after downloading the PDF file by connecting into your SPMS account.
+Please if you agree push it to GREEN otherwise reject the changes and give comment</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="DR">Dot Reassignment</log_status>
+<timestamp>21-May-2019 12:17:03</timestamp>
+<editor_status code="G">Green</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>22-May-2019 04:05:46</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 17:10:28</timestamp>
+<comments>THAPLM3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 23:20:53</timestamp>
+<comments>THAPLM3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>23-May-2019 04:43:22</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>23-May-2019 05:36:33</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>24-May-2019 00:11:51</timestamp>
+<comments>THAPLM3_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>24-May-2019 00:13:33</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Speaker, I have uploaded THAPLM3_TALK.PDF, which will be used in the conference proceedings. Please take a look at it and check that it is OK. If you have any questions or concerns, please email me at pdyer@bnl.gov.</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<abstract_id>3941</abstract_id>
+<main_class>NMC: Non MC Talk</main_class>
+<sub_class>Non-MC Talk</sub_class>
+<publishable>No, Editor Status Code is not Publishable, Final QA Not Publishable</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">THAPLM4</code>
+<presentation type="Oral">Invited Oral</presentation>
+<start_time>1440</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<title>The Hogil Kim Prize</title>
+<abstract>For his demonstration of new experimental technique of phase-stable laser acceleration of protons and ions, in overcoming the challenges to producing high-quality beams and leading the way to realising future medical accelerators.</abstract>
+<contributors>
+<contributor type="Owner">
+<lname>Yan</lname>
+<fname>Xueqing</fname>
+<iname>X.Q.</iname>
+<author_id>16313</author_id>
+<institutions>
+<institute>
+<full_name abbrev="PKU" type="University Institute">Peking University Institute of Heavy Ion Physics</full_name>
+<name1>Peking University</name1>
+<department>Institute of Heavy Ion Physics</department>
+<address1>No.201 Chengfu Road</address1>
+<address2>Haidian District</address2>
+<town>Beijing</town>
+<postal_code>100871</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>x.yan@pku.edu.cn</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Yan</lname>
+<fname>Xueqing</fname>
+<iname>X.Q.</iname>
+<author_id>16313</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="PKU" type="University Institute">Peking University Institute of Heavy Ion Physics</full_name>
+<name1>Peking University</name1>
+<department>Institute of Heavy Ion Physics</department>
+<address1>No.201 Chengfu Road</address1>
+<address2>Haidian District</address2>
+<town>Beijing</town>
+<postal_code>100871</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>x.yan@pku.edu.cn</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Yan</lname>
+<fname>Xueqing</fname>
+<iname>X.Q.</iname>
+<author_id>16313</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="PKU" type="University Institute">Peking University Institute of Heavy Ion Physics</full_name>
+<name1>Peking University</name1>
+<department>Institute of Heavy Ion Physics</department>
+<address1>No.201 Chengfu Road</address1>
+<address2>Haidian District</address2>
+<town>Beijing</town>
+<postal_code>100871</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>x.yan@pku.edu.cn</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THAPLM4_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THAPLM4_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THAPLM4&amp;wanted_file=THAPLM4_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THAPLM4&amp;wanted_file=THAPLM4_TALK.PPTX</fileURL>
+</fileURLs>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>17-May-2019 04:57:50</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>17-May-2019 04:57:50</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AOC">Abstract Owner Changed</log_status>
+<timestamp>17-May-2019 04:59:10</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>19-May-2019 07:40:55</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>19-May-2019 07:40:55</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 23:24:59</timestamp>
+<comments>THAPLM4_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>23-May-2019 05:36:42</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>23-May-2019 23:35:01</timestamp>
+<comments>THAPLM4_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>23-May-2019 23:37:03</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Speaker,
+I have uploaded THAPLM4_TALK.PDF, which will be used in the conference proceedings. Please take a look at it and check that it is OK. If you have any questions or concerns, please email me at pdyer@bnl.gov.</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>13-Jun-2019 01:18:21</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>13-Jun-2019 01:18:21</timestamp>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<abstract_id>3942</abstract_id>
+<main_class>NMC: Non MC Talk</main_class>
+<sub_class>Non-MC Talk</sub_class>
+<publishable>No, Editor Status Code is not Publishable, Final QA Not Publishable</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">THAPLM5</code>
+<presentation type="Oral">Invited Oral</presentation>
+<start_time>1500</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<title>The Mark Oliphant Prize</title>
+<abstract>The Mark Oliphant Prize for a student registered for a Ph.D. or diploma in accelerator physics or engineering, or to a trainee accelerator physicist or engineer in the educational phase of his or her professional career will be based on nominated presentations at the student poster session at IPAC¿19.</abstract>
+<contributors>
+<contributor type="Owner">
+<lname>MacArthur</lname>
+<fname>James</fname>
+<iname>J.P.</iname>
+<author_id>71998</author_id>
+<institutions>
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name>Stanford University</full_name>
+<name1>Stanford University</name1>
+<URL>http://www.stanford.edu/</URL>
+<town>Stanford, California</town>
+<zip_code>94305</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jmacart@stanford.edu</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>MacArthur</lname>
+<fname>James</fname>
+<iname>J.P.</iname>
+<author_id>71998</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jmacart@stanford.edu</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>MacArthur</lname>
+<fname>James</fname>
+<iname>J.P.</iname>
+<author_id>71998</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jmacart@stanford.edu</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THAPLM5_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THAPLM5_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THAPLM5&amp;wanted_file=THAPLM5_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THAPLM5&amp;wanted_file=THAPLM5_TALK.PPTX</fileURL>
+</fileURLs>
+<abstract_logs>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>17-May-2019 05:04:03</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>17-May-2019 05:04:03</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>19-May-2019 07:40:41</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>19-May-2019 07:40:41</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AOC">Abstract Owner Changed</log_status>
+<timestamp>21-May-2019 01:55:01</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AOC">Abstract Owner Changed</log_status>
+<timestamp>21-May-2019 01:55:07</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AOC">Abstract Owner Changed</log_status>
+<timestamp>22-May-2019 02:23:21</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>23-May-2019 02:32:37</timestamp>
+<comments>THAPLM5_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>23-May-2019 05:36:50</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>23-May-2019 23:37:56</timestamp>
+<comments>THAPLM5_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>23-May-2019 23:38:49</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Speaker,
+I have uploaded THAPLM5_TALK.PDF, which will be used in the conference proceedings. Please take a look at it and check that it is OK. If you have any questions or concerns, please email me at pdyer@bnl.gov.</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>13-Jun-2019 01:18:31</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>13-Jun-2019 01:18:31</timestamp>
+</abstract_log>
+</abstract_logs>
+</paper>
+</papers>
+</session>
+</conference>

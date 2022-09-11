@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<conference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://bel.gsi.de/docs/xml/conference.xsd" name="IPAC 2019, Melbourne, Australia">
+<session type="Oral">
+<name abbr="FRZPLM">Closing Ceremony</name>
+<date btime="1230" etime="1300">24-May-19</date>
+<location type="Afternoon Invited Oral">Main Plenary (plenary 2)</location>
+<chairs>
+<chair>
+<lname>Boland</lname>
+<fname>Mark</fname>
+<mname>James</mname>
+<iname>M.J.</iname>
+<author_id>6562</author_id>
+<institutions>
+<institute>
+<full_name abbrev="CLS" type="University Laboratory">Canadian Light Source Inc. University of Saskatchewan</full_name>
+<name1>Canadian Light Source Inc.</name1>
+<name2>University of Saskatchewan</name2>
+<URL>http://www.cls.usask.ca/</URL>
+<address1>44 Innovation Boulevard</address1>
+<town>Saskatoon, Saskatchewan</town>
+<zip_code>SK S7N 2V3</zip_code>
+<country_code abbrev="CDN">Canada</country_code>
+</institute>
+</institutions>
+<emails>
+<email>mboland@unimelb.edu.au</email>
+<email>mark.boland@synchrotron.org.au</email>
+<email>mark.boland@synchrotron.org.au</email>
+<email>mark.boland@usask.ca</email>
+<email>mark.boland@lightsource.ca</email>
+</emails>
+</chair>
+</chairs>
+<papers>
+<paper>
+<abstract_id>3944</abstract_id>
+<main_class>NMC: Entertainment Talk</main_class>
+<sub_class>Non-MC Talk</sub_class>
+<publishable>No, Editor Status Code is not Publishable, Final QA Not Publishable</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">FRZPLM1</code>
+<presentation type="Oral">Invited Oral</presentation>
+<start_time>1230</start_time>
+<duration>25</duration>
+</program_code>
+</program_codes>
+<title>Closing</title>
+<abstract>Closing and Thanks</abstract>
+<contributors>
+<contributor type="Owner">
+<lname>Boland</lname>
+<fname>Mark</fname>
+<mname>James</mname>
+<iname>M.J.</iname>
+<author_id>6562</author_id>
+<institutions>
+<institute>
+<full_name type="University Department">The University of Melbourne School of Physics</full_name>
+<name1>The University of Melbourne</name1>
+<department>School of Physics</department>
+<address1>Parkville</address1>
+<town>Melbourne, Victoria</town>
+<zip_code>VIC 3010</zip_code>
+<country_code abbrev="AUS">Australia</country_code>
+</institute>
+<institute>
+<full_name abbrev="ASCo" type="Laboratory">Australian Synchrotron Company</full_name>
+<name1>Australian Synchrotron Company</name1>
+<URL>http://www.synchrotron.org.au</URL>
+<address1>800 Blackburn Road</address1>
+<town>Clayton, Victoria</town>
+<zip_code>VIC 3168</zip_code>
+<country_code abbrev="AUS">Australia</country_code>
+</institute>
+<institute>
+<full_name abbrev="SLSA" type="Laboratory">Synchrotron Light Source Australia</full_name>
+<name1>Synchrotron Light Source Australia</name1>
+<URL>http://www.synchrotron.org.au</URL>
+<address1>800 Blackburn Road</address1>
+<town>Clayton</town>
+<postal_code>3168</postal_code>
+<country_code abbrev="AUS">Australia</country_code>
+</institute>
+<institute>
+<full_name type="University">University of Saskatchewan Department of Physics and Engineering Physics</full_name>
+<name1>University of Saskatchewan</name1>
+<department>Department of Physics and Engineering Physics</department>
+<town>Saskatoon</town>
+<zip_code>S7N 5E2</zip_code>
+<country_code abbrev="CDN">Canada</country_code>
+</institute>
+<institute>
+<full_name abbrev="CLS" type="University Laboratory">Canadian Light Source Inc. University of Saskatchewan</full_name>
+<name1>Canadian Light Source Inc.</name1>
+<name2>University of Saskatchewan</name2>
+<URL>http://www.cls.usask.ca/</URL>
+<address1>44 Innovation Boulevard</address1>
+<town>Saskatoon, Saskatchewan</town>
+<zip_code>SK S7N 2V3</zip_code>
+<country_code abbrev="CDN">Canada</country_code>
+</institute>
+</institutions>
+<emails>
+<email>mark.boland@lightsource.ca</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Boland</lname>
+<fname>Mark</fname>
+<mname>James</mname>
+<iname>M.J.</iname>
+<author_id>6562</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="CLS" type="University Laboratory">Canadian Light Source Inc. University of Saskatchewan</full_name>
+<name1>Canadian Light Source Inc.</name1>
+<name2>University of Saskatchewan</name2>
+<URL>http://www.cls.usask.ca/</URL>
+<address1>44 Innovation Boulevard</address1>
+<town>Saskatoon, Saskatchewan</town>
+<zip_code>SK S7N 2V3</zip_code>
+<country_code abbrev="CDN">Canada</country_code>
+</institute>
+</institutions>
+<emails>
+<email>mark.boland@lightsource.ca</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Boland</lname>
+<fname>Mark</fname>
+<mname>James</mname>
+<iname>M.J.</iname>
+<author_id>6562</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="CLS" type="University Laboratory">Canadian Light Source Inc. University of Saskatchewan</full_name>
+<name1>Canadian Light Source Inc.</name1>
+<name2>University of Saskatchewan</name2>
+<URL>http://www.cls.usask.ca/</URL>
+<address1>44 Innovation Boulevard</address1>
+<town>Saskatoon, Saskatchewan</town>
+<zip_code>SK S7N 2V3</zip_code>
+<country_code abbrev="CDN">Canada</country_code>
+</institute>
+</institutions>
+<emails>
+<email>mark.boland@lightsource.ca</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>FRZPLM1_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>FRZPLM1_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>FRZPLM1_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=FRZPLM1&amp;wanted_file=FRZPLM1_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=FRZPLM1&amp;wanted_file=FRZPLM1_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=FRZPLM1&amp;wanted_file=FRZPLM1_TALK.PPTX</fileURL>
+</fileURLs>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>17-May-2019 05:24:36</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>17-May-2019 05:24:36</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AOC">Abstract Owner Changed</log_status>
+<timestamp>17-May-2019 05:24:57</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>19-May-2019 07:39:24</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>19-May-2019 07:39:24</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>23-May-2019 23:55:01</timestamp>
+<comments>FRZPLM1_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>24-May-2019 00:24:44</timestamp>
+<comments>FRZPLM1_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>24-May-2019 02:56:45</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>24-May-2019 03:00:30</timestamp>
+<comments>FRZPLM1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>24-May-2019 03:01:19</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Mark,
+Your PowerPoint slides were successfully converted to PDF and will be published in the conference proceedings. 
+Please download the PDF slides file (FRZPLM1_TALK.pdf) and check that all is OK. 
+In case of problems, please contact:
+jan.chrin@psi.ch
+Thank you.
+</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>13-Jun-2019 01:19:01</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>13-Jun-2019 01:19:01</timestamp>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<abstract_id>3943</abstract_id>
+<main_class>NMC: Non MC Talk</main_class>
+<sub_class>Non-MC Talk</sub_class>
+<publishable>No, Editor Status Code is not Publishable, Final QA Not Publishable</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">FRZPLM2</code>
+<presentation type="Oral">Invited Oral</presentation>
+<start_time>1255</start_time>
+<duration>5</duration>
+</program_code>
+</program_codes>
+<title>IPAC'20 Presentation</title>
+<abstract>Information about IPAC'20</abstract>
+<contributors>
+<contributor type="Owner">
+<lname>Seidel</lname>
+<fname>Mike</fname>
+<iname>M.</iname>
+<author_id>440</author_id>
+<institutions>
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+<institute>
+<full_name abbrev="PSI">Paul Scherrer Institut</full_name>
+<name1>Paul Scherrer Institut</name1>
+<URL>http://www.psi.ch/</URL>
+<address1>Forschungsstrasse 111</address1>
+<town>Villigen PSI</town>
+<postal_code>5232</postal_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>mike.seidel@psi.ch</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Seidel</lname>
+<fname>Mike</fname>
+<iname>M.</iname>
+<author_id>440</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="PSI">Paul Scherrer Institut</full_name>
+<name1>Paul Scherrer Institut</name1>
+<URL>http://www.psi.ch/</URL>
+<address1>Forschungsstrasse 111</address1>
+<town>Villigen PSI</town>
+<postal_code>5232</postal_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>mike.seidel@psi.ch</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Seidel</lname>
+<fname>Mike</fname>
+<iname>M.</iname>
+<author_id>440</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="PSI">Paul Scherrer Institut</full_name>
+<name1>Paul Scherrer Institut</name1>
+<URL>http://www.psi.ch/</URL>
+<address1>Forschungsstrasse 111</address1>
+<town>Villigen PSI</town>
+<postal_code>5232</postal_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>mike.seidel@psi.ch</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>FRZPLM2_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>FRZPLM2_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>FRZPLM2_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=FRZPLM2&amp;wanted_file=FRZPLM2_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=FRZPLM2&amp;wanted_file=FRZPLM2_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=FRZPLM2&amp;wanted_file=FRZPLM2_TALK.PDF</fileURL>
+</fileURLs>
+<abstract_logs>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>17-May-2019 05:17:24</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>17-May-2019 05:17:24</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AOC">Abstract Owner Changed</log_status>
+<timestamp>17-May-2019 05:18:28</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>17-May-2019 09:15:32</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>17-May-2019 09:15:32</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>19-May-2019 07:40:34</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>19-May-2019 07:40:34</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 23:15:27</timestamp>
+<comments>FRZPLM2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>24-May-2019 03:22:52</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>24-May-2019 03:28:18</timestamp>
+<comments>FRZPLM2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>24-May-2019 03:29:39</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Speaker,
+A PDF (FRZPLM2_TALK.PDF) was generated from your slides as given in FRZPLM2_TALK.PPTX. FRZPLM2_TALK.PDF will be published in the conference proceedings. In case of any problems, please email me at pdyer@bnl.gov.</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>27-May-2019 01:32:33</timestamp>
+<comments>FRZPLM2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>13-Jun-2019 01:19:14</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>13-Jun-2019 01:19:14</timestamp>
+</abstract_log>
+</abstract_logs>
+</paper>
+</papers>
+</session>
+</conference>

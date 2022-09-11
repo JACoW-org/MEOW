@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<conference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://bel.gsi.de/docs/xml/conference.xsd" name="IPAC 2019, Melbourne, Australia">
+<session type="Oral">
+<name abbr="FRXPLM">Invited Oral: Hadron Accelrators</name>
+<date btime="1000" etime="1030">24-May-19</date>
+<location type="Before Coffee Invited Oral">Main Plenary (plenary 2)</location>
+<chairs>
+<chair>
+<lname>Wang</lname>
+<fname>Sheng</fname>
+<iname>S.</iname>
+<author_id>12774</author_id>
+<institutions>
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Accelerator Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<department>Accelerator Center</department>
+<address1>19B Yuquan Road</address1>
+<address2>Shijingshang District</address2>
+<town>Beijing</town>
+<postal_code>100049</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>wangs@ihep.ac.cn</email>
+</emails>
+</chair>
+</chairs>
+<papers>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Koseki</lname>
+<fname>Tadashi</fname>
+<iname>T.</iname>
+<author_id>2965</author_id>
+<institutions>
+<institute>
+<full_name abbrev="KEK">High Energy Accelerator Research Organization Accelerator Laboratory</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<department>Accelerator Laboratory</department>
+<address1>1-1 Oho</address1>
+<address2>Tsukuba</address2>
+<town>Ibaraki</town>
+<zip_code>305-0801</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="KEK" type="Laboratory">High Energy Accelerator Research Organization J-PARC Center</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<department>J-PARC Center</department>
+<address1>2-4 Shirakata Shirane</address1>
+<town>Tokai, Ibaraki</town>
+<zip_code>319-1195</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="RIKEN/RARF/CC">The Institute of Physical and Chemical Research Accelerator Research Facility Cyclotron Center</full_name>
+<name1>The Institute of Physical and Chemical Research</name1>
+<name2>Accelerator Research Facility</name2>
+<department>Cyclotron Center</department>
+<URL>http://www.rarf.riken.go.jp/rarf/rarf.html</URL>
+<address1>Wako Main Campus</address1>
+<address2>2-1 Hirosawa</address2>
+<address3>Wako</address3>
+<town>Saitama</town>
+<zip_code>351-0198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="J-PARC, KEK &amp; JAEA" type="University Laboratory">Japan Proton Accelerator Research Complex High Energy Accelerator Research Organization Tokai Campus</full_name>
+<name1>Japan Proton Accelerator Research Complex</name1>
+<name2>High Energy Accelerator Research Organization</name2>
+<department>Tokai Campus</department>
+<address1>Shirakata-Shirane 2-4</address1>
+<address2>Tokai-mura</address2>
+<address3>Naka-gun</address3>
+<town>Ibaraki-ken</town>
+<zip_code>319-1195</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>tadashi.koseki@kek.jp</email>
+<email>tadashi.koseki@kek.jp</email>
+<email>koseki@riken.go.jp</email>
+<email>tadashi.koseki@kek.jp</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>1315</abstract_id>
+<pages>5</pages>
+<toc>4380</toc>
+<main_class>MC4: Hadron Accelerators</main_class>
+<sub_class>A14 Neutron Spallation Facilities</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">FRXPLM1</code>
+<presentation type="Oral">Invited Oral</presentation>
+<start_time>1000</start_time>
+<duration>30</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>Operations Experience of SNS at 1.4MW and Upgrade Plans for Doubling the Beam Power</title>
+<abstract>In 2018, the SNS begins operation at the design proton beam power of 1.4 MW. This talk will present the critical technical challenges that were overcome in order to take the final step in beam power with a higher than 90% reliability. In addition, the future project of the SNS for doubling the beam power from 1.4 MW to 2.8 MW and construction of second target station will be discussed.</abstract>
+<contributors>
+<contributor type="Owner">
+<lname>Galambos</lname>
+<fname>John</fname>
+<iname>J.</iname>
+<author_id>2849</author_id>
+<institutions>
+<institute>
+<full_name abbrev="ORNL" type="Laboratory">Oak Ridge National Laboratory Spallation Neutron Source</full_name>
+<name1>Oak Ridge National Laboratory</name1>
+<name2>Spallation Neutron Source</name2>
+<URL>http://www.ornl.gov/</URL>
+<address1>One Bethel Valley Road</address1>
+<po_box>P.O. Box 2008</po_box>
+<town>Oak Ridge, Tennessee</town>
+<zip_code>TN 37831</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jdg@ornl.gov</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Galambos</lname>
+<fname>John</fname>
+<iname>J.</iname>
+<author_id>2849</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="ORNL" type="Laboratory">Oak Ridge National Laboratory Spallation Neutron Source</full_name>
+<name1>Oak Ridge National Laboratory</name1>
+<name2>Spallation Neutron Source</name2>
+<URL>http://www.ornl.gov/</URL>
+<address1>One Bethel Valley Road</address1>
+<po_box>P.O. Box 2008</po_box>
+<town>Oak Ridge, Tennessee</town>
+<zip_code>TN 37831</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jdg@ornl.gov</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Galambos</lname>
+<fname>John</fname>
+<iname>J.</iname>
+<author_id>2849</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="ORNL" type="Laboratory">Oak Ridge National Laboratory Spallation Neutron Source</full_name>
+<name1>Oak Ridge National Laboratory</name1>
+<name2>Spallation Neutron Source</name2>
+<URL>http://www.ornl.gov/</URL>
+<address1>One Bethel Valley Road</address1>
+<po_box>P.O. Box 2008</po_box>
+<town>Oak Ridge, Tennessee</town>
+<zip_code>TN 37831</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jdg@ornl.gov</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>FRXPLM1.docx</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>FRXPLM1_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>FRXPLM1.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>FRXPLM1.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>FRXPLM1.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>FRXPLM1_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>FRXPLM1_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>FRXPLM1_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>FRXPLM1_TALK.PPTX</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=FRXPLM1&amp;wanted_file=FRXPLM1.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=FRXPLM1&amp;wanted_file=FRXPLM1.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=FRXPLM1&amp;wanted_file=FRXPLM1_AUTHOR.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=FRXPLM1&amp;wanted_file=FRXPLM1.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=FRXPLM1&amp;wanted_file=FRXPLM1.docx</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=FRXPLM1&amp;wanted_file=FRXPLM1_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=FRXPLM1&amp;wanted_file=FRXPLM1_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=FRXPLM1&amp;wanted_file=FRXPLM1_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=FRXPLM1&amp;wanted_file=FRXPLM1_TALK.PPTX</fileURL>
+</fileURLs>
+<editor>Laurent Serani</editor>
+<final_qa>Guillaume Lalaire</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>02-Apr-2018 15:04:51</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>23-May-2018 19:12:10</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>23-May-2018 19:56:01</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>29-May-2018 07:13:50</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>29-May-2018 07:13:50</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>31-May-2018 02:10:29</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>31-May-2018 02:10:29</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>31-May-2018 02:27:25</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>31-May-2018 02:27:25</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AOC">Abstract Owner Changed</log_status>
+<timestamp>27-Jun-2018 00:26:03</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>20-Sep-2018 04:28:15</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>20-Sep-2018 04:28:15</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>13-May-2019 17:44:07</timestamp>
+<comments>FRXPLM1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>13-May-2019 17:44:29</timestamp>
+<comments>FRXPLM1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>19-May-2019 04:10:36</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 04:40:24</timestamp>
+<comments>FRXPLM1.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 04:40:48</timestamp>
+<comments>FRXPLM1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>19-May-2019 04:43:35</timestamp>
+<editor_status code="Y">Yellow</editor_status>
+<comments>dear author,
+cosmetic changes have been done on your doc, reformating references and caption figure.
+Please download and check the DPF file by loggind into your SPMS account.
+When agree put it to GREEN using the offered link otherwise reject changes and give comment</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="DR">Dot Reassignment</log_status>
+<timestamp>19-May-2019 07:58:28</timestamp>
+<editor_status code="G">Green</editor_status>
+<comments>thanks!</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 22:59:00</timestamp>
+<comments>FRXPLM1.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 06:55:10</timestamp>
+<comments>FRXPLM1_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>21-May-2019 05:04:32</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 05:21:22</timestamp>
+<comments>FRXPLM1_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>21-May-2019 05:54:56</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 07:34:01</timestamp>
+<comments>FRXPLM1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 23:17:33</timestamp>
+<comments>FRXPLM1_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>24-May-2019 02:55:05</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>24-May-2019 02:56:40</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear John,
+The pdf of your talk will be included in the proceedings as submitted.
+Best,
+jan.chrin@psi.ch</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+</papers>
+</session>
+</conference>

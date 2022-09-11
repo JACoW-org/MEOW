@@ -1,0 +1,1597 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<conference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://bel.gsi.de/docs/xml/conference.xsd" name="IPAC 2019, Melbourne, Australia">
+<session type="Oral">
+<name abbr="WEYYPLM">Contributed Orals: Circular and Linear Colliders</name>
+<date btime="1130" etime="1230">22-May-19</date>
+<location type="After Coffee Contributed Oral">Main Plenary (plenary 2)</location>
+<chairs>
+<chair>
+<lname>Bambade</lname>
+<fname>Philip</fname>
+<iname>P.</iname>
+<author_id>12710</author_id>
+<institutions>
+<institute>
+<full_name abbrev="LAL" type="Laboratory">Laboratoire de l'Accélérateur Linéaire CNRS/IN2P3 Université Paris-Saclay</full_name>
+<name1>Laboratoire de l'Accélérateur Linéaire</name1>
+<name2>CNRS/IN2P3</name2>
+<department>Université Paris-Saclay</department>
+<URL>http://www.lal.in2p3.fr/</URL>
+<address1>Univ. Paris-Sud</address1>
+<po_box>BP 34</po_box>
+<town>Orsay</town>
+<postal_code>91898</postal_code>
+<zip_code>Cedex</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>bambade@lal.in2p3.fr</email>
+<email>bambade@lal.in2p3.fr</email>
+</emails>
+</chair>
+</chairs>
+<papers>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Qin</lname>
+<fname>Qing</fname>
+<iname>Q.</iname>
+<author_id>1249</author_id>
+<institutions>
+<institute>
+<full_name abbrev="IHEP" type="Institute">Chinese Academy of Sciences Institute of High Energy Physics</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<URL>http://www.chinacp.com/eng/cporg/cporg_ihep.html</URL>
+<address1>Yuquan Road 19</address1>
+<po_box>P.O. Box 918-8</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Accelerator Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<department>Accelerator Center</department>
+<address1>19B Yuquan Road</address1>
+<address2>Shijingshang District</address2>
+<town>Beijing</town>
+<postal_code>100049</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Chinese Academy of Sciences Accelerator Division</full_name>
+<name1>Institute of High Energy Physics</name1>
+<name2>Chinese Academy of Sciences</name2>
+<department>Accelerator Division</department>
+<URL>http://www.ihep.cas.cn/</URL>
+<address1>19B Yuquan Road</address1>
+<po_box>P.O. Box 918</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Institute">Institute of High Energy Physics Chinese Academy of Sciences Experimental Physics Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<name2>Chinese Academy of Sciences</name2>
+<department>Experimental Physics Center</department>
+<URL>http://epc.ihep.ac.cn/epchomepage/index.html</URL>
+<address1>19B,Yuquan Rd.,</address1>
+<address2>Shijingshan District</address2>
+<po_box>P.O.Box 918</po_box>
+<town>Bejing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>qinq@mail.ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>3299</abstract_id>
+<pages>3</pages>
+<toc>2255</toc>
+<main_class>MC1: Circular and Linear Colliders</main_class>
+<sub_class>A02 Lepton Colliders</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">WEYYPLM1</code>
+<presentation type="Oral">Contributed Oral</presentation>
+<start_time>1130</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>Status of Early SuperKEKB Phase-3 Commissioning</title>
+<abstract>SuperKEKB is an asymmetric energy electron-positron collider for B-meson physics experiment. The beam collision with 3mm vertical beta function at the interaction point is confirmed during prior beam commissioning until July 2018. The next beam commissioning with the inner silicon vertex detectors so called &quot;phase-3 commissioning&quot; will start in March 2019. In the early part of next phase-3 commissioning, we plan to try the collision operation with over 1A stored beam current in order to exceed 1 x 10^34 cm^-2 s^-1 luminosity. We will report the preliminary results of the early stage of the SuperKEKB phase-3 commissioning.</abstract>
+<contributors>
+<contributor type="Owner">
+<lname>Morita</lname>
+<fname>Akio</fname>
+<iname>A.</iname>
+<author_id>2997</author_id>
+<institutions>
+<institute>
+<full_name abbrev="KEK" type="Laboratory">High Energy Accelerator Research Organization</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<URL>http://www.kek.jp/intra.html</URL>
+<address1>1-1 Oho</address1>
+<address2>Tsukuba</address2>
+<town>Ibaraki</town>
+<zip_code>305-0801</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="KEK">High Energy Accelerator Research Organization Accelerator Laboratory</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<department>Accelerator Laboratory</department>
+<address1>1-1 Oho</address1>
+<address2>Tsukuba</address2>
+<town>Ibaraki</town>
+<zip_code>305-0801</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>akio.morita@kek.jp</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Morita</lname>
+<fname>Akio</fname>
+<iname>A.</iname>
+<author_id>2997</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="KEK">High Energy Accelerator Research Organization Accelerator Laboratory</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<department>Accelerator Laboratory</department>
+<address1>1-1 Oho</address1>
+<address2>Tsukuba</address2>
+<town>Ibaraki</town>
+<zip_code>305-0801</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>akio.morita@kek.jp</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Morita</lname>
+<fname>Akio</fname>
+<iname>A.</iname>
+<author_id>2997</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="KEK">High Energy Accelerator Research Organization Accelerator Laboratory</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<department>Accelerator Laboratory</department>
+<address1>1-1 Oho</address1>
+<address2>Tsukuba</address2>
+<town>Ibaraki</town>
+<zip_code>305-0801</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>akio.morita@kek.jp</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="UNIX">Unix</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLM1f1.png</name>
+</file>
+<file>
+<platform abbrev="UNIX">Unix</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEYYPLM1_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="UNIX">Unix</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>WEYYPLM1.tex</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEYYPLM1.PDF</name>
+</file>
+<file>
+<platform abbrev="UNIX">Unix</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEYYPLM1.PDF</name>
+</file>
+<file>
+<platform abbrev="UNIX">Unix</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEYYPLM1_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="UNIX">Unix</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEYYPLM1_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLM1&amp;wanted_file=WEYYPLM1f1.png</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLM1&amp;wanted_file=WEYYPLM1.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLM1&amp;wanted_file=WEYYPLM1.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLM1&amp;wanted_file=WEYYPLM1_AUTHOR.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLM1&amp;wanted_file=WEYYPLM1.tex</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLM1&amp;wanted_file=WEYYPLM1_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLM1&amp;wanted_file=WEYYPLM1_TALK.PDF</fileURL>
+</fileURLs>
+<editor>Ivan Andrian</editor>
+<final_qa>Maxim Kuzin</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>05-Dec-2018 10:37:54</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>07-Dec-2018 09:01:16</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>06-Feb-2019 02:44:00</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>06-Feb-2019 02:44:00</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 12:14:57</timestamp>
+<comments>WEYYPLM1f1.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 12:37:09</timestamp>
+<comments>WEYYPLM1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 13:04:51</timestamp>
+<comments>WEYYPLM1.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>19-May-2019 05:51:07</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 05:55:10</timestamp>
+<comments>WEYYPLM1.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>19-May-2019 05:56:30</timestamp>
+<editor_status code="G">Green</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 05:39:27</timestamp>
+<comments>WEYYPLM1.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>20-May-2019 05:39:39</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 03:17:10</timestamp>
+<comments>WEYYPLM1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>22-May-2019 05:15:43</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 05:17:48</timestamp>
+<comments>WEYYPLM1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>22-May-2019 05:18:55</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Speaker,
+The pdf of your talk has been processed with back-up slides removed and will appear in the proceedings.
+Kind Regards,
+jan.chrin@psi.ch</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Qin</lname>
+<fname>Qing</fname>
+<iname>Q.</iname>
+<author_id>1249</author_id>
+<institutions>
+<institute>
+<full_name abbrev="IHEP" type="Institute">Chinese Academy of Sciences Institute of High Energy Physics</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<URL>http://www.chinacp.com/eng/cporg/cporg_ihep.html</URL>
+<address1>Yuquan Road 19</address1>
+<po_box>P.O. Box 918-8</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Accelerator Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<department>Accelerator Center</department>
+<address1>19B Yuquan Road</address1>
+<address2>Shijingshang District</address2>
+<town>Beijing</town>
+<postal_code>100049</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Chinese Academy of Sciences Accelerator Division</full_name>
+<name1>Institute of High Energy Physics</name1>
+<name2>Chinese Academy of Sciences</name2>
+<department>Accelerator Division</department>
+<URL>http://www.ihep.cas.cn/</URL>
+<address1>19B Yuquan Road</address1>
+<po_box>P.O. Box 918</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Institute">Institute of High Energy Physics Chinese Academy of Sciences Experimental Physics Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<name2>Chinese Academy of Sciences</name2>
+<department>Experimental Physics Center</department>
+<URL>http://epc.ihep.ac.cn/epchomepage/index.html</URL>
+<address1>19B,Yuquan Rd.,</address1>
+<address2>Shijingshan District</address2>
+<po_box>P.O.Box 918</po_box>
+<town>Bejing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>qinq@mail.ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>2187</abstract_id>
+<pages>4</pages>
+<toc>2258</toc>
+<main_class>MC1: Circular and Linear Colliders</main_class>
+<sub_class>A01 Hadron Colliders</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">WEYYPLM2</code>
+<presentation type="Oral">Contributed Oral</presentation>
+<start_time>1150</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>The 2018 Heavy-Ion Run of the LHC</title>
+<abstract>The fourth one-month Pb-Pb collision run brought LHC Run 2 to an end in December 2018. Following the tendency to reduce dependence on the configuration of the preceding proton run, a completely new optics cycle with the strongest ever focussing at the ALICE and LHCb experiments was designed and rapidly implemented, demonstrating the maturity of the collider's operating modes. Beam-loss monitor thresholds were carefully adjusted to provide optimal protection from the multiple loss mechanisms in heavy-ion operation. A switch from a basic bunch-spacing of 100 ns to 75 ns was made as the beam became available from the injector chain. A new record luminosity, 6 times the original design and close to the operating value proposed for HL-LHC, provided validation of the strategy for mitigating quenches due to bound-free pair production (BFPP) at the interaction points of the ATLAS and CMS experiments. Most of the beam parameters of the HL-LHC Pb-Pb upgrade were attained during this run and the integrated luminosity goals for the first 10 years of LHC operation were substantially exceeded.</abstract>
+<contributors>
+<contributor type="Co-Author">
+<lname>Bahamonde Castro</lname>
+<fname>Cristina</fname>
+<iname>C.</iname>
+<author_id>85651</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Engineering Department (EN)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Engineering Department (EN)</department>
+<URL>http://www.cern.ch</URL>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Bartmann</lname>
+<fname>Wolfgang</fname>
+<iname>W.</iname>
+<author_id>32601</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Technology Department (TE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Technology Department (TE)</department>
+<URL>http://www.cern.ch</URL>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>wolfgang.bartmann@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Bracco</lname>
+<fname>Chiara</fname>
+<iname>C.</iname>
+<author_id>21537</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Technology Department (TE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Technology Department (TE)</department>
+<URL>http://www.cern.ch</URL>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>chiara.bracco@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Bruce</lname>
+<fname>Roderik</fname>
+<iname>R.</iname>
+<author_id>11524</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>roderik.bruce@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Coello de Portugal</lname>
+<fname>Jaime Maria</fname>
+<iname>J.M.</iname>
+<author_id>72848</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanades de Particules 1</address1>
+<town>Meyrin</town>
+<postal_code>1217</postal_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Dilly</lname>
+<fname>Joschua</fname>
+<iname>J.</iname>
+<author_id>104138</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>joschua.dilly@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Fartoukh</lname>
+<fname>Stephane</fname>
+<mname>David</mname>
+<iname>S.D.</iname>
+<author_id>5763</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>stephane.fartoukh@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Fol</lname>
+<fname>Elena</fname>
+<iname>E.</iname>
+<author_id>100196</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research AB Department</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>AB Department</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanades de Particules 1</address1>
+<town>Meyrin</town>
+<postal_code>1217</postal_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>elena.fol@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Fuster-Martinez</lname>
+<fname>Nuria</fname>
+<iname>N.</iname>
+<author_id>51943</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanades de Particules 1</address1>
+<town>Meyrin</town>
+<postal_code>1217</postal_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>nuria.fuster.martinez@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Garcia-Tabares</lname>
+<fname>Ana</fname>
+<iname>A.</iname>
+<author_id>85372</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>ana.garcia-tabares.valdivieso@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Hofer</lname>
+<fname>Michael</fname>
+<iname>M.</iname>
+<author_id>94894</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>michael.hofer@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Holzer</lname>
+<fname>Eva Barbara</fname>
+<iname>E.B.</iname>
+<author_id>4769</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanades de Particules 1</address1>
+<town>Meyrin</town>
+<postal_code>1217</postal_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>barbara.holzer@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Jebramcik</lname>
+<fname>Marc</fname>
+<mname>Andre</mname>
+<iname>M.A.</iname>
+<author_id>68628</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>marc.jebramcik@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Keintzel</lname>
+<fname>Jacqueline</fname>
+<iname>J.</iname>
+<author_id>104769</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jacqueline.keintzel@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Lechner</lname>
+<fname>Anton</fname>
+<iname>A.</iname>
+<author_id>52129</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Engineering Department (EN)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Engineering Department (EN)</department>
+<URL>http://www.cern.ch</URL>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>anton.lechner@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Maclean</lname>
+<fname>Ewen</fname>
+<mname>Hamish</mname>
+<iname>E.H.</iname>
+<author_id>44576</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>ewen.hamish.maclean@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Malina</lname>
+<fname>Lukas</fname>
+<iname>L.</iname>
+<author_id>62354</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>lukas.malina@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Medvedeva</lname>
+<fname>Tatiana</fname>
+<iname>T.</iname>
+<author_id>104397</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>tatiana.medvedeva@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Mereghetti</lname>
+<fname>Alessio</fname>
+<iname>A.</iname>
+<author_id>36877</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanades de Particules 1</address1>
+<town>Meyrin</town>
+<postal_code>1217</postal_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>alessio.mereghetti@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Mirarchi</lname>
+<fname>Daniele</fname>
+<iname>D.</iname>
+<author_id>44537</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="University Institute">The University of Manchester The Photon Science Institute School of Physics and Astronomy</full_name>
+<name1>The University of Manchester</name1>
+<name2>The Photon Science Institute</name2>
+<department>School of Physics and Astronomy</department>
+<URL>www.psi.manchester.ac.uk</URL>
+<address1>Alan Turing Building</address1>
+<address2>Oxford Road</address2>
+<town>Manchester</town>
+<zip_code>M13 9PL</zip_code>
+<country_code abbrev="UK">United Kingdom</country_code>
+</institute>
+</institutions>
+<emails>
+<email>daniele.mirarchi@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Persson</lname>
+<fname>Tobias</fname>
+<mname>Hakan Bjorn</mname>
+<iname>T. H. B.</iname>
+<author_id>113577</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>tobias.persson@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Petersen</lname>
+<fname>Brian</fname>
+<iname>B.Aa.</iname>
+<author_id>113589</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Research Centre">European Organization for Nuclear Research Experimental Physics (EP)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Experimental Physics (EP)</department>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>brian.petersen@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Redaelli</lname>
+<fname>Stefano</fname>
+<iname>S.</iname>
+<author_id>1564</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>stefano.redaelli@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Salvachua</lname>
+<fname>Belen</fname>
+<iname>B.</iname>
+<author_id>57859</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanades de Particules 1</address1>
+<town>Meyrin</town>
+<postal_code>1217</postal_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>belen.salvachua@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Schaumann</lname>
+<fname>Michaela</fname>
+<iname>M.</iname>
+<author_id>51571</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>michaela.schaumann@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Schwick</lname>
+<fname>Christoph</fname>
+<iname>C.</iname>
+<author_id>40646</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanades de Particules 1</address1>
+<town>Meyrin</town>
+<postal_code>1217</postal_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>christoph.schwick@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Solfaroli</lname>
+<fname>Matteo</fname>
+<iname>M.</iname>
+<author_id>95028</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>matteo.solfaroli@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Spitznagel</lname>
+<fname>Martin</fname>
+<mname>Lukas</mname>
+<iname>M.L.</iname>
+<author_id>114130</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanades de Particules 1</address1>
+<town>Meyrin</town>
+<postal_code>1217</postal_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>martin.spitznagel@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Timko</lname>
+<fname>Helga</fname>
+<iname>H.</iname>
+<author_id>46591</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanades de Particules 1</address1>
+<town>Meyrin</town>
+<postal_code>1217</postal_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>helga.timko@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Tomas</lname>
+<fname>Rogelio</fname>
+<iname>R.</iname>
+<author_id>3672</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>rogelio.tomas@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Wegscheider</lname>
+<fname>Andreas</fname>
+<iname>A.</iname>
+<author_id>99515</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanades de Particules 1</address1>
+<town>Meyrin</town>
+<postal_code>1217</postal_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>andreas.wegscheider@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Wenninger</lname>
+<fname>Jorg</fname>
+<iname>J.</iname>
+<author_id>1650</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jorg.wenninger@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Wollmann</lname>
+<fname>Daniel</fname>
+<iname>D.</iname>
+<author_id>20820</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanades de Particules 1</address1>
+<town>Meyrin</town>
+<postal_code>1217</postal_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>daniel.wollmann@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Jowett</lname>
+<fname>John</fname>
+<mname>M.</mname>
+<iname>J.M.</iname>
+<author_id>1616</author_id>
+<institutions>
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research AB Department</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>AB Department</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanades de Particules 1</address1>
+<town>Meyrin</town>
+<postal_code>1217</postal_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+<institute>
+<full_name>Private Address</full_name>
+<name1>Private Address</name1>
+<address1>14 rue des Digitales</address1>
+<town>Thoiry</town>
+<postal_code>01710</postal_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanades de Particules 1</address1>
+<town>Meyrin</town>
+<postal_code>1217</postal_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>john.jowett@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Jowett</lname>
+<fname>John</fname>
+<mname>M.</mname>
+<iname>J.M.</iname>
+<author_id>1616</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>john.jowett@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Schaumann</lname>
+<fname>Michaela</fname>
+<iname>M.</iname>
+<author_id>51571</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>michaela.schaumann@cern.ch</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEYYPLM2_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLM2f1.pdf</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLM2f2.pdf</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLM2f3.pdf</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLM2f4.pdf</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLM2f5.pdf</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLM2f6.pdf</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLM2f7.pdf</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>WEYYPLM2.tex</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>WEYYPLM2.tex</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEYYPLM2.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEYYPLM2_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEYYPLM2_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEYYPLM2_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEYYPLM2_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLM2&amp;wanted_file=WEYYPLM2f3.pdf</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLM2&amp;wanted_file=WEYYPLM2f1.pdf</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLM2&amp;wanted_file=WEYYPLM2f7.pdf</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLM2&amp;wanted_file=WEYYPLM2f6.pdf</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLM2&amp;wanted_file=WEYYPLM2f5.pdf</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLM2&amp;wanted_file=WEYYPLM2f4.pdf</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLM2&amp;wanted_file=WEYYPLM2f2.pdf</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLM2&amp;wanted_file=WEYYPLM2.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLM2&amp;wanted_file=WEYYPLM2_AUTHOR.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLM2&amp;wanted_file=WEYYPLM2.tex</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLM2&amp;wanted_file=WEYYPLM2.tex</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLM2&amp;wanted_file=WEYYPLM2_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLM2&amp;wanted_file=WEYYPLM2_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLM2&amp;wanted_file=WEYYPLM2_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLM2&amp;wanted_file=WEYYPLM2_TALK.PDF</fileURL>
+</fileURLs>
+<editor>Fhumulani Nemulodi</editor>
+<final_qa>Charlie Horak</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>03-Dec-2018 01:08:02</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>07-Dec-2018 08:18:31</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>30-Jan-2019 22:36:42</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>30-Jan-2019 22:36:42</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>08-May-2019 18:32:50</timestamp>
+<comments>WEYYPLM2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>08-May-2019 18:35:49</timestamp>
+<comments>WEYYPLM2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>08-May-2019 18:36:26</timestamp>
+<comments>WEYYPLM2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>08-May-2019 18:37:45</timestamp>
+<comments>WEYYPLM2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>08-May-2019 18:38:50</timestamp>
+<comments>WEYYPLM2f1.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>08-May-2019 18:39:13</timestamp>
+<comments>WEYYPLM2f2.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>08-May-2019 18:39:51</timestamp>
+<comments>WEYYPLM2f3.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>08-May-2019 18:40:17</timestamp>
+<comments>WEYYPLM2f4.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>08-May-2019 18:40:38</timestamp>
+<comments>WEYYPLM2f5.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>08-May-2019 18:41:11</timestamp>
+<comments>WEYYPLM2f6.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>08-May-2019 18:41:32</timestamp>
+<comments>WEYYPLM2f7.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 15:16:20</timestamp>
+<comments>WEYYPLM2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>10-May-2019 15:16:41</timestamp>
+<comments>WEYYPLM2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>19-May-2019 05:48:30</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 01:13:19</timestamp>
+<comments>WEYYPLM2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 01:14:05</timestamp>
+<comments>WEYYPLM2.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>20-May-2019 01:17:27</timestamp>
+<editor_status code="Y">Yellow</editor_status>
+<comments>Dear Author your contribution has been edited to meet the standard of JACow, Please find comments below: 
+
+(*)hyperlink were removed (*) ref 20 was before ref 19 in the text swapped refs in the bibli to fix this (*) removed vertical line in the table and fixed the spacing 
+(*) some \murad units in the text and table were in italics, change them to normal text (*) Ref 15 was during the 9th workshop instead of the 10th from the original document (mistake from your part?) (*) Editted some of the refs to meet JACoW standard
+(*) Please upload the pdf file and check my changes for you final approval to move the document from yellow status to green status
+
+Regards
+Fhumulani</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="DR">Dot Reassignment</log_status>
+<timestamp>20-May-2019 07:33:58</timestamp>
+<editor_status code="G">Green</editor_status>
+<comments>It's a pity to de-activate the URLs in the bibliography, it makes the paper much less useful.  But I accept.</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 00:35:12</timestamp>
+<comments>WEYYPLM2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 01:59:49</timestamp>
+<comments>WEYYPLM2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>22-May-2019 05:15:48</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 05:33:00</timestamp>
+<comments>WEYYPLM2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>22-May-2019 05:34:20</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Speaker,
+The PDF of your talk has been processed, with backup slides removed, and will
+be published in the conference proceedings. 
+In the event of a problem, please contact:
+jan.chrin@psi.ch 
+Thank you.
+</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>22-May-2019 05:56:09</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>23-May-2019 05:22:49</timestamp>
+<comments>WEYYPLM2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>23-May-2019 06:07:49</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>New files uploaded by author verified for publication in proceedings.</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Qin</lname>
+<fname>Qing</fname>
+<iname>Q.</iname>
+<author_id>1249</author_id>
+<institutions>
+<institute>
+<full_name abbrev="IHEP" type="Institute">Chinese Academy of Sciences Institute of High Energy Physics</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<URL>http://www.chinacp.com/eng/cporg/cporg_ihep.html</URL>
+<address1>Yuquan Road 19</address1>
+<po_box>P.O. Box 918-8</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Accelerator Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<department>Accelerator Center</department>
+<address1>19B Yuquan Road</address1>
+<address2>Shijingshang District</address2>
+<town>Beijing</town>
+<postal_code>100049</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Chinese Academy of Sciences Accelerator Division</full_name>
+<name1>Institute of High Energy Physics</name1>
+<name2>Chinese Academy of Sciences</name2>
+<department>Accelerator Division</department>
+<URL>http://www.ihep.cas.cn/</URL>
+<address1>19B Yuquan Road</address1>
+<po_box>P.O. Box 918</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Institute">Institute of High Energy Physics Chinese Academy of Sciences Experimental Physics Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<name2>Chinese Academy of Sciences</name2>
+<department>Experimental Physics Center</department>
+<URL>http://epc.ihep.ac.cn/epchomepage/index.html</URL>
+<address1>19B,Yuquan Rd.,</address1>
+<address2>Shijingshan District</address2>
+<po_box>P.O.Box 918</po_box>
+<town>Bejing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>qinq@mail.ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>1842</abstract_id>
+<pages>4</pages>
+<toc>2262</toc>
+<main_class>MC1: Circular and Linear Colliders</main_class>
+<sub_class>A01 Hadron Colliders</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">WEYYPLM3</code>
+<presentation type="Oral">Contributed Oral</presentation>
+<start_time>1210</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>First Results of the Compensation of the Beam-Beam Effect with DC Wires in the LHC</title>
+<abstract>The compensation of the long-range beam-beam interactions using DC wires is presently under study as an option for enhancing the machine performance in the frame of the High-Luminosity LHC project (HL-LHC). The original idea dates back more than 15 years. After the installation of four wire prototypes in the LHC in 2018, a successful experimental campaign was performed during the last months. The experimental setup and the main results are reported in this paper.</abstract>
+<contributors>
+<contributor type="Co-Author">
+<lname>Amorim</lname>
+<fname>David</fname>
+<iname>D.</iname>
+<author_id>88090</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanades de Particules 1</address1>
+<town>Meyrin</town>
+<postal_code>1217</postal_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+<institute>
+<full_name type="University">Grenoble-INP Phelma</full_name>
+<name1>Grenoble-INP Phelma</name1>
+<address1>Minatec</address1>
+<address2>3 Parvis Louis Néel</address2>
+<town>Grenoble</town>
+<postal_code>38016</postal_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>david.amorim@phelma.grenoble-inp.fr</email>
+<email>david.amorim@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Bartosik</lname>
+<fname>Hannes</fname>
+<iname>H.</iname>
+<author_id>45028</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>hannes.bartosik@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Bertarelli</lname>
+<fname>Alessandro</fname>
+<iname>A.</iname>
+<author_id>5409</author_id>
+<institutions ckey="C

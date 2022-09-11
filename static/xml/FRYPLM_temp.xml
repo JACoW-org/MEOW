@@ -1,0 +1,1022 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<conference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://bel.gsi.de/docs/xml/conference.xsd" name="IPAC 2019, Melbourne, Australia">
+<session type="Oral">
+<name abbr="FRYPLM">Closing Plenary</name>
+<date btime="1100" etime="1230">24-May-19</date>
+<location type="After Coffee Invited Oral">Main Plenary (plenary 2)</location>
+<chairs>
+<chair>
+<lname>Boland</lname>
+<fname>Mark</fname>
+<mname>James</mname>
+<iname>M.J.</iname>
+<author_id>6562</author_id>
+<institutions>
+<institute>
+<full_name abbrev="CLS" type="University Laboratory">Canadian Light Source Inc. University of Saskatchewan</full_name>
+<name1>Canadian Light Source Inc.</name1>
+<name2>University of Saskatchewan</name2>
+<URL>http://www.cls.usask.ca/</URL>
+<address1>44 Innovation Boulevard</address1>
+<town>Saskatoon, Saskatchewan</town>
+<zip_code>SK S7N 2V3</zip_code>
+<country_code abbrev="CDN">Canada</country_code>
+</institute>
+</institutions>
+<emails>
+<email>mboland@unimelb.edu.au</email>
+<email>mark.boland@synchrotron.org.au</email>
+<email>mark.boland@synchrotron.org.au</email>
+<email>mark.boland@usask.ca</email>
+<email>mark.boland@lightsource.ca</email>
+</emails>
+</chair>
+</chairs>
+<papers>
+<paper>
+<abstract_id>1541</abstract_id>
+<main_class>NMC: Non MC Talk</main_class>
+<sub_class>Non-MC Talk</sub_class>
+<publishable>No, Editor Status Code is not Publishable, Final QA Not Publishable</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">FRYPLM1</code>
+<presentation type="Oral">Invited Oral</presentation>
+<start_time>1100</start_time>
+<duration>30</duration>
+</program_code>
+</program_codes>
+<title>X-ray Imaging: Faster, Smaller and Brighter</title>
+<abstract>X-ray science, and structure determination in particular, has continuously developed since 1895 with an increase in source brightness over that time of about 30 orders of magnitude. The development has culminated in large accelerator-driven radiation sources such as undulators and free-electron lasers, which are a big feature of the DESY campus. The bright laser-like beams from these sources have precipitated methodological advances for imaging complex forms of matter, such as biological macromolecules or man-made nanostructures. An understanding of how to synthesise atomic-resolution images was developed 100 years ago by Bragg, and still forms the basis for ongoing research in structure determination and coherent imaging, but in ways that perhaps Bragg would not have imagined. Our ambitions are to use these new capabilities to overcome bottlenecks in macromolecular imaging and to form ultrafast snapshots of molecules in action, to piece together their motions and reactions.</abstract>
+<contributors>
+<contributor type="Owner">
+<lname>Chapman</lname>
+<fname>Henry</fname>
+<iname>H.</iname>
+<author_id>25743</author_id>
+<institutions>
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+<institute>
+<full_name abbrev="CFEL" type="Research Centre">Centre for Free Electron Laser Science</full_name>
+<name1>Centre for Free Electron Laser Science</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+<institute>
+<full_name abbrev="LLNL" type="Laboratory">Lawrence Livermore National Laboratory</full_name>
+<name1>Lawrence Livermore National Laboratory</name1>
+<address1>7000 East Avenue</address1>
+<town>Livermore, California</town>
+<zip_code>CA 94551</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>henry.chapman@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Chapman</lname>
+<fname>Henry</fname>
+<iname>H.</iname>
+<author_id>25743</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="CFEL" type="Research Centre">Centre for Free Electron Laser Science</full_name>
+<name1>Centre for Free Electron Laser Science</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>henry.chapman@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Chapman</lname>
+<fname>Henry</fname>
+<iname>H.</iname>
+<author_id>25743</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="CFEL" type="Research Centre">Centre for Free Electron Laser Science</full_name>
+<name1>Centre for Free Electron Laser Science</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>henry.chapman@desy.de</email>
+</emails>
+</contributor>
+</contributors>
+<fileURLs>
+</fileURLs>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>05-Jul-2018 05:36:16</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>05-Jul-2018 05:38:28</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>05-Jul-2018 05:38:28</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AOC">Abstract Owner Changed</log_status>
+<timestamp>30-Nov-2018 11:18:49</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>19-May-2019 07:41:24</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>19-May-2019 07:41:24</timestamp>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Hsu</lname>
+<fname>Kuo-Tung</fname>
+<iname>K.T.</iname>
+<author_id>1799</author_id>
+<institutions>
+<institute>
+<full_name abbrev="NSRRC" type="Research Centre">National Synchrotron Radiation Research Center</full_name>
+<name1>National Synchrotron Radiation Research Center</name1>
+<URL>www.nsrrc.org.tw</URL>
+<address1>101 Hsin-Ann Road.</address1>
+<address2>Hsinchu Science Park</address2>
+<town>Hsinchu</town>
+<zip_code>30076</zip_code>
+<country_code abbrev="ROC">Taiwan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>kuotung@nsrrc.org.tw</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>1474</abstract_id>
+<pages>4</pages>
+<toc>4385</toc>
+<main_class>MC7: Accelerator Technology</main_class>
+<sub_class>T25 Lasers</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">FRYPLM2</code>
+<presentation type="Oral">Invited Oral</presentation>
+<start_time>1130</start_time>
+<duration>30</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>Lasers for Novel Accelerators</title>
+<abstract>Significant progress has been made over the last decade in optical laser performance including repetition rate, average and peak power, and laser-system footprint making these systems attractive for many applications including novel accelerators. Most novel acceleration schemes require high-power lasers. The talk will present drive laser requirements for current novel accelerator schemes, industry plans to meet these requirements, and the future for high-power lasers.</abstract>
+<contributors>
+<contributor type="Co-Author">
+<lname>Koester</lname>
+<fname>Petra</fname>
+<iname>P.</iname>
+<author_id>13772</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INO-CNR" type="Institute">Istituto Nazionale di Ottica Area della Ricerca del CNR</full_name>
+<name1>Istituto Nazionale di Ottica</name1>
+<name2>Area della Ricerca del CNR</name2>
+<address1>Via Moruzzi, 1</address1>
+<town>Pisa</town>
+<postal_code>56124</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>petra.koester@ino.cnr.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Labate</lname>
+<fname>Luca</fname>
+<iname>L.</iname>
+<author_id>13773</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INO-CNR" type="Institute">Istituto Nazionale di Ottica Area della Ricerca del CNR</full_name>
+<name1>Istituto Nazionale di Ottica</name1>
+<name2>Area della Ricerca del CNR</name2>
+<address1>Via Moruzzi, 1</address1>
+<town>Pisa</town>
+<postal_code>56124</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>luca.labate@ino.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Mathieu</lname>
+<fname>Francois</fname>
+<iname>F.</iname>
+<author_id>88028</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="LULI" type="Laboratory">Ecole Polytechnique Laboratoire pour l'Utilisation des Lasers Intenses</full_name>
+<name1>Ecole Polytechnique</name1>
+<name2>Laboratoire pour l'Utilisation des Lasers Intenses</name2>
+<town>Palaiseau</town>
+<postal_code>91128</postal_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>francois.mathieu@polytechnique.edu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Mazzotta</lname>
+<fname>Zeudi</fname>
+<iname>Z.</iname>
+<author_id>116493</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ARCNL" type="University Laboratory">University of Amsterdam ARCNL - Advanced Research Center for Nanolithography</full_name>
+<name1>University of Amsterdam</name1>
+<name2>ARCNL - Advanced Research Center for Nanolithography</name2>
+<address1>Science Park 106</address1>
+<town>Amsterdam</town>
+<postal_code>1098 XG</postal_code>
+<country_code abbrev="NL">The Netherlands</country_code>
+</institute>
+<institute>
+<full_name>Ecole Polytechnique</full_name>
+<name1>Ecole Polytechnique</name1>
+<URL>http://www.polytechnique.fr/</URL>
+<town>Palaiseau</town>
+<postal_code>91128</postal_code>
+<zip_code>Cedex</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>z.mazzotta@arcnl.nl</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Toci</lname>
+<fname>Guido</fname>
+<iname>G.</iname>
+<author_id>94881</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INO-CNR" type="Institute">Istituto Nazionale di Ottica Consiglio Nazionale delle Ricerche</full_name>
+<name1>Istituto Nazionale di Ottica Consiglio Nazionale delle Ricerche</name1>
+<address1>Via Madonna del Piano 10</address1>
+<town>Sesto Fiorentino</town>
+<postal_code>50019</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>guido.toci@ino.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Vannini</lname>
+<fname>Matteo</fname>
+<iname>M.</iname>
+<author_id>95148</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INO-CNR" type="Institute">Istituto Nazionale di Ottica Area della Ricerca del CNR</full_name>
+<name1>Istituto Nazionale di Ottica</name1>
+<name2>Area della Ricerca del CNR</name2>
+<address1>Via Moruzzi, 1</address1>
+<town>Pisa</town>
+<postal_code>56124</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>matteo.vannini@ino.it</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Gizzi</lname>
+<fname>Leonida</fname>
+<mname>Antonio</mname>
+<iname>L.A.</iname>
+<author_id>13771</author_id>
+<institutions>
+<institute>
+<full_name abbrev="CNR/IPP" type="Research Centre">Consiglio Nazionale delle Ricerche Istituto per i Processi Chimico-Fisici</full_name>
+<name1>Consiglio Nazionale delle Ricerche</name1>
+<name2>Istituto per i Processi Chimico-Fisici</name2>
+<address1>Via G. Moruzzi, 1</address1>
+<town>Pisa</town>
+<postal_code>56124</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+<institute>
+<full_name abbrev="INO-CNR" type="Institute">Istituto Nazionale di Ottica Area della Ricerca del CNR</full_name>
+<name1>Istituto Nazionale di Ottica</name1>
+<name2>Area della Ricerca del CNR</name2>
+<address1>Via Moruzzi, 1</address1>
+<town>Pisa</town>
+<postal_code>56124</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+<institute>
+<full_name abbrev="INFN-Pisa" type="Laboratory">Instituto Nazionale di Fisica Nucleare, Pisa</full_name>
+<name1>Instituto Nazionale di Fisica Nucleare, Pisa</name1>
+<address1>Largo Pontecorvo, 3</address1>
+<town>Pisa</town>
+<postal_code>56127</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>la.gizzi@ino.it</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Gizzi</lname>
+<fname>Leonida</fname>
+<mname>Antonio</mname>
+<iname>L.A.</iname>
+<author_id>13771</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="INO-CNR" type="Institute">Istituto Nazionale di Ottica Area della Ricerca del CNR</full_name>
+<name1>Istituto Nazionale di Ottica</name1>
+<name2>Area della Ricerca del CNR</name2>
+<address1>Via Moruzzi, 1</address1>
+<town>Pisa</town>
+<postal_code>56124</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>la.gizzi@ino.it</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Gizzi</lname>
+<fname>Leonida</fname>
+<mname>Antonio</mname>
+<iname>L.A.</iname>
+<author_id>13771</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="INO-CNR" type="Institute">Istituto Nazionale di Ottica Area della Ricerca del CNR</full_name>
+<name1>Istituto Nazionale di Ottica</name1>
+<name2>Area della Ricerca del CNR</name2>
+<address1>Via Moruzzi, 1</address1>
+<town>Pisa</town>
+<postal_code>56124</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>la.gizzi@ino.it</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>FRYPLM2.docx</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>FRYPLM2_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>FRYPLM2.docx</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>FRYPLM2_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>FRYPLM2.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>FRYPLM2.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>FRYPLM2.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>FRYPLM2_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>FRYPLM2_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>FRYPLM2_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>FRYPLM2_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=FRYPLM2&amp;wanted_file=FRYPLM2_AUTHOR.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=FRYPLM2&amp;wanted_file=FRYPLM2.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=FRYPLM2&amp;wanted_file=FRYPLM2.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=FRYPLM2&amp;wanted_file=FRYPLM2.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=FRYPLM2&amp;wanted_file=FRYPLM2_AUTHOR.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=FRYPLM2&amp;wanted_file=FRYPLM2.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=FRYPLM2&amp;wanted_file=FRYPLM2.docx</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=FRYPLM2&amp;wanted_file=FRYPLM2_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=FRYPLM2&amp;wanted_file=FRYPLM2_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=FRYPLM2&amp;wanted_file=FRYPLM2_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=FRYPLM2&amp;wanted_file=FRYPLM2_TALK.PPTX</fileURL>
+</fileURLs>
+<editor>Anthony Cuffe</editor>
+<final_qa>Maxim Kuzin</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>04-Apr-2018 20:24:05</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>31-May-2018 03:29:18</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>31-May-2018 03:29:18</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AOC">Abstract Owner Changed</log_status>
+<timestamp>27-Jun-2018 00:26:03</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>20-Sep-2018 04:53:02</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>20-Sep-2018 04:53:02</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="PRR">Peer Review Requested</log_status>
+<timestamp>22-Mar-2019 15:41:51</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>08-Apr-2019 08:30:57</timestamp>
+<comments>FRYPLM2.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>08-Apr-2019 08:35:13</timestamp>
+<comments>FRYPLM2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="PRG">Peer Review Granted</log_status>
+<timestamp>02-May-2019 19:17:52</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="REFA">Referee Assigned</log_status>
+<timestamp>02-May-2019 19:18:10</timestamp>
+<editor_notes>Referee: Adolfo Velez</editor_notes>
+</abstract_log>
+<abstract_log>
+<log_status code="REFA">Referee Assigned</log_status>
+<timestamp>02-May-2019 19:18:10</timestamp>
+<editor_notes>Referee: Paolo Mereu</editor_notes>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ5">5) Is the paper written in good English?</log_status>
+<timestamp>03-May-2019 12:36:59</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ7">7) Does the paper include appropriate references to the literature?</log_status>
+<timestamp>03-May-2019 12:36:59</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RORI">1) Is the work free of obvious scientific or technical errors and important factual mistakes?</log_status>
+<timestamp>03-May-2019 12:36:59</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ6">6) Does the paper acknowledge the work of others in the same field?</log_status>
+<timestamp>03-May-2019 12:36:59</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ4">4) Is the presentation of methods, results and conclusion understandable?</log_status>
+<timestamp>03-May-2019 12:36:59</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="REF">Referee</log_status>
+<timestamp>03-May-2019 12:36:59</timestamp>
+<referee_status code="a">approved</referee_status>
+<comments>Section Technology parts, second line, missing reference after EuPRAXIA</comments>
+<editor_notes>I miss some more discussion and comparison of the results obtained by different methods.</editor_notes>
+</abstract_log>
+<abstract_log>
+<log_status code="RVAL">2) Does the paper include own work, performed by the authors and not published elsewhere?</log_status>
+<timestamp>03-May-2019 12:36:59</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ3">3) Is some aspect or part of the work original or demonstrate clear progress?</log_status>
+<timestamp>03-May-2019 12:36:59</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 15:12:23</timestamp>
+<comments>FRYPLM2.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 15:15:29</timestamp>
+<comments>FRYPLM2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="REF">Referee</log_status>
+<timestamp>16-May-2019 10:40:20</timestamp>
+<referee_status code="c">to be corrected</referee_status>
+</abstract_log>
+<abstract_log>
+<log_status code="REF">Referee</log_status>
+<timestamp>16-May-2019 10:40:20</timestamp>
+<referee_status code="c">to be corrected</referee_status>
+<comments>Please, shorten the paper to fit 3 page + references limit and upload a new version</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RORI">1) Is the work free of obvious scientific or technical errors and important factual mistakes?</log_status>
+<timestamp>16-May-2019 10:40:20</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RVAL">2) Does the paper include own work, performed by the authors and not published elsewhere?</log_status>
+<timestamp>16-May-2019 10:40:20</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ7">7) Does the paper include appropriate references to the literature?</log_status>
+<timestamp>16-May-2019 10:40:20</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ6">6) Does the paper acknowledge the work of others in the same field?</log_status>
+<timestamp>16-May-2019 10:40:20</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ5">5) Is the paper written in good English?</log_status>
+<timestamp>16-May-2019 10:40:20</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ4">4) Is the presentation of methods, results and conclusion understandable?</log_status>
+<timestamp>16-May-2019 10:40:20</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ3">3) Is some aspect or part of the work original or demonstrate clear progress?</log_status>
+<timestamp>16-May-2019 10:40:20</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>19-May-2019 04:13:55</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 04:21:08</timestamp>
+<comments>FRYPLM2.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>19-May-2019 04:22:21</timestamp>
+<editor_status code="G">Green</editor_status>
+<comments>Perfect paper.  Thanks!</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ7">7) Does the paper include appropriate references to the literature?</log_status>
+<timestamp>21-May-2019 00:44:44</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ6">6) Does the paper acknowledge the work of others in the same field?</log_status>
+<timestamp>21-May-2019 00:44:44</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ5">5) Is the paper written in good English?</log_status>
+<timestamp>21-May-2019 00:44:44</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ4">4) Is the presentation of methods, results and conclusion understandable?</log_status>
+<timestamp>21-May-2019 00:44:44</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="REF">Referee</log_status>
+<timestamp>21-May-2019 00:44:44</timestamp>
+<referee_status code="a">approved</referee_status>
+</abstract_log>
+<abstract_log>
+<log_status code="RORI">1) Is the work free of obvious scientific or technical errors and important factual mistakes?</log_status>
+<timestamp>21-May-2019 00:44:44</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="REF">Referee</log_status>
+<timestamp>21-May-2019 00:44:44</timestamp>
+<referee_status code="a">approved</referee_status>
+<comments>Paper has been corrected</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RQ3">3) Is some aspect or part of the work original or demonstrate clear progress?</log_status>
+<timestamp>21-May-2019 00:44:44</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="RVAL">2) Does the paper include own work, performed by the authors and not published elsewhere?</log_status>
+<timestamp>21-May-2019 00:44:44</timestamp>
+<comments>Yes</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 06:19:41</timestamp>
+<comments>FRYPLM2.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>21-May-2019 06:19:47</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 23:01:16</timestamp>
+<comments>FRYPLM2.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>23-May-2019 07:20:56</timestamp>
+<comments>FRYPLM2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>23-May-2019 07:22:16</timestamp>
+<comments>FRYPLM2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>23-May-2019 14:16:11</timestamp>
+<comments>FRYPLM2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>24-May-2019 03:05:32</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>24-May-2019 03:23:24</timestamp>
+<comments>FRYPLM2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>24-May-2019 03:25:00</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Leonida,
+Your PowerPoint slides were successfully converted to PDF (with intermediate and slides removed and media embedded) and will be published in the conference proceedings. 
+Please download the PDF slides file (FRYPLM2_TALK.pdf) and check that all is OK. 
+In case of problems, please contact:
+jan.chrin@psi.ch
+Thank you.
+</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Watanabe</lname>
+<fname>Takahiro</fname>
+<iname>T.</iname>
+<author_id>1053</author_id>
+<institutions>
+<institute>
+<full_name abbrev="JASRI/SPring-8" type="Institute">Japan Synchrotron Radiation Research Institute SPring-8 Joint-Project for XFEL</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<name2>SPring-8 Joint-Project for XFEL</name2>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho, Sayo-gun</address2>
+<town>Hyogo-ken</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="JASRI/SPring-8">Japan Synchrotron Radiation Research Institute Accelerator Division</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<name2>Accelerator Division</name2>
+<URL>http://www.spring8.or.jp/e/index.html</URL>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo-ken</town>
+<zip_code>679 5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="JASRI/SPring-8" type="Research Centre">Japan Synchrotron Radiation Research Institute</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name type="Institute">Japan Synchrotron Radiation Research Institute (JASRI) RIKEN SPring-8 Center</full_name>
+<name1>Japan Synchrotron Radiation Research Institute (JASRI)</name1>
+<name2>RIKEN SPring-8 Center</name2>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory National Synchrotron Light Source</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<name2>National Synchrotron Light Source</name2>
+<URL>http://nslsweb.nsls.bnl.gov/nsls/default.htm</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>NY 11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name type="Research Centre">RIKEN SPring-8 Center</full_name>
+<name1>RIKEN SPring-8 Center</name1>
+<address1>1-1-1, Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5148</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="JASRI" type="Institute">Japan Synchrotron Radiation Research Institute</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@bnl.gov</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>1217</abstract_id>
+<main_class>MC2: Photon Sources and Electron Accelerators</main_class>
+<sub_class>A05 Synchrotron Radiation Facilities</sub_class>
+<publishable>No, Editor Status Code is not Publishable, Final QA Not Publishable</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">FRYPLM3</code>
+<presentation type="Oral">Invited Oral</presentation>
+<start_time>1200</start_time>
+<duration>30</duration>
+</program_code>
+</program_codes>
+<title>Overview of Light Source Developments in Asia</title>
+<abstract>China has been pursuing multiple light source projects. The first high energy next-generation light source project, HEPS, is under construction and other projects, including XFELs, are being developed. The Thai synchrotron light source facility, SLRI, has also started discussion on a new light source project. Australian light source, the ALS, has been operating well and is also considering the next steps. Korea and Japan have built several light source facilities based on storage rings as well as XFELs, and are now looking for their future plans. The closing talk is expected to overview these activities across Asia, and to provide future perspectives of light sources development across the region.</abstract>
+<contributors>
+<contributor type="Owner">
+<lname>Wang</lname>
+<fname>Dong</fname>
+<iname>D.</iname>
+<author_id>2089</author_id>
+<institutions>
+<institute>
+<full_name abbrev="MIT" type="Institute">Massachusetts Institute of Technology Bates Linear Accelerator Center</full_name>
+<name1>Massachusetts Institute of Technology</name1>
+<name2>Bates Linear Accelerator Center</name2>
+<URL>http://mitbates.mit.edu/index2.stm</URL>
+<address1>21 Manning Avenue</address1>
+<town>Middleton, Massachusetts</town>
+<zip_code>MA 01949</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name abbrev="SINAP" type="Academy of Sciences">Shanghai Institute of Applied Physics</full_name>
+<name1>Shanghai Institute of Applied Physics</name1>
+<URL>www.sinap.ac.cn</URL>
+<address1>2019 Jia Luo Road</address1>
+<po_box>PO Box 800-204</po_box>
+<town>Shanghai</town>
+<zip_code>201800</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name abbrev="SARI-CAS" type="Institute">Shanghai Advanced Research Institute Chinese Academy of Sciences</full_name>
+<name1>Shanghai Advanced Research Institute</name1>
+<name2>Chinese Academy of Sciences</name2>
+<address1>No. 99 Haike Road</address1>
+<address2>Zhangjiang Hi-Tech Park</address2>
+<town>Pudong, Shanghai</town>
+<zip_code>201210</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>wangdong@sinap.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Wang</lname>
+<fname>Dong</fname>
+<iname>D.</iname>
+<author_id>2089</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="SINAP" type="Academy of Sciences">Shanghai Institute of Applied Physics</full_name>
+<name1>Shanghai Institute of Applied Physics</name1>
+<URL>www.sinap.ac.cn</URL>
+<address1>2019 Jia Luo Road</address1>
+<po_box>PO Box 800-204</po_box>
+<town>Shanghai</town>
+<zip_code>201800</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>wangdong@sinap.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Wang</lname>
+<fname>Dong</fname>
+<iname>D.</iname>
+<author_id>2089</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="SINAP" type="Academy of Sciences">Shanghai Institute of Applied Physics</full_name>
+<name1>Shanghai Institute of Applied Physics</name1>
+<URL>www.sinap.ac.cn</URL>
+<address1>2019 Jia Luo Road</address1>
+<po_box>PO Box 800-204</po_box>
+<town>Shanghai</town>
+<zip_code>201800</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>wangdong@sinap.ac.cn</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>FRYPLM3_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>FRYPLM3_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=FRYPLM3&amp;wanted_file=FRYPLM3_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=FRYPLM3&amp;wanted_file=FRYPLM3_TALK.PDF</fileURL>
+</fileURLs>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>27-Mar-2018 01:22:51</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>29-May-2018 07:15:14</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>29-May-2018 07:15:14</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>31-May-2018 00:39:13</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>31-May-2018 00:39:13</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AOC">Abstract Owner Changed</log_status>
+<timestamp>27-Jun-2018 00:26:03</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>20-Sep-2018 04:13:42</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>20-Sep-2018 04:13:42</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>24-May-2019 00:53:48</timestamp>
+<comments>FRYPLM3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>24-May-2019 03:27:47</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>24-May-2019 03:31:56</timestamp>
+<comments>FRYPLM3_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>24-May-2019 03:33:08</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Dong,
+Your PowerPoint slides were successfully converted to PDF (with intermediate slides removed) and will be published in the conference proceedings. 
+Please download the PDF slides file (FRYPLM3_TALK.pdf) and check that all is OK. 
+In case of problems, please contact:
+jan.chrin@psi.ch
+Thank you.
+</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+</papers>
+</session>
+</conference>

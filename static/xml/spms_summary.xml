@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<conference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://bel.gsi.de/docs/xml/conference.xsd" name="IPAC 2019, Melbourne, Australia">
+<session type="Poster">
+<name abbr="SUSPFO">Student Poster Session</name>
+</session>
+<session type="Oral">
+<name abbr="MOOPLM">Welcome</name>
+</session>
+<session type="Oral">
+<name abbr="MOXPLM">Opening talks</name>
+</session>
+<session type="Oral">
+<name abbr="MOYPLM">Opening Plenaries</name>
+</session>
+<session type="Oral">
+<name abbr="MOZPLM">Invited Orals: Hadron Accelerators </name>
+</session>
+<session type="Oral">
+<name abbr="MOZPLS">Invited Orals: Circular and Linear Colliders </name>
+</session>
+<session type="Oral">
+<name abbr="MOZZPLM">Contributed Orals: Hadron Accelerators</name>
+</session>
+<session type="Oral">
+<name abbr="MOZZPLS">Contributed Orals: Circular and Linear Colliders</name>
+</session>
+<session type="Poster">
+<name abbr="MOPGW">Poster Session - Great White Shark</name>
+</session>
+<session type="Poster">
+<name abbr="MOPMP">Poster Session - Magpie</name>
+</session>
+<session type="Poster">
+<name abbr="MOPRB">Poster Session - Redback Spider</name>
+</session>
+<session type="Poster">
+<name abbr="MOPTS">Poster Session - Tiger Snake</name>
+</session>
+<session type="Oral">
+<name abbr="TUXPLM">Invited Orals: Accelerator Technology</name>
+</session>
+<session type="Oral">
+<name abbr="TUXPLS">Invited Orals: Novel Particle Sources and Acceleration Techniques</name>
+</session>
+<session type="Oral">
+<name abbr="TUXXPLM">Contributed Orals: Accelerator Technology</name>
+</session>
+<session type="Oral">
+<name abbr="TUXXPLS">Contributed Orals: Novel Particle Sources and Acceleration Techniques</name>
+</session>
+<session type="Oral">
+<name abbr="TUYPLM">Invited Orals: Photon Sources and Electron Accelerators</name>
+</session>
+<session type="Oral">
+<name abbr="TUYPLS">Invited Orals: Applications of Accelerators</name>
+</session>
+<session type="Oral">
+<name abbr="TUWPLS">Invited Oral: Beam Dynamics and EM Fields</name>
+</session>
+<session type="Oral">
+<name abbr="TUZPLM">Invited Orals: Beam Instrumentation, Controls, Feedback and Operational Aspects</name>
+</session>
+<session type="Oral">
+<name abbr="TUZPLS">Invited Orals: Beam Dynamics and EM Fields</name>
+</session>
+<session type="Oral">
+<name abbr="TUZZPLM">Contributed Orals: Beam Instrumentation, Controls, Feedback and Op.</name>
+</session>
+<session type="Oral">
+<name abbr="TUZZPLS">Contributed Orals: Beam Dynamics and EM Fields</name>
+</session>
+<session type="Poster">
+<name abbr="TUPMP">Poster Session - Magpie</name>
+</session>
+<session type="Poster">
+<name abbr="TUPGW">Poster Session - Great White Shark</name>
+</session>
+<session type="Poster">
+<name abbr="TUPRB">Poster Session - Redback</name>
+</session>
+<session type="Poster">
+<name abbr="TUPTS">Poster Session - Tiger Snake</name>
+</session>
+<session type="Oral">
+<name abbr="WEXPLM">Invited Orals: Photon Sources and Electron Accelerators</name>
+</session>
+<session type="Oral">
+<name abbr="WEXPLS">Invited Orals: Accelerator Technology</name>
+</session>
+<session type="Oral">
+<name abbr="WEXXPLM">Contributed Orals: Photon Sources and Electron Accelerators</name>
+</session>
+<session type="Oral">
+<name abbr="WEXXPLS">Contributed Orals: Accelerator Technology</name>
+</session>
+<session type="Oral">
+<name abbr="WEYPLM">Invited Orals: Circular and Linear Colliders </name>
+</session>
+<session type="Oral">
+<name abbr="WEYPLS">Invited Orals: Beam Dynamics and EM Fields</name>
+</session>
+<session type="Oral">
+<name abbr="WEYYPLM">Contributed Orals: Circular and Linear Colliders</name>
+</session>
+<session type="Oral">
+<name abbr="WEYYPLS">Contributed Orals: Beam Dynamics and EM Fields</name>
+</session>
+<session type="Oral">
+<name abbr="WEZPLM">Session for Industry</name>
+</session>
+<session type="Oral">
+<name abbr="WEZPLS">Invited Orals: Novel Particle Sources and Acceleration Techniques</name>
+</session>
+<session type="Oral">
+<name abbr="WEZZPLS">Contributed Orals: Novel Particle Sources and Acceleration Techniques</name>
+</session>
+<session type="Poster">
+<name abbr="WEPMP">Poster Session - Magpie</name>
+</session>
+<session type="Poster">
+<name abbr="WEPGW">Poster Session - Great White Shark</name>
+</session>
+<session type="Poster">
+<name abbr="WEPRB">Poster Session - Redback</name>
+</session>
+<session type="Poster">
+<name abbr="WEPTS">Poster Session - Tiger Snake</name>
+</session>
+<session type="Oral">
+<name abbr="WESPLS">Diversity in Accelerator Physics and Engineering</name>
+</session>
+<session type="Oral">
+<name abbr="THXPLM">Invited Orals: Hadron Accelerators 	</name>
+</session>
+<session type="Oral">
+<name abbr="THXPLS">Invited Orals: Applications of Accelerators, Tech. Transfer and Industrial Rel</name>
+</session>
+<session type="Oral">
+<name abbr="THXXPLM">Contributed Orals: Hadron Accelerators 	</name>
+</session>
+<session type="Oral">
+<name abbr="THXXPLS">Contributed Orals: Applications of Accelerators, Tech. Transfer, Industrial Rel</name>
+</session>
+<session type="Oral">
+<name abbr="THYPLM">Invited Orals: Photon Sources and Electron Accelerators</name>
+</session>
+<session type="Oral">
+<name abbr="THYPLS">Invited Orals: Beam Instrumentation, Controls, Feedback and Operation</name>
+</session>
+<session type="Oral">
+<name abbr="THYYPLM">Contributed Orals: Photon Sources and Electron Accelerators</name>
+</session>
+<session type="Oral">
+<name abbr="THYYPLS">Contributed Orals: Beam Instrumentation, Controls, Feedback and Operation</name>
+</session>
+<session type="Oral">
+<name abbr="THAPLM">Awards Session</name>
+</session>
+<session type="Poster">
+<name abbr="THPMP">Poster Session - Magpie</name>
+</session>
+<session type="Poster">
+<name abbr="THPGW">Poster Session - Great White Shark</name>
+</session>
+<session type="Poster">
+<name abbr="THPRB">Poster Session - Redback</name>
+</session>
+<session type="Poster">
+<name abbr="THPTS">Poster Session - Tiger Snake</name>
+</session>
+<session type="Oral">
+<name abbr="FRXXPLM">Contributed Orals: Accelerator Technology</name>
+</session>
+<session type="Oral">
+<name abbr="FRXXPLS">Contributed Oral: Beam Instrumentation, Controls, Feedback and Operation</name>
+</session>
+<session type="Oral">
+<name abbr="FRXPLM">Invited Oral: Hadron Accelrators</name>
+</session>
+<session type="Oral">
+<name abbr="FRXPLS">Invited Oral: Beam Dynamics and EM Fields</name>
+</session>
+<session type="Oral">
+<name abbr="FRYPLM">Closing Plenary</name>
+</session>
+<session type="Oral">
+<name abbr="FRZPLM">Closing Ceremony</name>
+</session>
+</conference>

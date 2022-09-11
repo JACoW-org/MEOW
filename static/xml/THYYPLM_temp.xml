@@ -1,0 +1,2445 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<conference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://bel.gsi.de/docs/xml/conference.xsd" name="IPAC 2019, Melbourne, Australia">
+<session type="Oral">
+<name abbr="THYYPLM">Contributed Orals: Photon Sources and Electron Accelerators</name>
+<date btime="1130" etime="1230">23-May-19</date>
+<location type="After Coffee Contributed Oral">Main Plenary (plenary 2)</location>
+<chairs>
+<chair>
+<lname>Watanabe</lname>
+<fname>Takahiro</fname>
+<iname>T.</iname>
+<author_id>1053</author_id>
+<institutions>
+<institute>
+<full_name abbrev="JASRI/SPring-8" type="Research Centre">Japan Synchrotron Radiation Research Institute</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@bnl.gov</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+</emails>
+</chair>
+</chairs>
+<papers>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Watanabe</lname>
+<fname>Takahiro</fname>
+<iname>T.</iname>
+<author_id>1053</author_id>
+<institutions>
+<institute>
+<full_name abbrev="JASRI/SPring-8" type="Institute">Japan Synchrotron Radiation Research Institute SPring-8 Joint-Project for XFEL</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<name2>SPring-8 Joint-Project for XFEL</name2>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho, Sayo-gun</address2>
+<town>Hyogo-ken</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="JASRI/SPring-8">Japan Synchrotron Radiation Research Institute Accelerator Division</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<name2>Accelerator Division</name2>
+<URL>http://www.spring8.or.jp/e/index.html</URL>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo-ken</town>
+<zip_code>679 5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="JASRI/SPring-8" type="Research Centre">Japan Synchrotron Radiation Research Institute</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name type="Institute">Japan Synchrotron Radiation Research Institute (JASRI) RIKEN SPring-8 Center</full_name>
+<name1>Japan Synchrotron Radiation Research Institute (JASRI)</name1>
+<name2>RIKEN SPring-8 Center</name2>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory National Synchrotron Light Source</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<name2>National Synchrotron Light Source</name2>
+<URL>http://nslsweb.nsls.bnl.gov/nsls/default.htm</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>NY 11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name type="Research Centre">RIKEN SPring-8 Center</full_name>
+<name1>RIKEN SPring-8 Center</name1>
+<address1>1-1-1, Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5148</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="JASRI" type="Institute">Japan Synchrotron Radiation Research Institute</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@bnl.gov</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>3664</abstract_id>
+<main_class>MC2: Photon Sources and Electron Accelerators</main_class>
+<sub_class>A24 Accelerators and Storage Rings, Other</sub_class>
+<publishable>No, Editor Status Code is not Publishable, Final QA Not Publishable</publishable>
+<program_codes>
+<program_code>
+<code primary="N">MOPRB108</code>
+<presentation type="Poster">Poster</presentation>
+</program_code>
+<program_code>
+<code primary="Y">THYYPLM1</code>
+<presentation type="Oral">Contributed Oral</presentation>
+<start_time>1130</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<title>A Novel Compact High Rep-Rate Gamma Ray Source Based on Strongly Tapered Undulator Interactions</title>
+<abstract>Recent experimental efforts have shown strongly tapered undulator interactions to be the most efficient means for exchanging energy between relativistic electron beams and electro-magnetic fields. The Rubicon Inverse Free Electron Laser (IFEL) accelerator demonstrated up to 100 MeV/m acceleration gradients, producing high quality mono-energetic beams. In separate experiments, it was also shown that this acceleration could occur at high rep-rates, and the accelerated beams could be used to produce X-rays through Inverse Compton Scattering (ICS). The Nocibur experiment demonstrated the reverse process, converting 30% of the energy in a relativistic electron beam to coherent radiation. Combining these concepts, we present here a novel scheme where a laser, re-circulated in an optical cavity drives an IFEL interaction, accelerating a 200 MeV beam up to 1 GeV, at which point an ICS interaction can be used to produce gamma rays. This is followed by a Nocibur-like interaction, decelerating the beam below it's initial energy, replenishing the laser energy absorbed in the acceleration stage as well as compensating for cavity losses.</abstract>
+<contributors>
+<contributor type="Co-Author">
+<lname>Murokh</lname>
+<fname>Alex</fname>
+<iname>A.Y.</iname>
+<author_id>13296</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="RadiaBeam" type="Industry">RadiaBeam Technologies</full_name>
+<name1>RadiaBeam Technologies</name1>
+<URL>www.radiabeam.com</URL>
+<address1>1600 Sawtelle BLVD STE 205</address1>
+<town>Los Angeles, California</town>
+<zip_code>CA 90025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>murokh@radiabeam.com</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Musumeci</lname>
+<fname>Pietro</fname>
+<iname>P.</iname>
+<author_id>2868</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="UCLA" type="University Department">University of California, Los Angeles Department of Physics and Astronomy</full_name>
+<name1>University of California, Los Angeles</name1>
+<department>Department of Physics and Astronomy</department>
+<URL>http://www.ucla.edu</URL>
+<address1>405 Hilgard Avenue</address1>
+<po_box>Box 951547</po_box>
+<town>Los Angeles, California</town>
+<zip_code>CA 90095-1547</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>musumeci@physics.ucla.edu</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Sudar</lname>
+<fname>Nicholas</fname>
+<mname>Sigmund</mname>
+<iname>N.S.</iname>
+<author_id>72081</author_id>
+<institutions>
+<institute>
+<full_name abbrev="UCLA" type="Laboratory">Particle Beam Physics Lab (PBPL) University of California, Los Angeles Department of Physics and Astronomy</full_name>
+<name1>Particle Beam Physics Lab (PBPL)</name1>
+<name2>University of California, Los Angeles</name2>
+<department>Department of Physics and Astronomy</department>
+<URL>http://pbpl.physics.ucla.edu/</URL>
+<address1>1-129 Knudsen Hall</address1>
+<town>Los Angeles</town>
+<zip_code>LA 90095-1547</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>nsudar@physics.ucla.edu</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Sudar</lname>
+<fname>Nicholas</fname>
+<mname>Sigmund</mname>
+<iname>N.S.</iname>
+<author_id>72081</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="UCLA" type="Laboratory">Particle Beam Physics Lab (PBPL) University of California, Los Angeles Department of Physics and Astronomy</full_name>
+<name1>Particle Beam Physics Lab (PBPL)</name1>
+<name2>University of California, Los Angeles</name2>
+<department>Department of Physics and Astronomy</department>
+<URL>http://pbpl.physics.ucla.edu/</URL>
+<address1>1-129 Knudsen Hall</address1>
+<town>Los Angeles</town>
+<zip_code>LA 90095-1547</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>nsudar@physics.ucla.edu</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Murokh</lname>
+<fname>Alex</fname>
+<iname>A.Y.</iname>
+<author_id>13296</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="RadiaBeam" type="Industry">RadiaBeam Technologies</full_name>
+<name1>RadiaBeam Technologies</name1>
+<URL>www.radiabeam.com</URL>
+<address1>1600 Sawtelle BLVD STE 205</address1>
+<town>Los Angeles, California</town>
+<zip_code>CA 90025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>murokh@radiabeam.com</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THYYPLM1_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THYYPLM1_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM1&amp;wanted_file=THYYPLM1_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM1&amp;wanted_file=THYYPLM1_TALK.PPTX</fileURL>
+</fileURLs>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>06-Dec-2018 01:16:52</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>07-Dec-2018 13:44:04</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>09-Apr-2019 05:58:52</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>09-Apr-2019 05:58:52</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="POST">Poster Police</log_status>
+<timestamp>20-May-2019 07:03:31</timestamp>
+<comments>Poster Not Posted, Poster Not Manned, Poster Not Satisfactory, Picture Taken.</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 06:50:53</timestamp>
+<comments>THYYPLM1_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>24-May-2019 00:08:36</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>24-May-2019 00:17:13</timestamp>
+<comments>THYYPLM1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>24-May-2019 00:18:11</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Speaker,
+Your PowerPoint slides were successfully converted to PDF (with intermediate slides removed and will be published in the conference proceedings. 
+Please download the PDF slides file (THYYPLM1_TALK.pdf) and check that all is OK. 
+In case of problems, please contact:
+Jan.chrin@psi.ch
+Thank you.
+</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Watanabe</lname>
+<fname>Takahiro</fname>
+<iname>T.</iname>
+<author_id>1053</author_id>
+<institutions>
+<institute>
+<full_name abbrev="JASRI/SPring-8" type="Institute">Japan Synchrotron Radiation Research Institute SPring-8 Joint-Project for XFEL</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<name2>SPring-8 Joint-Project for XFEL</name2>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho, Sayo-gun</address2>
+<town>Hyogo-ken</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="JASRI/SPring-8">Japan Synchrotron Radiation Research Institute Accelerator Division</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<name2>Accelerator Division</name2>
+<URL>http://www.spring8.or.jp/e/index.html</URL>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo-ken</town>
+<zip_code>679 5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="JASRI/SPring-8" type="Research Centre">Japan Synchrotron Radiation Research Institute</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name type="Institute">Japan Synchrotron Radiation Research Institute (JASRI) RIKEN SPring-8 Center</full_name>
+<name1>Japan Synchrotron Radiation Research Institute (JASRI)</name1>
+<name2>RIKEN SPring-8 Center</name2>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory National Synchrotron Light Source</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<name2>National Synchrotron Light Source</name2>
+<URL>http://nslsweb.nsls.bnl.gov/nsls/default.htm</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>NY 11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name type="Research Centre">RIKEN SPring-8 Center</full_name>
+<name1>RIKEN SPring-8 Center</name1>
+<address1>1-1-1, Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5148</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="JASRI" type="Institute">Japan Synchrotron Radiation Research Institute</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@bnl.gov</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>2347</abstract_id>
+<pages>4</pages>
+<toc>3419</toc>
+<main_class>MC2: Photon Sources and Electron Accelerators</main_class>
+<sub_class>A05 Synchrotron Radiation Facilities</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">THYYPLM2</code>
+<presentation type="Oral">Contributed Oral</presentation>
+<start_time>1150</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>Two Orbit Operation at Bessy II - During a User Test Week</title>
+<abstract>Operating a storage ring close to a horizontal resonance and manipulating the transverse non-linear beam dynamics can generate stable Transverse Resonance Island Buckets (TRIBs), which give a 2nd stable orbit in the ring. Both orbits can be populated with different electron bunch filling patterns and provide two different radiation sources to the user community. Such a machine setting has been established at BESSY II and was tested under realistic user conditions in a first 'TRIBs/Two Orbit User Test Week' in February 2018. Results and user feedback will be discussed in this contribution.</abstract>
+<contributors>
+<contributor type="Co-Author">
+<lname>Andreas</lname>
+<fname>Felix</fname>
+<iname>F.</iname>
+<author_id>113765</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="HZB" type="Institute">Helmholtz-Zentrum Berlin für Materialien und Energie GmbH Elektronen-Speicherring BESSY II</full_name>
+<name1>Helmholtz-Zentrum Berlin für Materialien und Energie GmbH</name1>
+<name2>Elektronen-Speicherring BESSY II</name2>
+<address1>Wilhelm-Conrad-Röntgen-Campus</address1>
+<address2>Albert-Einstein-Str. 15</address2>
+<town>Berlin</town>
+<postal_code>12489</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>fandreas@physik.hu-berlin.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Armborst</lname>
+<fname>Felix</fname>
+<iname>F.</iname>
+<author_id>86000</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="HZB" type="Institute">Helmholtz-Zentrum Berlin für Materialien und Energie GmbH Elektronen-Speicherring BESSY II</full_name>
+<name1>Helmholtz-Zentrum Berlin für Materialien und Energie GmbH</name1>
+<name2>Elektronen-Speicherring BESSY II</name2>
+<address1>Wilhelm-Conrad-Röntgen-Campus</address1>
+<address2>Albert-Einstein-Str. 15</address2>
+<town>Berlin</town>
+<postal_code>12489</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>felix.armborst@helmholtz-berlin.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Atkinson</lname>
+<fname>Terry</fname>
+<iname>T.</iname>
+<author_id>40876</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="HZB" type="Institute">Helmholtz-Zentrum Berlin für Materialien und Energie GmbH Elektronen-Speicherring BESSY II</full_name>
+<name1>Helmholtz-Zentrum Berlin für Materialien und Energie GmbH</name1>
+<name2>Elektronen-Speicherring BESSY II</name2>
+<address1>Wilhelm-Conrad-Röntgen-Campus</address1>
+<address2>Albert-Einstein-Str. 15</address2>
+<town>Berlin</town>
+<postal_code>12489</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>terry.atkinson@helmholtz-berlin.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Feikes</lname>
+<fname>Joerg</fname>
+<iname>J.</iname>
+<author_id>358</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="HZB" type="Institute">Helmholtz-Zentrum Berlin für Materialien und Energie GmbH Elektronen-Speicherring BESSY II</full_name>
+<name1>Helmholtz-Zentrum Berlin für Materialien und Energie GmbH</name1>
+<name2>Elektronen-Speicherring BESSY II</name2>
+<address1>Wilhelm-Conrad-Röntgen-Campus</address1>
+<address2>Albert-Einstein-Str. 15</address2>
+<town>Berlin</town>
+<postal_code>12489</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>joerg.feikes@helmholtz-berlin.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Jankowiak</lname>
+<fname>Andreas</fname>
+<iname>A.</iname>
+<author_id>324</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="HZB" type="Institute">Helmholtz-Zentrum Berlin für Materialien und Energie GmbH Elektronen-Speicherring BESSY II</full_name>
+<name1>Helmholtz-Zentrum Berlin für Materialien und Energie GmbH</name1>
+<name2>Elektronen-Speicherring BESSY II</name2>
+<address1>Wilhelm-Conrad-Röntgen-Campus</address1>
+<address2>Albert-Einstein-Str. 15</address2>
+<town>Berlin</town>
+<postal_code>12489</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>andreas.jankowiak@helmholtz-berlin.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Li</lname>
+<fname>Ji</fname>
+<iname>J.</iname>
+<author_id>51890</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="HZB" type="Institute">Helmholtz-Zentrum Berlin für Materialien und Energie GmbH Elektronen-Speicherring BESSY II</full_name>
+<name1>Helmholtz-Zentrum Berlin für Materialien und Energie GmbH</name1>
+<name2>Elektronen-Speicherring BESSY II</name2>
+<address1>Wilhelm-Conrad-Röntgen-Campus</address1>
+<address2>Albert-Einstein-Str. 15</address2>
+<town>Berlin</town>
+<postal_code>12489</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>ji.li@helmholtz-berlin.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Mertens</lname>
+<fname>Tom</fname>
+<iname>T.</iname>
+<author_id>51913</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="HZB" type="Research Centre">Helmholtz-Zentrum Berlin fuer Materialien und Energie GmbH (HZB)</full_name>
+<name1>Helmholtz-Zentrum Berlin fuer Materialien und Energie GmbH (HZB)</name1>
+<address1>Albert-Einstein-Str. 15</address1>
+<town>Berlin</town>
+<postal_code>12489</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>tom.mertens@helmholtz-berlin.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Ries</lname>
+<fname>Markus</fname>
+<iname>M.</iname>
+<author_id>46750</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="HZB" type="Institute">Helmholtz-Zentrum Berlin für Materialien und Energie GmbH Elektronen-Speicherring BESSY II</full_name>
+<name1>Helmholtz-Zentrum Berlin für Materialien und Energie GmbH</name1>
+<name2>Elektronen-Speicherring BESSY II</name2>
+<address1>Wilhelm-Conrad-Röntgen-Campus</address1>
+<address2>Albert-Einstein-Str. 15</address2>
+<town>Berlin</town>
+<postal_code>12489</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>markus.ries@helmholtz-berlin.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Schaelicke</lname>
+<fname>Andreas</fname>
+<iname>A.</iname>
+<author_id>21411</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="HZB" type="Institute">Helmholtz-Zentrum Berlin für Materialien und Energie GmbH Elektronen-Speicherring BESSY II</full_name>
+<name1>Helmholtz-Zentrum Berlin für Materialien und Energie GmbH</name1>
+<name2>Elektronen-Speicherring BESSY II</name2>
+<address1>Wilhelm-Conrad-Röntgen-Campus</address1>
+<address2>Albert-Einstein-Str. 15</address2>
+<town>Berlin</town>
+<postal_code>12489</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>andreas.schaelicke@helmholtz-berlin.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Schiwietz</lname>
+<fname>Gregor</fname>
+<iname>G.</iname>
+<author_id>85982</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="HZB" type="Institute">Helmholtz-Zentrum Berlin für Materialien und Energie GmbH Elektronen-Speicherring BESSY II</full_name>
+<name1>Helmholtz-Zentrum Berlin für Materialien und Energie GmbH</name1>
+<name2>Elektronen-Speicherring BESSY II</name2>
+<address1>Wilhelm-Conrad-Röntgen-Campus</address1>
+<address2>Albert-Einstein-Str. 15</address2>
+<town>Berlin</town>
+<postal_code>12489</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>schiwietz@helmholtz-berlin.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Wuestefeld</lname>
+<fname>Godehard</fname>
+<iname>G.</iname>
+<author_id>353</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="HZB" type="Institute">Helmholtz-Zentrum Berlin für Materialien und Energie GmbH Elektronen-Speicherring BESSY II</full_name>
+<name1>Helmholtz-Zentrum Berlin für Materialien und Energie GmbH</name1>
+<name2>Elektronen-Speicherring BESSY II</name2>
+<address1>Wilhelm-Conrad-Röntgen-Campus</address1>
+<address2>Albert-Einstein-Str. 15</address2>
+<town>Berlin</town>
+<postal_code>12489</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>godehard.wuestefeld@helmholtz-berlin.de</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Goslawski</lname>
+<fname>Paul</fname>
+<iname>P.</iname>
+<author_id>68528</author_id>
+<institutions>
+<institute>
+<full_name abbrev="HZB" type="Institute">Helmholtz-Zentrum Berlin für Materialien und Energie GmbH Elektronen-Speicherring BESSY II</full_name>
+<name1>Helmholtz-Zentrum Berlin für Materialien und Energie GmbH</name1>
+<name2>Elektronen-Speicherring BESSY II</name2>
+<address1>Wilhelm-Conrad-Röntgen-Campus</address1>
+<address2>Albert-Einstein-Str. 15</address2>
+<town>Berlin</town>
+<postal_code>12489</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>paul.goslawski@helmholtz-berlin.de</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Goslawski</lname>
+<fname>Paul</fname>
+<iname>P.</iname>
+<author_id>68528</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="HZB" type="Institute">Helmholtz-Zentrum Berlin für Materialien und Energie GmbH Elektronen-Speicherring BESSY II</full_name>
+<name1>Helmholtz-Zentrum Berlin für Materialien und Energie GmbH</name1>
+<name2>Elektronen-Speicherring BESSY II</name2>
+<address1>Wilhelm-Conrad-Röntgen-Campus</address1>
+<address2>Albert-Einstein-Str. 15</address2>
+<town>Berlin</town>
+<postal_code>12489</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>paul.goslawski@helmholtz-berlin.de</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Goslawski</lname>
+<fname>Paul</fname>
+<iname>P.</iname>
+<author_id>68528</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="HZB" type="Institute">Helmholtz-Zentrum Berlin für Materialien und Energie GmbH Elektronen-Speicherring BESSY II</full_name>
+<name1>Helmholtz-Zentrum Berlin für Materialien und Energie GmbH</name1>
+<name2>Elektronen-Speicherring BESSY II</name2>
+<address1>Wilhelm-Conrad-Röntgen-Campus</address1>
+<address2>Albert-Einstein-Str. 15</address2>
+<town>Berlin</town>
+<postal_code>12489</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>paul.goslawski@helmholtz-berlin.de</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="LINX">Linux</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYYPLM2f1.png</name>
+</file>
+<file>
+<platform abbrev="LINX">Linux</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYYPLM2f2a.png</name>
+</file>
+<file>
+<platform abbrev="LINX">Linux</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYYPLM2f2b.png</name>
+</file>
+<file>
+<platform abbrev="LINX">Linux</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYYPLM2f3.png</name>
+</file>
+<file>
+<platform abbrev="LINX">Linux</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>THYYPLM2f4.png</name>
+</file>
+<file>
+<platform abbrev="LINX">Linux</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>THYYPLM2.tex</name>
+</file>
+<file>
+<platform abbrev="LINX">Linux</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>THYYPLM2_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="LINX">Linux</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THYYPLM2_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="MOV">Talk Movies</file_type>
+<name>video1_THYYPLM2_talk.mp4</name>
+</file>
+<file>
+<platform abbrev="LINX">Linux</platform>
+<file_type abbrev="MOV">Talk Movies</file_type>
+<name>video2_THYYPLM2_talk.mp4</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THYYPLM2_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THYYPLM2_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>THYYPLM2.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>THYYPLM2.tex</name>
+</file>
+<file>
+<platform abbrev="LINX">Linux</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THYYPLM2_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Talk Movies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM2&amp;wanted_file=video2_THYYPLM2_talk.mp4</fileURL>
+<fileURL type="Talk Movies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM2&amp;wanted_file=video1_THYYPLM2_talk.mp4</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM2&amp;wanted_file=THYYPLM2f3.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM2&amp;wanted_file=THYYPLM2f1.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM2&amp;wanted_file=THYYPLM2f2b.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM2&amp;wanted_file=THYYPLM2f2a.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM2&amp;wanted_file=THYYPLM2f4.png</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM2&amp;wanted_file=THYYPLM2.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM2&amp;wanted_file=THYYPLM2_AUTHOR.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM2&amp;wanted_file=THYYPLM2.tex</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM2&amp;wanted_file=THYYPLM2.tex</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM2&amp;wanted_file=THYYPLM2_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM2&amp;wanted_file=THYYPLM2_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM2&amp;wanted_file=THYYPLM2_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM2&amp;wanted_file=THYYPLM2_TALK.PDF</fileURL>
+</fileURLs>
+<editor>Volker RW Schaa</editor>
+<final_qa>Gustavo Barbosa Monteiro Bruno</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>03-Dec-2018 14:32:36</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>03-Dec-2018 14:35:37</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>10-Dec-2018 00:24:17</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>10-Dec-2018 00:24:17</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>01-Feb-2019 11:52:44</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>01-Feb-2019 11:52:44</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>14-May-2019 20:27:58</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 20:47:59</timestamp>
+<comments>THYYPLM2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 20:50:08</timestamp>
+<comments>THYYPLM2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 20:50:46</timestamp>
+<comments>THYYPLM2f1.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 20:51:03</timestamp>
+<comments>THYYPLM2f2a.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 20:51:14</timestamp>
+<comments>THYYPLM2f2b.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 20:51:38</timestamp>
+<comments>THYYPLM2f4.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 20:51:46</timestamp>
+<comments>THYYPLM2f3.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>14-May-2019 20:51:55</timestamp>
+<comments>THYYPLM2f4.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 20:52:04</timestamp>
+<comments>THYYPLM2f4.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>14-May-2019 21:01:28</timestamp>
+<comments>THYYPLM2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>14-May-2019 21:01:32</timestamp>
+<comments>THYYPLM2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 21:01:45</timestamp>
+<comments>THYYPLM2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 21:02:24</timestamp>
+<comments>THYYPLM2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 07:43:49</timestamp>
+<comments>THYYPLM2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 07:43:53</timestamp>
+<comments>THYYPLM2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 07:44:43</timestamp>
+<comments>THYYPLM2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 07:45:02</timestamp>
+<comments>THYYPLM2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 08:58:54</timestamp>
+<comments>THYYPLM2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 08:58:57</timestamp>
+<comments>THYYPLM2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 08:59:46</timestamp>
+<comments>THYYPLM2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 09:00:50</timestamp>
+<comments>THYYPLM2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 12:01:56</timestamp>
+<comments>THYYPLM2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 12:01:59</timestamp>
+<comments>THYYPLM2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 12:02:25</timestamp>
+<comments>THYYPLM2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 12:03:56</timestamp>
+<comments>THYYPLM2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 12:04:24</timestamp>
+<comments>THYYPLM2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 12:04:37</timestamp>
+<comments>THYYPLM2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 03:33:31</timestamp>
+<comments>THYYPLM2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 03:37:39</timestamp>
+<comments>video1_THYYPLM2_talk.mp4</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 03:40:23</timestamp>
+<comments>video2_THYYPLM2_talk.mp4</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>20-May-2019 00:26:30</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 05:42:10</timestamp>
+<comments>THYYPLM2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 23:10:59</timestamp>
+<comments>THYYPLM2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 06:38:20</timestamp>
+<comments>THYYPLM2.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 06:38:53</timestamp>
+<comments>THYYPLM2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>22-May-2019 06:40:13</timestamp>
+<editor_status code="Y">Yellow</editor_status>
+<comments>Dear author, thank you for your submission. Editor found a number of formatting issues. The reference section is outstanding but differs slightly from the JACoW standard. Therefore the entries were modified to allow the requested output
+# TC06 Text formatting: wrong quotation marks: closing instead of opening e.q. 'standard'
+# TC06 Reference formatting: editor changed \begin{thebibliography}{9} to {99} because there are 16 references and the alignment was wrong
+# TC06 Reference formatting: titles are typeset in curly quotation marks
+# TC09 Figure reference formatting incorrect [at begin of sentence &quot;Figure&quot; may not be abbreviated to &quot;Fig.&quot; (in principle at begin of a sentence NO word is abbreviated)]
+# TC12 Unit formatting: units are printed in roman (upright) fonts (IUPAC rule of 1999), therefore they have to appear outside of math mode or included in \text{}/\mathrm{}: As &quot;$\mathrm{\mu$}&quot; doesn't work on a font which only contains a italic µ use \textmu or the \SI macro with &quot;\micro&quot; instead
+Please log into your SPMS account, download the PDF file and check the paper for the changes made (and look for editor introduced errors) and when you agree with the changes put it to GREEN via the offered link otherwise reject the changes and give a comment please.
+</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="DR">Dot Reassignment</log_status>
+<timestamp>24-May-2019 00:26:19</timestamp>
+<editor_status code="G">Green</editor_status>
+<comments>Switched to green so paper can go to QA.</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>24-May-2019 00:32:29</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>24-May-2019 01:17:39</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>24-May-2019 01:42:55</timestamp>
+<comments>THYYPLM2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>24-May-2019 01:44:03</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Paul,
+Your two videos have been embedded into the pdf of your talk for inclusion in the proceedings.
+Best,
+jan.chrin@psi.ch</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Watanabe</lname>
+<fname>Takahiro</fname>
+<iname>T.</iname>
+<author_id>1053</author_id>
+<institutions>
+<institute>
+<full_name abbrev="JASRI/SPring-8" type="Institute">Japan Synchrotron Radiation Research Institute SPring-8 Joint-Project for XFEL</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<name2>SPring-8 Joint-Project for XFEL</name2>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho, Sayo-gun</address2>
+<town>Hyogo-ken</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="JASRI/SPring-8">Japan Synchrotron Radiation Research Institute Accelerator Division</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<name2>Accelerator Division</name2>
+<URL>http://www.spring8.or.jp/e/index.html</URL>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo-ken</town>
+<zip_code>679 5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="JASRI/SPring-8" type="Research Centre">Japan Synchrotron Radiation Research Institute</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name type="Institute">Japan Synchrotron Radiation Research Institute (JASRI) RIKEN SPring-8 Center</full_name>
+<name1>Japan Synchrotron Radiation Research Institute (JASRI)</name1>
+<name2>RIKEN SPring-8 Center</name2>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory National Synchrotron Light Source</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<name2>National Synchrotron Light Source</name2>
+<URL>http://nslsweb.nsls.bnl.gov/nsls/default.htm</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>NY 11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name type="Research Centre">RIKEN SPring-8 Center</full_name>
+<name1>RIKEN SPring-8 Center</name1>
+<address1>1-1-1, Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5148</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="JASRI" type="Institute">Japan Synchrotron Radiation Research Institute</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@bnl.gov</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>3743</abstract_id>
+<pages>4</pages>
+<toc>3423</toc>
+<main_class>MC2: Photon Sources and Electron Accelerators</main_class>
+<sub_class>A05 Synchrotron Radiation Facilities</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">THYYPLM3</code>
+<presentation type="Oral">Contributed Oral</presentation>
+<start_time>1210</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>High-Charge Injector for on-Axis Injection Into A High-Performance Storage Ring Light Source</title>
+<abstract>Next-generation, high-performance storage ring light sources based on multibend achromat optics will require on-axis injection because of the extremely small dynamic aperture. Injectors will need to supply full-current bunch replacement in the ring with high single-bunch charge for swap-out. For upgrades of existing light sources, such as the Advanced Photon Source Upgrade (APS-U), it is economical to retain the existing injector infrastructure and make appropriate improvements. The challenges to these improvements include achieving high single-bunch charge in the presence of instabilities, beam loading, charge stability and reliability. In this paper, we discuss the rationale for the injector upgrades chosen for APS-U, as well as backup and potential alternate schemes. To date, we have achieved single-bunch charge from the injectors that doubles the original design value, and have a goal to achieve about three times the original design value.</abstract>
+<agency>Work supported by U. S. Department of Energy, Office of Science, under Contract No. DE-AC02-06CH11357.</agency>
+<contributors>
+<contributor type="Co-Author">
+<lname>Abid</lname>
+<fname>Iftikhar</fname>
+<mname>Abdulmuqeem</mname>
+<iname>I.A.</iname>
+<author_id>68632</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>iabid@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Berenc</lname>
+<fname>Tim</fname>
+<iname>T.G.</iname>
+<author_id>48433</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>berenc@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Berg</lname>
+<fname>William</fname>
+<iname>W.</iname>
+<author_id>12551</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>berg@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Blednykh</lname>
+<fname>Alexei</fname>
+<iname>A.</iname>
+<author_id>611</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory National Synchrotron Light Source II</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>National Synchrotron Light Source II</department>
+<URL>http://www.bnl.gov/nsls2/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>NY 11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>blednykh@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Borland</lname>
+<fname>Michael</fname>
+<iname>M.</iname>
+<author_id>4835</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>borland@anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Brill</lname>
+<fname>Adam</fname>
+<iname>A.R.</iname>
+<author_id>46043</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>abrill@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Bromberek</lname>
+<fname>David</fname>
+<iname>D.J.</iname>
+<author_id>24418</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>djbromb@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Byrd</lname>
+<fname>John</fname>
+<iname>J.M.</iname>
+<author_id>2974</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory</full_name>
+<name1>Argonne National Laboratory</name1>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jbyrd@anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Calvey</lname>
+<fname>Joseph</fname>
+<iname>J.R.</iname>
+<author_id>36218</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jcalvey@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Carvelli</lname>
+<fname>Jeremy</fname>
+<iname>J.</iname>
+<author_id>119054</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jcarvelli@anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Dooling</lname>
+<fname>Jeffrey</fname>
+<mname>Craig</mname>
+<iname>J.C.</iname>
+<author_id>2048</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>dooling@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Emery</lname>
+<fname>Louis</fname>
+<iname>L.</iname>
+<author_id>2770</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>emery@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Fors</lname>
+<fname>Thomas</fname>
+<iname>T.</iname>
+<author_id>39425</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>tfors@anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Fystro</lname>
+<fname>Gregory</fname>
+<iname>G.I.</iname>
+<author_id>90337</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory</full_name>
+<name1>Argonne National Laboratory</name1>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>fystro@anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Goel</lname>
+<fname>Aditya</fname>
+<iname>A.</iname>
+<author_id>39477</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>agoel@anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Hui</lname>
+<fname>Dandan</fname>
+<iname>D.</iname>
+<author_id>103111</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>dhui@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Keane</lname>
+<fname>Robert</fname>
+<iname>R.T.</iname>
+<author_id>56082</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>keane@anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Laird</lname>
+<fname>Robert</fname>
+<iname>R.</iname>
+<author_id>33503</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>laird@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Lenkszus</lname>
+<fname>Frank</fname>
+<iname>F.</iname>
+<author_id>2767</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>frl@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Lindberg</lname>
+<fname>Ryan</fname>
+<mname>Roger</mname>
+<iname>R.R.</iname>
+<author_id>13246</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>lindberg@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Lumpkin</lname>
+<fname>Alex</fname>
+<iname>A.H.</iname>
+<author_id>2764</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="Fermilab" type="Laboratory">Fermi National Accelerator Laboratory</full_name>
+<name1>Fermi National Accelerator Laboratory</name1>
+<URL>http://www.fnal.gov/</URL>
+<po_box>P.O. Box 500</po_box>
+<town>Batavia, Illinois</town>
+<zip_code>IL 60510-0500</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>lumpkin@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Madden</lname>
+<fname>Timothy</fname>
+<iname>T.J.</iname>
+<author_id>106652</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>tmadden@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Micklich</lname>
+<fname>Bradley</fname>
+<iname>B.J.</iname>
+<author_id>25291</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory</full_name>
+<name1>Argonne National Laboratory</name1>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>bjmicklich@anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Morrison</lname>
+<fname>Leonard</fname>
+<mname>H.</mname>
+<iname>L.H.</iname>
+<author_id>12996</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>morrison@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Pasky</lname>
+<fname>Stanley</fname>
+<mname>Joseph</mname>
+<iname>S.J.</iname>
+<author_id>2061</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory</full_name>
+<name1>Argonne National Laboratory</name1>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>pasky@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Sajaev</lname>
+<fname>Vadim</fname>
+<iname>V.</iname>
+<author_id>2775</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>sajaev@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Sereno</lname>
+<fname>Nicholas</fname>
+<iname>N.</iname>
+<author_id>2054</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>sereno@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Shang</lname>
+<fname>Hairong</fname>
+<iname>H.</iname>
+<author_id>2046</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>shang@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Smith</lname>
+<fname>Terry</fname>
+<mname>Lee</mname>
+<iname>T.L.</iname>
+<author_id>2063</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory</full_name>
+<name1>Argonne National Laboratory</name1>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>tls@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Stevens</lname>
+<fname>James</fname>
+<iname>J.B.</iname>
+<author_id>46482</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jbs@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Sun</lname>
+<fname>Yine</fname>
+<iname>Y.</iname>
+<author_id>2198</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>yinesun@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Waldschmidt</lname>
+<fname>Geoff</fname>
+<mname>J.</mname>
+<iname>G.J.</iname>
+<author_id>12662</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>waldschm@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Wang</lname>
+<fname>Ju</fname>
+<iname>J.</iname>
+<author_id>2085</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory</full_name>
+<name1>Argonne National Laboratory</name1>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>juw@anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Wienands</lname>
+<fname>Ulrich</fname>
+<iname>U.</iname>
+<author_id>2620</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory</full_name>
+<name1>Argonne National Laboratory</name1>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>wienands@anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Wootton</lname>
+<fname>Kent</fname>
+<mname>Peter</mname>
+<iname>K.P.</iname>
+<author_id>38738</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>kwootton@anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Xiao</lname>
+<fname>Aimin</fname>
+<iname>A.</iname>
+<author_id>8543</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>xiaoam@anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Yang</lname>
+<fname>Bingxin</fname>
+<iname>B.X.</iname>
+<author_id>12274</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>bxyang@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Yang</lname>
+<fname>Yawei</fname>
+<iname>Y.</iname>
+<author_id>51629</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>yaweiyang@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Yao</lname>
+<fname>Chihyuan</fname>
+<iname>C.</iname>
+<author_id>2041</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>cyao@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Harkay</lname>
+<fname>Katherine</fname>
+<mname>C.</mname>
+<iname>K.C.</iname>
+<author_id>2771</author_id>
+<institutions>
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>harkay@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Harkay</lname>
+<fname>Katherine</fname>
+<mname>C.</mname>
+<iname>K.C.</iname>
+<author_id>2771</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>harkay@aps.anl.gov</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Harkay</lname>
+<fname>Katherine</fname>
+<mname>C.</mname>
+<iname>K.C.</iname>
+<author_id>2771</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="ANL" type="Laboratory">Argonne National Laboratory Advanced Photon Source</full_name>
+<name1>Argonne National Laboratory</name1>
+<name2>Advanced Photon Source</name2>
+<URL>http://www.anl.gov/</URL>
+<address1>9700 South Cass Avenue</address1>
+<town>Argonne, Illinois</town>
+<zip_code>IL 60439</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>harkay@aps.anl.gov</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>fig1.jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>fig2c.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>fig2d.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>fig3a.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>fig5a.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>fig5b.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>THYYPLM3.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>fig2a.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>fig4a.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>fig3b.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>fig4b.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>THYYPLM3_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>THYYPLM3.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>THYYPLM3.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THYYPLM3_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THYYPLM3_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THYYPLM3_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM3&amp;wanted_file=fig1.jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM3&amp;wanted_file=fig3a.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM3&amp;wanted_file=fig4b.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM3&amp;wanted_file=fig3b.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM3&amp;wanted_file=fig4a.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM3&amp;wanted_file=fig2a.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM3&amp;wanted_file=fig5a.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM3&amp;wanted_file=fig2d.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM3&amp;wanted_file=fig5b.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM3&amp;wanted_file=fig2c.png</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM3&amp;wanted_file=THYYPLM3.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM3&amp;wanted_file=THYYPLM3_AUTHOR.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM3&amp;wanted_file=THYYPLM3.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM3&amp;wanted_file=THYYPLM3.docx</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM3&amp;wanted_file=THYYPLM3_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM3&amp;wanted_file=THYYPLM3_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THYYPLM3&amp;wanted_file=THYYPLM3_TALK.PDF</fileURL>
+</fileURLs>
+<editor>Christine Petit-Jean-Genaz</editor>
+<final_qa>Kip Bishofberger</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>07-Dec-2018 22:47:57</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="PRR">Peer Review Requested</log_status>
+<timestamp>07-Dec-2018 23:16:55</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>10-Dec-2018 01:18:09</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>10-Dec-2018 01:18:09</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>07-Feb-2019 21:50:59</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>07-Feb-2019 21:50:59</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>14-May-2019 17:37:32</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>15-May-2019 14:05:14</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 14:07:43</timestamp>
+<comments>THYYPLM3.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 14:08:16</timestamp>
+<comments>THYYPLM3_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 14:11:12</timestamp>
+<comments>THYYPLM3.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 14:11:18</timestamp>
+<comments>THYYPLM3_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 14:11:55</timestamp>
+<comments>THYYPLM3.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 14:12:12</timestamp>
+<comments>THYYPLM3_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 14:17:27</timestamp>
+<comments>THYYPLM3_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 14:17:31</timestamp>
+<comments>THYYPLM3.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 14:17:52</timestamp>
+<comments>THYYPLM3.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 14:18:06</timestamp>
+<comments>THYYPLM3_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 14:19:49</timestamp>
+<comments>THYYPLM3.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 14:20:09</timestamp>
+<comments>THYYPLM3.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 14:20:16</timestamp>
+<comments>THYYPLM3_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 14:20:31</timestamp>
+<comments>THYYPLM3_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 14:21:53</timestamp>
+<comments>fig1.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 14:22:14</timestamp>
+<comments>fig2c.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 14:22:31</timestamp>
+<comments>fig2d.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 14:25:11</timestamp>
+<comments>fig3a.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 14:25:29</timestamp>
+<comments>fig4b.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 14:25:46</timestamp>
+<comments>fig5a.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 14:26:04</timestamp>
+<comments>fig5b.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 14:26:45</timestamp>
+<comments>THYYPLM3_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 14:27:15</timestamp>
+<comments>THYYPLM3_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 19:27:42</timestamp>
+<comments>THYYPLM3.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 19:28:46</timestamp>
+<comments>THYYPLM3.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 19:28:55</timestamp>
+<comments>THYYPLM3_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 19:29:09</timestamp>
+<comments>THYYPLM3_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 20:16:12</timestamp>
+<comments>fig2a.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 20:16:30</timestamp>
+<comments>fig4a.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 20:16:47</timestamp>
+<comments>fig4b.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 20:17:11</timestamp>
+<comments>fig3b.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 20:17:32</timestamp>
+<comments>fig4b.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 23:11:15</timestamp>
+<comments>THYYPLM3_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>16-May-2019 00:57:24</timestamp>
+<comments>THYYPLM3_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>16-May-2019 00:57:34</timestamp>
+<comments>THYYPLM3_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>16-May-2019 00:58:29</timestamp>
+<comments>THYYPLM3_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>18-May-2019 22:56:57</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>18-May-2019 23:50:31</timestamp>
+<comments>THYYPLM3.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>18-May-2019 23:50:55</timestamp>
+<comments>THYYPLM3.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>18-May-2019 23:52:08</timestamp>
+<editor_status code="G">Green</editor_status>
+<comments>In the pdf file produced via upload, figures 3, 4 and 5 did not appear and neither did the references with the exception of the first two. Retrieved the source file, which was complete. Removed the full stop at the end of the table 1 caption which was the only formatting error discovered. Congratulations on the excellent preparation of the references. Normally this would be a yellow dot since the editor had to open the source file, however it is so well prepared it deserves a green dot immediately.</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 02:49:47</timestamp>
+<comments>THYYPLM3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 02:50:25</timestamp>
+<comments>THYYPLM3_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>22-May-2019 10:25:34</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>24-May-2019 00:15:16</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>24-May-2019 00:27:21</timestamp>
+<comments>THYYPLM3_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>24-May-2019 00:29:11</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Speaker,
+Your slides as given in THYYPLM3_TALK.PDF will be published in the conference proceedings. I had to embed fonts, but otherwise made no changes. In case of any problems, please email me at pdyer@bnl.gov.</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+</papers>
+</session>
+</conference>

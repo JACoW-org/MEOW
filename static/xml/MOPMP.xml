@@ -1,0 +1,1277 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<conference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://bel.gsi.de/docs/xml/conference.xsd" name="IPAC 2019, Melbourne, Australia">
+<session type="Poster">
+<name abbr="MOPMP">Poster Session - Magpie</name>
+<date btime="1600" etime="1800">20-May-19</date>
+<location type="Poster">Magpie</location>
+<papers>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Qin</lname>
+<fname>Qing</fname>
+<iname>Q.</iname>
+<author_id>1249</author_id>
+<institutions>
+<institute>
+<full_name abbrev="IHEP" type="Institute">Chinese Academy of Sciences Institute of High Energy Physics</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<URL>http://www.chinacp.com/eng/cporg/cporg_ihep.html</URL>
+<address1>Yuquan Road 19</address1>
+<po_box>P.O. Box 918-8</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Accelerator Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<department>Accelerator Center</department>
+<address1>19B Yuquan Road</address1>
+<address2>Shijingshang District</address2>
+<town>Beijing</town>
+<postal_code>100049</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Chinese Academy of Sciences Accelerator Division</full_name>
+<name1>Institute of High Energy Physics</name1>
+<name2>Chinese Academy of Sciences</name2>
+<department>Accelerator Division</department>
+<URL>http://www.ihep.cas.cn/</URL>
+<address1>19B Yuquan Road</address1>
+<po_box>P.O. Box 918</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Institute">Institute of High Energy Physics Chinese Academy of Sciences Experimental Physics Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<name2>Chinese Academy of Sciences</name2>
+<department>Experimental Physics Center</department>
+<URL>http://epc.ihep.ac.cn/epchomepage/index.html</URL>
+<address1>19B,Yuquan Rd.,</address1>
+<address2>Shijingshan District</address2>
+<po_box>P.O.Box 918</po_box>
+<town>Bejing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>qinq@mail.ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>2635</abstract_id>
+<pages>3</pages>
+<toc>417</toc>
+<main_class>MC1: Circular and Linear Colliders</main_class>
+<sub_class>A01 Hadron Colliders</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">MOPMP001</code>
+<presentation type="Poster">Poster</presentation>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>Optic Corrections for FCC-hh</title>
+<abstract>The FCC-hh (Future Hadron-Hadron Circular Collider) is one of the options considered for the next generation accelerator in high-energy physics as recommended by the European Strategy Group. The evaluation of the various magnets mechanical error and field error tolerances in the arc sections of FCC-hh, as well as an estimation of the required correctors strengths, are important aspects of the collider design. In this study the mechanical tolerances, dipole and quadrupole field error tolerances for the arc sections of FCC-hh are evaluated. The consolidated correction schemes of the linear coupling (with skew quadrupoles) and of the beam tunes (with normal quadrupoles) are presented. The integration of the different ring insertions (interaction region, collimation, injection, etc) is also discussed.</abstract>
+<contributors>
+<contributor type="Co-Author">
+<lname>Chance</lname>
+<fname>Antoine</fname>
+<iname>A.</iname>
+<author_id>11744</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CEA-IRFU" type="Research Centre">Commissariat à l'Energie Atomique et aux Energies Alternatives Institut de Recherche sur les lois Fondamentales de l'Univers</full_name>
+<name1>Commissariat à l'Energie Atomique et aux Energies Alternatives</name1>
+<name2>Institut de Recherche sur les lois Fondamentales de l'Univers</name2>
+<address1>Université Paris-Saclay</address1>
+<town>Gif-sur-Yvette</town>
+<postal_code>91191</postal_code>
+<zip_code>Cedex</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>achance@cea.fr</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Dalena</lname>
+<fname>Barbara</fname>
+<iname>B.</iname>
+<author_id>39135</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CEA-IRFU" type="Research Centre">Commissariat à l'Energie Atomique et aux Energies Alternatives Institut de Recherche sur les lois Fondamentales de l'Univers</full_name>
+<name1>Commissariat à l'Energie Atomique et aux Energies Alternatives</name1>
+<name2>Institut de Recherche sur les lois Fondamentales de l'Univers</name2>
+<address1>Université Paris-Saclay</address1>
+<town>Gif-sur-Yvette</town>
+<postal_code>91191</postal_code>
+<zip_code>Cedex</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>barbara.dalena@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Holzer</lname>
+<fname>Bernhard</fname>
+<mname>Johannes</mname>
+<iname>B.J.</iname>
+<author_id>398</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>bernhard.holzer@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Schulte</lname>
+<fname>Daniel</fname>
+<iname>D.</iname>
+<author_id>1631</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research AB Department</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>AB Department</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanades de Particules 1</address1>
+<town>Meyrin</town>
+<postal_code>1217</postal_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>daniel.schulte@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Boutin</lname>
+<fname>David</fname>
+<iname>D.</iname>
+<author_id>44765</author_id>
+<institutions>
+<institute>
+<full_name abbrev="CEA-DRF-IRFU" type="Atomic Energy Commission">Commissariat à l'Energie Atomique Direction de la Recherche Fondamentale Institut de Recherche sur les lois Fondamentales de l'Univers</full_name>
+<name1>Commissariat à l'Energie Atomique</name1>
+<name2>Direction de la Recherche Fondamentale</name2>
+<department>Institut de Recherche sur les lois Fondamentales de l'Univers</department>
+<URL>http://www-dapnia.cea.fr/</URL>
+<postal_code>Gif-sur-Yvette Cedex</postal_code>
+<zip_code>91191</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+<institute>
+<full_name abbrev="CEA-IRFU" type="Atomic Energy Commission">Commissariat à l'Energie Atomique Institut de Recherche sur les lois Fondamentales de l'Univers Service des Accélérateurs, Cryogénie et Magnétisme</full_name>
+<name1>Commissariat à l'Energie Atomique</name1>
+<name2>Institut de Recherche sur les lois Fondamentales de l'Univers</name2>
+<department>Service des Accélérateurs, Cryogénie et Magnétisme</department>
+<address1>Université Paris-Saclay</address1>
+<town>Gif-sur-Yvette</town>
+<postal_code>91191</postal_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+<institute>
+<full_name abbrev="IPHC" type="Research Centre">Institut Pluridisciplinaire Hubert Curien</full_name>
+<name1>Institut Pluridisciplinaire Hubert Curien</name1>
+<URL>www.iphc.cnrs.fr</URL>
+<address1>23 rue du Loess</address1>
+<po_box>B.P. 28</po_box>
+<town>Strasbourg Cedex 2</town>
+<postal_code>67037</postal_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+<institute>
+<full_name abbrev="CEA-IRFU" type="Research Centre">Commissariat à l'Energie Atomique et aux Energies Alternatives Institut de Recherche sur les lois Fondamentales de l'Univers</full_name>
+<name1>Commissariat à l'Energie Atomique et aux Energies Alternatives</name1>
+<name2>Institut de Recherche sur les lois Fondamentales de l'Univers</name2>
+<address1>Université Paris-Saclay</address1>
+<town>Gif-sur-Yvette</town>
+<postal_code>91191</postal_code>
+<zip_code>Cedex</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>david.boutin@cea.fr</email>
+</emails>
+</contributor>
+<contributor type="Presenter">
+<lname>Dalena</lname>
+<fname>Barbara</fname>
+<iname>B.</iname>
+<author_id>39135</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="CEA-IRFU" type="Research Centre">Commissariat à l'Energie Atomique et aux Energies Alternatives Institut de Recherche sur les lois Fondamentales de l'Univers</full_name>
+<name1>Commissariat à l'Energie Atomique et aux Energies Alternatives</name1>
+<name2>Institut de Recherche sur les lois Fondamentales de l'Univers</name2>
+<address1>Université Paris-Saclay</address1>
+<town>Gif-sur-Yvette</town>
+<postal_code>91191</postal_code>
+<zip_code>Cedex</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>barbara.dalena@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Boutin</lname>
+<fname>David</fname>
+<iname>D.</iname>
+<author_id>44765</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="CEA-DRF-IRFU" type="Atomic Energy Commission">Commissariat à l'Energie Atomique Direction de la Recherche Fondamentale Institut de Recherche sur les lois Fondamentales de l'Univers</full_name>
+<name1>Commissariat à l'Energie Atomique</name1>
+<name2>Direction de la Recherche Fondamentale</name2>
+<department>Institut de Recherche sur les lois Fondamentales de l'Univers</department>
+<URL>http://www-dapnia.cea.fr/</URL>
+<postal_code>Gif-sur-Yvette Cedex</postal_code>
+<zip_code>91191</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>david.boutin@cea.fr</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>MOPMP001.tex</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>MOPMP001f1.pdf</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>MOPMP001f2.pdf</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>MOPMP001f3.pdf</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>MOPMP001f4.pdf</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>MOPMP001f5.pdf</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>MOPMP001f6.pdf</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>MOPMP001_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>MOPMP001.tex</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>MOPMP001_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>MOPMP001.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOPMP001&amp;wanted_file=MOPMP001f6.pdf</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOPMP001&amp;wanted_file=MOPMP001f5.pdf</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOPMP001&amp;wanted_file=MOPMP001f4.pdf</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOPMP001&amp;wanted_file=MOPMP001f3.pdf</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOPMP001&amp;wanted_file=MOPMP001f2.pdf</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOPMP001&amp;wanted_file=MOPMP001f1.pdf</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOPMP001&amp;wanted_file=MOPMP001_AUTHOR.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOPMP001&amp;wanted_file=MOPMP001_AUTHOR.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOPMP001&amp;wanted_file=MOPMP001.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOPMP001&amp;wanted_file=MOPMP001.tex</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOPMP001&amp;wanted_file=MOPMP001.tex</fileURL>
+</fileURLs>
+<editor>Maxim Kuzin</editor>
+<final_qa>Magdalena Montes-Loera</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>04-Dec-2018 10:21:07</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>04-Dec-2018 12:21:11</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>06-Dec-2018 08:03:15</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>06-Dec-2018 08:03:15</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>06-Dec-2018 08:07:48</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>06-Dec-2018 08:07:48</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 16:23:34</timestamp>
+<comments>MOPMP001.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 16:24:02</timestamp>
+<comments>MOPMP001f1.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 16:24:15</timestamp>
+<comments>MOPMP001f2.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 16:24:29</timestamp>
+<comments>MOPMP001f3.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 16:24:51</timestamp>
+<comments>MOPMP001f4.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 16:25:03</timestamp>
+<comments>MOPMP001f5.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 16:25:14</timestamp>
+<comments>MOPMP001f6.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 16:25:35</timestamp>
+<comments>MOPMP001_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>16-May-2019 06:53:30</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>16-May-2019 06:57:51</timestamp>
+<editor_status code="R">Red</editor_status>
+<comments>Figures must be referred from the text. Please correct the Sub-Section format: They Should Be First Letters Capitals. </comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>16-May-2019 08:57:34</timestamp>
+<comments>MOPMP001.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>16-May-2019 08:57:59</timestamp>
+<comments>MOPMP001_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>16-May-2019 23:30:05</timestamp>
+<comments>MOPMP001.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>16-May-2019 23:30:24</timestamp>
+<editor_status code="G">Green</editor_status>
+<comments>thanks a lot!</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="POST">Poster Police</log_status>
+<timestamp>20-May-2019 06:31:29</timestamp>
+<comments>Poster Posted, Poster Manned, Poster Satisfactory.</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="POST">Poster Police</log_status>
+<timestamp>21-May-2019 05:54:37</timestamp>
+<comments>Poster Posted, Poster Manned, Poster Satisfactory, Picture Taken.</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="POST">Poster Police</log_status>
+<timestamp>21-May-2019 06:39:57</timestamp>
+<comments>Poster Posted, Poster Manned, Poster Satisfactory.</comments>
+<editor_notes>Ok</editor_notes>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>23-May-2019 04:36:36</timestamp>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Qin</lname>
+<fname>Qing</fname>
+<iname>Q.</iname>
+<author_id>1249</author_id>
+<institutions>
+<institute>
+<full_name abbrev="IHEP" type="Institute">Chinese Academy of Sciences Institute of High Energy Physics</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<URL>http://www.chinacp.com/eng/cporg/cporg_ihep.html</URL>
+<address1>Yuquan Road 19</address1>
+<po_box>P.O. Box 918-8</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Accelerator Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<department>Accelerator Center</department>
+<address1>19B Yuquan Road</address1>
+<address2>Shijingshang District</address2>
+<town>Beijing</town>
+<postal_code>100049</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Chinese Academy of Sciences Accelerator Division</full_name>
+<name1>Institute of High Energy Physics</name1>
+<name2>Chinese Academy of Sciences</name2>
+<department>Accelerator Division</department>
+<URL>http://www.ihep.cas.cn/</URL>
+<address1>19B Yuquan Road</address1>
+<po_box>P.O. Box 918</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Institute">Institute of High Energy Physics Chinese Academy of Sciences Experimental Physics Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<name2>Chinese Academy of Sciences</name2>
+<department>Experimental Physics Center</department>
+<URL>http://epc.ihep.ac.cn/epchomepage/index.html</URL>
+<address1>19B,Yuquan Rd.,</address1>
+<address2>Shijingshan District</address2>
+<po_box>P.O.Box 918</po_box>
+<town>Bejing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>qinq@mail.ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>2282</abstract_id>
+<pages>4</pages>
+<toc>420</toc>
+<main_class>MC1: Circular and Linear Colliders</main_class>
+<sub_class>A08 Linear Accelerators</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">MOPMP002</code>
+<presentation type="Poster">Poster</presentation>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>Linac and Damping Ring Designs for the FCC-ee</title>
+<abstract>We report the design of the pre-injector chain for the Future Circular e+ e- Collider (FCC-ee) system. The electron beam from a low-emittance RF gun is accelerated by an S-band linac up to 6 GeV. A damping ring at 1.54 GeV is required for emittance cooling of the positron beam. The intermediate energy step from the exit of the S-band linac at 6 GeV to the 20 GeV injection energy of the top-up booster can be provided by the modified Super Proton Synchrotron (SPS), serving as a pre-booster ring (PBR). An alternative option to reach 20 GeV energy would be to extend the S-band linac with a C- or X-band linac. An overall cost optimisation will determine the choice of the final configuration. Beam loss and emittance dilution in the linac due to space charge effects, wakefields, and misalignment of accelerator components can be mitigated by RF phasing and orbit steering. Start-to-end simulations examine the beam transport through the linac up to either 6 GeV or 20 GeV. The results indicate large design margins. Simulations of the beam dynamics in the damping ring (DR) demonstrate a sufficiently large momentum acceptance. Effects of intrabeam scattering and electron cloud instability in the DR are also studied.</abstract>
+<contributors>
+<contributor type="Co-Author">
+<lname>Barnyakov</lname>
+<fname>Alexey</fname>
+<iname>A.M.</iname>
+<author_id>56635</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BINP SB RAS" type="Institute">Russian Academy of Sciences The Budker Institute of Nuclear Physics</full_name>
+<name1>Russian Academy of Sciences</name1>
+<name2>The Budker Institute of Nuclear Physics</name2>
+<URL>http://www.inp.nsk.su/</URL>
+<address1>Budker INP, Lavrentiev av. 11</address1>
+<town>Novosibirsk</town>
+<postal_code>630090</postal_code>
+<country_code abbrev="RU">Russia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>skalpel@inbox.ru</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Chaikovska</lname>
+<fname>Iryna</fname>
+<iname>I.</iname>
+<author_id>41014</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="LAL" type="Laboratory">Laboratoire de l'Accélérateur Linéaire CNRS/IN2P3 Université Paris-Saclay</full_name>
+<name1>Laboratoire de l'Accélérateur Linéaire</name1>
+<name2>CNRS/IN2P3</name2>
+<department>Université Paris-Saclay</department>
+<URL>http://www.lal.in2p3.fr/</URL>
+<address1>Univ. Paris-Sud</address1>
+<po_box>BP 34</po_box>
+<town>Orsay</town>
+<postal_code>91898</postal_code>
+<zip_code>Cedex</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>chaikovs@lal.in2p3.fr</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Chehab</lname>
+<fname>Robert</fname>
+<iname>R.</iname>
+<author_id>261</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="LAL" type="Laboratory">Laboratoire de l'Accélérateur Linéaire CNRS/IN2P3 Université Paris-Saclay</full_name>
+<name1>Laboratoire de l'Accélérateur Linéaire</name1>
+<name2>CNRS/IN2P3</name2>
+<department>Université Paris-Saclay</department>
+<URL>http://www.lal.in2p3.fr/</URL>
+<address1>Univ. Paris-Sud</address1>
+<po_box>BP 34</po_box>
+<town>Orsay</town>
+<postal_code>91898</postal_code>
+<zip_code>Cedex</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>chehab@lalcls.in2p3.fr</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Furukawa</lname>
+<fname>Kazuro</fname>
+<iname>K.</iname>
+<author_id>3185</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="KEK" type="Laboratory">High Energy Accelerator Research Organization</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<URL>http://www.kek.jp/intra.html</URL>
+<address1>1-1 Oho</address1>
+<address2>Tsukuba</address2>
+<town>Ibaraki</town>
+<zip_code>305-0801</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>kazuro.furukawa@kek.jp</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Iida</lname>
+<fname>Naoko</fname>
+<iname>N.</iname>
+<author_id>2803</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="KEK" type="Laboratory">High Energy Accelerator Research Organization</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<URL>http://www.kek.jp/intra.html</URL>
+<address1>1-1 Oho</address1>
+<address2>Tsukuba</address2>
+<town>Ibaraki</town>
+<zip_code>305-0801</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>naoko.iida@kek.jp</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Kamitani</lname>
+<fname>Takuya</fname>
+<iname>T.</iname>
+<author_id>959</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="KEK" type="Laboratory">High Energy Accelerator Research Organization</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<URL>http://www.kek.jp/intra.html</URL>
+<address1>1-1 Oho</address1>
+<address2>Tsukuba</address2>
+<town>Ibaraki</town>
+<zip_code>305-0801</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>takuya.kamitani@kek.jp</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Levichev</lname>
+<fname>Alexey</fname>
+<iname>A.E.</iname>
+<author_id>34957</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BINP SB RAS" type="Institute">Russian Academy of Sciences The Budker Institute of Nuclear Physics</full_name>
+<name1>Russian Academy of Sciences</name1>
+<name2>The Budker Institute of Nuclear Physics</name2>
+<URL>http://www.inp.nsk.su/</URL>
+<address1>Budker INP, Lavrentiev av. 11</address1>
+<town>Novosibirsk</town>
+<postal_code>630090</postal_code>
+<country_code abbrev="RU">Russia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>a.e.levichev@inp.nsk.su</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Martyshkin</lname>
+<fname>Pavel</fname>
+<iname>P.V.</iname>
+<author_id>93571</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BINP SB RAS" type="Institute">Russian Academy of Sciences The Budker Institute of Nuclear Physics</full_name>
+<name1>Russian Academy of Sciences</name1>
+<name2>The Budker Institute of Nuclear Physics</name2>
+<URL>http://www.inp.nsk.su/</URL>
+<address1>Budker INP, Lavrentiev av. 11</address1>
+<town>Novosibirsk</town>
+<postal_code>630090</postal_code>
+<country_code abbrev="RU">Russia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>p.v.martyshkin@inp.nsk.su</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Miyahara</lname>
+<fname>Fusashi</fname>
+<iname>F.</iname>
+<author_id>41290</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="KEK" type="Laboratory">High Energy Accelerator Research Organization</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<URL>http://www.kek.jp/intra.html</URL>
+<address1>1-1 Oho</address1>
+<address2>Tsukuba</address2>
+<town>Ibaraki</town>
+<zip_code>305-0801</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>fusashi.miyahara@kek.jp</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Nikiforov</lname>
+<fname>Danila</fname>
+<iname>D.A.</iname>
+<author_id>71327</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BINP SB RAS" type="Institute">Russian Academy of Sciences The Budker Institute of Nuclear Physics</full_name>
+<name1>Russian Academy of Sciences</name1>
+<name2>The Budker Institute of Nuclear Physics</name2>
+<URL>http://www.inp.nsk.su/</URL>
+<address1>Budker INP, Lavrentiev av. 11</address1>
+<town>Novosibirsk</town>
+<postal_code>630090</postal_code>
+<country_code abbrev="RU">Russia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>nikdanila@bk.ru</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Oide</lname>
+<fname>Katsunobu</fname>
+<iname>K.</iname>
+<author_id>2811</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="KEK" type="Laboratory">High Energy Accelerator Research Organization</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<URL>http://www.kek.jp/intra.html</URL>
+<address1>1-1 Oho</address1>
+<address2>Tsukuba</address2>
+<town>Ibaraki</town>
+<zip_code>305-0801</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanades de Particules 1</address1>
+<town>Meyrin</town>
+<postal_code>1217</postal_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>katsunobu.oide@kek.jp</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Ozcan</lname>
+<fname>Erkcan</fname>
+<mname>Veysi</mname>
+<iname>E.V.</iname>
+<author_id>104196</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="University">Bogazici University Department of Physics</full_name>
+<name1>Bogazici University</name1>
+<department>Department of Physics</department>
+<address1>North Campus, KB Building Floor 3-4</address1>
+<town>Bebek / Istanbul</town>
+<postal_code>34342</postal_code>
+<country_code abbrev="TR">Turkey</country_code>
+</institute>
+</institutions>
+<emails>
+<email>erkcan.ozcan@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Papaphilippou</lname>
+<fname>Yannis</fname>
+<iname>Y.</iname>
+<author_id>197</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>yannis@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Polozov</lname>
+<fname>Sergey</fname>
+<mname>Markovich</mname>
+<iname>S.M.</iname>
+<author_id>4081</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="MEPhI" type="Institute">National Research Nuclear University</full_name>
+<name1>National Research Nuclear University</name1>
+<URL>http://www.mephi.ru/</URL>
+<address1>Kashirskoe Shosse 31</address1>
+<po_box>Box 600</po_box>
+<town>Moscow</town>
+<postal_code>115409</postal_code>
+<country_code abbrev="RU">Russia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>smpolozov@mephi.ru</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Rinolfi</lname>
+<fname>Louis</fname>
+<iname>L.</iname>
+<author_id>1627</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+<institute>
+<full_name abbrev="ESI" type="University Institute">European Scientific Institute</full_name>
+<name1>European Scientific Institute</name1>
+<URL>http://www.esi.cur-archamps.fr/</URL>
+<address1>Centre Universitaire de Formation et de Recherche</address1>
+<town>Archamps</town>
+<postal_code>74166</postal_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>louis.rinolfi@cern.ch</email>
+<email>louis.rinolfi@esi-archamps.eu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Yaman</lname>
+<fname>Fatih</fname>
+<iname>F.</iname>
+<author_id>51718</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IZTECH" type="University">Izmir Institute of Technology Electrical and Electronics Engineering</full_name>
+<name1>Izmir Institute of Technology</name1>
+<department>Electrical and Electronics Engineering</department>
+<address1>Gulbahce</address1>
+<address2>Urla</address2>
+<town>Izmir</town>
+<postal_code>35430</postal_code>
+<country_code abbrev="TR">Turkey</country_code>
+</institute>
+</institutions>
+<emails>
+<email>fatihyaman@iyte.edu.tr</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Zimmermann</lname>
+<fname>Frank</fname>
+<iname>F.</iname>
+<author_id>1653</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>frank.zimmermann@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Ogur</lname>
+<fname>Salim</fname>
+<iname>S.</iname>
+<author_id>78489</author_id>
+<institutions>
+<institute>
+<full_name type="University">Bogazici University Department of Physics</full_name>
+<name1>Bogazici University</name1>
+<department>Department of Physics</department>
+<address1>North Campus, KB Building Floor 3-4</address1>
+<town>Bebek / Istanbul</town>
+<postal_code>34342</postal_code>
+<country_code abbrev="TR">Turkey</country_code>
+</institute>
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Technology Department (TE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Technology Department (TE)</department>
+<URL>http://www.cern.ch</URL>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>salim.ogur@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Presenter">
+<lname>Chaikovska</lname>
+<fname>Iryna</fname>
+<iname>I.</iname>
+<author_id>41014</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="LAL" type="Laboratory">Laboratoire de l'Accélérateur Linéaire CNRS/IN2P3 Université Paris-Saclay</full_name>
+<name1>Laboratoire de l'Accélérateur Linéaire</name1>
+<name2>CNRS/IN2P3</name2>
+<department>Université Paris-Saclay</department>
+<URL>http://www.lal.in2p3.fr/</URL>
+<address1>Univ. Paris-Sud</address1>
+<po_box>BP 34</po_box>
+<town>Orsay</town>
+<postal_code>91898</postal_code>
+<zip_code>Cedex</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>chaikovs@lal.in2p3.fr</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Ogur</lname>
+<fname>Salim</fname>
+<iname>S.</iname>
+<author_id>78489</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>salim.ogur@cern.ch</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>MOPMP002.tex</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>MOPMP002f1.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>MOPMP002f2.PNG</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>MOPMP002f3.PNG</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>MOPMP002f4.PNG</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>MOPMP002_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>MOPMP002.tex</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>MOPMP002_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>MOPMP002.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>MOPMP002.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOPMP002&amp;wanted_file=MOPMP002f2.PNG</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOPMP002&amp;wanted_file=MOPMP002f1.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOPMP002&amp;wanted_file=MOPMP002f3.PNG</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOPMP002&amp;wanted_file=MOPMP002f4.PNG</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOPMP002&amp;wanted_file=MOPMP002.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOPMP002&amp;wanted_file=MOPMP002_AUTHOR.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOPMP002&amp;wanted_file=MOPMP002.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOPMP002&amp;wanted_file=MOPMP002_AUTHOR.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOPMP002&amp;wanted_file=MOPMP002.tex</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOPMP002&amp;wanted_file=MOPMP002.tex</fileURL>
+</fileURLs>
+<editor>Maxim Kuzin</editor>
+<final_qa>Magdalena Montes-Loera</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>03-Dec-2018 10:43:54</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>07-Dec-2018 09:10:08</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>13-May-2019 06:36:21</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>13-May-2019 06:43:27</timestamp>
+<comments>MOPMP002.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>13-May-2019 06:43:43</timestamp>
+<comments>MOPMP002f1.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>13-May-2019 06:43:54</timestamp>
+<comments>MOPMP002f2.PNG</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>13-May-2019 06:44:04</timestamp>
+<comments>MOPMP002f3.PNG</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>13-May-2019 06:44:12</timestamp>
+<comments>MOPMP002f4.PNG</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>13-May-2019 06:44:42</timestamp>
+<comments>MOPMP002_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>16-May-2019 07:00:35</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>16-May-2019 07:06:09</timestamp>
+<editor_status code="R">Red</editor_status>
+<comments>Author list incorrect - new group of authors with affiliation must started at the new line, and at the end not necessary to use the symbol &quot;;&quot;. As well the Table caption shoulb be The Fist Letters Capitals. </comments>
+</abstract_log>
+<abstract_log>
+<log_status code="POST">Poster Police</log_status>
+<timestamp>20-May-2019 06:31:31</timestamp>
+<comments>Poster Posted, Poster Manned, Poster Satisfactory.</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 12:26:17</timestamp>
+<comments>MOPMP002.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 12:26:57</timestamp>
+<comments>MOPMP002_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 23:21:42</timestamp>
+<comments>MOPMP002.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>20-May-2019 23:22:01</timestamp>
+<editor_status code="G">Green</editor_status>
+<comments>Thanks a lot!</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 02:08:11</timestamp>
+<comments>MOPMP002.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>21-May-2019 02:17:25</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>21-May-2019 04:12:53</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="POST">Poster Police</log_status>
+<timestamp>21-May-2019 06:39:59</timestamp>
+<comments>Poster Posted, Poster Manned, Poster Satisfactory.</comments>
+<editor_notes>Ok</editor_notes>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Qin</lname>
+<fname>Qing</fname>
+<iname>Q.</iname>
+<author_id>1249</author_id>
+<institutions>
+<institute>
+<full_name abbrev="IHEP" type="Institute">Chinese Academy of Sciences Institute of High Energy Physics</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<URL>http://www.chinacp.com/eng/cporg/cporg_ihep.html</URL>
+<address1>Yuquan Road 19</address1>
+<po_box>P.O. Box 918-8</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Accelerator Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<department>Accelerator Center</department>
+<address1>19B Yuquan Road</address1>
+<address2>Shijingshang District</address2>
+<town>Beijing</town>
+<postal_code>100049</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Chinese Academy of Sciences Accelerator Division</full_name>
+<name1>Institute of High Energy Physics</name1>
+<name2>Chinese Academy of Sciences</name2>
+<department>Accelerator Division</department>
+<URL>http://www.ihep.cas.cn/</URL>
+<address1>19B Yuquan Road</address1>
+<po_box>P.O. Box 918</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Institute">Institute of High Energy Physics Chinese Academy of Sciences Experimental Physics Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<name2>Chinese Academy of Sciences</name2>
+<department>Experimental Physics Center</department>
+<URL>http://epc.ihep.ac.cn/epchomepage/index.html</URL>
+<address1>19B,Yuquan Rd.,</address1>
+<address2>Shijingshan District</address2>
+<po_box>P.O.Box 918</po_box>
+<town>Bejing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>qinq@mail.ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>3267</abstract_id>
+<pages>4</pages>
+<toc>424</toc>
+<main_class>MC1: Circular and Linear Colliders</main_class>
+<sub_class>A02 Lepton Colliders</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">MOPMP003</code>
+<presentation type="Poster">Poster</presentation>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>Positron Source for FCC-ee</title>
+<abstract>The FCC-ee is a high-luminosity, high-precision circular collider to be constructed in a new 100 km tunnel in the Geneva area. The physics case is well established and the FCC-ee operation is foreseen at 91 GeV (Z-pole), 160 GeV (W pair production threshold), 240 GeV (Higgs resonance) and 365 GeV (t-tbar threshold). Due to the large 6D production emittance and important thermal load in the production target, the positron injector, in particular the positron source, is one of the key elements of the FCC-ee, requiring special attention. To ensure high reliability of the positron source, conventional and hybrid targets are currently under study. The final choice of the positron target will be made based on the estimated performances. In this framework, we present a preliminary design of the FCC-ee positron source, with detailed simulation studies of positron production, capture and primary acceleration.</abstract>
+<contributors>
+<contributor type="Co-Author">
+<lname>Apyan</lname>
+<fname>Armen</fname>
+<iname>A.</iname>
+<author_id>39382</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ANSL" type="Institute">A.I. Alikhanyan National Science Laboratory</full_name>
+<name1>A.I. Alikhanyan National Science Laboratory</name1>
+<URL>http://www.yerphi.am/</URL>
+<address1>Alikhanian Brothers Street 2</address1>
+<town>Yerevan</town>
+<postal_code>0036</postal_code>
+<country_code abbrev="ARM">Armenia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>aapyan@gmail.com</email>
+</emails>
+</contributor>
+<contributor type="Co-Auth

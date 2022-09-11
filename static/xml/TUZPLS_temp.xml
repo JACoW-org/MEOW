@@ -1,0 +1,1164 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<conference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://bel.gsi.de/docs/xml/conference.xsd" name="IPAC 2019, Melbourne, Australia">
+<session type="Oral">
+<name abbr="TUZPLS">Invited Orals: Beam Dynamics and EM Fields</name>
+<date btime="1400" etime="1500">21-May-19</date>
+<location type="Afternoon Invited Oral">Secondary Plenary (plenary 3)</location>
+<chairs>
+<chair>
+<lname>Raparia</lname>
+<fname>Deepak</fname>
+<iname>D.</iname>
+<author_id>2131</author_id>
+<institutions>
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>raparia@bnl.gov</email>
+<email>raparia@bnl.gov</email>
+</emails>
+</chair>
+</chairs>
+<papers>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Lobanov</lname>
+<fname>Nikolai</fname>
+<mname>R.</mname>
+<iname>N.R.</iname>
+<author_id>38943</author_id>
+<institutions>
+<institute>
+<full_name type="University Department">Research School of Physics and Engineering Australian National University Nuclear Physics</full_name>
+<name1>Research School of Physics and Engineering</name1>
+<name2>Australian National University</name2>
+<department>Nuclear Physics</department>
+<URL>http://wwwrsphysse.anu.edu.au/nuclear/</URL>
+<town>Canberra, Australian Capitol Territory</town>
+<zip_code>ACT 0200</zip_code>
+<country_code abbrev="AUS">Australia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>nikolai.lobanov@anu.edu.au</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>1278</abstract_id>
+<main_class>MC5: Beam Dynamics and EM Fields</main_class>
+<sub_class>D01 Beam Optics - Lattices, Correction Schemes, Transport</sub_class>
+<publishable>No, Editor Status Code is not Publishable, Final QA Not Publishable</publishable>
+<program_codes>
+<program_code>
+<code primary="N">SUSPFO130</code>
+<presentation type="Poster">Poster</presentation>
+</program_code>
+<program_code>
+<code primary="Y">TUZPLS1</code>
+<presentation type="Oral">Invited Oral</presentation>
+<start_time>1400</start_time>
+<duration>30</duration>
+</program_code>
+</program_codes>
+<title>Microbunch Rotation and Coherent Undulator Radiation From a Kicked Electron Beam</title>
+<abstract>Most X-ray Free Electron Lasers (FELs) emit linearly polarized X-ray pulses. Recently, a device called the Delta undulator has been installed at the Linac Coherent Light Source (LCLS) to provide tuneable polarization. The electron beam is first microbunched by the LCLS normal undulators, then the microbunched beam is kicked prior to the Delta undulator, and an intense circularly polarized X-ray pulse is generated in the Delta undulator towards the kicked direction and is spatially separation from the linearly polarized radiation from upstream undulators. Coherent off-axis radiation is usually strongly suppressed because the microbunches themselves cannot rotate. The talk will show that microbunches can in fact rotate towards the new direction of travel if the kick is applied in a quadrupole focusing channel and also will clarify characteristics of the coherent undulator radiation from a tilted microbunch in the far-field and will compare simulations with experiments. This microbunch rotation can explain the unexpectedly large amount of off-axis radiation that was observed during Delta undulator experiments at LCLS and may have other applications to the advanced X-ray manipulations.</abstract>
+<contributors>
+<contributor type="Co-Author">
+<lname>Huang</lname>
+<fname>Zhirong</fname>
+<iname>Z.</iname>
+<author_id>2534</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>zrh@slac.stanford.edu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Krzywinski</lname>
+<fname>Jacek</fname>
+<iname>J.</iname>
+<author_id>18295</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>krzywins@slac.stanford.edu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Lutman</lname>
+<fname>Alberto</fname>
+<mname>Andrea</mname>
+<iname>A.A.</iname>
+<author_id>31977</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>aal@slac.stanford.edu</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>MacArthur</lname>
+<fname>James</fname>
+<iname>J.P.</iname>
+<author_id>71998</author_id>
+<institutions>
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name>Stanford University</full_name>
+<name1>Stanford University</name1>
+<URL>http://www.stanford.edu/</URL>
+<town>Stanford, California</town>
+<zip_code>94305</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jmacart@stanford.edu</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>MacArthur</lname>
+<fname>James</fname>
+<iname>J.P.</iname>
+<author_id>71998</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name>Stanford University</full_name>
+<name1>Stanford University</name1>
+<URL>http://www.stanford.edu/</URL>
+<town>Stanford, California</town>
+<zip_code>94305</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jmacart@stanford.edu</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>MacArthur</lname>
+<fname>James</fname>
+<iname>J.P.</iname>
+<author_id>71998</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name>Stanford University</full_name>
+<name1>Stanford University</name1>
+<URL>http://www.stanford.edu/</URL>
+<town>Stanford, California</town>
+<zip_code>94305</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jmacart@stanford.edu</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>TUZPLS1_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>TUZPLS1_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLS1&amp;wanted_file=TUZPLS1_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLS1&amp;wanted_file=TUZPLS1_TALK.PPTX</fileURL>
+</fileURLs>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>29-Mar-2018 16:53:00</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>01-Apr-2018 03:51:27</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>31-May-2018 02:58:08</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>31-May-2018 02:58:08</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AOC">Abstract Owner Changed</log_status>
+<timestamp>27-Jun-2018 00:26:03</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>20-Sep-2018 04:40:44</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>20-Sep-2018 04:40:44</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 01:35:52</timestamp>
+<comments>TUZPLS1_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>21-May-2019 23:10:33</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 23:21:54</timestamp>
+<comments>TUZPLS1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>21-May-2019 23:23:04</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Speaker,
+Your PowerPoint slides were converted successfully to PDF (with intermediate and backup slides removed) and will
+be published in the conference proceedings. Please download the PDF
+slides file (TUZPLS1_TALK.pdf) and check that all is OK. 
+In the event of a problem, please contact:
+jan.chrin@psi.ch 
+Thank you.
+</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Lobanov</lname>
+<fname>Nikolai</fname>
+<mname>R.</mname>
+<iname>N.R.</iname>
+<author_id>38943</author_id>
+<institutions>
+<institute>
+<full_name type="University Department">Research School of Physics and Engineering Australian National University Nuclear Physics</full_name>
+<name1>Research School of Physics and Engineering</name1>
+<name2>Australian National University</name2>
+<department>Nuclear Physics</department>
+<URL>http://wwwrsphysse.anu.edu.au/nuclear/</URL>
+<town>Canberra, Australian Capitol Territory</town>
+<zip_code>ACT 0200</zip_code>
+<country_code abbrev="AUS">Australia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>nikolai.lobanov@anu.edu.au</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>1361</abstract_id>
+<pages>5</pages>
+<toc>1203</toc>
+<main_class>MC5: Beam Dynamics and EM Fields</main_class>
+<sub_class>D01 Beam Optics - Lattices, Correction Schemes, Transport</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">TUZPLS2</code>
+<presentation type="Oral">Invited Oral</presentation>
+<start_time>1430</start_time>
+<duration>30</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>Beam Dynamics Study in the HEPS Storage Ring</title>
+<abstract>The High Energy Photon Source (HEPS) is the first high-energy diffraction-limited storage ring (DLSR) light source to be built in China, with a natural emittance of a few tens of pm rad and a circumference of 1360.4 m. After 10 years¿ evolution, the accelerator physics design of the HEPS has been basically determined, with the ring consisting of 48 hybrid-7BAs with anti-bends and super-bends. This paper will discuss the accelerator physics studies of the HEPS storage ring, covering issues of lattice design, nonlinear optimization, collective effects, error correction, insertion devices, etc.</abstract>
+<contributors>
+<contributor type="Co-Author">
+<lname>Cui</lname>
+<fname>Xiaohao</fname>
+<iname>X.</iname>
+<author_id>51704</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Accelerator Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<department>Accelerator Center</department>
+<address1>19B Yuquan Road</address1>
+<address2>Shijingshang District</address2>
+<town>Beijing</town>
+<postal_code>100049</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>cuixh@ihep.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Duan</lname>
+<fname>Zhe</fname>
+<iname>Z.</iname>
+<author_id>46729</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IHEP" type="Laboratory">Chinese Academy of Sciences Institute of High Energy Physics Beijing Synchrotron Radiation Laboratory</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<department>Beijing Synchrotron Radiation Laboratory</department>
+<address1>19 Yu Quan Road</address1>
+<po_box>P.O. Box 918 (9)</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>duanz@ihep.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Guo</lname>
+<fname>Yuan</fname>
+<mname>Yuan</mname>
+<iname>Y.Y.</iname>
+<author_id>62268</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IHEP" type="Institute">Chinese Academy of Sciences Institute of High Energy Physics</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<URL>http://www.chinacp.com/eng/cporg/cporg_ihep.html</URL>
+<address1>Yuquan Road 19</address1>
+<po_box>P.O. Box 918-8</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>guoyy@ihep.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>He</lname>
+<fname>Ping</fname>
+<iname>P.</iname>
+<author_id>2100</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Accelerator Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<department>Accelerator Center</department>
+<address1>19B Yuquan Road</address1>
+<address2>Shijingshang District</address2>
+<town>Beijing</town>
+<postal_code>100049</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>heping@ihep.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Huang</lname>
+<fname>Xiyang</fname>
+<iname>X.Y.</iname>
+<author_id>70327</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IHEP" type="Institute">Chinese Academy of Sciences Institute of High Energy Physics</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<URL>http://www.chinacp.com/eng/cporg/cporg_ihep.html</URL>
+<address1>Yuquan Road 19</address1>
+<po_box>P.O. Box 918-8</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>huangxy@ihep.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Ji</lname>
+<fname>Daheng</fname>
+<iname>D.</iname>
+<author_id>44676</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Accelerator Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<department>Accelerator Center</department>
+<address1>19B Yuquan Road</address1>
+<address2>Shijingshang District</address2>
+<town>Beijing</town>
+<postal_code>100049</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jidh@ihep.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Ji</lname>
+<fname>Hongfei</fname>
+<iname>H.F.</iname>
+<author_id>60308</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IHEP" type="Institute">Chinese Academy of Sciences Institute of High Energy Physics</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<URL>http://www.chinacp.com/eng/cporg/cporg_ihep.html</URL>
+<address1>Yuquan Road 19</address1>
+<po_box>P.O. Box 918-8</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jihf@ihep.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Li</lname>
+<fname>Chao</fname>
+<iname>C.</iname>
+<author_id>53735</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IHEP" type="Institute">Chinese Academy of Sciences Institute of High Energy Physics</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<URL>http://www.chinacp.com/eng/cporg/cporg_ihep.html</URL>
+<address1>Yuquan Road 19</address1>
+<po_box>P.O. Box 918-8</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>lichao@ihep.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Li</lname>
+<fname>Jingyi</fname>
+<iname>J.Y.</iname>
+<author_id>2881</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IHEP" type="Institute">Chinese Academy of Sciences Institute of High Energy Physics</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<URL>http://www.chinacp.com/eng/cporg/cporg_ihep.html</URL>
+<address1>Yuquan Road 19</address1>
+<po_box>P.O. Box 918-8</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jingyili@ihep.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Li</lname>
+<fname>Xiao Yu</fname>
+<iname>X.Y.</iname>
+<author_id>88788</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IHEP" type="Institute">Chinese Academy of Sciences Institute of High Energy Physics</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<URL>http://www.chinacp.com/eng/cporg/cporg_ihep.html</URL>
+<address1>Yuquan Road 19</address1>
+<po_box>P.O. Box 918-8</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>lixiaoyu@ihep.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Meng</lname>
+<fname>Cai</fname>
+<iname>C.</iname>
+<author_id>56494</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IHEP" type="Institute">Chinese Academy of Sciences Institute of High Energy Physics</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<URL>http://www.chinacp.com/eng/cporg/cporg_ihep.html</URL>
+<address1>Yuquan Road 19</address1>
+<po_box>P.O. Box 918-8</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>mengc@ihep.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Peng</lname>
+<fname>Yuemei</fname>
+<iname>Y.M.</iname>
+<author_id>37678</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IHEP" type="Institute">Chinese Academy of Sciences Institute of High Energy Physics</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<URL>http://www.chinacp.com/eng/cporg/cporg_ihep.html</URL>
+<address1>Yuquan Road 19</address1>
+<po_box>P.O. Box 918-8</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>pengym@ihep.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Qin</lname>
+<fname>Qing</fname>
+<iname>Q.</iname>
+<author_id>1249</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IHEP" type="Institute">Chinese Academy of Sciences Institute of High Energy Physics</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<URL>http://www.chinacp.com/eng/cporg/cporg_ihep.html</URL>
+<address1>Yuquan Road 19</address1>
+<po_box>P.O. Box 918-8</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>qinq@mail.ihep.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Tian</lname>
+<fname>Saike</fname>
+<iname>S.K.</iname>
+<author_id>52465</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IHEP" type="Laboratory">Chinese Academy of Sciences Institute of High Energy Physics Beijing Synchrotron Radiation Laboratory</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<department>Beijing Synchrotron Radiation Laboratory</department>
+<address1>19 Yu Quan Road</address1>
+<po_box>P.O. Box 918 (9)</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>tiansk@ihep.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Wang</lname>
+<fname>Jiuqing</fname>
+<iname>J.Q.</iname>
+<author_id>1256</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IHEP" type="Institute">Chinese Academy of Sciences Institute of High Energy Physics</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<URL>http://www.chinacp.com/eng/cporg/cporg_ihep.html</URL>
+<address1>Yuquan Road 19</address1>
+<po_box>P.O. Box 918-8</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>wangjq@mail.ihep.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Wang</lname>
+<fname>Na</fname>
+<iname>N.</iname>
+<author_id>27023</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Accelerator Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<department>Accelerator Center</department>
+<address1>19B Yuquan Road</address1>
+<address2>Shijingshang District</address2>
+<town>Beijing</town>
+<postal_code>100049</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>wangn@ihep.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Wei</lname>
+<fname>Yuanyuan</fname>
+<iname>Y.</iname>
+<author_id>27151</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IHEP" type="Institute">Chinese Academy of Sciences Institute of High Energy Physics</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<URL>http://www.chinacp.com/eng/cporg/cporg_ihep.html</URL>
+<address1>Yuquan Road 19</address1>
+<po_box>P.O. Box 918-8</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>weiyy@ihep.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Xu</lname>
+<fname>Gang</fname>
+<iname>G.</iname>
+<author_id>1257</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IHEP" type="Institute">Chinese Academy of Sciences Institute of High Energy Physics</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<URL>http://www.chinacp.com/eng/cporg/cporg_ihep.html</URL>
+<address1>Yuquan Road 19</address1>
+<po_box>P.O. Box 918-8</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>xug@mail.ihep.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Xu</lname>
+<fname>Haisheng</fname>
+<iname>H.S.</iname>
+<author_id>51587</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IHEP" type="Institute">Chinese Academy of Sciences Institute of High Energy Physics</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<URL>http://www.chinacp.com/eng/cporg/cporg_ihep.html</URL>
+<address1>Yuquan Road 19</address1>
+<po_box>P.O. Box 918-8</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>haisheng.xu@ihep.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Yan</lname>
+<fname>Fang</fname>
+<iname>F.</iname>
+<author_id>36279</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IHEP" type="Laboratory">Chinese Academy of Sciences Institute of High Energy Physics Beijing Synchrotron Radiation Laboratory</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<department>Beijing Synchrotron Radiation Laboratory</department>
+<address1>19 Yu Quan Road</address1>
+<po_box>P.O. Box 918 (9)</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>yanfang@ihep.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Yu</lname>
+<fname>Chenghui</fname>
+<iname>C.H.</iname>
+<author_id>4544</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Accelerator Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<department>Accelerator Center</department>
+<address1>19B Yuquan Road</address1>
+<address2>Shijingshang District</address2>
+<town>Beijing</town>
+<postal_code>100049</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>yuch@ihep.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Zhao</lname>
+<fname>Yaliang</fname>
+<iname>Y.L.</iname>
+<author_id>45071</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IHEP" type="Institute">Chinese Academy of Sciences Institute of High Energy Physics</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<URL>http://www.chinacp.com/eng/cporg/cporg_ihep.html</URL>
+<address1>Yuquan Road 19</address1>
+<po_box>P.O. Box 918-8</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>zhaoyl@ihep.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Huang</lname>
+<fname>Wenhui</fname>
+<iname>W.-H.</iname>
+<author_id>12796</author_id>
+<institutions>
+<institute>
+<full_name abbrev="TUB" type="University">Tsinghua University in Beijing</full_name>
+<name1>Tsinghua University in Beijing</name1>
+<URL>http://www.tsinghua.edu.cn/eng/</URL>
+<town>Beijing</town>
+<zip_code>100084</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="TUB" type="University">Tsinghua University in Beijing Accelerator Laboratory Department of Engineering Physics</full_name>
+<name1>Tsinghua University in Beijing</name1>
+<name2>Accelerator Laboratory</name2>
+<department>Department of Engineering Physics</department>
+<URL>http://www.tsinghua.edu.cn/eng/</URL>
+<town>Beijing</town>
+<zip_code>100084</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Jiao</lname>
+<fname>Yi</fname>
+<iname>Y.</iname>
+<author_id>27024</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="IHEP" type="Institute">Chinese Academy of Sciences Institute of High Energy Physics</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<URL>http://www.chinacp.com/eng/cporg/cporg_ihep.html</URL>
+<address1>Yuquan Road 19</address1>
+<po_box>P.O. Box 918-8</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jiaoyi@ihep.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Jiao</lname>
+<fname>Yi</fname>
+<iname>Y.</iname>
+<author_id>27024</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="IHEP" type="Institute">Chinese Academy of Sciences Institute of High Energy Physics</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<URL>http://www.chinacp.com/eng/cporg/cporg_ihep.html</URL>
+<address1>Yuquan Road 19</address1>
+<po_box>P.O. Box 918-8</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jiaoyi@ihep.ac.cn</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>TUZPLS2_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>TUZPLS2.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>TUZPLS2.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>TUZPLS2.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>TUZPLS2_TALK.PPT</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>TUZPLS2_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>TUZPLS2.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>TUZPLS2.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>TUZPLS2.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>TUZPLS2_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>TUZPLS2_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>TUZPLS2_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>TUZPLS2_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>TUZPLS2.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>TUZPLS2.docx</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLS2&amp;wanted_file=TUZPLS2_AUTHOR.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLS2&amp;wanted_file=TUZPLS2_AUTHOR.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLS2&amp;wanted_file=TUZPLS2.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLS2&amp;wanted_file=TUZPLS2_AUTHOR.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLS2&amp;wanted_file=TUZPLS2.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLS2&amp;wanted_file=TUZPLS2_AUTHOR.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLS2&amp;wanted_file=TUZPLS2.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLS2&amp;wanted_file=TUZPLS2.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLS2&amp;wanted_file=TUZPLS2.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLS2&amp;wanted_file=TUZPLS2.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLS2&amp;wanted_file=TUZPLS2.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLS2&amp;wanted_file=TUZPLS2.docx</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLS2&amp;wanted_file=TUZPLS2_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLS2&amp;wanted_file=TUZPLS2_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUZPLS2&amp;wanted_file=TUZPLS2_TALK.PPT</fileURL>
+</fileURLs>
+<editor>Mark Caetano</editor>
+<final_qa>Magdalena Montes-Loera</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>03-Apr-2018 05:48:27</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>17-Apr-2018 10:57:44</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>17-Apr-2018 10:57:44</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>29-May-2018 07:01:26</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>29-May-2018 07:01:26</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>31-May-2018 02:59:33</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>31-May-2018 02:59:33</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>26-Jun-2018 13:34:47</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>26-Jun-2018 13:34:47</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AW">Abstract Withdrawn</log_status>
+<timestamp>27-Jun-2018 00:26:02</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>20-Sep-2018 04:47:19</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>20-Sep-2018 04:47:19</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>20-Sep-2018 04:48:12</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>20-Sep-2018 04:48:12</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>15-May-2019 06:41:58</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 06:51:12</timestamp>
+<comments>TUZPLS2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 06:53:23</timestamp>
+<comments>TUZPLS2.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>18-May-2019 07:01:56</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>18-May-2019 07:19:45</timestamp>
+<comments>TUZPLS2.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>18-May-2019 07:21:32</timestamp>
+<editor_status code="R">Red</editor_status>
+<comments>Hello,
+I have made the following changes to your paper:
+Formatting of figure captions
+Formatting of reference list
+
+I have had to return it as there are two Figure 7. Could you please download the updated version and address this for me?
+
+Thanks,
+Mark</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 11:34:47</timestamp>
+<comments>TUZPLS2.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 22:51:14</timestamp>
+<comments>TUZPLS2_TALK.PPT</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 22:51:58</timestamp>
+<comments>TUZPLS2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 02:34:38</timestamp>
+<comments>TUZPLS2.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 02:35:22</timestamp>
+<comments>TUZPLS2.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 13:52:06</timestamp>
+<comments>TUZPLS2.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 13:52:53</timestamp>
+<comments>TUZPLS2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 13:54:33</timestamp>
+<comments>TUZPLS2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 13:56:05</timestamp>
+<comments>TUZPLS2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>21-May-2019 23:10:37</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 23:50:25</timestamp>
+<comments>TUZPLS2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>21-May-2019 23:50:50</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Speaker,
+Your PowerPoint slides were converted successfully to PDF and will
+be published in the conference proceedings. Please download the PDF
+slides file (TUZPLS2_TALK.pdf) and check that all is OK. 
+In the event of a problem, please contact:
+jan.chrin@psi.ch 
+Thank you.
+</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 05:56:12</timestamp>
+<comments>TUZPLS2.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 05:56:38</timestamp>
+<comments>TUZPLS2.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>22-May-2019 05:58:43</timestamp>
+<editor_status code="Y">Yellow</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>22-May-2019 06:41:04</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="DR">Dot Reassignment</log_status>
+<timestamp>22-May-2019 10:24:16</timestamp>
+<editor_status code="G">Green</editor_status>
+<comments>thanks very much for your careful correction!</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>23-May-2019 00:40:53</timestamp>
+</abstract_log>
+</abstract_logs>
+</paper>
+</papers>
+</session>
+</conference>

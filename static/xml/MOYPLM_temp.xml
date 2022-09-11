@@ -1,0 +1,1278 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<conference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://bel.gsi.de/docs/xml/conference.xsd" name="IPAC 2019, Melbourne, Australia">
+<session type="Oral">
+<name abbr="MOYPLM">Opening Plenaries</name>
+<date btime="1100" etime="1230">20-May-19</date>
+<location type="After Coffee Invited Oral">Main Plenary (plenary 2)</location>
+<chairs>
+<chair>
+<lname>Tanaka</lname>
+<fname>Hitoshi</fname>
+<iname>H.</iname>
+<author_id>3112</author_id>
+<institutions>
+<institute>
+<full_name type="Research Centre">RIKEN SPring-8 Center</full_name>
+<name1>RIKEN SPring-8 Center</name1>
+<address1>1-1-1, Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5148</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>tanaka@spring8.or.jp</email>
+<email>tanaka@spring8.or.jp</email>
+<email>tanaka@spring8.or.jp</email>
+<email>tanaka@spring8.or.jp</email>
+</emails>
+</chair>
+</chairs>
+<papers>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Koseki</lname>
+<fname>Tadashi</fname>
+<iname>T.</iname>
+<author_id>2965</author_id>
+<institutions>
+<institute>
+<full_name abbrev="KEK">High Energy Accelerator Research Organization Accelerator Laboratory</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<department>Accelerator Laboratory</department>
+<address1>1-1 Oho</address1>
+<address2>Tsukuba</address2>
+<town>Ibaraki</town>
+<zip_code>305-0801</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="KEK" type="Laboratory">High Energy Accelerator Research Organization J-PARC Center</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<department>J-PARC Center</department>
+<address1>2-4 Shirakata Shirane</address1>
+<town>Tokai, Ibaraki</town>
+<zip_code>319-1195</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="RIKEN/RARF/CC">The Institute of Physical and Chemical Research Accelerator Research Facility Cyclotron Center</full_name>
+<name1>The Institute of Physical and Chemical Research</name1>
+<name2>Accelerator Research Facility</name2>
+<department>Cyclotron Center</department>
+<URL>http://www.rarf.riken.go.jp/rarf/rarf.html</URL>
+<address1>Wako Main Campus</address1>
+<address2>2-1 Hirosawa</address2>
+<address3>Wako</address3>
+<town>Saitama</town>
+<zip_code>351-0198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="J-PARC, KEK &amp; JAEA" type="University Laboratory">Japan Proton Accelerator Research Complex High Energy Accelerator Research Organization Tokai Campus</full_name>
+<name1>Japan Proton Accelerator Research Complex</name1>
+<name2>High Energy Accelerator Research Organization</name2>
+<department>Tokai Campus</department>
+<address1>Shirakata-Shirane 2-4</address1>
+<address2>Tokai-mura</address2>
+<address3>Naka-gun</address3>
+<town>Ibaraki-ken</town>
+<zip_code>319-1195</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>tadashi.koseki@kek.jp</email>
+<email>tadashi.koseki@kek.jp</email>
+<email>koseki@riken.go.jp</email>
+<email>tadashi.koseki@kek.jp</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>1429</abstract_id>
+<pages>6</pages>
+<toc>6</toc>
+<main_class>MC4: Hadron Accelerators</main_class>
+<sub_class>A17 High Intensity Accelerators</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">MOYPLM1</code>
+<presentation type="Oral">Invited Oral</presentation>
+<start_time>1100</start_time>
+<duration>30</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>Challenges to Higher Beam Power in J-PARC: Achieved Performance and Future Prospects</title>
+<abstract>J-PARC is a world leading intensity frontier accelerator facility, consisting of a 400-MeV H- linac, a 3-GeV Rapid Cycling Synchrotron (RCS) and a 30-GeV slow cycling Main Ring synchrotron (MR). The RCS delivered a 500 kW beam (4.2E13 particles per pulse (ppp)) to the Material and Life science experimental Facility (MLF) in April of 2018, The design power of 1 MW will be delivered in the next few years. Construction of a second target station (2TS) of the MLF with beam power upgraded to 1.5 MW is now under discussion. The MR delivers proton beam to a long-baseline neutrino oscillation experiment, T2K, by fast extraction (FX) and to the hadron experimental facility by slow extraction (SX). For the FX, the maximum beam power is 475 kW and 2.5E14 ppp, the world highest ppp in synchrotrons, and for the SX 51 kW and 5.5E13 ppp with an extremely high extraction efficiency of 99.5 %. To achieve 1.3 MW beam power for the neutrino experiment, upgrades to allow operation with a higher repetition rate are planned. The talk will review recent progress of J-PARC facility by highlighting technical challenges toward higher beam power together with future prospects.</abstract>
+<contributors>
+<contributor type="Owner">
+<lname>Igarashi</lname>
+<fname>Susumu</fname>
+<iname>S.</iname>
+<author_id>964</author_id>
+<institutions>
+<institute>
+<full_name abbrev="KEK" type="Laboratory">High Energy Accelerator Research Organization</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<URL>http://www.kek.jp/intra.html</URL>
+<address1>1-1 Oho</address1>
+<address2>Tsukuba</address2>
+<town>Ibaraki</town>
+<zip_code>305-0801</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>susumu.igarashi@kek.jp</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Igarashi</lname>
+<fname>Susumu</fname>
+<iname>S.</iname>
+<author_id>964</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="KEK" type="Laboratory">High Energy Accelerator Research Organization</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<URL>http://www.kek.jp/intra.html</URL>
+<address1>1-1 Oho</address1>
+<address2>Tsukuba</address2>
+<town>Ibaraki</town>
+<zip_code>305-0801</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>susumu.igarashi@kek.jp</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Igarashi</lname>
+<fname>Susumu</fname>
+<iname>S.</iname>
+<author_id>964</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="KEK" type="Laboratory">High Energy Accelerator Research Organization</full_name>
+<name1>High Energy Accelerator Research Organization</name1>
+<URL>http://www.kek.jp/intra.html</URL>
+<address1>1-1 Oho</address1>
+<address2>Tsukuba</address2>
+<town>Ibaraki</town>
+<zip_code>305-0801</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>susumu.igarashi@kek.jp</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>MOYPLM1.docx</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>MOYPLM1_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOYPLM1_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOYPLM1_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOYPLM1_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOYPLM1_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>MOYPLM1.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>MOYPLM1.docx</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOYPLM1_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOYPLM1_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOYPLM1_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM1&amp;wanted_file=MOYPLM1_AUTHOR.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM1&amp;wanted_file=MOYPLM1.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM1&amp;wanted_file=MOYPLM1.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM1&amp;wanted_file=MOYPLM1.docx</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM1&amp;wanted_file=MOYPLM1_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM1&amp;wanted_file=MOYPLM1_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM1&amp;wanted_file=MOYPLM1_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM1&amp;wanted_file=MOYPLM1_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM1&amp;wanted_file=MOYPLM1_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM1&amp;wanted_file=MOYPLM1_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM1&amp;wanted_file=MOYPLM1_TALK.PDF</fileURL>
+</fileURLs>
+<editor>Anthony Cuffe</editor>
+<final_qa>Dong Eon Kim</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>04-Apr-2018 08:03:39</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>31-May-2018 01:45:51</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>31-May-2018 01:45:51</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>31-May-2018 02:06:32</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>31-May-2018 02:06:32</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>31-May-2018 04:02:09</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>31-May-2018 04:02:09</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AOC">Abstract Owner Changed</log_status>
+<timestamp>27-Jun-2018 00:26:03</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>20-Sep-2018 04:26:58</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>20-Sep-2018 04:26:58</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 11:24:31</timestamp>
+<comments>MOYPLM1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 11:24:54</timestamp>
+<comments>MOYPLM1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>18-May-2019 05:09:44</timestamp>
+<comments>MOYPLM1_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>18-May-2019 05:13:58</timestamp>
+<comments>MOYPLM1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>19-May-2019 03:36:21</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 03:45:13</timestamp>
+<comments>MOYPLM1_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 03:46:23</timestamp>
+<comments>MOYPLM1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 04:11:43</timestamp>
+<comments>MOYPLM1.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 04:11:59</timestamp>
+<comments>MOYPLM1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>19-May-2019 04:13:05</timestamp>
+<editor_status code="Y">Yellow</editor_status>
+<comments>Minor corrections were made to your paper to fix formatting issues.  Please verify the changes and approve or provide feedback.  If you make modifications, please use the latest uploaded file with the editor's changes as a starting point so the changes are not lost.
+- Sub-sectoin Heading switched to title-case.
+- Reference Formatting.
+
+</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 08:12:29</timestamp>
+<comments>MOYPLM1_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 08:13:11</timestamp>
+<comments>MOYPLM1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>21-May-2019 00:18:38</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 00:26:13</timestamp>
+<comments>MOYPLM1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>21-May-2019 00:27:56</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Your PowerPoint slides were converted successfully to PDF and will be included in the conference proceedings. Please download the PDF slides file (MOYPLM1_TALK.pdf) and check. In case of trouble just send an email to &quot;v.r.w.schaa@gsi.de&quot;. Thank you.
+</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="DR">Dot Reassignment</log_status>
+<timestamp>21-May-2019 22:10:50</timestamp>
+<editor_status code="G">Green</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>23-May-2019 02:56:52</timestamp>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Hsu</lname>
+<fname>Kuo-Tung</fname>
+<iname>K.T.</iname>
+<author_id>1799</author_id>
+<institutions>
+<institute>
+<full_name abbrev="NSRRC" type="Research Centre">National Synchrotron Radiation Research Center</full_name>
+<name1>National Synchrotron Radiation Research Center</name1>
+<URL>www.nsrrc.org.tw</URL>
+<address1>101 Hsin-Ann Road.</address1>
+<address2>Hsinchu Science Park</address2>
+<town>Hsinchu</town>
+<zip_code>30076</zip_code>
+<country_code abbrev="ROC">Taiwan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>kuotung@nsrrc.org.tw</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>1178</abstract_id>
+<pages>5</pages>
+<toc>12</toc>
+<main_class>MC7: Accelerator Technology</main_class>
+<sub_class>T07 Superconducting RF</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">MOYPLM2</code>
+<presentation type="Oral">Invited Oral</presentation>
+<start_time>1130</start_time>
+<duration>30</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>SRF Operation at XFEL: Lessons Learned After More Than One Year</title>
+<abstract>The European XFEL is the largest high-field SRF installation in the world and has now been in operation more than a year. It serves as a &quot;prototype&quot; for other facilities being constructed or in the planning stages. Performance of the operation of the SRF system over this period of time and the lessons learned will be discussed.</abstract>
+<contributors>
+<contributor type="Co-Author">
+<lname>Ayvazyan</lname>
+<fname>Valeri</fname>
+<iname>V.</iname>
+<author_id>442</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>valeri.ayvazyan@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Branlard</lname>
+<fname>Julien</fname>
+<iname>J.</iname>
+<author_id>23910</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>julien.branlard@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Decking</lname>
+<fname>Winfried</fname>
+<iname>W.</iname>
+<author_id>2951</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>winfried.decking@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Lilje</lname>
+<fname>Lutz</fname>
+<iname>L.</iname>
+<author_id>2954</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>lutz.lilje@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Omet</lname>
+<fname>Mathieu</fname>
+<iname>M.</iname>
+<author_id>60649</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>mathieu.omet@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Schnautz</lname>
+<fname>Tobias</fname>
+<iname>T.</iname>
+<author_id>118809</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>tobias.schnautz@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Vogel</lname>
+<fname>Elmar</fname>
+<iname>E.</iname>
+<author_id>455</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>elmar.vogel@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Walker</lname>
+<fname>Nicholas</fname>
+<iname>N.</iname>
+<author_id>379</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>nicholas.walker@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Kostin</lname>
+<fname>Denis</fname>
+<iname>D.</iname>
+<author_id>4136</author_id>
+<institutions>
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+<institute>
+<full_name>Private Address</full_name>
+<name1>Private Address</name1>
+<address1>Luruper Hauptstr. 114j</address1>
+<town>Hamburg</town>
+<postal_code>22547</postal_code>
+<zip_code>22457</zip_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>denis.kostin@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Kostin</lname>
+<fname>Denis</fname>
+<iname>D.</iname>
+<author_id>4136</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>denis.kostin@desy.de</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Kostin</lname>
+<fname>Denis</fname>
+<iname>D.</iname>
+<author_id>4136</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="DESY">Deutsches Elektronen-Synchrotron</full_name>
+<name1>Deutsches Elektronen-Synchrotron</name1>
+<address1>Notkestrasse 85</address1>
+<town>Hamburg</town>
+<postal_code>22607</postal_code>
+<country_code abbrev="D">Germany</country_code>
+</institute>
+</institutions>
+<emails>
+<email>denis.kostin@desy.de</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOYPLM2_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>MOYPLM2_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>MOYPLM2.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>MOYPLM2f1.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>MOYPLM2f2.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>MOYPLM2f3.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>MOYPLM2f4.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>MOYPLM2f5.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>MOYPLM2f6.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>MOYPLM2f7.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>MOYPLM2f8.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>MOYPLM2f9.jpg</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>MOYPLM2.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>MOYPLM2.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>MOYPLM2.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOYPLM2_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM2&amp;wanted_file=MOYPLM2f1.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM2&amp;wanted_file=MOYPLM2f9.jpg</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM2&amp;wanted_file=MOYPLM2f2.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM2&amp;wanted_file=MOYPLM2f3.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM2&amp;wanted_file=MOYPLM2f8.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM2&amp;wanted_file=MOYPLM2f5.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM2&amp;wanted_file=MOYPLM2f6.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM2&amp;wanted_file=MOYPLM2f7.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM2&amp;wanted_file=MOYPLM2f4.png</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM2&amp;wanted_file=MOYPLM2.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM2&amp;wanted_file=MOYPLM2.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM2&amp;wanted_file=MOYPLM2_AUTHOR.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM2&amp;wanted_file=MOYPLM2.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM2&amp;wanted_file=MOYPLM2.docx</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM2&amp;wanted_file=MOYPLM2_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM2&amp;wanted_file=MOYPLM2_TALK.PPTX</fileURL>
+</fileURLs>
+<editor>Laurent Serani</editor>
+<final_qa>Johan Olander</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>23-Mar-2018 14:24:24</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>29-May-2018 05:58:13</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>29-May-2018 05:58:13</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>31-May-2018 03:25:48</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>31-May-2018 03:25:48</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AOC">Abstract Owner Changed</log_status>
+<timestamp>27-Jun-2018 00:26:03</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>20-Sep-2018 04:55:50</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>20-Sep-2018 04:55:50</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>11-Dec-2018 14:13:51</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 18:04:16</timestamp>
+<comments>MOYPLM2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 18:05:50</timestamp>
+<comments>MOYPLM2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 18:06:35</timestamp>
+<comments>MOXAA01f1.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 18:06:50</timestamp>
+<comments>MOXAA01f2.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 18:07:02</timestamp>
+<comments>MOXAA01f3.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>10-May-2019 18:07:21</timestamp>
+<comments>MOXAA01f1.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>10-May-2019 18:07:26</timestamp>
+<comments>MOXAA01f2.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>10-May-2019 18:07:31</timestamp>
+<comments>MOXAA01f3.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 18:08:15</timestamp>
+<comments>MOYPLM2.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 18:09:34</timestamp>
+<comments>MOYPLM2f1.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 18:09:59</timestamp>
+<comments>MOYPLM2f2.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 18:10:10</timestamp>
+<comments>MOYPLM2f3.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 18:10:34</timestamp>
+<comments>MOYPLM2f4.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 18:10:44</timestamp>
+<comments>MOYPLM2f5.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 18:10:58</timestamp>
+<comments>MOYPLM2f6.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 18:11:07</timestamp>
+<comments>MOYPLM2f7.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 18:11:23</timestamp>
+<comments>MOYPLM2f8.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 18:11:31</timestamp>
+<comments>MOYPLM2f9.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>18-May-2019 06:19:51</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>18-May-2019 06:30:37</timestamp>
+<editor_status code="R">Red</editor_status>
+<comments>the guideline is 3 pages for paper and an extra page for acknowledgment and references.
+Try to follow the guideline and shortness your paper</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>18-May-2019 07:00:07</timestamp>
+<comments>MOYPLM2.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>18-May-2019 07:00:24</timestamp>
+<comments>MOYPLM2.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>18-May-2019 07:00:51</timestamp>
+<editor_status code="Y">Yellow</editor_status>
+<comments>references.
+Please check the PDF file on your SPMS account. When agree put it to GREEN via the offered link otherwise reject changes and give comments</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="DR">Dot Reassignment</log_status>
+<timestamp>18-May-2019 08:36:11</timestamp>
+<editor_status code="G">Green</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 00:01:07</timestamp>
+<comments>MOYPLM2.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>21-May-2019 00:01:15</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>21-May-2019 00:28:15</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 00:34:24</timestamp>
+<comments>MOYPLM2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>21-May-2019 00:35:13</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Your PowerPoint slides were converted successfully to PDF and will be included in the conference proceedings. Please download the PDF slides file (MOYPLM2_TALK.pdf) and check. In case of trouble just send an email to &quot;v.r.w.schaa@gsi.de&quot;. Thank you.
+</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Qin</lname>
+<fname>Qing</fname>
+<iname>Q.</iname>
+<author_id>1249</author_id>
+<institutions>
+<institute>
+<full_name abbrev="IHEP" type="Institute">Chinese Academy of Sciences Institute of High Energy Physics</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<URL>http://www.chinacp.com/eng/cporg/cporg_ihep.html</URL>
+<address1>Yuquan Road 19</address1>
+<po_box>P.O. Box 918-8</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Accelerator Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<department>Accelerator Center</department>
+<address1>19B Yuquan Road</address1>
+<address2>Shijingshang District</address2>
+<town>Beijing</town>
+<postal_code>100049</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Chinese Academy of Sciences Accelerator Division</full_name>
+<name1>Institute of High Energy Physics</name1>
+<name2>Chinese Academy of Sciences</name2>
+<department>Accelerator Division</department>
+<URL>http://www.ihep.cas.cn/</URL>
+<address1>19B Yuquan Road</address1>
+<po_box>P.O. Box 918</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Institute">Institute of High Energy Physics Chinese Academy of Sciences Experimental Physics Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<name2>Chinese Academy of Sciences</name2>
+<department>Experimental Physics Center</department>
+<URL>http://epc.ihep.ac.cn/epchomepage/index.html</URL>
+<address1>19B,Yuquan Rd.,</address1>
+<address2>Shijingshan District</address2>
+<po_box>P.O.Box 918</po_box>
+<town>Bejing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>qinq@mail.ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>1494</abstract_id>
+<pages>6</pages>
+<toc>17</toc>
+<main_class>MC1: Circular and Linear Colliders</main_class>
+<sub_class>A01 Hadron Colliders</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">MOYPLM3</code>
+<presentation type="Oral">Invited Oral</presentation>
+<start_time>1200</start_time>
+<duration>30</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>Progress with the High Luminosity LHC Project at CERN</title>
+<abstract>The High Luminosity LHC (HL-LHC) project aims at upgrading the LHC by increasing the peak luminosity by a factor five, to allow to collect 3000 fb-1 for ATLAS and CMS experiments, each, which is ten times more than what is foreseen in the LHC. The upgrade is based on multiple factors. One factor is doubling the beam current, also thanks to the injector upgrade (LIU) project, and another one is operation in levelling mode. The most critical upgrade is the deploying of a stronger inner quadrupole triplet in the low-beta insertions with more than twice-larger aperture w.r.t. present LHC triplet, thanks to the use of Nb3Sn superconductor, a world first for accelerators, with almost 12 T peak field in the coils. The novel concept of ATS optics allows to utilise the increased aperture efficiently by generating beta* values 3 to 4 times below the nominal values of the LHC. We will make use of compact crab cavities for hadrons (also a novelty in accelerators) to allow almost head-on collisions despite the larger crossing angle. We are developing new collimator insertions in the dispersion suppressor region to handle the losses in the cold part of the machine (the beam halo stores 30 MJ) thanks to the use of a few 11 T dipoles based on Nb3Sn technology. We also aim at reducing drastically the impedance contribution of collimators by utilizing new materials and coating techniques. Many other technologies are developed for HL-LHC like new SC links of 100 kA: HL-LHC is critical as a technology turning point for HEP colliders as it is for Physics reach. The technologies developed for HL-LHC, namely (but not only) the high field superconducting magnets, are critical for the post-LHC hadron collider, like a High Energy LHC or the 100 km Future Circular Collider</abstract>
+<contributors>
+<contributor type="Co-Author">
+<lname>Brüning</lname>
+<fname>Oliver</fname>
+<mname>Sim</mname>
+<iname>O.S.</iname>
+<author_id>1680</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>oliver.bruning@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Rossi</lname>
+<fname>Lucio</fname>
+<iname>L.</iname>
+<author_id>1702</author_id>
+<institutions>
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research AT Department</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>AT Department</department>
+<URL>http://www.cern.ch</URL>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Technology Department (TE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Technology Department (TE)</department>
+<URL>http://www.cern.ch</URL>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Accelerator Technology Sector Director Office (ATS-DO)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<name2>Accelerator Technology Sector</name2>
+<department>Director Office (ATS-DO)</department>
+<address1>Esplanade des Particles 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>lucio.rossi@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Rossi</lname>
+<fname>Lucio</fname>
+<iname>L.</iname>
+<author_id>1702</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Technology Department (TE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Technology Department (TE)</department>
+<URL>http://www.cern.ch</URL>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>lucio.rossi@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Rossi</lname>
+<fname>Lucio</fname>
+<iname>L.</iname>
+<author_id>1702</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Technology Department (TE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Technology Department (TE)</department>
+<URL>http://www.cern.ch</URL>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>lucio.rossi@cern.ch</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOYPLM3_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOYPLM3_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>MOYPLM3_TALK-split.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>MOYPLM3.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>MOYPLM3.docx</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM3&amp;wanted_file=MOYPLM3_TALK-split.PPTX</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM3&amp;wanted_file=MOYPLM3.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM3&amp;wanted_file=MOYPLM3.docx</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM3&amp;wanted_file=MOYPLM3_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOYPLM3&amp;wanted_file=MOYPLM3_TALK.PPTX</fileURL>
+</fileURLs>
+<editor>David Taylor Button</editor>
+<final_qa>Johan Olander</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>05-Apr-2018 08:35:28</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>29-May-2018 06:00:28</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>29-May-2018 06:00:28</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>31-May-2018 00:09:11</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>31-May-2018 00:09:11</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AOC">Abstract Owner Changed</log_status>
+<timestamp>27-Jun-2018 00:26:03</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>20-Sep-2018 03:25:01</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>20-Sep-2018 03:25:01</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>12-Dec-2018 00:51:14</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>12-Dec-2018 00:51:14</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>12-Dec-2018 00:52:36</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>12-Dec-2018 00:52:36</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 13:47:00</timestamp>
+<comments>MOYPLM3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>19-May-2019 21:59:52</timestamp>
+<comments>MOYPLM3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 22:01:27</timestamp>
+<comments>MOYPLM3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>21-May-2019 00:35:28</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 00:53:17</timestamp>
+<comments>MOYPLM3_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>21-May-2019 00:54:14</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Your PowerPoint slides were converted successfully to PDF and will be included in the conference proceedings. Please download the PDF slides file (MOYPLM2_TALK.pdf) and check. In case of trouble just send an email to &quot;v.r.w.schaa@gsi.de&quot;. Thank you.
+</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 00:55:58</timestamp>
+<comments>MOYPLM3_TALK-split.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>22-May-2019 04:13:31</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>22-May-2019 06:31:41</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 06:32:08</timestamp>
+<comments>MOYPLM3.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 06:32:46</timestamp>
+<comments>MOYPLM3.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>22-May-2019 06:33:22</timestamp>
+<editor_status code="G">Green</editor_status>
+<comments>Thank you for your kind interaction and help preparing your submission.
+
+David</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>22-May-2019 06:47:57</timestamp>
+</abstract_log>
+</abstract_logs>
+</paper>
+</papers>
+</session>
+</conference>

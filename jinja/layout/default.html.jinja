@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block head %}
+    <title>{% block title %}{% endblock %} - My Webpage</title>
+    {% endblock %}
+
+    {% block styles %}
+    <link href="{{ url_for('static', path='/css/style.css') }}" rel="stylesheet">
+    {% endblock %}
+
+    {% block scripts %}
+    <script src="{{ url_for('static', path='/js/script.js') }}" type="application/javascript"></script>
+    {% endblock %}
+
+</head>
+<body>
+    <div id="content">
+    {% block content %}{% endblock %}
+    </div>
+    <div id="footer">
+        {% block footer %}
+        &copy; Copyright 2022.
+        {% endblock %}
+    </div>
+</body>
+</html>

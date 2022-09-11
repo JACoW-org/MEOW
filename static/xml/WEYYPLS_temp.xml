@@ -1,0 +1,1561 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<conference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://bel.gsi.de/docs/xml/conference.xsd" name="IPAC 2019, Melbourne, Australia">
+<session type="Oral">
+<name abbr="WEYYPLS">Contributed Orals: Beam Dynamics and EM Fields</name>
+<date btime="1130" etime="1230">22-May-19</date>
+<location type="After Coffee Contributed Oral">Secondary Plenary (plenary 3)</location>
+<chairs>
+<chair>
+<lname>Lobanov</lname>
+<fname>Nikolai</fname>
+<mname>R.</mname>
+<iname>N.R.</iname>
+<author_id>38943</author_id>
+<institutions>
+<institute>
+<full_name type="University Department">Research School of Physics and Engineering Australian National University Nuclear Physics</full_name>
+<name1>Research School of Physics and Engineering</name1>
+<name2>Australian National University</name2>
+<department>Nuclear Physics</department>
+<URL>http://wwwrsphysse.anu.edu.au/nuclear/</URL>
+<town>Canberra, Australian Capitol Territory</town>
+<zip_code>ACT 0200</zip_code>
+<country_code abbrev="AUS">Australia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>nikolai.lobanov@anu.edu.au</email>
+</emails>
+</chair>
+</chairs>
+<papers>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Lobanov</lname>
+<fname>Nikolai</fname>
+<mname>R.</mname>
+<iname>N.R.</iname>
+<author_id>38943</author_id>
+<institutions>
+<institute>
+<full_name type="University Department">Research School of Physics and Engineering Australian National University Nuclear Physics</full_name>
+<name1>Research School of Physics and Engineering</name1>
+<name2>Australian National University</name2>
+<department>Nuclear Physics</department>
+<URL>http://wwwrsphysse.anu.edu.au/nuclear/</URL>
+<town>Canberra, Australian Capitol Territory</town>
+<zip_code>ACT 0200</zip_code>
+<country_code abbrev="AUS">Australia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>nikolai.lobanov@anu.edu.au</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>3467</abstract_id>
+<pages>4</pages>
+<toc>2266</toc>
+<main_class>MC5: Beam Dynamics and EM Fields</main_class>
+<sub_class>D01 Beam Optics - Lattices, Correction Schemes, Transport</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">WEYYPLS1</code>
+<presentation type="Oral">Contributed Oral</presentation>
+<start_time>1130</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>Muon G-2:  An Interplay between Beam Dynamics and a Muon Decay Experiment at the Precision Frontier</title>
+<abstract>The Muon g-2 Experiment at Fermilab (E989) will use the higher proton flux delivered by the Fermilab accelerator complex and improvements to the experimental apparatus to measure the anomalous magnetic moment of the muon to unprecedented precision. In addition to the increased statistics beyond the most recent measurement, the experiment relies on detailed understanding of the beam dynamics in the experiment's storage ring as well as the incoming muon beam properties for proper assessments of systematic errors in the data analysis. Modeling and measurements of beam and storage ring properties, from proton targeting to muon storage, produce a unique unification of particle beam physics with a high energy physics experiment. Here the beam dynamics issues and analysis techniques essential to the g-2 experiment are presented and discussed.</abstract>
+<agency>This work has been partially funded by Fermi Research Alliance, LLC under Contract No. DE-AC02-07CH11359 with the U.S. Department of Energy, Office of Science, Office of High Energy Physics.</agency>
+<contributors>
+<contributor type="Owner">
+<lname>Syphers</lname>
+<fname>Michael</fname>
+<mname>James</mname>
+<iname>M.J.</iname>
+<author_id>11304</author_id>
+<institutions>
+<institute>
+<full_name abbrev="FRIB" type="University Laboratory">Facility for Rare Isotope Beams Michigan State University Cyclotron Laboratory</full_name>
+<name1>Facility for Rare Isotope Beams</name1>
+<name2>Michigan State University</name2>
+<department>Cyclotron Laboratory</department>
+<URL>http://www.frib.msu.edu/</URL>
+<town>East Lansing, Michigan</town>
+<zip_code>MI 48824-1321</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name abbrev="MSU" type="University">Michigan State University Department of Physics and Astronomy</full_name>
+<name1>Michigan State University</name1>
+<department>Department of Physics and Astronomy</department>
+<town>East Lansing, Michigan</town>
+<zip_code>MI 48824-2320</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name abbrev="Fermilab" type="Laboratory">Fermi National Accelerator Laboratory</full_name>
+<name1>Fermi National Accelerator Laboratory</name1>
+<URL>http://www.fnal.gov/</URL>
+<po_box>P.O. Box 500</po_box>
+<town>Batavia, Illinois</town>
+<zip_code>IL 60510-0500</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name abbrev="Fermilab" type="Laboratory">Fermi National Accelerator Laboratory Accelerator Division</full_name>
+<name1>Fermi National Accelerator Laboratory</name1>
+<name2>Accelerator Division</name2>
+<URL>http://www.fnal.gov/</URL>
+<po_box>P.O. Box 500</po_box>
+<town>Batavia, Illinois</town>
+<zip_code>IL 60510-0500</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name abbrev="NSCL" type="University Laboratory">Michigan State University National Superconducting Cyclotron Laboratory</full_name>
+<name1>Michigan State University</name1>
+<name2>National Superconducting Cyclotron Laboratory</name2>
+<URL>http://www.nscl.msu.edu/</URL>
+<address1>640 South Shaw Lane</address1>
+<town>East Lansing, Michigan</town>
+<zip_code>MI 48824</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name>Northern Illinois University Department of Physics</full_name>
+<name1>Northern Illinois University</name1>
+<department>Department of Physics</department>
+<URL>http://www.physics.niu.edu/</URL>
+<town>DeKalb, Illinois</town>
+<zip_code>IL 60115</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>msyphers@niu.edu</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Syphers</lname>
+<fname>Michael</fname>
+<mname>James</mname>
+<iname>M.J.</iname>
+<author_id>11304</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name>Northern Illinois University Department of Physics</full_name>
+<name1>Northern Illinois University</name1>
+<department>Department of Physics</department>
+<URL>http://www.physics.niu.edu/</URL>
+<town>DeKalb, Illinois</town>
+<zip_code>IL 60115</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>msyphers@niu.edu</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Syphers</lname>
+<fname>Michael</fname>
+<mname>James</mname>
+<iname>M.J.</iname>
+<author_id>11304</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name>Northern Illinois University Department of Physics</full_name>
+<name1>Northern Illinois University</name1>
+<department>Department of Physics</department>
+<URL>http://www.physics.niu.edu/</URL>
+<town>DeKalb, Illinois</town>
+<zip_code>IL 60115</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>msyphers@niu.edu</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>MuonCampus.pdf</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>SRing.pdf</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>RadiusCalc.pdf</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>RadiusData.pdf</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>WEYYPLS1.tex</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEYYPLS1_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>WEYYPLS1.tex</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEYYPLS1.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEYYPLS1_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEYYPLS1_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEYYPLS1_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEYYPLS1_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS1&amp;wanted_file=SRing.pdf</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS1&amp;wanted_file=RadiusCalc.pdf</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS1&amp;wanted_file=MuonCampus.pdf</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS1&amp;wanted_file=RadiusData.pdf</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS1&amp;wanted_file=WEYYPLS1.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS1&amp;wanted_file=WEYYPLS1_AUTHOR.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS1&amp;wanted_file=WEYYPLS1.tex</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS1&amp;wanted_file=WEYYPLS1.tex</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS1&amp;wanted_file=WEYYPLS1_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS1&amp;wanted_file=WEYYPLS1_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS1&amp;wanted_file=WEYYPLS1_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS1&amp;wanted_file=WEYYPLS1_TALK.PDF</fileURL>
+</fileURLs>
+<editor>Ivan Andrian</editor>
+<final_qa>Maxim Kuzin</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>05-Dec-2018 15:56:50</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>11-Dec-2018 04:54:15</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>03-Feb-2019 22:22:17</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>06-Feb-2019 02:35:27</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>06-Feb-2019 02:35:27</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 19:24:13</timestamp>
+<comments>WEYYPLS1.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 19:24:35</timestamp>
+<comments>WEYYPLS1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 19:25:59</timestamp>
+<comments>MuonCampus.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 19:26:21</timestamp>
+<comments>SRing.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 19:27:07</timestamp>
+<comments>RadiusCalc.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 19:27:24</timestamp>
+<comments>RadiusData.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>17-May-2019 06:59:50</timestamp>
+<comments>WEYYPLS1.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 07:01:04</timestamp>
+<comments>WEYYPLS1.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>17-May-2019 07:01:18</timestamp>
+<comments>WEYYPLS1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>17-May-2019 07:01:48</timestamp>
+<comments>WEYYPLS1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>19-May-2019 04:38:08</timestamp>
+<comments>WEYYPLS1.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 04:38:36</timestamp>
+<comments>WEYYPLS1.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 04:39:08</timestamp>
+<comments>WEYYPLS1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>19-May-2019 04:39:48</timestamp>
+<comments>WEYYPLS1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>19-May-2019 04:40:00</timestamp>
+<comments>RadiusData.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 04:40:24</timestamp>
+<comments>RadiusData.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>19-May-2019 04:53:36</timestamp>
+<comments>WEYYPLS1.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>19-May-2019 04:53:47</timestamp>
+<comments>WEYYPLS1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 04:54:34</timestamp>
+<comments>WEYYPLS1.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 04:55:02</timestamp>
+<comments>WEYYPLS1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>19-May-2019 05:56:57</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 06:07:47</timestamp>
+<comments>WEYYPLS1.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 06:08:02</timestamp>
+<comments>WEYYPLS1.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>19-May-2019 06:09:26</timestamp>
+<editor_status code="G">Green</editor_status>
+<comments>recompiled with \begin{thebibliography}{99}</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>20-May-2019 05:42:23</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 10:39:48</timestamp>
+<comments>WEYYPLS1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 01:13:10</timestamp>
+<comments>WEYYPLS1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>21-May-2019 04:44:04</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 04:52:17</timestamp>
+<comments>WEYYPLS1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>21-May-2019 05:00:57</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>22-May-2019 05:16:03</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 05:24:10</timestamp>
+<comments>WEYYPLS1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>22-May-2019 05:25:35</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Speaker,
+The pdf of your talk has been processed, with backup slides removed, and will appear in the conferences proceedings.
+Kind Regards,
+jan.chrin@psi.ch</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Lobanov</lname>
+<fname>Nikolai</fname>
+<mname>R.</mname>
+<iname>N.R.</iname>
+<author_id>38943</author_id>
+<institutions>
+<institute>
+<full_name type="University Department">Research School of Physics and Engineering Australian National University Nuclear Physics</full_name>
+<name1>Research School of Physics and Engineering</name1>
+<name2>Australian National University</name2>
+<department>Nuclear Physics</department>
+<URL>http://wwwrsphysse.anu.edu.au/nuclear/</URL>
+<town>Canberra, Australian Capitol Territory</town>
+<zip_code>ACT 0200</zip_code>
+<country_code abbrev="AUS">Australia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>nikolai.lobanov@anu.edu.au</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>2701</abstract_id>
+<pages>4</pages>
+<toc>2270</toc>
+<main_class>MC5: Beam Dynamics and EM Fields</main_class>
+<sub_class>D01 Beam Optics - Lattices, Correction Schemes, Transport</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">WEYYPLS2</code>
+<presentation type="Oral">Contributed Oral</presentation>
+<start_time>1150</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>First Experimental Measurements of the Caustic Nature of Trajectories in Bunch Compressors</title>
+<abstract>Theoretical advancements describing density perturbations in accelerated charge particle beams, known as caustics, has been recently developed * This proceeding describes the first experimental measurements of the caustic nature of charged particle trajectories in a particle accelerator. Caustics by their nature are discontinuities that result from small continuous perturbations of an input. Under certain conditions, small density modulations will reliably produce striking changes in the corresponding output current profile. These current modulations can shift alone the bunch with varying higher-order longitudinal dispersion. The MAX IV linac double-bend achromats provide the perfect test bed for experimentally verifying how the caustic lines evolve. The natural amplification of small perturbations makes caustics an attractive diagnostic tool, and effective tool for characterise the bunch compressors. This approach also allows us to modify and improve the longitudinal charge profile, removing current spikes or creating tailor shaped current profiles.</abstract>
+<footnote>* T.K.Charles et. al. Phys. Rev. Accel. Beams 19, 104402</footnote>
+<contributors>
+<contributor type="Co-Author">
+<lname>Björklund Svensson</lname>
+<fname>Jonas</fname>
+<iname>J.</iname>
+<author_id>77043</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="University Department">Lund University Department of Physics</full_name>
+<name1>Lund University</name1>
+<department>Department of Physics</department>
+<address1>Sölvegatan 14</address1>
+<town>Lund</town>
+<postal_code>SE-223 62</postal_code>
+<country_code abbrev="SE">Sweden</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jonas.bjorklund_svensson@fysik.lth.se</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Latina</lname>
+<fname>Andrea</fname>
+<iname>A.</iname>
+<author_id>21470</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>andrea.latina@cern.ch</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Thorin</lname>
+<fname>Sara</fname>
+<iname>S.</iname>
+<author_id>21193</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="University Laboratory">MAX IV Laboratory Lund University</full_name>
+<name1>MAX IV Laboratory</name1>
+<name2>Lund University</name2>
+<address1>Fotongatan 2</address1>
+<po_box>P.O. Box 118</po_box>
+<town>Lund</town>
+<postal_code>22100</postal_code>
+<country_code abbrev="SE">Sweden</country_code>
+</institute>
+</institutions>
+<emails>
+<email>sara.thorin@maxlab.lu.se</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Charles</lname>
+<fname>Tessa</fname>
+<iname>T.K.</iname>
+<author_id>44102</author_id>
+<institutions>
+<institute>
+<full_name type="University Department">Monash University Faculty of Science School of Physics and Astronomy</full_name>
+<name1>Monash University</name1>
+<name2>Faculty of Science</name2>
+<department>School of Physics and Astronomy</department>
+<address1>Clayton Campus, Wellington Road</address1>
+<town>Clayton, Victoria</town>
+<zip_code>VIC 3800</zip_code>
+<country_code abbrev="AUS">Australia</country_code>
+</institute>
+<institute>
+<full_name type="University">Monash University Department of Mechanical and Aerospace Engineering</full_name>
+<name1>Monash University</name1>
+<department>Department of Mechanical and Aerospace Engineering</department>
+<address1>Clayton Campus, Wellington Road</address1>
+<town>Clayton, Victoria</town>
+<zip_code>VIC 3800</zip_code>
+<country_code abbrev="AUS">Australia</country_code>
+</institute>
+<institute>
+<full_name abbrev="SLSA" type="Laboratory">Synchrotron Light Source Australia</full_name>
+<name1>Synchrotron Light Source Australia</name1>
+<URL>http://www.synchrotron.org.au</URL>
+<address1>800 Blackburn Road</address1>
+<town>Clayton</town>
+<postal_code>3168</postal_code>
+<country_code abbrev="AUS">Australia</country_code>
+</institute>
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research Beams Department (BE)</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<department>Beams Department (BE)</department>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanade des Particules 1</address1>
+<town>Geneva</town>
+<postal_code>1211</postal_code>
+<zip_code>23</zip_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+<institute>
+<full_name type="University Department">The University of Melbourne School of Physics</full_name>
+<name1>The University of Melbourne</name1>
+<department>School of Physics</department>
+<address1>Parkville</address1>
+<town>Melbourne, Victoria</town>
+<zip_code>VIC 3010</zip_code>
+<country_code abbrev="AUS">Australia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>tessa.charles@gmail.com</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Charles</lname>
+<fname>Tessa</fname>
+<iname>T.K.</iname>
+<author_id>44102</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name type="University Department">The University of Melbourne School of Physics</full_name>
+<name1>The University of Melbourne</name1>
+<department>School of Physics</department>
+<address1>Parkville</address1>
+<town>Melbourne, Victoria</town>
+<zip_code>VIC 3010</zip_code>
+<country_code abbrev="AUS">Australia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>tessa.charles@gmail.com</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Charles</lname>
+<fname>Tessa</fname>
+<iname>T.K.</iname>
+<author_id>44102</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name type="University Department">The University of Melbourne School of Physics</full_name>
+<name1>The University of Melbourne</name1>
+<department>School of Physics</department>
+<address1>Parkville</address1>
+<town>Melbourne, Victoria</town>
+<zip_code>VIC 3010</zip_code>
+<country_code abbrev="AUS">Australia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>tessa.charles@gmail.com</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLS2_f1.png</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLS2_f2.pdf</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLS2_f3_a.pdf</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLS2_f3_b.pdf</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLS2_f4_a.pdf</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLS2_f4_b.pdf</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLS2_f5_a.png</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLS2_f5_b.png</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLS2_f6.png</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEYYPLS2_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>WEYYPLS2.tex</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>WEYYPLS2.tex</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEYYPLS2.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEYYPLS2_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEYYPLS2_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEYYPLS2_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEYYPLS2.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS2&amp;wanted_file=WEYYPLS2_f1.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS2&amp;wanted_file=WEYYPLS2_f2.pdf</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS2&amp;wanted_file=WEYYPLS2_f6.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS2&amp;wanted_file=WEYYPLS2_f5_b.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS2&amp;wanted_file=WEYYPLS2_f5_a.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS2&amp;wanted_file=WEYYPLS2_f4_b.pdf</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS2&amp;wanted_file=WEYYPLS2_f4_a.pdf</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS2&amp;wanted_file=WEYYPLS2_f3_b.pdf</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS2&amp;wanted_file=WEYYPLS2_f3_a.pdf</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS2&amp;wanted_file=WEYYPLS2.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS2&amp;wanted_file=WEYYPLS2_AUTHOR.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS2&amp;wanted_file=WEYYPLS2.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS2&amp;wanted_file=WEYYPLS2.tex</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS2&amp;wanted_file=WEYYPLS2.tex</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS2&amp;wanted_file=WEYYPLS2_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS2&amp;wanted_file=WEYYPLS2_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS2&amp;wanted_file=WEYYPLS2_TALK.PPTX</fileURL>
+</fileURLs>
+<editor>Ivan Andrian</editor>
+<final_qa>Dong Eon Kim</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>04-Dec-2018 13:11:42</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>11-Dec-2018 05:12:07</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>11-Dec-2018 05:12:07</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>03-Feb-2019 11:54:45</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>03-Feb-2019 11:54:45</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 12:01:06</timestamp>
+<comments>WEYYPLS2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 12:01:45</timestamp>
+<comments>WEYYPLS2_f1.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 12:01:55</timestamp>
+<comments>WEYYPLS2_f2.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 12:02:04</timestamp>
+<comments>WEYYPLS2_f3_a.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 12:02:13</timestamp>
+<comments>WEYYPLS2_f3_b.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 12:02:28</timestamp>
+<comments>WEYYPLS2_f4_a.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 12:02:43</timestamp>
+<comments>WEYYPLS2_f4_b.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 12:03:04</timestamp>
+<comments>WEYYPLS2_f5_a.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 12:03:17</timestamp>
+<comments>WEYYPLS2_f5_b.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 12:03:30</timestamp>
+<comments>WEYYPLS2_f6.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 07:14:00</timestamp>
+<comments>WEYYPLS2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 07:14:11</timestamp>
+<comments>WEYYPLS2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 07:14:39</timestamp>
+<comments>WEYYPLS2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 07:15:37</timestamp>
+<comments>WEYYPLS2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 07:16:08</timestamp>
+<comments>WEYYPLS2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>19-May-2019 06:11:32</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 06:21:42</timestamp>
+<comments>WEYYPLS2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 06:21:54</timestamp>
+<comments>WEYYPLS2.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>19-May-2019 06:22:44</timestamp>
+<editor_status code="G">Green</editor_status>
+<comments>second subsection changed to Title Case; reordered references #26 and #27</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 21:28:45</timestamp>
+<comments>WEYYPLS2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 23:34:34</timestamp>
+<comments>WEYYPLS2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>21-May-2019 04:15:38</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>21-May-2019 04:15:38</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>22-May-2019 05:16:07</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 05:28:57</timestamp>
+<comments>WEYYPLS2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>22-May-2019 05:31:04</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Hi Tessa,
+Talk processed.
+Best,
+Jan
+Your PowerPoint slides were converted successfully to PDF, with backup slides removed, and will
+be published in the conference proceedings. Please download the PDF
+slides file (WEYYPLS2_TALK.pdf) and check that all is OK. 
+In the event of a problem, please contact:
+jan.chrin@psi.ch 
+Thank you.
+</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>23-May-2019 05:21:50</timestamp>
+<comments>WEYYPLS2.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>23-May-2019 05:22:24</timestamp>
+<comments>Perfect. Just replaced superscript 12-&gt; 1,2 in the title which is a obvious typo.</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Lobanov</lname>
+<fname>Nikolai</fname>
+<mname>R.</mname>
+<iname>N.R.</iname>
+<author_id>38943</author_id>
+<institutions>
+<institute>
+<full_name type="University Department">Research School of Physics and Engineering Australian National University Nuclear Physics</full_name>
+<name1>Research School of Physics and Engineering</name1>
+<name2>Australian National University</name2>
+<department>Nuclear Physics</department>
+<URL>http://wwwrsphysse.anu.edu.au/nuclear/</URL>
+<town>Canberra, Australian Capitol Territory</town>
+<zip_code>ACT 0200</zip_code>
+<country_code abbrev="AUS">Australia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>nikolai.lobanov@anu.edu.au</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>2164</abstract_id>
+<pages>3</pages>
+<toc>2274</toc>
+<main_class>MC5: Beam Dynamics and EM Fields</main_class>
+<sub_class>D03 Calculations of EM Fields - Theory and Code Developments</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">WEYYPLS3</code>
+<presentation type="Oral">Contributed Oral</presentation>
+<start_time>1210</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>Development of Methods for Calculation of Bunch Radiation in Presence of Dielectric Objects</title>
+<abstract>Radiation of charged particles moving in presence of dielectric targets is of interests for various applications in accelerator and beam physics*. Typically, the size of the target is much larger than the wavelengths under consideration. This fact gives us an obvious small parameter of the problem and allows developing approximate methods of analysis. We develop two methods: &quot;ray-optical method&quot; and &quot;aperture method&quot;**. These methods can be very effective for all situations where we can find the tangential field components on the &quot;aperture&quot; which is an object boundary illuminated by Cherenkov radiation. We apply the aperture method to different dielectric objects including a prism, a cone, and a ball. Electromagnetic field is analyzed on different distances from the objects. The special attention is given to investigation of the field in the far-field (Fraunhofer) area having large importance for various applications. We obtain analytical results for different objects, demonstrate typical radiation patterns and discuss new physical effects, in particular, the phenomenon of concentration of radiation and effect of &quot;Cherenkov spotlight&quot;. Prospects of use of aperture method and ray-optical one for other objects are discussed as well.</abstract>
+<agency>This work was supported by the Russian Science Foundation (Grant # 18-72-10137).</agency>
+<footnote>* R.Kieffer et al, PRL, 121, 054802 (2018).
+** E.S.Belonogaya et al, JOSA B, 32, 649 (2015); S.N.Galyamin, A.V.Tyukhtin, PRL, 113, 064802 (2014); A.V.Tyukhtin et al, J. Instrum., 13, C02033 (2018).
+</footnote>
+<contributors>
+<contributor type="Co-Author">
+<lname>Belonogaya</lname>
+<fname>Ekaterina</fname>
+<mname>S.</mname>
+<iname>E.S.</iname>
+<author_id>46092</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="University">Saint Petersburg State University</full_name>
+<name1>Saint Petersburg State University</name1>
+<address1>7/9 Universitetskaya Nab. St. Petersburg</address1>
+<town>Saint Petersburg</town>
+<postal_code>199034</postal_code>
+<country_code abbrev="RU">Russia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>besjonok@gmail.com</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Galyamin</lname>
+<fname>Sergey</fname>
+<mname>N.</mname>
+<iname>S.N.</iname>
+<author_id>28140</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="University">Saint Petersburg State University</full_name>
+<name1>Saint Petersburg State University</name1>
+<address1>7/9 Universitetskaya Nab. St. Petersburg</address1>
+<town>Saint Petersburg</town>
+<postal_code>199034</postal_code>
+<country_code abbrev="RU">Russia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>s.galyamin@spbu.ru</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Vorobev</lname>
+<fname>Viktor</fname>
+<mname>V.</mname>
+<iname>V.V.</iname>
+<author_id>55251</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="University">Saint Petersburg State University</full_name>
+<name1>Saint Petersburg State University</name1>
+<address1>7/9 Universitetskaya Nab. St. Petersburg</address1>
+<town>Saint Petersburg</town>
+<postal_code>199034</postal_code>
+<country_code abbrev="RU">Russia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>viktor.v.vorobev@gmail.com</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Tyukhtin</lname>
+<fname>Andrey</fname>
+<mname>V.</mname>
+<iname>A.V.</iname>
+<author_id>28120</author_id>
+<institutions>
+<institute>
+<full_name type="University">Saint-Petersburg State University Radiophysics Department</full_name>
+<name1>Saint-Petersburg State University</name1>
+<department>Radiophysics Department</department>
+<address1>1 Ul'yanovskaya Str., Petrodvorets</address1>
+<town>Saint-Petersburg</town>
+<zip_code>198504</zip_code>
+<country_code abbrev="RU">Russia</country_code>
+</institute>
+<institute>
+<full_name>Saint-Petersburg State University Physical Faculty</full_name>
+<name1>Saint-Petersburg State University</name1>
+<department>Physical Faculty</department>
+<address1>Radiophysics Department 1 Ul'yanovskaya</address1>
+<address2>Petrodvorets</address2>
+<town>Saint-Petersburg</town>
+<postal_code>198504</postal_code>
+<country_code abbrev="RU">Russia</country_code>
+</institute>
+<institute>
+<full_name type="University">Saint Petersburg State University</full_name>
+<name1>Saint Petersburg State University</name1>
+<address1>7/9 Universitetskaya Nab. St. Petersburg</address1>
+<town>Saint Petersburg</town>
+<postal_code>199034</postal_code>
+<country_code abbrev="RU">Russia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>tyukhtin@bk.ru</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Tyukhtin</lname>
+<fname>Andrey</fname>
+<mname>V.</mname>
+<iname>A.V.</iname>
+<author_id>28120</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name type="University">Saint Petersburg State University</full_name>
+<name1>Saint Petersburg State University</name1>
+<address1>7/9 Universitetskaya Nab. St. Petersburg</address1>
+<town>Saint Petersburg</town>
+<postal_code>199034</postal_code>
+<country_code abbrev="RU">Russia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>tyukhtin@bk.ru</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Tyukhtin</lname>
+<fname>Andrey</fname>
+<mname>V.</mname>
+<iname>A.V.</iname>
+<author_id>28120</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name type="University">Saint Petersburg State University</full_name>
+<name1>Saint Petersburg State University</name1>
+<address1>7/9 Universitetskaya Nab. St. Petersburg</address1>
+<town>Saint Petersburg</town>
+<postal_code>199034</postal_code>
+<country_code abbrev="RU">Russia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>tyukhtin@bk.ru</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLS3f1a.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLS3f1b.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLS3f1c.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLS3f1d.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLS3f2a.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLS3f2b.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLS3f2c.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLS3f2d.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLS3f3a.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLS3f3b.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLS3f3c.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>WEYYPLS3f3d.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>WEYYPLS3.tex</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEYYPLS3_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEYYPLS3.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEYYPLS3_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEYYPLS3_TALK.PPT</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEYYPLS3.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>WEYYPLS3.tex</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEYYPLS3_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEYYPLS3_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEYYPLS3.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>WEYYPLS3.tex</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEYYPLS3.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS3&amp;wanted_file=WEYYPLS3f2b.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS3&amp;wanted_file=WEYYPLS3f2c.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS3&amp;wanted_file=WEYYPLS3f3b.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS3&amp;wanted_file=WEYYPLS3f3a.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS3&amp;wanted_file=WEYYPLS3f2d.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS3&amp;wanted_file=WEYYPLS3f2a.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS3&amp;wanted_file=WEYYPLS3f1d.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS3&amp;wanted_file=WEYYPLS3f1c.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS3&amp;wanted_file=WEYYPLS3f1b.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS3&amp;wanted_file=WEYYPLS3f1a.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS3&amp;wanted_file=WEYYPLS3f3d.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS3&amp;wanted_file=WEYYPLS3f3c.png</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS3&amp;wanted_file=WEYYPLS3.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS3&amp;wanted_file=WEYYPLS3.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS3&amp;wanted_file=WEYYPLS3.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS3&amp;wanted_file=WEYYPLS3_AUTHOR.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS3&amp;wanted_file=WEYYPLS3.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS3&amp;wanted_file=WEYYPLS3.tex</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS3&amp;wanted_file=WEYYPLS3.tex</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS3&amp;wanted_file=WEYYPLS3.tex</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS3&amp;wanted_file=WEYYPLS3_TALK.PPT</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS3&amp;wanted_file=WEYYPLS3_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS3&amp;wanted_file=WEYYPLS3_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEYYPLS3&amp;wanted_file=WEYYPLS3_TALK.PDF</fileURL>
+</fileURLs>
+<editor>Gustavo Barbosa Monteiro Bruno</editor>
+<final_qa>Maxim Kuzin</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>02-Dec-2018 15:54:04</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>02-Dec-2018 16:03:37</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>03-Dec-2018 10:32:00</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>11-Dec-2018 05:45:34</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>11-Dec-2018 05:45:34</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>12-Dec-2018 02:54:23</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>12-Dec-2018 02:54:23</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>30-Jan-2019 22:34:56</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>30-Jan-2019 22:34:56</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>10-Mar-2019 18:00:16</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>11-Apr-2019 17:24:37</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 19:31:34</timestamp>
+<comments>WEYYPLS3.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 19:32:19</timestamp>
+<comments>WEYYPLS3f1a.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 19:32:33</timestamp>
+<comments>WEYYPLS3f1b.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 19:32:50</timestamp>
+<comments>WEYYPLS3f1c.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 19:33:04</timestamp>
+<comments>WEYYPLS3f1d.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 19:33:16</timestamp>
+<comments>WEYYPLS3f2a.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 19:33:30</timestamp>
+<comments>WEYYPLS3f2b.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 19:33:45</timestamp>
+<comments>WEYYPLS3f2c.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 19:34:07</timestamp>
+<comments>WEYYPLS3f2d.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 19:34:22</timestamp>
+<comments>WEYYPLS3f3a.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 19:34:39</timestamp>
+<comments>WEYYPLS3f3b.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 19:35:01</timestamp>
+<comments>WEYYPLS3f3c.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 19:35:17</timestamp>
+<comments>WEYYPLS3f3d.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 19:36:09</timestamp>
+<comments>WEYYPLS3_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 10:07:03</timestamp>
+<comments>WEYYPLS3.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>15-May-2019 10:07:10</timestamp>
+<comments>WEYYPLS3_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 10:09:00</timestamp>
+<comments>WEYYPLS3.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>15-May-2019 10:09:39</timestamp>
+<comments>WEYYPLS3_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>19-May-2019 05:48:34</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 05:57:13</timestamp>
+<comments>WEYYPLS3.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>19-May-2019 05:58:46</timestamp>
+<editor_status code="G">Green</editor_status>
+<comments>Dear author,
+
+The references are acceptable, but not to the JACOW standard. Next time, please review the annex for the JACOW example (https://jacow.org/Authors/LaTeX) to guarantee fast review of your work.
+
+Best regards,
+Gustavo Bruno</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>20-May-2019 05:44:23</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 03:56:08</timestamp>
+<comments>WEYYPLS3_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 04:01:12</timestamp>
+<comments>WEYYPLS3_TALK.PPT</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 05:12:04</timestamp>
+<comments>WEYYPLS3.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 05:12:14</timestamp>
+<comments>WEYYPLS3.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>22-May-2019 05:14:08</timestamp>
+<editor_status code="Y">Yellow</editor_status>
+<comments>Dear author,
+
+Thank you for the improved paper. I had to recompile your new source to PDF so it could fit the margins required by JACOW.
+
+As I had to regenerate the PDF, could you please double-check the resulting file for any undesirable changes?
+
+Best regards,
+Gustavo Bruno</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>22-May-2019 05:16:11</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 05:37:10</timestamp>
+<comments>WEYYPLS3_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>22-May-2019 05:37:44</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Speaker,
+Your PowerPoint slides were converted successfully to PDF and will
+be published in the conference proceedings. Please download the PDF
+slides file (WEYYPLS3_TALK.pdf) and check that all is OK. 
+In the event of a problem, please contact:
+jan.chrin@psi.ch 
+Thank you.
+</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="REDC">Author rejected the Editor's changes</log_status>
+<timestamp>22-May-2019 11:52:34</timestamp>
+<comments>Dear editor, 
+
+It is seams, there was some confusion. I found an old pdf file in my account. In the new file sent to you by mail (WEYYPLS3_cor.tex, WEYYPLS3_cor.pdf), italics are used for journal names. Please, replace the old file with the new one.
+
+Sincerely Yours, 
+Andrey Tyukhtin</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 22:57:41</timestamp>
+<comments>WEYYPLS3_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>22-May-2019 22:59:29</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Problem wit the missing characters now fixed. I could not use the author's pdf as submitted as fonts were not embedded. I therefore converted submitted pdf to ps and then created a new pdf from th ps embedding the fonts in the process. New pdf of talk uploaded. Please check. Thanks. Jan</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>23-May-2019 01:17:23</timestamp>
+<comments>WEYYPLS3.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>23-May-2019 01:17:36</timestamp>
+<comments>WEYYPLS3.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>23-May-2019 01:24:39</timestamp>
+<editor_status code="Y">Yellow</editor_status>
+<comments>Dear author, thank you for reviewing.
+
+Indeed, the version of the file upload as old, apparently I hadn't noticed an error in Latex compilation and didn't realize the old file was still in place.
+
+However, I could not upload the PDF you have sent me, because as I said, the second page had content outside the margin limits required by JACOW. This margin limit is a non-negotiable JACOW standard, so I had to recompile your paper from source.
+
+By setting the proper margins, there were problems with the reference and picture formatting, and some changes were made to the source code to better reformat the pictures and references.
+
+Could you please check the new files I have uploaded to see if there are any undesirable changes? Reformatting the pictures was inevitable to avoid having the references spread around them.
+
+Best regards,
+Gustavo Bruno</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="DR">Dot Reassignment</log_status>
+<timestamp>23-May-2019 14:40:28</timestamp>
+<editor_status code="G">Green</editor_status>
+<comments>Thank you very much! 
+Everything is good except for one moment: I see two vertical blue lines on all pages. Please correct it.
+
+Sincerely yours, 
+Andrey Tyukhtin, 
+</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>25-May-2019 14:46:01</timestamp>
+<comments>WEYYPLS3.PDF</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+</papers>
+</session>
+</conference>

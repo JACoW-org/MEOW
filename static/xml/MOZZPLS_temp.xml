@@ -1,0 +1,2404 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<conference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://bel.gsi.de/docs/xml/conference.xsd" name="IPAC 2019, Melbourne, Australia">
+<session type="Oral">
+<name abbr="MOZZPLS">Contributed Orals: Circular and Linear Colliders</name>
+<date btime="1500" etime="1600">20-May-19</date>
+<location type="Afternoon Contributed Oral">Secondary Plenary (plenary 3)</location>
+<chairs>
+<chair>
+<lname>Bambade</lname>
+<fname>Philip</fname>
+<iname>P.</iname>
+<author_id>12710</author_id>
+<institutions>
+<institute>
+<full_name abbrev="LAL" type="Laboratory">Laboratoire de l'Accélérateur Linéaire CNRS/IN2P3 Université Paris-Saclay</full_name>
+<name1>Laboratoire de l'Accélérateur Linéaire</name1>
+<name2>CNRS/IN2P3</name2>
+<department>Université Paris-Saclay</department>
+<URL>http://www.lal.in2p3.fr/</URL>
+<address1>Univ. Paris-Sud</address1>
+<po_box>BP 34</po_box>
+<town>Orsay</town>
+<postal_code>91898</postal_code>
+<zip_code>Cedex</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>bambade@lal.in2p3.fr</email>
+<email>bambade@lal.in2p3.fr</email>
+</emails>
+</chair>
+</chairs>
+<papers>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Qin</lname>
+<fname>Qing</fname>
+<iname>Q.</iname>
+<author_id>1249</author_id>
+<institutions>
+<institute>
+<full_name abbrev="IHEP" type="Institute">Chinese Academy of Sciences Institute of High Energy Physics</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<URL>http://www.chinacp.com/eng/cporg/cporg_ihep.html</URL>
+<address1>Yuquan Road 19</address1>
+<po_box>P.O. Box 918-8</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Accelerator Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<department>Accelerator Center</department>
+<address1>19B Yuquan Road</address1>
+<address2>Shijingshang District</address2>
+<town>Beijing</town>
+<postal_code>100049</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Chinese Academy of Sciences Accelerator Division</full_name>
+<name1>Institute of High Energy Physics</name1>
+<name2>Chinese Academy of Sciences</name2>
+<department>Accelerator Division</department>
+<URL>http://www.ihep.cas.cn/</URL>
+<address1>19B Yuquan Road</address1>
+<po_box>P.O. Box 918</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Institute">Institute of High Energy Physics Chinese Academy of Sciences Experimental Physics Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<name2>Chinese Academy of Sciences</name2>
+<department>Experimental Physics Center</department>
+<URL>http://epc.ihep.ac.cn/epchomepage/index.html</URL>
+<address1>19B,Yuquan Rd.,</address1>
+<address2>Shijingshan District</address2>
+<po_box>P.O.Box 918</po_box>
+<town>Bejing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>qinq@mail.ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>2323</abstract_id>
+<pages>4</pages>
+<toc>45</toc>
+<main_class>MC1: Circular and Linear Colliders</main_class>
+<sub_class>A19 Electron-Hadron Colliders</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">MOZZPLS1</code>
+<presentation type="Oral">Contributed Oral</presentation>
+<start_time>1500</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>eRHIC Design Overview</title>
+<abstract>The Electron-Ion Collider (EIC) is being envisioned as the next facility to be constructed by the DOE Nuclear Physics program. Brookhaven National Laboratory is proposing eRHIC, a facility based on the existing RHIC complex as a cost effective realization of the EIC project with a peak luminosity of 10^34 cm^-2 sec^-1. An electron storage ring with an energy range from 5 to 18 GeV will be added in the existing RHIC tunnel. A spin-transparent rapid-cycling synchrotron (RCS) will serve as a full-energy polarized electron injector. Recent design improvements include reduction of the IR magnet strengths to avoid the necessity for Nb3Sn magnets, and a novel hadron injection scheme to maximize the integrated luminosity. We will provide an overview of this proposed project and present the current design status.</abstract>
+<agency>Work supported by Brookhaven Science Associates, LLC under Contract No. DE-AC02-98CH10886 with the U.S. Department of Energy.</agency>
+<contributors>
+<contributor type="Co-Author">
+<lname>Bassi</lname>
+<fname>Gabriele</fname>
+<iname>G.</iname>
+<author_id>12667</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory NSLS II</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>NSLS II</department>
+<address1>Bldg. 817B</address1>
+<po_box>PO Box 110</po_box>
+<town>Upton, New York</town>
+<postal_code>NY</postal_code>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>gbassi@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Beebe-Wang</lname>
+<fname>Joanne</fname>
+<iname>J.</iname>
+<author_id>2728</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>bbwang@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Berg</lname>
+<fname>J. Scott</fname>
+<iname>J.S.</iname>
+<author_id>2140</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jsberg@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Blaskiewicz</lname>
+<fname>Michael</fname>
+<iname>M.</iname>
+<author_id>2729</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>michael.blaskiewicz@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Blednykh</lname>
+<fname>Alexei</fname>
+<iname>A.</iname>
+<author_id>611</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory National Synchrotron Light Source II</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>National Synchrotron Light Source II</department>
+<URL>http://www.bnl.gov/nsls2/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>NY 11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>blednykh@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Brennan</lname>
+<fname>Joseph</fname>
+<mname>Michael</mname>
+<iname>J.M.</iname>
+<author_id>2730</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>brennan@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Brooks</lname>
+<fname>Stephen</fname>
+<iname>S.J.</iname>
+<author_id>3645</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>sbrooks@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Brown</lname>
+<fname>Kevin</fname>
+<mname>A.</mname>
+<iname>K.A.</iname>
+<author_id>2142</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>kbrown@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Drees</lname>
+<fname>Kirsten</fname>
+<mname>Angelika</mname>
+<iname>K.A.</iname>
+<author_id>2735</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>drees@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Fedotov</lname>
+<fname>Alexei</fname>
+<mname>V.</mname>
+<iname>A.V.</iname>
+<author_id>2736</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>fedotov@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Fischer</lname>
+<fname>Wolfram</fname>
+<iname>W.</iname>
+<author_id>2737</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>wolfram.fischer@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Gassner</lname>
+<fname>David</fname>
+<iname>D.M.</iname>
+<author_id>2087</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>gassner@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Gianfelice-Wendt</lname>
+<fname>Eliana</fname>
+<iname>E.</iname>
+<author_id>397</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="Fermilab" type="Laboratory">Fermi National Accelerator Laboratory</full_name>
+<name1>Fermi National Accelerator Laboratory</name1>
+<URL>http://www.fnal.gov/</URL>
+<po_box>P.O. Box 500</po_box>
+<town>Batavia, Illinois</town>
+<zip_code>IL 60510-0500</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>eliana@fnal.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Guo</lname>
+<fname>Weiming</fname>
+<iname>W.</iname>
+<author_id>11928</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory National Synchrotron Light Source II</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>National Synchrotron Light Source II</department>
+<URL>http://www.bnl.gov/nsls2/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>NY 11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>wguo@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Hao</lname>
+<fname>Yue</fname>
+<iname>Y.</iname>
+<author_id>28268</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="FRIB" type="University Laboratory">Facility for Rare Isotope Beams, Michigan State University</full_name>
+<name1>Facility for Rare Isotope Beams, Michigan State University</name1>
+<address1>640 S. Shaw Lane</address1>
+<town>East Lansing, Michigan</town>
+<zip_code>MI 48864</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>yhao@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Hershcovitch</lname>
+<fname>Ady</fname>
+<iname>A.</iname>
+<author_id>3977</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>hershcovitch@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Hetzel</lname>
+<fname>Charles</fname>
+<iname>C.</iname>
+<author_id>48258</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory National Synchrotron Light Source II</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>National Synchrotron Light Source II</department>
+<URL>http://www.bnl.gov/nsls2/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>NY 11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>chetzel@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Holmes</lname>
+<fname>Douglas</fname>
+<iname>D.</iname>
+<author_id>11639</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>dholmes@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Huang</lname>
+<fname>Haixin</fname>
+<iname>H.</iname>
+<author_id>2740</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>huanghai@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Jackson</lname>
+<fname>William</fname>
+<mname>Allen</mname>
+<iname>W.A.</iname>
+<author_id>48429</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>wjackson@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Kewisch</lname>
+<fname>Jorg</fname>
+<iname>J.</iname>
+<author_id>2741</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jorg@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Li</lname>
+<fname>Yongjun</fname>
+<iname>Y.</iname>
+<author_id>4373</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory National Synchrotron Light Source II</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>National Synchrotron Light Source II</department>
+<URL>http://www.bnl.gov/nsls2/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>NY 11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>yli@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Liu</lname>
+<fname>Chuyu</fname>
+<iname>C.</iname>
+<author_id>20741</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>cliu1@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Lovelace III</lname>
+<fname>Henry</fname>
+<iname>H.</iname>
+<author_id>104029</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>hlovelace@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Luo</lname>
+<fname>Yun</fname>
+<iname>Y.</iname>
+<author_id>3660</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>yluo@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Meot</lname>
+<fname>Francois</fname>
+<iname>F.</iname>
+<author_id>168</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>fmeot@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Minty</lname>
+<fname>Michiko</fname>
+<iname>M.G.</iname>
+<author_id>40303</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>minty@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Palmer</lname>
+<fname>Robert</fname>
+<mname>B.</mname>
+<iname>R.B.</iname>
+<author_id>2114</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>palmer@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Parker</lname>
+<fname>Brett</fname>
+<iname>B.</iname>
+<author_id>2129</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Superconducting Magnet Division</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Superconducting Magnet Division</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>parker@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Peggs</lname>
+<fname>Steve</fname>
+<iname>S.</iname>
+<author_id>2747</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>peggs@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Ptitsyn</lname>
+<fname>Vadim</fname>
+<iname>V.</iname>
+<author_id>2750</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>vadimp@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Ranjbar</lname>
+<fname>Vahid</fname>
+<mname>Houston</mname>
+<iname>V.H.</iname>
+<author_id>2751</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>ranjbar@txcorp.com</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Robert-Demolaize</lname>
+<fname>Guillaume</fname>
+<iname>G.</iname>
+<author_id>5397</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>grd@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Seletskiy</lname>
+<fname>Sergei</fname>
+<iname>S.</iname>
+<author_id>2033</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>seletskiy@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Smaluk</lname>
+<fname>Victor</fname>
+<iname>V.V.</iname>
+<author_id>1191</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory National Synchrotron Light Source II</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>National Synchrotron Light Source II</department>
+<URL>http://www.bnl.gov/nsls2/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>NY 11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>smaluk@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Smith</lname>
+<fname>Kevin</fname>
+<mname>S.</mname>
+<iname>K.S.</iname>
+<author_id>2097</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>ksmith@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Tepikian</lname>
+<fname>Steven</fname>
+<iname>S.</iname>
+<author_id>2754</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>tepikian@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Thieberger</lname>
+<fname>Peter</fname>
+<iname>P.</iname>
+<author_id>2099</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>pt@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Trbojevic</lname>
+<fname>Dejan</fname>
+<iname>D.</iname>
+<author_id>2755</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>trbojevic@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Tsoupas</lname>
+<fname>Nicholaos</fname>
+<iname>N.</iname>
+<author_id>2756</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>tsoupas@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Verdu-Andres</lname>
+<fname>Silvia</fname>
+<iname>S.</iname>
+<author_id>62087</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>sverdu@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Weng</lname>
+<fname>Wu-Tsung</fname>
+<iname>W.-T.</iname>
+<author_id>2758</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>weng@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Willeke</lname>
+<fname>Ferdinand</fname>
+<mname>J.</mname>
+<iname>F.J.</iname>
+<author_id>395</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>willeke@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Witte</lname>
+<fname>Holger</fname>
+<iname>H.</iname>
+<author_id>9402</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>white@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Wu</lname>
+<fname>Qiong</fname>
+<iname>Q.</iname>
+<author_id>28107</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>qiowu@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Xu</lname>
+<fname>Wencan</fname>
+<iname>W.</iname>
+<author_id>20743</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>wxu@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Zaltsman</lname>
+<fname>Alex</fname>
+<iname>A.</iname>
+<author_id>2759</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>zaltsman@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Zhang</lname>
+<fname>Wu</fname>
+<iname>W.</iname>
+<author_id>2724</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>arling@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Montag</lname>
+<fname>Christoph</fname>
+<iname>C.</iname>
+<author_id>2746</author_id>
+<institutions>
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>montag@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Montag</lname>
+<fname>Christoph</fname>
+<iname>C.</iname>
+<author_id>2746</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>montag@bnl.gov</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Montag</lname>
+<fname>Christoph</fname>
+<iname>C.</iname>
+<author_id>2746</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory Collider-Accelerator Department</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<department>Collider-Accelerator Department</department>
+<URL>http://www.bnl.gov/world/</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>montag@bnl.gov</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="LINX">Linux</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>MOZZPLS1f1.png</name>
+</file>
+<file>
+<platform abbrev="LINX">Linux</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>MOZZPLS1f2.png</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOZZPLS1_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="LINX">Linux</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>MOZZPLS1.tex</name>
+</file>
+<file>
+<platform abbrev="LINX">Linux</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>MOZZPLS1_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOZZPLS1_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>MOZZPLS1.tex</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>MOZZPLS1.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOZZPLS1_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZZPLS1&amp;wanted_file=MOZZPLS1f1.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZZPLS1&amp;wanted_file=MOZZPLS1f2.png</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZZPLS1&amp;wanted_file=MOZZPLS1_AUTHOR.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZZPLS1&amp;wanted_file=MOZZPLS1.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZZPLS1&amp;wanted_file=MOZZPLS1.tex</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZZPLS1&amp;wanted_file=MOZZPLS1.tex</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZZPLS1&amp;wanted_file=MOZZPLS1_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZZPLS1&amp;wanted_file=MOZZPLS1_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZZPLS1&amp;wanted_file=MOZZPLS1_TALK.PPTX</fileURL>
+</fileURLs>
+<editor>Ivan Andrian</editor>
+<final_qa>Johan Olander</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>03-Dec-2018 13:29:00</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>07-Dec-2018 09:32:49</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>30-Jan-2019 00:42:35</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>30-Jan-2019 00:42:35</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 13:44:50</timestamp>
+<comments>MOZZPLS1f1.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 13:45:01</timestamp>
+<comments>MOZZPLS1f2.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 13:46:35</timestamp>
+<comments>MOZZPLS1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 13:49:36</timestamp>
+<comments>MOZZPLS1.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 14:09:25</timestamp>
+<comments>MOZZPLS1_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>14-May-2019 18:13:20</timestamp>
+<comments>MOZZPLS1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>14-May-2019 18:13:28</timestamp>
+<comments>MOZZPLS1.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 18:13:58</timestamp>
+<comments>MOZZPLS1.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 18:14:22</timestamp>
+<comments>MOZZPLS1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>19-May-2019 04:57:54</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 05:03:43</timestamp>
+<comments>MOZZPLS1_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 05:12:53</timestamp>
+<comments>MOZZPLS1.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 05:13:08</timestamp>
+<comments>MOZZPLS1.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>19-May-2019 05:14:19</timestamp>
+<editor_status code="Y">Yellow</editor_status>
+<comments>Fixed some indentation problems with bullet lists, plus style in some references</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="DR">Dot Reassignment</log_status>
+<timestamp>19-May-2019 05:19:51</timestamp>
+<editor_status code="G">Green</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>20-May-2019 23:44:03</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>21-May-2019 01:36:26</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 01:39:56</timestamp>
+<comments>MOZZPLS1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>21-May-2019 01:41:19</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Speaker,
+Your PowerPoint slides were converted successfully to PDF and will
+be published in the conference proceedings. Please download the PDF
+slides file (MOZZPLS1_TALK.pdf) and check that all is OK. In the event of a problem, please contact:
+jan.chrin@psi.ch 
+Thank you.
+</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Qin</lname>
+<fname>Qing</fname>
+<iname>Q.</iname>
+<author_id>1249</author_id>
+<institutions>
+<institute>
+<full_name abbrev="IHEP" type="Institute">Chinese Academy of Sciences Institute of High Energy Physics</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<URL>http://www.chinacp.com/eng/cporg/cporg_ihep.html</URL>
+<address1>Yuquan Road 19</address1>
+<po_box>P.O. Box 918-8</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Accelerator Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<department>Accelerator Center</department>
+<address1>19B Yuquan Road</address1>
+<address2>Shijingshang District</address2>
+<town>Beijing</town>
+<postal_code>100049</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Chinese Academy of Sciences Accelerator Division</full_name>
+<name1>Institute of High Energy Physics</name1>
+<name2>Chinese Academy of Sciences</name2>
+<department>Accelerator Division</department>
+<URL>http://www.ihep.cas.cn/</URL>
+<address1>19B Yuquan Road</address1>
+<po_box>P.O. Box 918</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Institute">Institute of High Energy Physics Chinese Academy of Sciences Experimental Physics Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<name2>Chinese Academy of Sciences</name2>
+<department>Experimental Physics Center</department>
+<URL>http://epc.ihep.ac.cn/epchomepage/index.html</URL>
+<address1>19B,Yuquan Rd.,</address1>
+<address2>Shijingshan District</address2>
+<po_box>P.O.Box 918</po_box>
+<town>Bejing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>qinq@mail.ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>2811</abstract_id>
+<pages>4</pages>
+<toc>49</toc>
+<main_class>MC1: Circular and Linear Colliders</main_class>
+<sub_class>A09 Muon Accelerators and Neutrino Factories</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">MOZZPLS2</code>
+<presentation type="Oral">Contributed Oral</presentation>
+<start_time>1520</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>Positron Driven Muon Source for a Muon Collider: Recent Developments</title>
+<abstract>The design of a future multi-TeV muon collider needs new ideas to overcome the technological challenges related to muon production, cooling, accumulation and acceleration. The Low Emittance Muon Accelerator (LEMMA) concept *,** presents in this paper an upgraded layout of a positron driven muon source. The positron beam, stored in a ring with high energy acceptance and low emittance, is extracted and driven in a push-pull configuration to a multi-target system, to produce muon pairs at threshold on the target's electrons. This solution alleviates the issues related to the power deposited and the integrated Peak Energy Density Deposition on the targets. Muons produced in the multi-target system will then be accumulated in many parallel rings before acceleration and injection in the collider. A special multi-target line lattice has been designed to cope with the focusing of both the positron and muon beams. Studies on the number, material and thickness of the targets have been carried out. A general layout of the overall scheme and a description is presented, as well as plans for future R&amp;D.</abstract>
+<footnote>* M. Antonelli, P. Raimondi, INFN-13-22/LNF, 2013
+** M. Boscolo, M. Antonelli, O.R. Blanco-Garcia, S. Guiducci, S. Liuzzo, P. Raimondi, F. Collamati, Phys. Rev. Accel. Beams, vol. 21, p. 061005, 2018</footnote>
+<contributors>
+<contributor type="Co-Author">
+<lname>Antonelli</lname>
+<fname>Mario</fname>
+<iname>M.</iname>
+<author_id>86042</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INFN/LNF" type="Research Centre">Istituto Nazionale di Fisica Nucleare Laboratori Nazionali di Frascati</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare</name1>
+<name2>Laboratori Nazionali di Frascati</name2>
+<URL>http://www.lnf.infn.it/</URL>
+<address1>Via E. Fermi, 40</address1>
+<po_box>P.O. Box 13</po_box>
+<town>Frascati</town>
+<postal_code>00044</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>mario.antonelli@lnf.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Bacci</lname>
+<fname>Alberto</fname>
+<iname>A.</iname>
+<author_id>5324</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INFN-Milano" type="National Research Council">Istituto Nazionale di Fisica Nucleare Sezione di Milano</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare</name1>
+<department>Sezione di Milano</department>
+<address1>Via G. Celoria 16</address1>
+<town>Milano</town>
+<postal_code>20133</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>alberto.bacci@mi.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Bauce</lname>
+<fname>Matteo</fname>
+<iname>M.</iname>
+<author_id>119023</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INFN-Roma1" type="Institute">Istituto Nazionale di Fisica Nucleare - Sez. Roma 1</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare - Sez. Roma 1</name1>
+<address1>Piazza A. Moro 2</address1>
+<town>Rome</town>
+<postal_code>00185</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>matteo.bauce@roma1.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Blanco-García</lname>
+<fname>Oscar</fname>
+<mname>Roberto</mname>
+<iname>O.R.</iname>
+<author_id>48126</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INFN/LNF" type="Laboratory">Istituto Nazionale di Fisica Nucleare Laboratori Nazionali di Frascati Accelerator Division</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare</name1>
+<name2>Laboratori Nazionali di Frascati</name2>
+<department>Accelerator Division</department>
+<URL>http://www.lnf.infn.it/</URL>
+<address1>Via E. Fermi, 40</address1>
+<po_box>C.P. 13</po_box>
+<town>Frascati (Roma)</town>
+<postal_code>00044</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>oscar.blancogarcia@lnf.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Boscolo</lname>
+<fname>Manuela</fname>
+<iname>M.</iname>
+<author_id>787</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INFN/LNF" type="Research Centre">Istituto Nazionale di Fisica Nucleare Laboratori Nazionali di Frascati</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare</name1>
+<name2>Laboratori Nazionali di Frascati</name2>
+<URL>http://www.lnf.infn.it/</URL>
+<address1>Via E. Fermi, 40</address1>
+<po_box>P.O. Box 13</po_box>
+<town>Frascati</town>
+<postal_code>00044</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>manuela.boscolo@lnf.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Cesarini</lname>
+<fname>Gianmario</fname>
+<iname>G.</iname>
+<author_id>118708</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INFN-Roma">Istituto Nazionale di Fisica Nucleare Sezione di Roma</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare</name1>
+<name2>Sezione di Roma</name2>
+<URL>http://www.roma1.infn.it/</URL>
+<address1>Dipartimento di Fisica</address1>
+<address2>Università degli Studi di Roma La Sapien</address2>
+<address3>P.le Aldo Moro, 2</address3>
+<town>Roma</town>
+<postal_code>185</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>gianmario.cesarini@uniroma1.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Chaikovska</lname>
+<fname>Iryna</fname>
+<iname>I.</iname>
+<author_id>41014</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="LAL" type="Laboratory">Laboratoire de l'Accélérateur Linéaire CNRS/IN2P3 Université Paris-Saclay</full_name>
+<name1>Laboratoire de l'Accélérateur Linéaire</name1>
+<name2>CNRS/IN2P3</name2>
+<department>Université Paris-Saclay</department>
+<URL>http://www.lal.in2p3.fr/</URL>
+<address1>Univ. Paris-Sud</address1>
+<po_box>BP 34</po_box>
+<town>Orsay</town>
+<postal_code>91898</postal_code>
+<zip_code>Cedex</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>chaikovs@lal.in2p3.fr</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Chehab</lname>
+<fname>Robert</fname>
+<iname>R.</iname>
+<author_id>261</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="LAL" type="Laboratory">Laboratoire de l'Accélérateur Linéaire CNRS/IN2P3 Université Paris-Saclay</full_name>
+<name1>Laboratoire de l'Accélérateur Linéaire</name1>
+<name2>CNRS/IN2P3</name2>
+<department>Université Paris-Saclay</department>
+<URL>http://www.lal.in2p3.fr/</URL>
+<address1>Univ. Paris-Sud</address1>
+<po_box>BP 34</po_box>
+<town>Orsay</town>
+<postal_code>91898</postal_code>
+<zip_code>Cedex</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>chehab@lalcls.in2p3.fr</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Ciarma</lname>
+<fname>Andrea</fname>
+<iname>A.</iname>
+<author_id>118649</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INFN/LNF" type="Laboratory">Istituto Nazionale di Fisica Nucleare Laboratori Nazionali di Frascati Accelerator Division</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare</name1>
+<name2>Laboratori Nazionali di Frascati</name2>
+<department>Accelerator Division</department>
+<URL>http://www.lnf.infn.it/</URL>
+<address1>Via E. Fermi, 40</address1>
+<po_box>C.P. 13</po_box>
+<town>Frascati (Roma)</town>
+<postal_code>00044</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>andrea.ciarma@lnf.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Collamati</lname>
+<fname>Francesco</fname>
+<iname>F.</iname>
+<author_id>90832</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INFN-Roma1" type="Institute">Istituto Nazionale di Fisica Nucleare - Sez. Roma 1</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare - Sez. Roma 1</name1>
+<address1>Piazza A. Moro 2</address1>
+<town>Rome</town>
+<postal_code>00185</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>francesco.collamati@roma1.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Giribono</lname>
+<fname>Anna</fname>
+<iname>A.</iname>
+<author_id>72073</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INFN/LNF" type="Laboratory">Istituto Nazionale di Fisica Nucleare Laboratori Nazionali di Frascati Accelerator Division</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare</name1>
+<name2>Laboratori Nazionali di Frascati</name2>
+<department>Accelerator Division</department>
+<URL>http://www.lnf.infn.it/</URL>
+<address1>Via E. Fermi, 40</address1>
+<po_box>C.P. 13</po_box>
+<town>Frascati (Roma)</town>
+<postal_code>00044</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>anna.giribono@lnf.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Guiducci</lname>
+<fname>Susanna</fname>
+<iname>S.</iname>
+<author_id>791</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INFN/LNF" type="Research Centre">Istituto Nazionale di Fisica Nucleare Laboratori Nazionali di Frascati</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare</name1>
+<name2>Laboratori Nazionali di Frascati</name2>
+<URL>http://www.lnf.infn.it/</URL>
+<address1>Via E. Fermi, 40</address1>
+<po_box>P.O. Box 13</po_box>
+<town>Frascati</town>
+<postal_code>00044</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>susanna.guiducci@lnf.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Liuzzo</lname>
+<fname>Simone</fname>
+<mname>Maria</mname>
+<iname>S.M.</iname>
+<author_id>43276</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ESRF" type="Research Centre">European Synchrotron Radiation Facility</full_name>
+<name1>European Synchrotron Radiation Facility</name1>
+<URL>http://www.esrf.fr/</URL>
+<address1>71, avenue des Martyrs</address1>
+<po_box>CS 40220</po_box>
+<town>Grenoble</town>
+<postal_code>38043</postal_code>
+<zip_code>Cedex 9</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>simone.liuzzo@esrf.fr</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Lucchesi</lname>
+<fname>Donatella</fname>
+<iname>D.</iname>
+<author_id>113793</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name>Univ. degli Studi di Padova Galileo Galilei Physics Department</full_name>
+<name1>Univ. degli Studi di Padova</name1>
+<department>Galileo Galilei Physics Department</department>
+<URL>http://axpbib.pd.infn.it/</URL>
+<address1>Via F. Marzolo, 8</address1>
+<town>Padova</town>
+<postal_code>35131</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>donatella.lucchesi@pd.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Pastrone</lname>
+<fname>Nadia</fname>
+<iname>N.</iname>
+<author_id>113797</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INFN-Torino" type="Institute">Istituto Nazionale di Fisica Nucleare Sezione di Torino</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare</name1>
+<name2>Sezione di Torino</name2>
+<URL>http://www.to.infn.it/</URL>
+<address1>Via P. Giuria 1</address1>
+<town>Torino</town>
+<postal_code>10125</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>pastrone@to.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Raimondi</lname>
+<fname>Pantaleo</fname>
+<iname>P.</iname>
+<author_id>758</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="ESRF" type="Research Centre">European Synchrotron Radiation Facility</full_name>
+<name1>European Synchrotron Radiation Facility</name1>
+<URL>http://www.esrf.fr/</URL>
+<address1>71, avenue des Martyrs</address1>
+<po_box>CS 40220</po_box>
+<town>Grenoble</town>
+<postal_code>38043</postal_code>
+<zip_code>Cedex 9</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>pantaleo.raimondi@esrf.fr</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Vaccarezza</lname>
+<fname>Cristina</fname>
+<iname>C.</iname>
+<author_id>773</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INFN/LNF" type="Research Centre">Istituto Nazionale di Fisica Nucleare Laboratori Nazionali di Frascati</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare</name1>
+<name2>Laboratori Nazionali di Frascati</name2>
+<URL>http://www.lnf.infn.it/</URL>
+<address1>Via E. Fermi, 40</address1>
+<po_box>P.O. Box 13</po_box>
+<town>Frascati</town>
+<postal_code>00044</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>cristina.vaccarezza@lnf.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Variola</lname>
+<fname>Alessandro</fname>
+<iname>A.</iname>
+<author_id>21756</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="INFN/LNF" type="Research Centre">Istituto Nazionale di Fisica Nucleare Laboratori Nazionali di Frascati</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare</name1>
+<name2>Laboratori Nazionali di Frascati</name2>
+<URL>http://www.lnf.infn.it/</URL>
+<address1>Via E. Fermi, 40</address1>
+<po_box>P.O. Box 13</po_box>
+<town>Frascati</town>
+<postal_code>00044</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>alessandro.variola@lnf.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Biagini</lname>
+<fname>Maria</fname>
+<mname>Enrica</mname>
+<iname>M.E.</iname>
+<author_id>759</author_id>
+<institutions>
+<institute>
+<full_name abbrev="INFN/LNF" type="Research Centre">Istituto Nazionale di Fisica Nucleare Laboratori Nazionali di Frascati</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare</name1>
+<name2>Laboratori Nazionali di Frascati</name2>
+<URL>http://www.lnf.infn.it/</URL>
+<address1>Via E. Fermi, 40</address1>
+<po_box>P.O. Box 13</po_box>
+<town>Frascati</town>
+<postal_code>00044</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>marica.biagini@lnf.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Biagini</lname>
+<fname>Maria</fname>
+<mname>Enrica</mname>
+<iname>M.E.</iname>
+<author_id>759</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="INFN/LNF" type="Research Centre">Istituto Nazionale di Fisica Nucleare Laboratori Nazionali di Frascati</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare</name1>
+<name2>Laboratori Nazionali di Frascati</name2>
+<URL>http://www.lnf.infn.it/</URL>
+<address1>Via E. Fermi, 40</address1>
+<po_box>P.O. Box 13</po_box>
+<town>Frascati</town>
+<postal_code>00044</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>marica.biagini@lnf.infn.it</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Biagini</lname>
+<fname>Maria</fname>
+<mname>Enrica</mname>
+<iname>M.E.</iname>
+<author_id>759</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="INFN/LNF" type="Research Centre">Istituto Nazionale di Fisica Nucleare Laboratori Nazionali di Frascati</full_name>
+<name1>Istituto Nazionale di Fisica Nucleare</name1>
+<name2>Laboratori Nazionali di Frascati</name2>
+<URL>http://www.lnf.infn.it/</URL>
+<address1>Via E. Fermi, 40</address1>
+<po_box>P.O. Box 13</po_box>
+<town>Frascati</town>
+<postal_code>00044</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+</institutions>
+<emails>
+<email>marica.biagini@lnf.infn.it</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>MOZZPLS2.tex</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>MOZZPLS2_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>MOZZPLS2f1.jpg</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>MOZZPLS2f2.png</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOZZPLS2_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOZZPLS2_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>MOZZPLS2.tex</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>MOZZPLS2.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOZZPLS2_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOZZPLS2_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOZZPLS2_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOZZPLS2_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOZZPLS2_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOZZPLS2_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>MOZZPLS2.PDF</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOZZPLS2_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZZPLS2&amp;wanted_file=MOZZPLS2f2.png</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZZPLS2&amp;wanted_file=MOZZPLS2f1.jpg</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZZPLS2&amp;wanted_file=MOZZPLS2.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZZPLS2&amp;wanted_file=MOZZPLS2.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZZPLS2&amp;wanted_file=MOZZPLS2_AUTHOR.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZZPLS2&amp;wanted_file=MOZZPLS2.tex</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZZPLS2&amp;wanted_file=MOZZPLS2.tex</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZZPLS2&amp;wanted_file=MOZZPLS2_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZZPLS2&amp;wanted_file=MOZZPLS2_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZZPLS2&amp;wanted_file=MOZZPLS2_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZZPLS2&amp;wanted_file=MOZZPLS2_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZZPLS2&amp;wanted_file=MOZZPLS2_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZZPLS2&amp;wanted_file=MOZZPLS2_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZZPLS2&amp;wanted_file=MOZZPLS2_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZZPLS2&amp;wanted_file=MOZZPLS2_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZZPLS2&amp;wanted_file=MOZZPLS2_TALK.PDF</fileURL>
+</fileURLs>
+<editor>Jana Leah Thomson</editor>
+<final_qa>Magdalena Montes-Loera</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="PRR">Peer Review Requested</log_status>
+<timestamp>04-Dec-2018 15:43:24</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>04-Dec-2018 15:43:24</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>04-Dec-2018 15:59:14</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>07-Dec-2018 09:16:22</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>07-Dec-2018 09:16:22</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>04-Feb-2019 10:45:43</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>04-Feb-2019 10:45:43</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 12:51:22</timestamp>
+<comments>MOZZPLS2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 12:51:46</timestamp>
+<comments>MOZZPLS2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 12:52:45</timestamp>
+<comments>MOZZPLS2f1.jpg</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>14-May-2019 12:52:58</timestamp>
+<comments>MOZZPLS2f2.png</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 04:58:39</timestamp>
+<comments>MOZZPLS2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 04:59:59</timestamp>
+<comments>MOZZPLS2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>19-May-2019 05:01:27</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 05:20:36</timestamp>
+<comments>MOZZPLS2.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 05:20:49</timestamp>
+<comments>MOZZPLS2.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>19-May-2019 05:21:55</timestamp>
+<editor_status code="Y">Yellow</editor_status>
+<comments>Dear author,  I made minor edits.   The main correction was the sub-section headings.  They need to be in initial caps.     Thanks, (Jana, TRIUMF)</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="DR">Dot Reassignment</log_status>
+<timestamp>19-May-2019 07:41:36</timestamp>
+<editor_status code="G">Green</editor_status>
+<comments>Dear Jana, thank you, I didn't know.</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 11:46:11</timestamp>
+<comments>MOZZPLS2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 11:47:45</timestamp>
+<comments>MOZZPLS2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 13:54:03</timestamp>
+<comments>MOZZPLS2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 13:56:03</timestamp>
+<comments>MOZZPLS2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 21:39:59</timestamp>
+<comments>MOZZPLS2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 21:43:24</timestamp>
+<comments>MOZZPLS2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 22:44:37</timestamp>
+<comments>MOZZPLS2.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>20-May-2019 04:06:01</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>21-May-2019 01:41:58</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 02:02:09</timestamp>
+<comments>MOZZPLS2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>21-May-2019 02:03:27</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Maria,
+Your PowerPoint slides were converted successfully to PDF and will
+be published in the conference proceedings. Please download the PDF
+slides file (MOZZPLS2_TALK.pdf) and check that all is OK. In the event of a problem, please contact:
+jan.chrin@psi.ch 
+Thank you.
+</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>21-May-2019 02:12:22</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Author,
+The submitted pdf of your talk is suitable for publication and will be included in the proceedings as given. In case of problems, please contact jan.chrin@psi.ch
+Thank you.</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Qin</lname>
+<fname>Qing</fname>
+<iname>Q.</iname>
+<author_id>1249</author_id>
+<institutions>
+<institute>
+<full_name abbrev="IHEP" type="Institute">Chinese Academy of Sciences Institute of High Energy Physics</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<URL>http://www.chinacp.com/eng/cporg/cporg_ihep.html</URL>
+<address1>Yuquan Road 19</address1>
+<po_box>P.O. Box 918-8</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Accelerator Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<department>Accelerator Center</department>
+<address1>19B Yuquan Road</address1>
+<address2>Shijingshang District</address2>
+<town>Beijing</town>
+<postal_code>100049</postal_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Chinese Academy of Sciences Accelerator Division</full_name>
+<name1>Institute of High Energy Physics</name1>
+<name2>Chinese Academy of Sciences</name2>
+<department>Accelerator Division</department>
+<URL>http://www.ihep.cas.cn/</URL>
+<address1>19B Yuquan Road</address1>
+<po_box>P.O. Box 918</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Institute">Institute of High Energy Physics Chinese Academy of Sciences Experimental Physics Center</full_name>
+<name1>Institute of High Energy Physics</name1>
+<name2>Chinese Academy of Sciences</name2>
+<department>Experimental Physics Center</department>
+<URL>http://epc.ihep.ac.cn/epchomepage/index.html</URL>
+<address1>19B,Yuquan Rd.,</address1>
+<address2>Shijingshan District</address2>
+<po_box>P.O.Box 918</po_box>
+<town>Bejing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>qinq@mail.ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+<email>qinq@ihep.ac.cn</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>1942</abstract_id>
+<main_class>MC1: Circular and Linear Colliders</main_class>
+<sub_class>A24 Accelerators and Storage Rings, Other</sub_class>
+<publishable>No, Editor Status Code is not Publishable, Final QA Not Publishable</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">MOZZPLS3</code>
+<presentation type="Oral">Contributed Oral</presentation>
+<start_time>1540</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<title>R&amp;D Status of CEPC Accelerator</title>
+<abstract>CEPC is a 100 km circular electron-positron collider operating at 90-240 GeV center-of-mass energy of Z-pole, WW pair production threshold and Higgs resonance. CEPC and its successor SPPC, a 100 TeV center-of-mass super proton-proton collider, will ensure the elementary particle physics a vibrant field for decades to come. To reduce the overall cost, partial double ring scheme was proposed as the alternative, which has a significant impact on the cavity operation and beam dynamics. The conceptual design report (CDR) of CEPC is completed by the end Jul1 2018 as an important step to move the project forward. In this presentation, the status of CEPC project and accelerator key technology R&amp;D status will be shown, including SRF system, High efficiency klystron etc.</abstract>
+<agency>Ministry of Science and Technology, China</agency>
+<contributors>
+<contributor type="Owner">
+<lname>Chi</lname>
+<fname>Yunlong</fname>
+<iname>Y.L.</iname>
+<author_id>1251</author_id>
+<institutions>
+<institute>
+<full_name abbrev="IHEP" type="Institute">Chinese Academy of Sciences Institute of High Energy Physics</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<name2>Institute of High Energy Physics</name2>
+<URL>http://www.chinacp.com/eng/cporg/cporg_ihep.html</URL>
+<address1>Yuquan Road 19</address1>
+<po_box>P.O. Box 918-8</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Chinese Academy of Sciences Accelerator Division</full_name>
+<name1>Institute of High Energy Physics</name1>
+<name2>Chinese Academy of Sciences</name2>
+<department>Accelerator Division</department>
+<URL>http://www.ihep.cas.cn/</URL>
+<address1>19B Yuquan Road</address1>
+<po_box>P.O. Box 918</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+<institute>
+<full_name abbrev="NSC/KIPT" type="Institute">National Science Centre Kharkov Institute of Physics and Technology</full_name>
+<name1>National Science Centre</name1>
+<name2>Kharkov Institute of Physics and Technology</name2>
+<URL>http://www.kipt.kharkov.ua/</URL>
+<address1>1 Academicheskaja St.</address1>
+<town>Kharkov</town>
+<postal_code>61108</postal_code>
+<country_code abbrev="UA">Ukraine</country_code>
+</institute>
+</institutions>
+<emails>
+<email>chiyl@ihep.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Chi</lname>
+<fname>Yunlong</fname>
+<iname>Y.L.</iname>
+<author_id>1251</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Chinese Academy of Sciences Accelerator Division</full_name>
+<name1>Institute of High Energy Physics</name1>
+<name2>Chinese Academy of Sciences</name2>
+<department>Accelerator Division</department>
+<URL>http://www.ihep.cas.cn/</URL>
+<address1>19B Yuquan Road</address1>
+<po_box>P.O. Box 918</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>chiyl@ihep.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Chi</lname>
+<fname>Yunlong</fname>
+<iname>Y.L.</iname>
+<author_id>1251</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="IHEP" type="Academy of Sciences">Institute of High Energy Physics Chinese Academy of Sciences Accelerator Division</full_name>
+<name1>Institute of High Energy Physics</name1>
+<name2>Chinese Academy of Sciences</name2>
+<department>Accelerator Division</department>
+<URL>http://www.ihep.cas.cn/</URL>
+<address1>19B Yuquan Road</address1>
+<po_box>P.O. Box 918</po_box>
+<town>Beijing</town>
+<zip_code>100049</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>chiyl@ihep.ac.cn</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>MOZZPLS3_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=MOZZPLS3&amp;wanted_file=MOZZPLS3_TALK.PDF</fileURL>
+</fileURLs>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>28-Nov-2018 05:53:03</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>07-Dec-2018 09:33:54</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>07-Dec-2018 09:33:54</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>31-Jan-2019 04:21:52</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>31-Jan-2019 04:21:52</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 06:07:41</timestamp>
+<comments>MOZZPLS3_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>21-May-2019 02:03:56</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>21-May-2019 02:13:55</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Author,
+The submitted pdf of your talk is suitable for publication and will be included in the proceedings as given. In case of problems, please contact jan.chrin@psi.ch
+Thank you.</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+</papers>
+</session>
+</conference>

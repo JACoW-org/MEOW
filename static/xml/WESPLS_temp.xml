@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<conference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://bel.gsi.de/docs/xml/conference.xsd" name="IPAC 2019, Melbourne, Australia">
+<session type="Oral">
+<name abbr="WESPLS">Diversity in Accelerator Physics and Engineering</name>
+<date btime="1830" etime="2000">22-May-19</date>
+<location type="Special Session">Secondary Plenary (plenary 3)</location>
+<chairs>
+<chair>
+<lname>Dowd</lname>
+<fname>Rohan</fname>
+<iname>R.T.</iname>
+<author_id>21442</author_id>
+<institutions>
+<institute>
+<full_name abbrev="AS - ANSTO" type="Laboratory">Australian Synchrotron - ANSTO</full_name>
+<name1>Australian Synchrotron - ANSTO</name1>
+<URL>www.synchrotron.org.au</URL>
+<address1>800 Blackburn Road</address1>
+<town>Clayton</town>
+<zip_code>3168</zip_code>
+<country_code abbrev="AUS">Australia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>rohan.dowd@synchrotron.org.au</email>
+<email>rohan.dowd@synchrotron.org.au</email>
+<email>rohand@ansto.gov.au</email>
+</emails>
+</chair>
+</chairs>
+<papers>
+<paper>
+<abstract_id>3958</abstract_id>
+<main_class>NMC: Non MC Talk</main_class>
+<sub_class>Non-MC Talk</sub_class>
+<publishable>No, Editor Status Code is not Publishable, Final QA Not Publishable</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">WESPLS1</code>
+<presentation type="Oral">Invited Oral</presentation>
+<start_time>1830</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<title>Tactile Collider : Accelerator Outreach to Visually Impaired Audiences</title>
+<abstract>The Large Hadron Collider (LHC) has attracted significant attention from the general public. The science of the LHC and Higgs Boson is primarily communicated to school children and the wider public using visual methods. As a result, people with visual impairment (VI) often have difficulty accessing scientific communications and may be culturally excluded from news of scientific progress. Tactile Collider is a multi-sensory experience that aims to communicate particle accelerator science in a way that is inclusive of audiences with VI. These experiences are delivered as a 2-hour event that has been touring the UK since 2017. In this article we present the methods and training that have been used in implementing Tactile Collider as a model for engaging children and adults with science. The event has been developed alongside experts that specialise in making learning accessible to people with VI.</abstract>
+<contributors>
+<contributor type="Owner">
+<lname>Appleby</lname>
+<fname>Robert</fname>
+<iname>R.B.</iname>
+<author_id>12696</author_id>
+<institutions>
+<institute>
+<full_name abbrev="UMAN" type="University Institute">Cockcroft Institute The University of Manchester Physics and Astronomy Department</full_name>
+<name1>Cockcroft Institute</name1>
+<name2>The University of Manchester</name2>
+<department>Physics and Astronomy Department</department>
+<address1>Brunswick Street</address1>
+<town>Manchester</town>
+<zip_code>M13 9PL</zip_code>
+<country_code abbrev="UK">United Kingdom</country_code>
+</institute>
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanades de Particules 1</address1>
+<town>Meyrin</town>
+<postal_code>1217</postal_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+<institute>
+<full_name abbrev="STFC/DL/ASTeC">Science and Technology Facilities Council Daresbury Laboratory Accelerator Science and Technology Centre</full_name>
+<name1>Science and Technology Facilities Council</name1>
+<name2>Daresbury Laboratory</name2>
+<department>Accelerator Science and Technology Centre</department>
+<URL>http://www.dl.ac.uk/</URL>
+<town>Daresbury, Warrington, Cheshire</town>
+<zip_code>WA4 4AD</zip_code>
+<country_code abbrev="UK">United Kingdom</country_code>
+</institute>
+<institute>
+<full_name abbrev="UMAN" type="University Institute">The University of Manchester School of Physics and Astronomy</full_name>
+<name1>The University of Manchester</name1>
+<name2>School of Physics and Astronomy</name2>
+<address1>Sackville Street Building</address1>
+<po_box>P.O. Box 88</po_box>
+<town>Manchester</town>
+<zip_code>M6- 1QD</zip_code>
+<country_code abbrev="UK">United Kingdom</country_code>
+</institute>
+<institute>
+<full_name type="Institute">Cockcroft Institute</full_name>
+<name1>Cockcroft Institute</name1>
+<URL>http://www.lancs.ac.uk/cockcroft-institute/</URL>
+<address1>Daresbury Laboratory</address1>
+<town>Warrington, Cheshire</town>
+<zip_code>WA4 4AD</zip_code>
+<country_code abbrev="UK">United Kingdom</country_code>
+</institute>
+</institutions>
+<emails>
+<email>robert.appleby@manchester.ac.uk</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Appleby</lname>
+<fname>Robert</fname>
+<iname>R.B.</iname>
+<author_id>12696</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="UMAN" type="University Institute">Cockcroft Institute The University of Manchester Physics and Astronomy Department</full_name>
+<name1>Cockcroft Institute</name1>
+<name2>The University of Manchester</name2>
+<department>Physics and Astronomy Department</department>
+<address1>Brunswick Street</address1>
+<town>Manchester</town>
+<zip_code>M13 9PL</zip_code>
+<country_code abbrev="UK">United Kingdom</country_code>
+</institute>
+</institutions>
+<emails>
+<email>robert.appleby@manchester.ac.uk</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Appleby</lname>
+<fname>Robert</fname>
+<iname>R.B.</iname>
+<author_id>12696</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="UMAN" type="University Institute">Cockcroft Institute The University of Manchester Physics and Astronomy Department</full_name>
+<name1>Cockcroft Institute</name1>
+<name2>The University of Manchester</name2>
+<department>Physics and Astronomy Department</department>
+<address1>Brunswick Street</address1>
+<town>Manchester</town>
+<zip_code>M13 9PL</zip_code>
+<country_code abbrev="UK">United Kingdom</country_code>
+</institute>
+</institutions>
+<emails>
+<email>robert.appleby@manchester.ac.uk</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WESPLS1_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WESPLS1&amp;wanted_file=WESPLS1_TALK.PDF</fileURL>
+</fileURLs>
+<abstract_logs>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>22-May-2019 05:58:32</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>22-May-2019 05:58:32</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 06:02:04</timestamp>
+<comments>WESPLS1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>23-May-2019 02:01:40</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>23-May-2019 02:04:42</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Speaker,
+The pdf of your talk as submitted is suitable for publication and will be included in the proceedings.
+Kind Regards,
+jan.chrin@psi.ch</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="AOC">Abstract Owner Changed</log_status>
+<timestamp>23-May-2019 22:54:11</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>13-Jun-2019 01:17:34</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>13-Jun-2019 01:17:34</timestamp>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<abstract_id>3945</abstract_id>
+<main_class>NMC: Non MC Talk</main_class>
+<sub_class>Non-MC Talk</sub_class>
+<publishable>No, Editor Status Code is not Publishable, Final QA Not Publishable</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">WESPLS2</code>
+<presentation type="Oral">Invited Oral</presentation>
+<start_time>1850</start_time>
+<duration>60</duration>
+</program_code>
+</program_codes>
+<title>Presentation by Cordelia Fine</title>
+<abstract>In this presentation, Cordelia Fine will discuss the deep reach and legacy of the view that men are `thinkers¿ and women are `feelers¿. The influence of these gender stereotypes can be seen in the perceived `fit¿ of men versus women in traditionally masculine domains like physics, and even in the science that purports to show that males are biologically predisposed to understand the world, while females are predisposed to understand people.</abstract>
+<contributors>
+<contributor type="Owner">
+<lname>Fine</lname>
+<fname>Cordelia</fname>
+<iname>C.</iname>
+<author_id>119248</author_id>
+<institutions>
+<institute>
+<full_name type="University Department">The University of Melbourne School of Physics</full_name>
+<name1>The University of Melbourne</name1>
+<department>School of Physics</department>
+<address1>Parkville</address1>
+<town>Melbourne, Victoria</town>
+<zip_code>VIC 3010</zip_code>
+<country_code abbrev="AUS">Australia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>rohandowd@gmail.com</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Fine</lname>
+<fname>Cordelia</fname>
+<iname>C.</iname>
+<author_id>119248</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name type="University Department">The University of Melbourne School of Physics</full_name>
+<name1>The University of Melbourne</name1>
+<department>School of Physics</department>
+<address1>Parkville</address1>
+<town>Melbourne, Victoria</town>
+<zip_code>VIC 3010</zip_code>
+<country_code abbrev="AUS">Australia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>rohandowd@gmail.com</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Fine</lname>
+<fname>Cordelia</fname>
+<iname>C.</iname>
+<author_id>119248</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name type="University Department">The University of Melbourne School of Physics</full_name>
+<name1>The University of Melbourne</name1>
+<department>School of Physics</department>
+<address1>Parkville</address1>
+<town>Melbourne, Victoria</town>
+<zip_code>VIC 3010</zip_code>
+<country_code abbrev="AUS">Australia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>rohandowd@gmail.com</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WESPLS2_TALK.PPTX</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WESPLS2&amp;wanted_file=WESPLS2_TALK.PPTX</fileURL>
+</fileURLs>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>17-May-2019 07:44:21</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>17-May-2019 07:44:21</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AOC">Abstract Owner Changed</log_status>
+<timestamp>17-May-2019 08:18:53</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>19-May-2019 07:41:45</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>19-May-2019 07:41:45</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 01:22:39</timestamp>
+<comments>WESPLS2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>23-May-2019 04:20:46</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>23-May-2019 04:27:18</timestamp>
+<comments>WESPLS2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>23-May-2019 04:28:52</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Speaker,
+Your PowerPoint slides were successfully converted to PDF (with intermediate slides removed) and will
+be published in the conference proceedings. Please download the PDF
+slides file (WESPLS2_TALK.pdf) and check that all is OK. 
+In case of problems, please contact:
+Jan.chrin@psi.ch
+Thank you.
+</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAS">Transparency Reassigned</log_status>
+<timestamp>23-May-2019 15:47:57</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>23-May-2019 15:49:26</timestamp>
+<transparency_status code="R">Red</transparency_status>
+<comments>PDF should not be published</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>23-May-2019 15:52:35</timestamp>
+<comments>WESPLS2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>13-Jun-2019 01:17:48</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>13-Jun-2019 01:17:48</timestamp>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<abstract_id>3946</abstract_id>
+<main_class>NMC: Non MC Talk</main_class>
+<sub_class>Non-MC Talk</sub_class>
+<publishable>No, Editor Status Code is not Publishable, Final QA Not Publishable</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">WESPLS3</code>
+<presentation type="Oral">Invited Oral</presentation>
+<start_time>1950</start_time>
+<duration>10</duration>
+</program_code>
+</program_codes>
+<title>Public Awareness Activity</title>
+<abstract>Instructions on how to participate in the Wiki Edit-a-thon activity.</abstract>
+<contributors>
+<contributor type="Co-Author">
+<lname>Dowd</lname>
+<fname>Rohan</fname>
+<iname>R.T.</iname>
+<author_id>21442</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="AS - ANSTO" type="Laboratory">Australian Synchrotron - ANSTO</full_name>
+<name1>Australian Synchrotron - ANSTO</name1>
+<URL>www.synchrotron.org.au</URL>
+<address1>800 Blackburn Road</address1>
+<town>Clayton</town>
+<zip_code>3168</zip_code>
+<country_code abbrev="AUS">Australia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>rohand@ansto.gov.au</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Dowd</lname>
+<fname>Rohan</fname>
+<iname>R.T.</iname>
+<author_id>21442</author_id>
+<institutions>
+<institute>
+<full_name abbrev="ASCo" type="Laboratory">Australian Synchrotron Company</full_name>
+<name1>Australian Synchrotron Company</name1>
+<URL>http://www.synchrotron.org.au</URL>
+<address1>800 Blackburn Road</address1>
+<town>Clayton, Victoria</town>
+<zip_code>VIC 3168</zip_code>
+<country_code abbrev="AUS">Australia</country_code>
+</institute>
+<institute>
+<full_name abbrev="SLSA" type="Laboratory">Synchrotron Light Source Australia</full_name>
+<name1>Synchrotron Light Source Australia</name1>
+<URL>http://www.synchrotron.org.au</URL>
+<address1>800 Blackburn Road</address1>
+<town>Clayton</town>
+<postal_code>3168</postal_code>
+<country_code abbrev="AUS">Australia</country_code>
+</institute>
+<institute>
+<full_name abbrev="AS - ANSTO" type="Laboratory">Australian Synchrotron - ANSTO</full_name>
+<name1>Australian Synchrotron - ANSTO</name1>
+<URL>www.synchrotron.org.au</URL>
+<address1>800 Blackburn Road</address1>
+<town>Clayton</town>
+<zip_code>3168</zip_code>
+<country_code abbrev="AUS">Australia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>rohand@ansto.gov.au</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Chalmers</lname>
+<fname>Madeleine</fname>
+<mname>Cole</mname>
+<iname>M.C.</iname>
+<author_id>113529</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="AS - ANSTO" type="Laboratory">Australian Synchrotron - ANSTO</full_name>
+<name1>Australian Synchrotron - ANSTO</name1>
+<URL>www.synchrotron.org.au</URL>
+<address1>800 Blackburn Road</address1>
+<town>Clayton</town>
+<zip_code>3168</zip_code>
+<country_code abbrev="AUS">Australia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>madeleic@ansto.gov.au</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Dowd</lname>
+<fname>Rohan</fname>
+<iname>R.T.</iname>
+<author_id>21442</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="AS - ANSTO" type="Laboratory">Australian Synchrotron - ANSTO</full_name>
+<name1>Australian Synchrotron - ANSTO</name1>
+<URL>www.synchrotron.org.au</URL>
+<address1>800 Blackburn Road</address1>
+<town>Clayton</town>
+<zip_code>3168</zip_code>
+<country_code abbrev="AUS">Australia</country_code>
+</institute>
+</institutions>
+<emails>
+<email>rohand@ansto.gov.au</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WESPLS3_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WESPLS3_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WESPLS3&amp;wanted_file=WESPLS3_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WESPLS3&amp;wanted_file=WESPLS3_TALK.PPTX</fileURL>
+</fileURLs>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>17-May-2019 08:34:11</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>17-May-2019 08:34:11</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>19-May-2019 07:41:10</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>19-May-2019 07:41:10</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 01:42:16</timestamp>
+<comments>WESPLS3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>23-May-2019 04:42:45</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>23-May-2019 04:46:59</timestamp>
+<comments>WESPLS3_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>23-May-2019 04:49:40</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Hi Rohan,
+All good.
+Best,
+Jan
+
+Dear Speaker,
+Your PowerPoint slides were successfully converted to PDF and will
+be published in the conference proceedings. Please download the PDF
+slides file (WESPLS3_TALK.pdf) and check that all is OK. 
+In case of problems, please contact:
+jan.chrin@psi.ch
+Thank you.
+</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>13-Jun-2019 01:18:07</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>13-Jun-2019 01:18:07</timestamp>
+</abstract_log>
+</abstract_logs>
+</paper>
+</papers>
+</session>
+</conference>

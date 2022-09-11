@@ -1,0 +1,1307 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<conference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://bel.gsi.de/docs/xml/conference.xsd" name="IPAC 2019, Melbourne, Australia">
+<session type="Oral">
+<name abbr="THXXPLS">Contributed Orals: Applications of Accelerators, Tech. Transfer, Industrial Rel</name>
+<date btime="0930" etime="1030">23-May-19</date>
+<location type="Before Coffee Contributed Oral">Secondary Plenary (plenary 3)</location>
+<chairs>
+<chair>
+<lname>Klysubun</lname>
+<fname>Prapong</fname>
+<iname>P.</iname>
+<author_id>20854</author_id>
+<institutions>
+<institute>
+<full_name abbrev="SLRI" type="Institute">Synchrotron Light Research Institute</full_name>
+<name1>Synchrotron Light Research Institute</name1>
+<address1>PO. Box 93</address1>
+<town>Nakhon Ratchasima</town>
+<zip_code>30000</zip_code>
+<country_code abbrev="T">Thailand</country_code>
+</institute>
+</institutions>
+<emails>
+<email>pklysubun@gmail.com</email>
+<email>pklysubun@slri.or.th</email>
+<email>pklysubun@slri.or.th</email>
+</emails>
+</chair>
+</chairs>
+<papers>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Klysubun</lname>
+<fname>Prapong</fname>
+<iname>P.</iname>
+<author_id>20854</author_id>
+<institutions>
+<institute>
+<full_name abbrev="SLRI" type="Laboratory">Synchrotron Light Research Institute SIAM Photon Source</full_name>
+<name1>Synchrotron Light Research Institute</name1>
+<department>SIAM Photon Source</department>
+<URL>www.nsrc.or.th</URL>
+<address1>111 Surapat 3, University Avenue</address1>
+<address2>Suranaree Sub-district, Muang</address2>
+<po_box>P.O.B. 93</po_box>
+<town>Nakhon Ratchasima</town>
+<zip_code>30000</zip_code>
+<country_code abbrev="T">Thailand</country_code>
+</institute>
+<institute>
+<full_name abbrev="SLRI" type="Laboratory">Synchrotron Light Research Institute</full_name>
+<name1>Synchrotron Light Research Institute</name1>
+<URL>www.nsrc.or.th</URL>
+<address1>111 Surapat 3, University Avenue</address1>
+<address2>Suranaree Sub-district, Muang</address2>
+<town>Nakhon Ratchasima</town>
+<zip_code>30000</zip_code>
+<country_code abbrev="T">Thailand</country_code>
+</institute>
+<institute>
+<full_name abbrev="SLRI" type="Institute">Synchrotron Light Research Institute</full_name>
+<name1>Synchrotron Light Research Institute</name1>
+<address1>PO. Box 93</address1>
+<town>Nakhon Ratchasima</town>
+<zip_code>30000</zip_code>
+<country_code abbrev="T">Thailand</country_code>
+</institute>
+</institutions>
+<emails>
+<email>pklysubun@gmail.com</email>
+<email>pklysubun@slri.or.th</email>
+<email>pklysubun@slri.or.th</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>2183</abstract_id>
+<pages>4</pages>
+<toc>3404</toc>
+<main_class>MC8: Applications of Accelerators, Technology Transfer and Industrial Relations</main_class>
+<sub_class>U01 Medical Applications</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">THXXPLS1</code>
+<presentation type="Oral">Contributed Oral</presentation>
+<start_time>930</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>Status of the Carbon Commissioning and Roadmap Projects of the MedAustron Ion Therapy Center Accelerator</title>
+<abstract>The synchrotron-based MedAustron Particle Therapy Accelerator MAPTA located in Austria, delivers proton beams for medical treatment in the energy range 62-252 MeV/n since the year 2016 and is in preparation to provide C6+ carbon ions in the range 120-400 MeV/n to two of the three clinically used ion therapy irradiation rooms. In addition, carbon and proton beams, the latter with up to 800 MeV, will be provided to a fourth room dedicated to research. After beam generation and pre-acceleration to 7MeV, a 77m long synchrotron accelerates particles up to the requested energy for clinical treatment. A third-order resonance extraction method is used to extract the particles from the synchrotron in a slow controlled process and then transfer the particles to the 4 irradiation rooms with a spill time of 0.1-10 seconds to facilitate the control of the delivered radiation dose during clinical treatments. Presently, proton beams are delivered to the horizontal and vertical beam lines of three rooms. Commissioning of the accelerator with carbon ions has been completed for one beam line. In parallel, the installation of the beam line magnets for the proton Gantry is ongoing. A review of the accelerator and the status of the carbon commissioning, ongoing in parallel with clinical operations, and an outlook to future roadmap projects are presented.</abstract>
+<contributors>
+<contributor type="Co-Author">
+<lname>Adler</lname>
+<fname>Laurids</fname>
+<iname>L.</iname>
+<author_id>104537</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="EBG MedAustron" type="Industry">EBG MedAustron GmbH</full_name>
+<name1>EBG MedAustron GmbH</name1>
+<address1>Viktor Kaplan-Str. 2</address1>
+<town>Wr. Neustadt</town>
+<postal_code>2700</postal_code>
+<country_code abbrev="A">Austria</country_code>
+</institute>
+</institutions>
+<emails>
+<email>laurids.adler@medaustron.at</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>De Franco</lname>
+<fname>Andrea</fname>
+<iname>A.</iname>
+<author_id>95137</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="EBG MedAustron" type="Industry">EBG MedAustron GmbH</full_name>
+<name1>EBG MedAustron GmbH</name1>
+<address1>Viktor Kaplan-Str. 2</address1>
+<town>Wr. Neustadt</town>
+<postal_code>2700</postal_code>
+<country_code abbrev="A">Austria</country_code>
+</institute>
+</institutions>
+<emails>
+<email>andrea.de.franco@medaustron.at</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Farinon</lname>
+<fname>Fabio</fname>
+<iname>F.</iname>
+<author_id>88189</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="EBG MedAustron" type="Industry">EBG MedAustron GmbH</full_name>
+<name1>EBG MedAustron GmbH</name1>
+<address1>Viktor Kaplan-Str. 2</address1>
+<town>Wr. Neustadt</town>
+<postal_code>2700</postal_code>
+<country_code abbrev="A">Austria</country_code>
+</institute>
+</institutions>
+<emails>
+<email>fabio.farinon@medaustron.at</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Gambino</lname>
+<fname>Nadia</fname>
+<iname>N.</iname>
+<author_id>35422</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="EBG MedAustron" type="Industry">EBG MedAustron GmbH</full_name>
+<name1>EBG MedAustron GmbH</name1>
+<address1>Viktor Kaplan-Str. 2</address1>
+<town>Wr. Neustadt</town>
+<postal_code>2700</postal_code>
+<country_code abbrev="A">Austria</country_code>
+</institute>
+</institutions>
+<emails>
+<email>nadia.gambino@medaustron.at</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Guidoboni</lname>
+<fname>Greta</fname>
+<iname>G.</iname>
+<author_id>76906</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="EBG MedAustron" type="Industry">EBG MedAustron GmbH</full_name>
+<name1>EBG MedAustron GmbH</name1>
+<address1>Viktor Kaplan-Str. 2</address1>
+<town>Wr. Neustadt</town>
+<postal_code>2700</postal_code>
+<country_code abbrev="A">Austria</country_code>
+</institute>
+</institutions>
+<emails>
+<email>greta.guidoboni@medaustron.at</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Kowarik</lname>
+<fname>Gregor</fname>
+<iname>G.</iname>
+<author_id>95194</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="EBG MedAustron" type="Industry">EBG MedAustron GmbH</full_name>
+<name1>EBG MedAustron GmbH</name1>
+<address1>Viktor Kaplan-Str. 2</address1>
+<town>Wr. Neustadt</town>
+<postal_code>2700</postal_code>
+<country_code abbrev="A">Austria</country_code>
+</institute>
+</institutions>
+<emails>
+<email>gregor.kowarik@medaustron.at</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Kronberger</lname>
+<fname>Matthias</fname>
+<iname>M.</iname>
+<author_id>52226</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="EBG MedAustron" type="Industry">EBG MedAustron GmbH</full_name>
+<name1>EBG MedAustron GmbH</name1>
+<address1>Viktor Kaplan-Str. 2</address1>
+<town>Wr. Neustadt</town>
+<postal_code>2700</postal_code>
+<country_code abbrev="A">Austria</country_code>
+</institute>
+</institutions>
+<emails>
+<email>matthias.kronberger@medaustron.at</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Kurfuerst</lname>
+<fname>Christoph</fname>
+<iname>C.</iname>
+<author_id>44703</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="EBG MedAustron" type="Industry">EBG MedAustron GmbH</full_name>
+<name1>EBG MedAustron GmbH</name1>
+<address1>Viktor Kaplan-Str. 2</address1>
+<town>Wr. Neustadt</town>
+<postal_code>2700</postal_code>
+<country_code abbrev="A">Austria</country_code>
+</institute>
+</institutions>
+<emails>
+<email>christoph.kurfuerst@medaustron.at</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Lau</lname>
+<fname>Hin Tung</fname>
+<iname>H.T.</iname>
+<author_id>116369</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="EBG MedAustron" type="Industry">EBG MedAustron GmbH</full_name>
+<name1>EBG MedAustron GmbH</name1>
+<address1>Viktor Kaplan-Str. 2</address1>
+<town>Wr. Neustadt</town>
+<postal_code>2700</postal_code>
+<country_code abbrev="A">Austria</country_code>
+</institute>
+</institutions>
+<emails>
+<email>hin.lau@medaustron.at</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Myalski</lname>
+<fname>Szymon</fname>
+<iname>S.</iname>
+<author_id>66850</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="EBG MedAustron" type="Industry">EBG MedAustron GmbH</full_name>
+<name1>EBG MedAustron GmbH</name1>
+<address1>Viktor Kaplan-Str. 2</address1>
+<town>Wr. Neustadt</town>
+<postal_code>2700</postal_code>
+<country_code abbrev="A">Austria</country_code>
+</institute>
+</institutions>
+<emails>
+<email>szymon.myalski@medaustron.at</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Nowak</lname>
+<fname>Sebastian</fname>
+<iname>S.</iname>
+<author_id>88188</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="EBG MedAustron" type="Industry">EBG MedAustron GmbH</full_name>
+<name1>EBG MedAustron GmbH</name1>
+<address1>Viktor Kaplan-Str. 2</address1>
+<town>Wr. Neustadt</town>
+<postal_code>2700</postal_code>
+<country_code abbrev="A">Austria</country_code>
+</institute>
+</institutions>
+<emails>
+<email>sebastian.nowak@medaustron.at</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Penescu</lname>
+<fname>Liviu</fname>
+<iname>L.C.</iname>
+<author_id>42076</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name type="Industry">Abstract Landscapes</full_name>
+<name1>Abstract Landscapes</name1>
+<URL>https://www.abstract-landscapes.com/</URL>
+<address1>520 Rue de Saint-Hilaire</address1>
+<town>Montpellier</town>
+<zip_code>34000</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>liviu.penescu@abstract-landscapes.com</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Schmitzer</lname>
+<fname>Claus</fname>
+<iname>C.</iname>
+<author_id>52225</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="EBG MedAustron" type="Industry">EBG MedAustron GmbH</full_name>
+<name1>EBG MedAustron GmbH</name1>
+<address1>Viktor Kaplan-Str. 2</address1>
+<town>Wr. Neustadt</town>
+<postal_code>2700</postal_code>
+<country_code abbrev="A">Austria</country_code>
+</institute>
+</institutions>
+<emails>
+<email>claus.schmitzer@medaustron.at</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Strasik</lname>
+<fname>Ivan</fname>
+<iname>I.</iname>
+<author_id>25746</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="EBG MedAustron" type="Industry">EBG MedAustron GmbH</full_name>
+<name1>EBG MedAustron GmbH</name1>
+<address1>Viktor Kaplan-Str. 2</address1>
+<town>Wr. Neustadt</town>
+<postal_code>2700</postal_code>
+<country_code abbrev="A">Austria</country_code>
+</institute>
+</institutions>
+<emails>
+<email>ivan.strasik@medaustron.at</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Urschütz</lname>
+<fname>Peter</fname>
+<iname>P.</iname>
+<author_id>4248</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="EBG MedAustron" type="Industry">EBG MedAustron GmbH</full_name>
+<name1>EBG MedAustron GmbH</name1>
+<address1>Viktor Kaplan-Str. 2</address1>
+<town>Wr. Neustadt</town>
+<postal_code>2700</postal_code>
+<country_code abbrev="A">Austria</country_code>
+</institute>
+</institutions>
+<emails>
+<email>peter.urschuetz@medaustron.at</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Wastl</lname>
+<fname>Alexander</fname>
+<iname>A.</iname>
+<author_id>60029</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="EBG MedAustron" type="Industry">EBG MedAustron GmbH</full_name>
+<name1>EBG MedAustron GmbH</name1>
+<address1>Viktor Kaplan-Str. 2</address1>
+<town>Wr. Neustadt</town>
+<postal_code>2700</postal_code>
+<country_code abbrev="A">Austria</country_code>
+</institute>
+</institutions>
+<emails>
+<email>alexander.wastl@medaustron.at</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Pivi</lname>
+<fname>Mauro</fname>
+<mname>Torino Francesco</mname>
+<iname>M.T.F.</iname>
+<author_id>2981</author_id>
+<institutions>
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory Next Linear Collider Dept.</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<name2>Next Linear Collider Dept.</name2>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name type="Industry">IMS Nanofabrication AG</full_name>
+<name1>IMS Nanofabrication AG</name1>
+<address1>Schreygasse 3</address1>
+<town>Vienna</town>
+<postal_code>1020</postal_code>
+<country_code abbrev="A">Austria</country_code>
+</institute>
+<institute>
+<full_name abbrev="EBG MedAustron" type="Industry">EBG MedAustron GmbH</full_name>
+<name1>EBG MedAustron GmbH</name1>
+<address1>Viktor Kaplan-Str. 2</address1>
+<town>Wr. Neustadt</town>
+<postal_code>2700</postal_code>
+<country_code abbrev="A">Austria</country_code>
+</institute>
+</institutions>
+<emails>
+<email>mauro.pivi@medaustron.at</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Pivi</lname>
+<fname>Mauro</fname>
+<mname>Torino Francesco</mname>
+<iname>M.T.F.</iname>
+<author_id>2981</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="EBG MedAustron" type="Industry">EBG MedAustron GmbH</full_name>
+<name1>EBG MedAustron GmbH</name1>
+<address1>Viktor Kaplan-Str. 2</address1>
+<town>Wr. Neustadt</town>
+<postal_code>2700</postal_code>
+<country_code abbrev="A">Austria</country_code>
+</institute>
+</institutions>
+<emails>
+<email>mauro.pivi@medaustron.at</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Pivi</lname>
+<fname>Mauro</fname>
+<mname>Torino Francesco</mname>
+<iname>M.T.F.</iname>
+<author_id>2981</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="EBG MedAustron" type="Industry">EBG MedAustron GmbH</full_name>
+<name1>EBG MedAustron GmbH</name1>
+<address1>Viktor Kaplan-Str. 2</address1>
+<town>Wr. Neustadt</town>
+<postal_code>2700</postal_code>
+<country_code abbrev="A">Austria</country_code>
+</institute>
+</institutions>
+<emails>
+<email>mauro.pivi@medaustron.at</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>THXXPLS1.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>THXXPLS1_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THXXPLS1_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THXXPLS1_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>THXXPLS1.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>THXXPLS1_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>THXXPLS1.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>THXXPLS1.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THXXPLS1_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>THXXPLS1.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THXXPLS1_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>THXXPLS1.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THXXPLS1&amp;wanted_file=THXXPLS1.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THXXPLS1&amp;wanted_file=THXXPLS1_AUTHOR.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THXXPLS1&amp;wanted_file=THXXPLS1.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THXXPLS1&amp;wanted_file=THXXPLS1.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THXXPLS1&amp;wanted_file=THXXPLS1_AUTHOR.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THXXPLS1&amp;wanted_file=THXXPLS1.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THXXPLS1&amp;wanted_file=THXXPLS1.docx</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THXXPLS1&amp;wanted_file=THXXPLS1.docx</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THXXPLS1&amp;wanted_file=THXXPLS1_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THXXPLS1&amp;wanted_file=THXXPLS1_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THXXPLS1&amp;wanted_file=THXXPLS1_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THXXPLS1&amp;wanted_file=THXXPLS1_TALK.PDF</fileURL>
+</fileURLs>
+<editor>Philip Scott Dyer</editor>
+<final_qa>Gustavo Barbosa Monteiro Bruno</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="PRR">Peer Review Requested</log_status>
+<timestamp>02-Dec-2018 23:09:21</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>02-Dec-2018 23:09:21</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>04-Dec-2018 11:03:03</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>04-Dec-2018 12:18:58</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>04-Dec-2018 12:29:22</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>04-Dec-2018 12:35:55</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>04-Dec-2018 21:00:03</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>10-Dec-2018 14:41:59</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>31-Jan-2019 11:25:28</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>31-Jan-2019 11:25:28</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 04:48:46</timestamp>
+<comments>THXXPLS1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 04:50:11</timestamp>
+<comments>THXXPLS1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>19-May-2019 08:13:04</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>19-May-2019 22:57:33</timestamp>
+<editor_status code="R">Red</editor_status>
+<comments>The paper length is restricted to 3 pages. A fourth page can be used for references. Please reduce the length of your paper.</comments>
+<editor_notes>6 pages submitted initially</editor_notes>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 05:34:25</timestamp>
+<comments>THXXPLS1_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 05:37:32</timestamp>
+<comments>THXXPLS1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>23-May-2019 00:15:22</timestamp>
+<comments>THXXPLS1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>23-May-2019 00:16:08</timestamp>
+<comments>THXXPLS1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>23-May-2019 04:43:49</timestamp>
+<comments>THXXPLS1.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>23-May-2019 04:44:20</timestamp>
+<comments>THXXPLS1.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>23-May-2019 04:48:39</timestamp>
+<editor_status code="Y">Yellow</editor_status>
+<comments>I made formatting changes, but otherwise everything was fine. Please look over the most recent file for acceptability.</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="DR">Dot Reassignment</log_status>
+<timestamp>23-May-2019 15:22:36</timestamp>
+<editor_status code="G">Green</editor_status>
+<comments>After Editing by editor the summary section goes into the 4th page. If this is acceptable for you it is fine for me.
+Cheers,</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>23-May-2019 23:58:11</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>24-May-2019 00:01:09</timestamp>
+<comments>THXXPLS1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>24-May-2019 00:02:12</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Mauro,
+A new pdf of your talk (with all fonts embedded) was produced for inclusion in the proceedings.
+Best,
+jan.chrin@psi.ch</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>24-May-2019 00:03:41</timestamp>
+<comments>THXXPLS1.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>24-May-2019 00:04:30</timestamp>
+<comments>Initial capped the subheadings.</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>24-May-2019 00:07:24</timestamp>
+<comments>A paragraph of summary is in the page 4. But there is no good method to reduce the length of the paper at this stage. David agreed to publish this paper.
+QA ok.</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>24-May-2019 00:20:59</timestamp>
+<comments>THXXPLS1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>24-May-2019 00:21:58</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Mauro,
+Your PowerPoint slides were successfully converted to PDF and will be published in the conference proceedings. 
+Please download the PDF slides file (THXXPLS1_TALK.pdf) and check that all is OK. 
+In case of problems, please contact:
+Jan.chrin@psi.ch
+Thank you.
+</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>24-May-2019 01:52:39</timestamp>
+<comments>THXXPLS1.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>24-May-2019 01:53:18</timestamp>
+<comments>Dear author,
+
+During QA, an edit was made to avoid spliting  number and unit in different lines.
+
+Best regards,
+Gustavo Bruno</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Klysubun</lname>
+<fname>Prapong</fname>
+<iname>P.</iname>
+<author_id>20854</author_id>
+<institutions>
+<institute>
+<full_name abbrev="SLRI" type="Laboratory">Synchrotron Light Research Institute SIAM Photon Source</full_name>
+<name1>Synchrotron Light Research Institute</name1>
+<department>SIAM Photon Source</department>
+<URL>www.nsrc.or.th</URL>
+<address1>111 Surapat 3, University Avenue</address1>
+<address2>Suranaree Sub-district, Muang</address2>
+<po_box>P.O.B. 93</po_box>
+<town>Nakhon Ratchasima</town>
+<zip_code>30000</zip_code>
+<country_code abbrev="T">Thailand</country_code>
+</institute>
+<institute>
+<full_name abbrev="SLRI" type="Laboratory">Synchrotron Light Research Institute</full_name>
+<name1>Synchrotron Light Research Institute</name1>
+<URL>www.nsrc.or.th</URL>
+<address1>111 Surapat 3, University Avenue</address1>
+<address2>Suranaree Sub-district, Muang</address2>
+<town>Nakhon Ratchasima</town>
+<zip_code>30000</zip_code>
+<country_code abbrev="T">Thailand</country_code>
+</institute>
+<institute>
+<full_name abbrev="SLRI" type="Institute">Synchrotron Light Research Institute</full_name>
+<name1>Synchrotron Light Research Institute</name1>
+<address1>PO. Box 93</address1>
+<town>Nakhon Ratchasima</town>
+<zip_code>30000</zip_code>
+<country_code abbrev="T">Thailand</country_code>
+</institute>
+</institutions>
+<emails>
+<email>pklysubun@gmail.com</email>
+<email>pklysubun@slri.or.th</email>
+<email>pklysubun@slri.or.th</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>2622</abstract_id>
+<main_class>MC8: Applications of Accelerators, Technology Transfer and Industrial Relations</main_class>
+<sub_class>U01 Medical Applications</sub_class>
+<publishable>No, Editor Status Code is not Publishable, Final QA Not Publishable</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">THXXPLS2</code>
+<presentation type="Oral">Contributed Oral</presentation>
+<start_time>950</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<title>Recent Progress in the Production of Medical Radioisotopes with RFT-30 Cyclotron</title>
+<abstract>RFT-30 cyclotron has been regularly operated since 2013, and research on the production of radioisotopes (RIs) has been performed using this cyclotron. Fluorine-18 (F-18), which is the most widely-used positron emitter, has been regularly produced and provided to users in universities and research institutes since 2015. In 2018, mass-production of zirconium-89 (Zr-89) is successfully achieved. Zr-89 has a half-life of 3.3 days which is well matched to the circulation half-lives of antibodies. In addition, long-term proton irradiation for the production of germanium-68 (Ge-68), which is one of the typical generator RIs, was also carried out. A generator is a device used to extract the positron-emitting daughter radioisotope from a source of the decaying parent radioisotope which has a relatively long half-life. Furthermore, we are trying to optimize irradiation conditions for the RI production and following processes after the irradiation. The research on the production of other useful RIs and the performance improvement for the mass-production will be accomplished in the future.</abstract>
+<contributors>
+<contributor type="Co-Author">
+<lname>Hur</lname>
+<fname>Min Goo</fname>
+<iname>M.G.</iname>
+<author_id>21441</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="KAERI" type="Institute">Korea Atomic Energy Research Institute</full_name>
+<name1>Korea Atomic Energy Research Institute</name1>
+<address1>Yusong</address1>
+<po_box>P.O. Box 105</po_box>
+<town>Daejon</town>
+<zip_code>305-600</zip_code>
+<country_code abbrev="KOR">Republic of Korea</country_code>
+</institute>
+</institutions>
+<emails>
+<email>hur09@kaeri.re.kr</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Kong</lname>
+<fname>Young Bae</fname>
+<iname>Y.B.</iname>
+<author_id>63248</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="KAERI" type="Institute">Korea Atomic Energy Research Institute</full_name>
+<name1>Korea Atomic Energy Research Institute</name1>
+<address1>29 Geumgu-gil</address1>
+<address2>Jeongeup-si</address2>
+<address3>Jeollabuk-do</address3>
+<town>Jeongeup-si</town>
+<zip_code>56212</zip_code>
+<country_code abbrev="KOR">Republic of Korea</country_code>
+</institute>
+</institutions>
+<emails>
+<email>ybkong@kaeri.re.kr</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Park</lname>
+<fname>Jeong Hoon</fname>
+<iname>J.H.</iname>
+<author_id>44751</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="KAERI" type="Institute">Korea Atomic Energy Research Institute</full_name>
+<name1>Korea Atomic Energy Research Institute</name1>
+<address1>Yusong</address1>
+<po_box>P.O. Box 105</po_box>
+<town>Daejon</town>
+<zip_code>305-600</zip_code>
+<country_code abbrev="KOR">Republic of Korea</country_code>
+</institute>
+</institutions>
+<emails>
+<email>parkjh@kaeri.re.kr</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Song</lname>
+<fname>HoSeung</fname>
+<iname>H.S.</iname>
+<author_id>47442</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="KAERI" type="Institute">Korea Atomic Energy Research Institute</full_name>
+<name1>Korea Atomic Energy Research Institute</name1>
+<address1>29 Geumgu-gil</address1>
+<address2>Jeongeup-si</address2>
+<address3>Jeollabuk-do</address3>
+<town>Jeongeup-si</town>
+<zip_code>56212</zip_code>
+<country_code abbrev="KOR">Republic of Korea</country_code>
+</institute>
+</institutions>
+<emails>
+<email>hssong2@kaeri.re.kr</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Yang</lname>
+<fname>Seung Dae</fname>
+<iname>S.D.</iname>
+<author_id>21909</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="KAERI" type="Institute">Korea Atomic Energy Research Institute</full_name>
+<name1>Korea Atomic Energy Research Institute</name1>
+<address1>Yusong</address1>
+<po_box>P.O. Box 105</po_box>
+<town>Daejon</town>
+<zip_code>305-600</zip_code>
+<country_code abbrev="KOR">Republic of Korea</country_code>
+</institute>
+</institutions>
+<emails>
+<email>sdyang@kaeri.re.kr</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Lee</lname>
+<fname>Eunje</fname>
+<iname>E.J.</iname>
+<author_id>54457</author_id>
+<institutions>
+<institute>
+<full_name abbrev="KAERI" type="Institute">Korea Atomic Energy Research Institute</full_name>
+<name1>Korea Atomic Energy Research Institute</name1>
+<address1>Yusong</address1>
+<po_box>P.O. Box 105</po_box>
+<town>Daejon</town>
+<zip_code>305-600</zip_code>
+<country_code abbrev="KOR">Republic of Korea</country_code>
+</institute>
+</institutions>
+<emails>
+<email>leeeunje@kaeri.re.kr</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Lee</lname>
+<fname>Eunje</fname>
+<iname>E.J.</iname>
+<author_id>54457</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="KAERI" type="Institute">Korea Atomic Energy Research Institute</full_name>
+<name1>Korea Atomic Energy Research Institute</name1>
+<address1>Yusong</address1>
+<po_box>P.O. Box 105</po_box>
+<town>Daejon</town>
+<zip_code>305-600</zip_code>
+<country_code abbrev="KOR">Republic of Korea</country_code>
+</institute>
+</institutions>
+<emails>
+<email>leeeunje@kaeri.re.kr</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Lee</lname>
+<fname>Eunje</fname>
+<iname>E.J.</iname>
+<author_id>54457</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="KAERI" type="Institute">Korea Atomic Energy Research Institute</full_name>
+<name1>Korea Atomic Energy Research Institute</name1>
+<address1>Yusong</address1>
+<po_box>P.O. Box 105</po_box>
+<town>Daejon</town>
+<zip_code>305-600</zip_code>
+<country_code abbrev="KOR">Republic of Korea</country_code>
+</institute>
+</institutions>
+<emails>
+<email>leeeunje@kaeri.re.kr</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THXXPLS2_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THXXPLS2_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THXXPLS2&amp;wanted_file=THXXPLS2_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THXXPLS2&amp;wanted_file=THXXPLS2_TALK.PPTX</fileURL>
+</fileURLs>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>04-Dec-2018 10:02:16</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>10-Dec-2018 14:32:53</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>31-Jan-2019 11:34:38</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>31-Jan-2019 11:34:38</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 15:36:04</timestamp>
+<comments>THXXPLS2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>21-May-2019 15:38:10</timestamp>
+<comments>THXXPLS2_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 01:15:36</timestamp>
+<comments>THXXPLS2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>24-May-2019 00:18:19</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>24-May-2019 00:27:14</timestamp>
+<comments>THXXPLS2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>24-May-2019 00:27:54</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Speaker,
+Your PowerPoint slides were successfully converted to PDF and will be published in the conference proceedings. 
+Please download the PDF slides file (THXXPLS2_TALK.pdf) and check that all is OK. 
+In case of problems, please contact:
+Jan.chrin@psi.ch
+Thank you.
+</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Klysubun</lname>
+<fname>Prapong</fname>
+<iname>P.</iname>
+<author_id>20854</author_id>
+<institutions>
+<institute>
+<full_name abbrev="SLRI" type="Laboratory">Synchrotron Light Research Institute SIAM Photon Source</full_name>
+<name1>Synchrotron Light Research Institute</name1>
+<department>SIAM Photon Source</department>
+<URL>www.nsrc.or.th</URL>
+<address1>111 Surapat 3, University Avenue</address1>
+<address2>Suranaree Sub-district, Muang</address2>
+<po_box>P.O.B. 93</po_box>
+<town>Nakhon Ratchasima</town>
+<zip_code>30000</zip_code>
+<country_code abbrev="T">Thailand</country_code>
+</institute>
+<institute>
+<full_name abbrev="SLRI" type="Laboratory">Synchrotron Light Research Institute</full_name>
+<name1>Synchrotron Light Research Institute</name1>
+<URL>www.nsrc.or.th</URL>
+<address1>111 Surapat 3, University Avenue</address1>
+<address2>Suranaree Sub-district, Muang</address2>
+<town>Nakhon Ratchasima</town>
+<zip_code>30000</zip_code>
+<country_code abbrev="T">Thailand</country_code>
+</institute>
+<institute>
+<full_name abbrev="SLRI" type="Institute">Synchrotron Light Research Institute</full_name>
+<name1>Synchrotron Light Research Institute</name1>
+<address1>PO. Box 93</address1>
+<town>Nakhon Ratchasima</town>
+<zip_code>30000</zip_code>
+<country_code abbrev="T">Thailand</country_code>
+</institute>
+</institutions>
+<emails>
+<email>pklysubun@gmail.com</email>
+<email>pklysubun@slri.or.th</email>
+<email>pklysubun@slri.or.th</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>1785</abstract_id>
+<main_class>MC8: Applications of Accelerators, Technology Transfer and Industrial Relations</main_class>
+<sub_class>U02 Materials Analysis and Modification</sub_class>
+<publishable>No, Editor Status Code is not Publishable, Final QA Not Publishable</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">THXXPLS3</code>
+<presentation type="Oral">Contributed Oral</presentation>
+<start_time>1010</start_time>
+<duration>20</duration>
+</program_code>
+</program_codes>
+<title>Science Frontiers  of  Megaelectronvolt Ultrafast Electron Probes</title>
+<abstract>Ultrafast electron probe is the new frontier for electron scattering instrumentations. The development in high-brightness electron beam made it feasible to explore megaelectronvolt electrons for Ultrafast Electron diffraction and Microsscopy (MeV-UED/UEM)*. Recent development in MeV-UED [2-3] has enabled broad scientific opportunities in ultrafast material science and chemical dynamics, such as the ripples of monolayer MoS2 and atomic movie of light-induced structural distortion in the perovskites solar cell were captured for the first time by the MeV-UED. Single-shot MeV-UED was successfully employed for the first observation of heterogeneous melting**. In the gas phase UED, real space movie of a nuclear wavepacket passing through conical intersections was sucesffuly recorded ***. To probe and controlling electron motion within a molecule and image bio-molecules in its nature environments, new generation electron scattering instruments with better time resolution, higher sensitivity and real space imaging are needed. SLAC¿s strategy for next generation ultrafast electron instrument based on the superconductor RF gun will be discussed.</abstract>
+<footnote>* X.J. Wang et al, Phys. Rev. E , 54, No.4, R3121 -3124 (1996). 
+** M. Z. Mo et al, Science 360 1451-1455 (2018).
+*** J. Yang et al, Science, 361, 64-67. (2018).
+</footnote>
+<contributors>
+<contributor type="Co-Author">
+<lname>Li</lname>
+<fname>Renkai</fname>
+<iname>R.K.</iname>
+<author_id>28303</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>lirk@tsinghua.edu.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Shen</lname>
+<fname>Xiaozhe</fname>
+<iname>X.</iname>
+<author_id>39263</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>xshen@slac.stanford.edu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Yang</lname>
+<fname>Jie</fname>
+<iname>J.</iname>
+<author_id>94939</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jieyang@slac.stanford.edu</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Wang</lname>
+<fname>Xijie</fname>
+<iname>X.J.</iname>
+<author_id>2148</author_id>
+<institutions>
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory National Synchrotron Light Source</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<name2>National Synchrotron Light Source</name2>
+<URL>http://nslsweb.nsls.bnl.gov/nsls/default.htm</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>NY 11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>wangxj@slac.stanford.edu</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Wang</lname>
+<fname>Xijie</fname>
+<iname>X.J.</iname>
+<author_id>2148</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>wangxj@slac.stanford.edu</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Wang</lname>
+<fname>Xijie</fname>
+<iname>X.J.</iname>
+<author_id>2148</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>wangxj@slac.stanford.edu</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THXXPLS3_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>THXXPLS3_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THXXPLS3&amp;wanted_file=THXXPLS3_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=THXXPLS3&amp;wanted_file=THXXPLS3_TALK.PPTX</fileURL>
+</fileURLs>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>21-Nov-2018 23:04:24</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>10-Dec-2018 15:00:30</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>10-Dec-2018 15:00:30</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>14-Dec-2018 03:12:43</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>14-Dec-2018 03:12:43</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>29-Jan-2019 12:26:17</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>29-Jan-2019 12:26:17</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 21:40:44</timestamp>
+<comments>THXXPLS3_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>24-May-2019 01:44:10</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>24-May-2019 01:48:34</timestamp>
+<comments>THXXPLS3_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>24-May-2019 01:49:39</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Xijie,
+Your PowerPoint slides were successfully converted to PDF (with intermediate slides removed) and will be published in the conference proceedings. 
+Please download the PDF slides file (THXXPLS3_TALK.pdf) and check that all is OK. 
+In case of problems, please contact:
+jan.chrin@psi.ch
+Thank you.
+
+</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+</papers>
+</session>
+</conference>

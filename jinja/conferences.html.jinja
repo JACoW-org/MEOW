@@ -1,0 +1,25 @@
+{% extends "layout/default.html.jinja" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <h1>Conferences</h1>
+    <p class="important">
+      Welcome to conferences page.
+    </p>
+    <p>
+        <button id="task_button">task</button>
+        <button id="del_button">del</button>
+        <button id="put_button">put</button>
+        <button id="get_button">get</button>
+        <button id="ab_button">ab</button>
+    </p>
+    <a href="index">
+        index
+    </a>
+{% endblock %}

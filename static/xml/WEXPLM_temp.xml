@@ -1,0 +1,740 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<conference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://bel.gsi.de/docs/xml/conference.xsd" name="IPAC 2019, Melbourne, Australia">
+<session type="Oral">
+<name abbr="WEXPLM">Invited Orals: Photon Sources and Electron Accelerators</name>
+<date btime="0900" etime="0930">22-May-19</date>
+<location type="Before Coffee Invited Oral">Main Plenary (plenary 2)</location>
+<chairs>
+<chair>
+<lname>Raubenheimer</lname>
+<fname>Tor</fname>
+<iname>T.O.</iname>
+<author_id>2602</author_id>
+<institutions>
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>tor@slac.stanford.edu</email>
+<email>tor@slac.stanford.edu</email>
+</emails>
+</chair>
+</chairs>
+<papers>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Watanabe</lname>
+<fname>Takahiro</fname>
+<iname>T.</iname>
+<author_id>1053</author_id>
+<institutions>
+<institute>
+<full_name abbrev="JASRI/SPring-8" type="Institute">Japan Synchrotron Radiation Research Institute SPring-8 Joint-Project for XFEL</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<name2>SPring-8 Joint-Project for XFEL</name2>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho, Sayo-gun</address2>
+<town>Hyogo-ken</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="JASRI/SPring-8">Japan Synchrotron Radiation Research Institute Accelerator Division</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<name2>Accelerator Division</name2>
+<URL>http://www.spring8.or.jp/e/index.html</URL>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo-ken</town>
+<zip_code>679 5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="JASRI/SPring-8" type="Research Centre">Japan Synchrotron Radiation Research Institute</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name type="Institute">Japan Synchrotron Radiation Research Institute (JASRI) RIKEN SPring-8 Center</full_name>
+<name1>Japan Synchrotron Radiation Research Institute (JASRI)</name1>
+<name2>RIKEN SPring-8 Center</name2>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="BNL" type="Laboratory">Brookhaven National Laboratory National Synchrotron Light Source</full_name>
+<name1>Brookhaven National Laboratory</name1>
+<name2>National Synchrotron Light Source</name2>
+<URL>http://nslsweb.nsls.bnl.gov/nsls/default.htm</URL>
+<po_box>P.O. Box 5000</po_box>
+<town>Upton, Long Island, New York</town>
+<zip_code>NY 11973</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name type="Research Centre">RIKEN SPring-8 Center</full_name>
+<name1>RIKEN SPring-8 Center</name1>
+<address1>1-1-1, Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5148</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+<institute>
+<full_name abbrev="JASRI" type="Institute">Japan Synchrotron Radiation Research Institute</full_name>
+<name1>Japan Synchrotron Radiation Research Institute</name1>
+<address1>1-1-1 Kouto</address1>
+<address2>Sayo-cho</address2>
+<address3>Sayo-gun</address3>
+<town>Hyogo</town>
+<zip_code>679-5198</zip_code>
+<country_code abbrev="J">Japan</country_code>
+</institute>
+</institutions>
+<emails>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@bnl.gov</email>
+<email>twatanabe@spring8.or.jp</email>
+<email>twatanabe@spring8.or.jp</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>1343</abstract_id>
+<pages>5</pages>
+<toc>2219</toc>
+<main_class>MC2: Photon Sources and Electron Accelerators</main_class>
+<sub_class>A06 Free Electron Lasers</sub_class>
+<publishable>Yes</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">WEXPLM1</code>
+<presentation type="Oral">Invited Oral</presentation>
+<start_time>900</start_time>
+<duration>30</duration>
+</program_code>
+</program_codes>
+<dot>Green</dot>
+<title>XFEL Operational Flexibility due to the Dechirper System</title>
+<abstract>The RadiaBeam/SLAC dechirper was installed to demonstrate the concept of using wakefields from a corrugated structure to change the energy profile along an electron bunch. Since installation, the system has allowed a large number of additional XFEL operating modes including fresh-slice two-color or three color operation, fresh-slice seeding, passive streaking, etc. This talk will discuss the results from using the dechirper system and possible implementation issues related to the high-rate LCLS-II.</abstract>
+<agency>U.S.Department of Energy, Office of Science, Laboratory Directed Research and Development (LDRD) program at SLAC National Accelerator Laboratory, under Contract No. DE-AC02-76SF00515.</agency>
+<footnote>Lutman, A. A. et al. Nat. Photon. 10, 745-750 (2016).; Nat. Photon. 10, 695-696 (2016); other papers in submission.</footnote>
+<contributors>
+<contributor type="Co-Author">
+<lname>Bane</lname>
+<fname>Karl</fname>
+<mname>Leopold Freitag</mname>
+<iname>K.L.F.</iname>
+<author_id>2597</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>kbane@slac.stanford.edu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Ding</lname>
+<fname>Yuantao</fname>
+<iname>Y.</iname>
+<author_id>4993</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>ding@slac.stanford.edu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Emma</lname>
+<fname>Claudio</fname>
+<iname>C.</iname>
+<author_id>71487</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>cemma@slac.stanford.edu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Guetg</lname>
+<fname>Marc</fname>
+<mname>Walter</mname>
+<iname>M.W.</iname>
+<author_id>55250</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>marcg@slac.stanford.edu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Guo</lname>
+<fname>Zhaoheng</fname>
+<iname>G.</iname>
+<author_id>100753</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name>Stanford University</full_name>
+<name1>Stanford University</name1>
+<URL>http://www.stanford.edu/</URL>
+<town>Stanford, California</town>
+<zip_code>94305</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>zhaoheng@stanford.edu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Hemsing</lname>
+<fname>Erik</fname>
+<iname>E.</iname>
+<author_id>28321</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>ehemsing@slac.stanford.edu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Huang</lname>
+<fname>Zhirong</fname>
+<iname>Z.</iname>
+<author_id>2534</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>zrh@slac.stanford.edu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Krzywinski</lname>
+<fname>Jacek</fname>
+<iname>J.</iname>
+<author_id>18295</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>krzywins@slac.stanford.edu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>MacArthur</lname>
+<fname>James</fname>
+<iname>J.P.</iname>
+<author_id>71998</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>jmacart@stanford.edu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Marcus</lname>
+<fname>Gabriel</fname>
+<iname>G.</iname>
+<author_id>37153</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>gmarcus@slac.stanford.edu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Marinelli</lname>
+<fname>Agostino</fname>
+<iname>A.</iname>
+<author_id>37022</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>marinelli@slac.stanford.edu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Maxwell</lname>
+<fname>Timothy</fname>
+<mname>John</mname>
+<iname>T.J.</iname>
+<author_id>28299</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>tmaxwell@slac.stanford.edu</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Novokhatski</lname>
+<fname>Alexander</fname>
+<iname>A.</iname>
+<author_id>2507</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>novo@slac.stanford.edu</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Lutman</lname>
+<fname>Alberto</fname>
+<mname>Andrea</mname>
+<iname>A.A.</iname>
+<author_id>31977</author_id>
+<institutions>
+<institute>
+<full_name abbrev="DEEI" type="University">University of Trieste DEEI Department</full_name>
+<name1>University of Trieste</name1>
+<department>DEEI Department</department>
+<address1>Via Valerio 10, ed. C1</address1>
+<town>Trieste</town>
+<postal_code>34100</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name>Elettra-Sincrotrone Trieste S.C.p.A.</full_name>
+<name1>Elettra-Sincrotrone Trieste S.C.p.A.</name1>
+<URL>http://www.elettra.trieste.it/</URL>
+<address1>SS 14 - km 163,5 in Area Science Park</address1>
+<town>Basovizza</town>
+<postal_code>34149</postal_code>
+<country_code abbrev="I">Italy</country_code>
+</institute>
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory LCLS Department</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<department>LCLS Department</department>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+<institute>
+<full_name>Private Address</full_name>
+<name1>Private Address</name1>
+<address1>1150 Welch Road #515</address1>
+<town>Palo Alto, CA</town>
+<postal_code>94304</postal_code>
+<zip_code>94304</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>aal@slac.stanford.edu</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Lutman</lname>
+<fname>Alberto</fname>
+<mname>Andrea</mname>
+<iname>A.A.</iname>
+<author_id>31977</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>aal@slac.stanford.edu</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Lutman</lname>
+<fname>Alberto</fname>
+<mname>Andrea</mname>
+<iname>A.A.</iname>
+<author_id>31977</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="SLAC" type="University Laboratory">SLAC National Accelerator Laboratory</full_name>
+<name1>SLAC National Accelerator Laboratory</name1>
+<URL>http://www.slac.stanford.edu/</URL>
+<address1>2575 Sand Hill Road</address1>
+<town>Menlo Park, California</town>
+<zip_code>CA 94025</zip_code>
+<country_code abbrev="USA">United States of America</country_code>
+</institute>
+</institutions>
+<emails>
+<email>aal@slac.stanford.edu</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>WEXPLM1.tex</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>IPAC2019.pdf</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>LasingOnCore.pdf</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>SeedingDelta.pdf</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="O">Other Supporting Files</file_type>
+<name>TimeProfile.pdf</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEXPLM1_AUTHOR.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>WEXPLM1.tex</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEXPLM1.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>WEXPLM1.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEXPLM1_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEXPLM1_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>WEXPLM1_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXPLM1&amp;wanted_file=LasingOnCore.pdf</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXPLM1&amp;wanted_file=TimeProfile.pdf</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXPLM1&amp;wanted_file=SeedingDelta.pdf</fileURL>
+<fileURL type="Other Supporting Files">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXPLM1&amp;wanted_file=IPAC2019.pdf</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXPLM1&amp;wanted_file=WEXPLM1_AUTHOR.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXPLM1&amp;wanted_file=WEXPLM1.PDF</fileURL>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXPLM1&amp;wanted_file=WEXPLM1.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXPLM1&amp;wanted_file=WEXPLM1.tex</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXPLM1&amp;wanted_file=WEXPLM1.tex</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXPLM1&amp;wanted_file=WEXPLM1_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXPLM1&amp;wanted_file=WEXPLM1_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=WEXPLM1&amp;wanted_file=WEXPLM1_TALK.PDF</fileURL>
+</fileURLs>
+<editor>Ivan Andrian</editor>
+<final_qa>Maxim Kuzin</final_qa>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>03-Apr-2018 00:55:21</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>29-May-2018 07:02:11</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>29-May-2018 07:02:11</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>31-May-2018 00:37:41</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>31-May-2018 00:37:41</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AOC">Abstract Owner Changed</log_status>
+<timestamp>27-Jun-2018 00:26:03</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>20-Sep-2018 04:11:26</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>20-Sep-2018 04:11:26</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>12-Dec-2018 04:24:49</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>12-Dec-2018 04:24:49</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>09-May-2019 19:53:47</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>09-May-2019 21:41:51</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 19:16:44</timestamp>
+<comments>WEXPLM1.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 19:17:30</timestamp>
+<comments>IPAC2019.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 19:17:43</timestamp>
+<comments>LasingOnCore.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 19:18:01</timestamp>
+<comments>SeedingDelta.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 19:18:11</timestamp>
+<comments>TimeProfile.pdf</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>10-May-2019 19:18:39</timestamp>
+<comments>WEXPLM1_AUTHOR.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>19-May-2019 05:40:25</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 05:47:47</timestamp>
+<comments>WEXPLM1.tex</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>19-May-2019 05:47:57</timestamp>
+<comments>WEXPLM1.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="E">Edit Complete</log_status>
+<timestamp>19-May-2019 05:49:07</timestamp>
+<editor_status code="G">Green</editor_status>
+<comments>changed table caption to title case and aligned references (\begin{thebibliography}{99})</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 06:00:54</timestamp>
+<comments>WEXPLM1.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FQ">Final QA Passed</log_status>
+<timestamp>20-May-2019 06:01:01</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 00:54:53</timestamp>
+<comments>WEXPLM1_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>22-May-2019 03:34:14</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 04:13:52</timestamp>
+<comments>WEXPLM1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>22-May-2019 04:15:34</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Alberto,
+Your PowerPoint slides were converted successfully to PDF (with backup slides removed) and will
+be published in the conference proceedings. Please download the PDF
+slides file (WEXPLM1_TALK.pdf) and check that all is OK. 
+In the event of problems, please contact:
+jan.chrin@psi.ch 
+Thank you.
+</comments>
+<editor_notes>pdf-&gt;ps-&gt;pdf top embed fonts</editor_notes>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>22-May-2019 05:56:48</timestamp>
+<comments>WEXPLM1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>22-May-2019 05:58:12</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Hi Alberto,
+Got yr email and used yr file, but still had to go from pdf to ps back to pdf to embed fonts.
+Please check pdf again.
+Thanks and Best, Jan</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+</papers>
+</session>
+</conference>

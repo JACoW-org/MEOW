@@ -1,0 +1,739 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<conference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://bel.gsi.de/docs/xml/conference.xsd" name="IPAC 2019, Melbourne, Australia">
+<session type="Oral">
+<name abbr="TUYPLS">Invited Orals: Applications of Accelerators</name>
+<date btime="1100" etime="1200">21-May-19</date>
+<location type="After Coffee Invited Oral">Secondary Plenary (plenary 3)</location>
+<chairs>
+<chair>
+<lname>Vretenar</lname>
+<fname>Maurizio</fname>
+<iname>M.</iname>
+<author_id>1700</author_id>
+<institutions>
+<institute>
+<full_name abbrev="CERN" type="Laboratory">European Organization for Nuclear Research</full_name>
+<name1>European Organization for Nuclear Research</name1>
+<URL>http://www.cern.ch</URL>
+<address1>Esplanades de Particules 1</address1>
+<town>Meyrin</town>
+<postal_code>1217</postal_code>
+<country_code abbrev="CH">Switzerland</country_code>
+</institute>
+</institutions>
+<emails>
+<email>maurizio.vretenar@cern.ch</email>
+<email>maurizio.vretenar@cern.ch</email>
+<email>maurizio.vretenar@cern.ch</email>
+</emails>
+</chair>
+</chairs>
+<papers>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Klysubun</lname>
+<fname>Prapong</fname>
+<iname>P.</iname>
+<author_id>20854</author_id>
+<institutions>
+<institute>
+<full_name abbrev="SLRI" type="Laboratory">Synchrotron Light Research Institute SIAM Photon Source</full_name>
+<name1>Synchrotron Light Research Institute</name1>
+<department>SIAM Photon Source</department>
+<URL>www.nsrc.or.th</URL>
+<address1>111 Surapat 3, University Avenue</address1>
+<address2>Suranaree Sub-district, Muang</address2>
+<po_box>P.O.B. 93</po_box>
+<town>Nakhon Ratchasima</town>
+<zip_code>30000</zip_code>
+<country_code abbrev="T">Thailand</country_code>
+</institute>
+<institute>
+<full_name abbrev="SLRI" type="Laboratory">Synchrotron Light Research Institute</full_name>
+<name1>Synchrotron Light Research Institute</name1>
+<URL>www.nsrc.or.th</URL>
+<address1>111 Surapat 3, University Avenue</address1>
+<address2>Suranaree Sub-district, Muang</address2>
+<town>Nakhon Ratchasima</town>
+<zip_code>30000</zip_code>
+<country_code abbrev="T">Thailand</country_code>
+</institute>
+<institute>
+<full_name abbrev="SLRI" type="Institute">Synchrotron Light Research Institute</full_name>
+<name1>Synchrotron Light Research Institute</name1>
+<address1>PO. Box 93</address1>
+<town>Nakhon Ratchasima</town>
+<zip_code>30000</zip_code>
+<country_code abbrev="T">Thailand</country_code>
+</institute>
+</institutions>
+<emails>
+<email>pklysubun@gmail.com</email>
+<email>pklysubun@slri.or.th</email>
+<email>pklysubun@slri.or.th</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>1214</abstract_id>
+<main_class>MC8: Applications of Accelerators, Technology Transfer and Industrial Relations</main_class>
+<sub_class>U05 Other Applications</sub_class>
+<publishable>No, Editor Status Code is not Publishable, Final QA Not Publishable</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">TUYPLS1</code>
+<presentation type="Oral">Invited Oral</presentation>
+<start_time>1100</start_time>
+<duration>30</duration>
+</program_code>
+</program_codes>
+<title>The Brave New World of Accelerators Applications</title>
+<abstract>During the past century particle accelerators and their technology have played an essential role to improve standards of living and well-being. Originally developed to investigate the fundamental laws of nature, today, accelerators in different configurations are producing beams of subatomic particles and charged atoms that help to manage our health and our environment; they also provide a significant tool for manufacturing industry, for sustaining greener, safer energy, and for securing our borders and ensuring national security. They offer advance investigation methods considered essential in many fields of basic and applied science. Innovative technical developments are in progress or in the horizon, and will extend the practical use of accelerators even further for the social and economic benefit of all. The quest for more compact, more efficient, lower cost, portable, combined with imaging,... is ongoing and not absent of challenges. In this talk the recent developments of particle accelerators focused in societal applications will be described as well as the issues, challenges and opportunities the R&amp;D in this brave new field is facing.</abstract>
+<contributors>
+<contributor type="Owner">
+<lname>Faus-Golfe</lname>
+<fname>Angeles</fname>
+<iname>A.</iname>
+<author_id>1483</author_id>
+<institutions>
+<institute>
+<full_name abbrev="IFIC" type="Research Centre">Instituto de Física Corpuscular Consejo Superior de Investigaciones Cientificas University of Valencia</full_name>
+<name1>Instituto de Física Corpuscular</name1>
+<name2>Consejo Superior de Investigaciones Cientificas</name2>
+<department>University of Valencia</department>
+<address1>Edificio Institutos de investigación</address1>
+<address2>Apartado de Correos 22085</address2>
+<town>Valencia</town>
+<postal_code>46071</postal_code>
+<country_code abbrev="E">Spain</country_code>
+</institute>
+<institute>
+<full_name abbrev="LAL" type="Laboratory">Laboratoire de l'Accélérateur Linéaire CNRS/IN2P3 Université Paris-Saclay</full_name>
+<name1>Laboratoire de l'Accélérateur Linéaire</name1>
+<name2>CNRS/IN2P3</name2>
+<department>Université Paris-Saclay</department>
+<URL>http://www.lal.in2p3.fr/</URL>
+<address1>Univ. Paris-Sud</address1>
+<po_box>BP 34</po_box>
+<town>Orsay</town>
+<postal_code>91898</postal_code>
+<zip_code>Cedex</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>fausgolf@lal.in2p3.fr</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Faus-Golfe</lname>
+<fname>Angeles</fname>
+<iname>A.</iname>
+<author_id>1483</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="LAL" type="Laboratory">Laboratoire de l'Accélérateur Linéaire CNRS/IN2P3 Université Paris-Saclay</full_name>
+<name1>Laboratoire de l'Accélérateur Linéaire</name1>
+<name2>CNRS/IN2P3</name2>
+<department>Université Paris-Saclay</department>
+<URL>http://www.lal.in2p3.fr/</URL>
+<address1>Univ. Paris-Sud</address1>
+<po_box>BP 34</po_box>
+<town>Orsay</town>
+<postal_code>91898</postal_code>
+<zip_code>Cedex</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>fausgolf@lal.in2p3.fr</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>Faus-Golfe</lname>
+<fname>Angeles</fname>
+<iname>A.</iname>
+<author_id>1483</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="LAL" type="Laboratory">Laboratoire de l'Accélérateur Linéaire CNRS/IN2P3 Université Paris-Saclay</full_name>
+<name1>Laboratoire de l'Accélérateur Linéaire</name1>
+<name2>CNRS/IN2P3</name2>
+<department>Université Paris-Saclay</department>
+<URL>http://www.lal.in2p3.fr/</URL>
+<address1>Univ. Paris-Sud</address1>
+<po_box>BP 34</po_box>
+<town>Orsay</town>
+<postal_code>91898</postal_code>
+<zip_code>Cedex</zip_code>
+<country_code abbrev="F">France</country_code>
+</institute>
+</institutions>
+<emails>
+<email>fausgolf@lal.in2p3.fr</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>TUYPLS1_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>TUYPLS1_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>TUYPLS1_TALK.PDF</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUYPLS1&amp;wanted_file=TUYPLS1_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUYPLS1&amp;wanted_file=TUYPLS1_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUYPLS1&amp;wanted_file=TUYPLS1_TALK.PPTX</fileURL>
+</fileURLs>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>26-Mar-2018 16:36:31</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>29-May-2018 06:53:53</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>29-May-2018 06:53:53</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>31-May-2018 02:54:59</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>31-May-2018 02:54:59</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AOC">Abstract Owner Changed</log_status>
+<timestamp>27-Jun-2018 00:26:03</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>20-Sep-2018 05:33:00</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>20-Sep-2018 05:33:00</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>06-Dec-2018 08:53:01</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>06-Dec-2018 08:53:01</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 03:04:54</timestamp>
+<comments>TUYPLS1_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 23:46:51</timestamp>
+<comments>TUYPLS1_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>21-May-2019 22:44:51</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 22:58:21</timestamp>
+<comments>TUYPLS1_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>21-May-2019 23:05:08</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Angeles,
+Your PowerPoint slides were converted successfully to PDF and will
+be published in the conference proceedings. Please download the PDF
+slides file (TUXXPLS3_TALK.pdf) and check that all is OK. 
+In the event of a problem, please contact:
+jan.chrin@psi.ch 
+Thank you.
+</comments>
+</abstract_log>
+</abstract_logs>
+</paper>
+<paper>
+<coordinators>
+<coordinator>
+<lname>Klysubun</lname>
+<fname>Prapong</fname>
+<iname>P.</iname>
+<author_id>20854</author_id>
+<institutions>
+<institute>
+<full_name abbrev="SLRI" type="Laboratory">Synchrotron Light Research Institute SIAM Photon Source</full_name>
+<name1>Synchrotron Light Research Institute</name1>
+<department>SIAM Photon Source</department>
+<URL>www.nsrc.or.th</URL>
+<address1>111 Surapat 3, University Avenue</address1>
+<address2>Suranaree Sub-district, Muang</address2>
+<po_box>P.O.B. 93</po_box>
+<town>Nakhon Ratchasima</town>
+<zip_code>30000</zip_code>
+<country_code abbrev="T">Thailand</country_code>
+</institute>
+<institute>
+<full_name abbrev="SLRI" type="Laboratory">Synchrotron Light Research Institute</full_name>
+<name1>Synchrotron Light Research Institute</name1>
+<URL>www.nsrc.or.th</URL>
+<address1>111 Surapat 3, University Avenue</address1>
+<address2>Suranaree Sub-district, Muang</address2>
+<town>Nakhon Ratchasima</town>
+<zip_code>30000</zip_code>
+<country_code abbrev="T">Thailand</country_code>
+</institute>
+<institute>
+<full_name abbrev="SLRI" type="Institute">Synchrotron Light Research Institute</full_name>
+<name1>Synchrotron Light Research Institute</name1>
+<address1>PO. Box 93</address1>
+<town>Nakhon Ratchasima</town>
+<zip_code>30000</zip_code>
+<country_code abbrev="T">Thailand</country_code>
+</institute>
+</institutions>
+<emails>
+<email>pklysubun@gmail.com</email>
+<email>pklysubun@slri.or.th</email>
+<email>pklysubun@slri.or.th</email>
+</emails>
+</coordinator>
+</coordinators>
+<abstract_id>1219</abstract_id>
+<main_class>MC8: Applications of Accelerators, Technology Transfer and Industrial Relations</main_class>
+<sub_class>U03 Transmutation and Energy Production</sub_class>
+<publishable>No, Editor Status Code is not Publishable, Final QA Not Publishable</publishable>
+<program_codes>
+<program_code>
+<code primary="Y">TUYPLS2</code>
+<presentation type="Oral">Invited Oral</presentation>
+<start_time>1130</start_time>
+<duration>30</duration>
+</program_code>
+</program_codes>
+<dot>Assigned to an Editor</dot>
+<title>Development of Accelerator Driven Advanced Nuclear Energy and Nuclear Fuel Recycling</title>
+<abstract>The proposed Accelerator Driven Advanced Nuclear Energy System (ADANES) is a new closed nuclear energy cycle system, aimed at improving the utilization rate of nuclear fuels, enhancing nuclear safety, reducing the nuclear proliferation, and at becoming a sustainable and low-carbon energy supply for thousands of years. The ADANES system consists of fuel burner similar to the Accelerator Driven System (ADS), used nuclear fuel processing and recycle system. Recently, several prototypes and developments for key technologies have been made, such as 25 MeV proton superconducting linac, granular flow spallation target, a new-design reactor, key process of used nuclear fuel, and others. This talk will present ADANES development and status of key technology R&amp;D.</abstract>
+<contributors>
+<contributor type="Co-Author">
+<lname>Gu</lname>
+<fname>Long</fname>
+<iname>L.</iname>
+<author_id>116509</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IMP/CAS" type="Institute">Institute of Modern Physics, Chinese Academy of Sciences</full_name>
+<name1>Institute of Modern Physics, Chinese Academy of Sciences</name1>
+<address1>No.509 Nanchang Rd.</address1>
+<town>Lanzhou</town>
+<zip_code>730000</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>gulong@impcas.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>He</lname>
+<fname>Yuan</fname>
+<iname>Y.</iname>
+<author_id>29627</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IMP/CAS" type="Institute">Institute of Modern Physics, Chinese Academy of Sciences</full_name>
+<name1>Institute of Modern Physics, Chinese Academy of Sciences</name1>
+<address1>No.509 Nanchang Rd.</address1>
+<town>Lanzhou</town>
+<zip_code>730000</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>hey@impcas.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Qin</lname>
+<fname>Zhi</fname>
+<iname>Z.</iname>
+<author_id>116508</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IMP/CAS" type="Institute">Institute of Modern Physics, Chinese Academy of Sciences</full_name>
+<name1>Institute of Modern Physics, Chinese Academy of Sciences</name1>
+<address1>No.509 Nanchang Rd.</address1>
+<town>Lanzhou</town>
+<zip_code>730000</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>qinzhi@impcas.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Wang</lname>
+<fname>Zhiguang</fname>
+<iname>Z.G.</iname>
+<author_id>116510</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IMP/CAS" type="Institute">Institute of Modern Physics, Chinese Academy of Sciences</full_name>
+<name1>Institute of Modern Physics, Chinese Academy of Sciences</name1>
+<address1>No.509 Nanchang Rd.</address1>
+<town>Lanzhou</town>
+<zip_code>730000</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>zhgwang@impcas.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Wang</lname>
+<fname>Zhijun</fname>
+<iname>Z.J.</iname>
+<author_id>46016</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IMP/CAS" type="Institute">Institute of Modern Physics, Chinese Academy of Sciences</full_name>
+<name1>Institute of Modern Physics, Chinese Academy of Sciences</name1>
+<address1>No.509 Nanchang Rd.</address1>
+<town>Lanzhou</town>
+<zip_code>730000</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>wangzj@impcas.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Yang</lname>
+<fname>Lei</fname>
+<iname>L.</iname>
+<author_id>57599</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IMP/CAS" type="Institute">Institute of Modern Physics, Chinese Academy of Sciences</full_name>
+<name1>Institute of Modern Physics, Chinese Academy of Sciences</name1>
+<address1>No.509 Nanchang Rd.</address1>
+<town>Lanzhou</town>
+<zip_code>730000</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>lyang@impcas.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Zhan</lname>
+<fname>Wen-Long</fname>
+<iname>W.-L.</iname>
+<author_id>18773</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="CAS" type="Academy of Sciences">Chinese Academy of Sciences</full_name>
+<name1>Chinese Academy of Sciences</name1>
+<URL>http://english.cas.cn</URL>
+<address1>52 Sanlihe Rd</address1>
+<address2>Xicheng District</address2>
+<town>Beijing</town>
+<zip_code>100864</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>wlzhan@cashq.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Zhang</lname>
+<fname>Junhui</fname>
+<iname>J.H.</iname>
+<author_id>38778</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IMP/CAS" type="Institute">Institute of Modern Physics, Chinese Academy of Sciences</full_name>
+<name1>Institute of Modern Physics, Chinese Academy of Sciences</name1>
+<address1>No.509 Nanchang Rd.</address1>
+<town>Lanzhou</town>
+<zip_code>730000</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>junhui_zh@impcas.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Co-Author">
+<lname>Zhang</lname>
+<fname>Xueying</fname>
+<iname>X.</iname>
+<author_id>84269</author_id>
+<institutions ckey="COA">
+<institute>
+<full_name abbrev="IMP/CAS" type="Institute">Institute of Modern Physics, Chinese Academy of Sciences</full_name>
+<name1>Institute of Modern Physics, Chinese Academy of Sciences</name1>
+<address1>No.509 Nanchang Rd.</address1>
+<town>Lanzhou</town>
+<zip_code>730000</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>zhxy@impcas.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Owner">
+<lname>Xu</lname>
+<fname>Hushan</fname>
+<iname>H.S.</iname>
+<author_id>40239</author_id>
+<institutions>
+<institute>
+<full_name abbrev="IMP/CAS" type="Institute">Institute of Modern Physics, Chinese Academy of Sciences</full_name>
+<name1>Institute of Modern Physics, Chinese Academy of Sciences</name1>
+<address1>No.509 Nanchang Rd.</address1>
+<town>Lanzhou</town>
+<zip_code>730000</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>hushan@impcas.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Primary Author">
+<lname>Xu</lname>
+<fname>Hushan</fname>
+<iname>H.S.</iname>
+<author_id>40239</author_id>
+<institutions ckey="PRI">
+<institute>
+<full_name abbrev="IMP/CAS" type="Institute">Institute of Modern Physics, Chinese Academy of Sciences</full_name>
+<name1>Institute of Modern Physics, Chinese Academy of Sciences</name1>
+<address1>No.509 Nanchang Rd.</address1>
+<town>Lanzhou</town>
+<zip_code>730000</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>hushan@impcas.ac.cn</email>
+</emails>
+</contributor>
+<contributor type="Speaker">
+<lname>He</lname>
+<fname>Yuan</fname>
+<iname>Y.</iname>
+<author_id>29627</author_id>
+<institutions ckey="PRE">
+<institute>
+<full_name abbrev="IMP/CAS" type="Institute">Institute of Modern Physics, Chinese Academy of Sciences</full_name>
+<name1>Institute of Modern Physics, Chinese Academy of Sciences</name1>
+<address1>No.509 Nanchang Rd.</address1>
+<town>Lanzhou</town>
+<zip_code>730000</zip_code>
+<country_code abbrev="PRC">People's Republic of China</country_code>
+</institute>
+</institutions>
+<emails>
+<email>hey@impcas.ac.cn</email>
+</emails>
+</contributor>
+</contributors>
+<files>
+<file>
+<platform abbrev="Mac">Macintosh</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>TUYPLS2_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>TUYPLS2_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>TUYPLS2_TALK.PPTX</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>TUYPLS2_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="PDFS">Portable Document Format or PostScript</file_type>
+<name>TUYPLS2.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="SRC">Source File (MS Word, Open Document or LaTeX)</file_type>
+<name>TUYPLS2.docx</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>TUYPLS2_TALK.PDF</name>
+</file>
+<file>
+<platform abbrev="PC">Intel PC</platform>
+<file_type abbrev="TRAN">Transparencies</file_type>
+<name>TUYPLS2_TALK.PPTX</name>
+</file>
+</files>
+<fileURLs>
+<fileURL type="Portable Document Format or PostScript">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUYPLS2&amp;wanted_file=TUYPLS2.PDF</fileURL>
+<fileURL type="Source File (MS Word, Open Document or LaTeX)">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUYPLS2&amp;wanted_file=TUYPLS2.docx</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUYPLS2&amp;wanted_file=TUYPLS2_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUYPLS2&amp;wanted_file=TUYPLS2_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUYPLS2&amp;wanted_file=TUYPLS2_TALK.PDF</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUYPLS2&amp;wanted_file=TUYPLS2_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUYPLS2&amp;wanted_file=TUYPLS2_TALK.PPTX</fileURL>
+<fileURL type="Transparencies">https://jacowfs.jlab.org/cgi-bin/ipac19/editor.zipdownload?paper_id=TUYPLS2&amp;wanted_file=TUYPLS2_TALK.PDF</fileURL>
+</fileURLs>
+<editor>Kip Bishofberger</editor>
+<abstract_logs>
+<abstract_log>
+<log_status code="AC">Abstract Created</log_status>
+<timestamp>27-Mar-2018 08:33:35</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>29-May-2018 06:52:53</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>29-May-2018 06:52:53</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>31-May-2018 02:54:12</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>31-May-2018 02:54:12</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AOC">Abstract Owner Changed</log_status>
+<timestamp>27-Jun-2018 00:26:03</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AU">Abstract Updated</log_status>
+<timestamp>20-Sep-2018 05:32:06</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="AB">Abstract Initial QA Performed</log_status>
+<timestamp>20-Sep-2018 05:32:06</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 05:43:58</timestamp>
+<comments>TUYPLS2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 22:23:06</timestamp>
+<comments>TUYPLS2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>20-May-2019 22:24:20</timestamp>
+<comments>TUYPLS2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 23:40:07</timestamp>
+<comments>TUYPLS2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FREM">File Removed</log_status>
+<timestamp>20-May-2019 23:40:17</timestamp>
+<comments>TUYPLS2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>20-May-2019 23:55:59</timestamp>
+<comments>TUYPLS2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 00:48:40</timestamp>
+<comments>TUYPLS2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TASS">Transparency Assigned</log_status>
+<timestamp>21-May-2019 22:44:54</timestamp>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>21-May-2019 23:08:50</timestamp>
+<comments>TUYPLS2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="TRAN">Transparency Complete</log_status>
+<timestamp>21-May-2019 23:10:04</timestamp>
+<transparency_status code="G">Green</transparency_status>
+<comments>Dear Speaker,
+Your PowerPoint slides were converted successfully to PDF and will
+be published in the conference proceedings. Please download the PDF
+slides file (TUYPLS2_TALK.pdf) and check that all is OK. 
+In the event of a problem, please contact:
+jan.chrin@psi.ch 
+Thank you.
+</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>08-Jul-2019 03:52:31</timestamp>
+<comments>TUYPLS2.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>08-Jul-2019 03:53:20</timestamp>
+<comments>TUYPLS2.docx</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>08-Jul-2019 03:53:42</timestamp>
+<comments>TUYPLS2_TALK.PDF</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="FUP">File Uploaded</log_status>
+<timestamp>08-Jul-2019 03:54:07</timestamp>
+<comments>TUYPLS2_TALK.PPTX</comments>
+</abstract_log>
+<abstract_log>
+<log_status code="A">Paper Assigned</log_status>
+<timestamp>25-Jun-2022 13:05:02</timestamp>
+<editor_status code="A">Assigned to an Editor</editor_status>
+</abstract_log>
+</abstract_logs>
+</paper>
+</papers>
+</session>
+</conference>
