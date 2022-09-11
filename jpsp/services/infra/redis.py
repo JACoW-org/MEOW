@@ -17,7 +17,7 @@ from jpsp.models.infra.schema import RedisIndexMeta
 logger = lg.getLogger(__name__)
 
 
-class RedisSchemaMigrator:
+class RedisManager:
     """ """
     
     def __init__(self):
@@ -54,7 +54,8 @@ class RedisSchemaMigrator:
         except Exception as e:
             logger.error(e, exc_info=True)
 
-
+    async def destroy(self):
+        await dbs.redis_client.close()
 
 
 def acquire_global_lock() -> RedisLock:

@@ -26,17 +26,7 @@ logger = logging.getLogger(__name__)
 
 
 async def create_task_queue():
-    
-    # app.state.TASKS_KEY = [
-    #     create_task(
-    #         process_task_worker(app, i, queue),
-    #         name=f'queue_task_{i}',
-    #         logger=logging.getLogger("process_task_worker"),
-    #         message="process_task_worker raised an exception",
-    #     )
-    #     for i in range(4)
-    # ]
-    
+       
     async def _create_task_group():
         async with create_task_group() as tg:
             for i in range(1, 8):
@@ -66,27 +56,27 @@ async def process_task_worker(worker_id: int, task_status: TaskStatus = TASK_STA
 
 async def process_task_executor(worker_id: int):
     """ """
-
-    try:
-        logger.debug(f"Worker {worker_id}: Waiting for task...")
-
-        task = await srs.workers_manager.queue.get()
-
-        logger.debug(f"Worker {worker_id}: Begin task {task}")
-
-        start_time = datetime.now()
-
-        await TaskRunner.run_task(task)
-
-        logger.debug(
-            f"Worker {worker_id}: End task {task} "
-            f"{((datetime.now()) - start_time).total_seconds()}"
-        )
-
-        srs.workers_manager.queue.task_done()
-
-    except RuntimeError:
-        logger.error(f"Worker {worker_id}: Internal Error", exc_info=True)
+    pass
+#    try:
+#        logger.debug(f"Worker {worker_id}: Waiting for task...")
+#
+#        task = await srs.workers_manager.queue.get()
+#
+#        logger.debug(f"Worker {worker_id}: Begin task {task}")
+#
+#        start_time = datetime.now()
+#
+#        await TaskRunner.run_task(task)
+#
+#        logger.debug(
+#            f"Worker {worker_id}: End task {task} "
+#            f"{((datetime.now()) - start_time).total_seconds()}"
+#        )
+#
+#        srs.workers_manager.queue.task_done()
+#
+#    except RuntimeError:
+#        logger.error(f"Worker {worker_id}: Internal Error", exc_info=True)
 
 
 async def create_signals_handler():
