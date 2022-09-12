@@ -8,13 +8,10 @@ from typing import Callable, Any
 from jpsp.app.workers.logic import AbsRedisWorkerLogicComponent
 from jpsp.tasks.infra.task_runner import TaskRunner
 
-from concurrent.futures import as_completed
-
 from anyio import create_task_group
 from anyio import create_memory_object_stream
-from anyio import to_thread, CapacityLimiter
+from anyio import to_thread
 
-from anyio.from_thread import start_blocking_portal
 from anyio.from_thread import BlockingPortal
 
 from anyio.streams.memory import MemoryObjectSendStream
@@ -129,13 +126,10 @@ class RedisWorkerManager():
 
                     try:
                         sender.send_nowait("event_ab")
-
-                        # sender.send_nowait("xml_download")
-
                         await TaskRunner.send_queued(task_id="", params=dict())
-
-                    except WouldBlock as e:
-                        print(e)
+                    except WouldBlock as error:
+                        await TaskRunner.send_error(task_id="", error=error)
+                        logger.error(f"Worker sub: queue limit", e, exc_info=True)
 
                 __callable: Callable = await self.logic.subscribe(on_message=on_message)
 
@@ -150,7 +144,7 @@ class RedisWorkerManager():
                     tg.start_soon(__callable)
 
         except BaseException as e:
-            logger.error(f"Worker sub: Internal Error", exc_info=True)
+            logger.error(f"Worker sub: Internal Error", e, exc_info=True)
 
     async def process_task_worker(self, worker_id: int, receiver: MemoryObjectReceiveStream):
         """ """
