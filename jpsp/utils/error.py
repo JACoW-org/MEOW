@@ -2,7 +2,7 @@ import traceback
 from typing import Optional
 
 
-def exception_to_string(ex: Optional[Exception]) -> dict | None:
+def exception_to_string(ex: Optional[BaseException]) -> dict | None:
     if ex is None:
         return None
 

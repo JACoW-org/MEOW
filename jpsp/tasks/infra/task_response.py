@@ -16,7 +16,7 @@ class TaskResponse:
             dict(event=event, body=body)
         )
 
-        await dbs.redis_client.publish("chat:c", message)
+        await dbs.redis_client.publish("jpsp:feed", message)
 
     async def close(self) -> None:
         """ """

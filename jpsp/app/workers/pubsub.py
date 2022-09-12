@@ -28,7 +28,7 @@ class PubsubRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
 
         async def __read(p: PubSub):
 
-            logger.debug('__read')
+            # logger.debug('__read')
 
             async with create_task_group() as tg:
                 with move_on_after(2) as scope:

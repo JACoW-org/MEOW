@@ -5,6 +5,7 @@ Split spms.xml into spms_summary.xml and sessions
 import asyncio
 import logging
 import pathlib
+from typing import Any
 
 from anyio import open_file
 from lxml import etree
@@ -16,7 +17,7 @@ from jpsp.tasks.infra.task_response import TaskResponse
 logger = logging.getLogger(__name__)
 
 
-async def main() -> None:
+async def main() -> Any:
     """ Main Function """
 
     base_path = pathlib.Path(__file__).parent.parent.parent
@@ -30,6 +31,8 @@ async def main() -> None:
         write_child(base_path, child)
         for child in root
     ])
+    
+    return True
 
 
 async def write_child(base_path: pathlib.Path, child: etree._Element) -> None:
@@ -52,5 +55,5 @@ async def write_child(base_path: pathlib.Path, child: etree._Element) -> None:
 class XmlSplitTask(AbstractTask):
     """ """
 
-    async def run(self, req: TaskRequest, res: TaskResponse) -> None:
-        await main()
+    async def run(self, params: Any) -> Any:
+        return await main()

@@ -1,6 +1,6 @@
 window.addEventListener("DOMContentLoaded", () => {
 
-    const websocket = new WebSocket(`ws://${location.host}/socket/pippo_id`);
+    const websocket = new WebSocket(`ws://${location.host}/socket/jpsp:feed`);
 
     websocket.addEventListener('open', function (event) {
 

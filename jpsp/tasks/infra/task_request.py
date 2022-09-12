@@ -1,10 +1,8 @@
+from typing import Any
+
 
 class TaskRequest:
     """ """
 
-    def __init__(self):
-        pass
-
-    def params(self):
-        """ """
-        pass
+    def __init__(self, params: Any):
+        self.params: Any = params

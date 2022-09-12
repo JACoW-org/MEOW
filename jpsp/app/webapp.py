@@ -13,9 +13,9 @@ logger = lg.getLogger(__name__)
 
 
 class UvicornWebappManager:
-    
+
     async def run(self):
-        
+
         app = Starlette(
             debug=False,
             routes=app_routes,
@@ -34,4 +34,3 @@ class UvicornWebappManager:
         server = uvicorn.Server(config)
 
         await server.serve()
-    

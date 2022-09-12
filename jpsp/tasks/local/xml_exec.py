@@ -4,6 +4,7 @@ Split spms.xml into spms_summary.xml and sessions
 
 import logging
 import pathlib
+from typing import Any
 
 from jpsp.tasks.infra.abstract_task import AbstractTask
 from jpsp.tasks.infra.task_request import TaskRequest
@@ -16,8 +17,7 @@ logger = logging.getLogger(__name__)
 class ExecProcessTask(AbstractTask):
     """ """
 
-    async def run(self, req: TaskRequest, res: TaskResponse) -> None:
-        await res.send("exec_program:status:start", dict(ok=True))
+    async def run(self, params: Any) -> Any:
 
         logger.info("exec_program:status:start")
 
@@ -44,8 +44,4 @@ class ExecProcessTask(AbstractTask):
 
         logger.info(f"exec_program:status:end")
 
-        await res.send("exec_program:status:end", dict(
-            ok=True,
-            # stdout=str(stdout, 'UTF-8'),
-            # stderr=str(stderr, 'UTF-8'),
-        ))
+        return True

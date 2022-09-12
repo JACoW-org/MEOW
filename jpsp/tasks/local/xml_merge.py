@@ -5,7 +5,7 @@ Merge spms_summary.xml and sessions
 import asyncio
 import logging
 import pathlib
-from typing import Optional
+from typing import Any, Optional
 
 from anyio import open_file
 from lxml import etree
@@ -91,10 +91,8 @@ async def read_child(xml_path: pathlib.Path, child: etree._Element) -> Optional[
 class XmlMergeTask(AbstractTask):
     """ """
 
-    async def run(self, req: TaskRequest, res: TaskResponse) -> None:
+    async def run(self, params: Any) -> Any:
         """ Main Function """
-
-        await res.send("xml_merge:status:start", dict(ok=True))
 
         summary_url = "https://spms.kek.jp/pls/ipac19/spms_summary.xml"
 
@@ -108,8 +106,6 @@ class XmlMergeTask(AbstractTask):
 
         if not summary_path.exists():
             raise Exception(f"{summary_path} not found")
-
-        await res.send("xml_merge:status:progress", dict(ok=True, msg='summary file downloaded'))
 
         async with await open_file(summary_path, mode='r', encoding="ISO-8859-1") as f:
             xml_str: bytes = (await f.read()).encode()
@@ -125,8 +121,6 @@ class XmlMergeTask(AbstractTask):
             process_child(xml_path, child)
             for child in root
         ])
-
-        await res.send("xml_merge:status:progress", dict(ok=True, msg='session files downloaded'))
 
         for result in results:
             if result is not None:
@@ -171,4 +165,4 @@ class XmlMergeTask(AbstractTask):
             )).encode()
             await f.write(xml_str)
 
-        await res.send("xml_merge:status:end", dict(ok=True))
+        return True

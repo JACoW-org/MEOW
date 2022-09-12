@@ -24,18 +24,18 @@ class WebSocketManager():
                 try:
                     async with create_task_group() as tg:
                         with move_on_after(2) as scope:
-                            logger.debug('__read')
+                            # logger.debug('__read')
 
                             payload = await p.get_message(
                                 ignore_subscribe_messages=True,
                                 timeout=1000
                             )
 
-                            logger.debug(f"payload {payload}")
+                            # logger.debug(f"payload {payload}")
 
                             if payload and payload['type'] == 'message':
                                 data = str(payload['data'], 'UTF-8')
-                                logger.debug(f"broadcast {data}")
+                                # logger.debug(f"broadcast {data}")
                                 await self.broadcast(data)
 
                             await sleep(0.01)
@@ -55,9 +55,9 @@ class WebSocketManager():
 
                     if pubsub is not None:
                         async with pubsub as p:
-                            await p.subscribe("chat:c")
+                            await p.subscribe("jpsp:feed")
                             await __reader(p)
-                            await p.unsubscribe("chat:c")
+                            await p.unsubscribe("jpsp:feed")
 
                 except BaseException:
                     logger.error("subscribe", exc_info=True)
@@ -118,9 +118,9 @@ class WebSocketManager():
 # 
     #                     if pubsub is not None:
     #                         async with pubsub as p:
-    #                             await p.subscribe("chat:c")
+    #                             await p.subscribe("jpsp:feed")
     #                             await __reader(p)
-    #                             await p.unsubscribe("chat:c")
+    #                             await p.unsubscribe("jpsp:feed")
 # 
     #                 except BaseException:
     #                     logger.error("subscribe", exc_info=True)
