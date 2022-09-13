@@ -25,10 +25,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - *Security* in case of vulnerabilities.
 
 
+## [13.09.2022]
+
+### Topics
+- Presentazione layout del repository jpsp-ng
+- Generatore documentazione [mkdocs](https://ipac-docs.jacow.org/)
+- Creazione utenza [indico](https://indico.jacow.org) tramite [cern](https://oraweb.cern.ch/pls/jacow/profile.html)
+- Presentazione iniziale dell'interfaccia di amministrazione indico
+- Presentazione iniziale del flusso di lavoro relativo all'evento conferenza in indico
+- Definizione generale interazione plugin indico -> jpsp-ng
+- Definizione generale interazione per use case abstract_booklet
+- Definizione generale fase di autenticazione tra i due sistemi
+
+
 ## [12.09.2022]
 
 ### Topics
-- Generazione bozza di AB
+- Zoom con i ragazzi di Indico: Adrian Mönnich e Duarte Galvão (https://getindico.io/about/)
 
 
 ## [05.09.2022]
