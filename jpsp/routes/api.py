@@ -6,12 +6,13 @@ from starlette.responses import JSONResponse, Response
 from starlette.responses import StreamingResponse
 from starlette.routing import Route
 
-from jpsp.services.local.conference.abstract_booklet import create_abstract_booklet_from_entities, \
+from jpsp.services.local.conference.abstract_booklet import create_abstract_booklet_from_entities, create_abstract_booklet_from_event, \
     export_abstract_booklet_to_odt
 from jpsp.services.local.conference.delete_conference import del_conference_entity
 from jpsp.services.local.conference.find_conference import get_conference_entity
 from jpsp.services.local.conference.save_conference import put_conference_entity
 from jpsp.utils.response import create_json_response
+from jpsp.utils.serialization import json_decode
 
 logger = lg.getLogger(__name__)
 
@@ -162,6 +163,32 @@ async def api_ab_conference_odt(req: Request) -> Response:
         )
 
 
+async def api_generate_event_ab_odt(req: Request) -> Response:
+    """ """
+
+    try:
+        
+        event: dict = json_decode(str(await req.body(), 'utf-8'))
+
+        abstract_booklet = await create_abstract_booklet_from_event(event)
+
+        abstract_booklet_odt = export_abstract_booklet_to_odt(abstract_booklet)
+
+        filename: str = f"{event.get('title', '')}_abstract_booklet.odt"
+
+        return StreamingResponse(abstract_booklet_odt,
+                                 headers={
+                                     'Content-Type': 'application/vnd.oasis.opendocument.text',
+                                     'Content-Disposition': f'attachment; filename="{filename}"'
+                                 })
+    except Exception as error:
+        logger.error(error, exc_info=True)
+
+        return Response(
+            status_code=500
+        )
+    
+
 routes = [
     Route('/', api_list_endpoint, methods=['GET', 'POST', 'PUT', 'DELETE']),
     Route('/conference/{id}/del', api_del_conference, methods=['GET', 'POST', 'PUT', 'DELETE']),
@@ -170,5 +197,6 @@ routes = [
     Route('/conference/{id}/ab.json', api_ab_conference_json, methods=['GET', 'POST', 'PUT', 'DELETE']),
     # Route('/conference/{id}/ab.rtf', api_ab_conference_rtf, methods=['GET', 'POST', 'PUT', 'DELETE']),
     Route('/conference/{id}/ab.odt', api_ab_conference_odt, methods=['GET', 'POST', 'PUT', 'DELETE']),
+    Route('/generate-event-ab.odt', api_generate_event_ab_odt, methods=['PUT']),
     Route('/task/{code}', api_endpoint, methods=['GET', 'POST', 'PUT', 'DELETE']),
 ]
