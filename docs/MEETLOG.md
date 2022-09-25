@@ -17,17 +17,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Types of changes
 
-- *Added* for new features.
-- *Changed* for changes in existing functionality.
-- *Deprecated* for soon-to-be removed features.
-- *Removed* for now removed features.
-- *Fixed* for any bug fixes.
-- *Security* in case of vulnerabilities.
+- *Topics* for new features.
+
+
+## [19.09.22]
+
+### Topics (da tradurre)
+
+ - Definizione metodo di auth tramite apikey per jpsp-ng (api + ws)
+ - Definizione modalità di connessione del plugin jpsp-ng all'interno dell'evento
+ - Aggiunta indice in abstract_booklet odt
+ - Creazione repo git per jpsp-ng-indico
+ - Discussione dell'importazione dell'evento in indico (errori refid)
+ - Definizione generale dei primi controlli sui pdf dell'evento (dimensioni pagina, fonts embedded, num pagine)
+ - Definizione generale dell'api per i controlli sui pdf (singolo-pdf->post pdf bynary/multi pdf->post event json)
+
 
 
 ## [13.09.2022]
 
-### Topics
+### Topics (da tradurre)
+
 - Presentazione layout del repository jpsp-ng
 - Generatore documentazione [mkdocs](https://ipac-docs.jacow.org/)
 - Creazione utenza [indico](https://indico.jacow.org) tramite [cern](https://oraweb.cern.ch/pls/jacow/profile.html)
@@ -40,13 +50,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [12.09.2022]
 
-### Topics
+### Topics (da tradurre)
+
 - Zoom con i ragazzi di Indico: Adrian Mönnich e Duarte Galvão (https://getindico.io/about/)
 
 
 ## [05.09.2022]
 
-### Topics
+### Topics (da tradurre)
+
 - Gestione concorrenza e locks
 - Gestione pipeling transazionali
 - Popolamento Entità in Cache
@@ -54,7 +66,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [24.08.2022]
 
-### Topics
+### Topics (da tradurre)
+
 - Call di presentazione con Andrea Ferrari, Fabio Gomiero
 - Accesso WEB API Indico per lettura json conferenza
 - Definizione Entità
@@ -63,7 +76,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [16.08.2022]
 
-### Topics
+### Topics (da tradurre)
+
 - Presentazione progetto
 - Definizione architettura
 - Inizio sviluppo
