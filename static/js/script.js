@@ -7,8 +7,8 @@ window.addEventListener("DOMContentLoaded", () => {
         console.log('onopen')
 
         websocket.addEventListener("message", ({ data }) => {
-          // const event = JSON.parse(data);
-          console.log(data)
+            // const event = JSON.parse(data);
+            console.log(data)
         });
 
         document.getElementById('task_button').addEventListener("click", () => {
@@ -29,21 +29,34 @@ window.addEventListener("DOMContentLoaded", () => {
         });
 
         document.getElementById('put_button').addEventListener("click", () => {
-           fetch(`http://${location.host}/api/conference/44/put`)
+            fetch(`http://${location.host}/api/conference/44/put`)
                 .then(res => res.json())
                 .then(json => console.log(json))
                 .catch(err => console.error(err))
         });
 
         document.getElementById('get_button').addEventListener("click", () => {
-           fetch(`http://${location.host}/api/conference/44/get`)
+
+            fetch(`http://${location.host}/api/conference/44/get`, {
+                headers: {
+                    'X-API-Key': '01GDWDBTHHJNZ0KAVKZ1YP320S'
+                }
+            })
+                .then(res => res.json())
+                .then(json => console.log(json))
+                .catch(err => console.error(err))
+        });
+
+        document.getElementById('401_button').addEventListener("click", () => {
+
+            fetch(`http://${location.host}/api/conference/44/get`)
                 .then(res => res.json())
                 .then(json => console.log(json))
                 .catch(err => console.error(err))
         });
 
         document.getElementById('ab_button').addEventListener("click", () => {
-           fetch(`http://${location.host}/api/conference/44/ab.odt`)
+            fetch(`http://${location.host}/api/conference/44/ab.odt`)
                 .then(res => res.blob())
                 .then(blob => {
                     const a = document.createElement('a');

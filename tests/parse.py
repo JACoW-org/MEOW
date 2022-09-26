@@ -48,7 +48,6 @@ def dt_to_int(val: dt.date) -> int:
 # print(dt_to_int(dtime))
 # print(dt_to_int(dtzone))
 
-
-print(Settings.SearchIndex.dumps())
-print(Settings.SearchIndex.dumps())
-print(Settings.SearchIndex.dumps())
+# print(Settings.SearchIndex.dumps())
+# print(Settings.SearchIndex.dumps())
+# print(Settings.SearchIndex.dumps())

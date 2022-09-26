@@ -1,12 +1,12 @@
 from typing import Type
 from jpsp.models.infra.base import BaseModel
 
-from jpsp.models.application import Settings
+from jpsp.models.application import Settings, Credential
 from jpsp.models.conference import Conference, SessionSlot, Creator, Folder, Chair, Material, Resource, Attachment, \
     SessionSlotContribution, SessionEvent, SessionEventConvener, SessionSlotConvener, Author, CoAuthor, PrimaryAuthor, \
     Speaker
 
-jpsp_settings: list[Type[BaseModel]] = [Settings]
+jpsp_settings: list[Type[BaseModel]] = [Settings, Credential]
     
 jpsp_conference: list[Type[BaseModel]] = [Conference]
 

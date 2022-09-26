@@ -11,7 +11,8 @@ from jpsp.services.local.conference.abstract_booklet import create_abstract_book
 from jpsp.services.local.conference.delete_conference import del_conference_entity
 from jpsp.services.local.conference.find_conference import get_conference_entity
 from jpsp.services.local.conference.save_conference import put_conference_entity
-from jpsp.utils.response import create_json_response
+from jpsp.services.local.credential.find_credential import find_credential_by_secret
+from jpsp.utils.response import create_json_response, create_json_error_response
 from jpsp.utils.serialization import json_decode
 
 logger = lg.getLogger(__name__)
@@ -43,7 +44,7 @@ async def api_del_conference(req: Request) -> JSONResponse:
     except Exception as error:
         logger.error(error, exc_info=True)
 
-        return await create_json_response(
+        return await create_json_error_response(
             ok=False, error=error
         )
 
@@ -66,7 +67,7 @@ async def api_put_conference(req: Request) -> JSONResponse:
     except Exception as error:
         logger.error(error, exc_info=True)
 
-        return await create_json_response(
+        return await create_json_error_response(
             ok=False, error=error
         )
 
@@ -75,21 +76,34 @@ async def api_get_conference(req: Request) -> JSONResponse:
     """ """
 
     try:
-        conference_id: str = req.path_params['id']
-        conference = await get_conference_entity(conference_id)
 
-        if conference is not None:
-            return await create_json_response(
-                ok=True, body=dict(conference)
+        credential = await find_credential_by_secret(
+            req.headers.get('X-API-Key')
+        )
+
+        if credential is not None:
+            conference_id: str = req.path_params['id']
+            conference = await get_conference_entity(conference_id)
+
+            if conference is not None:
+                return await create_json_response(
+                    ok=True, body=dict(conference)
+                )
+
+            return await create_json_error_response(
+                ok=False, status_code=404,
+                error=Exception("Conference not found")
             )
 
-        return await create_json_response(
-            ok=True
+        return await create_json_error_response(
+            ok=False, status_code=401,
+            error=Exception("Invalid API Key")
         )
+
     except Exception as error:
         logger.error(error, exc_info=True)
 
-        return await create_json_response(
+        return await create_json_error_response(
             ok=False, error=error
         )
 
@@ -108,23 +122,23 @@ async def api_ab_conference_json(req: Request) -> Response:
     except Exception as error:
         logger.error(error, exc_info=True)
 
-        return await create_json_response(
+        return await create_json_error_response(
             ok=False, error=error
         )
 
 
 # async def api_ab_conference_rtf(req: Request) -> Response:
 #     """ """
-# 
+#
 #     try:
 #         conference_id: str = req.path_params['id']
-# 
+#
 #         abstract_booklet = await create_abstract_booklet_from_entities(conference_id)
-# 
+#
 #         abstract_booklet_rtf = export_abstract_booklet_to_rtf(abstract_booklet)
-# 
+#
 #         filename: str = f"abstract_booklet_{conference_id}.rtf"
-# 
+#
 #         return StreamingResponse(abstract_booklet_rtf,
 #                                  headers={
 #                                      'Content-Type': 'application/rtf; charset=UTF-8',
@@ -132,7 +146,7 @@ async def api_ab_conference_json(req: Request) -> Response:
 #                                  })
 #     except Exception as error:
 #         logger.error(error, exc_info=True)
-# 
+#
 #         return Response(
 #             status_code=500
 #         )
@@ -167,7 +181,7 @@ async def api_generate_event_ab_odt(req: Request) -> Response:
     """ """
 
     try:
-        
+
         event: dict = json_decode(str(await req.body(), 'utf-8'))
 
         abstract_booklet = await create_abstract_booklet_from_event(event)
@@ -187,16 +201,23 @@ async def api_generate_event_ab_odt(req: Request) -> Response:
         return Response(
             status_code=500
         )
-    
+
 
 routes = [
     Route('/', api_list_endpoint, methods=['GET', 'POST', 'PUT', 'DELETE']),
-    Route('/conference/{id}/del', api_del_conference, methods=['GET', 'POST', 'PUT', 'DELETE']),
-    Route('/conference/{id}/put', api_put_conference, methods=['GET', 'POST', 'PUT', 'DELETE']),
-    Route('/conference/{id}/get', api_get_conference, methods=['GET', 'POST', 'PUT', 'DELETE']),
-    Route('/conference/{id}/ab.json', api_ab_conference_json, methods=['GET', 'POST', 'PUT', 'DELETE']),
+    Route('/conference/{id}/del', api_del_conference,
+          methods=['GET', 'POST', 'PUT', 'DELETE']),
+    Route('/conference/{id}/put', api_put_conference,
+          methods=['GET', 'POST', 'PUT', 'DELETE']),
+    Route('/conference/{id}/get', api_get_conference,
+          methods=['GET', 'POST', 'PUT', 'DELETE']),
+    Route('/conference/{id}/ab.json', api_ab_conference_json,
+          methods=['GET', 'POST', 'PUT', 'DELETE']),
     # Route('/conference/{id}/ab.rtf', api_ab_conference_rtf, methods=['GET', 'POST', 'PUT', 'DELETE']),
-    Route('/conference/{id}/ab.odt', api_ab_conference_odt, methods=['GET', 'POST', 'PUT', 'DELETE']),
-    Route('/generate-event-ab.odt', api_generate_event_ab_odt, methods=['PUT']),
-    Route('/task/{code}', api_endpoint, methods=['GET', 'POST', 'PUT', 'DELETE']),
+    Route('/conference/{id}/ab.odt', api_ab_conference_odt,
+          methods=['GET', 'POST', 'PUT', 'DELETE']),
+    Route('/generate-event-ab.odt',
+          api_generate_event_ab_odt, methods=['PUT']),
+    Route('/task/{code}', api_endpoint,
+          methods=['GET', 'POST', 'PUT', 'DELETE']),
 ]
