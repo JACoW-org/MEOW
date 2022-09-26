@@ -20,6 +20,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - *Topics* for new features.
 
 
+## [26.09.22]
+
+### Topics (da tradurre)
+
+ - Aggiungere ai settings di jpsp-ng-indico per evento il max page count
+ - Tool jpsp-ng-cli per creazione admin user (user, pass, key, first, last)
+ - Refactoring Credential -> Type User (Admin) or Type App (Indico44)
+ - Admin web ui per jpsp-ng con lagina di crezione utenti applicativi (credentials)
+ - API REST (only admin) per creare una nuova utenza applicativa
+
+
+
 ## [19.09.22]
 
 ### Topics (da tradurre)
