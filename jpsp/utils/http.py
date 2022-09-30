@@ -2,8 +2,10 @@ import logging
 import pathlib
 from typing import Any, AsyncIterable
 
-import aiohttp
+import io
 import ujson
+import aiohttp
+
 from anyio import open_file
 
 from jpsp.app.config import conf
@@ -84,8 +86,23 @@ async def download_file(url: str, file: pathlib.Path) -> None:
 
     print('download_file -->', url)
 
-    async with await open_file(file, mode='wb') as fd:
+    async with await open_file(file, mode='wb') as f:
         async for chunk in fetch_chunks(url):
-            await fd.write(chunk)
+            await f.write(chunk)
 
         print('download_file -->', file)
+
+
+async def download_stream(url: str) -> io.BytesIO:
+    """ Download file function """
+
+    print('download_stream -->', url)
+    
+    f = io.BytesIO()
+
+    async for chunk in fetch_chunks(url):
+        f.write(chunk)
+
+    f.seek(0)
+    
+    return f

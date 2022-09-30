@@ -1,5 +1,6 @@
 import asyncio as aio
 import logging as lg
+from tabnanny import check
 
 from starlette.requests import Request
 from starlette.responses import JSONResponse, Response
@@ -8,10 +9,15 @@ from starlette.routing import Route
 
 from jpsp.services.local.conference.abstract_booklet import create_abstract_booklet_from_entities, create_abstract_booklet_from_event, \
     export_abstract_booklet_to_odt
+
+from jpsp.services.local.conference.check_pdf import check_event_pdf
+
 from jpsp.services.local.conference.delete_conference import del_conference_entity
 from jpsp.services.local.conference.find_conference import get_conference_entity
 from jpsp.services.local.conference.save_conference import put_conference_entity
+
 from jpsp.services.local.credential.find_credential import find_credential_by_secret
+
 from jpsp.utils.response import create_json_response, create_json_error_response
 from jpsp.utils.serialization import json_decode
 
@@ -201,10 +207,30 @@ async def api_generate_event_ab_odt(req: Request) -> Response:
         return Response(
             status_code=500
         )
+        
+async def api_check_event_pdf(req: Request) -> Response:
+    """ """
+
+    try:
+
+        check_pdf_input: dict = json_decode(str(await req.body(), 'utf-8'))
+
+        check_pdf_report = await check_event_pdf(check_pdf_input)
+
+        return await create_json_response(
+            ok=True, body=check_pdf_report
+        )
+    except Exception as error:
+        logger.error(error, exc_info=True)
+
+        return await create_json_error_response(
+            ok=False, error=error
+        )
 
 
 routes = [
-    Route('/', api_list_endpoint, methods=['GET', 'POST', 'PUT', 'DELETE']),
+    Route('/', api_list_endpoint, 
+          methods=['GET', 'POST', 'PUT', 'DELETE']),
     Route('/conference/{id}/del', api_del_conference,
           methods=['GET', 'POST', 'PUT', 'DELETE']),
     Route('/conference/{id}/put', api_put_conference,
@@ -213,11 +239,12 @@ routes = [
           methods=['GET', 'POST', 'PUT', 'DELETE']),
     Route('/conference/{id}/ab.json', api_ab_conference_json,
           methods=['GET', 'POST', 'PUT', 'DELETE']),
-    # Route('/conference/{id}/ab.rtf', api_ab_conference_rtf, methods=['GET', 'POST', 'PUT', 'DELETE']),
     Route('/conference/{id}/ab.odt', api_ab_conference_odt,
           methods=['GET', 'POST', 'PUT', 'DELETE']),
-    Route('/generate-event-ab.odt',
-          api_generate_event_ab_odt, methods=['PUT']),
+    Route('/generate-event-ab.odt', api_generate_event_ab_odt, 
+          methods=['PUT']),
+    Route('/check-event-pdf', api_check_event_pdf, 
+          methods=['PUT']),
     Route('/task/{code}', api_endpoint,
           methods=['GET', 'POST', 'PUT', 'DELETE']),
 ]

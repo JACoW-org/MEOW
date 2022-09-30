@@ -4,19 +4,36 @@ Esecuzione parallela all'interno di un task group
 
 """
 
+from typing import Any
 import anyio
+import io
 from pikepdf import open
+
+from jpsp.utils.http import download_stream
+from jpsp.utils.serialization import json_decode
 
 
 
 async def main():
     
-    with open('test.pdf') as my_pdf:
-    for page in my_pdf.pages:
-        page.Rotate = 180
-    my_pdf.save('test-rotated.pdf')
+    event_stream: io.BytesIO = await download_stream('https://indico.jacow.org/export/event/44.json?detail=contributions')
+    
+    event_json: str = event_stream.read().decode('utf-8')
+    
+    response: Any = json_decode(event_json)
+    
+    event: dict = response['results'][0]
+    
+    contributions: list[dict] = event.get('contributions', [])
+    
+    def sort_func(e:dict):
+        return int(e.get('id', '0'))
+    
+    contributions.sort(key=sort_func)
+    
+    for contribution in contributions:
+        print(contribution.get('id'), contribution.get('code'), contribution.get('title'))
+    
+    # with open('test.pdf') as my_pdf:    
 
-    runtime = anyio.current_time() - start
-    print(f'program executed in {runtime:.2f}s')
 
-anyio.run(main)
