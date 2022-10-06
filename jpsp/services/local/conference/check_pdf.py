@@ -58,15 +58,15 @@ async def event_pdf_check(contributions: list[dict]):
     
     reports = []
     
-    await asyncio.gather(
-        *[_task(f, reports) for f in files]
-    )
+    # await asyncio.gather(
+    #     *[_task(f, reports) for f in files]
+    # )
     
-    # limiter = CapacityLimiter(64)
+    l = CapacityLimiter(8)
     
-    # async with create_task_group() as tg:
-    #     for f in files:
-    #         tg.start_soon(_task, limiter, f, reports)
+    async with create_task_group() as tg:
+        for f in files:
+            tg.start_soon(_task, l, f, reports)
 
     # async with create_task_group() as tg:
     #     for f in files:
@@ -92,21 +92,20 @@ async def extract_event_pdf_files(elements: list[dict]) -> list:
     return files
         
 
-async def _task(f: dict, res: list):
+async def _task(l: CapacityLimiter, f: dict, res: list):
     """ """
     
-    # if limiter is not None:
-    #     async with limiter:        
-    #         res.append({
-    #             "file": f,
-    #             "report": await _run(f)
-    #         })
-    # else:
-    
-    res.append({
-        "file": f,
-        "report": await _run(f)
-    })
+    if l is not None:
+        async with l:        
+            res.append({
+                "file": f,
+                "report": await _run(f)
+            })
+    else:
+        res.append({
+            "file": f,
+            "report": await _run(f)
+        })
         
 
 async def _run(f: dict):

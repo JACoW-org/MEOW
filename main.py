@@ -11,46 +11,46 @@ logger = lg.getLogger(__name__)
 
 async def jpsp_worker():
     # logger.info('jpsp_worker - begin')
-    
+
     await srs.workers_manager.run()
-            
+
     # logger.info('jpsp_worker - end')
 
 
 async def jpsp_webapp() -> None:
     # logger.info('jpsp_webapp - begin')
-    
+
     await srs.webapp_manager.run()
-            
+
     # logger.info('jpsp_webapp - end')
 
 
 async def jpsp_socket() -> None:
     # logger.info('jpsp_webapp - begin')
-    
+
     await srs.socket_manager.run()
-            
+
     # logger.info('jpsp_webapp - end')
 
 
 async def main() -> None:
     # logger.info('jpsp - begin')
-    
+
     await srs.redis_manager.prepare()
     await srs.redis_manager.migrate()
-    
+
     async with create_task_group() as tg:
         tg.start_soon(jpsp_webapp)
         tg.start_soon(jpsp_worker)
         tg.start_soon(jpsp_socket)
-    
+
     await srs.redis_manager.destroy()
 
     # logger.info('jpsp - end')
 
 
 if __name__ == "__main__":
-    run(main)
+    run(main, backend='asyncio', backend_options={'use_uvloop': True})
 
 
 # if __name__ == "__main__":
@@ -71,7 +71,6 @@ if __name__ == "__main__":
 #         workers=2
 #     )
 #
-
 
 
 # async def webapp():
