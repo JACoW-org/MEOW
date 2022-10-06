@@ -148,7 +148,7 @@ class StreamRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
 
             logger.debug(f"REDIS NAME: {conf.REDIS_CLIENT_NAME}", )
             logger.debug(f"REDIS ID: {last_id}")
-            logger.debug(f"      --> {data}")
+            # logger.debug(f"      --> {data}")
 
 
 def create_logic():

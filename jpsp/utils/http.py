@@ -1,6 +1,7 @@
+from email import header
 import logging
 import pathlib
-from typing import Any, AsyncIterable
+from typing import Any, AsyncIterable, Optional
 
 import io
 import ujson
@@ -35,10 +36,11 @@ class HttpClientSessions:
                 pass
 
 
-async def fetch_chunks(url: str) -> AsyncIterable:
+async def fetch_chunks(url: str, headers: Optional[dict] = {}) -> AsyncIterable:
     """ Fetch chunks function """
 
     async with aiohttp.ClientSession(
+            headers=headers,
             json_serialize=ujson.dumps,
             timeout=aiohttp.ClientTimeout(
                 total=conf.HTTP_REQUEST_TIMEOUT_SECONDS
@@ -93,14 +95,14 @@ async def download_file(url: str, file: pathlib.Path) -> None:
         print('download_file -->', file)
 
 
-async def download_stream(url: str) -> io.BytesIO:
+async def download_stream(url: str, headers: dict) -> io.BytesIO:
     """ Download file function """
 
-    print('download_stream -->', url)
+    # print('download_stream -->', url)
     
     f = io.BytesIO()
 
-    async for chunk in fetch_chunks(url):
+    async for chunk in fetch_chunks(url, headers=headers):
         f.write(chunk)
 
     f.seek(0)

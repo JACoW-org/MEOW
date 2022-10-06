@@ -90,10 +90,10 @@ class PubsubRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
         logger.debug(f"REDIS NAME: {conf.REDIS_CLIENT_NAME}", )
 
         if payload:
-            data = payload['data']
+            # data = payload['data']
             last_id = ''
 
             logger.debug(f"REDIS ID: {last_id}")
-            logger.debug(f"      --> {data}")
+            # logger.debug(f"      --> {data}")
         else:
             logger.debug('Empty PAYLOAD')

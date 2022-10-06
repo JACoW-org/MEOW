@@ -4,6 +4,8 @@ Esecuzione parallela all'interno di un task group
 
 """
 
+from typing import List, Dict, Optional
+from dataclasses import dataclass
 from anyio import run_process, create_task_group, run, CapacityLimiter
 from typing import Any
 
@@ -20,96 +22,92 @@ from pikepdf.objects import Object  # type: ignore
 from pikepdf.objects import Dictionary, String, Array, Stream
 
 from jpsp.utils.http import download_stream
-from jpsp.utils.serialization import json_encode
 
-async def print_element(key: str, value: Any, level: int, fonts: dict, font: dict):
+
+@dataclass
+class PdfPageFontReport:
+    name: Optional[str] = None
+    enc: Optional[str] = None
+    type: Optional[str] = None
+    subtype: Optional[str] = None
+    emb: Optional[bool] = None
+
+
+@dataclass
+class PdfPageSizeReport:
+    width: float
+    height: float
+
+
+@dataclass
+class PdfPageReport:
+    sizes: PdfPageSizeReport
+    fonts: Dict[str, PdfPageFontReport]
+
+
+@dataclass
+class PdfReport:
+    page_count: int
+    pages_report: List[PdfPageReport]
+
+
+async def fill_font(key: str, value: Any, level: int, fonts: dict, font: PdfPageFontReport):
     """ """
-   
-    if level == 2 and key == '/BaseFont':
-        font['name'] = str(value)
-        fonts[str(value)] = font
-        
-    if level == 2 and key == '/Encoding':
-        font['encoding'] = str(value)
-    
-    if level == 2 and key == '/Encoding':
-        font['encoding'] = str(value)
-    
-    if level == 2 and key == '/Type':
-        font['type'] = str(value)
-        
-    if level == 2 and key == '/Subtype':
-        font['subtype'] = str(value)
-        
-    if level == 3 and key in ['/FontFile', '/FontFile2', '/FontFile3']:
-        font['embedded'] = True    
-     
-    # print(level, " " * level, key, ":", type(value))
 
-    if isinstance(value, int):
-        print(level, " " * level, key, ":", value)
-    if isinstance(value, String):
-        print(level, " " * level, key, ":", value)
-    elif isinstance(value, Dictionary):
-        await print_dict(value, level+1, fonts, font)
-    elif isinstance(value, Array):
-        await print_array(key, value, level+1, fonts, font)
-    elif isinstance(value, Stream):
-        await print_stream(key, value, level+1, fonts, font)
-    elif isinstance(value, Object):
-        print(level, " " * level, key, ":", value)
-        
+    try:
+        if level == 2 and key == '/BaseFont':
+            font.name = str(value)
+            fonts[font.name] = font
 
-async def print_array(key: str, array: Array, level: int, fonts: dict, font: dict):
-    print(level, " " * level, key, 'array')
-    # print(array.to_json())
-    # for el in array.as_list():
-    #     await print_element(key, el, level)
+        if level == 2 and key == '/Encoding':
+            font.enc = str(value)
 
-async def print_dict(dictionary: Dictionary, level: int, fonts: dict, font: dict):
-    for key, value in dictionary.items():
-        await print_element(key, value, level, fonts, font)
+        if level == 2 and key == '/Type':
+            font.type = str(value)
 
-async def print_stream(key: str, stream: Stream, level: int, fonts: dict, font: dict):
-    print(level, " " * level, key, 'stream')
-    # print(stream.to_json())
-    # print(stream.get_stream_buffer())
-    
-    
+        if level == 2 and key == '/Subtype':
+            font.subtype = str(value)
 
-async def check_pdf(pdf_stream: io.BytesIO):
+        if level == 3 and key in ['/FontFile', '/FontFile2', '/FontFile3']:
+            font.emb = True
+    except:
+        pass
 
-    # print("pdf_size", sys.getsizeof(pdf_stream))
 
-    result: dict = dict()
+async def load_font(key: str, value: Any, level: int, fonts: dict, font: PdfPageFontReport):
+    """ """
+
+    await fill_font(key, value, level, fonts, font)
+
+    # print(level, " " * level, key, ":", type(value), font)
+
+    if isinstance(value, Dictionary):
+        for child_key, child_value in value.items():
+            await load_font(child_key, child_value, level+1, fonts, font)
+
+
+async def event_pdf_report(pdf_stream: io.BytesIO):
+    """ """
 
     with open(pdf_stream) as p:
 
-        result["page_count"] = len(p.pages)
-        result["fonts"] = dict()
+        result = PdfReport(page_count=len(p.pages), pages_report=[])
 
-        for key, value in p.docinfo.items():
-            if key in ['/Title', '/Author', '/CreationDate', '/Creator', '/ModDate', '/Producer']:
-                await print_element(key, value, 0, result["fonts"], {})
+        # for key, value in p.docinfo.items():
+        #     if key in ['/Title', '/Author', '/CreationDate', '/Creator', '/ModDate', '/Producer']:
+        #         await load_meta(key, value, 0, result["meta"], {})
 
         for page in p.pages:
 
-            # print(page)
-            
+            fonts = dict()
+
             if isinstance(page.obj, Array):
                 for i in page.obj.keys():
-                    await print_element("", i, 0, result["fonts"], {})
+                    await load_font("", i, 0, fonts, PdfPageFontReport())
             else:
                 for key, value in page.resources.items():
-                    # print('0', key)
                     if key in ['/Font', '/FontFamily', '/FontName', '/Type', '/FontFile', '/FontFile2', '/FontFile3', '/Encoding', '/BaseFont', '/ToUnicode', '/DescendantFonts']:
-                        print('0', key)
-                        await print_element(key, value, 0, result["fonts"], {})
-                        
-            # print(result["fonts"])
-
-            # print(res.to_json().decode())
-            # print(page.obj)
+                        await load_font(key, value, 0, fonts, PdfPageFontReport())
 
             if '/CropBox' in page:
                 # use CropBox if defined since that's what the PDF viewer would usually display
@@ -130,8 +128,10 @@ async def check_pdf(pdf_stream: io.BytesIO):
             if '/UserUnit' in page:
                 userunit = float(page.UserUnit)  # type: ignore
 
-            # convert the box coordinates to float and multiply with the UserUnit
-            relevant_box = [float(x)*userunit for x in relevant_box]  # type: ignore
+            relevant_box = [
+                float(x)*userunit
+                for x in relevant_box  # type: ignore
+            ]
 
             # obtain the dimensions of the box
             width = abs(relevant_box[2] - relevant_box[0])
@@ -147,16 +147,15 @@ async def check_pdf(pdf_stream: io.BytesIO):
             if (rotation // 90) % 2 != 0:  # type: ignore
                 width, height = height, width
 
-            result['page_size'] = dict(
-                width=width, height=height
+            page_report = PdfPageReport(
+                sizes=PdfPageSizeReport(
+                    width=width,
+                    height=height
+                ),
+                fonts=fonts
             )
 
-        # unembedded = fonts - embedded
-        # print('Font List')
-        # print(sorted(list(fonts)))
-        # if unembedded:
-        #     print('Unembedded Fonts')
-        #     print(unembedded)
+            result.pages_report.append(page_report)
 
         p.close()
 
@@ -173,7 +172,8 @@ async def main():
     }
 
     PDF_FILE = {
-        "url": "https://indico.jacow.org/event/44/contributions/349/attachments/227/751/AppleIII-Development_Tischer_FEL2022-THBI1.pdf",
+        "url": "http://127.0.0.1:8005/event/12/contributions/2640/editing/paper/6059/17077/TUP22.pdf",
+        "_url": "https://indico.jacow.org/event/44/contributions/349/attachments/227/751/AppleIII-Development_Tischer_FEL2022-THBI1.pdf",
         "_url": "https://vtechworks.lib.vt.edu/bitstream/handle/10919/73229/Base%2014%20Fonts.pdf?sequence=1&isAllowed=y",
         "name": "AppleIII-Development_Tischer_FEL2022-THBI1.pdf",
         "size": 4227793,
@@ -182,23 +182,26 @@ async def main():
 
     async def task(num: int, limiter: CapacityLimiter, file: dict):
         async with limiter:
-            pdf_stream = await download_stream(file.get('url', None))
+            pdf_stream = await download_stream(file.get('url', None), headers=dict(
+                Authorization="Bearer indp_9bjGQIZOeK7k19kXaiheF1tFLeSuhxvedChnPJgsbj"
+            ))
 
             # if not file.get("checksum", None) == str(hashlib.md5(pdf_stream.getbuffer()).hexdigest()):
             #     raise Exception("invalid checksum")
-            
+
             # /home/fabio.meneghetti/Documents/RichiestaMutuo.pdf
 
             # result = await to_process.run_sync(check_pdf, pdf_stream)
-            result = await check_pdf(pdf_stream)
-            
-            print('## page_count:', result['page_count'])
-            print('## page_size:', result['page_size'])
-            
-            for key, font in result['fonts'].items():
-                print('##', font['name'], font['encoding'], font['subtype'], font['embedded'])
-            
-            
+            result = await event_pdf_report(pdf_stream)
+
+            print('## page_count:', result.page_count)
+
+            for page_report in result.pages_report:
+
+                print('##', page_report.sizes)
+
+                for font in page_report.fonts.values():
+                    print('  --', font)
 
     # await task()
 

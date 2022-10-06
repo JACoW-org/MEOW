@@ -1,5 +1,5 @@
-from lib2to3.pytree import Base
 import logging as lg
+import time 
 
 from typing import Any
 
@@ -17,7 +17,7 @@ class TaskRunner:
     """ """
 
     @classmethod
-    async def run_task(cls, task_id: str, code: str, params: Any) -> Any:
+    async def run_task(cls, task_id: str, code: str, params: dict, context: dict) -> Any:
         """ """
 
         try:
@@ -26,17 +26,15 @@ class TaskRunner:
                 task_id=task_id
             )
 
-            logger.debug(f"run_task {code} {args}")
+            # logger.debug(f"run_task {code} {args}")
 
             task_obj = await TaskFactory.create_task(code, args)
 
-            logger.debug(f"run_task - task created")
-            # logger.debug(f"run_task - task created {params}")
+            # logger.debug(f"run_task - task created")
                         
-            result = await task_obj.run(params)
+            result = await task_obj.run(params, context)
 
-            logger.debug(f"run_task - task result")
-            # logger.debug(f"run_task - task result {result}")
+            # logger.debug(f"run_task - task result")
             
             return result
         
@@ -46,48 +44,55 @@ class TaskRunner:
             
     
     @classmethod
-    async def send_queued(cls, task_id: str, params: dict) -> None:   
-        await cls.send('task:queued', dict(
-            task_id=task_id,
-            params=params
-        ))
+    async def send_queued(cls, task_id: str, task: str) -> None:   
+        await cls.send('task:queued', task_id, task, None)
             
     
     @classmethod
-    async def send_begin(cls, task_id: str, params: dict) -> None:   
-        await cls.send('task:begin', dict(
-            task_id=task_id,
-            params=params
-        ))
+    async def send_begin(cls, task_id: str, task: str) -> None:   
+        await cls.send('task:begin', task_id, task, None)
             
     
     @classmethod
-    async def send_end(cls, task_id: str, result: dict) -> None:  
-        await cls.send('task:end', dict(
-            task_id=task_id,
-            result=result
-        ))
+    async def send_end(cls, task_id: str, task: str, result: dict) -> None:  
+        await cls.send('task:end', task_id, task, result)
             
     
     @classmethod
-    async def send_error(cls, task_id: str, error: BaseException) -> None:  
-        await cls.send('task:error', dict(
-            task_id=task_id,
-            error=exception_to_string(error)
-        ))
+    async def send_error(cls, task_id: str, task: str, error: BaseException) -> None:  
+        await cls.send('task:error', task_id, task, exception_to_string(error))
             
     
     @classmethod
-    async def send(cls, event: str, body: dict) -> None:
+    async def send(cls, event: str, task_id: str, task: str, params: dict | None) -> None:
+        
+        # head: {
+        #     code: 'exec_task',
+        #     uuid: ulid(),
+        #     time: time
+        # },
+        # body: {
+        #     method: 'event_ab',
+        #     params: params
+        # },
+        
         """ """
         
         try:
         
-            logger.debug(f"send {event}")
+            # logger.debug(f"send {event}")
 
-            message = json_encode(
-                dict(event=event, body=body)
-            )
+            message = json_encode({
+                'head': {
+                    'code': event,
+                    'uuid': task_id,
+                    'time': int(time.time())
+                }, 
+                'body': {
+                    'method': task,
+                    'params': params
+                }
+            })
 
             await dbs.redis_client.publish("jpsp:feed", message)
             

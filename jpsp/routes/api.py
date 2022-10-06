@@ -10,7 +10,7 @@ from starlette.routing import Route
 from jpsp.services.local.conference.abstract_booklet import create_abstract_booklet_from_entities, create_abstract_booklet_from_event, \
     export_abstract_booklet_to_odt
 
-from jpsp.services.local.conference.check_pdf import check_event_pdf
+from jpsp.services.local.conference.check_pdf import event_pdf_check
 
 from jpsp.services.local.conference.delete_conference import del_conference_entity
 from jpsp.services.local.conference.find_conference import get_conference_entity
@@ -84,7 +84,7 @@ async def api_get_conference(req: Request) -> JSONResponse:
     try:
 
         credential = await find_credential_by_secret(
-            req.headers.get('X-API-Key')
+            req.headers.get('X-API-Key', None)
         )
 
         if credential is not None:
@@ -208,17 +208,19 @@ async def api_generate_event_ab_odt(req: Request) -> Response:
             status_code=500
         )
         
-async def api_check_event_pdf(req: Request) -> Response:
+async def api_event_pdf_check(req: Request) -> Response:
     """ """
 
     try:
 
-        check_pdf_input: dict = json_decode(str(await req.body(), 'utf-8'))
+        params: dict = json_decode(str(await req.body(), 'utf-8'))
+        
+        check_pdf_input: list[dict] = params.get("contributions", [])
 
-        check_pdf_report = await check_event_pdf(check_pdf_input)
+        event_pdf_report = await event_pdf_check(check_pdf_input)
 
         return await create_json_response(
-            ok=True, body=check_pdf_report
+            ok=True, body=event_pdf_report
         )
     except Exception as error:
         logger.error(error, exc_info=True)
@@ -243,7 +245,7 @@ routes = [
           methods=['GET', 'POST', 'PUT', 'DELETE']),
     Route('/generate-event-ab.odt', api_generate_event_ab_odt, 
           methods=['PUT']),
-    Route('/check-event-pdf', api_check_event_pdf, 
+    Route('/event-pdf-check', api_event_pdf_check, 
           methods=['PUT']),
     Route('/task/{code}', api_endpoint,
           methods=['GET', 'POST', 'PUT', 'DELETE']),

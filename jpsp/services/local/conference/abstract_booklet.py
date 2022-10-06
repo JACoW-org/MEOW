@@ -4,7 +4,7 @@ import logging as lg
 # from PyRTF.Elements import Document
 # from PyRTF.Renderer import Renderer
 # from PyRTF.document.section import Section
-from odf.opendocument import OpenDocumentText
+from odf.opendocument import OpenDocumentText, OpenDocument
 from odf.style import Style, TextProperties
 from odf.text import H, P
 
@@ -222,11 +222,11 @@ async def create_abstract_booklet_from_entities(conference_id: str):
 #     return f
 
 
-def export_abstract_booklet_to_odt(abstract_booklet: dict) -> io.BytesIO():
+def export_abstract_booklet_to_odt(abstract_booklet: dict) -> io.BytesIO:
     """ """
 
     # 'application/vnd.oasis.opendocument.text'
-    abstract_booklet_document = OpenDocumentText()
+    abstract_booklet_document: OpenDocument = OpenDocumentText()
 
     """ """
     """ Documents styles """
@@ -260,7 +260,7 @@ def export_abstract_booklet_to_odt(abstract_booklet: dict) -> io.BytesIO():
         session_title = H(outlinelevel=1, stylename=heading_1_style,
                           text=f"{session.get('code')} - {session.get('title')}")
 
-        abstract_booklet_document.text.addElement(session_title)
+        abstract_booklet_document.text.addElement(session_title)  # type: ignore
 
         if len(session.get('conveners')) > 0:
 
@@ -270,23 +270,23 @@ def export_abstract_booklet_to_odt(abstract_booklet: dict) -> io.BytesIO():
                 session_chair.addText(
                     f"{convener.get('first')} {convener.get('last')} ({convener.get('affiliation')})")
 
-            abstract_booklet_document.text.addElement(session_chair)
+            abstract_booklet_document.text.addElement(session_chair)  # type: ignore
 
         # Black line
-        abstract_booklet_document.text.addElement(P())
+        abstract_booklet_document.text.addElement(P())  # type: ignore
 
         for contribution in session.get('contributions'):
             h = H(outlinelevel=1, stylename=heading_3_style,
                   text=f"{contribution.get('code')} - {contribution.get('title')}")
 
-            abstract_booklet_document.text.addElement(h)
+            abstract_booklet_document.text.addElement(h)  # type: ignore
 
             c = P(text=f"{contribution.get('description')}")
 
-            abstract_booklet_document.text.addElement(c)
+            abstract_booklet_document.text.addElement(c)  # type: ignore
 
             # Black line
-            abstract_booklet_document.text.addElement(P())
+            abstract_booklet_document.text.addElement(P())  # type: ignore
     """ """
     """ Sessions """
     """ """

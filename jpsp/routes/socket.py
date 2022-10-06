@@ -60,7 +60,7 @@ async def __ws_to_r_handler(ws: WebSocket):
             message = await ws.receive_json(mode="text")
             # logger.debug(message)
             if message:
-                logger.debug(f"ws_to_r {message}")
+                # logger.debug(f"ws_to_r {message}")
                 await publish(message)
 
     except WebSocketDisconnect:

@@ -10,10 +10,13 @@ from jpsp.models.application import Credential
 logger = lg.getLogger(__name__)
 
 
-async def find_credential_by_secret(secret: str) -> Credential | None:
+async def find_credential_by_secret(secret: str | None) -> Credential | None:
     """ """
 
     try:
+        
+        if secret is None:
+            raise ServiceError('Invalid secret')
 
         credential = await Credential.find_one(
             Query(f"@secret:({secret})")

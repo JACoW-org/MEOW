@@ -18,6 +18,8 @@ from anyio.streams.memory import MemoryObjectSendStream
 from anyio.streams.memory import MemoryObjectReceiveStream
 from anyio.streams.memory import WouldBlock
 
+from jpsp.utils.serialization import json_decode, json_encode
+
 logger = lg.getLogger(__name__)
 
 
@@ -51,7 +53,7 @@ class RedisWorkerManager():
 
         async with create_task_group() as tg:
             async with receiver:
-                for i in range(8):
+                for i in range(16):
                     tg.start_soon(self.process_task_worker,
                                   i, receiver.clone())
 
@@ -118,20 +120,55 @@ class RedisWorkerManager():
 
             async with sender:
 
-                async def on_message(data: Any):
+                async def on_message(raw: Any):
+
+                    # logger.debug(f"######### __process data {raw}")
+
+                    data: dict = json_decode(str(raw, 'utf-8'))
+
                     # logger.debug(f"######### __process data {data}")
 
-                    # message = deserialize(data)
-                    # logger.debug(f"__process message {message}")
+                    # {'code': 'task:exec', 'time': '1665050907325', 'uuid': '01GEPC94NXJGJ79YHYKSBRXJEA'}
+                    head: dict = data.get('head', None)
+                    body: dict = data.get('body', None)
 
-                    try:
-                        sender.send_nowait("event_ab")
-                        await TaskRunner.send_queued(task_id="", params=dict())
-                    except WouldBlock as error:
-                        await TaskRunner.send_error(task_id="", error=error)
-                        logger.error(f"Worker sub: queue limit", e, exc_info=True)
+                    if head is not None and body is not None:
+
+                        code: str = head.get('code', None)
+                        uuid: str = head.get('uuid', None)
+                        time: str = head.get('time', None)
+                                
+                        method: str = body.get('method', None)
+                        params: dict = body.get('params', None)
+
+                        if code == 'task:exec':
+
+                            try:
+
+                                context = {
+                                    'code': code,
+                                    'uuid': uuid,
+                                    'time': time
+                                }
+
+                                sender.send_nowait(json_encode({
+                                    'method': method,
+                                    'params': params,
+                                    'context': context,
+                                }))
+                                
+                                logger.debug(f"######### sent -> {method}")
+
+                                await TaskRunner.send_queued(task_id=uuid, task=method)
+
+                            except WouldBlock as error:
+                                await TaskRunner.send_error(task_id=uuid, task=method, error=error)
+                                msg = f"Worker sub: exausted"
+                                logger.error(msg, e, exc_info=True)
 
                 __callable: Callable = await self.logic.subscribe(on_message=on_message)
+
+                await __callable()
 
                 # self.task = create_task(
                 #     __callable(),
@@ -139,9 +176,9 @@ class RedisWorkerManager():
                 #     logger=self.logic.create_logger(),
                 #     message=self.logic.exception_message()
                 # )
-
-                async with create_task_group() as tg:
-                    tg.start_soon(__callable)
+                #
+                # async with create_task_group() as tg:
+                #     tg.start_soon(__callable)
 
         except BaseException as e:
             logger.error(f"Worker sub: Internal Error", e, exc_info=True)
@@ -154,47 +191,58 @@ class RedisWorkerManager():
             logger.debug(f"Worker {worker_id}: Waiting for task...")
 
             async with receiver:
-                async for task in receiver:
-                    await self.execute_in_worker_thread(worker_id, task, dict())
+                async for raw in receiver:
+                    
+                    try:
+                        logger.debug(f"Worker {worker_id}: Begin")
+                        
+                        task = json_decode(raw)
+
+                        method = task.get('method', None)
+                        params = task.get('params', None)
+                        context = task.get('context', None)
+
+                        await self.execute_in_current_thread(worker_id, method, params, context)
+                        
+                    except BaseException:
+                        logger.error(f"Worker {worker_id}: Internal Error", exc_info=True)
 
         except BaseException:
             logger.error(f"Worker {worker_id}: Internal Error", exc_info=True)
 
-    async def execute_in_current_thread(self, worker_id: int, task: str, params: dict):
+    async def execute_in_current_thread(self, worker_id: int, method: str, params: dict, context: dict):
+        await self.exec_in_loop(worker_id, method, params, context)
 
-        task_id = str(uuid.uuid4())
-        
-        await self.exec_in_loop(worker_id, task_id, task, params)
+    async def execute_in_worker_thread(self, worker_id: int, method: dict, params: dict, context: dict):
 
-    async def execute_in_worker_thread(self, worker_id: int, task: str, params: dict):
-
-        task_id = str(uuid.uuid4())
-
-        def in_thread(portal: BlockingPortal, task: str):
-            portal.start_task_soon(self.exec_in_loop, worker_id, task_id, task, params)
+        def in_thread(portal: BlockingPortal):
+            portal.start_task_soon(
+                self.exec_in_loop, worker_id, method, params, context)
 
         async with BlockingPortal() as portal:
-            await to_thread.run_sync(in_thread, portal, task)
-            
-    async def exec_in_loop(self, worker_id: int, task_id: str, task: str, params: dict):
+            await to_thread.run_sync(in_thread, portal)
+
+    async def exec_in_loop(self, worker_id: int, method: str, params: dict, context: dict):
 
         start_time = datetime.now()
 
+        task_id: str = context.get('uuid', None)
+
         logger.debug(
             f"Worker Thread {worker_id}: "
-            f"Begin task {task} "
+            f"Begin task {method} "
         )
-        
+
         try:
-            await TaskRunner.send_begin(task_id=task_id, params=params)
-            result = await TaskRunner.run_task(task_id, task, params)
-            await TaskRunner.send_end(task_id=task_id, result=result)
+            await TaskRunner.send_begin(task_id=task_id, task=method)
+            result = await TaskRunner.run_task(task_id, method, params, context)
+            await TaskRunner.send_end(task_id=task_id, task=method, result=result)
         except BaseException as error:
-            await TaskRunner.send_error(task_id=task_id, error=error)
+            await TaskRunner.send_error(task_id=task_id, task=method, error=error)
         finally:
             logger.debug(
                 f"Worker Thread {worker_id}: "
-                f"End task {task} "
+                f"End task {method} "
                 f"{((datetime.now()) - start_time).total_seconds()}"
             )
 

@@ -13,5 +13,5 @@ class AbstractTask(ABC):
         self.args = args
 
     @abstractmethod
-    async def run(self, params: Any) -> Any:
+    async def run(self, params: dict, context: dict = {}) -> Any:
         """ """
