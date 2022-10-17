@@ -1,12 +1,7 @@
-"""
-Event AB
-"""
-
 import logging
-import io
 import base64
 
-from typing import Any, AsyncGenerator
+from typing import AsyncGenerator
 
 from jpsp.services.local.conference.abstract_booklet \
     import create_abstract_booklet_from_event, \
@@ -29,9 +24,9 @@ class EventAbTask(AbstractTask):
 
         b64 = base64.b64encode(abstract_booklet_odt.getvalue()).decode('utf-8')
         
-        event_id = params.get('id', '')
-        event_title = params.get('title', '')
-        
-        filename = f'{event_id}_{event_title}_abstrack_booklet.odt'
+        event_id = params.get('id', 'event')
+        event_title = params.get('title', 'title')
+        suffix = 'abstrack_booklet'
+        ext = 'odt'
 
-        yield {'b64': b64, 'filename': filename}
+        yield {'b64': b64, 'filename': f'{event_id}_{event_title}_{suffix}.{ext}'}

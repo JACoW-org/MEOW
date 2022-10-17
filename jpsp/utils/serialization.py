@@ -16,13 +16,13 @@ class JSONSerializer(AbstractSerializer):
 
     def __init__(self):
         try:
-            from ujson import dumps, loads
+            from orjson import dumps, loads
             super().__init__(dumps, loads)
         except ImportError:
-            raise ImportError('Error: pip install ujson')
+            raise ImportError('Error: pip install orjson')
 
-    def serialize(self, data: Any) -> str:
-        return self._dumps(data, sort_keys=True)
+    def serialize(self, data: Any) -> bytes:
+        return self._dumps(data)
 
     def deserialize(self, data: str) -> Any:
         return self._loads(data)
@@ -36,9 +36,9 @@ class PickleSerializer(AbstractSerializer):
             from pickle import dumps, loads
             super().__init__(dumps, loads)
         except ImportError:
-            raise ImportError('Error: pip install ujson')
+            raise ImportError('Error: pip install pickle')
 
-    def serialize(self, data: Any) -> str:
+    def serialize(self, data: Any) -> bytes:
         return self._dumps(data)
 
     def deserialize(self, data: str) -> Any:
@@ -62,7 +62,7 @@ class PickleSerializer(AbstractSerializer):
 #         return self._loads(data)
 
 
-def json_encode(data: Any) -> str:
+def json_encode(data: Any) -> bytes:
     return JSONSerializer().serialize(data)
 
 
@@ -70,7 +70,7 @@ def json_decode(data: str) -> Any:
     return JSONSerializer().deserialize(data)
 
 
-def pickle_encode(data: Any) -> Any:
+def pickle_encode(data: Any) -> bytes:
     return PickleSerializer().serialize(data)
 
 

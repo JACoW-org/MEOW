@@ -4,12 +4,13 @@ import pathlib
 from typing import Any, AsyncIterable, Optional
 
 import io
-import ujson
+import orjson
 import aiohttp
 
 from anyio import open_file
 
 from jpsp.app.config import conf
+from jpsp.utils.serialization import json_encode
 
 logger = logging.getLogger(__name__)
 
@@ -38,10 +39,13 @@ class HttpClientSessions:
 
 async def fetch_chunks(url: str, headers: Optional[dict] = {}) -> AsyncIterable:
     """ Fetch chunks function """
+    
+    def json_serialize(val):
+        return str(json_encode(val),'utf-8')
 
     async with aiohttp.ClientSession(
             headers=headers,
-            json_serialize=ujson.dumps,
+            json_serialize=json_serialize,
             timeout=aiohttp.ClientTimeout(
                 total=conf.HTTP_REQUEST_TIMEOUT_SECONDS
             )
@@ -59,9 +63,12 @@ async def fetch_chunks(url: str, headers: Optional[dict] = {}) -> AsyncIterable:
 
 async def fetch_json(url: str) -> Any:
     """ Fetch json function """
+    
+    def json_serialize(val):
+        return str(json_encode(val),'utf-8')
 
     async with aiohttp.ClientSession(
-            json_serialize=ujson.dumps,
+            json_serialize=json_serialize,
             timeout=aiohttp.ClientTimeout(
                 total=conf.HTTP_REQUEST_TIMEOUT_SECONDS
             )

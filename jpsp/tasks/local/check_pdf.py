@@ -2,10 +2,9 @@
 Put Event
 """
 
-import anyio
 import logging
 
-from typing import Any, AsyncGenerator
+from typing import  AsyncGenerator
 from jpsp.services.local.conference.check_pdf import event_pdf_check
 
 from jpsp.tasks.infra.abstract_task import AbstractTask
