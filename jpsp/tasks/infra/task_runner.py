@@ -1,7 +1,7 @@
 import logging as lg
-import time 
+import time
 
-from typing import Any
+from typing import Any, AsyncGenerator
 
 from jpsp.tasks.infra.task_factory import TaskFactory
 
@@ -17,7 +17,7 @@ class TaskRunner:
     """ """
 
     @classmethod
-    async def run_task(cls, task_id: str, code: str, params: dict, context: dict) -> Any:
+    async def run_task(cls, task_id: str, code: str, params: dict, context: dict) -> AsyncGenerator:
         """ """
 
         try:
@@ -31,41 +31,44 @@ class TaskRunner:
             task_obj = await TaskFactory.create_task(code, args)
 
             # logger.debug(f"run_task - task created")
-                        
-            result = await task_obj.run(params, context)
 
-            # logger.debug(f"run_task - task result")
-            
-            return result
-        
+            async for p in task_obj.run(params, context):  # type: ignore
+                yield p
+
+            # logger.debug(f"run_task - task result")            
+
         except BaseException as e:
             logger.error(e, exc_info=True)
             raise e
-            
-    
+
     @classmethod
-    async def send_queued(cls, task_id: str, task: str) -> None:   
+    async def send_queued(cls, task_id: str, task: str) -> None:
+        logger.debug(f"send_queued {task_id} {task}")
         await cls.send('task:queued', task_id, task, None)
-            
-    
+
     @classmethod
-    async def send_begin(cls, task_id: str, task: str) -> None:   
+    async def send_begin(cls, task_id: str, task: str) -> None:
+        logger.debug(f"send_begin {task_id} {task}")
         await cls.send('task:begin', task_id, task, None)
-            
-    
+
     @classmethod
-    async def send_end(cls, task_id: str, task: str, result: dict) -> None:  
+    async def send_progress(cls, task_id: str, task: str, progress: dict) -> None:
+        logger.debug(f"send_progress {task_id} {task}")
+        await cls.send('task:progress', task_id, task, progress)
+
+    @classmethod
+    async def send_end(cls, task_id: str, task: str, result: dict) -> None:
+        logger.debug(f"send_end {task_id} {task}")
         await cls.send('task:end', task_id, task, result)
-            
-    
+
     @classmethod
-    async def send_error(cls, task_id: str, task: str, error: BaseException) -> None:  
+    async def send_error(cls, task_id: str, task: str, error: BaseException) -> None:
+        logger.debug(f"send_error {task_id} {task}")
         await cls.send('task:error', task_id, task, exception_to_string(error))
-            
-    
+
     @classmethod
     async def send(cls, event: str, task_id: str, task: str, params: dict | None) -> None:
-        
+
         # head: {
         #     code: 'exec_task',
         #     uuid: ulid(),
@@ -75,11 +78,11 @@ class TaskRunner:
         #     method: 'event_ab',
         #     params: params
         # },
-        
+
         """ """
-        
+
         try:
-        
+
             # logger.debug(f"send {event}")
 
             message = json_encode({
@@ -87,7 +90,7 @@ class TaskRunner:
                     'code': event,
                     'uuid': task_id,
                     'time': int(time.time())
-                }, 
+                },
                 'body': {
                     'method': task,
                     'params': params
@@ -95,6 +98,6 @@ class TaskRunner:
             })
 
             await dbs.redis_client.publish("jpsp:feed", message)
-            
+
         except BaseException as e:
             logger.error(e, exc_info=True)

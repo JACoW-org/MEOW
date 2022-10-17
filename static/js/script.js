@@ -2,7 +2,11 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const ulid = ULID();
 
+    document.cookie = 'X-API-Key=01GDWDBTHHJNZ0KAVKZ1YP320S' + '; path=/';
+
     const websocket = new WebSocket(`ws://${location.host}/socket/jpsp:feed`);
+
+    const store = {};
 
     websocket.addEventListener('open', function (event) {
 
@@ -10,7 +14,43 @@ window.addEventListener("DOMContentLoaded", () => {
 
         websocket.addEventListener("message", ({ data }) => {
             // const event = JSON.parse(data);
+
+            data = JSON.parse(data)
+
             console.log(data)
+
+            if (data && data.head)
+
+                store[data.head.uuid] = store[data.head.uuid] || {};
+
+            if (['task:queued'].includes(data.head.code)) {
+
+                store[data.head.uuid].queued_time = data.head.time;
+
+            } else if (['task:begin'].includes(data.head.code)) {
+
+                store[data.head.uuid].begin_time = data.head.time;
+
+            } else if (['task:end', 'task:error'].includes(data.head.code)) {
+
+                store[data.head.uuid].end_time = data.head.time;
+
+                console.log(`[${data.head.uuid}]`, 'queued -> end', (
+                    store[data.head.uuid].end_time - store[data.head.uuid].queued_time
+                ), 'seconds');
+
+                console.log(`[${data.head.uuid}]`, 'begin -> end', (
+                    store[data.head.uuid].end_time - store[data.head.uuid].begin_time
+                ), 'seconds');
+
+                console.log(`[${data.head.uuid}]`, 'queued -> begin', (
+                    store[data.head.uuid].begin_time - store[data.head.uuid].queued_time
+                ), 'seconds');
+
+            }
+
+            // console.log(JSON.stringify(store))
+
         });
 
         document.getElementById('xml_merge_task_button').addEventListener("click", () => {
@@ -37,33 +77,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 body: {
                     method: 'check_pdf',
                     params: {
-                        contributions: [
-                            {
-                                "code": "WEP60",
-                                "friendly_id": 3,
-                                "id": 2591,
-                                "revisions": [
-                                    {
-                                        "comment": "Thank you very much for the comments and the changes to the manuscript. We accept all the changes.",
-                                        "created_dt": "2022-08-22T09:32:45.386458+00:00",
-                                        "files": [
-                                            {
-                                                "content_type": "application/pdf",
-                                                "contribution_id": 2591,
-                                                "download_url": "http://127.0.0.1:8005/event/12/contributions/2591/editing/paper/5951/16667/WEP60.pdf",
-                                                "event_id": 12,
-                                                "filename": "WEP60.pdf",
-                                                "id": 16667,
-                                                "revision_id": 5951,
-                                                "uuid": "566123f7-bf12-44c5-a709-9ad50aaf2795"
-                                            }
-                                        ],
-                                        "id": 5951
-                                    }
-                                ],
-                                "title": "Millimeter-Wave Undulators for Compact X-Ray Free-Electron Lasers"
-                            }
-                        ]
+                        contributions: generate_contributions()
                     }
                 },
             }));
@@ -124,6 +138,42 @@ window.addEventListener("DOMContentLoaded", () => {
 
 console.log('start');
 
+
+function generate_contributions() {
+
+    const list = []
+
+    for (let i = 1; i <= 1000; i++) {
+        list.push({
+            "code": "WEP60",
+            "friendly_id": i,
+            "id": 200 + i,
+            "revisions": [
+                {
+                    "comment": "Thank you very much for the comments and the changes to the manuscript. We accept all the changes.",
+                    "created_dt": "2022-08-22T09:32:45.386458+00:00",
+                    "files": [
+                        {
+                            "content_type": "application/pdf",
+                            "contribution_id": 200 + i,
+                            "download_url": "http://127.0.0.1:8005/event/12/contributions/2591/editing/paper/5951/16667/WEP60.pdf",
+                            "event_id": 12,
+                            "filename": "WEP60.pdf",
+                            "id": 1000 + i,
+                            "revision_id": 1,
+                            "uuid": "566123f7-bf12-44c5-a709-9ad50aaf2795"
+                        }
+                    ],
+                    "id": 5951
+                }
+            ],
+            "title": "Millimeter-Wave Undulators for Compact X-Ray Free-Electron Lasers"
+        })
+    }
+
+    return list;
+
+}
 
 
 

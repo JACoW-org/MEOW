@@ -1,6 +1,6 @@
 import anyio
 
-from tests.pikepdf.main_open import main
+from tests.gen.async_gen import async_gen as main
 
 
 if __name__ == '__main__':

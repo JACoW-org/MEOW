@@ -3,13 +3,17 @@ import io
 import logging as lg
 
 from pikepdf import open
-from pikepdf.objects import Object  # type: ignore
-from pikepdf.objects import Dictionary, String, Array, Stream
-
-import asyncio
+from pikepdf.objects import Dictionary, Array
 
 from anyio import create_task_group, CapacityLimiter
-from anyio import to_process, sleep, to_thread
+from anyio import to_process, to_thread
+from anyio import create_memory_object_stream, ClosedResourceError
+
+from anyio.streams.memory import (
+    MemoryObjectReceiveStream,
+    MemoryObjectSendStream,
+    MemoryObjectStreamState,
+)
 
 from typing import Any, List, Dict, Optional
 from dataclasses import dataclass, asdict
@@ -54,25 +58,32 @@ async def event_pdf_check(contributions: list[dict]):
 
     files = await extract_event_pdf_files(contributions)
     
+    total_files: int = len(files)
+    checked_files: int = 0
+    
     # logger.debug(f'event_pdf_check - files: {len(files)}')
     
-    reports = []
-    
-    # await asyncio.gather(
-    #     *[_task(f, reports) for f in files]
-    # )
-    
-    l = CapacityLimiter(8)
+    send_reports_stream, receive_reports_stream = create_memory_object_stream()
+       
+    limiter = CapacityLimiter(4)
     
     async with create_task_group() as tg:
-        for f in files:
-            tg.start_soon(_task, l, f, reports)
+        async with send_reports_stream:
+            for index, current in enumerate(files):
+                tg.start_soon(_task, limiter, total_files, index, current, send_reports_stream.clone())
 
-    # async with create_task_group() as tg:
-    #     for f in files:
-    #         tg.start_soon(_task, f, reports)
-
-    return reports
+        try:
+            async with receive_reports_stream:
+                async for report in receive_reports_stream:
+                    checked_files = checked_files + 1
+                    print('receive_reports_stream::report-->', checked_files, total_files)
+                    
+                    yield report
+                    
+                    if checked_files >= total_files:
+                        receive_reports_stream.close()
+        except ClosedResourceError:
+            pass
 
 
 async def extract_event_pdf_files(elements: list[dict]) -> list:
@@ -92,17 +103,19 @@ async def extract_event_pdf_files(elements: list[dict]) -> list:
     return files
         
 
-async def _task(l: CapacityLimiter, f: dict, res: list):
+async def _task(l: CapacityLimiter, t: int, i: int, f: dict, res: MemoryObjectSendStream):
     """ """
     
     if l is not None:
-        async with l:        
-            res.append({
+        async with l:                
+            await res.send({
+                "index": i,
+                "total": t,
                 "file": f,
                 "report": await _run(f)
             })
     else:
-        res.append({
+        await res.send({
             "file": f,
             "report": await _run(f)
         })

@@ -53,7 +53,7 @@ class RedisWorkerManager():
 
         async with create_task_group() as tg:
             async with receiver:
-                for i in range(16):
+                for i in range(4):
                     tg.start_soon(self.process_task_worker,
                                   i, receiver.clone())
 
@@ -235,8 +235,13 @@ class RedisWorkerManager():
 
         try:
             await TaskRunner.send_begin(task_id=task_id, task=method)
-            result = await TaskRunner.run_task(task_id, method, params, context)
-            await TaskRunner.send_end(task_id=task_id, task=method, result=result)
+            
+            async_generator = TaskRunner.run_task(task_id, method, params, context)
+            
+            async for progress in async_generator:
+                await TaskRunner.send_progress(task_id=task_id, task=method, progress=progress)              
+            
+            await TaskRunner.send_end(task_id=task_id, task=method, result={})
         except BaseException as error:
             await TaskRunner.send_error(task_id=task_id, task=method, error=error)
         finally:

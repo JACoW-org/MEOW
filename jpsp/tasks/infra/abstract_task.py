@@ -1,5 +1,5 @@
 from abc import abstractmethod, ABC
-from typing import Any
+from typing import Any, AsyncGenerator
 
 from jpsp.tasks.infra.task_request import TaskRequest
 from jpsp.tasks.infra.task_response import TaskResponse
@@ -13,5 +13,5 @@ class AbstractTask(ABC):
         self.args = args
 
     @abstractmethod
-    async def run(self, params: dict, context: dict = {}) -> Any:
+    async def run(self, params: dict, context: dict = {}) -> AsyncGenerator:
         """ """

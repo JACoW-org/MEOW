@@ -5,6 +5,7 @@ from starlette.applications import Starlette
 
 from jpsp.app.middleware import middleware as app_middleware
 from jpsp.app.routes import routes as app_routes
+from jpsp.app.config import conf
 
 from jpsp.callbacks.shutdown import app_shutdown
 from jpsp.callbacks.startup import app_startup
@@ -27,8 +28,8 @@ class UvicornWebappManager:
         config = uvicorn.Config(
             app=app,
             host="127.0.0.1",
-            port=8000,
-            log_level='info'
+            port=conf.SERVER_PORT,
+            log_level=conf.LOG_LEVEL
         )
 
         server = uvicorn.Server(config)

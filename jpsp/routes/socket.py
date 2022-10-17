@@ -3,9 +3,11 @@ import logging
 
 from starlette.routing import WebSocketRoute
 from starlette.websockets import WebSocket, WebSocketDisconnect
+from starlette.exceptions import HTTPException
 
 from jpsp.app.instances.application import app
 from jpsp.app.instances.databases import dbs
+from jpsp.services.local.credential.find_credential import find_credential_by_secret
 
 from jpsp.utils.serialization import json_encode
 
@@ -102,18 +104,33 @@ async def __close_websocket(websocket: WebSocket):
     app.active_connections.remove(websocket)
 
 
-async def websocket_endpoint(websocket: WebSocket):
+async def websocket_endpoint(ws: WebSocket):
     try:
         # client_id: str = websocket.path_params["client_id"]
         # assert isinstance(client_id, str) and client_id != "", f"Invalid client_id: {client_id}"
+        
+        cookie_api_key = ws.cookies.get('X-API-Key', None)
+        header_api_key = ws.headers.get('X-API-Key', None)
+        
+        logger.info(f'cookie_api_key->{cookie_api_key}')
+        logger.info(f'header_api_key->{header_api_key}')
+        
+        credential = await find_credential_by_secret(
+            cookie_api_key if cookie_api_key is not None else  header_api_key
+        )
 
-        await __open_websocket(websocket)
-        await __websocket_tasks(websocket)
-        await __close_websocket(websocket)
+        if credential is not None:
 
-    except RuntimeError:
+            await __open_websocket(ws)
+            await __websocket_tasks(ws)
+            await __close_websocket(ws)
+        
+        else:
+            raise HTTPException(status_code=401, detail="Invalid API Key")
+
+    except BaseException as e:
         logger.error("websocket_endpoint", exc_info=True)
-
+        raise e
 
 routes = [
     WebSocketRoute('/{client_id}', websocket_endpoint)

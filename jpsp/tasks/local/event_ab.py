@@ -6,7 +6,7 @@ import logging
 import io
 import base64
 
-from typing import Any
+from typing import Any, AsyncGenerator
 
 from jpsp.services.local.conference.abstract_booklet \
     import create_abstract_booklet_from_event, \
@@ -20,7 +20,7 @@ logger = logging.getLogger(__name__)
 class EventAbTask(AbstractTask):
     """ EventAbTask """
 
-    async def run(self, params: dict, context: dict = {}) -> dict:
+    async def run(self, params: dict, context: dict = {}) -> AsyncGenerator[dict, None]:
         """ Main Function """
 
         abstract_booklet = await create_abstract_booklet_from_event(params)
@@ -34,4 +34,4 @@ class EventAbTask(AbstractTask):
         
         filename = f'{event_id}_{event_title}_abstrack_booklet.odt'
 
-        return {'b64': b64, 'filename': filename}
+        yield {'b64': b64, 'filename': filename}

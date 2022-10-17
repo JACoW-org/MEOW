@@ -8,6 +8,9 @@ from os import environ
 class __Config:
     """ """
     
+    SERVER_PORT: int = int(environ.get('SERVER_PORT', '8000'))
+    LOG_LEVEL: str = environ.get('LOG_LEVEL', 'info')
+    
     ADMIN_EMAIL: str = 'meneghetti.fabio@gmail.com'
     
     REDIS_SERVER_HOST: str = str(environ.get('REDIS_HOST', '127.0.0.1'))

@@ -207,21 +207,23 @@ async def api_generate_event_ab_odt(req: Request) -> Response:
         return Response(
             status_code=500
         )
-        
+
+
 async def api_event_pdf_check(req: Request) -> Response:
     """ """
 
     try:
 
         params: dict = json_decode(str(await req.body(), 'utf-8'))
-        
+
         check_pdf_input: list[dict] = params.get("contributions", [])
 
         event_pdf_report = await event_pdf_check(check_pdf_input)
 
         return await create_json_response(
-            ok=True, body=event_pdf_report
+            ok=True, body={'reports': event_pdf_report}
         )
+        
     except Exception as error:
         logger.error(error, exc_info=True)
 
@@ -231,7 +233,7 @@ async def api_event_pdf_check(req: Request) -> Response:
 
 
 routes = [
-    Route('/', api_list_endpoint, 
+    Route('/', api_list_endpoint,
           methods=['GET', 'POST', 'PUT', 'DELETE']),
     Route('/conference/{id}/del', api_del_conference,
           methods=['GET', 'POST', 'PUT', 'DELETE']),
@@ -243,9 +245,9 @@ routes = [
           methods=['GET', 'POST', 'PUT', 'DELETE']),
     Route('/conference/{id}/ab.odt', api_ab_conference_odt,
           methods=['GET', 'POST', 'PUT', 'DELETE']),
-    Route('/generate-event-ab.odt', api_generate_event_ab_odt, 
+    Route('/generate-event-ab.odt', api_generate_event_ab_odt,
           methods=['PUT']),
-    Route('/event-pdf-check', api_event_pdf_check, 
+    Route('/event-pdf-check', api_event_pdf_check,
           methods=['PUT']),
     Route('/task/{code}', api_endpoint,
           methods=['GET', 'POST', 'PUT', 'DELETE']),
