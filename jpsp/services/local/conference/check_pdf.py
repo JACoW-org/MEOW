@@ -51,35 +51,38 @@ class PdfReport:
     pages_report: List[PdfPageReport]
 
 
-async def event_pdf_check(contributions: list[dict]):
+async def event_pdf_check(contributions: list[dict], cookies: dict = {}):
     """ """
-    
-    # logger.debug(f'event_pdf_check - count: {len(contributions)}')
+
+    # logger.debug(f'event_pdf_check - count: {len(contributions)} - cookies: {cookies}')
 
     files = await extract_event_pdf_files(contributions)
-    
+
     total_files: int = len(files)
     checked_files: int = 0
-    
+
     # logger.debug(f'event_pdf_check - files: {len(files)}')
-    
+
     send_reports_stream, receive_reports_stream = create_memory_object_stream()
-       
-    limiter = CapacityLimiter(4)
-    
+
+    limiter = CapacityLimiter(6)
+
     async with create_task_group() as tg:
         async with send_reports_stream:
             for index, current in enumerate(files):
-                tg.start_soon(_task, limiter, total_files, index, current, send_reports_stream.clone())
+                tg.start_soon(_task, limiter, total_files, index,
+                              current, cookies, send_reports_stream.clone())
 
         try:
             async with receive_reports_stream:
                 async for report in receive_reports_stream:
                     checked_files = checked_files + 1
-                    print('receive_reports_stream::report-->', checked_files, total_files)
                     
+                    # print('receive_reports_stream::report-->',
+                    #       checked_files, total_files)
+
                     yield report
-                    
+
                     if checked_files >= total_files:
                         receive_reports_stream.close()
         except ClosedResourceError:
@@ -88,56 +91,57 @@ async def event_pdf_check(contributions: list[dict]):
 
 async def extract_event_pdf_files(elements: list[dict]) -> list:
     """ """
-    
+
     files = []
 
     for element in elements:
         revisions = element.get('revisions', [])
         for file in revisions[-1].get('files', []):
             files.append(file)
-        
+
         # for revision in element.get('revisions', []):
         #     for file in revision.get('files', []):
         #         files.append(file)
-    
-    return files
-        
 
-async def _task(l: CapacityLimiter, t: int, i: int, f: dict, res: MemoryObjectSendStream):
+    return files
+
+
+async def _task(l: CapacityLimiter, t: int, i: int, f: dict, c: dict, res: MemoryObjectSendStream):
     """ """
-    
+
     if l is not None:
-        async with l:                
+        async with l:
             await res.send({
                 "index": i,
                 "total": t,
                 "file": f,
-                "report": await _run(f)
+                "report": await _run(f, c)
             })
     else:
         await res.send({
             "file": f,
-            "report": await _run(f)
+            "report": await _run(f, c)
         })
-        
 
-async def _run(f: dict):
+
+async def _run(f: dict, c: dict):
     """ """
+
+    url = f.get('download_url', '')
     
-    url = f.get('download_url', '')           
-    logger.debug(f'_task: begin -> {url}')
-    
+    # logger.debug(f'_task: begin -> {url} -> {c}')
+
     # await sleep(15)
-    # 
+    #
     # logger.debug(f'_task: end -> {url}')
-    # 
+    #
     # return {}
-    
-    headers=dict(Authorization="Bearer indp_9bjGQIZOeK7k19kXaiheF1tFLeSuhxvedChnPJgsbj")
-    pdf_stream = await download_stream(f.get('download_url', ''), headers=headers)
-    
+
+    cookies = dict(indico_session_http=c.get('indico_session_http', ''))
+    pdf_stream = await download_stream(f.get('external_download_url', ''), cookies=cookies)
+
     # print(l.total_tokens)
-    
+
     return await to_thread.run_sync(event_pdf_report, pdf_stream)
     # return await to_process.run_sync(event_pdf_report, pdf_stream)
     # return event_pdf_report(pdf_stream)
@@ -166,7 +170,8 @@ def event_pdf_report(pdf_stream: io.BytesIO):
                 else:
                     for key, value in page.resources.items():
                         if key in ['/Font', '/FontFamily', '/FontName', '/Type', '/FontFile', '/FontFile2', '/FontFile3', '/Encoding', '/BaseFont', '/ToUnicode', '/DescendantFonts']:
-                            load_font(key, value, 0, fonts, PdfPageFontReport())
+                            load_font(key, value, 0, fonts,
+                                      PdfPageFontReport())
 
                 if '/CropBox' in page:
                     # use CropBox if defined since that's what the PDF viewer would usually display

@@ -18,7 +18,7 @@ class EventAbTask(AbstractTask):
     async def run(self, params: dict, context: dict = {}) -> AsyncGenerator[dict, None]:
         """ Main Function """
 
-        abstract_booklet = await create_abstract_booklet_from_event(params)
+        abstract_booklet = await create_abstract_booklet_from_event(params.get('event', None))
 
         abstract_booklet_odt = export_abstract_booklet_to_odt(abstract_booklet)
 
