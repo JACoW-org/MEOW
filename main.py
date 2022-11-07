@@ -1,5 +1,8 @@
 import logging as lg
 
+import uvloop
+uvloop.install()
+
 from anyio import create_task_group, run
 
 from jpsp.app.instances.services import srs
@@ -71,8 +74,8 @@ if __name__ == "__main__":
 #         workers=2
 #     )
 #
-
-
+#
+#
 # async def webapp():
 #     logger.info('webapp >>>')
 #
@@ -85,6 +88,7 @@ if __name__ == "__main__":
 #     )
 #
 #     uvicorn.run(app, host="127.0.0.1", port=8000, log_level='info', workers=1)
+#
 #
 # async def worker():
 #     logger.info('worker >>>')
@@ -103,6 +107,7 @@ if __name__ == "__main__":
 
 
 # async def app(scope, receive, send):
+#
 #     app = Starlette(
 #         debug=False,
 #         routes=app_routes,

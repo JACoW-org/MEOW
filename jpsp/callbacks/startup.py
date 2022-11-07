@@ -1,4 +1,5 @@
 import logging
+import anyio
 
 # from jpsp.app.redis import create_redis_pool
 
@@ -13,6 +14,9 @@ logger = logging.getLogger(__name__)
 
 async def app_startup() -> None:
     logger.debug('Starlette startup - BEGIN')
+    
+    limiter = anyio.to_thread.current_default_thread_limiter()
+    limiter.total_tokens = 100
 
     await create_app_state()
     # await create_redis_pool()
