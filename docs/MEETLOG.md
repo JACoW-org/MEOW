@@ -20,6 +20,60 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - *Topics* for new features.
 
 
+
+
+
+## [28.10.22]
+
+### Topics (da tradurre)
+
+ - SAL timeline React per pdf checks puntuali
+
+
+
+## [25.10.22]
+
+### Topics (da tradurre)
+
+ - SAL pdf checks
+ - SAL settings con custom fields
+ - Uso dei settings (ApiKey, ApiUrl)
+ - Miglioramento sicurezza con cookie
+
+
+
+## [18.10.22]
+
+### Topics (da tradurre)
+
+ - SAL pdf checks
+ - Miglioramenti grafici al progress
+ - Filtrare solo i papers che hanno il flag Pubblicabile a TRUE
+ - Aggiungere link alla pagina della Contributuion
+ - Introdurre VUE.JS
+
+
+
+## [10.10.22]
+
+### Topics (da tradurre)
+
+ - SAL pdf checks
+ - Introdurre progress sui pdf checks, per monitorare lo stato di avanzamento
+ - Estrazione custom fields da Contribution (eretitati da Abstract)
+
+
+
+## [03.10.22]
+
+### Topics (da tradurre)
+
+ - Aggiungere ad jpsp-ng-indico una REST per estrarre i papers dell'evento
+ - Creare un task async per l'eseguzione dei controlli sui pdf (massivo) (JPSP-NG)
+ - Creare un task async per l'eseguzione dei controlli sui pdf (puntuale) (EDITING)
+
+
+
 ## [26.09.22]
 
 ### Topics (da tradurre)
@@ -27,7 +81,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - Aggiungere ai settings di jpsp-ng-indico per evento il max page count
  - Tool jpsp-ng-cli per creazione admin user (user, pass, key, first, last)
  - Refactoring Credential -> Type User (Admin) or Type App (Indico44)
- - Admin web ui per jpsp-ng con lagina di crezione utenti applicativi (credentials)
+ - Admin web ui per jpsp-ng con pagina di crezione utenti applicativi (credentials)
  - API REST (only admin) per creare una nuova utenza applicativa
 
 
