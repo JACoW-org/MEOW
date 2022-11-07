@@ -37,7 +37,7 @@ class HttpClientSessions:
                 pass
 
 
-async def fetch_chunks(url: str, headers: Optional[dict] = {}) -> AsyncIterable:
+async def fetch_chunks(url: str, headers: dict = {}, cookies: dict = {}) -> AsyncIterable:
     """ Fetch chunks function """
     
     def json_serialize(val):
@@ -45,6 +45,7 @@ async def fetch_chunks(url: str, headers: Optional[dict] = {}) -> AsyncIterable:
 
     async with aiohttp.ClientSession(
             headers=headers,
+            cookies=cookies,
             json_serialize=json_serialize,
             timeout=aiohttp.ClientTimeout(
                 total=conf.HTTP_REQUEST_TIMEOUT_SECONDS
@@ -85,7 +86,7 @@ async def fetch_json(url: str) -> Any:
 async def download_json(url: str) -> Any:
     """ Download json function """
 
-    print('download_json -->', url)
+    # print('download_json -->', url)
 
     return await fetch_json(url)
 
@@ -93,23 +94,23 @@ async def download_json(url: str) -> Any:
 async def download_file(url: str, file: pathlib.Path) -> None:
     """ Download file function """
 
-    print('download_file -->', url)
+    # print('download_file -->', url)
 
     async with await open_file(file, mode='wb') as f:
         async for chunk in fetch_chunks(url):
             await f.write(chunk)
 
-        print('download_file -->', file)
+        # print('download_file -->', file)
 
 
-async def download_stream(url: str, headers: dict) -> io.BytesIO:
+async def download_stream(url: str, headers: dict = {}, cookies: dict = {}) -> io.BytesIO:
     """ Download file function """
 
-    # print('download_stream -->', url)
+    # print(f'download_stream --> {url} --> {headers} --> {cookies}')
     
     f = io.BytesIO()
 
-    async for chunk in fetch_chunks(url, headers=headers):
+    async for chunk in fetch_chunks(url, headers=headers, cookies=cookies):
         f.write(chunk)
 
     f.seek(0)

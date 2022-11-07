@@ -82,7 +82,7 @@ async def api_get_conference(req: Request) -> JSONResponse:
     try:
 
         credential = await find_credential_by_secret(
-            req.headers.get('X-API-Key', None)
+            req.headers.get('X-API-KEY', None)
         )
 
         if credential is not None:

@@ -14,8 +14,6 @@ from jpsp.utils.serialization import json_encode
 logger = logging.getLogger(__name__)
 
 
-
-
 async def publish(message: dict):
     topic_name: str = await __publish_key()
 
@@ -24,6 +22,7 @@ async def publish(message: dict):
     )
 
     logger.debug(f"publish_task {topic_name} {message_id}")
+
 
 async def __publish_key() -> str:
     counter: int = await dbs.redis_client.incr('workers:stream:counter')
@@ -35,11 +34,12 @@ async def __publish_key() -> str:
 
     return topic_name
 
+
 async def __workers():
-    
+
     client_list = await dbs.redis_client.client_list()
-    client_filter = lambda c: (str(c['name']).startswith('worker_'))
-    
+    def client_filter(c): return (str(c['name']).startswith('worker_'))
+
     workers: list[str] = sorted(list(map(
         lambda w: str(w['name']),
         filter(
@@ -47,10 +47,11 @@ async def __workers():
             client_list
         )
     )))
-    
+
     logger.debug(f"__workers {workers} ")
-    
+
     return workers
+
 
 async def __ws_to_r_handler(ws: WebSocket):
     """ """
@@ -71,7 +72,6 @@ async def __ws_to_r_handler(ws: WebSocket):
         logger.error("ws_to_r:exc", exc_info=True)
 
     logger.info("ws_to_r_handler >>> END")
-
 
 
 async def __websocket_tasks(websocket):
@@ -108,15 +108,15 @@ async def websocket_endpoint(ws: WebSocket):
     try:
         # client_id: str = websocket.path_params["client_id"]
         # assert isinstance(client_id, str) and client_id != "", f"Invalid client_id: {client_id}"
-        
-        cookie_api_key = ws.cookies.get('X-API-Key', None)
-        header_api_key = ws.headers.get('X-API-Key', None)
-        
+
+        cookie_api_key = ws.cookies.get('X-API-KEY', None)
+        header_api_key = ws.headers.get('X-API-KEY', None)
+
         logger.info(f'cookie_api_key->{cookie_api_key}')
         logger.info(f'header_api_key->{header_api_key}')
-        
+
         credential = await find_credential_by_secret(
-            cookie_api_key if cookie_api_key is not None else  header_api_key
+            cookie_api_key if cookie_api_key is not None else header_api_key
         )
 
         if credential is not None:
@@ -124,10 +124,12 @@ async def websocket_endpoint(ws: WebSocket):
             await __open_websocket(ws)
             await __websocket_tasks(ws)
             await __close_websocket(ws)
-        
+
         else:
             raise HTTPException(status_code=401, detail="Invalid API Key")
 
+    except asyncio.exceptions.CancelledError as e:
+        pass
     except BaseException as e:
         logger.error("websocket_endpoint", exc_info=True)
         raise e
