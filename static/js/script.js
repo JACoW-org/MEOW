@@ -2,7 +2,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     const ulid = ULID();
 
-    document.cookie = 'X-API-Key=01GDWDBTHHJNZ0KAVKZ1YP320S' + '; path=/';
+    document.cookie = 'X-API-KEY=01GDWDBTHHJNZ0KAVKZ1YP320S' + '; path=/';
 
     const websocket = new WebSocket(`ws://${location.host}/socket/jpsp:feed`);
 
@@ -101,7 +101,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
             fetch(`http://${location.host}/api/conference/44/get`, {
                 headers: {
-                    'X-API-Key': '01GDWDBTHHJNZ0KAVKZ1YP320S'
+                    'X-API-KEY': '01GDWDBTHHJNZ0KAVKZ1YP320S'
                 }
             })
                 .then(res => res.json())

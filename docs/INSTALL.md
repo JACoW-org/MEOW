@@ -1,5 +1,9 @@
 # JPSP-NG - INSTALL
 
+### https://realpython.com/intro-to-pyenv/
+curl https://pyenv.run | bash
+
+
 ## SETUP
 
 ```
