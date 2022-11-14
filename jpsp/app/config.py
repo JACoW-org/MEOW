@@ -8,7 +8,7 @@ from os import environ
 class __Config:
     """ """
     
-    SERVER_PORT: int = int(environ.get('SERVER_PORT', '8000'))
+    SERVER_PORT: int = int(environ.get('SERVER_PORT', '8080'))
     LOG_LEVEL: str = environ.get('LOG_LEVEL', 'info')
     
     ADMIN_EMAIL: str = 'meneghetti.fabio@gmail.com'

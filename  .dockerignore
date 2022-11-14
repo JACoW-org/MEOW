@@ -1,0 +1,6 @@
+venv
+docker
+tests
+docs
+
+node_modules

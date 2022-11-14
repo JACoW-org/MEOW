@@ -27,7 +27,7 @@ async def run_unicorn(app):
 
     config = uvicorn.Config(
         app=app,
-        host="127.0.0.1",
+        host="0.0.0.0",
         port=conf.SERVER_PORT,
         log_level=conf.LOG_LEVEL
     )
@@ -42,11 +42,11 @@ async def run_hypercorn(app):
     SECONDS = 1.0
     
     config = Config()
-    config.bind = [f"127.0.0.1:8443"]
+    config.bind = [f"0.0.0.0:8443"]
     config.certfile = "ssl/cert.crt"
     config.keyfile = "ssl/cert.key"
     config.loglevel = "debug"
-    config.insecure_bind = [f"127.0.0.1:{conf.SERVER_PORT}"]
+    config.insecure_bind = [f"0.0.0.0:{conf.SERVER_PORT}"]
     config.startup_timeout = 60 * SECONDS
     config.graceful_timeout = 3 * SECONDS
     config.shutdown_timeout = 30 * SECONDS
