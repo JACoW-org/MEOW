@@ -1,6 +1,6 @@
 import anyio
 
-from tests.gen.async_gen import async_gen as main
+from tests.ab.load import async_load as main
 
 
 if __name__ == '__main__':
