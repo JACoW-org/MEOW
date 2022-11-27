@@ -53,7 +53,7 @@ class RedisWorkerManager():
 
         async with create_task_group() as tg:
             async with receiver:
-                for i in range(4):
+                for i in range(2):
                     tg.start_soon(self.process_task_worker,
                                   i, receiver.clone())
 
