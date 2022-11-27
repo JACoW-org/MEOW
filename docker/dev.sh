@@ -2,8 +2,8 @@
 
 docker build -t it.akera.jpsp.image . 
 
-docker stop it.akera.jpsp.node 
-docker rm it.akera.jpsp.node ; 
+docker stop it.akera.jpsp.node
+docker rm it.akera.jpsp.node
 
 docker run --name it.akera.jpsp.node \
     -e REDIS_HOST=192.168.1.120 \
