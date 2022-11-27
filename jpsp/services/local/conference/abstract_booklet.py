@@ -12,7 +12,8 @@ from odf.opendocument import OpenDocumentText, OpenDocument
 from odf.style import Style, TextProperties, ParagraphProperties
 from odf.text import Span, P
 
-from jpsp.utils.datetime import datedict_to_tz_datetime, format_datetime_day, format_datetime_range, format_datetime_time
+from jpsp.utils.datetime import datedict_to_tz_datetime, format_datetime_day, format_datetime_range, \
+    format_datetime_time, format_datetime_full
 
 from jpsp.services.local.conference.find_conference import get_conference_session_slots_entities, \
     get_conference_session_slots_conveners_entities, get_conference_session_event_entity, \
@@ -22,7 +23,7 @@ from jpsp.services.local.conference.find_conference import get_conference_sessio
 logger = lg.getLogger(__name__)
 
 
-async def create_abstract_booklet_from_event(event: dict) -> dict:
+async def create_abstract_booklet_from_event(event: dict, cookies: dict, settings: dict) -> dict:
     """ """
 
     def sort_list_by_date(val):
@@ -295,7 +296,7 @@ async def create_abstract_booklet_from_entities(conference_id: str):
 #     return f
 
 
-def export_abstract_booklet_to_odt(abstract_booklet_data: dict) -> io.BytesIO:
+def export_abstract_booklet_to_odt(abstract_booklet_data: dict, event: dict, cookies: dict, settings: dict) -> io.BytesIO:
     """ """
 
     def _serialize_abstract_booklet(abstract_booklet_document: OpenDocument):
@@ -312,70 +313,49 @@ def export_abstract_booklet_to_odt(abstract_booklet_data: dict) -> io.BytesIO:
 
         root_style = Style(name="AB Root", family="paragraph")
 
-        root_style.addElement(TextProperties(attributes={
-            'fontfamily': "'Arial'"
-        }))
+        root_style.addElement(TextProperties(fontfamily='Arial'))
 
         abstract_booklet_document.styles.addElement(root_style)
 
         heading_1_style = Style(name="AB Heading 1", family="paragraph")
 
-        heading_1_style.addElement(TextProperties(attributes={
-            'fontsize': "16pt",
-            'fontweight': "bold",
-            'color': '#ff0000'
-        }))
+        heading_1_style.addElement(TextProperties(
+            fontsize="16pt", fontweight="bold", color='#ff0000'))
 
         heading_1_style.addElement(ParagraphProperties(
-            breakbefore="page",
-            keepwithnext="always"
-        ))
+            breakbefore="page", keepwithnext="always"))
 
         abstract_booklet_document.styles.addElement(heading_1_style)
 
         heading_2_style = Style(name="AB Heading 2", family="paragraph")
 
-        heading_2_style.addElement(TextProperties(attributes={
-            'fontsize': "14pt",
-            'fontweight': "bold",
-            'color': '#ff0000'
-        }))
+        heading_2_style.addElement(TextProperties(
+            fontsize="14pt", fontweight="bold", color='#ff0000'))
 
-        heading_2_style.addElement(ParagraphProperties(
-            keepwithnext="always"
-        ))
+        heading_2_style.addElement(ParagraphProperties(keepwithnext="always"))
 
         abstract_booklet_document.styles.addElement(heading_2_style)
 
         heading_3_style = Style(name="AB Heading 3", family="paragraph")
 
-        heading_3_style.addElement(TextProperties(attributes={
-            # 'fontsize': "12pt",
-            'fontweight': "bold",
-            'color': '#ff0000'
-        }))
+        heading_3_style.addElement(TextProperties(
+            fontsize="12pt", fontweight="bold", color='#ff0000'))
 
-        heading_3_style.addElement(ParagraphProperties(
-            keepwithnext="always"
-        ))
+        heading_3_style.addElement(ParagraphProperties(keepwithnext="always"))
 
         abstract_booklet_document.styles.addElement(heading_3_style)
 
         heading_4_style = Style(name="AB Title", family="paragraph")
 
-        heading_4_style.addElement(TextProperties(attributes={
-            # 'fontsize': "12pt",
-            'fontweight': "bold"
-        }))
+        heading_4_style.addElement(TextProperties(
+            fontsize="12pt", fontweight="bold"))
 
         abstract_booklet_document.styles.addElement(heading_4_style)
 
         heading_5_style = Style(name="AB Authors", family="paragraph")
 
-        heading_5_style.addElement(TextProperties(attributes={
-            # 'fontsize': "12pt",
-            'fontstyle': "italic"
-        }))
+        heading_5_style.addElement(TextProperties(
+            fontsize="12pt", fontstyle="italic"))
 
         abstract_booklet_document.styles.addElement(heading_5_style)
 
@@ -387,34 +367,27 @@ def export_abstract_booklet_to_odt(abstract_booklet_data: dict) -> io.BytesIO:
 
         heading_7_style = Style(name="AB Coauthors", family="paragraph")
 
-        heading_7_style.addElement(TextProperties(attributes={
-            # 'fontsize': "12pt",
-            'fontstyle': "italic"
-        }))
+        heading_7_style.addElement(TextProperties(fontsize="12pt",
+                                                  fontstyle="italic"))
 
         abstract_booklet_document.styles.addElement(heading_7_style)
 
         description_style = Style(name="AB Description", family="paragraph")
 
-        description_style.addElement(TextProperties(attributes={
-            # 'fontsize': "12pt"
-        }))
+        description_style.addElement(TextProperties(fontsize="12pt"))
 
         abstract_booklet_document.styles.addElement(description_style)
 
         footnotes_style = Style(name="AB Footnotes", family="paragraph")
 
-        footnotes_style.addElement(TextProperties(attributes={
-            'fontsize': "12pt"
-        }))
+        footnotes_style.addElement(TextProperties(fontsize="12pt"))
 
         abstract_booklet_document.styles.addElement(footnotes_style)
 
-        funding_agency_style = Style(name="AB Funding Agency", family="paragraph")
+        funding_agency_style = Style(name="AB Funding Agency",
+                                     family="paragraph")
 
-        funding_agency_style.addElement(TextProperties(attributes={
-            'fontsize': "12pt"
-        }))
+        funding_agency_style.addElement(TextProperties(fontsize="12pt"))
 
         abstract_booklet_document.styles.addElement(funding_agency_style)
 
@@ -432,10 +405,15 @@ def export_abstract_booklet_to_odt(abstract_booklet_data: dict) -> io.BytesIO:
             fa=funding_agency_style,
         )
 
-    def _abstract_booklet_chapters(abstract_booklet_document: OpenDocument, abstract_booklet: dict, heading_styles: dict):
+    def _abstract_booklet_chapters(abstract_booklet_document: OpenDocument, abstract_booklet: dict, heading_styles: dict, settings: dict):
         """ Sessions """
 
         for session in abstract_booklet['sessions']:
+
+            ab_session_h1 = settings.get('ab_session_h1', '')
+            ab_session_h2 = settings.get('ab_session_h2', '')
+            ab_contribution_h1 = settings.get('ab_contribution_h1', '')
+            ab_contribution_h2 = settings.get('ab_contribution_h2', '')
 
             print(session.get('code'), session.get('title'),
                   session.get('start'), session.get('end'))
@@ -443,17 +421,31 @@ def export_abstract_booklet_to_odt(abstract_booklet_data: dict) -> io.BytesIO:
             session_code = f"{session.get('code')}"
             session_title = f"{session.get('title')}"
 
-            session_date = format_datetime_range(session.get('start'),
-                                                 session.get('end'))
+            session_start = format_datetime_full(session.get('start'))
+            session_end = format_datetime_time(session.get('end'))
+
+            # session_date = format_datetime_range(session.get('start'),
+            #                                      session.get('end'))
+
+            session_h1 = ab_session_h1 \
+                .replace("{code}", session_code) \
+                .replace("{title}", session_title) \
+                .replace("{start}", session_start) \
+                .replace("{end}", session_end)
+
+            session_h2 = ab_session_h2 \
+                .replace("{code}", session_code) \
+                .replace("{title}", session_title) \
+                .replace("{start}", session_start) \
+                .replace("{end}", session_end)
 
             abstract_booklet_document.text.addElement(  # type: ignore
                 P(stylename=heading_styles.get('h1'),
-                  text=f"{session_code} - {session_title}")
+                  text=session_h1)
             )
 
             abstract_booklet_document.text.addElement(  # type: ignore
-                P(stylename=heading_styles.get('h2'),
-                  text=f"{session_date}")
+                P(stylename=heading_styles.get('h2'), text=session_h2)
             )
 
             if len(session.get('conveners')) > 0:
@@ -475,9 +467,32 @@ def export_abstract_booklet_to_odt(abstract_booklet_data: dict) -> io.BytesIO:
 
             for contribution in session.get('contributions'):
 
-                contribution_start = "/ " + format_datetime_time(
-                    contribution.get('start')
-                ) if not session.get('is_poster') else ''
+                contribution_code = contribution.get('code')
+                contribution_title = contribution.get('title')
+
+                contribution_start = format_datetime_time(
+                    contribution.get('start'))
+                contribution_end = format_datetime_time(
+                    contribution.get('end'))
+
+                contribution_h1 = ab_contribution_h1 \
+                    .replace("{code}", contribution_code) \
+                    .replace("{title}", contribution_title) \
+                    .replace("{start}", contribution_start) \
+                    .replace("{end}", contribution_end)
+
+                contribution_h2 = ab_contribution_h2 \
+                    .replace("{code}", contribution_code) \
+                    .replace("{title}", contribution_title) \
+                    .replace("{start}", contribution_start) \
+                    .replace("{end}", contribution_end)
+
+                contribution_header = contribution_h1 if not \
+                    session.get('is_poster') else contribution_h2
+
+                # contribution_start = "/ " + format_datetime_time(
+                #     contribution.get('start')
+                # ) if not session.get('is_poster') else ''
 
                 contribution_speakers_ids = [
                     int(item.get('id')) for item in contribution.get('speakers', [])
@@ -508,7 +523,7 @@ def export_abstract_booklet_to_odt(abstract_booklet_data: dict) -> io.BytesIO:
 
                 abstract_booklet_document.text.addElement(  # type: ignore
                     P(stylename=heading_styles.get('h3'),
-                      text=f"{contribution.get('code')} {contribution_start}")
+                      text=contribution_header)
                 )
 
                 abstract_booklet_document.text.addElement(  # type: ignore
@@ -516,21 +531,26 @@ def export_abstract_booklet_to_odt(abstract_booklet_data: dict) -> io.BytesIO:
                       text=f"{contribution.get('title')}")
                 )
 
-                contribution_primary_authors_para = P(stylename=heading_styles.get('h5'))
 
                 if contribution_primary_authors_groups:
+                    
+                    contribution_primary_authors_para = P(
+                        stylename=heading_styles.get('h5'))
+                    
                     for group_idx, group in enumerate(contribution_primary_authors_groups):
                         for item_idx, item in enumerate(group.get('items', [])):
 
                             # print(item.get('id'), contribution_speakers_ids, (int(item.get('id')) in contribution_speakers_ids))
 
-                            stylename = heading_styles.get('h6') if int(item.get('id')) in contribution_speakers_ids else None
+                            stylename = heading_styles.get('h6') if int(
+                                item.get('id')) in contribution_speakers_ids else None
 
                             separator = "" if group_idx == len(
                                 contribution_primary_authors_groups) - 1 else ", "
+                            
+                            affiliation = f" ({item.get('affiliation')})" if item.get('affiliation') != '' else '' 
 
-                            text = f"{item.get('first', '')} {item.get('last')} " \
-                                + f"({item.get('affiliation')})" \
+                            text = f"{item.get('first', '')} {item.get('last')}" + affiliation \
                                 if item_idx == len(group.get('items', []))-1 \
                                 else f"{item.get('first')} {item.get('last')}"
 
@@ -541,22 +561,25 @@ def export_abstract_booklet_to_odt(abstract_booklet_data: dict) -> io.BytesIO:
                             contribution_primary_authors_para.addElement(  # type: ignore
                                 Span(text=separator)
                             )
-                            
-                abstract_booklet_document.text.addElement(  # type: ignore
-                    contribution_primary_authors_para
-                )
 
-                contribution_coauthors_para = P(stylename=heading_styles.get('h7'))
+                    abstract_booklet_document.text.addElement(  # type: ignore
+                        contribution_primary_authors_para
+                    )
+
                 
                 if contribution_coauthors_groups:
+                    contribution_coauthors_para = P(
+                        stylename=heading_styles.get('h7'))
+                    
                     for group_idx, group in enumerate(contribution_coauthors_groups):
                         for item_idx, item in enumerate(group.get('items', [])):
 
                             separator = "" if group_idx == len(
                                 contribution_coauthors_groups) - 1 else ", "
+                            
+                            affiliation = f" ({item.get('affiliation')})" if item.get('affiliation') != '' else '' 
 
-                            text = f"{item.get('first', '')} {item.get('last')} " \
-                                + f"({item.get('affiliation')})" + separator \
+                            text = f"{item.get('first', '')} {item.get('last')}" + affiliation \
                                 if item_idx == len(group.get('items', []))-1 \
                                 else f"{item.get('first')} {item.get('last')}"
 
@@ -567,10 +590,10 @@ def export_abstract_booklet_to_odt(abstract_booklet_data: dict) -> io.BytesIO:
                             contribution_coauthors_para.addElement(  # type: ignore
                                 Span(text=separator)
                             )
-                            
-                abstract_booklet_document.text.addElement(  # type: ignore
-                    contribution_coauthors_para
-                )
+
+                    abstract_booklet_document.text.addElement(  # type: ignore
+                        contribution_coauthors_para
+                    )
 
                 # Black line
                 abstract_booklet_document.text.addElement(P())  # type: ignore
@@ -628,6 +651,7 @@ def export_abstract_booklet_to_odt(abstract_booklet_data: dict) -> io.BytesIO:
 
     abstract_booklet_document = _abstract_booklet_chapters(abstract_booklet_document,
                                                            abstract_booklet_data,
-                                                           heading_styles)
+                                                           heading_styles,
+                                                           settings)
 
     return _serialize_abstract_booklet(abstract_booklet_document)

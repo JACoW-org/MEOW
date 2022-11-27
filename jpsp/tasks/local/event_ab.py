@@ -17,10 +17,14 @@ class EventAbTask(AbstractTask):
 
     async def run(self, params: dict, context: dict = {}) -> AsyncGenerator[dict, None]:
         """ Main Function """
+        
+        event = params.get('event', None)
+        cookies = params.get('cookies', None)
+        settings = params.get('settings', None)
 
-        abstract_booklet = await create_abstract_booklet_from_event(params.get('event', None))
+        abstract_booklet = await create_abstract_booklet_from_event(event, cookies, settings)
 
-        abstract_booklet_odt = export_abstract_booklet_to_odt(abstract_booklet)
+        abstract_booklet_odt = export_abstract_booklet_to_odt(abstract_booklet, event, cookies, settings)
 
         b64 = base64.b64encode(abstract_booklet_odt.getvalue()).decode('utf-8')
         
