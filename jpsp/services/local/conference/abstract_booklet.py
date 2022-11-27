@@ -93,6 +93,7 @@ async def create_abstract_booklet_from_event(event: dict, cookies: dict, setting
                 title=session_slot_contribution.get('title'),
                 duration=session_slot_contribution.get('duration'),
                 description=session_slot_contribution.get('description'),
+                field_values=session_slot_contribution.get('field_values'),
                 session=session_slot_contribution.get('session'),
                 room=session_slot_contribution.get('room'),
                 location=session_slot_contribution.get('location'),
@@ -531,12 +532,11 @@ def export_abstract_booklet_to_odt(abstract_booklet_data: dict, event: dict, coo
                       text=f"{contribution.get('title')}")
                 )
 
-
                 if contribution_primary_authors_groups:
-                    
+
                     contribution_primary_authors_para = P(
                         stylename=heading_styles.get('h5'))
-                    
+
                     for group_idx, group in enumerate(contribution_primary_authors_groups):
                         for item_idx, item in enumerate(group.get('items', [])):
 
@@ -547,8 +547,9 @@ def export_abstract_booklet_to_odt(abstract_booklet_data: dict, event: dict, coo
 
                             separator = "" if group_idx == len(
                                 contribution_primary_authors_groups) - 1 else ", "
-                            
-                            affiliation = f" ({item.get('affiliation')})" if item.get('affiliation') != '' else '' 
+
+                            affiliation = f" ({item.get('affiliation')})" if item.get(
+                                'affiliation') != '' else ''
 
                             text = f"{item.get('first', '')} {item.get('last')}" + affiliation \
                                 if item_idx == len(group.get('items', []))-1 \
@@ -566,18 +567,18 @@ def export_abstract_booklet_to_odt(abstract_booklet_data: dict, event: dict, coo
                         contribution_primary_authors_para
                     )
 
-                
                 if contribution_coauthors_groups:
                     contribution_coauthors_para = P(
                         stylename=heading_styles.get('h7'))
-                    
+
                     for group_idx, group in enumerate(contribution_coauthors_groups):
                         for item_idx, item in enumerate(group.get('items', [])):
 
                             separator = "" if group_idx == len(
                                 contribution_coauthors_groups) - 1 else ", "
-                            
-                            affiliation = f" ({item.get('affiliation')})" if item.get('affiliation') != '' else '' 
+
+                            affiliation = f" ({item.get('affiliation')})" if item.get(
+                                'affiliation') != '' else ''
 
                             text = f"{item.get('first', '')} {item.get('last')}" + affiliation \
                                 if item_idx == len(group.get('items', []))-1 \
@@ -605,10 +606,23 @@ def export_abstract_booklet_to_odt(abstract_booklet_data: dict, event: dict, coo
 
                 # Campi opzionali - con stili specifici
 
-                # Description
                 description_lines = contribution.get(
                     'description', '').splitlines()
 
+                footnotes_lines = []
+                funding_agency_lines = []
+
+                field_values = contribution.get('field_values', [])
+
+                for field in field_values:
+                    if field.get('name', '') == "Footnotes":
+                        footnotes_lines = field.get('value', '').splitlines()
+                    if field.get('name', '') == "Funding Agency":
+                        funding_agency_lines = field.get('value', '').splitlines()
+                        
+                print(field_values, footnotes_lines, funding_agency_lines)
+
+                # Description
                 for description in description_lines:
                     abstract_booklet_document.text.addElement(  # type: ignore
                         P(stylename=heading_styles.get('de'),
@@ -616,9 +630,6 @@ def export_abstract_booklet_to_odt(abstract_booklet_data: dict, event: dict, coo
                     )
 
                 # Footnotes
-                footnotes_lines = contribution.get(
-                    'footnotes', '').splitlines()
-
                 for footnotes in footnotes_lines:
                     abstract_booklet_document.text.addElement(  # type: ignore
                         P(stylename=heading_styles.get('fn'),
@@ -626,9 +637,6 @@ def export_abstract_booklet_to_odt(abstract_booklet_data: dict, event: dict, coo
                     )
 
                 # Funding Agency
-                funding_agency_lines = contribution.get(
-                    'funding_agency', '').splitlines()
-
                 for funding_agency in funding_agency_lines:
                     abstract_booklet_document.text.addElement(  # type: ignore
                         P(stylename=heading_styles.get('fa'),
