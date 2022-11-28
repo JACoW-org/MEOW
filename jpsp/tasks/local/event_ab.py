@@ -3,11 +3,14 @@ import base64
 
 from typing import AsyncGenerator
 
-from jpsp.services.local.conference.abstract_booklet \
-    import create_abstract_booklet_from_event, \
-    export_abstract_booklet_to_odt
+from jpsp.services.local.abstract_booklet.create_abstract_booklet \
+    import create_abstract_booklet_from_event
+    
+from jpsp.services.local.abstract_booklet.export_abstract_booklet \
+    import export_abstract_booklet_to_odt
 
 from jpsp.tasks.infra.abstract_task import AbstractTask
+
 
 logger = logging.getLogger(__name__)
 
@@ -18,9 +21,9 @@ class EventAbTask(AbstractTask):
     async def run(self, params: dict, context: dict = {}) -> AsyncGenerator[dict, None]:
         """ Main Function """
         
-        event = params.get('event', None)
-        cookies = params.get('cookies', None)
-        settings = params.get('settings', None)
+        event: dict = params.get('event', dict())
+        cookies: dict = params.get('cookies', dict())
+        settings: dict = params.get('settings', dict())
 
         abstract_booklet = await create_abstract_booklet_from_event(event, cookies, settings)
 

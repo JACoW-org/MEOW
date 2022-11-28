@@ -9,7 +9,8 @@ datedict -> dict(
     tz="Europe/Zurich"
 )
 """
-
+def format_datetime_sec(d: dt.datetime) -> str:
+    return str(d.timestamp()) if d else '' 
 
 def format_datetime_day(d: dt.datetime) -> str:
     return d.strftime('%-j') if d else ''

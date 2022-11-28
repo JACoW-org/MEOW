@@ -51,7 +51,7 @@ class PdfReport:
     pages_report: List[PdfPageReport]
 
 
-async def event_pdf_check(contributions: list[dict], cookies: dict = {}):
+async def event_pdf_check(contributions: list[dict], cookies: dict, settings: dict):
     """ """
 
     # logger.debug(f'event_pdf_check - count: {len(contributions)} - cookies: {cookies}')

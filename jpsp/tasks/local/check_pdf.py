@@ -18,8 +18,9 @@ class CheckPdfTask(AbstractTask):
     async def run(self, params: dict, context: dict = {}) -> AsyncGenerator[dict, None]:
         """ Main Function """
 
-        cookies: dict = params.get("cookies", {})
-        check_pdf_input: list[dict] = params.get("contributions", [])
+        contributions: list[dict] = params.get("contributions", list())
+        cookies: dict = params.get("cookies", dict())
+        settings: dict = params.get("settings", dict())
 
-        async for progress in event_pdf_check(check_pdf_input, cookies):
+        async for progress in event_pdf_check(contributions, cookies, settings):
             yield {'progress': progress}
