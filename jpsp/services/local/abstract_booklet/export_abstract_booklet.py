@@ -1,6 +1,6 @@
 import io
 import logging as lg
-import functools
+import ulid
 
 from itertools import groupby
 from operator import itemgetter
@@ -11,9 +11,11 @@ from operator import itemgetter
 from odf.opendocument import OpenDocumentText, OpenDocument
 from odf.style import Style, TextProperties, ParagraphProperties
 
-from odf.text import Span, P
+from odf.text import H, A, Span, P, HiddenParagraph, HiddenText, SoftPageBreak
 from odf.text import TableOfContent, TableOfContentSource, TableOfContentEntryTemplate
-from odf.text import IndexBody, IndexTitle, Tab, BookmarkStart, BookmarkEnd, BookmarkRef
+from odf.text import IndexBody, IndexTitle, IndexEntryLinkStart, IndexEntryChapter, \
+    IndexEntryPageNumber, IndexEntryText, IndexEntryLinkEnd, IndexTitleTemplate, \
+    IndexEntryTabStop, IndexEntrySpan, Tab, BookmarkStart, BookmarkEnd, BookmarkRef
 
 from jpsp.utils.datetime import format_datetime_time, format_datetime_full
 
@@ -38,6 +40,22 @@ def _document_styles(odt: OpenDocument):
     root_style.addElement(TextProperties(fontfamily='Arial'))
 
     odt.styles.addElement(root_style)
+
+    bkm_style = Style(name="AB Bookmark", family="paragraph")
+
+    bkm_style.addElement(TextProperties(fontsize="12pt"))
+
+    odt.styles.addElement(bkm_style)
+
+    idx_style = Style(name="AB Index", family="paragraph")
+
+    idx_style.addElement(TextProperties(fontsize="12pt"))
+
+    odt.styles.addElement(idx_style)
+
+    hidden_style = Style(name="AB Hidden", family="paragraph")
+
+    odt.styles.addElement(hidden_style)
 
     h1_style = Style(name="AB Heading 1", family="paragraph")
 
@@ -114,6 +132,9 @@ def _document_styles(odt: OpenDocument):
 
     return dict(
         rt=root_style,
+        idx=idx_style,
+        bkm=bkm_style,
+        hid=hidden_style,
         h1=h1_style,
         h2=h2_style,
         h3=h3_style,
@@ -127,15 +148,188 @@ def _document_styles(odt: OpenDocument):
     )
 
 
-def _abstract_booklet_chapters(odt: OpenDocument, ab: dict, styles: dict, settings: dict):
-    """ Sessions """
+def _abstract_booklet_titles(ab: dict):
+    """ Index """
+
+    idx = dict()
 
     for session in ab.get('sessions', list()):
 
-        ab_session_h1 = settings.get('ab_session_h1', '')
-        ab_session_h2 = settings.get('ab_session_h2', '')
-        ab_contribution_h1 = settings.get('ab_contribution_h1', '')
-        ab_contribution_h2 = settings.get('ab_contribution_h2', '')
+        print(">", session.get('code'), ' - ', session.get('title'), ' - ',
+              session.get('start'), ' - ', session.get('end'))
+
+        idx[session.get('code')] = dict(
+            uuid=str(ulid.ULID()),
+            code=session.get('code'),
+            title=session.get('title')
+        )
+
+        for contribution in session.get('contributions'):
+
+            idx[contribution.get('code')] = dict(
+                uuid=str(ulid.ULID()),
+                code=contribution.get('code'),
+                title=contribution.get('title')
+            )
+
+    return idx
+
+
+def _abstract_booklet_index(odt: OpenDocument, ab: dict, styles: dict, idx: dict):
+    """ Index """
+
+    odt_toc = TableOfContent(name="Table of Contents", protected=True)
+
+    # <text:table-of-content-source text:outline-level="3">
+    odt_tocs = TableOfContentSource(outlinelevel=3)
+
+    # <text:index-title-template text:style-name="Contents_20_Heading">
+    odt_itt = IndexTitleTemplate()
+    odt_itt.addText("Table of Contents")
+
+    # <text:table-of-content-entry-template text:outline-level="1" text:style-name="Contents_20_1">
+    #     <text:index-entry-link-start text:style-name="Index_20_Link" />
+    #     <text:index-entry-chapter />
+    #     <text:index-entry-text />
+    #     <text:index-entry-tab-stop style:type="right" style:leader-char="." />
+    #     <text:index-entry-page-number />
+    #     <text:index-entry-link-end />
+    # </text:table-of-content-entry-template>
+
+    # h1
+
+    odt_toc_et_1 = TableOfContentEntryTemplate(
+        outlinelevel=1, stylename=styles.get('idx'))
+
+    idx_entry_link_start = IndexEntryLinkStart()
+    idx_entry_link_chapter = IndexEntryChapter()
+    idx_entry_link_text = IndexEntryText()
+    idx_entry_link_tab_stop = IndexEntryTabStop(type="right", leaderchar=".")
+    idx_entry_link_page_num = IndexEntryPageNumber()
+    idx_entry_link_end = IndexEntryLinkEnd()
+
+    odt_toc_et_1.addElement(idx_entry_link_start)
+    # odt_toc_et_1.addElement(idx_entry_link_chapter)
+    odt_toc_et_1.addElement(idx_entry_link_text)
+    odt_toc_et_1.addElement(idx_entry_link_tab_stop)
+    odt_toc_et_1.addElement(idx_entry_link_page_num)
+    odt_toc_et_1.addElement(idx_entry_link_end)
+
+    odt_tocs.addElement(odt_toc_et_1)
+
+    # h2
+
+    odt_toc_et_2 = TableOfContentEntryTemplate(
+        outlinelevel=2, stylename=styles.get('idx'))
+
+    idx_entry_link_start = IndexEntryLinkStart()
+    idx_entry_link_chapter = IndexEntryChapter()
+    idx_entry_link_text = IndexEntryText()
+    idx_entry_link_span = IndexEntrySpan()
+    idx_entry_link_tab_stop = IndexEntryTabStop(type="right", leaderchar=".")
+    idx_entry_link_page_num = IndexEntryPageNumber()
+    idx_entry_link_end = IndexEntryLinkEnd()
+
+    odt_toc_et_2.addElement(idx_entry_link_start)
+    # odt_toc_et_2.addElement(idx_entry_link_chapter)
+    odt_toc_et_2.addElement(idx_entry_link_text)
+    # odt_toc_et_2.addElement(idx_entry_link_span)
+    # odt_toc_et_2.addElement(idx_entry_link_tab_stop)
+    # odt_toc_et_2.addElement(idx_entry_link_page_num)
+    odt_toc_et_2.addElement(idx_entry_link_end)
+
+    odt_tocs.addElement(odt_toc_et_2)
+
+    # h3
+
+    odt_toc_et_3 = TableOfContentEntryTemplate(
+        outlinelevel=3, stylename=styles.get('idx'))
+
+    idx_entry_link_start = IndexEntryLinkStart()
+    idx_entry_link_chapter = IndexEntryChapter()
+    idx_entry_link_text = IndexEntryText()
+    idx_entry_link_tab_stop = IndexEntryTabStop(type="right", leaderchar=".")
+    idx_entry_link_page_num = IndexEntryPageNumber()
+    idx_entry_link_end = IndexEntryLinkEnd()
+
+    odt_toc_et_3.addElement(idx_entry_link_start)
+    # odt_toc_et_3.addElement(idx_entry_link_chapter)
+    odt_toc_et_3.addElement(idx_entry_link_text)
+    odt_toc_et_3.addElement(idx_entry_link_tab_stop)
+    odt_toc_et_3.addElement(idx_entry_link_page_num)
+    odt_toc_et_3.addElement(idx_entry_link_end)
+
+    odt_tocs.addElement(odt_toc_et_3)
+
+    # title
+
+    odt_tocs.addElement(odt_itt)
+
+    odt_toc.addElement(odt_tocs)
+
+    index_title = IndexTitle(name="Table of Contents",
+                             stylename=styles.get('idx'))
+    index_title.addElement(P(text="Table of Contents"))
+
+    index_body = IndexBody()
+    index_body.addElement(index_title)
+
+    # for session in ab.get('sessions', list()):
+    #
+    #     print(">", session.get('code'), ' - ', session.get('title'), ' - ',
+    #           session.get('start'), ' - ', session.get('end'))
+    #
+    #     session_idx = idx.get(session.get('code'), dict())
+    #
+    #     session_entry = P()
+    #
+    #     session_link = A(type="simple", href=f"#{session_idx.get('uuid')}")
+    #
+    #     session_link.addText(
+    #         f"{session_idx.get('code')} - {session_idx.get('title')}")
+    #     session_link.addElement(Tab())
+    #     session_link.addText(f"1")
+    #
+    #     session_entry.addElement(session_link)
+    #
+    #     index_body.addElement(session_entry)
+    #
+    #     for contribution in session.get('contributions'):
+    #
+    #         contribution_idx = idx.get(contribution.get('code'), dict())
+    #
+    #         contribution_entry = P()
+    #
+    #         contribution_link = A(
+    #             type="simple", href=f"#{session_idx.get('uuid')}")
+    #
+    #         contribution_link.addText(
+    #             f"{contribution_idx.get('code')} - {contribution_idx.get('title')}")
+    #         contribution_link.addElement(Tab())
+    #         contribution_link.addText(f"1")
+    #
+    #         contribution_entry.addElement(contribution_link)
+    #
+    #         index_body.addElement(contribution_entry)
+
+    odt_toc.addElement(index_body)
+
+    odt.text.addElement(odt_toc)  # type: ignore
+
+    odt.text.addElement(SoftPageBreak())  # type: ignore
+
+    return odt
+
+
+def _abstract_booklet_chapters(odt: OpenDocument, ab: dict, styles: dict, idx: dict, settings: dict):
+    """ Sessions """
+
+    ab_session_h1 = settings.get('ab_session_h1', '')
+    ab_session_h2 = settings.get('ab_session_h2', '')
+    ab_contribution_h1 = settings.get('ab_contribution_h1', '')
+    ab_contribution_h2 = settings.get('ab_contribution_h2', '')
+
+    for session in ab.get('sessions', list()):
 
         print(">", session.get('code'), ' - ', session.get('title'), ' - ',
               session.get('start'), ' - ', session.get('end'))
@@ -145,6 +339,8 @@ def _abstract_booklet_chapters(odt: OpenDocument, ab: dict, styles: dict, settin
 
         session_start = format_datetime_full(session.get('start'))
         session_end = format_datetime_time(session.get('end'))
+
+        session_idx = idx[session_code]
 
         session_h1 = ab_session_h1 \
             .replace("{code}", session_code) \
@@ -158,17 +354,30 @@ def _abstract_booklet_chapters(odt: OpenDocument, ab: dict, styles: dict, settin
             .replace("{start}", session_start) \
             .replace("{end}", session_end)
 
+        # <text:bookmark-start text:name="__RefHeading___Toc8109_2226614992" />
+        #     MOA - First lasing
+        # <text:bookmark-end text:name="__RefHeading___Toc8109_2226614992" />
+
+        session_bookmark = H(outlinelevel=1, stylename=styles.get('h1'))
+
+        session_bookmark.addElement(
+            BookmarkStart(name=session_idx.get('uuid')))
+        session_bookmark.addText(session_h1)
+        session_bookmark.addElement(BookmarkEnd(name=session_idx.get('uuid')))
+
         odt.text.addElement(  # type: ignore
-            P(stylename=styles.get('h1'), 
-              text=f"{session_h1} / {session_h2}")
+            session_bookmark
+        )
+
+        odt.text.addElement(  # type: ignore
+            P(stylename=styles.get('h2'), text=session_h2)
         )
 
         session_conveners = session.get('conveners', [])
 
         if len(session_conveners) > 0:
 
-            session_chair = P(stylename=styles.get('h2'),
-                              text=f"Chair: ")
+            session_chair = P(stylename=styles.get('h2'), text="Chair: ")
 
             for convener in session_conveners:
                 session_chair.addText(
@@ -185,12 +394,14 @@ def _abstract_booklet_chapters(odt: OpenDocument, ab: dict, styles: dict, settin
         for contribution in session.get('contributions'):
 
             print()
-            print("--- " + contribution.get('code'), ' - ', contribution.get('title'),' - ', 
+            print(">>> " + contribution.get('code'), ' - ', contribution.get('title'), ' - ',
                   contribution.get('start'), ' - ', contribution.get('end'))
             print()
 
             contribution_code = contribution.get('code')
             contribution_title = contribution.get('title')
+
+            contribution_idx = idx.get(contribution_code, dict())
 
             contribution_start = format_datetime_time(
                 contribution.get('start'))
@@ -212,16 +423,43 @@ def _abstract_booklet_chapters(odt: OpenDocument, ab: dict, styles: dict, settin
             contribution_header = contribution_h1 if not \
                 session.get('is_poster') else contribution_h2
 
-            odt.text.addElement(  # type: ignore
-                P(stylename=styles.get('h3'),
-                    text=contribution_header)
-            )
+            # contribution_outline = H(outlinelevel=2, stylename=styles.get('hid'))
+            # contribution_outline.addElement(
+            #     Span(text=f"{contribution_code} - {contribution_title}")
+            # )
+
+            # , stylename=styles.get('bkm')
+
+            contribution_bookmark = H(outlinelevel=3, stylename=styles.get('h4'))
+
+            contribution_bookmark.addElement(
+                BookmarkStart(name=contribution_idx.get('uuid')))
+            contribution_bookmark.addText(contribution_title)
+            contribution_bookmark.addElement(
+                BookmarkEnd(name=contribution_idx.get('uuid')))
+
+            contribution_h1 = H(outlinelevel=2, stylename=styles.get('h3'))
+
+            contribution_h1.addElement(Span(text=contribution_code))
+            contribution_h1.addText(" / ")
+            contribution_h1.addText(text=contribution_start)
 
             odt.text.addElement(  # type: ignore
-                P(stylename=styles.get('h4'),
-                    text=f"{contribution.get('title')}")
+                contribution_h1
             )
 
+            # odt.text.addElement(  # type: ignore
+            #     P(stylename=styles.get('h3'), text=contribution_start)
+            # )
+
+            odt.text.addElement(  # type: ignore
+                contribution_bookmark
+            )
+
+            # odt.text.addElement(  # type: ignore
+            #     H(outlinelevel=3, stylename=styles.get(
+            #         'h4'), text=contribution_title)
+            # )
 
             contribution_speakers_ids = [
                 int(item.get('id')) for item in contribution.get('speakers', [])
@@ -359,10 +597,10 @@ def export_abstract_booklet_to_odt(ab: dict, event: dict, cookies: dict, setting
 
     styles = _document_styles(odt)
 
-    # abstract_booklet_document = _abstract_booklet_index(abstract_booklet_document,
-    #                                                        abstract_booklet_data,
-    #                                                        heading_styles)
+    idx = _abstract_booklet_titles(ab)
 
-    odt = _abstract_booklet_chapters(odt, ab, styles, settings)
+    odt = _abstract_booklet_index(odt, ab, styles, idx)
+
+    odt = _abstract_booklet_chapters(odt, ab, styles, idx, settings)
 
     return _serialize_abstract_booklet(odt)
