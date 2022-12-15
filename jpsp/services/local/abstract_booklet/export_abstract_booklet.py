@@ -11,6 +11,7 @@ from operator import itemgetter
 from odf.opendocument import OpenDocumentText, OpenDocument
 from odf.style import Style, TextProperties, ParagraphProperties
 
+from odf.table import Table, TableColumns, TableColumn, TableRows, TableRow, TableCell
 from odf.text import H, A, Span, P, HiddenParagraph, HiddenText, SoftPageBreak
 from odf.text import TableOfContent, TableOfContentSource, TableOfContentEntryTemplate
 from odf.text import IndexBody, IndexTitle, IndexEntryLinkStart, IndexEntryChapter, \
@@ -32,7 +33,7 @@ def _serialize_abstract_booklet(odt: OpenDocument):
     return f
 
 
-def _document_styles(odt: OpenDocument):
+def _abstract_booklet_styles(odt: OpenDocument):
     """ Documents styles """
 
     root_style = Style(name="AB Root", family="paragraph")
@@ -148,7 +149,7 @@ def _document_styles(odt: OpenDocument):
     )
 
 
-def _abstract_booklet_titles(ab: dict):
+def _abstract_booklet_idx(ab: dict):
     """ Index """
 
     idx = dict()
@@ -175,7 +176,7 @@ def _abstract_booklet_titles(ab: dict):
     return idx
 
 
-def _abstract_booklet_index(odt: OpenDocument, ab: dict, styles: dict, idx: dict):
+def _abstract_booklet_toc(odt: OpenDocument, ab: dict, styles: dict, idx: dict):
     """ Index """
 
     odt_toc = TableOfContent(name="Table of Contents", protected=True)
@@ -321,15 +322,16 @@ def _abstract_booklet_index(odt: OpenDocument, ab: dict, styles: dict, idx: dict
     return odt
 
 
-def _abstract_booklet_chapters(odt: OpenDocument, ab: dict, styles: dict, idx: dict, settings: dict):
+def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict, settings: dict):
     """ Sessions """
 
     ab_session_h1 = settings.get('ab_session_h1', '')
     ab_session_h2 = settings.get('ab_session_h2', '')
+    
     ab_contribution_h1 = settings.get('ab_contribution_h1', '')
     ab_contribution_h2 = settings.get('ab_contribution_h2', '')
 
-    for session in ab.get('sessions', list()):
+    for session in ab.get('sessions', []):
 
         print(">", session.get('code'), ' - ', session.get('title'), ' - ',
               session.get('start'), ' - ', session.get('end'))
@@ -388,10 +390,9 @@ def _abstract_booklet_chapters(odt: OpenDocument, ab: dict, styles: dict, idx: d
                 session_chair
             )
 
-        # Black line
         odt.text.addElement(P())  # type: ignore
 
-        for contribution in session.get('contributions'):
+        for contribution in session.get('contributions', []):
 
             print()
             print(">>> " + contribution.get('code'), ' - ', contribution.get('title'), ' - ',
@@ -429,6 +430,73 @@ def _abstract_booklet_chapters(odt: OpenDocument, ab: dict, styles: dict, idx: d
             # )
 
             # , stylename=styles.get('bkm')
+            
+            
+
+            contribution_h1 = H(outlinelevel=2, stylename=styles.get('h3'))
+
+            contribution_h1.addElement(Span(text=contribution_code + " "))
+            # contribution_h1.addText(" / ")
+            # contribution_h1.addText(text=contribution_start)
+            
+            
+            contribution_h2 = P(stylename=styles.get('h3'))
+
+            # contribution_h2.addElement(Span(text=contribution_code))
+            # contribution_h2.addText(" / ")
+            contribution_h2.addText(text=contribution_start)
+            
+            
+            # rem ----------------------------------------------------------------------
+            # rem define variables
+            # dim document   as object
+            # dim dispatcher as object
+            # rem ----------------------------------------------------------------------
+            # rem get access to the document
+            # document   = ThisComponent.CurrentController.Frame
+            # dispatcher = createUnoService("com.sun.star.frame.DispatchHelper")
+            # 
+            # rem ----------------------------------------------------------------------
+            # dispatcher.executeDispatch(document, ".uno:SetMinimalColumnWidth", "", 0, Array())
+            
+            
+            contribution_dt = Table(name=f"AB Contribution Code {contribution_code}")
+            
+            # <table:table-column table:style-name="contrib-header-MOA02.A" />
+            # <table:table-column table:style-name="contrib-header-MOA02.B" />
+            # <table:table-column table:style-name="contrib-header-MOA02.C" />
+            
+            tcs = TableColumns()
+            tcs.addElement(TableColumn())
+            tcs.addElement(TableColumn())
+            tcs.addElement(TableColumn())
+            
+            contribution_dt.addElement(tcs)
+            
+            
+            trs = TableRows()
+        
+            tr = TableRow()
+            
+            tc = TableCell(valuetype="string", value=contribution_code)
+            tc.addElement(contribution_h1)
+            
+            tr.addElement(tc)
+            
+            tc = TableCell(valuetype="string", value=" / ")
+            tc.addElement(P(stylename=styles.get('h3'), text="/ "))
+            
+            tr.addElement(tc)            
+            
+            tc = TableCell(valuetype="string", value=contribution_start)
+            tc.addElement(contribution_h2)
+            
+            tr.addElement(tc)
+            
+            
+            trs.addElement(tr)
+            contribution_dt.addElement(trs)
+            
 
             contribution_bookmark = H(outlinelevel=3, stylename=styles.get('h4'))
 
@@ -437,20 +505,19 @@ def _abstract_booklet_chapters(odt: OpenDocument, ab: dict, styles: dict, idx: d
             contribution_bookmark.addText(contribution_title)
             contribution_bookmark.addElement(
                 BookmarkEnd(name=contribution_idx.get('uuid')))
-
-            contribution_h1 = H(outlinelevel=2, stylename=styles.get('h3'))
-
-            contribution_h1.addElement(Span(text=contribution_code))
-            contribution_h1.addText(" / ")
-            contribution_h1.addText(text=contribution_start)
-
-            odt.text.addElement(  # type: ignore
-                contribution_h1
-            )
-
+            
+            
             # odt.text.addElement(  # type: ignore
-            #     P(stylename=styles.get('h3'), text=contribution_start)
+            #     contribution_h1
             # )
+            # 
+            # odt.text.addElement(  # type: ignore
+            #     contribution_h2
+            # )
+            
+            odt.text.addElement(  # type: ignore
+                contribution_dt
+            )
 
             odt.text.addElement(  # type: ignore
                 contribution_bookmark
@@ -590,17 +657,45 @@ def _abstract_booklet_chapters(odt: OpenDocument, ab: dict, styles: dict, idx: d
 
 
 def export_abstract_booklet_to_odt(ab: dict, event: dict, cookies: dict, settings: dict) -> io.BytesIO:
-    """ """
+    """
+        Sub Main
 
-    # 'application/vnd.oasis.opendocument.text'
+            dim operation as string
+            dim service as string
+
+            dim cursor as object
+            dim dispatcher as object
+            dim controller as object
+
+            operation =  ".uno:SetMinimalColumnWidth"
+            service = "com.sun.star.frame.DispatchHelper"
+
+            dispatcher = createUnoService(service)
+            controller = ThisComponent.getCurrentController()
+                
+            for index = 0 to ThisComponent.TextTables.count - 1
+                
+                controller.select(ThisComponent.TextTables(index))
+                
+                cursor = controller.getViewCursor()
+                
+                cursor.gotoEnd(True)
+                cursor.gotoEnd(True)
+
+                dispatcher.executeDispatch(controller.Frame, operation, "", 0, Array())
+            next
+
+        end sub
+    """
+
     odt: OpenDocument = OpenDocumentText()
 
-    styles = _document_styles(odt)
+    styles = _abstract_booklet_styles(odt)
 
-    idx = _abstract_booklet_titles(ab)
+    idx = _abstract_booklet_idx(ab)
 
-    odt = _abstract_booklet_index(odt, ab, styles, idx)
+    odt = _abstract_booklet_toc(odt, ab, styles, idx)
 
-    odt = _abstract_booklet_chapters(odt, ab, styles, idx, settings)
+    odt = _abstract_booklet_body(odt, ab, styles, idx, settings)
 
     return _serialize_abstract_booklet(odt)
