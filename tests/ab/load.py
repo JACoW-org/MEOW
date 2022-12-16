@@ -12,8 +12,6 @@ async def async_load():
             'affiliation': 'Elettra-Sincrotrone Trieste S.C.p.A.', 'email': 'matteo.pancaldi@elettra.eu'},
         {'id': '17652', 'first': 'Arun', 'last': 'Ravindran',
             'affiliation': 'University of Nova Gorica', 'email': 'arun.ravindran@ung.si'},
-        {'id': '17647', 'first': 'Benedikt', 'last': 'Roesner',
-            'affiliation': 'Paul Scherrer Institut', 'email': 'benedikt.roesner@psi.ch'},
         {'id': '17645', 'first': 'Charles S.', 'last': 'Bevis',
             'affiliation': 'University of Pavia', 'email': 'charles.bevis@unipv.it'},
         {'id': '17654', 'first': 'Dario', 'last': 'De Angelis',
@@ -43,7 +41,9 @@ async def async_load():
         {'id': '17656', 'first': 'Stefano', 'last': 'Bonetti',
             'affiliation': "Stockholm University and Ca' Foscari University of Venice", 'email': 'stefano.bonetti@unive.it'},
         {'id': '17653', 'first': 'Thierry', 'last': 'Ruchon',
-            'affiliation': 'Université Paris-Saclay, CEA, CNRS, LIDYL', 'email': 'thierry.ruchon@cea.fr'}
+            'affiliation': 'Université Paris-Saclay, CEA, CNRS, LIDYL', 'email': 'thierry.ruchon@cea.fr'},
+        {'id': '17647', 'first': 'Benedikt', 'last': 'Roesner',
+            'affiliation': 'Paul Scherrer Institut', 'email': 'benedikt.roesner@psi.ch'},
     ]
 
     print(json.dumps(contribution_primary_authors_list, indent=2, sort_keys=True))
@@ -59,11 +59,24 @@ async def async_load():
             contribution_primary_authors_dict[key] = []
         
         contribution_primary_authors_dict[key].append(item)
-        
+               
     contribution_primary_authors_groups: list[dict] = []
     
+    main = False
+    
     for (key, items) in contribution_primary_authors_dict.items():
-        contribution_primary_authors_groups.append({'key': key, 'items': items})
+        
+        sorted_items = items
+    
+        if main is False:
+            first = items.pop(0)
+            sorted_items = sorted(items, key = itemgetter('first', 'last'))
+            sorted_items = [first] + items
+            main= True
+        else:
+            sorted_items = sorted(items, key = itemgetter('first', 'last'))        
+        
+        contribution_primary_authors_groups.append({'key': key, 'items': sorted_items})
     
     print(json.dumps(contribution_primary_authors_groups, indent=2, sort_keys=True))
     print()

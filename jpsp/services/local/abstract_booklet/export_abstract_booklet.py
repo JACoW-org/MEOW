@@ -507,9 +507,24 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
 
             contribution_primary_authors_groups: list[dict] = []
 
+            contribution_primary_authors_first = True
+
             for (key, items) in contribution_primary_authors_dict.items():
+
+                sorted_items = items
+
+                if contribution_primary_authors_first is True:
+                    main_authors = items.pop(0)
+                    sorted_items = sorted(
+                        items, key=itemgetter('first', 'last'))
+                    sorted_items = [main_authors] + items
+                    contribution_primary_authors_first = False
+                else:
+                    sorted_items = sorted(
+                        items, key=itemgetter('first', 'last'))
+
                 contribution_primary_authors_groups.append(
-                    {'key': key, 'items': items})
+                    {'key': key, 'items': sorted_items})
 
             print("contribution_primary_authors_indico:",
                   contribution.get('primary_authors', []))
@@ -571,7 +586,8 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
 
             for (key, items) in contribution_coauthors_dict.items():
                 contribution_coauthors_groups.append(
-                    {'key': key, 'items': items})
+                    {'key': key, 'items': sorted(
+                        items, key=itemgetter('first', 'last'))})
 
             print("contribution_coauthors_indico:",
                   contribution.get('coauthors', []))
