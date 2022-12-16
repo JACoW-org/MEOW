@@ -5,11 +5,8 @@ import ulid
 from itertools import groupby
 from operator import itemgetter
 
-# from PyRTF.Elements import Document
-# from PyRTF.Renderer import Renderer
-# from PyRTF.document.section import Section
 from odf.opendocument import OpenDocumentText, OpenDocument
-from odf.style import Style, TextProperties, ParagraphProperties
+from odf.style import Style, TextProperties, ParagraphProperties, TableProperties
 
 from odf.table import Table, TableColumns, TableColumn, TableRows, TableRow, TableCell
 from odf.text import H, A, Span, P, HiddenParagraph, HiddenText, SoftPageBreak
@@ -48,11 +45,23 @@ def _abstract_booklet_styles(odt: OpenDocument):
 
     odt.styles.addElement(bkm_style)
 
-    idx_style = Style(name="AB Index", family="paragraph")
+    idx_style_1 = Style(name="AB Index level 1", family="paragraph")
 
-    idx_style.addElement(TextProperties(fontsize="12pt"))
+    idx_style_1.addElement(TextProperties(fontsize="12pt"))
 
-    odt.styles.addElement(idx_style)
+    odt.styles.addElement(idx_style_1)
+
+    idx_style_2 = Style(name="AB Index level 2", family="paragraph")
+
+    idx_style_2.addElement(TextProperties(fontsize="12pt"))
+
+    odt.styles.addElement(idx_style_2)
+
+    idx_style_3 = Style(name="AB Index level 3", family="paragraph")
+
+    idx_style_3.addElement(TextProperties(fontsize="12pt"))
+
+    odt.styles.addElement(idx_style_3)
 
     hidden_style = Style(name="AB Hidden", family="paragraph")
 
@@ -85,6 +94,13 @@ def _abstract_booklet_styles(odt: OpenDocument):
     h3_style.addElement(ParagraphProperties(keepwithnext="always"))
 
     odt.styles.addElement(h3_style)
+
+    table_style = Style(name="AB Table", family="table")
+
+    table_style.addElement(TableProperties(
+        keepwithnext="always", align="right"))
+
+    odt.automaticstyles.addElement(table_style)
 
     title_style = Style(name="AB Title", family="paragraph")
 
@@ -133,12 +149,15 @@ def _abstract_booklet_styles(odt: OpenDocument):
 
     return dict(
         rt=root_style,
-        idx=idx_style,
+        il1=idx_style_1,
+        il2=idx_style_2,
+        il3=idx_style_3,
         bkm=bkm_style,
         hid=hidden_style,
         h1=h1_style,
         h2=h2_style,
         h3=h3_style,
+        tbl=table_style,
         h4=title_style,
         h5=authors_style,
         h6=speakers_style,
@@ -200,7 +219,7 @@ def _abstract_booklet_toc(odt: OpenDocument, ab: dict, styles: dict, idx: dict):
     # h1
 
     odt_toc_et_1 = TableOfContentEntryTemplate(
-        outlinelevel=1, stylename=styles.get('idx'))
+        outlinelevel=1, stylename=styles.get('il1'))
 
     idx_entry_link_start = IndexEntryLinkStart()
     idx_entry_link_chapter = IndexEntryChapter()
@@ -221,7 +240,7 @@ def _abstract_booklet_toc(odt: OpenDocument, ab: dict, styles: dict, idx: dict):
     # h2
 
     odt_toc_et_2 = TableOfContentEntryTemplate(
-        outlinelevel=2, stylename=styles.get('idx'))
+        outlinelevel=2, stylename=styles.get('il2'))
 
     idx_entry_link_start = IndexEntryLinkStart()
     idx_entry_link_chapter = IndexEntryChapter()
@@ -244,7 +263,7 @@ def _abstract_booklet_toc(odt: OpenDocument, ab: dict, styles: dict, idx: dict):
     # h3
 
     odt_toc_et_3 = TableOfContentEntryTemplate(
-        outlinelevel=3, stylename=styles.get('idx'))
+        outlinelevel=3, stylename=styles.get('il3'))
 
     idx_entry_link_start = IndexEntryLinkStart()
     idx_entry_link_chapter = IndexEntryChapter()
@@ -268,50 +287,11 @@ def _abstract_booklet_toc(odt: OpenDocument, ab: dict, styles: dict, idx: dict):
 
     odt_toc.addElement(odt_tocs)
 
-    index_title = IndexTitle(name="Table of Contents",
-                             stylename=styles.get('idx'))
+    index_title = IndexTitle(name="Table of Contents")
     index_title.addElement(P(text="Table of Contents"))
 
     index_body = IndexBody()
     index_body.addElement(index_title)
-
-    # for session in ab.get('sessions', list()):
-    #
-    #     print(">", session.get('code'), ' - ', session.get('title'), ' - ',
-    #           session.get('start'), ' - ', session.get('end'))
-    #
-    #     session_idx = idx.get(session.get('code'), dict())
-    #
-    #     session_entry = P()
-    #
-    #     session_link = A(type="simple", href=f"#{session_idx.get('uuid')}")
-    #
-    #     session_link.addText(
-    #         f"{session_idx.get('code')} - {session_idx.get('title')}")
-    #     session_link.addElement(Tab())
-    #     session_link.addText(f"1")
-    #
-    #     session_entry.addElement(session_link)
-    #
-    #     index_body.addElement(session_entry)
-    #
-    #     for contribution in session.get('contributions'):
-    #
-    #         contribution_idx = idx.get(contribution.get('code'), dict())
-    #
-    #         contribution_entry = P()
-    #
-    #         contribution_link = A(
-    #             type="simple", href=f"#{session_idx.get('uuid')}")
-    #
-    #         contribution_link.addText(
-    #             f"{contribution_idx.get('code')} - {contribution_idx.get('title')}")
-    #         contribution_link.addElement(Tab())
-    #         contribution_link.addText(f"1")
-    #
-    #         contribution_entry.addElement(contribution_link)
-    #
-    #         index_body.addElement(contribution_entry)
 
     odt_toc.addElement(index_body)
 
@@ -327,7 +307,7 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
 
     ab_session_h1 = settings.get('ab_session_h1', '')
     ab_session_h2 = settings.get('ab_session_h2', '')
-    
+
     ab_contribution_h1 = settings.get('ab_contribution_h1', '')
     ab_contribution_h2 = settings.get('ab_contribution_h2', '')
 
@@ -336,8 +316,8 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
         print(">", session.get('code'), ' - ', session.get('title'), ' - ',
               session.get('start'), ' - ', session.get('end'))
 
-        session_code = f"{session.get('code')}"
-        session_title = f"{session.get('title')}"
+        session_code = session.get('code')
+        session_title = session.get('title')
 
         session_start = format_datetime_full(session.get('start'))
         session_end = format_datetime_time(session.get('end'))
@@ -362,10 +342,11 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
 
         session_bookmark = H(outlinelevel=1, stylename=styles.get('h1'))
 
-        session_bookmark.addElement(
-            BookmarkStart(name=session_idx.get('uuid')))
+        session_bookmark.addElement(BookmarkStart(
+            name=session_idx.get('uuid')))
         session_bookmark.addText(session_h1)
-        session_bookmark.addElement(BookmarkEnd(name=session_idx.get('uuid')))
+        session_bookmark.addElement(BookmarkEnd(
+            name=session_idx.get('uuid')))
 
         odt.text.addElement(  # type: ignore
             session_bookmark
@@ -383,7 +364,8 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
 
             for convener in session_conveners:
                 session_chair.addText(
-                    f"{convener.get('first')} {convener.get('last')} ({convener.get('affiliation')})"
+                    f"{convener.get('first')} {convener.get('last')} " +
+                    f"({convener.get('affiliation')})"
                 )
 
             odt.text.addElement(  # type: ignore
@@ -402,7 +384,7 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
             contribution_code = contribution.get('code')
             contribution_title = contribution.get('title')
 
-            contribution_idx = idx.get(contribution_code, dict())
+            contribution_idx = idx.get(contribution_code, {})
 
             contribution_start = format_datetime_time(
                 contribution.get('start'))
@@ -430,91 +412,70 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
             # )
 
             # , stylename=styles.get('bkm')
-            
-            
 
             contribution_h1 = H(outlinelevel=2, stylename=styles.get('h3'))
 
             contribution_h1.addElement(Span(text=contribution_code + " "))
             # contribution_h1.addText(" / ")
             # contribution_h1.addText(text=contribution_start)
-            
-            
+
             contribution_h2 = P(stylename=styles.get('h3'))
 
             # contribution_h2.addElement(Span(text=contribution_code))
             # contribution_h2.addText(" / ")
+
             contribution_h2.addText(text=contribution_start)
-            
-            
-            # rem ----------------------------------------------------------------------
-            # rem define variables
-            # dim document   as object
-            # dim dispatcher as object
-            # rem ----------------------------------------------------------------------
-            # rem get access to the document
-            # document   = ThisComponent.CurrentController.Frame
-            # dispatcher = createUnoService("com.sun.star.frame.DispatchHelper")
-            # 
-            # rem ----------------------------------------------------------------------
-            # dispatcher.executeDispatch(document, ".uno:SetMinimalColumnWidth", "", 0, Array())
-            
-            
-            contribution_dt = Table(name=f"AB Contribution Code {contribution_code}")
-            
-            # <table:table-column table:style-name="contrib-header-MOA02.A" />
-            # <table:table-column table:style-name="contrib-header-MOA02.B" />
-            # <table:table-column table:style-name="contrib-header-MOA02.C" />
-            
+
+            contribution_dt = Table(
+                stylename=styles.get('tbl'),
+                name=f"AB_Contribution_Code_{contribution_code}")
+
             tcs = TableColumns()
             tcs.addElement(TableColumn())
             tcs.addElement(TableColumn())
             tcs.addElement(TableColumn())
-            
+
             contribution_dt.addElement(tcs)
-            
-            
+
             trs = TableRows()
-        
+
             tr = TableRow()
-            
+
             tc = TableCell(valuetype="string", value=contribution_code)
             tc.addElement(contribution_h1)
-            
+
             tr.addElement(tc)
-            
+
             tc = TableCell(valuetype="string", value=" / ")
             tc.addElement(P(stylename=styles.get('h3'), text="/ "))
-            
-            tr.addElement(tc)            
-            
+
+            tr.addElement(tc)
+
             tc = TableCell(valuetype="string", value=contribution_start)
             tc.addElement(contribution_h2)
-            
+
             tr.addElement(tc)
-            
-            
+
             trs.addElement(tr)
             contribution_dt.addElement(trs)
-            
 
-            contribution_bookmark = H(outlinelevel=3, stylename=styles.get('h4'))
+            contribution_bookmark = H(
+                outlinelevel=3, stylename=styles.get('h4'))
 
             contribution_bookmark.addElement(
                 BookmarkStart(name=contribution_idx.get('uuid')))
             contribution_bookmark.addText(contribution_title)
             contribution_bookmark.addElement(
                 BookmarkEnd(name=contribution_idx.get('uuid')))
-            
-            
+
             # odt.text.addElement(  # type: ignore
             #     contribution_h1
             # )
-            # 
+            #
             # odt.text.addElement(  # type: ignore
             #     contribution_h2
             # )
-            
+
             odt.text.addElement(  # type: ignore
                 contribution_dt
             )
@@ -532,79 +493,124 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
                 int(item.get('id')) for item in contribution.get('speakers', [])
             ]
 
-            contribution_primary_authors_groups = [
-                ({'key': key, 'items': [item for item in items]})
+            print("contribution_speakers_ids:", contribution_speakers_ids)
 
-                for (key, items) in groupby(contribution.get(
-                    'primary_authors', []), itemgetter('affiliation'))
-            ]
+            contribution_primary_authors_dict: dict[str, list] = {}
 
-            contribution_coauthors_groups = [
-                ({'key': key, 'items': [item for item in items]})
+            for item in contribution.get('primary_authors', []):
+                key = item.get('affiliation', '')
 
-                for (key, items) in groupby(contribution.get(
-                    'coauthors', []), itemgetter('affiliation'))
-            ]
+                if not key in contribution_primary_authors_dict:
+                    contribution_primary_authors_dict[key] = []
+
+                contribution_primary_authors_dict[key].append(item)
+
+            contribution_primary_authors_groups: list[dict] = []
+
+            for (key, items) in contribution_primary_authors_dict.items():
+                contribution_primary_authors_groups.append(
+                    {'key': key, 'items': items})
+
+            print("contribution_primary_authors_indico:",
+                  contribution.get('primary_authors', []))
+            print("contribution_primary_authors_groups:",
+                  contribution_primary_authors_groups)
 
             if contribution_primary_authors_groups:
 
                 contribution_primary_authors_para = P(
                     stylename=styles.get('h5'))
 
-                for group_idx, group in enumerate(contribution_primary_authors_groups):
-                    for item_idx, item in enumerate(group.get('items', [])):
+                for contribution_primary_authors_group_idx, group in enumerate(contribution_primary_authors_groups):
+                    for contribution_primary_authors_item_idx, item in enumerate(group.get('items', [])):
 
                         # print(item.get('id'), contribution_speakers_ids, (int(item.get('id')) in contribution_speakers_ids))
 
-                        stylename = styles.get('h6') if int(
-                            item.get('id')) in contribution_speakers_ids else None
-
-                        separator = "" if group_idx == len(
-                            contribution_primary_authors_groups) - 1 else ", "
+                        stylename = styles.get('h6') if int(item.get('id')) \
+                            in contribution_speakers_ids else None
 
                         affiliation = f" ({item.get('affiliation')})" if item.get(
                             'affiliation') != '' else ''
 
-                        text = f"{item.get('first', '')} {item.get('last')}" + affiliation \
-                            if item_idx == len(group.get('items', []))-1 \
-                            else f"{item.get('first')} {item.get('last')}"
+                        author = f"{item.get('first')} {item.get('last')}"
+
+                        text = f"{author}{affiliation}" \
+                            if contribution_primary_authors_item_idx \
+                            == len(group.get('items', [])) - 1 \
+                            else author
 
                         contribution_primary_authors_para.addElement(  # type: ignore
                             Span(stylename=stylename, text=text)
                         )
 
                         contribution_primary_authors_para.addElement(  # type: ignore
-                            Span(text=separator)
+                            Span(text="" if contribution_primary_authors_item_idx == len(
+                                group.get('items', [])) - 1 else ", ")
                         )
+
+                    contribution_primary_authors_para.addElement(  # type: ignore
+                        Span(text="." if contribution_primary_authors_group_idx \
+                             == len(contribution_primary_authors_groups) - 1 else ", ")
+                    )
 
                 odt.text.addElement(  # type: ignore
                     contribution_primary_authors_para
                 )
 
+            contribution_coauthors_dict: dict[str, list] = {}
+
+            for item in contribution.get('coauthors', []):
+                key = item.get('affiliation', '')
+
+                if not key in contribution_coauthors_dict:
+                    contribution_coauthors_dict[key] = []
+
+                contribution_coauthors_dict[key].append(item)
+
+            contribution_coauthors_groups: list[dict] = []
+
+            for (key, items) in contribution_coauthors_dict.items():
+                contribution_coauthors_groups.append(
+                    {'key': key, 'items': items})
+
+            print("contribution_coauthors_indico:",
+                  contribution.get('coauthors', []))
+            print("contribution_coauthors_groups:",
+                  contribution_coauthors_groups)
+
             if contribution_coauthors_groups:
 
                 contribution_coauthors_para = P(stylename=styles.get('h7'))
 
-                for group_idx, group in enumerate(contribution_coauthors_groups):
-                    for item_idx, item in enumerate(group.get('items', [])):
+                for contribution_coauthors_group_idx, group in enumerate(contribution_coauthors_groups):
+                    for contribution_coauthors_item_idx, item in enumerate(group.get('items', [])):
 
-                        separator = "" if group_idx == len(
-                            contribution_coauthors_groups) - 1 else ", "
+                        stylename = styles.get('h6') if int(item.get('id')) \
+                            in contribution_speakers_ids else None
 
                         affiliation = f" ({item.get('affiliation')})" if item.get(
                             'affiliation') != '' else ''
 
-                        text = f"{item.get('first', '')} {item.get('last')}" + affiliation \
-                            if item_idx == len(group.get('items', []))-1 \
-                            else f"{item.get('first')} {item.get('last')}"
+                        author = f"{item.get('first')} {item.get('last')}"
+
+                        text = f"{author}{affiliation}" \
+                            if contribution_coauthors_item_idx \
+                            == len(group.get('items', [])) - 1 \
+                            else author
 
                         contribution_coauthors_para.addElement(  # type: ignore
-                            Span(text=text)
+                            Span(stylename=stylename, text=text)
                         )
 
                         contribution_coauthors_para.addElement(  # type: ignore
-                            Span(text=separator)
+                            Span(text="" if contribution_coauthors_item_idx == len(
+                                group.get('items', [])) - 1 else ", ")
                         )
+
+                    contribution_coauthors_para.addElement(  # type: ignore
+                        Span(text="." if contribution_coauthors_group_idx \
+                             == len(contribution_coauthors_groups) - 1 else ", ")
+                    )
 
                 odt.text.addElement(  # type: ignore
                     contribution_coauthors_para
@@ -672,13 +678,13 @@ def export_abstract_booklet_to_odt(ab: dict, event: dict, cookies: dict, setting
 
             dispatcher = createUnoService(service)
             controller = ThisComponent.getCurrentController()
-                
+
             for index = 0 to ThisComponent.TextTables.count - 1
-                
+
                 controller.select(ThisComponent.TextTables(index))
-                
+
                 cursor = controller.getViewCursor()
-                
+
                 cursor.gotoEnd(True)
                 cursor.gotoEnd(True)
 
