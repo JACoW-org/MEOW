@@ -1,6 +1,6 @@
 import anyio
 
-from tests.ab.load import async_load as main
+from tests.pikepdf.main_pages import main
 
 
 if __name__ == '__main__':
