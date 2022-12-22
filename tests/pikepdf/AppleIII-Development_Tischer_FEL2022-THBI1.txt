@@ -1,0 +1,887 @@
+Development of APPLE-III 
+Undulators for FLASH
+An Afterburner for FLASH2
+
+Markus Tischer
+
+on behalf of DESY’s Insertion Device (FS-US) and Mech. Design Group (ZM1)
+
+FEL2022 Conference, Trieste, 25.08.2022
+
+
+New Scientific Demands for Free Electron Lasers
+and their realization within the FLASH2020+ project (TUP51)
+
+User’s „dream 
+machine“
+
+Scientific purpose
+
+FLASH2020+ plans
+
+FEL line
+
+@ FEL2022
+
+Extended 
+wavelength range
+
+Reach O and N K-edges 
+and 3d metal L-edges
+
+Increase accelerator energy, 
+use advanced undulator schemes
+
+FLASH1 and 
+FLASH2
+
+Variable 
+polarization
+
+Circular dichroism for 
+magnetism and chirality
+
+Flexible APPLE-III undulators and 
+afterburner
+
+FLASH1 and 
+FLASH2
+
+Flexible pump-
+probe schemes
+
+Fourier-limited 
+pulses
+
+Resonant excitations
+
+Stable, small bandwidth 
+spectroscopy and 
+coherence applications
+
+Flexible schemes with optical laser and 
+FEL options for multi-colour pump-
+probe experiments
+
+FLASH1 and 
+FLASH2
+
+Laser-manipulation of electron 
+bunches at 1MHz: Seeding
+
+FLASH1
+
+TUP42
+
+Ultrashort pulses 
+at 1fs and shorter
+
+Ultimate temporal 
+resolution, highest power
+
+New undulator combinations
+(currently not funded)
+
+FLASH2
+
+MOP39
+
+CW operations 
+(100kHz)
+
+Low hit rate experiments
+
+Postponed as long-term goal (2030+)
+
+| FEL2022 Conference | APPLE-III Development | M.Tischer, 25.08.22
+
+Courtesy L.Schaper
+
+Page 2
+
+MOP37
+
+THBI1
+
+FRAO4
+
+
+FLASH2020+
+Current Shutdown
+
+…and   Seeding Upgrade in 2024/25
+
+Combination of HGHG and EEHG:
+
+Fully coherent pulses with 
+variable wavelength (60 – 4 nm) 
+tens of fs duration and 
+1MHz repetition rate. 
+
+Variable polarization: Apple III radiators
+
+Courtesy L.Schaper
+
+Page 3
+
+| FEL2022 Conference | APPLE-III Development | M.Tischer, 25.08.22
+
+
+Topics
+APPLE-III Afterburner for FLASH2    
+full scale prototype for FLASH1 Seeding IDs
+
+CoWorkers
+Major Contributions by
+
+> Undulator Group FS-US
+
+> Introduction
+
+> Specifications
+
+> Concept & Prototype
+
+> Magnet Design
+
+> Mechanical Design
+
+> Magnetic Measurements
+
+ Jacques Abenhaim
+ Philip Eckoldt
+ Kathrin Götze
+ Paul Neumann
+ Patrick N’Gotta
+
+ Andreas Schöps
+ Sayali Telawane
+ Pavel Vagin
+ Thorsten Vielitz
+
+> Mechanical Design Department (ZM1)
+ Torsten Ramm
+ Peter Talkovski
+
+ Hilmar Bienert
+ Hakan Bolat
+ Daniel Meissner
+
+> Production Planning (ZM2)
+
+ Björn Hager
+ Matthias Schacht
+
+ Martin Steudel
+ Florian Andersen (ZMQS)
+
+> Photon Science Machine Shop (FS-BT)
+
+ Markus Kowalski and colleagues
+
+> FLASH Team  (L.Schaper, E. Ferrari et al.)
+
+| FEL2022 Conference | APPLE-III Development | M.Tischer, 25.08.22
+
+> Valuable input by J.Bahrdt (HZB) and T.Schmidt (PSI)
+
+Page 4
+
+
+Permanent Magnet Undulators
+
+Variable gap
+
+Adjustable phase
+
+DELTA
+
+APPLE-II
+
+APPLE-X
+
+APPLE-III
+J. Bahrdt et al., Proc. FEL Conference 2004, 610
+Proc. SRI Conference 2003, AIP CP 705, 215 (2004)
+
+Period length λU
+
+λU
+
+17.5mm for APPLE-III 
+afterburner @FLASH2
+
+Gap
+change
+
+e-
+e-
+
+APPLE-III
+
+| FEL2022 Conference | APPLE-III Development | M.Tischer, 25.08.22
+
+Page 5
+
+
+APPLE III – Concept and Overview
+for FLASH2 Afterburner and  FL2020+ Seeding IDs
+
+400
+
+0
+
+]
+
+N
+
+[
+
+d
+o
+i
+r
+e
+p
+
+:= Gap
+
+20x20mm2 NdFeB magnets
+with cutouts and clipped edge
+
+/
+e
+c
+r
+o
+F
+
+.
+z
+i
+r
+o
+H
+
+-400
+
+min. diagonal magnet distance: 8.0mm
+corresponds to Gap=1.0mm
+(beam pipe: douter=7mm, ∅inner=6mm)
+
+,
+.
+t
+r
+e
+V
+
+-800
+
+e-
+
+Prototype
+
+Features:
+
+• APPLE III  provides highest field
+
+• Force reduction up to factor of 8
+• Half period  Full period keepers
+• Correction magnet  replaced by 
+
+virtual shimming of keepers
+
+Most prominent 
+change from prototype 
+towards final structure
+
+| FEL2022 Conference | APPLE-III Development | M.Tischer, 25.08.22
+
+solid: with compensation
+dashed: without comp.
+
+-8                 -5                                0                                 5                   8
+
+Longitudinal Shift / mm
+
+Force Compensation Concept (Apple2):
+BESSY, SRI2018, AIP Conf. Proc. 2054, 030031 (2019)
+
+𝐾𝐾 = 𝐾𝐾𝑙𝑙𝑙𝑙𝑙𝑙 = 𝐾𝐾𝑐𝑐𝑙𝑙𝑐𝑐𝑐𝑐 =
+
+𝜆𝜆𝑈𝑈 𝐵𝐵𝑒𝑒𝑒𝑒𝑒𝑒
+
+𝑒𝑒
+𝑚𝑚0𝑐𝑐
+2
+
+𝜆𝜆𝑅𝑅 =
+
+𝜆𝜆𝑈𝑈
+2
+2𝛾𝛾
+
+𝐾𝐾
+2
+
++ 1
+
+Page 6
+
+ 
+ 
+ 
+ 
+
+APPLE-III  Prototype Test Structure
+
+per = 16mm
+
+N~16
+
+| FEL2022 Conference | APPLE-III Development | M.Tischer, 25.08.22
+
+Page 7
+
+
+APPLE III  Afterburner (FLASH2) – Parameter Range
+
+Wavelength specification  
+
+ 1.39 – 1.77 nm   (890 – 700 eV)
+ Linear and circular polarization
+
+Period length selection  
+
+prototype results (measured)
+ per=16mm, gap=3.2mm
+ K=0.61
+
+1.4
+
+1.2
+
+1
+
+final specification
+ per=17.5mm, gap=1.0mm
+ K=0.92 
+ includes K~0.1 margin
+
+for compensation of errors
+
+ B=0.56T
+
+ Phase error < 10° rms
+
+ L=2.5m
+
+0.8
+
+K
+
+0.6
+
+0.4
+
+0.2
+
+0
+
+gap=1mm
+(8mm diagonal spacing)
+
+2mm
+
+3mm
+
+Fe L3
+
+Co L3
+
+Ni L2
+
+O K
+
+Fe L3
+
+Co L3
+
+Ni L2
+
+per = 17.5 mm
+
+16
+
+17
+
+18
+
+19
+
+Undulator Period, mm
+
+| FEL2022 Conference | APPLE-III Development | M.Tischer, 25.08.22
+
+Page 8
+
+
+APPLE-III  Transverse Field Dependence
+
+Circular mode
+
+By – vertical
+Bz - horizontal
+
+longitudinal
+
+-10         0         10
+
+vertical
+
+-10         0         10mm
+
+horizontal
+
+> Symmetric configuration
+
+at minimum gap
+
+> Focusing effect of vertical field  
+
+ for all gaps
+
+> De-/Focusing of horizontal field
+
+ depending on gap
+
+gap=1
+
+gap=6
+
+gap=19
+
+| FEL2022 Conference | APPLE-III Development | M.Tischer, 25.08.22
+
+Page 9
+
+
+APPLE-III  Transverse Field Dependence
+
+Circular mode
+
+By – vertical
+Bz - horizontal
+
+zoomed in
+
+> Symmetric configuration
+
+at minimum gap
+
+gap=1
+
+-10      0      10
+horizontal
+
+-1       0       1
+vertical
+
+-1       0       1
+horizontal position
+
+> Focusing effect of vertical field  
+
+longitudinal
+
+-10      0      10
+vertical
+
+ for all gaps
+
+> De-/Focusing of horizontal field
+
+ depending on gap
+
+ ~”friendly” within the useful gap range
+
+Curvature (~y2) vertical
+as function of gap
+
+B0(gap)
+
+0.4
+
+0.2
+
+0
+
+gap=6
+
+gap=19
+
+0
+
+1         5           10           15
+
+0
+
+1         5           10           15
+
+1         5           10           15
+
+| FEL2022 Conference | APPLE-III Development | M.Tischer, 25.08.22
+
+Gap, mm
+
+Page 10
+
+Curvature (~z2) horizontal
+as function of gap
+
+
+Magnet – Mechanical Dimensions
+
+Main Magnet Pair
+
+Force Compensation Magnet Pair
+
+A   B
+
+A   B
+
+20 x 20 mm2
+cross-section
+
+8.75 mm
+thickness
+
+17.5 x 14 mm2
+cross-section
+
+8.75 mm
+thickness
+
+| FEL2022 Conference | APPLE-III Development | M.Tischer, 25.08.22
+
+Page 11
+
+
+Demagnetizing Fields
+
+ Maximum demagnetizing fields in between rows for A 
+
+and on opposite edge for B magnet
+
+ Higher demagnetizing fields for A magnets: 18kOe, 
+B magnets: 15kOe → different grades for A and B
+
+ Highest demagetizing fields for force compensation
+
+A magnet, ~20kOe
+
+Magnet Specification   (NdFeB)
+
+A                 B          Comp.Magn.
+
+min. Br      1.32 T          1.36 T           1.26 T
+21 kOe *    18 kOe *        26 kOe
+min. Hcj
+* before GBD-treatment (+5kOe)
+
+| FEL2022 Conference | APPLE-III Development | M.Tischer, 25.08.22
+
+Page 12
+
+
+Combined (glued) Single Magnets
+
+Magnet Pairs
+
+AB
+BA
+
+45
+
+43
+
+41
+
+g
+e
+d
+
+,
+a
+t
+e
+B
+
+39
+
+43
+
+45
+
+47
+
+49
+
+Alpha, deg
+
+> Magnet sorting of single magnets (only for prototype)
+
+> Magnetic errors of single magnets are similar to usual 
+magnets ~0.7° rms, despite of smaller magnets and 
+45° magnetization direction
+
+> Angular error after gluing slightly increased to 1.2°
+
+rms, absolute values of magnetization angle cannot 
+be interpreted directly 
+
+| FEL2022 Conference | APPLE-III Development | M.Tischer, 25.08.22
+
+Page 13
+
+ 
+
+Magnet – Manufacturing & Characterization
+
+> Fabrication of magnet pairs (specification to vendors)
+
+ Production of both, single A and B magnets from die-pressed TP-material
+ Magnet errors: 1% Mr scatter and 1.5° angular errors
+ GBD treatment for all single magnets
+ Gluing of single magnets to AB-pairs in fully randomized configurations
+ Coating of magnet pairs
+
+> Magnetic measurements
+
+ Helmholtz coil measurements of completed AB- and BA-magnet pairs 
+ Hall mapper (“camera”) measurements of magnets (possibly)
+ Short stretched wire stand for assembled magnet keepers
+- direct measurement of field integral errors on-axis
+- additionally Hall probe for field amplitude/phase error
+
+> Magnet structure assembly
+
+ Sorting of keepers based on Helmholtz, SW and Hall probe data
+ Magnetic measurement and pre-shimming of upper and lower girders 
+
+separately
+
+| FEL2022 Conference | APPLE-III Development | M.Tischer, 25.08.22
+
+Page 14
+
+
+Test Sorting of Short Prototype Structure
+
+Assembled structure (16 periods) measured with Hall 
+probe bench + earth field
+
+Prediction from individual magnet measurements with
+stretched wire (background earth field subtracted)
+
+vertical
+
+horizontal
+
+vertical
+
+horizontal
+
+Good match, except for ambient field offset and different scan length of bench/wire
+
+Reasonably good agreement except for some global offset due to an imperfect consideration of the ambient field contribution
+
+| FEL2022 Conference | APPLE-III Development | M.Tischer, 25.08.22
+
+Page 15
+
+
+APPLE-III Field Error Correction
+Decomposition of field errors
+
+Two measurements with different shift of one axis.
+
+Difference of two measurements eliminates B234
+
+M1 = B1(x)             + B2(x) + B3(x) + B4(x)
+M2 = B1(x + shift) + B2(x) + B3(x) + B4(x)
+
+Test: Field error introduced in row B1
+
+D = M2 - M1 = B1(x+shift) – B1(x)
+
+Looks like derivative: (f(x+dx) – f(x)) / dx, with dx = shift
+"integrated" back as: B1[i] = B1[i-shift] + D[i]
+
+| FEL2022 Conference | APPLE-III Development | M.Tischer, 25.08.22
+
+Page 16
+
+
+Mechanical Design Overview
+APPLE-III
+
+• Undulator Frame
+
+• Magnet Girder
+
+• Gap Drive
+
+• Magnet Structure
+
+• Main Girder
+
+• Subgirder
+
+• Keepers
+
+• Shift Drive System
+
+• Shift Position Encoder
+
+| FEL2022 Conference | APPLE-III Development | M.Tischer, 25.08.22
+
+Page 17
+
+
+Keeper Design
+General Design and Flexure Hinges
+
+• Main magnets can be adjusted
+perpendicularly to the beam
+
+•
+
+•
+
+4 bar linkage as parallel guide
+mechanism
+
+Individual adjustment of both magnets
+on one keeper
+
+• Adjustment range +/- 0.2mm
+
+• Mechanics:
+
+• Differential thread bolt (P1=0.7 and 
+
+P2=0.5)
+
+• Wedge angle 5°
+
+• Theoretical resolution: 
+
+0.2mm x tan 5° = 0.017 mm/rev
+
+Differential thread bolt
+
+Wedge
+
+Pretension Screw
+and Spring
+
+Slit separating
+2 magnet pairs
+
+| FEL2022 Conference | APPLE-III Development | M.Tischer, 25.08.22
+
+Page 18
+
+
+Weak Link Tuning Mechanism
+Accuracy and Reproducibility Problems
+
+Initial behaviour
+
+Improved springs
+
+Non diagonal movement of main magnet
+caused by additional ~1mrad rotation
+
+Confirmed by magnetic measurements
+(fitting magnet position & rotation in Radia
+to match magnetic measurements)
+
+| FEL2022 Conference | APPLE-III Development | M.Tischer, 25.08.22
+
+Page 19
+
+
+Keeper Design
+Magnetic Forces on Keepers and Deformation
+
+•
+
+Force Compensation reduces overall net forces on 
+rows and quadrants of keepers
+
+• Moments stay relatively high
+
+• All forces and moments vary with shift
+
+• Direction rotates around with shift
+
+• Magnitude stays nearly constant
+
+| FEL2022 Conference | APPLE-III Development | M.Tischer, 25.08.22
+
+Page 20
+
+
+Vacuum Chamber  and  Support
+
+> Extruded aluminum chamber
+
+> 7x7mm2 cross-section
+
+> Dm 6mm inner bore
+
+> Length ~2.5m
+
+> Support by 0.5mm thick 
+
+blades in a groove
+
+> Adjustment by movers
+
+Courtesy A. de Zubiaurre Wagner, S. Lederer
+
+| FEL2022 Conference | APPLE-III Development | M.Tischer, 25.08.22
+
+Page 21
+
+
+Present Status & Schedule  (Afterburner @FLASH2)
+
+> Support mechanics available
+
+> All long lead items in production
+
+> Keeper and magnets expected to come in fall
+
+> Shift rails and sub-girder until end of the year
+
+> Keeper assembly
+
+> Keeper measurements
+
+> Mounting
+
+> Magnetic tuning
+
+> Installation at FLASH2 in 2nd half of 2023
+
+| FEL2022 Conference | APPLE-III Development | M.Tischer, 25.08.22
+
+Page 22
+
+
+Thank you
+
