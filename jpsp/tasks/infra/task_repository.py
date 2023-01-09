@@ -3,6 +3,7 @@ import logging
 from jpsp.tasks.infra.abstract_task import AbstractTask
 from jpsp.tasks.local.check_pdf import CheckPdfTask
 from jpsp.tasks.local.event_ab import EventAbTask
+from jpsp.tasks.local.event_pdf import EventPdfTask
 from jpsp.tasks.local.event_zip import EventZipTask
 from jpsp.tasks.local.event_put import EventPutTask
 from jpsp.tasks.local.xml_download import XmlDownloadTask
@@ -21,6 +22,7 @@ class TaskRepository:
         event_ab=EventAbTask,
         check_pdf=CheckPdfTask,
         event_zip=EventZipTask,
+        event_pdf=EventPdfTask,
         xml_download=XmlDownloadTask,
         exec_process=ExecProcessTask,
         exec_merge=XmlMergeTask,

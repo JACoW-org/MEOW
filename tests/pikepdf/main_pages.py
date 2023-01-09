@@ -12,42 +12,68 @@ from anyio import open_file, run
 
 from jpsp.utils.http import download_stream
 
-from pdfminer.high_level import extract_text, extract_text_to_fp
-
 from io import StringIO
-from pdfminer.layout import LAParams
-
-
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 
+from anyio import Path
 
 
 PDF = "/home/fabio.meneghetti/Projects/elettra/src/jpsp-ng/tests/pikepdf/AppleIII-Development_Tischer_FEL2022-THBI1.pdf"
 
 
-async def main():
-    
-    start = time.time()
-    
-    output = StringIO()
-    with open(PDF, 'rb') as fin:
-        extract_text_to_fp(fin, output, laparams=LAParams(),
-                            output_type='text', codec=None)
-        
-    print(output.getvalue())
-    
-    # create object
-    tfidf = TfidfVectorizer()
+# def _pdf_to_txt() -> str:
+#
+#     from pdfminer.high_level import extract_text_to_fp
+#     from pdfminer.layout import LAParams
+#
+#     out = StringIO()
+#
+#     with open(PDF, 'rb') as fin:
+#          extract_text_to_fp(fin, out, laparams=LAParams(),
+#                              output_type='text', codec=None)
+#
+#     return out.getvalue()
 
-    # get tf-df values
-    result = tfidf.fit_transform([output.getvalue()])
-    
-    # get idf values
-    print('\nidf values:')
-    for ele1, ele2 in zip(tfidf.get_feature_names_out(), tfidf.idf_):
-        print(ele1, ':', ele2)
-    
-    end = time.time()
-    
-    print(end - start)
+
+def pdf_to_txt(stream: bytes) -> str:
+
+    from fitz import Document
+
+    out = StringIO()
+
+    doc = Document(stream=stream, filetype='pdf')
+
+    for page in doc:  # iterate the document pages
+        text = page.get_textpage().extractText()  # get plain text (is in UTF-8)
+        out.write(text)  # write text of page
+
+    return out.getvalue()
+
+
+async def main():
+
+    start = time.time()
+
+    pdf = await Path(PDF).read_bytes()
+
+    # print(time.time() - start)
+
+    txt = pdf_to_txt(pdf)
+
+    # print(txt)
+
+    print(time.time() - start)
+
+    # # create object
+    # tfidf = TfidfVectorizer()
+    #
+    # # get tf-df values
+    # result = tfidf.fit_transform([out.getvalue()])
+    #
+    # # get idf values
+    # print('\nidf values:')
+    # for ele1, ele2 in zip(tfidf.get_feature_names_out(), tfidf.idf_):
+    #     print(ele1, ':', ele2)
+    #
+    # print(time.time() - start)

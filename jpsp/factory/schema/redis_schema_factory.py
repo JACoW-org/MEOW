@@ -5,7 +5,7 @@ from redis.commands.search.indexDefinition import IndexDefinition, IndexType
 from jpsp.models.infra.base import BaseSearchIndex, BaseModel
 from jpsp.models.infra.fields import IndexField
 from jpsp.models.infra.schema import RedisIndexMeta
-from jpsp.utils.serialization import sha1sum_hash
+from jpsp.utils.hash import sha1sum_hash
 
 from jpsp.app.instances.databases import dbs
 

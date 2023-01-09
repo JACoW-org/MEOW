@@ -137,7 +137,7 @@ class RedisWorkerManager():
                         code: str = head.get('code', None)
                         uuid: str = head.get('uuid', None)
                         time: str = head.get('time', None)
-                                
+
                         method: str = body.get('method', None)
                         params: dict = body.get('params', None)
 
@@ -156,7 +156,7 @@ class RedisWorkerManager():
                                     'params': params,
                                     'context': context,
                                 }))
-                                
+
                                 logger.debug(f"######### sent -> {method}")
 
                                 await TaskRunner.send_queued(task_id=uuid, task=method)
@@ -192,10 +192,10 @@ class RedisWorkerManager():
 
             async with receiver:
                 async for raw in receiver:
-                    
+
                     try:
                         logger.debug(f"Worker {worker_id}: Begin")
-                        
+
                         task = json_decode(raw)
 
                         method = task.get('method', None)
@@ -203,9 +203,10 @@ class RedisWorkerManager():
                         context = task.get('context', None)
 
                         await self.execute_in_current_thread(worker_id, method, params, context)
-                        
+
                     except BaseException:
-                        logger.error(f"Worker {worker_id}: Internal Error", exc_info=True)
+                        logger.error(
+                            f"Worker {worker_id}: Internal Error", exc_info=True)
 
         except BaseException:
             logger.error(f"Worker {worker_id}: Internal Error", exc_info=True)
@@ -235,12 +236,16 @@ class RedisWorkerManager():
 
         try:
             await TaskRunner.send_begin(task_id=task_id, task=method)
-            
-            async_generator = TaskRunner.run_task(task_id, method, params, context)
-            
-            async for progress in async_generator:
-                await TaskRunner.send_progress(task_id=task_id, task=method, progress=progress)              
-            
+
+            async_generator = TaskRunner.run_task(
+                task_id, method, params, context)
+
+            async for result in async_generator:
+                if result.get('type') == 'final':
+                    await TaskRunner.send_result(task_id=task_id, task=method, result=result)
+                else:
+                    await TaskRunner.send_progress(task_id=task_id, task=method, progress=result)
+
             await TaskRunner.send_end(task_id=task_id, task=method, result={})
         except BaseException as error:
             await TaskRunner.send_error(task_id=task_id, task=method, error=error)

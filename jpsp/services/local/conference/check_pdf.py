@@ -6,14 +6,10 @@ from pikepdf import open
 from pikepdf.objects import Dictionary, Array
 
 from anyio import create_task_group, CapacityLimiter
-from anyio import to_process, to_thread
+from anyio import to_thread
 from anyio import create_memory_object_stream, ClosedResourceError
 
-from anyio.streams.memory import (
-    MemoryObjectReceiveStream,
-    MemoryObjectSendStream,
-    MemoryObjectStreamState,
-)
+from anyio.streams.memory import MemoryObjectSendStream
 
 from typing import Any, List, Dict, Optional
 from dataclasses import dataclass, asdict
@@ -51,10 +47,13 @@ class PdfReport:
     pages_report: List[PdfPageReport]
 
 
-async def event_pdf_check(contributions: list[dict], cookies: dict, settings: dict):
+async def event_pdf_check(event: dict, cookies: dict, settings: dict):
     """ """
 
     # logger.debug(f'event_pdf_check - count: {len(contributions)} - cookies: {cookies}')
+    
+    
+    contributions: list[dict] = event.get("contributions", list())
 
     files = await extract_event_pdf_files(contributions)
 
@@ -127,7 +126,7 @@ async def _task(l: CapacityLimiter, t: int, i: int, f: dict, c: dict, res: Memor
 async def _run(f: dict, c: dict):
     """ """
 
-    url = f.get('download_url', '')
+    # url = f.get('download_url', '')
     
     # logger.debug(f'_task: begin -> {url} -> {c}')
 

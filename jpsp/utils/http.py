@@ -1,13 +1,11 @@
 from email import header
 import logging
-import pathlib
 from typing import Any, AsyncIterable, Optional
 
 import io
-import orjson
 import aiohttp
 
-from anyio import open_file
+from anyio import open_file, Path
 
 from jpsp.app.config import conf
 from jpsp.utils.serialization import json_encode
@@ -91,13 +89,13 @@ async def download_json(url: str) -> Any:
     return await fetch_json(url)
 
 
-async def download_file(url: str, file: pathlib.Path) -> None:
+async def download_file(url: str, file: Path, headers: dict = {}, cookies: dict = {}) -> None:
     """ Download file function """
 
     # print('download_file -->', url)
 
     async with await open_file(file, mode='wb') as f:
-        async for chunk in fetch_chunks(url):
+        async for chunk in fetch_chunks(url, headers=headers, cookies=cookies):
             await f.write(chunk)
 
         # print('download_file -->', file)

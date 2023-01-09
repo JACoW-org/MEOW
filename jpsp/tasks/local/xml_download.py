@@ -4,7 +4,8 @@ Split spms.xml into spms_summary.xml and sessions
 
 import asyncio
 import logging
-import pathlib
+
+from anyio import Path
 
 from typing import Any
 
@@ -31,10 +32,10 @@ class XmlDownloadTask(AbstractTask):
         # spms_full_url = 'https://spms.kek.jp/pls/sap2017/spms.xml'
         # spms_summary_url = 'https://spms.kek.jp/pls/sap2017/spms_summary.xml'
 
-        base_path = pathlib.Path(__file__).parent.parent.parent.parent
+        base_path = Path(__file__).parent.parent.parent.parent
         xml_path = base_path.joinpath("static", "xml")
 
-        xml_path.mkdir(exist_ok=True, parents=True)
+        await xml_path.mkdir(exist_ok=True, parents=True)
 
         # spms_full_file = xml_path.joinpath("spms_full.xml")
         spms_summary_file = xml_path.joinpath("spms_summary.xml")
