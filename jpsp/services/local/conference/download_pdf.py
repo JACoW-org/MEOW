@@ -64,8 +64,9 @@ async def event_pdf_download(event: dict, cookies: dict, settings: dict):
                     if checked_files >= total_files:
 
                         vectorizer = TfidfVectorizer(
+                            token_pattern=r"(?u)\b[a-zA-z]{3,}\b",
                             stop_words='english', 
-                            max_features=100
+                            max_features=500,
                         )
                         
                         vectorizer.fit_transform([
