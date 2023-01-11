@@ -3,6 +3,8 @@ from io import StringIO
 import logging as lg
 import hashlib as hl
 
+import nltk
+
 from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError
 
@@ -12,6 +14,14 @@ from sklearn.feature_extraction.text import TfidfTransformer, CountVectorizer, T
 
 
 from jpsp.utils.http import download_file
+
+from nltk.tokenize import word_tokenize
+from nltk.stem.snowball import SnowballStemmer
+
+from jpsp.utils import keywords
+
+nltk.download('punkt')
+nltk.download('stopwords')
 
 
 logger = lg.getLogger(__name__)
@@ -47,14 +57,35 @@ async def event_pdf_download(event: dict, cookies: dict, settings: dict):
                               index, current, cookies, pdf_dir, 
                               send_reports_stream.clone())
 
-        reports = list()
+        stemmer = SnowballStemmer("english")
+        result = []
+
+        # stem default keywords
+        stem_keywords_dict = {}
+        for keyword in keywords.KEYWORDS:
+            stem = stemmer.stem(keyword)
+            stem_keywords_dict[stem] = keyword
+    
+        # debug print
+        logger.debug(f'keywords as stems {stem_keywords_dict}')
 
         try:
             async with receive_reports_stream:
                 async for report in receive_reports_stream:
                     checked_files = checked_files + 1
 
-                    reports.append(report)
+                    # tokenize report
+                    report_tokens = tokenize_txt(report.get('txt'))
+                    
+                    # tokens stemming
+                    keywords_counts = get_paper_keywords_by_stem(report_tokens, stemmer, stem_keywords_dict)
+
+                    result.append(dict(
+                        file=report.get('file'),
+                        keywords=list(keywords_counts.keys())
+                    ))
+
+                    logger.debug(f'keyword count for report {report.get("file").get("filename")}: {keywords_counts}')
 
                     yield dict(
                         type='progress',
@@ -63,27 +94,32 @@ async def event_pdf_download(event: dict, cookies: dict, settings: dict):
 
                     if checked_files >= total_files:
 
-                        vectorizer = TfidfVectorizer(
-                            token_pattern=r"(?u)\b[a-zA-z]{3,}\b",
-                            stop_words='english', 
-                            max_features=500,
-                        )
-                        
-                        vectorizer.fit_transform([
-                            r.get('txt') for r in reports
-                        ])
-
-                        features = vectorizer.get_feature_names_out()
-
-                        result = [
-                            get_keywords(vectorizer, features, r)
-                            for r in reports
-                        ]
-
                         yield dict(
                             type='final',
                             value=result
                         )
+
+                        # vectorizer = TfidfVectorizer(
+                        #     token_pattern=r"(?u)\b[a-zA-z]{3,}\b",
+                        #     stop_words='english', 
+                        #     max_features=500,
+                        # )
+                        
+                        # vectorizer.fit_transform([
+                        #     r.get('txt') for r in reports
+                        # ])
+
+                        # features = vectorizer.get_feature_names_out()
+
+                        # result = [
+                        #     get_keywords(vectorizer, features, r)
+                        #     for r in reports
+                        # ]
+
+                        # yield dict(
+                        #     type='final',
+                        #     value=result
+                        # )
 
                         receive_reports_stream.close()
 
@@ -182,6 +218,7 @@ async def _run(f: dict, c: dict, p: Path):
 def pdf_to_txt(stream: bytes) -> str:
     """ """
 
+    # non è oneroso importare fitz n volte ?
     from fitz import Document
 
     out = StringIO()
@@ -194,6 +231,25 @@ def pdf_to_txt(stream: bytes) -> str:
 
     return out.getvalue()
 
+def tokenize_txt(txt: str) -> list:
+
+    # TODO possibly add custom rules to perform better tokenization
+
+    return word_tokenize(txt)
+
+def get_paper_keywords_by_stem(paper_tokens: list, stemmer: SnowballStemmer, keywords_stems_map: dict) -> dict:
+    
+    paper_keywords = {}
+    for token in paper_tokens:
+        stem = stemmer.stem(token)
+        if stem in keywords_stems_map:
+            keyword = keywords_stems_map[stem]
+            if keyword in paper_keywords:
+                paper_keywords[keyword] += 1
+            else:
+                paper_keywords[keyword] = 1
+    
+    return paper_keywords
 
 async def _is_to_download(f: Path, m: str) -> bool:
     """ """
