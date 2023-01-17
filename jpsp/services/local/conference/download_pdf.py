@@ -1,11 +1,11 @@
 
-from io import StringIO
+from io import StringIO, open, BytesIO
 import logging as lg
 import hashlib as hl
 
 import nltk
 
-from anyio import Path, create_task_group, CapacityLimiter
+from anyio import Path, create_task_group, CapacityLimiter, to_process
 from anyio import create_memory_object_stream, ClosedResourceError
 
 from anyio.streams.memory import MemoryObjectSendStream
@@ -48,32 +48,30 @@ async def event_pdf_download(event: dict, cookies: dict, settings: dict):
 
     limiter = CapacityLimiter(6)
 
+    stemmer = SnowballStemmer("english")
+    # stem default keywords
+    stem_keywords_dict = stem_keywords_as_tree(keywords.KEYWORDS, stemmer)
+
     async with create_task_group() as tg:
         async with send_reports_stream:
             for index, current in enumerate(files):
                 tg.start_soon(_task, limiter, total_files, 
-                              index, current, cookies, pdf_dir, 
+                              index, current, cookies, pdf_dir,
+                              stemmer, stem_keywords_dict,
                               send_reports_stream.clone())
 
-        stemmer = SnowballStemmer("english")
         result = []
 
-        # stem default keywords
-        stem_keywords_dict = stem_keywords_as_tree(keywords.KEYWORDS, stemmer)
 
         try:
             async with receive_reports_stream:
                 async for report in receive_reports_stream:
                     checked_files = checked_files + 1
 
-                    paper_keywords = get_keywords_from_text(report.get('txt'), stemmer, stem_keywords_dict)
-
                     result.append(dict(
                         file=report.get('file'),
-                        keywords=paper_keywords
+                        keywords=report.get('keywords')
                     ))
-
-                    logger.debug(f'keyword count for report {report.get("file").get("filename")}: {paper_keywords}')
 
                     yield dict(
                         type='progress',
@@ -231,21 +229,23 @@ async def extract_event_pdf_files(elements: list[dict]) -> list:
     return files
 
 
-async def _task(l: CapacityLimiter, t: int, i: int, f: dict, c: dict, p: Path, res: MemoryObjectSendStream):
+async def _task(l: CapacityLimiter, t: int, i: int, f: dict, c: dict, p: Path, stemmer: SnowballStemmer, stem_keywords_dict: dict[list[str]], res: MemoryObjectSendStream):
     """ """
 
     async with l:
-        r = await _run(f, c, p)
+        k = await _run(f, c, p, stemmer, stem_keywords_dict)
+        # k = await to_process.run_sync(_run, f, c, p, stemmer, stem_keywords_dict)
 
         await res.send({
             "index": i,
             "total": t,
             "file": f,
-            "txt": r
+            # "txt": r,
+            "keywords": k
         })
 
 
-async def _run(f: dict, c: dict, p: Path):
+async def _run(f: dict, c: dict, p: Path, stemmer: SnowballStemmer, stem_keywords_dict: dict[list[str]]):
     """ """
 
     md5 = f.get('md5sum', '')
@@ -261,15 +261,28 @@ async def _run(f: dict, c: dict, p: Path):
         cookies = dict(indico_session_http=sess)
         await download_file(url=url, file=file, cookies=cookies)
 
-    txt = pdf_to_txt(await file.read_bytes())
+    # txt = pdf_to_txt(await file.read_bytes())
 
-    return txt
+    # paper_keywords = get_keywords_from_text(txt, stemmer, stem_keywords_dict)
+    paper_keywords = await to_process.run_sync(get_keywords_from_pdf, str(await file.absolute()), stemmer, stem_keywords_dict)
+
+    return paper_keywords
+
+def get_keywords_from_pdf(path: str, stemmer: SnowballStemmer, stem_keywords_dict: dict[list[str]]):
+
+    with open(path, 'rb') as fh:
+        buf = BytesIO(fh.read())
+        txt = pdf_to_txt(buf) 
+
+        pdf_keywords = get_keywords_from_text(txt, stemmer, stem_keywords_dict)
+
+        return pdf_keywords
+
 
 
 def pdf_to_txt(stream: bytes) -> str:
     """ """
 
-    # non è oneroso importare fitz n volte ?
     from fitz import Document
 
     out = StringIO()
