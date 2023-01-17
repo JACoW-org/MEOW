@@ -160,20 +160,23 @@ def get_keywords_from_text(text: str, stemmer: SnowballStemmer, stem_keywords_tr
     # init keywords counts
     text_keywords_counts: dict[int] = {}
     # O(n)
-    for i in range(len(text_tokens)):
+    # for i in range(len(text_tokens)):
+    for i, token in enumerate(text_tokens):
         
-        token: str = text_tokens[i]
+        # token: str = text_tokens[i]
         if stemmer.stem(token) in stem_keywords_tree:
 
             token_stem: str = stemmer.stem(token)
             # O(m), m is the amount of keywords in the list with the same stem
             for keyword in stem_keywords_tree[token_stem]:
                 
+                # TODO use different tokenization method to improve
                 keyword_tokens: list[str] = wordpunct_tokenize(keyword)
                 j: int = 1
                 isMatch: bool = True
+                keyword_tokens_len: int = len(keyword_tokens)
                 # O(k), where k is usually ~1/2
-                while (isMatch and j < len(keyword_tokens)):
+                while (isMatch and j < keyword_tokens_len):
                     isMatch = keyword_tokens[j] == text_tokens[i + j]
                     j += 1
 
