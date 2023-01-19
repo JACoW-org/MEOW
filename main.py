@@ -38,6 +38,11 @@ async def jpsp_socket() -> None:
 
 async def main() -> None:
     # logger.info('jpsp - begin')
+    
+    from nltk import download
+    
+    download('punkt')
+    download('stopwords')
 
     await srs.redis_manager.prepare()
     await srs.redis_manager.migrate()

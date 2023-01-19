@@ -1,12 +1,13 @@
 
 import io
 import logging as lg
+import hashlib as hl
 
-from pikepdf import open
+from pikepdf import open as pdf_open
 from pikepdf.objects import Dictionary, Array
 
 from anyio import create_task_group, CapacityLimiter
-from anyio import to_thread
+from anyio import Path, to_process, to_thread
 from anyio import create_memory_object_stream, ClosedResourceError
 
 from anyio.streams.memory import MemoryObjectSendStream
@@ -14,8 +15,7 @@ from anyio.streams.memory import MemoryObjectSendStream
 from typing import Any, List, Dict, Optional
 from dataclasses import dataclass, asdict
 
-from jpsp.utils.http import download_stream
-
+from jpsp.utils.http import download_file
 
 logger = lg.getLogger(__name__)
 
@@ -52,6 +52,11 @@ async def event_pdf_check(event: dict, cookies: dict, settings: dict):
 
     # logger.debug(f'event_pdf_check - count: {len(contributions)} - cookies: {cookies}')
 
+    event_id = event.get('id', 'event')
+
+    pdf_cache_dir: Path = Path('var', 'run', f"{event_id}_pdf")
+    await pdf_cache_dir.mkdir(exist_ok=True, parents=True)
+
     contributions: list[dict] = event.get("contributions", list())
 
     files = await extract_event_pdf_files(contributions)
@@ -61,32 +66,32 @@ async def event_pdf_check(event: dict, cookies: dict, settings: dict):
 
     # logger.debug(f'event_pdf_check - files: {len(files)}')
 
-    send_reports_stream, receive_reports_stream = create_memory_object_stream()
+    send_stream, receive_stream = create_memory_object_stream()
 
-    limiter = CapacityLimiter(6)
+    capacity_limiter = CapacityLimiter(6)
 
     async with create_task_group() as tg:
-        async with send_reports_stream:
-            for index, current in enumerate(files):
-                tg.start_soon(_task, limiter, total_files, index,
-                              current, cookies, send_reports_stream.clone())
+        async with send_stream:
+            for current_index, current_file in enumerate(files):
+                tg.start_soon(pdf_check_task, capacity_limiter, total_files, current_index,
+                              current_file, cookies, pdf_cache_dir, send_stream.clone())
 
         try:
-            async with receive_reports_stream:
-                async for report in receive_reports_stream:
+            async with receive_stream:
+                async for report in receive_stream:
                     checked_files = checked_files + 1
 
                     # print('receive_reports_stream::report-->',
                     #       checked_files, total_files)
-                    
+
                     yield dict(
                         type='progress',
                         value=report
                     )
 
                     if checked_files >= total_files:
-                        receive_reports_stream.close()
-                        
+                        receive_stream.close()
+
                         yield dict(
                             type='final',
                             value=None
@@ -113,25 +118,22 @@ async def extract_event_pdf_files(elements: list[dict]) -> list:
     return files
 
 
-async def _task(l: CapacityLimiter, t: int, i: int, f: dict, c: dict, res: MemoryObjectSendStream):
+async def pdf_check_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int, current_file: dict,
+                         cookies: dict, pdf_cache_dir: Path, res: MemoryObjectSendStream):
     """ """
 
-    if l is not None:
-        async with l:
-            await res.send({
-                "index": i,
-                "total": t,
-                "file": f,
-                "report": await _run(f, c)
-            })
-    else:
+    async with capacity_limiter:
+        report = await internal_pdf_check_task(current_file, cookies, pdf_cache_dir)
+
         await res.send({
-            "file": f,
-            "report": await _run(f, c)
+            "index": current_index,
+            "total": total_files,
+            "file": current_file,
+            "report": report
         })
 
 
-async def _run(f: dict, c: dict):
+async def internal_pdf_check_task(current_file: dict, cookies: dict, pdf_cache_dir: Path):
     """ """
 
     # url = f.get('download_url', '')
@@ -144,86 +146,116 @@ async def _run(f: dict, c: dict):
     #
     # return {}
 
-    cookies = dict(indico_session_http=c.get('indico_session_http', ''))
-    pdf_stream = await download_stream(f.get('external_download_url', ''), cookies=cookies)
+    pdf_md5 = current_file.get('md5sum', '')
+    pdf_name = current_file.get('filename', '')
+    http_sess = cookies.get('indico_session_http', '')
+    pdf_url = current_file.get('external_download_url', '')
+
+    pdf_file = Path(pdf_cache_dir, pdf_name)
+
+    print([pdf_md5, pdf_name])
+
+    if await _is_to_download(pdf_file, pdf_md5):
+        cookies = dict(indico_session_http=http_sess)
+        await download_file(url=pdf_url, file=pdf_file, cookies=cookies)
 
     # print(l.total_tokens)
 
-    return await to_thread.run_sync(event_pdf_report, pdf_stream)
-    # return await to_process.run_sync(event_pdf_report, pdf_stream)
-    # return event_pdf_report(pdf_stream)
+    # IN PROCESS
+    # return event_pdf_report(str(await pdf_file.absolute()))
+
+    # EXTERNAL THREAD
+    # return await to_thread.run_sync(event_pdf_report, str(await pdf_file.absolute()))
+
+    # EXTERNAL PROCESS
+    return await to_process.run_sync(event_pdf_report, str(await pdf_file.absolute()))
 
 
-def event_pdf_report(pdf_stream: io.BytesIO):
+async def _is_to_download(file: Path, md5: str) -> bool:
+    """ """
+
+    already_exists = await file.exists()
+
+    is_to_download = md5 == '' or already_exists == False or md5 != hl.md5(await file.read_bytes()).hexdigest()
+
+    if is_to_download == True:
+        print(await file.absolute(), '-->', 'download')
+    else:
+        print(await file.absolute(), '-->', 'skip')
+
+    return is_to_download
+
+
+def event_pdf_report(path: str):
     """ """
 
     try:
 
-        with open(pdf_stream) as p:
+        with open(path, 'rb') as fh:
 
-            result = PdfReport(page_count=len(p.pages), pages_report=[])
+            with pdf_open(io.BytesIO(fh.read())) as p:
 
-            # for key, value in p.docinfo.items():
-            #     if key in ['/Title', '/Author', '/CreationDate', '/Creator', '/ModDate', '/Producer']:
-            #         load_meta(key, value, 0, result["meta"], {})
+                result = PdfReport(page_count=len(p.pages), pages_report=[])
 
-            for page in p.pages:
+                # for key, value in p.docinfo.items():
+                #     if key in ['/Title', '/Author', '/CreationDate', '/Creator', '/ModDate', '/Producer']:
+                #         load_meta(key, value, 0, result["meta"], {})
 
-                fonts = dict()
+                for page in p.pages:
 
-                if isinstance(page.obj, Array):
-                    for i in page.obj.keys():
-                        load_font("", i, 0, fonts, PdfPageFontReport())
-                else:
-                    for key, value in page.resources.items():
-                        if key in ['/Font', '/FontFamily', '/FontName', '/Type', '/FontFile', '/FontFile2', '/FontFile3', '/Encoding', '/BaseFont', '/ToUnicode', '/DescendantFonts']:
-                            load_font(key, value, 0, fonts,
-                                      PdfPageFontReport())
+                    fonts = dict()
 
-                if '/CropBox' in page:
-                    # use CropBox if defined since that's what the PDF viewer would usually display
-                    relevant_box = page.CropBox
-                elif '/MediaBox' in page:
-                    relevant_box = page.MediaBox
-                else:
-                    # fall back to ANSI A (US Letter) if neither CropBox nor MediaBox are defined
-                    # unlikely, but possible
-                    relevant_box = None
+                    if isinstance(page.obj, Array):
+                        for i in page.obj.keys():
+                            load_font("", i, 0, fonts, PdfPageFontReport())
+                    else:
+                        for key, value in page.resources.items():
+                            if key in ['/Font', '/FontFamily', '/FontName', '/Type', '/FontFile', '/FontFile2', '/FontFile3', '/Encoding', '/BaseFont', '/ToUnicode', '/DescendantFonts']:
+                                load_font(key, value, 0, fonts,
+                                          PdfPageFontReport())
 
-                # check whether the page defines a UserUnit
-                userunit = 1
-                if '/UserUnit' in page:
-                    userunit = float(page.UserUnit)  # type: ignore
+                    if '/CropBox' in page:
+                        # use CropBox if defined since that's what the PDF viewer would usually display
+                        relevant_box = page.CropBox
+                    elif '/MediaBox' in page:
+                        relevant_box = page.MediaBox
+                    else:
+                        # fall back to ANSI A (US Letter) if neither CropBox nor MediaBox are defined
+                        # unlikely, but possible
+                        relevant_box = None
 
-                relevant_box = [
-                    float(x)*userunit
-                    for x in relevant_box  # type: ignore
-                ]
+                    # check whether the page defines a UserUnit
+                    userunit = 1
+                    if '/UserUnit' in page:
+                        userunit = float(page.UserUnit)  # type: ignore
 
-                # obtain the dimensions of the box
-                width = abs(relevant_box[2] - relevant_box[0])
-                height = abs(relevant_box[3] - relevant_box[1])
+                    relevant_box = [
+                        float(x)*userunit
+                        for x in relevant_box  # type: ignore
+                    ]
 
-                rotation = 0
-                if '/Rotate' in page:
-                    rotation = page.Rotate
+                    # obtain the dimensions of the box
+                    width = abs(relevant_box[2] - relevant_box[0])
+                    height = abs(relevant_box[3] - relevant_box[1])
 
-                if (rotation // 90) % 2 != 0:  # type: ignore
-                    width, height = height, width
+                    rotation = 0
+                    if '/Rotate' in page:
+                        rotation = page.Rotate
 
-                page_report = PdfPageReport(
-                    sizes=PdfPageSizeReport(
-                        width=width,
-                        height=height
-                    ),
-                    fonts=fonts
-                )
+                    if (rotation // 90) % 2 != 0:  # type: ignore
+                        width, height = height, width
 
-                result.pages_report.append(page_report)
+                    page_report = PdfPageReport(
+                        sizes=PdfPageSizeReport(
+                            width=width,
+                            height=height
+                        ),
+                        fonts=fonts
+                    )
 
-            p.close()
+                    result.pages_report.append(page_report)
 
-        pdf_stream.close()
+                p.close()
 
         return asdict(result)
 
