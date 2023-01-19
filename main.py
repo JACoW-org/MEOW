@@ -8,7 +8,7 @@ from anyio import create_task_group, run
 from jpsp.app.instances.services import srs
 
 
-lg.basicConfig(level=lg.DEBUG)
+lg.basicConfig(level=lg.INFO)
 logger = lg.getLogger(__name__)
 
 
@@ -39,6 +39,14 @@ async def jpsp_socket() -> None:
 async def main() -> None:
     # logger.info('jpsp - begin')
     
+    import anyio
+          
+    limiter = anyio.to_thread.current_default_thread_limiter()  # type: ignore 
+    limiter.total_tokens = 128
+
+    limiter = anyio.to_process.current_default_process_limiter()  # type: ignore 
+    limiter.total_tokens = 64
+    
     from nltk import download
     
     download('punkt')
@@ -46,7 +54,6 @@ async def main() -> None:
 
     await srs.redis_manager.prepare()
     await srs.redis_manager.migrate()
-    # await srs.redis_manager.migrate()
 
     async with create_task_group() as tg:
         tg.start_soon(jpsp_webapp)

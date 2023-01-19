@@ -5,7 +5,7 @@ from io import open
 from fitz import Document
 
 from anyio import create_task_group, CapacityLimiter
-from anyio import Path, to_process, to_thread
+from anyio import Path, to_process, to_thread, sleep
 from anyio import create_memory_object_stream, ClosedResourceError
 
 from anyio.streams.memory import MemoryObjectSendStream
@@ -113,7 +113,7 @@ async def internal_pdf_check_task(current_file: dict, cookies: dict, pdf_cache_d
 
     pdf_file = Path(pdf_cache_dir, pdf_name)
 
-    print([pdf_md5, pdf_name])
+    logger.debug(f"{pdf_md5} {pdf_name}")
 
     if await is_to_download(pdf_file, pdf_md5):
         cookies = dict(indico_session_http=http_sess)
@@ -136,7 +136,7 @@ def event_pdf_report(path: str):
     
     report = dict()
     
-    logger.info(f"event_pdf_report >>> {path}")
+    # logger.info(f"event_pdf_report >>> {path}")
     
     with open(path, 'rb') as fh:
         try:
@@ -146,7 +146,7 @@ def event_pdf_report(path: str):
         except Exception as e:
             logger.error(e, exc_info=True)
 
-    logger.info(f"event_pdf_report >>> {report}")
+    # logger.info(f"event_pdf_report >>> {report}")
     
     return report
 

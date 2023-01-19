@@ -61,5 +61,5 @@ class UvicornWebappManager:
 
         app = _get_app()
 
-        # await run_unicorn(app)
-        await run_hypercorn(app)
+        await run_unicorn(app)
+        # await run_hypercorn(app)

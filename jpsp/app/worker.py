@@ -1,4 +1,3 @@
-import uuid
 import logging as lg
 
 from datetime import datetime
@@ -53,7 +52,7 @@ class RedisWorkerManager():
 
         async with create_task_group() as tg:
             async with receiver:
-                for i in range(2):
+                for i in range(8):
                     tg.start_soon(self.process_task_worker,
                                   i, receiver.clone())
 
@@ -183,6 +182,7 @@ class RedisWorkerManager():
         except BaseException as e:
             logger.error(f"Worker sub: Internal Error", e, exc_info=True)
 
+
     async def process_task_worker(self, worker_id: int, receiver: MemoryObjectReceiveStream):
         """ """
 
@@ -202,7 +202,10 @@ class RedisWorkerManager():
                         params = task.get('params', None)
                         context = task.get('context', None)
 
-                        await self.execute_in_current_thread(worker_id, method, params, context)
+                        # await self.execute_in_current_thread(worker_id, method, params, context)
+                        await self.execute_in_worker_thread(worker_id, method, params, context)
+                        
+                        logger.debug(f"Worker {worker_id}: End")
 
                     except BaseException:
                         logger.error(
@@ -215,7 +218,6 @@ class RedisWorkerManager():
         await self.exec_in_loop(worker_id, method, params, context)
 
     async def execute_in_worker_thread(self, worker_id: int, method: dict, params: dict, context: dict):
-
         def in_thread(portal: BlockingPortal):
             portal.start_task_soon(
                 self.exec_in_loop, worker_id, method, params, context)
@@ -229,7 +231,7 @@ class RedisWorkerManager():
 
         task_id: str = context.get('uuid', None)
 
-        logger.debug(
+        logger.info(
             f"Worker Thread {worker_id}: "
             f"Begin task {method} "
         )
@@ -253,7 +255,7 @@ class RedisWorkerManager():
         except BaseException as error:
             await TaskRunner.send_error(task_id=task_id, task=method, error=error)
         finally:
-            logger.debug(
+            logger.info(
                 f"Worker Thread {worker_id}: "
                 f"End task {method} "
                 f"{((datetime.now()) - start_time).total_seconds()}"
