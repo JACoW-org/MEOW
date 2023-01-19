@@ -1,8 +1,13 @@
+import logging as lg
+
 from abc import abstractmethod, ABC
-from typing import Any, AsyncGenerator
+from typing import AsyncGenerator, Callable
 
 from jpsp.tasks.infra.task_request import TaskRequest
 from jpsp.tasks.infra.task_response import TaskResponse
+
+
+logger = lg.getLogger(__name__)
 
 
 class AbstractTask(ABC):
@@ -15,3 +20,4 @@ class AbstractTask(ABC):
     @abstractmethod
     async def run(self, params: dict, context: dict = {}) -> AsyncGenerator:
         """ """
+

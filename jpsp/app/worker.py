@@ -241,10 +241,13 @@ class RedisWorkerManager():
                 task_id, method, params, context)
 
             async for result in async_generator:
-                if result.get('type') == 'final':
-                    await TaskRunner.send_result(task_id=task_id, task=method, result=result)
+                type = result.get('type', '')
+                value = result.get('value', '')
+                
+                if type == 'final':
+                    await TaskRunner.send_result(task_id=task_id, task=method, result=value)
                 else:
-                    await TaskRunner.send_progress(task_id=task_id, task=method, progress=result)
+                    await TaskRunner.send_progress(task_id=task_id, task=method, progress=value)
 
             await TaskRunner.send_end(task_id=task_id, task=method, result={})
         except BaseException as error:

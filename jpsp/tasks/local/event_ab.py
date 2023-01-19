@@ -1,39 +1,23 @@
-import logging
-import base64
+import logging as lg
 
 from typing import AsyncGenerator
 
-from jpsp.services.local.abstract_booklet.create_abstract_booklet \
-    import create_abstract_booklet_from_event
-    
-from jpsp.services.local.abstract_booklet.export_abstract_booklet \
-    import export_abstract_booklet_to_odt
+from jpsp.services.local.event.event_abstract_booklet import event_abstract_booklet
 
 from jpsp.tasks.infra.abstract_task import AbstractTask
 
 
-logger = logging.getLogger(__name__)
+logger = lg.getLogger(__name__)
 
 
 class EventAbTask(AbstractTask):
     """ EventAbTask """
 
     async def run(self, params: dict, context: dict = {}) -> AsyncGenerator[dict, None]:
-        """ Main Function """
-        
+
         event: dict = params.get('event', dict())
         cookies: dict = params.get('cookies', dict())
         settings: dict = params.get('settings', dict())
-
-        abstract_booklet = await create_abstract_booklet_from_event(event, cookies, settings)
-
-        abstract_booklet_odt = export_abstract_booklet_to_odt(abstract_booklet, event, cookies, settings)
-
-        b64 = base64.b64encode(abstract_booklet_odt.getvalue()).decode('utf-8')
         
-        event_id = params.get('id', 'event')
-        event_title = params.get('title', 'title')
-        suffix = 'abstrack_booklet'
-        ext = 'odt'
-
-        yield {'b64': b64, 'filename': f'{event_id}_{event_title}_{suffix}.{ext}'}
+        async for r in event_abstract_booklet(event, cookies, settings):
+            yield r

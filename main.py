@@ -41,6 +41,7 @@ async def main() -> None:
 
     await srs.redis_manager.prepare()
     await srs.redis_manager.migrate()
+    # await srs.redis_manager.migrate()
 
     async with create_task_group() as tg:
         tg.start_soon(jpsp_webapp)
@@ -104,8 +105,8 @@ if __name__ == "__main__":
 #
 #
 # run(main)
-
-
+# 
+# 
 # async def app(scope, receive, send):
 #
 #     app = Starlette(

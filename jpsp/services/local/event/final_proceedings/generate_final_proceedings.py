@@ -1,9 +1,12 @@
 import io
+import logging as lg
 
 from anyio import Path
 
-from jpsp.utils.datetime import datedict_to_tz_datetime, format_datetime_full, format_datetime_time
-from jpsp.utils.serialization import json_encode
+from jpsp.utils.datetime import format_datetime_full, format_datetime_time
+
+
+logger = lg.getLogger(__name__)
 
 
 async def generate_final_proceedings(final_proceedings: dict):
@@ -14,7 +17,7 @@ async def generate_final_proceedings(final_proceedings: dict):
 
     await working_dir.mkdir(parents=True, exist_ok=True)
 
-    print('temporary directory', await working_dir.absolute())
+    logger.debug(f'temporary directory {await working_dir.absolute()}')
 
     mkdocs_yml = Path(working_dir, "mkdocs.yml")
     await mkdocs_yml.write_text(await get_mkdocs_yml_content(event))

@@ -1,21 +1,21 @@
 import io
-import logging as lg
 import ulid
+import logging as lg
 
-from itertools import groupby
 from operator import itemgetter
 
 from odf.opendocument import OpenDocumentText, OpenDocument
 from odf.style import Style, TextProperties, ParagraphProperties, TableProperties
 
 from odf.table import Table, TableColumns, TableColumn, TableRows, TableRow, TableCell
-from odf.text import H, A, Span, P, HiddenParagraph, HiddenText, SoftPageBreak
-from odf.text import TableOfContent, TableOfContentSource, TableOfContentEntryTemplate
+
 from odf.text import IndexBody, IndexTitle, IndexEntryLinkStart, IndexEntryChapter, \
     IndexEntryPageNumber, IndexEntryText, IndexEntryLinkEnd, IndexTitleTemplate, \
-    IndexEntryTabStop, IndexEntrySpan, Tab, BookmarkStart, BookmarkEnd, BookmarkRef
+    IndexEntryTabStop, IndexEntrySpan, BookmarkStart, BookmarkEnd, TableOfContent, \
+    TableOfContentSource, TableOfContentEntryTemplate, H, Span, P, SoftPageBreak
 
 from jpsp.utils.datetime import format_datetime_time, format_datetime_full
+
 
 logger = lg.getLogger(__name__)
 
@@ -175,8 +175,8 @@ def _abstract_booklet_idx(ab: dict):
 
     for session in ab.get('sessions', list()):
 
-        print(">", session.get('code'), ' - ', session.get('title'), ' - ',
-              session.get('start'), ' - ', session.get('end'))
+        # print(">", session.get('code'), ' - ', session.get('title'), ' - ',
+        #       session.get('start'), ' - ', session.get('end'))
 
         idx[session.get('code')] = dict(
             uuid=str(ulid.ULID()),
@@ -313,6 +313,7 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
 
     for session in ab.get('sessions', []):
 
+        print("")
         print(">", session.get('code'), ' - ', session.get('title'), ' - ',
               session.get('start'), ' - ', session.get('end'))
 
@@ -375,11 +376,11 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
         odt.text.addElement(P())  # type: ignore
 
         for contribution in session.get('contributions', []):
-
-            print()
+           
+            print("")
             print(">>> " + contribution.get('code'), ' - ', contribution.get('title'), ' - ',
-                  contribution.get('start'), ' - ', contribution.get('end'))
-            print()
+                   contribution.get('start'), ' - ', contribution.get('end'))
+            print("")
 
             contribution_code = contribution.get('code')
             contribution_title = contribution.get('title')
@@ -388,30 +389,24 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
 
             contribution_start = format_datetime_time(
                 contribution.get('start'))
+            
             contribution_end = format_datetime_time(
                 contribution.get('end'))
 
-            contribution_h1 = ab_contribution_h1 \
-                .replace("{code}", contribution_code) \
-                .replace("{title}", contribution_title) \
-                .replace("{start}", contribution_start) \
-                .replace("{end}", contribution_end)
+            # contribution_h1 = ab_contribution_h1 \
+            #     .replace("{code}", contribution_code) \
+            #     .replace("{title}", contribution_title) \
+            #     .replace("{start}", contribution_start) \
+            #     .replace("{end}", contribution_end)
 
-            contribution_h2 = ab_contribution_h2 \
-                .replace("{code}", contribution_code) \
-                .replace("{title}", contribution_title) \
-                .replace("{start}", contribution_start) \
-                .replace("{end}", contribution_end)
+            # contribution_h2 = ab_contribution_h2 \
+            #     .replace("{code}", contribution_code) \
+            #     .replace("{title}", contribution_title) \
+            #     .replace("{start}", contribution_start) \
+            #     .replace("{end}", contribution_end)
 
-            contribution_header = contribution_h1 if not \
-                session.get('is_poster') else contribution_h2
-
-            # contribution_outline = H(outlinelevel=2, stylename=styles.get('hid'))
-            # contribution_outline.addElement(
-            #     Span(text=f"{contribution_code} - {contribution_title}")
-            # )
-
-            # , stylename=styles.get('bkm')
+            # contribution_header = contribution_h1 if not \
+            #     session.get('is_poster') else contribution_h2
 
             contribution_h1 = H(outlinelevel=2, stylename=styles.get('h3'))
 
@@ -468,14 +463,6 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
             contribution_bookmark.addElement(
                 BookmarkEnd(name=contribution_idx.get('uuid')))
 
-            # odt.text.addElement(  # type: ignore
-            #     contribution_h1
-            # )
-            #
-            # odt.text.addElement(  # type: ignore
-            #     contribution_h2
-            # )
-
             odt.text.addElement(  # type: ignore
                 contribution_dt
             )
@@ -484,16 +471,9 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
                 contribution_bookmark
             )
 
-            # odt.text.addElement(  # type: ignore
-            #     H(outlinelevel=3, stylename=styles.get(
-            #         'h4'), text=contribution_title)
-            # )
-
             contribution_speakers_ids = [
                 int(item.get('id')) for item in contribution.get('speakers', [])
             ]
-
-            print("contribution_speakers_ids:", contribution_speakers_ids)
 
             contribution_primary_authors_dict: dict[str, list] = {}
 
@@ -525,11 +505,6 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
 
                 contribution_primary_authors_groups.append(
                     {'key': key, 'items': sorted_items})
-
-            print("contribution_primary_authors_indico:",
-                  contribution.get('primary_authors', []))
-            print("contribution_primary_authors_groups:",
-                  contribution_primary_authors_groups)
 
             if contribution_primary_authors_groups:
 
@@ -589,10 +564,6 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
                     {'key': key, 'items': sorted(
                         items, key=itemgetter('first', 'last'))})
 
-            print("contribution_coauthors_indico:",
-                  contribution.get('coauthors', []))
-            print("contribution_coauthors_groups:",
-                  contribution_coauthors_groups)
 
             if contribution_coauthors_groups:
 
@@ -632,12 +603,9 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
                     contribution_coauthors_para
                 )
 
+
             # Black line
             odt.text.addElement(P())  # type: ignore
-
-            # print("--- " + contribution.get('description'),
-            #       contribution.get('field_values'),
-            #       settings.get('custom_fields'))
 
             # Description
             description_lines = contribution.get(
@@ -679,6 +647,7 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
 
 
 def export_abstract_booklet_to_odt(ab: dict, event: dict, cookies: dict, settings: dict) -> io.BytesIO:
+    """ Abstract Booklet - Open Document Format Macro """
     """
         Sub Main
 

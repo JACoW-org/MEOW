@@ -59,7 +59,7 @@ class TaskRunner:
     @classmethod
     async def send_result(cls, task_id: str, task: str, result: dict) -> None:
         logger.debug(f"send_result {task_id} {task}")
-        await cls.send('task:progress', task_id, task, result)
+        await cls.send('task:result', task_id, task, result)
 
     @classmethod
     async def send_end(cls, task_id: str, task: str, result: dict) -> None:

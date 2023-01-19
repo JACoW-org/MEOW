@@ -1,4 +1,9 @@
+import logging as lg
+
 from anyio import Path
+
+
+logger = lg.getLogger(__name__)
 
 
 async def clean_final_proceedings(event: dict, cookies: dict, settings: dict):
@@ -7,7 +12,7 @@ async def clean_final_proceedings(event: dict, cookies: dict, settings: dict):
     
     await working_dir.mkdir(parents=True, exist_ok=True)
 
-    print('temporary directory', await working_dir.absolute())
+    logger.debug('temporary directory', await working_dir.absolute())
     
     # await working_dir.rmdir()
     

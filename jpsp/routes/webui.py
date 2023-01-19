@@ -1,9 +1,11 @@
-import logging
+import logging as lg
 
 from starlette.routing import Mount
 from starlette.staticfiles import StaticFiles
 
-logger = logging.getLogger(__name__)
+
+logger = lg.getLogger(__name__)
+
 
 webui = StaticFiles(directory='webui')
 

@@ -51,8 +51,7 @@ async def event_pdf_check(event: dict, cookies: dict, settings: dict):
     """ """
 
     # logger.debug(f'event_pdf_check - count: {len(contributions)} - cookies: {cookies}')
-    
-    
+
     contributions: list[dict] = event.get("contributions", list())
 
     files = await extract_event_pdf_files(contributions)
@@ -76,14 +75,23 @@ async def event_pdf_check(event: dict, cookies: dict, settings: dict):
             async with receive_reports_stream:
                 async for report in receive_reports_stream:
                     checked_files = checked_files + 1
-                    
+
                     # print('receive_reports_stream::report-->',
                     #       checked_files, total_files)
-
-                    yield report
+                    
+                    yield dict(
+                        type='progress',
+                        value=report
+                    )
 
                     if checked_files >= total_files:
                         receive_reports_stream.close()
+                        
+                        yield dict(
+                            type='final',
+                            value=None
+                        )
+
         except ClosedResourceError:
             pass
 
@@ -127,7 +135,7 @@ async def _run(f: dict, c: dict):
     """ """
 
     # url = f.get('download_url', '')
-    
+
     # logger.debug(f'_task: begin -> {url} -> {c}')
 
     # await sleep(15)

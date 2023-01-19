@@ -1,9 +1,10 @@
-import logging
+import logging as lg
 
 from jpsp.tasks.infra.abstract_task import AbstractTask
 from jpsp.tasks.infra.task_repository import TaskRepository
 
-logger = logging.getLogger(__name__)
+
+logger = lg.getLogger(__name__)
 
 
 class TaskFactory:
@@ -15,7 +16,7 @@ class TaskFactory:
 
         task_cls = await TaskRepository.get_task(code)
 
-        logging.debug(f"create_task {code}")
+        logger.debug(f"create_task {code}")
 
         task_obj = task_cls(args)
 
