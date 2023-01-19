@@ -1,29 +1,26 @@
-
-from io import StringIO
+import nltk
 
 import logging as lg
 import hashlib as hl
 
-import nltk
-
 from fitz import Document
 
 from typing import AsyncGenerator
+from io import StringIO, open, BytesIO
 
-from anyio import Path, create_task_group, CapacityLimiter
+
+from anyio import Path, create_task_group, CapacityLimiter, to_process
 from anyio import create_memory_object_stream, ClosedResourceError
 
 from anyio.streams.memory import MemoryObjectSendStream
 
-from sklearn.feature_extraction.text import TfidfTransformer, CountVectorizer, TfidfVectorizer
-
-
 from jpsp.utils.http import download_file
 
-from nltk.tokenize import word_tokenize
+from nltk.tokenize import wordpunct_tokenize
 from nltk.stem.snowball import SnowballStemmer
 
 from jpsp.utils import keywords
+
 
 nltk.download('punkt')
 nltk.download('stopwords')
@@ -55,23 +52,17 @@ async def event_pdf_keywords(event: dict, cookies: dict, settings: dict) -> Asyn
 
     limiter = CapacityLimiter(6)
 
+    stemmer = SnowballStemmer("english")
+    # stem default keywords
+    stem_keywords_dict = stem_keywords_as_tree(keywords.KEYWORDS, stemmer)
+
     async with create_task_group() as tg:
         async with send_reports_stream:
             for index, current in enumerate(files):
                 tg.start_soon(_task, limiter, total_files,
                               index, current, cookies, pdf_dir,
+                              stemmer, stem_keywords_dict,
                               send_reports_stream.clone())
-
-        stemmer = SnowballStemmer("english")
-
-        # stem default keywords
-        stem_keywords_dict = {}
-        for keyword in keywords.KEYWORDS:
-            stem = stemmer.stem(keyword)
-            stem_keywords_dict[stem] = keyword
-
-        # debug print
-        logger.debug(f'keywords as stems {stem_keywords_dict}')
 
         result = []
 
@@ -80,20 +71,10 @@ async def event_pdf_keywords(event: dict, cookies: dict, settings: dict) -> Asyn
                 async for report in receive_reports_stream:
                     checked_files = checked_files + 1
 
-                    # tokenize report
-                    report_tokens = tokenize_txt(report.get('txt'))
-
-                    # tokens stemming
-                    keywords_counts = get_paper_keywords_by_stem(
-                        report_tokens, stemmer, stem_keywords_dict)
-
                     result.append(dict(
                         file=report.get('file'),
-                        keywords=list(keywords_counts.keys())
+                        keywords=report.get('keywords')
                     ))
-
-                    logger.debug(
-                        f'keyword count for report {report.get("file").get("filename")}: {keywords_counts}')
 
                     yield dict(
                         type='progress',
@@ -107,28 +88,6 @@ async def event_pdf_keywords(event: dict, cookies: dict, settings: dict) -> Asyn
                             value=result
                         )
 
-                        # vectorizer = TfidfVectorizer(
-                        #     token_pattern=r"(?u)\b[a-zA-z]{3,}\b",
-                        #     stop_words='english',
-                        #     max_features=500,
-                        # )
-
-                        # vectorizer.fit_transform([
-                        #     r.get('txt') for r in reports
-                        # ])
-
-                        # features = vectorizer.get_feature_names_out()
-
-                        # result = [
-                        #     get_keywords(vectorizer, features, r)
-                        #     for r in reports
-                        # ]
-
-                        # yield dict(
-                        #     type='final',
-                        #     value=result
-                        # )
-
                         receive_reports_stream.close()
 
         except ClosedResourceError:
@@ -140,7 +99,7 @@ def sort_coo(coo_matrix):
     return sorted(tuples, key=lambda x: (x[1], x[0]), reverse=True)
 
 
-def extract_topn_from_vector(feature_names, sorted_items, topn=10):
+def extract_topn_from_vector(feature_names, sorted_items, topn=10) -> dict:
 
     sorted_items = sorted_items[:topn]
 
@@ -155,6 +114,99 @@ def extract_topn_from_vector(feature_names, sorted_items, topn=10):
         results[feature_vals[idx]] = score_vals[idx]
 
     return results
+
+
+def stem_keywords_greedy(keywords: list[str], stemmer: SnowballStemmer) -> dict[str, str]:
+
+    keywords_stems = {}
+
+    for keyword in keywords:
+        keywords_stems[stemmer.stem(wordpunct_tokenize(keyword)[0])] = keyword
+
+    return keywords_stems
+
+
+def stem_keywords_as_tree(keywords: list[str], stemmer: SnowballStemmer) -> dict[str, list[str]]:
+
+    keywords_stems_tree: dict[str, list[str]] = {}
+
+    for keyword in keywords:
+        # TODO use different tokenization method to improve
+        keyword_tokens = wordpunct_tokenize(keyword)
+        first_token_stem = stemmer.stem(keyword_tokens[0])
+        if first_token_stem in keywords_stems_tree:
+            keywords_stems_tree[first_token_stem].append(keyword)
+        else:
+            keywords_stems_tree[first_token_stem] = [keyword]
+
+    return keywords_stems_tree
+
+
+def get_keywords_from_text_greedy(text: str, stemmer: SnowballStemmer, stem_keywords: dict) -> list[str]:
+
+    text_tokens = wordpunct_tokenize(text)
+
+    text_keywords_counts: dict[str, int] = {}
+    for token in text_tokens:
+        token_stem = stemmer.stem(token)
+        if token_stem in stem_keywords:
+            keyword = stem_keywords[token_stem]
+            if keyword in text_keywords_counts:
+                text_keywords_counts[keyword] += 1
+            else:
+                text_keywords_counts[keyword] = 1
+
+    return get_top_keywords(text_keywords_counts)
+
+
+def get_keywords_from_text(text: str, stemmer: SnowballStemmer, stem_keywords_tree: dict[str, list[str]]) -> list[str]:
+
+    text_tokens: list[str] = wordpunct_tokenize(text)
+
+    # init keywords counts
+    text_keywords_counts: dict[str, int] = {}
+    # O(n)
+    # for i in range(len(text_tokens)):
+    for i, token in enumerate(text_tokens):
+
+        # token: str = text_tokens[i]
+        if stemmer.stem(token) in stem_keywords_tree:
+
+            token_stem: str = stemmer.stem(token)
+            # O(m), m is the amount of keywords in the list with the same stem
+            for keyword in stem_keywords_tree[token_stem]:
+
+                # TODO use different tokenization method to improve
+                keyword_tokens: list[str] = wordpunct_tokenize(keyword)
+                j: int = 1
+                isMatch: bool = True
+                keyword_tokens_len: int = len(keyword_tokens)
+                # O(k), where k is usually ~1/2
+                while (isMatch and j < keyword_tokens_len):
+                    isMatch = keyword_tokens[j] == text_tokens[i + j]
+                    j += 1
+
+                if isMatch:
+                    if keyword in text_keywords_counts:
+                        text_keywords_counts[keyword] += 1
+                    else:
+                        text_keywords_counts[keyword] = 1
+
+    return get_top_keywords(text_keywords_counts)
+
+
+def get_top_keywords(candidates: dict[str, int]) -> list[str]:
+
+    sorted_candidates = sorted(
+        candidates.items(), key=lambda x: x[1], reverse=True)
+
+    top_keywords = []
+    index = 0
+    while (index < len(sorted_candidates) and (index < 5 or sorted_candidates[index][1] == sorted_candidates[index - 1][1])):
+        top_keywords.append(sorted_candidates[index][0])
+        index += 1
+
+    return top_keywords
 
 
 def get_keywords(vectorizer, features, report):
@@ -188,21 +240,23 @@ async def extract_event_pdf_files(elements: list[dict]) -> list:
     return files
 
 
-async def _task(l: CapacityLimiter, t: int, i: int, f: dict, c: dict, p: Path, res: MemoryObjectSendStream):
+async def _task(l: CapacityLimiter, t: int, i: int, f: dict, c: dict, p: Path, stemmer: SnowballStemmer, stem_keywords_dict: dict[str, list[str]], res: MemoryObjectSendStream):
     """ """
 
     async with l:
-        r = await _run(f, c, p)
+        k = await _run(f, c, p, stemmer, stem_keywords_dict)
+        # k = await to_process.run_sync(_run, f, c, p, stemmer, stem_keywords_dict)
 
         await res.send({
             "index": i,
             "total": t,
             "file": f,
-            "txt": r
+            # "txt": r,
+            "keywords": k
         })
 
 
-async def _run(f: dict, c: dict, p: Path):
+async def _run(f: dict, c: dict, p: Path, stemmer: SnowballStemmer, stem_keywords_dict: dict[str, list[str]]):
     """ """
 
     md5 = f.get('md5sum', '')
@@ -212,15 +266,29 @@ async def _run(f: dict, c: dict, p: Path):
 
     file = Path(p, name)
 
-    # print([md5, name])
+    print([md5, name])
 
     if await _is_to_download(file, md5):
         cookies = dict(indico_session_http=sess)
         await download_file(url=url, file=file, cookies=cookies)
 
-    txt = pdf_to_txt(await file.read_bytes())
+    # txt = pdf_to_txt(await file.read_bytes())
 
-    return txt
+    # paper_keywords = get_keywords_from_text(txt, stemmer, stem_keywords_dict)
+    paper_keywords = await to_process.run_sync(get_keywords_from_pdf, str(await file.absolute()), stemmer, stem_keywords_dict)
+
+    return paper_keywords
+
+
+def get_keywords_from_pdf(path: str, stemmer: SnowballStemmer, stem_keywords_dict: dict[str, list[str]]):
+
+    with open(path, 'rb') as fh:
+        
+        txt = pdf_to_txt(fh.read())
+
+        pdf_keywords = get_keywords_from_text(txt, stemmer, stem_keywords_dict)
+
+        return pdf_keywords
 
 
 def pdf_to_txt(stream: bytes) -> str:
@@ -237,15 +305,9 @@ def pdf_to_txt(stream: bytes) -> str:
     return out.getvalue()
 
 
-def tokenize_txt(txt: str) -> list:
+def get_paper_keywords_by_stem(paper_tokens: list, stemmer: SnowballStemmer, keywords_stems_map: dict) -> list:
 
-    # TODO possibly add custom rules to perform better tokenization
-
-    return word_tokenize(txt)
-
-
-def get_paper_keywords_by_stem(paper_tokens: list, stemmer: SnowballStemmer, keywords_stems_map: dict) -> dict:
-
+    # get occurences of all keywords given in input for the this paper
     paper_keywords = {}
     for token in paper_tokens:
         stem = stemmer.stem(token)
@@ -256,7 +318,18 @@ def get_paper_keywords_by_stem(paper_tokens: list, stemmer: SnowballStemmer, key
             else:
                 paper_keywords[keyword] = 1
 
-    return paper_keywords
+    # filter keywords
+    sorted_paper_keywords = sorted(
+        paper_keywords.items(), key=lambda x: x[1], reverse=True)
+
+    filtered_paper_keywords = []
+
+    index = 0
+    while (index < 5 or sorted_paper_keywords[index][1] == sorted_paper_keywords[index - 1][1]):
+        filtered_paper_keywords.append(sorted_paper_keywords[index][0])
+        index += 1
+
+    return filtered_paper_keywords
 
 
 async def _is_to_download(f: Path, m: str) -> bool:
