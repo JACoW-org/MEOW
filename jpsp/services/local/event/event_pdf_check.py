@@ -1,50 +1,20 @@
 
-import io
 import logging as lg
-import hashlib as hl
 
-from pikepdf import open as pdf_open
-from pikepdf.objects import Dictionary, Array
+from io import open
+from fitz import Document
 
 from anyio import create_task_group, CapacityLimiter
 from anyio import Path, to_process, to_thread
 from anyio import create_memory_object_stream, ClosedResourceError
 
 from anyio.streams.memory import MemoryObjectSendStream
+from jpsp.services.local.event.event_pdf_utils import is_to_download
 
-from typing import Any, List, Dict, Optional
-from dataclasses import dataclass, asdict
 
 from jpsp.utils.http import download_file
 
 logger = lg.getLogger(__name__)
-
-
-@dataclass
-class PdfPageFontReport:
-    name: Optional[str] = None
-    enc: Optional[str] = None
-    type: Optional[str] = None
-    subtype: Optional[str] = None
-    emb: Optional[bool] = None
-
-
-@dataclass
-class PdfPageSizeReport:
-    width: float
-    height: float
-
-
-@dataclass
-class PdfPageReport:
-    sizes: PdfPageSizeReport
-    fonts: Dict[str, PdfPageFontReport]
-
-
-@dataclass
-class PdfReport:
-    page_count: int
-    pages_report: List[PdfPageReport]
 
 
 async def event_pdf_check(event: dict, cookies: dict, settings: dict):
@@ -68,7 +38,7 @@ async def event_pdf_check(event: dict, cookies: dict, settings: dict):
 
     send_stream, receive_stream = create_memory_object_stream()
 
-    capacity_limiter = CapacityLimiter(6)
+    capacity_limiter = CapacityLimiter(4)
 
     async with create_task_group() as tg:
         async with send_stream:
@@ -82,7 +52,7 @@ async def event_pdf_check(event: dict, cookies: dict, settings: dict):
                     checked_files = checked_files + 1
 
                     # print('receive_reports_stream::report-->',
-                    #       checked_files, total_files)
+                    #       checked_files, total_files, report)
 
                     yield dict(
                         type='progress',
@@ -136,16 +106,6 @@ async def pdf_check_task(capacity_limiter: CapacityLimiter, total_files: int, cu
 async def internal_pdf_check_task(current_file: dict, cookies: dict, pdf_cache_dir: Path):
     """ """
 
-    # url = f.get('download_url', '')
-
-    # logger.debug(f'_task: begin -> {url} -> {c}')
-
-    # await sleep(15)
-    #
-    # logger.debug(f'_task: end -> {url}')
-    #
-    # return {}
-
     pdf_md5 = current_file.get('md5sum', '')
     pdf_name = current_file.get('filename', '')
     http_sess = cookies.get('indico_session_http', '')
@@ -155,7 +115,7 @@ async def internal_pdf_check_task(current_file: dict, cookies: dict, pdf_cache_d
 
     print([pdf_md5, pdf_name])
 
-    if await _is_to_download(pdf_file, pdf_md5):
+    if await is_to_download(pdf_file, pdf_md5):
         cookies = dict(indico_session_http=http_sess)
         await download_file(url=pdf_url, file=pdf_file, cookies=cookies)
 
@@ -171,132 +131,68 @@ async def internal_pdf_check_task(current_file: dict, cookies: dict, pdf_cache_d
     return await to_process.run_sync(event_pdf_report, str(await pdf_file.absolute()))
 
 
-async def _is_to_download(file: Path, md5: str) -> bool:
-    """ """
-
-    already_exists = await file.exists()
-
-    is_to_download = md5 == '' or already_exists == False or md5 != hl.md5(await file.read_bytes()).hexdigest()
-
-    if is_to_download == True:
-        print(await file.absolute(), '-->', 'download')
-    else:
-        print(await file.absolute(), '-->', 'skip')
-
-    return is_to_download
-
-
 def event_pdf_report(path: str):
     """ """
+    
+    report = dict()
+    
+    logger.info(f"event_pdf_report >>> {path}")
+    
+    with open(path, 'rb') as fh:
+        try:
+            pdf = Document(stream=fh.read(), filetype='pdf')
+            report = extract_pdf_report(pdf)
+            pdf.close()
+        except Exception as e:
+            logger.error(e, exc_info=True)
+
+    logger.info(f"event_pdf_report >>> {report}")
+    
+    return report
+
+
+def extract_pdf_report(pdf: Document):
 
     try:
 
-        with open(path, 'rb') as fh:
+        pages_report = []
+        fonts_report = []
+        xref_list = []
 
-            with pdf_open(io.BytesIO(fh.read())) as p:
+        for page in pdf:
 
-                result = PdfReport(page_count=len(p.pages), pages_report=[])
+            for font in page.get_fonts(True):
 
-                # for key, value in p.docinfo.items():
-                #     if key in ['/Title', '/Author', '/CreationDate', '/Creator', '/ModDate', '/Producer']:
-                #         load_meta(key, value, 0, result["meta"], {})
+                xref = font[0]
 
-                for page in p.pages:
+                if xref not in xref_list:
 
-                    fonts = dict()
+                    xref_list.append(xref)
 
-                    if isinstance(page.obj, Array):
-                        for i in page.obj.keys():
-                            load_font("", i, 0, fonts, PdfPageFontReport())
-                    else:
-                        for key, value in page.resources.items():
-                            if key in ['/Font', '/FontFamily', '/FontName', '/Type', '/FontFile', '/FontFile2', '/FontFile3', '/Encoding', '/BaseFont', '/ToUnicode', '/DescendantFonts']:
-                                load_font(key, value, 0, fonts,
-                                          PdfPageFontReport())
+                    extracted = pdf.extract_font(xref)
+                    font_name, font_ext, font_type, buffer = extracted
+                    font_emb = (font_ext == "n/a" or len(buffer) == 0) == False
 
-                    if '/CropBox' in page:
-                        # use CropBox if defined since that's what the PDF viewer would usually display
-                        relevant_box = page.CropBox
-                    elif '/MediaBox' in page:
-                        relevant_box = page.MediaBox
-                    else:
-                        # fall back to ANSI A (US Letter) if neither CropBox nor MediaBox are defined
-                        # unlikely, but possible
-                        relevant_box = None
+                    # print("font_name", font_name, "font_emb", font_emb, "font_ext", font_ext, "font_type", font_type, len(buffer)) # font.name, font.flags, font.bbox, font.buffer
 
-                    # check whether the page defines a UserUnit
-                    userunit = 1
-                    if '/UserUnit' in page:
-                        userunit = float(page.UserUnit)  # type: ignore
+                    fonts_report.append(dict(
+                        name=font_name, emb=font_emb,
+                        ext=font_ext, type=font_type))
 
-                    relevant_box = [
-                        float(x)*userunit
-                        for x in relevant_box  # type: ignore
-                    ]
+            page_report = dict(sizes=dict(
+                width=page.mediabox_size.y,
+                height=page.mediabox_size.x))
 
-                    # obtain the dimensions of the box
-                    width = abs(relevant_box[2] - relevant_box[0])
-                    height = abs(relevant_box[3] - relevant_box[1])
+            pages_report.append(page_report)
 
-                    rotation = 0
-                    if '/Rotate' in page:
-                        rotation = page.Rotate
+        fonts_report.sort(key=lambda x: x.get('name'))
 
-                    if (rotation // 90) % 2 != 0:  # type: ignore
-                        width, height = height, width
+        return dict(
+            page_count=pdf.page_count,
+            pages_report=pages_report,
+            fonts_report=fonts_report
+        )
 
-                    page_report = PdfPageReport(
-                        sizes=PdfPageSizeReport(
-                            width=width,
-                            height=height
-                        ),
-                        fonts=fonts
-                    )
-
-                    result.pages_report.append(page_report)
-
-                p.close()
-
-        return asdict(result)
-
-    except BaseException as e:
+    except Exception as e:
         logger.error(e, exc_info=True)
-        return None
 
-
-def fill_font(key: str, value: Any, level: int, fonts: dict, font: PdfPageFontReport):
-    """ """
-
-    try:
-
-        if level == 2 and key == '/BaseFont':
-            font.name = str(value)
-            fonts[font.name] = font
-
-        if level == 2 and key == '/Encoding':
-            font.enc = str(value)
-
-        if level == 2 and key == '/Type':
-            font.type = str(value)
-
-        if level == 2 and key == '/Subtype':
-            font.subtype = str(value)
-
-        if level == 3 and key in ['/FontFile', '/FontFile2', '/FontFile3']:
-            font.emb = True
-
-    except BaseException as e:
-        # logger.error(e, exc_info=True)
-        pass
-
-
-def load_font(key: str, value: Any, level: int, fonts: dict, font: PdfPageFontReport):
-    """ """
-
-    fill_font(key, value, level, fonts, font)
-
-    # print(level, " " * level, key, ":", type(value), font)
-
-    if isinstance(value, Dictionary):
-        for child_key, child_value in value.items():
-            load_font(child_key, child_value, level+1, fonts, font)

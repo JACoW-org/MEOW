@@ -14,12 +14,14 @@ import io
 import pathlib
 import hashlib
 
+from fitz import Document
+
 from anyio import run, to_process
 from anyio import open_file, run
 
-from pikepdf import open
-from pikepdf.objects import Object  # type: ignore
-from pikepdf.objects import Dictionary, String, Array, Stream
+# from pikepdf import open
+# from pikepdf.objects import Object  # type: ignore
+# from pikepdf.objects import Dictionary, String, Array, Stream
 
 from jpsp.utils.http import download_stream
 

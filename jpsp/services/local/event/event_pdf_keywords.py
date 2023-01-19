@@ -1,18 +1,15 @@
-import nltk
-
 import logging as lg
-import hashlib as hl
 
 from fitz import Document
 
 from typing import AsyncGenerator
 from io import StringIO, open
 
-
 from anyio import Path, create_task_group, CapacityLimiter, to_process, to_thread
 from anyio import create_memory_object_stream, ClosedResourceError
 
 from anyio.streams.memory import MemoryObjectSendStream
+from jpsp.services.local.event.event_pdf_utils import is_to_download
 
 from jpsp.utils.http import download_file
 
@@ -51,7 +48,7 @@ async def event_pdf_keywords(event: dict, cookies: dict, settings: dict) -> Asyn
 
     send_stream, receive_stream = create_memory_object_stream()
 
-    capacity_limiter = CapacityLimiter(6)
+    capacity_limiter = CapacityLimiter(4)
 
     async with create_task_group() as tg:
         async with send_stream:
@@ -60,34 +57,26 @@ async def event_pdf_keywords(event: dict, cookies: dict, settings: dict) -> Asyn
                               current_index, current_file, cookies, pdf_cache_dir,
                               stemmer, stem_keywords_dict, send_stream.clone())
 
-        result = []
-
         try:
             async with receive_stream:
                 async for report in receive_stream:
                     checked_files = checked_files + 1
-
-                    result.append(dict(
-                        file=report.get('file'),
-                        keywords=report.get('keywords')
-                    ))
+                    
+                    # print('receive_reports_stream::report-->',
+                    #       checked_files, total_files, report)
 
                     yield dict(
                         type='progress',
-                        value=dict(
-                            file=report.get('file'),
-                            keywords=report.get('keywords')
-                        )
+                        value=report
                     )
 
                     if checked_files >= total_files:
+                        receive_stream.close()
 
                         yield dict(
                             type='final',
-                            value=result
+                            value=None
                         )
-
-                        receive_stream.close()
 
         except ClosedResourceError:
             pass
@@ -110,11 +99,11 @@ async def extract_event_pdf_files(elements: list[dict]) -> list:
     return files
 
 
-async def pdf_keywords_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int, current_file: dict, context: dict, pdf_cache_dir: Path, stemmer: SnowballStemmer, stem_keywords_dict: dict[str, list[str]], res: MemoryObjectSendStream) -> None:
+async def pdf_keywords_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int, current_file: dict, cookies: dict, pdf_cache_dir: Path, stemmer: SnowballStemmer, stem_keywords_dict: dict[str, list[str]], res: MemoryObjectSendStream) -> None:
     """ """
 
     async with capacity_limiter:
-        keywords = await internal_pdf_keywords_task(current_file, context, pdf_cache_dir, stemmer, stem_keywords_dict)
+        keywords = await internal_pdf_keywords_task(current_file, cookies, pdf_cache_dir, stemmer, stem_keywords_dict)
 
         await res.send({
             "index": current_index,
@@ -137,7 +126,7 @@ async def internal_pdf_keywords_task(current_file: dict, cookies: dict, pdf_cach
 
     print([pdf_md5, pdf_name])
 
-    if await _is_to_download(pdf_file, pdf_md5):
+    if await is_to_download(pdf_file, pdf_md5):
         cookies = dict(indico_session_http=http_sess)
         await download_file(url=pdf_url, file=pdf_file, cookies=cookies)
 
@@ -151,21 +140,6 @@ async def internal_pdf_keywords_task(current_file: dict, cookies: dict, pdf_cach
     paper_keywords = await to_process.run_sync(get_keywords_from_pdf, str(await pdf_file.absolute()), stemmer, stem_keywords_dict)
 
     return paper_keywords
-
-
-async def _is_to_download(file: Path, md5: str) -> bool:
-    """ """
-
-    already_exists = await file.exists()
-
-    is_to_download = md5 == '' or already_exists == False or md5 != hl.md5(await file.read_bytes()).hexdigest()
-
-    if is_to_download == True:
-        print(await file.absolute(), '-->', 'download')
-    else:
-        print(await file.absolute(), '-->', 'skip')
-
-    return is_to_download
 
 
 def get_keywords_from_pdf(path: str, stemmer: SnowballStemmer, stem_keywords_dict: dict[str, list[str]]) -> list[str]:
@@ -183,12 +157,24 @@ def pdf_to_txt(stream: bytes) -> str:
     """ """
 
     out = StringIO()
+    
+    try:
 
-    doc = Document(stream=stream, filetype='pdf')
-
-    for page in doc:  # iterate the document pages
-        text = page.get_textpage().extractText()  # get plain text (is in UTF-8)
-        out.write(text)  # write text of page
+        doc = Document(stream=stream, filetype='pdf')
+        
+        try:
+            
+            for page in doc:  # iterate the document pages
+                text = page.get_textpage().extractText()  # get plain text (is in UTF-8)
+                out.write(text)  # write text of page
+                    
+        except Exception as e:
+            logger.error(e, exc_info=True)
+            
+        doc.close()
+                  
+    except Exception as e:
+        logger.error(e, exc_info=True)
 
     return out.getvalue()
 

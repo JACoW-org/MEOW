@@ -10,6 +10,8 @@ import time
 from anyio import run, to_process
 from anyio import open_file, run
 
+from fitz import Document
+
 from jpsp.utils.http import download_stream
 
 from io import StringIO
@@ -38,8 +40,6 @@ PDF = "/home/fabio.meneghetti/Projects/elettra/src/jpsp-ng/tests/pikepdf/AppleII
 
 def pdf_to_txt(stream: bytes) -> str:
 
-    from fitz import Document
-
     out = StringIO()
 
     doc = Document(stream=stream, filetype='pdf')
@@ -61,7 +61,7 @@ async def main():
 
     txt = pdf_to_txt(pdf)
 
-    # print(txt)
+    print(txt)
 
     print(time.time() - start)
 

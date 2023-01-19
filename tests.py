@@ -1,6 +1,6 @@
 import anyio
 
-from tests.pikepdf.main_pages import main
+from tests.pikepdf.main_report import main
 # from tests.hugo.generate import main
 
 

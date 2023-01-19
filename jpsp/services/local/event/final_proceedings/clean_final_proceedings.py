@@ -12,7 +12,7 @@ async def clean_final_proceedings(event: dict, cookies: dict, settings: dict):
     
     await working_dir.mkdir(parents=True, exist_ok=True)
 
-    logger.debug('temporary directory', await working_dir.absolute())
+    logger.debug(f"temporary directory {await working_dir.absolute()}")
     
     # await working_dir.rmdir()
     
