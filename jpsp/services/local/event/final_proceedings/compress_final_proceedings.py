@@ -29,9 +29,11 @@ async def compress_final_proceedings(event: dict, cookies: dict, settings: dict)
 
     zip_file_path = await zip_file.absolute()
     out_dir_path = await out_dir.absolute()
+    
+    zip_cmd = await Path('bin', '7zzs').absolute()
 
     # 7z a /tmp/12/12.7z /tmp/12/out -m0=LZMA2:d=64k -mmt=4
-    result = await run_process(f"7z a {zip_file_path} {out_dir_path} -m0=LZMA2:d=64k -mmt=4")
+    result = await run_process(f"{zip_cmd} a {zip_file_path} {out_dir_path} -m0=LZMA2:d=64k -mmt=4")
     # result = await run_process(f"zip -6 -r {zip_file_path} {out_dir_path}")
 
     logger.debug(result.stdout.decode())

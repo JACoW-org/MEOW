@@ -14,7 +14,7 @@ async def main():
     
     site_path = await Path('var', 'run', uuid).absolute()
     
-    hugo_cmd = await Path('hugo', 'hugo').absolute()
+    hugo_cmd = await Path('bin', 'hugo').absolute()
     
     result = await run_process([f"{hugo_cmd}", "new", "site", f"{site_path}"])
     
