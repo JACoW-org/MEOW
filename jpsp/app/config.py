@@ -1,5 +1,5 @@
 
-from pydantic.dataclasses import dataclass
+from dataclasses import dataclass
 from ulid import ULID
 
 from os import environ

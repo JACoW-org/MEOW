@@ -1,7 +1,7 @@
 import abc
+from dataclasses import dataclass
 import logging as lg
 
-import pydantic as pd
 import redis.asyncio as ar
 
 from redis.asyncio.client import Pipeline
@@ -35,15 +35,17 @@ class BaseSearchIndex:
     r: ar.Redis
 
 
-class AbstractModel(pd.BaseModel, abc.ABC):
+@dataclass
+class AbstractModel(abc.ABC):
     """ """
 
-    id: str = pd.Field()
+    id: str
 
     class SearchIndex(BaseSearchIndex):
         pass
 
 
+@dataclass
 class BaseModel(AbstractModel):
     """ """
 
@@ -54,7 +56,7 @@ class BaseModel(AbstractModel):
 
     @classmethod
     def save(cls, model: AbstractModel, pipe: Pipeline):
-        pipe.json().set(cls.key(model.id), Path('.'), model.dict())
+        pipe.json().set(cls.key(model.id), Path('.'), model.__dict__)
 
     @classmethod
     def key(cls, model_id: str):

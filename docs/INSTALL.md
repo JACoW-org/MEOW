@@ -16,6 +16,9 @@ python3 -m venv venv
 ```
 
 
+pip list --outdated 
+
+
 ## RUN
 
 ```
