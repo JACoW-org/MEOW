@@ -11,6 +11,8 @@ from jpsp.app.instances.application import app
 
 from anyio import create_task_group
 
+from jpsp.utils.serialization import json_decode
+
 logger = logging.getLogger(__name__)
 
 
@@ -35,8 +37,8 @@ class WebSocketManager():
 
                             if payload and payload['type'] == 'message':
                                 data = str(payload['data'], 'UTF-8')
-                                # logger.debug(f"broadcast {data}")
-                                await self.broadcast(data)
+                                # logger.debug(f"broadcast {data}")                               
+                                await self.send_message(data)
 
                             await sleep(0.01)
 
@@ -149,10 +151,25 @@ class WebSocketManager():
     # async def disconnect(self, websocket: WebSocket):
     #     app.active_connections.remove(websocket)
 
-    async def broadcast(self, message: str):
-        for connection in app.active_connections:
-            try:
-                await connection.send_text(message)
-            except RuntimeError:
-                pass
+    async def send_message(self, message: str):
+        try:
+            payload: dict = json_decode(message)
+            
+            head: dict = payload.get('head', None)
+            uuid: str = head.get('uuid', None)
+            
+            conn = app.active_connections.get(uuid, None)
+            
+            if conn is not None:
+                await conn.send_text(message)
+            else:
+                logger.error(f"task_id: {uuid} have not a connection")
+        except BaseException:
+            logger.error("subscribe", exc_info=True)
+        
+        # for connection in app.active_connections:
+        #     try:
+        #         await connection.send_text(message)
+        #     except RuntimeError:
+        #         pass
 

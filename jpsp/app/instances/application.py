@@ -21,7 +21,7 @@ class __Instances:
         
     state: __State = __State()
     
-    active_connections: List[WebSocket] = field(default_factory=lambda: [])
+    active_connections: dict[str, WebSocket] = field(default_factory=lambda: {})
 
 
 app = __Instances()

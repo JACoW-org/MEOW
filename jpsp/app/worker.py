@@ -169,16 +169,6 @@ class RedisWorkerManager():
 
                 await __callable()
 
-                # self.task = create_task(
-                #     __callable(),
-                #     name=f'worker_task',
-                #     logger=self.logic.create_logger(),
-                #     message=self.logic.exception_message()
-                # )
-                #
-                # async with create_task_group() as tg:
-                #     tg.start_soon(__callable)
-
         except BaseException as e:
             logger.error(f"Worker sub: Internal Error", e, exc_info=True)
 

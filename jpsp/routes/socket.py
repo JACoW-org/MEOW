@@ -74,11 +74,11 @@ async def __ws_to_r_handler(ws: WebSocket):
     logger.info("ws_to_r_handler >>> END")
 
 
-async def __websocket_tasks(websocket):
+async def __websocket_tasks(ws: WebSocket, id: str):
     """ """
 
     done, pending = await asyncio.wait([
-        __ws_to_r_handler(websocket),
+        __ws_to_r_handler(ws),
     ], return_when=asyncio.FIRST_COMPLETED)
 
     # logger.debug(f"Done task: {done}")
@@ -91,23 +91,28 @@ async def __websocket_tasks(websocket):
             logger.error(exc, exc_info=True)
 
 
-async def __open_websocket(websocket: WebSocket):
+async def __open_websocket(ws: WebSocket, id: str):
     logger.warning('open_websocket')
 
-    await websocket.accept()
-    app.active_connections.append(websocket)
+    await ws.accept()
+    
+    # app.active_connections.append(ws)
+    app.active_connections[id] = ws
 
 
-async def __close_websocket(websocket: WebSocket):
+async def __close_websocket(ws: WebSocket, id: str):
     logger.warning('close_websocket')
 
-    app.active_connections.remove(websocket)
+    # app.active_connections.remove(ws)
+    del app.active_connections[id]
 
 
 async def websocket_endpoint(ws: WebSocket):
     try:
-        # client_id: str = websocket.path_params["client_id"]
-        # assert isinstance(client_id, str) and client_id != "", f"Invalid client_id: {client_id}"
+               
+        id: str = ws.path_params.get("task_id", None)
+        
+        assert isinstance(id, str), f"Invalid task_id: {id}"
 
         cookie_api_key = ws.cookies.get('X-API-KEY', None)
         header_api_key = ws.headers.get('X-API-KEY', None)
@@ -121,9 +126,9 @@ async def websocket_endpoint(ws: WebSocket):
 
         if credential is not None:
 
-            await __open_websocket(ws)
-            await __websocket_tasks(ws)
-            await __close_websocket(ws)
+            await __open_websocket(ws, id)
+            await __websocket_tasks(ws, id)
+            await __close_websocket(ws, id)
 
         else:
             raise HTTPException(status_code=401, detail="Invalid API Key")
@@ -135,5 +140,5 @@ async def websocket_endpoint(ws: WebSocket):
         raise e
 
 routes = [
-    WebSocketRoute('/{client_id}', websocket_endpoint)
+    WebSocketRoute('/{task_id}', websocket_endpoint)
 ]
