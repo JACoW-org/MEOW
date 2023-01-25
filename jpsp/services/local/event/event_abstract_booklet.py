@@ -9,6 +9,8 @@ from jpsp.services.local.event.abstract_booklet.create_abstract_booklet \
 from jpsp.services.local.event.abstract_booklet.export_abstract_booklet \
     import export_abstract_booklet_to_odt
 
+from jpsp.tasks.local.reference.reference import Citation
+
 
 logger = lg.getLogger(__name__)
 
@@ -17,6 +19,23 @@ async def event_abstract_booklet(event: dict, cookies: dict, settings: dict) -> 
     """ """
 
     ab = await create_abstract_booklet_from_event(event, cookies, settings)
+
+    for session in event.get('sessions'):
+        logger.info(session)
+        for contribution in session.get('contributions'):
+            #logger.info(contribution)
+            citation = Citation(
+                'FEL22',
+                contribution.get('code'),
+                contribution.get('primary_authors'),
+                session['title'],
+                'book_title',
+                'pages',
+                'paper',
+                'venue',
+                contribution.get('url')
+                )
+            logger.info(citation.to_bibtex())
 
     odt = export_abstract_booklet_to_odt(ab, event, cookies, settings)
 

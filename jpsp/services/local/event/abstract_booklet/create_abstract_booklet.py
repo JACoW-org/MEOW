@@ -12,7 +12,7 @@ def _sort_list_by_date(val):
     string = format_datetime_sec(val.get('start')) \
         + '_' + val.get('code', '')
         
-    print(string)
+    #print(string)
         
     return string
 
