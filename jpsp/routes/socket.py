@@ -114,15 +114,17 @@ async def websocket_endpoint(ws: WebSocket):
         
         assert isinstance(id, str), f"Invalid task_id: {id}"
 
-        cookie_api_key = ws.cookies.get('X-API-KEY', None)
-        header_api_key = ws.headers.get('X-API-KEY', None)
-
-        logger.info(f'cookie_api_key->{cookie_api_key}')
-        logger.info(f'header_api_key->{header_api_key}')
-
-        credential = await find_credential_by_secret(
-            cookie_api_key if cookie_api_key is not None else header_api_key
-        )
+        # cookie_api_key = ws.cookies.get('X-API-KEY', None)
+        # header_api_key = ws.headers.get('X-API-KEY', None)
+        # logger.info(f'cookie_api_key->{cookie_api_key}')
+        # logger.info(f'header_api_key->{header_api_key}')
+        
+        # credential = await find_credential_by_secret(
+        #     cookie_api_key if cookie_api_key is not None else header_api_key
+        # )
+        
+        api_key: str = ws.path_params.get("api_key", None)
+        credential = await find_credential_by_secret(api_key)
 
         if credential is not None:
 

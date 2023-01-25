@@ -25,3 +25,7 @@ pip list --outdated
 ./venv/bin/python main.py
 ./venv/bin/pytest ./tests
 ```
+
+
+htop -u fabio.meneghetti -F "python main"
+
