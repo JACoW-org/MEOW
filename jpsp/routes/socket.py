@@ -142,5 +142,5 @@ async def websocket_endpoint(ws: WebSocket):
         raise e
 
 routes = [
-    WebSocketRoute('/{task_id}', websocket_endpoint)
+    WebSocketRoute('/{api_key}/{task_id}', websocket_endpoint)
 ]
