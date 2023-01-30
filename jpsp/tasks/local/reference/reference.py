@@ -28,7 +28,7 @@ class Citation:
         self.venue = venue
         self.url = url
 
-    def to_bibtex(self):
+    def to_bibtex(self) -> str:
 
         first_last_name = None
         if len(self.authors) > 0:
@@ -55,7 +55,7 @@ class Citation:
             }}
         """
 
-    def to_latex(self):
+    def to_latex(self) -> str:
 
         first_last_name = None
         if len(self.authors) > 0:
@@ -78,6 +78,12 @@ class Citation:
             \\url{{{self.url}}}
         """
 
-    def to_word():
-        return ''
+    def to_word(self) -> str:
+        return ""
+    
+    def to_ris(self) -> str:
+        return ""
+    
+    def to_xml(self) -> str:
+        return ""
         
