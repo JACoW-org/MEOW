@@ -28,7 +28,7 @@ class PubsubRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
 
         async def __read(p: PubSub):
 
-            # logger.debug('__read')
+            logger.debug('__read')
 
             async with create_task_group() as tg:
                 with move_on_after(2) as scope:
@@ -50,7 +50,7 @@ class PubsubRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
                         
 
         async def __reader(p: PubSub):
-            while app.state.running:
+            while app.state.worker_running:
                 payload = await __read(p)
                 
                 if payload and payload['type'] == 'message':

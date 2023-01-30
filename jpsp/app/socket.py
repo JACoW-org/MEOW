@@ -22,7 +22,7 @@ class WebSocketManager():
     async def run(self):
         
         async def __reader(p: PubSub):
-            while app.state.running:
+            while app.state.webapp_running:
                 try:
                     async with create_task_group() as tg:
                         with move_on_after(2) as scope:

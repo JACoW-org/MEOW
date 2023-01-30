@@ -17,7 +17,8 @@ class __Instances:
     class __State:
         """ """
 
-        running: bool = False
+        webapp_running: bool = False
+        worker_running: bool = False
         
     state: __State = __State()
     

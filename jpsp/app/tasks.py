@@ -29,7 +29,7 @@ async def create_task_queue():
        
     async def _create_task_group():
         async with create_task_group() as tg:
-            for i in range(1, 8):
+            for i in range(1, 2):
                 logger.info(f'start worker {i}')
                 await tg.start(process_task_worker, i)
     
@@ -47,11 +47,11 @@ async def process_task_worker(worker_id: int, task_status: TaskStatus = TASK_STA
     try:
         task_status.started()
         
-        while app.state.running:
+        while app.state.worker_running:
             await process_task_executor(worker_id)
             
-    except RuntimeError:
-        logger.error(f"Worker {worker_id}: Internal Error", exc_info=True)
+    except BaseException as e:
+        logger.error(f"Worker {worker_id}: Internal Error", e, exc_info=True)
 
 
 async def process_task_executor(worker_id: int):
@@ -75,8 +75,8 @@ async def process_task_executor(worker_id: int):
 #
 #        srs.workers_manager.queue.task_done()
 #
-#    except RuntimeError:
-#        logger.error(f"Worker {worker_id}: Internal Error", exc_info=True)
+#    except BaseException as e:
+#        logger.error(f"Worker {worker_id}: Internal Error", e, exc_info=True)
 
 
 async def create_signals_handler():

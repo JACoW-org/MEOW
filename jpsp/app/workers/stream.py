@@ -58,7 +58,7 @@ class StreamRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
 
                 logger.info(f"subscribe >>> worker_group: 'worker_group'")
 
-                while app.state.running:
+                while app.state.worker_running:
                     payload = await __read()
                     if payload:
                         key, messages = payload[0]
