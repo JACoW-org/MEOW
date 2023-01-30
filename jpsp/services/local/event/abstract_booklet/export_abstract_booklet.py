@@ -313,9 +313,9 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
 
     for session in ab.get('sessions', []):
 
-        print("")
-        print(">", session.get('code'), ' - ', session.get('title'), ' - ',
-              session.get('start'), ' - ', session.get('end'))
+        # print("")
+        # print(">", session.get('code'), ' - ', session.get('title'), ' - ',
+        #       session.get('start'), ' - ', session.get('end'))
 
         session_code = session.get('code')
         session_title = session.get('title')
@@ -377,10 +377,10 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
 
         for contribution in session.get('contributions', []):
            
-            print("")
-            print(">>> " + contribution.get('code'), ' - ', contribution.get('title'), ' - ',
-                   contribution.get('start'), ' - ', contribution.get('end'))
-            print("")
+            # print("")
+            # print(">>> " + contribution.get('code'), ' - ', contribution.get('title'), ' - ',
+            #        contribution.get('start'), ' - ', contribution.get('end'))
+            # print("")
 
             contribution_code = contribution.get('code')
             contribution_title = contribution.get('title')

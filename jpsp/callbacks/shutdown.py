@@ -1,7 +1,7 @@
 import logging
 
 # from jpsp.app.redis import destroy_redis_pool
-from jpsp.app.state import destroy_app_state
+from jpsp.app.state import destroy_webapp_state, destroy_worker_state
 
 from jpsp.models.infra.locks import RedisLockList
 from jpsp.utils.http import HttpClientSessions
@@ -15,7 +15,8 @@ async def app_shutdown():
 
     #from main import app
 
-    await destroy_app_state()
+    await destroy_webapp_state()
+    # await destroy_worker_state()
 
     await HttpClientSessions.close_client_sessions()
     await RedisLockList.release_all_locks()

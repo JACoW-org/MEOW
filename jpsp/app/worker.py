@@ -1,8 +1,12 @@
+from asyncio import CancelledError
 import logging as lg
+
+import signal
 
 from datetime import datetime
 
 from typing import Callable, Any
+from jpsp.app.state import create_worker_state, destroy_worker_state
 
 from jpsp.app.workers.logic import AbsRedisWorkerLogicComponent
 from jpsp.tasks.infra.task_runner import TaskRunner
@@ -12,6 +16,10 @@ from anyio import create_memory_object_stream
 from anyio import to_thread
 
 from anyio.from_thread import BlockingPortal
+
+from anyio import open_signal_receiver, create_task_group
+
+from anyio.abc import CancelScope
 
 from anyio.streams.memory import MemoryObjectSendStream
 from anyio.streams.memory import MemoryObjectReceiveStream
@@ -27,16 +35,27 @@ class RedisWorkerManager():
 
     def __init__(self, logic: AbsRedisWorkerLogicComponent):
         self.logic: AbsRedisWorkerLogicComponent = logic
+        
+    async def signal_handler(self, scope: CancelScope):
+        with open_signal_receiver(signal.SIGINT, signal.SIGTERM) as signals:
+            async for signum in signals:
+                logger.info('SIGINT' if signum == signal.SIGINT else 'SIGTERM')
+                scope.cancel()
 
     async def run(self):
 
         # logger.info('run - begin')
-
+        
+        await create_worker_state()
+        
         sender, receiver = create_memory_object_stream(4096)
 
         async with create_task_group() as tg:
+            tg.start_soon(self.signal_handler, tg.cancel_scope)
             tg.start_soon(self.start_listener, sender)
             tg.start_soon(self.start_workers, receiver)
+        
+        await destroy_worker_state()
 
         # logger.info('run - end')
 
@@ -52,7 +71,7 @@ class RedisWorkerManager():
 
         async with create_task_group() as tg:
             async with receiver:
-                for i in range(8):
+                for i in range(2):
                     tg.start_soon(self.process_task_worker,
                                   i, receiver.clone())
 
@@ -169,6 +188,8 @@ class RedisWorkerManager():
 
                 await __callable()
 
+        except CancelledError:
+            logger.info(f"Worker sub: Cancelled")
         except BaseException as e:
             logger.error(f"Worker sub: Internal Error", e, exc_info=True)
 
@@ -201,6 +222,8 @@ class RedisWorkerManager():
                         logger.error(
                             f"Worker {worker_id}: Internal Error", exc_info=True)
 
+        except CancelledError:
+            logger.info(f"Worker {worker_id}: Cancelled")
         except BaseException:
             logger.error(f"Worker {worker_id}: Internal Error", exc_info=True)
 

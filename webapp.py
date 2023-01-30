@@ -8,23 +8,20 @@ uvloop.install()
 from anyio import create_task_group, run
 
 from os import environ
-
-environ['CLIENT_TYPE'] = 'worker'
-
+    
+environ['CLIENT_TYPE'] = 'webapp'  
 
 lg.basicConfig(level=lg.INFO)
 logger = lg.getLogger(__name__)
 
-
 from jpsp.app.instances.services import srs
 
-
-async def jpsp_worker() -> None:
-    # logger.info('jpsp_worker - begin')
-
-    await srs.workers_manager.run()
-
-    # logger.info('jpsp_worker - end')
+# async def jpsp_worker() -> None:
+#     # logger.info('jpsp_worker - begin')
+# 
+#     await srs.workers_manager.run()
+# 
+#     # logger.info('jpsp_worker - end')
 
 
 async def jpsp_webapp() -> None:
@@ -42,7 +39,6 @@ async def jpsp_socket() -> None:
 
     # logger.info('jpsp_webapp - end')
 
-
 async def main() -> None:
     # logger.info('jpsp - begin')
     
@@ -58,14 +54,15 @@ async def main() -> None:
     
     download('punkt')
     download('stopwords')
-
+    
     await srs.redis_manager.prepare()
     await srs.redis_manager.migrate()
 
     async with create_task_group() as tg:
         tg.start_soon(jpsp_webapp)
-        tg.start_soon(jpsp_worker)
+        # tg.start_soon(jpsp_worker)
         tg.start_soon(jpsp_socket)
+        
 
     await srs.redis_manager.destroy()
 

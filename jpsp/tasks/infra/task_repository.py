@@ -4,6 +4,7 @@ from jpsp.tasks.infra.abstract_task import AbstractTask
 from jpsp.tasks.local.check_pdf import CheckPdfTask
 from jpsp.tasks.local.event_ab import EventAbTask
 from jpsp.tasks.local.event_pdf import EventPdfTask
+from jpsp.tasks.local.event_ref import EventRefTask
 from jpsp.tasks.local.event_zip import EventZipTask
 
 # from jpsp.tasks.local.event_put import EventPutTask
@@ -24,6 +25,7 @@ class TaskRepository:
         check_pdf=CheckPdfTask,
         event_zip=EventZipTask,
         event_pdf=EventPdfTask,
+        event_ref=EventRefTask,
         
         # event_put=EventPutTask,
         # xml_exec=ExecProcessTask,

@@ -21,7 +21,7 @@ async def publish(message: dict):
         channel=topic_name, message=json_encode(message)
     )
 
-    logger.debug(f"publish_task {topic_name} {message_id}")
+    logger.info(f"publish_task {topic_name} {message_id}")
 
 
 async def __publish_key() -> str:
@@ -30,16 +30,18 @@ async def __publish_key() -> str:
     workers: list[str] = await __workers()
     topic_name: str = workers[counter % len(workers)]
 
-    logger.debug(f"publish_key {topic_name} {counter} {workers}")
+    logger.info(f"publish_key {topic_name} {counter} {workers}")
 
     return topic_name
 
 
 async def __workers():
 
-    client_list = await dbs.redis_client.client_list()
-    def client_filter(c): return (str(c['name']).startswith('worker_'))
+    def client_filter(c) -> bool: 
+        return (str(c['name']).startswith('worker_'))
 
+    client_list = await dbs.redis_client.client_list('pubsub')
+    
     workers: list[str] = sorted(list(map(
         lambda w: str(w['name']),
         filter(
@@ -59,7 +61,7 @@ async def __ws_to_r_handler(ws: WebSocket):
     logger.info("ws_to_r_handler >>> BEGIN")
 
     try:
-        while app.state.running:
+        while app.state.webapp_running:
             message = await ws.receive_json(mode="text")
             # logger.debug(message)
             if message:
@@ -114,15 +116,17 @@ async def websocket_endpoint(ws: WebSocket):
         
         assert isinstance(id, str), f"Invalid task_id: {id}"
 
-        cookie_api_key = ws.cookies.get('X-API-KEY', None)
-        header_api_key = ws.headers.get('X-API-KEY', None)
-
-        logger.info(f'cookie_api_key->{cookie_api_key}')
-        logger.info(f'header_api_key->{header_api_key}')
-
-        credential = await find_credential_by_secret(
-            cookie_api_key if cookie_api_key is not None else header_api_key
-        )
+        # cookie_api_key = ws.cookies.get('X-API-KEY', None)
+        # header_api_key = ws.headers.get('X-API-KEY', None)
+        # logger.info(f'cookie_api_key->{cookie_api_key}')
+        # logger.info(f'header_api_key->{header_api_key}')
+        
+        # credential = await find_credential_by_secret(
+        #     cookie_api_key if cookie_api_key is not None else header_api_key
+        # )
+        
+        api_key: str = ws.path_params.get("api_key", None)
+        credential = await find_credential_by_secret(api_key)
 
         if credential is not None:
 
@@ -140,5 +144,5 @@ async def websocket_endpoint(ws: WebSocket):
         raise e
 
 routes = [
-    WebSocketRoute('/{task_id}', websocket_endpoint)
+    WebSocketRoute('/{api_key}/{task_id}', websocket_endpoint)
 ]

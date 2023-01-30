@@ -13,9 +13,11 @@ class __Config:
     
     ADMIN_EMAIL: str = 'meneghetti.fabio@gmail.com'
     
+    CLIENT_TYPE: str = str(environ.get('CLIENT_TYPE'))
+    
     REDIS_SERVER_HOST: str = str(environ.get('REDIS_HOST', '127.0.0.1'))
     REDIS_SERVER_PORT: int = int(environ.get('REDIS_PORT', '6379'))
-    REDIS_CLIENT_NAME: str = f'worker_{str(ULID())}'
+    REDIS_CLIENT_NAME: str = f'{CLIENT_TYPE}_{str(ULID())}'
     
     REDIS_NODE_TOPIC: str = REDIS_CLIENT_NAME
     
