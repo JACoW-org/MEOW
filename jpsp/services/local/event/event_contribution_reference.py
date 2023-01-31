@@ -3,7 +3,7 @@ import logging as lg
 from typing import AsyncGenerator
 
 
-from jpsp.tasks.local.reference.reference import Citation
+from jpsp.tasks.local.reference.reference import Citation, Conference, ConferenceStatus, Reference
 
 
 logger = lg.getLogger(__name__)
@@ -11,6 +11,8 @@ logger = lg.getLogger(__name__)
 
 async def event_contribution_reference(event: dict, cookies: dict, settings: dict) -> AsyncGenerator:
     """ """
+    
+    conference = Conference(ConferenceStatus.IN_PROCEEDINGS, event.get('title', ''))
 
     for session in event.get('sessions', []):
         # logger.info(session)
@@ -18,17 +20,8 @@ async def event_contribution_reference(event: dict, cookies: dict, settings: dic
         for contribution in session.get('contributions', []):
             #logger.info(contribution)
             
-            citation = Citation(
-                conference_code='FEL22',
-                paper_id=contribution.get('code'),
-                authors=contribution.get('primary_authors'),
-                title= session['title'],
-                book_title='book_title',
-                pages='pages',
-                paper='paper',
-                venue='venue',
-                url=contribution.get('url')
-                )
+            reference = Reference(paper_id=contribution.get('code'), authors=contribution.get('primary_authors'), title=session['title'], url=contribution.get('url'))
+            citation = Citation(conference, reference)
 
             yield dict(
                 type='progress',

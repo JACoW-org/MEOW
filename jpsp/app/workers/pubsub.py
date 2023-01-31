@@ -29,6 +29,22 @@ class PubsubRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
         async def __read(p: PubSub):
 
             logger.debug('__read')
+            
+            # try:
+            #     
+            #     payload = await p.get_message(
+            #         ignore_subscribe_messages=True,
+            #         timeout=1
+            #     )
+            # 
+            #     self.__log_payload(payload)
+            # 
+            #     return payload
+            # 
+            # except BaseException as e:
+            #     pass
+            # finally:
+            #     await sleep(0.01)
 
             async with create_task_group() as tg:
                 with move_on_after(2) as scope:
@@ -36,11 +52,11 @@ class PubsubRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
                         
                         payload = await p.get_message(
                             ignore_subscribe_messages=True,
-                            timeout=1000
+                            timeout=1
                         )
-
+            
                         self.__log_payload(payload)
-
+            
                         return payload
                 
                     except BaseException as e:
@@ -61,7 +77,7 @@ class PubsubRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
 
         async def __task():
 
-            logger.info(f"subscribe >>> topic: {conf.REDIS_CLIENT_NAME}")
+            logger.debug(f"subscribe >>> topic: {conf.REDIS_CLIENT_NAME}")
 
             try:
                 pubsub: Optional[PubSub] = dbs.redis_client.pubsub()
@@ -69,6 +85,7 @@ class PubsubRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
                     if pubsub is not None:
                         async with pubsub as p:
                             await p.subscribe(conf.REDIS_NODE_TOPIC)
+                            
                             await __reader(p)
                             
                             logger.warning('### unsubscribe ###')

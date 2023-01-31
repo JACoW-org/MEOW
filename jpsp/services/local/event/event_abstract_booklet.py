@@ -20,9 +20,7 @@ async def event_abstract_booklet(event: dict, cookies: dict, settings: dict) -> 
 
     ab = await create_abstract_booklet_from_event(event, cookies, settings)
 
-    conference_code = event.get('title')
-
-    conference = Conference(ConferenceStatus.IN_PROCEEDINGS, conference_code)
+    conference = Conference(ConferenceStatus.IN_PROCEEDINGS, event.get('title', ''))
 
     for session in event.get('sessions'):
         #logger.info(session)
