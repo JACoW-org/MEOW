@@ -68,17 +68,9 @@ class Citation:
     def to_bibtex(self) -> str:
 
 
-        first_last_name = None
-        if len(self.reference.authors) > 0:
-            first_last_name = self.reference.authors[0].get('last_name').lower()
+        first_last_name = self._build_first_last_name()
 
-        authors = ''
-        for index, author in enumerate(self.reference.authors):
-            if index > 0:
-                authors += ' and '
-            first_name = author.get('first_name')
-            last_name = author.get('last_name')
-            authors += f'{first_name[0].upper()}. {last_name}'
+        authors = self._build_authors()
 
         stream = StringIO()
         
@@ -96,7 +88,7 @@ class Citation:
 
         stream.write(f'\tpaper = {{{self.reference.paper_id}}},\n')
 
-        stream.write(f'\tvenue = {{{self.build_venue()}}},\n')
+        stream.write(f'\tvenue = {{{self._build_venue()}}},\n')
 
         if self.conference.status is not ConferenceStatus.IN_PROCEEDINGS:
             stream.write('\tintype = {presented at the},\n')
@@ -137,26 +129,42 @@ class Citation:
 
     def to_latex(self) -> str:
 
-        first_last_name = None
-        if len(self.reference.authors) > 0:
-            first_last_name = self.reference.authors[0].get('last_name').lower()
+        first_last_name = self._build_first_last_name()
 
-        authors = ''
-        for index, author in enumerate(self.reference.authors):
-            if index > 0:
-                authors += ' and '
-            first_name = author.get('first_name')
-            last_name = author.get('last_name')
-            authors += f'{first_name[0].upper()}. {last_name}'
+        stream = StringIO()
 
-        return f"""
-            %cite{{{first_last_name}}}:{self.conference.code}-{self.reference.paper_id}
-            \\bibitem{{{first_last_name}}}:{self.conference.code}-{self.reference.paper_id}
-            {authors},
-            \\textquotedblleft{{{self.reference.title}}}\\textquotedblright,
-            in \\emph{{{self.reference.book_title}}}, {self.conference.venue}, {self.reference.pages}
-            \\url{{{self.reference.url}}}
-        """
+        stream.write(f'%\cite{{{first_last_name}:{self.conference.code.upper()}-{self.reference.paper_id.upper()}}}\n')
+        stream.write(f'\\bibitem{{{first_last_name}:{self.conference.code.upper()}-{self.reference.paper_id.upper()}}}\n')
+
+        first_author = self.reference.authors[0]
+        stream.write(f'\t{self._format_author(first_author.get("first_name"), first_author.get("last_name"))}')
+        
+        if len(self.reference.authors) > 1:
+            stream.write(' \\emph{et al.}\n')
+        else:
+            stream.write('\n')
+
+        stream.write(f'\t\\textquotedblleft{{{self.reference.title}}}\\textquotedblright\n')
+
+        if self.conference.status is ConferenceStatus.IN_PROCEEDINGS:
+            stream.write(f'\tin emph{{Proc. {self.reference.book_title}}}')
+        else:
+            stream.write(f'\tpresented at the {self.conference.code}')
+
+        stream.write(f', {self._build_venue()}')
+        
+        if self.reference.pages is not None:
+            stream.write(f', pp. {self.reference.pages}')
+
+        if self.conference.status is ConferenceStatus.CONFERENCE:
+            stream.write(f', this conference.')
+        elif self.conference.status is ConferenceStatus.UNPUBLISHED:
+            stream.write(f', unpublished.')
+
+        if self.reference.doi_verified and self.reference.doi is not None:
+            stream.write(f'\n\\url{{{self.reference.doi}}}')
+
+        return stream.getvalue()
 
     def to_word(self) -> str:
         return ""
@@ -167,7 +175,29 @@ class Citation:
     def to_xml(self) -> str:
         return ""
 
-    def build_venue(self)-> str:
+    def _build_first_last_name(self) -> str:
+
+        first_last_name = self.reference.authors[0].get('last_name').lower()
+
+        return first_last_name
+
+    def _build_authors(self) -> str:
+        authors = ''
+        for index, author in enumerate(self.reference.authors):
+            if index > 0:
+                authors += ' and '
+            first_name = author.get('first_name')
+            last_name = author.get('last_name')
+            authors += f'{first_name[0].upper()}. {last_name}'
+
+        return authors
+
+    def _format_author(self, first_name: str, last_name: str) -> str:
+        author = f'{first_name[0].upper()}. {last_name}'
+
+        return author
+
+    def _build_venue(self)-> str:
         if self.conference.year is None or self.conference.month is None:
             return self.conference.venue
         else:

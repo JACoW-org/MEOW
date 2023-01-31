@@ -42,7 +42,7 @@ async def event_contribution_reference(event: dict, cookies: dict, settings: dic
 
             if citation.is_citable():
                 
-                logger.info(f'\n{citation.to_bibtex()}')
+                logger.info(f'\n{citation.to_latex()}')
 
                 yield dict(
                     type='progress',
