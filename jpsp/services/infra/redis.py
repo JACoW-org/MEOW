@@ -11,8 +11,10 @@ from jpsp.app.instances.databases import dbs
 
 from jpsp.factory.schema.redis_schema_factory import create_search_index_info, create_search_index_meta
 from jpsp.models.infra.base import BaseModel
-from jpsp.models.infra.locks import RedisLock
+from jpsp.models.infra.locks import RedisLock, RedisLockList
 from jpsp.models.infra.schema import RedisIndexMeta
+from jpsp.services.local.credential.save_credential import create_default_credentials
+from jpsp.utils.http import HttpClientSessions
 
 logger = lg.getLogger(__name__)
 
@@ -55,7 +57,26 @@ class RedisManager:
             logger.error(e, exc_info=True)
 
     async def destroy(self):
+        """ """
+        try:
+            await HttpClientSessions.close_client_sessions()
+            await RedisLockList.release_all_locks()
+        except LockError as e:
+            logger.error(e, exc_info=True)
+        except Exception as e:
+            logger.error(e, exc_info=True)
+    
         await dbs.redis_client.close()
+        
+    async def popola(self):
+        """ """
+        
+        try:
+            await create_default_credentials()
+        except LockError as e:
+            logger.error(e, exc_info=True)
+        except Exception as e:
+            logger.error(e, exc_info=True)
 
 
 def acquire_global_lock() -> RedisLock:

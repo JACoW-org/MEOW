@@ -24,36 +24,35 @@ def _get_app():
 
 async def run_unicorn(app):
     import uvicorn
-
+    
     config = uvicorn.Config(
         app=app,
         host="0.0.0.0",
         port=conf.SERVER_PORT,
-        log_level=conf.LOG_LEVEL
+        log_level=conf.LOG_LEVEL,
     )
-
-    await uvicorn.Server(config).serve()
     
-
-async def run_hypercorn(app):
-    from hypercorn.config import Config
-    from hypercorn.asyncio import serve
+    server = uvicorn.Server(config)
     
-    SECONDS = 1.0
+    original_handler = uvicorn.Server.handle_exit
     
-    config = Config()
-    config.bind = [f"0.0.0.0:8443"]
-    config.certfile = "ssl/cert.crt"
-    config.keyfile = "ssl/cert.key"
-    config.loglevel = "debug"
-    config.insecure_bind = [f"0.0.0.0:{conf.SERVER_PORT}"]
-    config.startup_timeout = 60 * SECONDS
-    config.graceful_timeout = 3 * SECONDS
-    config.shutdown_timeout = 30 * SECONDS
+    from jpsp.app.instances.application import app
     
-    await serve(app, config)
-
-
+    app.state.webapp_running = True
+    app.state.worker_running = True
+    
+    def handle_exit(*args, **kwargs):
+        """ """
+        
+        app.state.webapp_running = False
+        app.state.worker_running = False
+        
+        original_handler(*args, **kwargs)
+    
+    uvicorn.Server.handle_exit = handle_exit    
+    
+    await server.serve()
+    
 
 class UvicornWebappManager:
 
@@ -62,4 +61,3 @@ class UvicornWebappManager:
         app = _get_app()
 
         await run_unicorn(app)
-        # await run_hypercorn(app)
