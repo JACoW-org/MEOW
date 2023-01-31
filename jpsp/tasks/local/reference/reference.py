@@ -9,14 +9,15 @@ class ConferenceStatus(Enum):
 
 @dataclass
 class Conference:
-    conference_status: ConferenceStatus
-    conference_code: str
-    conference_series: str = None
-    conference_series_number: int = None
-    conference_pub_month: int = None
-    conference_pub_year: int = None
-    conference_issn: str = None
-    conference_isbn: str = None
+    status: ConferenceStatus
+    code: str
+    series: str = None
+    series_number: int = None
+    month: int = None
+    year: int = None
+    venue: str = None
+    issn: str = None
+    isbn: str = None
 
 @dataclass
 class Reference:
@@ -25,8 +26,6 @@ class Reference:
     title: str
     book_title: str = None
     pages: str = None
-    paper: str = None
-    venue: str = None
     url: str = None
     doi_verified: bool = None
     doi: str = None
@@ -39,6 +38,9 @@ class Citation:
 
     publisher: str = 'JaCoW Publishing, Geneva, Switzerland'
     language: str = 'english'
+
+    def is_citable(self) -> bool:
+        return self.reference.authors is not None and len(self.reference.authors) > 0
 
     '''
     TODO:
@@ -80,36 +82,58 @@ class Citation:
 
         stream = StringIO()
         
-        stream.write(self.conference.conference_status.value)
-        stream.write('{')
-        stream.write(f'{{{first_last_name}}}:{self.conference.conference_code.lower()}-{self.reference.paper_id.lower()},\n')
-        stream.write(f'author = {{{authors}}}\n')
-        stream.write(f'title = {{{self.reference.title}}},\n')
-        if self.reference.pages is not None:
-            stream.write(f'pages = {{{self.reference.pages}}},\n')
-        else:
-            stream.write('pages = {},\n')
-        stream.write(f'paper = {{{self.reference.paper}}},\n')
-        stream.write(f'venue = {{{self.reference.venue}}},\n')
-        stream.write(f'publisher = {{{self.publisher}}},\n')
-        stream.write(f'url = {{{self.reference.url}}},\n')
-        stream.write(f'language = {{{self.language}}}\n')
+        stream.write(self.conference.status.value + '{')
+
+        stream.write(f'{first_last_name}:{self.conference.code.lower()}-{self.reference.paper_id.lower()},\n')
+
+        stream.write(f'\tauthor = {{{authors}}}\n')
+        stream.write(f'\ttitle = {{{self.reference.title}}},\n')
+
+        if self.conference.status is ConferenceStatus.IN_PROCEEDINGS:
+            stream.write(f'\tbooktitle = {{{ self.reference.book_title }}}\n')
+
+        stream.write(f'\tpages = {{{self.reference.pages if self.reference.pages is not None else ""}}}\n')
+
+        stream.write(f'\tpaper = {{{self.reference.paper_id}}},\n')
+
+        stream.write(f'\tvenue = {{{self.build_venue()}}},\n')
+
+        if self.conference.status is not ConferenceStatus.IN_PROCEEDINGS:
+            stream.write('\tintype = {presented at the},\n')
+
+        if self.conference.series is not None:
+            stream.write(f'\tseries = {{{self.conference.series}}},\n')
+
+        if self.conference.series_number is not None:
+            stream.write(f'\tnumber = {{{self.conference.series_number}}},\n')
+
+        stream.write(f'\tpublisher = {{{self.publisher}}},\n')
+
+        if self.conference.month is not None:
+            stream.write(f'\tmonth = {{{self.conference.month}}},\n')
+
+        if self.conference.year is not None:
+            stream.write(f'\tyear = {{{self.conference.year}}},\n')
+
+        if self.conference.issn is not None:
+            stream.write(f'\tissn = {{{self.conference.issn}}},\n')   # TODO format
+
+        if self.conference.isbn is not None:
+            stream.write(f'\tisbn = {{{self.conference.isbn}}},\n')   # TODO format
+
+        if self.reference.doi_verified:
+            stream.write(f'\tdoi = {{{self.reference.doi}}},\n')      # TODO review once doi is available
+
+        stream.write(f'\turl = {{{self.reference.url}}},\n')
+
+        if self.conference.status is not ConferenceStatus.IN_PROCEEDINGS:
+            stream.write(f'\tnote = {{presented at {self.conference.code}, {self.conference.venue}, {self.conference.year}, paper {self.reference.paper_id}, unpublished}}\n')
+
+        stream.write(f'\tlanguage = {{{self.language}}}\n')
+
         stream.write('}')
 
         return stream.getvalue()
-
-        # return f"""
-        #     @inproceedings{{{first_last_name}:{self.conference.conference_code}-{self.reference.paper_id},
-        #         author = {{{authors}}}   
-        #         title = {{{self.reference.title}}},
-        #         pages = {{{self.reference.pages if self.reference.pages else ''}}},
-        #         paper = {{{self.reference.paper}}},
-        #         venue = {{{self.reference.venue}}},
-        #         publisher = {{{self.publisher}}},
-        #         url = {{{self.reference.url}}},
-        #         language = {{{self.language}}}
-        #     }}
-        # """
 
     def to_latex(self) -> str:
 
@@ -126,11 +150,11 @@ class Citation:
             authors += f'{first_name[0].upper()}. {last_name}'
 
         return f"""
-            %cite{{{first_last_name}}}:{self.conference.conference_code}-{self.reference.paper_id}
-            \\bibitem{{{first_last_name}}}:{self.conference.conference_code}-{self.reference.paper_id}
+            %cite{{{first_last_name}}}:{self.conference.code}-{self.reference.paper_id}
+            \\bibitem{{{first_last_name}}}:{self.conference.code}-{self.reference.paper_id}
             {authors},
             \\textquotedblleft{{{self.reference.title}}}\\textquotedblright,
-            in \\emph{{{self.reference.book_title}}}, {self.reference.venue}, {self.reference.pages}
+            in \\emph{{{self.reference.book_title}}}, {self.conference.venue}, {self.reference.pages}
             \\url{{{self.reference.url}}}
         """
 
@@ -142,4 +166,13 @@ class Citation:
     
     def to_xml(self) -> str:
         return ""
+
+    def build_venue(self)-> str:
+        if self.conference.year is None or self.conference.month is None:
+            return self.conference.venue
+        else:
+
+            from calendar import month_abbr
+
+            return f'{self.conference.venue}, {month_abbr[self.conference.month]} {self.conference.year}'
         
