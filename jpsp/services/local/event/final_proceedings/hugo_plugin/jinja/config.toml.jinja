@@ -1,0 +1,70 @@
+baseURL = '{{url}}'
+languageCode = 'en-us'
+title = '{{title}}'
+theme = 'hugo-xmin'
+
+
+[[menu.main]]
+name = "Home"
+url = ""
+weight = 1
+
+[[menu.main]]
+name = "Session"
+url = "session/"
+weight = 2
+
+[[menu.main]]
+name = "Classification"
+url = "classification/"
+weight = 3
+
+[[menu.main]]
+name = "Author"
+url = "author/"
+weight = 4
+
+[[menu.main]]
+name = "Institute"
+url = "institute/"
+weight = 5
+
+[[menu.main]]
+name = "DOI per Institute"
+url = "doi_per_institute/"
+weight = 6
+
+[[menu.main]]
+name = "Keyword"
+url = "keyword/"
+weight = 8
+
+
+
+[params]
+description = "FEL2022 - Proceedings - Trieste, Italy"
+footer = "&copy; 2022 by JACoW — cc Creative Commons Attribution 4.0"
+
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      definitionList = true
+      footnote = true
+      linkify = true
+      linkifyProtocol = 'https'
+      strikethrough = true
+      table = true
+      taskList = true
+      typographer = true
+    [markup.goldmark.parser]
+      autoHeadingID = true
+      autoHeadingIDType = 'github'
+      wrapStandAloneImageWithinParagraph = true
+      [markup.goldmark.parser.attribute]
+        block = false
+        title = true
+    [markup.goldmark.renderer]
+      hardWraps = false
+      unsafe = true
+      xhtml = true

@@ -14,6 +14,7 @@ from jpsp.services.local.event.final_proceedings.compress_final_proceedings \
 
 from jpsp.services.local.event.final_proceedings.clean_final_proceedings \
     import clean_final_proceedings
+from jpsp.services.local.event.final_proceedings.hugo_plugin.hugo_final_proceedings_plugin import HugoFinalProceedingsPlugin
 
 
 logger = lg.getLogger(__name__)
@@ -24,11 +25,9 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
 
     fp = await create_final_proceedings(event, cookies, settings)
 
-    await generate_final_proceedings(fp)
-
-    zip = await compress_final_proceedings(event, cookies, settings)
-
-    await clean_final_proceedings(event, cookies, settings)
+    plugin = HugoFinalProceedingsPlugin(fp)
+    
+    zip = await plugin.run()
 
     id = event.get('id', 'event')
     title = event.get('title', 'title')

@@ -1,0 +1,32 @@
+---
+title: "{{ session_code }} - {{ session_title }} - {{ session_start }} / {{ session_end }}"
+date: 2023-01-02T12:06:30+01:00
+draft: false
+---
+
+{% for convener in session_conveners %}
+### Chair: {{ convener.first|e }} {{ convener.last|e }} ({{ convener.affiliation|e }})
+{% endfor %}
+
+{% for contribution in contributions %}
+
+### {{ contribution.code|e }}
+
+#### {{ contribution.title|e }}
+
+> {{ contribution.description|e }}
+
+- Slides: [{{ contribution.code|e }}]({% raw %}{{<{% endraw %} ref "/pdf/{{ contribution.code|e }}" {% raw %}>}}{% endraw %} "{{ contribution.code|e }}")
+
+- DOI: reference for this paper
+※ https://doi.org/10.18429/JACoW-FEL2019-MOA01
+
+- About: paper received ※ 26 August 2019 -
+paper accepted ※ 09 September 2019 - 
+issue date ※ 05 November 2019
+
+- Export: reference for this paper using
+※ BibTeX, ※ LaTeX, ※ Text/Word
+※ RIS, ※ EndNote (xml)
+
+{% endfor %}

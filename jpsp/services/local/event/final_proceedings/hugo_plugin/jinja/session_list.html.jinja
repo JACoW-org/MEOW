@@ -1,0 +1,9 @@
+---
+title: "Session"
+date: 2023-01-02T12:06:30+01:00
+---
+
+{% for session in sessions %}
+  [{{ session.code|e }}]({% raw %}{{<{% endraw %} ref "/session/{{ session.code|e }}/" {% raw %}>}}{% endraw %} "{{ session.code|e }}")
+{% endfor %}
+
