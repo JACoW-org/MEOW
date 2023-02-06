@@ -1,4 +1,5 @@
 import logging as lg
+from pathlib import Path
 
 from starlette.requests import Request
 from starlette.responses import Response
@@ -7,7 +8,7 @@ from starlette.templating import Jinja2Templates
 
 logger = lg.getLogger(__name__)
 
-jinja = Jinja2Templates(directory='jinja')
+jinja = Jinja2Templates(directory=Path('jinja', 'admin_site'))
 
 
 async def index_endpoint(request: Request) -> Response:

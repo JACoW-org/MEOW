@@ -6,9 +6,11 @@ from anyio import Path
 
 from typing import AsyncGenerator
 
+from pprint import pprint
+
 import shutil
 
-from anyio import sleep, create_task_group, run
+from anyio import create_task_group
 
 from jinja2 import Environment, select_autoescape, FileSystemLoader, Template
 
@@ -32,8 +34,7 @@ class JinjaTemplateRenderer:
         self.env = Environment(
             enable_async=True,
             autoescape=select_autoescape(),
-            loader=FileSystemLoader(
-                "jpsp/services/local/event/final_proceedings/hugo_plugin/jinja"),
+            loader=FileSystemLoader("jinja/final_proceedings"),
         )
 
     async def render(self, name: str, args: dict) -> str:
@@ -75,9 +76,16 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         self.event: dict = final_proceedings.get('event', None)
         self.sessions: list = final_proceedings.get('sessions', [])
 
-        self.src_dir = Path('var', 'run', f"{self.event.get('id')}_hugo_src")
-        self.out_dir = Path(
-            'var', 'run', f"{self.event.get('id')}_hugo_src", "out")
+        self.init_paths()
+
+    def init_paths(self) -> None:
+
+        event_id: str = self.event.get('id', None)
+
+        self.tmp_dir = Path('var', 'tmp')
+        
+        self.src_dir = Path('var', 'run', f"{event_id}_hugo_src")
+        self.out_dir = Path('var', 'run', f"{event_id}_hugo_src", "out")
 
         self.src_session_dir = Path(self.src_dir, 'content', 'session')
         self.src_classification_dir = Path(
@@ -118,52 +126,96 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
             shutil.rmtree(f"{await self.src_dir.absolute()}", ignore_errors=True)
 
             # await self.src_dir.rmdir()
+            await self.tmp_dir.mkdir(exist_ok=True, parents=True)
             await self.src_dir.mkdir(exist_ok=True, parents=True)
 
         except BaseException as e:
             logger.error("hugo:prepare", e, exc_info=True)
 
+        # try:
+        # 
+        #     ssg_cmd = await self.ssg_cmd()
+        # 
+        #     ssg_args = [f"{ssg_cmd}", "new", "site",
+        #                 f"{self.src_dir}", "--force"]
+        # 
+        #     result = await run_process(ssg_args)
+        # 
+        #     if result.returncode == 0:
+        #         logger.info(result.stdout.decode())
+        #     else:
+        #         logger.info(result.stderr.decode())
+        # 
+        # except BaseException as e:
+        #     logger.error("hugo:prepare", e, exc_info=True)
+
         try:
 
-            ssg_cmd = await self.ssg_cmd()
+            # theme_dir = await Path(self.src_dir, 'themes/PaperMod').absolute()
+            #
+            # git_args = ["git", "clone", "https://github.com/adityatelange/hugo-PaperMod",
+            #             f"{theme_dir}", "--depth=1"]
+            #
+            # theme_dir = await Path(self.src_dir, 'themes/hugo-book').absolute()
+            #
+            # git_args = ["git", "clone", "https://github.com/alex-shpak/hugo-book",
+            #             f"{theme_dir}", "--depth=1"]
+            #
+            # theme_dir = await Path(self.src_dir, 'themes/hugo-xmin').absolute()
+            #
+            # git_args = ["git", "clone", "https://github.com/yihui/hugo-xmin.git",
+            #             f"{theme_dir}", "--depth=1"]
+            #
+            # result = await run_process(git_args)
+            #
+            # if result.returncode == 0:
+            #     logger.info(result.stdout.decode())
+            # else:
+            #     logger.info(result.stderr.decode())
 
-            ssg_args = [f"{ssg_cmd}", "new", "site",
-                        f"{self.src_dir}", "--force"]
+            zip_cmd = await self.zip_cmd()
 
-            result = await run_process(ssg_args)
+            site_assets_dir = await Path('assets', 'hugo-site.7z').absolute()
+            site_output_dir = await self.tmp_dir.absolute()
+
+            site_extract_args = [f"{zip_cmd}", "x", f"{site_assets_dir}",
+                                 "-aoa", f"-o{site_output_dir}"]
+
+            pprint(site_extract_args)
+            
+            result = await run_process(site_extract_args)
 
             if result.returncode == 0:
                 logger.info(result.stdout.decode())
             else:
                 logger.info(result.stderr.decode())
+                
+            await Path(self.tmp_dir, '0_hugo_src').rename(self.src_dir)
+            
+            shutil.rmtree(f"{await Path(self.tmp_dir, '0_hugo_src').absolute()}", ignore_errors=True)
 
         except BaseException as e:
-            logger.error("hugo:prepare", e, exc_info=True)
-
+            logger.error(e)
+                       
         try:
 
-            theme_dir = await Path(self.src_dir, 'themes/PaperMod').absolute()
+            zip_cmd = await self.zip_cmd()
 
-            git_args = ["git", "clone", "https://github.com/adityatelange/hugo-PaperMod",
-                        f"{theme_dir}", "--depth=1"]
+            theme_assets_dir = await Path('assets', 'hugo-theme.7z').absolute()
+            theme_output_dir = await Path(self.src_dir, 'themes').absolute()
 
-            theme_dir = await Path(self.src_dir, 'themes/hugo-book').absolute()
+            theme_extract_args = [f"{zip_cmd}", "x", f"{theme_assets_dir}",
+                                  "-aoa", f"-o{theme_output_dir}"]
 
-            git_args = ["git", "clone", "https://github.com/alex-shpak/hugo-book",
-                        f"{theme_dir}", "--depth=1"]
-            
-            theme_dir = await Path(self.src_dir, 'themes/hugo-xmin').absolute()
+            pprint(theme_extract_args)
 
-            git_args = ["git", "clone", "https://github.com/yihui/hugo-xmin.git",
-                        f"{theme_dir}", "--depth=1"]
-
-            result = await run_process(git_args)
+            result = await run_process(theme_extract_args)
 
             if result.returncode == 0:
                 logger.info(result.stdout.decode())
             else:
                 logger.info(result.stderr.decode())
-
+            
         except BaseException as e:
             logger.error(e)
 
