@@ -1,0 +1,8 @@
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+    <xsl:output omit-xml-declaration="yes" indent="no" encoding="UTF-8" method="text"/>
+
+    <xsl:template match="/">Conference code: <xsl:value-of select="reference/conference/code"></xsl:value-of>
+        Paper code: <xsl:value-of select="reference/contribution/paper-code"></xsl:value-of>
+    </xsl:template>
+
+</xsl:stylesheet>

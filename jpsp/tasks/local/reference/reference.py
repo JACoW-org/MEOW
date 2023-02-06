@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
 from enum import Enum
 from io import StringIO
 
@@ -6,6 +6,38 @@ class ConferenceStatus(Enum):
     IN_PROCEEDINGS = '@inproceedings'
     CONFERENCE = '@conference'
     UNPUBLISHED = '@unpublished'
+
+@dataclass
+class Contribution:
+    # mandatory
+    conference_status: ConferenceStatus
+    conference_code: str
+    venue: str
+    start_date: str
+    end_date: str
+    paper_code: str
+    primary_authors: list
+    title: str
+    url: str
+
+    # optional
+    publisher: str = 'JaCoW Publishing, Geneva, Switzerland'
+    language: str = 'english'
+    series: str = None
+    series_number: int = None
+    issn: str = None
+    isbn: str = None
+    book_title: str = None
+    start_page: str = None
+    number_of_pages: int = None
+    doi: str = None
+
+    def as_dict(self) -> dict:
+        dict_obj = asdict(self)
+        return dict_obj
+
+    def is_citable(self) -> bool:
+        return self.primary_authors is not None and len(self.primary_authors) > 0
 
 @dataclass
 class Conference:
@@ -34,7 +66,7 @@ class Reference:
 class Citation:
 
     conference: Conference
-    reference: Reference
+    reference: Contribution
 
     publisher: str = 'JaCoW Publishing, Geneva, Switzerland'
     language: str = 'english'

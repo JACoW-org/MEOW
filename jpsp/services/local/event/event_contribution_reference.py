@@ -4,26 +4,43 @@ from typing import AsyncGenerator
 
 from datetime import datetime
 
-from jpsp.tasks.local.reference.reference import Citation, Conference, Reference, ConferenceStatus
+from jpsp.tasks.local.reference.reference import Contribution, Citation, Conference, Reference, ConferenceStatus
+
+from jinja2 import Environment, select_autoescape, FileSystemLoader
+from lxml.etree import XML, XSLT, fromstring, tostring
+from anyio import open_file, run
 
 
 logger = lg.getLogger(__name__)
+
+class JinjaXMLBuilder:
+
+    def __init__(self) -> None:
+        self.env = Environment(
+            enable_async=True,
+            autoescape=select_autoescape(),
+            loader=FileSystemLoader('jinja/reference')
+        )
+    
+    async def build_reference_xml(self, contribution: Contribution) -> str:
+        return await self.env.get_template('reference.xml.jinja').render_async(contribution.as_dict())
 
 
 async def event_contribution_reference(event: dict, cookies: dict, settings: dict) -> AsyncGenerator:
     """ """
 
-    conference_code = event.get('title')
-    conference_date = datetime.strptime(event.get('start_dt').get('date'), '%Y-%m-%d')
-    conference_location = event.get('location')
+    xml_builder = JinjaXMLBuilder()
+    # conference_code = event.get('title')
+    # conference_date = datetime.strptime(event.get('start_dt').get('date'), '%Y-%m-%d')
+    # conference_location = event.get('location')
 
-    conference = Conference(
-        status=ConferenceStatus.UNPUBLISHED,
-        code=conference_code,
-        month=conference_date.month,
-        year=conference_date.year,
-        venue=conference_location
-    )
+    # conference = Conference(
+    #     status=ConferenceStatus.UNPUBLISHED,
+    #     code=conference_code,
+    #     month=conference_date.month,
+    #     year=conference_date.year,
+    #     venue=conference_location
+    # )
 
     for session in event.get('sessions', []):
         # logger.info(session)
@@ -31,30 +48,64 @@ async def event_contribution_reference(event: dict, cookies: dict, settings: dic
         for contribution in session.get('contributions', []):
             #logger.info(contribution)
 
-            reference = Reference(
-                paper_id=contribution.get('code'),
-                authors=contribution.get('primary_authors'),
-                title=session['title'],
+            data = Contribution(
+                conference_status=ConferenceStatus.UNPUBLISHED,
+                conference_code=event.get('title'),
+                venue=event.get('location'),
+                start_date=event.get('start_dt').get('date'),
+                end_date=event.get('end_dt').get('date'),
+                paper_code=contribution.get('code'),
+                primary_authors=contribution.get('primary_authors'),
+                title=contribution.get('title'),
                 url=contribution.get('url')
             )
 
-            citation = Citation(conference, reference)
+            if data.is_citable():
+                # build contribution xml with jinja
+                xml_val = await xml_builder.build_reference_xml(data)
+                doc = fromstring(xml_val, parser=None)
 
-            if citation.is_citable():
-                
-                logger.info(f'\n{citation.to_latex()}')
+                references=dict(code=contribution.get('code'))
+
+                async with await open_file('/home/christian/Documents/elettra/jpsp-ng/xslt/bibtex.xml') as f:
+                    xslt_root = XML(await f.read(), parser=None)
+                    xslt_tran = XSLT(xslt_root)
+
+                    result = bytes(xslt_tran(doc))
+
+                    print(result)
+
+                    references['bibtex'] = str(result)
 
                 yield dict(
                     type='progress',
-                    value=dict(
-                        code=contribution.get('code'),
-                        bibtex=citation.to_bibtex(),
-                        latex=citation.to_latex(),
-                        word=citation.to_word(),
-                        ris=citation.to_ris(),
-                        xml=citation.to_xml(),
-                    )
+                    value=references
                 )
+
+            # reference = Reference(
+            #     paper_id=contribution.get('code'),
+            #     authors=contribution.get('primary_authors'),
+            #     title=session['title'],
+            #     url=contribution.get('url')
+            # )
+
+            # citation = Citation(conference, reference)
+
+            # if citation.is_citable():
+                
+            #     logger.info(f'\n{citation.to_latex()}')
+
+            #     yield dict(
+            #         type='progress',
+            #         value=dict(
+            #             code=contribution.get('code'),
+            #             bibtex=citation.to_bibtex(),
+            #             latex=citation.to_latex(),
+            #             word=citation.to_word(),
+            #             ris=citation.to_ris(),
+            #             xml=citation.to_xml(),
+            #         )
+            #     )
 
 
     yield dict(
