@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<publisher>{{ publisher }}</publisher>
+<language>{{ language }}</language>
+<conference>
+    <status>{{ conference_status }}</status>    <!-- TODO check -->
+    <code>{{ conference_code }}</code>
+    <series>{{ series }}</series>
+    <series-number>{{ series_number }}</series-number>
+    <venue>{{ venue }}</venue>
+    <start-date>{{ start_date }}</start-date>
+    <end-date>{{ end_date }}</end-date>
+    <issn>{{ issn }}</issn>
+    <isbn>{{ isbn }}</isbn>
+</conference>
+<contribution>
+    <paper-code>{{ paper_code }}</paper-code>
+    <primary-authors>
+        {% for author in primary_authors %}
+        <author>
+            <first-name>{{ author.first_name }}</first-name>
+            <last-name>{{ author.last_name }}</last-name>
+        </author>
+        {% endfor %}
+    </primary-authors>
+    <title>{{ title }}</title>
+    <book-title>{{ book_title }}</book-title>   <!-- TODO maybe this is a conference parameter -->
+    <pages>
+        <start-page>{{ start_page }}</start-page>
+        <number>{{ number_of_pages }}</number>
+    </pages>
+    <url>{{ url }}</url>
+    <doi>{{ doi }}</doi>
+</contribution>
