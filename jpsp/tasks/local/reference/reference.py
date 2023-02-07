@@ -3,14 +3,17 @@ from enum import Enum
 from io import StringIO
 
 class ConferenceStatus(Enum):
-    IN_PROCEEDINGS = '@inproceedings'
-    CONFERENCE = '@conference'
-    UNPUBLISHED = '@unpublished'
+    # IN_PROCEEDINGS = '@inproceedings'
+    # CONFERENCE = '@conference'
+    # UNPUBLISHED = '@unpublished'
+    IN_PROCEEDINGS = 'in_proceedings'
+    CONFERENCE = 'conference'
+    UNPUBLISHED = 'unpublished'
 
 @dataclass
 class Contribution:
     # mandatory
-    conference_status: ConferenceStatus
+    conference_status: str
     conference_code: str
     venue: str
     start_date: str
@@ -23,14 +26,14 @@ class Contribution:
     # optional
     publisher: str = 'JaCoW Publishing, Geneva, Switzerland'
     language: str = 'english'
-    series: str = None
-    series_number: int = None
-    issn: str = None
-    isbn: str = None
-    book_title: str = None
-    start_page: str = None
-    number_of_pages: int = None
-    doi: str = None
+    series: str = ''
+    series_number: str = ''
+    issn: str = ''
+    isbn: str = ''
+    book_title: str = ''
+    start_page: str = ''
+    number_of_pages: int = 0
+    doi: str = ''
 
     def as_dict(self) -> dict:
         dict_obj = asdict(self)

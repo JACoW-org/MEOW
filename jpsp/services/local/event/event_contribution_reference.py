@@ -7,7 +7,7 @@ from datetime import datetime
 from jpsp.tasks.local.reference.reference import Contribution, Citation, Conference, Reference, ConferenceStatus
 
 from jinja2 import Environment, select_autoescape, FileSystemLoader
-from lxml.etree import XML, XSLT, fromstring, tostring
+from lxml.etree import XML, XSLT, fromstring, tostring, XMLParser
 from anyio import open_file, run
 
 
@@ -49,7 +49,7 @@ async def event_contribution_reference(event: dict, cookies: dict, settings: dic
             #logger.info(contribution)
 
             data = Contribution(
-                conference_status=ConferenceStatus.UNPUBLISHED,
+                conference_status=ConferenceStatus.UNPUBLISHED.value,
                 conference_code=event.get('title'),
                 venue=event.get('location'),
                 start_date=event.get('start_dt').get('date'),
@@ -63,12 +63,12 @@ async def event_contribution_reference(event: dict, cookies: dict, settings: dic
             if data.is_citable():
                 # build contribution xml with jinja
                 xml_val = await xml_builder.build_reference_xml(data)
-                doc = fromstring(xml_val, parser=None)
+                doc = fromstring(xml_val, parser=XMLParser(encoding='utf-8'))
 
                 references=dict(code=contribution.get('code'))
 
                 async with await open_file('/home/christian/Documents/elettra/jpsp-ng/xslt/bibtex.xml') as f:
-                    xslt_root = XML(await f.read(), parser=None)
+                    xslt_root = XML(await f.read(), XMLParser(encoding='utf-8'))
                     xslt_tran = XSLT(xslt_root)
 
                     result = bytes(xslt_tran(doc))
