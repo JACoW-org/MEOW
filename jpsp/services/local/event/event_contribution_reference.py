@@ -29,6 +29,19 @@ class JinjaXMLBuilder:
 async def event_contribution_reference(event: dict, cookies: dict, settings: dict) -> AsyncGenerator:
     """ """
 
+    # factory of xslt functions
+    xslt_functions = dict()
+
+    # bibtex
+    async with await open_file('xslt/bibtex.xml') as f:
+        xslt_root = XML(await f.read(), XMLParser(encoding='utf-8'))
+        xslt_functions['bibtex'] = XSLT(xslt_root)
+
+    # latex
+    async with await open_file('xslt/latex.xml') as f:
+        xslt_root = XML(await f.read(), XMLParser(encoding='utf-8'))
+        xslt_functions['latex'] = XSLT(xslt_root)
+
     xml_builder = JinjaXMLBuilder()
     # conference_code = event.get('title')
     # conference_date = datetime.strptime(event.get('start_dt').get('date'), '%Y-%m-%d')
@@ -65,18 +78,25 @@ async def event_contribution_reference(event: dict, cookies: dict, settings: dic
                 xml_val = await xml_builder.build_reference_xml(data)
                 doc = fromstring(xml_val, parser=XMLParser(encoding='utf-8'))
 
-                references=dict(code=contribution.get('code'))
+                bibtex_ref = xslt_functions.get('bibtex')(doc)
+                latex_ref = xslt_functions.get('latex')(doc)
+
+                references=dict(
+                    code=contribution.get('code'),
+                    bibtex=str(bibtex_ref, encoding='utf-8'),
+                    latex=str(latex_ref, encoding='utf-8')
+                )
 
                 # bibtex
-                async with await open_file('xslt/bibtex.xml') as f:
-                    xslt_root = XML(await f.read(), XMLParser(encoding='utf-8'))
-                    xslt_tran = XSLT(xslt_root)
+                # async with await open_file('xslt/bibtex.xml') as f:
+                #     xslt_root = XML(await f.read(), XMLParser(encoding='utf-8'))
+                #     xslt_tran = XSLT(xslt_root)
 
-                    result = str(xslt_tran(doc), encoding='utf-8')
+                #     result = str(xslt_tran(doc), encoding='utf-8')
 
-                    # print(result)
+                #     # print(result)
 
-                    references['bibtex'] = result
+                #     references['bibtex'] = result
 
                 yield dict(
                     type='progress',
