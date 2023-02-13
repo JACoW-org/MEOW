@@ -67,13 +67,14 @@ async def event_contribution_reference(event: dict, cookies: dict, settings: dic
 
                 references=dict(code=contribution.get('code'))
 
-                async with await open_file('/home/christian/Documents/elettra/jpsp-ng/xslt/bibtex.xml') as f:
+                # bibtex
+                async with await open_file('xslt/bibtex.xml') as f:
                     xslt_root = XML(await f.read(), XMLParser(encoding='utf-8'))
                     xslt_tran = XSLT(xslt_root)
 
                     result = str(xslt_tran(doc), encoding='utf-8')
 
-                    print(result)
+                    # print(result)
 
                     references['bibtex'] = result
 
