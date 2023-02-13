@@ -49,7 +49,7 @@
     <xsl:choose>
         <xsl:when test="conference/status = 'in_proceedings'">
             <xsl:text>in emph{Proc. </xsl:text>
-            <xsl:value-of select="contribution/book-title"/>
+            <xsl:value-of select="conference/book-title"/>
             <xsl:text>}</xsl:text>
         </xsl:when>
         <xsl:otherwise>
