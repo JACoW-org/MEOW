@@ -23,7 +23,7 @@ from anyio import open_file, run
 # from pikepdf.objects import Object  # type: ignore
 # from pikepdf.objects import Dictionary, String, Array, Stream
 
-from jpsp.utils.http import download_stream
+from meow.utils.http import download_stream
 
 
 @dataclass

@@ -13,7 +13,7 @@ from anyio import create_task_group, CapacityLimiter
 
 from fitz import Document
 
-from jpsp.utils.http import download_stream
+from meow.utils.http import download_stream
 
 
 @dataclass

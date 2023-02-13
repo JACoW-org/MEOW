@@ -16,12 +16,12 @@ lg.basicConfig(level=lg.INFO)
 logger = lg.getLogger(__name__)
 
 
-from jpsp.app.instances.services import srs
+from meow.app.instances.services import srs
 
 
 
 async def main() -> None:
-    logger.debug('jpsp - begin')
+    logger.debug('meow - begin')
     
     import anyio
           
@@ -47,7 +47,7 @@ async def main() -> None:
 
     await srs.redis_manager.destroy()
 
-    logger.debug('jpsp - end')
+    logger.debug('meow - end')
 
 
 if __name__ == "__main__":

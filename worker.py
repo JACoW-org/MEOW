@@ -4,7 +4,7 @@ import logging as lg
 
 import uvloop
 
-# from jpsp.app.state import create_worker_state, destroy_worker_state
+# from meow.app.state import create_worker_state, destroy_worker_state
 
 uvloop.install()
 
@@ -25,13 +25,13 @@ lg.basicConfig(level=lg.INFO)
 logger = lg.getLogger(__name__)
 
 
-from jpsp.app.instances.services import srs
+from meow.app.instances.services import srs
 
 
 
 async def signal_handler(scope: CancelScope):
     
-    from jpsp.app.instances.application import app    
+    from meow.app.instances.application import app    
     app.state.webapp_running = True
     app.state.worker_running = True
     
@@ -47,7 +47,7 @@ async def signal_handler(scope: CancelScope):
 
 async def main() -> None:
           
-    logger.debug('jpsp - begin')
+    logger.debug('meow - begin')
     
     import anyio
         
@@ -72,7 +72,7 @@ async def main() -> None:
         
     await srs.redis_manager.destroy()
 
-    logger.debug('jpsp - end')
+    logger.debug('meow - end')
 
 
 if __name__ == "__main__":    
