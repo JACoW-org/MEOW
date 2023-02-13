@@ -1,10 +1,10 @@
-{# <?xml version="1.0" encoding="UTF-8"?> #}
 <reference>
     <publisher>{{ publisher }}</publisher>
     <language>{{ language }}</language>
     <conference>
-        <status>{{ conference_status }}</status>    <!-- TODO check -->
+        <status>{{ conference_status }}</status>
         <code>{{ conference_code }}</code>
+        <book-title>{{ book_title }}</book-title>
         <series>{{ series }}</series>
         <series-number>{{ series_number }}</series-number>
         <venue>{{ venue }}</venue>
@@ -24,7 +24,6 @@
             {% endfor %}
         </primary-authors>
         <title>{{ title }}</title>
-        <book-title>{{ book_title }}</book-title>   <!-- TODO maybe this is a conference parameter -->
         <pages>
             <start-page>{{ start_page }}</start-page>
             <number>{{ number_of_pages }}</number>
