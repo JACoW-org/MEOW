@@ -42,6 +42,11 @@ async def event_contribution_reference(event: dict, cookies: dict, settings: dic
         xslt_root = XML(await f.read(), XMLParser(encoding='utf-8'))
         xslt_functions['latex'] = XSLT(xslt_root)
 
+    # word
+    async with await open_file('xslt/word.xml') as f:
+        xslt_root = XML(await f.read(), XMLParser(encoding='utf-8'))
+        xslt_functions['word'] = XSLT(xslt_root)
+
     xml_builder = JinjaXMLBuilder()
     # conference_code = event.get('title')
     # conference_date = datetime.strptime(event.get('start_dt').get('date'), '%Y-%m-%d')
@@ -80,11 +85,13 @@ async def event_contribution_reference(event: dict, cookies: dict, settings: dic
 
                 bibtex_ref = xslt_functions.get('bibtex')(doc)
                 latex_ref = xslt_functions.get('latex')(doc)
+                word_ref = xslt_functions.get('word')(doc)
 
                 references=dict(
                     code=contribution.get('code'),
                     bibtex=str(bibtex_ref, encoding='utf-8'),
-                    latex=str(latex_ref, encoding='utf-8')
+                    latex=str(latex_ref, encoding='utf-8'),
+                    word=str(word_ref, encoding='utf-8')
                 )
 
                 # bibtex
