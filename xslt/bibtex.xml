@@ -38,8 +38,17 @@
     </xsl:choose>
     <xsl:text>},</xsl:text>
     <xsl:text>title = {</xsl:text><xsl:value-of select="contribution/title"/><xsl:text>},</xsl:text>
-    <xsl:if test="conference/status = 'in_proceedings'"><xsl:text>booktitle = {</xsl:text><xsl:value-of select="contribution/book-title"/><xsl:text>},</xsl:text>
-    <xsl:text>pages = {</xsl:text><xsl:text>},</xsl:text></xsl:if>
+    <xsl:if test="conference/status = 'in_proceedings'">
+        <xsl:text>booktitle = {</xsl:text>
+        <xsl:value-of select="contribution/book-title"/>
+        <xsl:text>},</xsl:text>
+        <xsl:text>pages = {</xsl:text>
+        <xsl:value-of select="contribution/pages/start-page"/>
+        <xsl:text>-</xsl:text>
+        <xsl:variable name="endPage" select="contribution/pages/start-page + contribution/pages/number"/>
+        <xsl:value-of select="$endPage"/>
+        <xsl:text>},</xsl:text>
+    </xsl:if>
     <xsl:text>paper = {</xsl:text><xsl:value-of select="contribution/paper-code"></xsl:value-of><xsl:text>},</xsl:text>
     <xsl:text>venue = {</xsl:text><xsl:value-of select="conference/venue"/><xsl:text>},</xsl:text>
     <xsl:if test="conference/status != 'in_proceedings'"><xsl:text>intype = {presented at the</xsl:text><xsl:text>},</xsl:text></xsl:if>
@@ -47,8 +56,8 @@
     <xsl:if test="conference/series-number != ''"><xsl:text>number = {</xsl:text><xsl:value-of select="conference/series-number"/><xsl:text>},</xsl:text></xsl:if>
     <xsl:text>publisher = {</xsl:text><xsl:value-of select="publisher"/><xsl:text>},</xsl:text>
     <xsl:variable name="dateString" select="conference/start-date"></xsl:variable>
-    <xsl:text>month = {</xsl:text><xsl:value-of select="substring($dateString, 6, 2)"></xsl:value-of><xsl:text>},</xsl:text>
-    <xsl:text>year = {</xsl:text><xsl:value-of select="substring($dateString, 1, 4)"></xsl:value-of><xsl:text>},</xsl:text>
+    <xsl:text>month = {</xsl:text><xsl:value-of select="substring($dateString, 6, 2)"/><xsl:text>},</xsl:text>
+    <xsl:text>year = {</xsl:text><xsl:value-of select="substring($dateString, 1, 4)"/><xsl:text>},</xsl:text>
     <xsl:if test="conference/issn != ''"><xsl:text>issn = {</xsl:text><xsl:value-of select="conference/issn"/><xsl:text>},</xsl:text></xsl:if>
     <xsl:if test="conference/isbn != ''"><xsl:text>isbn = {</xsl:text><xsl:value-of select="conference/isbn"/><xsl:text>},</xsl:text></xsl:if>
     <xsl:if test="contribution/doi != ''"><xsl:text>doi = {</xsl:text><xsl:value-of select="contribution/doi"/><xsl:text>},</xsl:text></xsl:if>
