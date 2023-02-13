@@ -1,12 +1,12 @@
 from starlette.applications import Starlette
 
-from jpsp.app.routes import routes as app_routes
-from jpsp.app.middleware import middleware as app_middleware
+from meow.app.routes import routes as app_routes
+from meow.app.middleware import middleware as app_middleware
 
-from jpsp.callbacks.shutdown import app_shutdown
-from jpsp.callbacks.startup import app_startup
+from meow.callbacks.shutdown import app_shutdown
+from meow.callbacks.startup import app_startup
 
-from jpsp.app.instances.services import srs
+from meow.app.instances.services import srs
 
 async def app_pre() -> None:
     await srs.redis_manager.prepare()

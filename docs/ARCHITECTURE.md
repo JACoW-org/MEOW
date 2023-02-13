@@ -1,9 +1,9 @@
 # Architecture
 
 
-## JPSP-NG
+## MEOW
 
-### JPSP-API-TASK
+### MEOW-API-TASK
 
 Applicazione di calcolo: espone task via api websocket (o rest)
 
@@ -30,17 +30,17 @@ Applicazione di calcolo: espone task via api websocket (o rest)
         recupero di tali contenuti (es. url della risorsa, header http con token di auth, ...)    
 
 
-### JPSP-PLUGIN-CONF
+### MEOW-PLUGIN-CONF
 
 Plugin di indico per la conf del servizio di calcolo
 
- - verrà creato un plugin indico di configurazione per il servizio jpsp-ng
+ - verrà creato un plugin indico di configurazione per il servizio meow
  - tale plugin verrà collegato all'evento
- - in fase di collegamento verranno definiti parametri come l'url di jpsp-ng ed il token di auth
+ - in fase di collegamento verranno definiti parametri come l'url di meow ed il token di auth
  - ogni evento avrà la propria configurazione
 
 
-## JPSP-PLUGIN-AB
+## MEOW-PLUGIN-AB
 
 Plugin di indico per l'estensione della web-ui di indico (parte amministrativa) 
 per aggiungere il bottone che scatenerà la creazione dell'abstract_booklet

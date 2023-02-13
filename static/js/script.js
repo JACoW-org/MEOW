@@ -4,7 +4,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     document.cookie = 'X-API-KEY=01GDWDBTHHJNZ0KAVKZ1YP320S' + '; path=/';
 
-    const websocket = new WebSocket(`ws://${location.host}/socket/jpsp:feed`);
+    const websocket = new WebSocket(`ws://${location.host}/socket/meow:feed`);
 
     const store = {};
 

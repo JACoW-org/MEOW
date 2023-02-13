@@ -12,7 +12,7 @@ from anyio import open_file, run
 
 from fitz import Document
 
-from jpsp.utils.http import download_stream
+from meow.utils.http import download_stream
 
 from io import StringIO
 
@@ -21,7 +21,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from anyio import Path
 
 
-PDF = "/home/fabio.meneghetti/Projects/elettra/src/jpsp-ng/tests/pikepdf/AppleIII-Development_Tischer_FEL2022-THBI1.pdf"
+PDF = "/home/fabio.meneghetti/Projects/elettra/src/meow/tests/pikepdf/AppleIII-Development_Tischer_FEL2022-THBI1.pdf"
 
 
 # def _pdf_to_txt() -> str:

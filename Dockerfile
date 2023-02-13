@@ -9,7 +9,7 @@ COPY ./requirements.txt /code/requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 COPY ./jinja /code/app/jinja
-COPY ./jpsp /code/app/jpsp
+COPY ./meow /code/app/meow
 COPY ./ssl /code/app/ssl
 COPY ./static /code/app/static
 COPY ./webui /code/app/webui

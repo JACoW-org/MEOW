@@ -1,7 +1,7 @@
 import datetime as dt
 import pytz
 
-from jpsp.models.application import Settings
+from meow.models.application import Settings
 
 start_date = dict(
     date="2022-08-21",

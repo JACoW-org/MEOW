@@ -1,4 +1,4 @@
-# JPSP-NG - INSTALL
+# MEOW - INSTALL
 
 ### https://realpython.com/intro-to-pyenv/
 curl https://pyenv.run | bash
@@ -7,7 +7,7 @@ curl https://pyenv.run | bash
 ## SETUP
 
 ```
-cd jpsp-ng
+cd meow
 python3 -m venv venv
 
 . ./venv/bin/activate
@@ -18,6 +18,8 @@ python3 -m venv venv
 
 pip list --outdated 
 
+
+rm -rfv venv ; python3 -m venv venv ; . ./venv/bin/activate ; ./venv/bin/pip install --upgrade pip ; ./venv/bin/pip install -r requirements-dev.txt
 
 ## RUN
 

@@ -9,8 +9,8 @@ import anyio
 import io
 from pikepdf import open
 
-from jpsp.utils.http import download_stream
-from jpsp.utils.serialization import json_decode
+from meow.utils.http import download_stream
+from meow.utils.serialization import json_decode
 
 
 
