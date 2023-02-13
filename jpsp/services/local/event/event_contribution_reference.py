@@ -71,11 +71,11 @@ async def event_contribution_reference(event: dict, cookies: dict, settings: dic
                     xslt_root = XML(await f.read(), XMLParser(encoding='utf-8'))
                     xslt_tran = XSLT(xslt_root)
 
-                    result = bytes(xslt_tran(doc))
+                    result = str(xslt_tran(doc), encoding='utf-8')
 
                     print(result)
 
-                    references['bibtex'] = str(result)
+                    references['bibtex'] = result
 
                 yield dict(
                     type='progress',
