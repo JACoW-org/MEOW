@@ -1,0 +1,39 @@
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:output omit-xml-declaration="yes" indent="no" encoding="UTF-8" method="text" media-type="text/plain"/>
+
+<xsl:template match="reference">
+    <xsl:text>TY - </xsl:text><xsl:choose><xsl:when test="conference/status = 'in_proceedings'"><xsl:text>CONF</xsl:text></xsl:when><xsl:otherwise><xsl:text>UNPB</xsl:text></xsl:otherwise></xsl:choose><xsl:text>\n</xsl:text>
+    <xsl:for-each select="contribution/primary-authors/author">
+        <xsl:text>AU - </xsl:text>
+        <xsl:value-of select="last-name"></xsl:value-of>
+        <xsl:text>,</xsl:text>
+        <xsl:value-of select="substring(first-name, 1, 1)"></xsl:value-of>
+        <xsl:text>\n</xsl:text>
+    </xsl:for-each>
+    <xsl:text>ED - </xsl:text><xsl:comment>TBD - da doi ???</xsl:comment><xsl:text>\n</xsl:text>
+    <xsl:text>TI - </xsl:text><xsl:value-of select="contribution/title"/><xsl:text>\n</xsl:text>
+    <xsl:text>J2 - Prof of </xsl:text>
+        <xsl:value-of select="conference/code"/><xsl:text>, </xsl:text>
+        <xsl:value-of select="conference/venue"/><xsl:text>, </xsl:text>
+        <xsl:value-of select="conference/start-date"></xsl:value-of>
+    <xsl:text>\n</xsl:text>
+    <xsl:text>CY - </xsl:text><xsl:value-of select="conference/venue"/><xsl:text>\n</xsl:text>
+    <xsl:text>T2 - </xsl:text><xsl:value-of select="conference/series"/><xsl:text>\n</xsl:text>
+    <xsl:text>T3 - </xsl:text><xsl:value-of select="conference/series-number"/><xsl:text>\n</xsl:text>
+    <xsl:text>LA - </xsl:text><xsl:value-of select="language"/><xsl:text>\n</xsl:text>
+    <xsl:text>AB - </xsl:text><xsl:comment>ABSTRACT</xsl:comment><xsl:text>\n</xsl:text>
+    <xsl:text>PB - </xsl:text><xsl:value-of select="publisher"/><xsl:text>\n</xsl:text>
+    <xsl:text>CP - </xsl:text>Geneva, Switzerland<xsl:text>\n</xsl:text>
+    <xsl:text>SP - </xsl:text><xsl:value-of select="contribution/pages/start-page"/><xsl:text>\n</xsl:text>
+    <xsl:text>EP - </xsl:text><xsl:value-of select="contribution/pages/start-page + contribution/pages/number"/><xsl:text>\n</xsl:text>
+    <xsl:text>KW - </xsl:text><xsl:comment>KEYWORDS</xsl:comment><xsl:text>\n</xsl:text>
+    <xsl:variable name="dateString" select="conference/start-date"/>
+    <xsl:text>DA - </xsl:text><xsl:value-of select="substring($dateString, 1, 4)"/><xsl:text>/</xsl:text><xsl:value-of select="substring($dateString, 6, 2)"/><xsl:text>\n</xsl:text>
+    <xsl:text>PY - </xsl:text><xsl:value-of select="substring($dateString, 1, 4)"/><xsl:text>\n</xsl:text>
+    <xsl:text>SN - </xsl:text><xsl:value-of select="conference/issn"/><xsl:text>\n</xsl:text>
+    <xsl:text>DO - </xsl:text><xsl:value-of select="contribution/doi"/><xsl:text>\n</xsl:text>
+    <xsl:text>UR - </xsl:text><xsl:value-of select="contribution/url"/><xsl:text>\n</xsl:text>
+    <xsl:text>ER - </xsl:text><xsl:text>\n</xsl:text>
+</xsl:template>
+
+</xsl:stylesheet>

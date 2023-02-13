@@ -47,18 +47,12 @@ async def event_contribution_reference(event: dict, cookies: dict, settings: dic
         xslt_root = XML(await f.read(), XMLParser(encoding='utf-8'))
         xslt_functions['word'] = XSLT(xslt_root)
 
-    xml_builder = JinjaXMLBuilder()
-    # conference_code = event.get('title')
-    # conference_date = datetime.strptime(event.get('start_dt').get('date'), '%Y-%m-%d')
-    # conference_location = event.get('location')
+    # RIS
+    async with await open_file('xslt/ris.xml') as f:
+        xslt_root = XML(await f.read(), XMLParser(encoding='utf-8'))
+        xslt_functions['ris'] = XSLT(xslt_root)
 
-    # conference = Conference(
-    #     status=ConferenceStatus.UNPUBLISHED,
-    #     code=conference_code,
-    #     month=conference_date.month,
-    #     year=conference_date.year,
-    #     venue=conference_location
-    # )
+    xml_builder = JinjaXMLBuilder()
 
     for session in event.get('sessions', []):
         # logger.info(session)
@@ -86,12 +80,14 @@ async def event_contribution_reference(event: dict, cookies: dict, settings: dic
                 bibtex_ref = xslt_functions.get('bibtex')(doc)
                 latex_ref = xslt_functions.get('latex')(doc)
                 word_ref = xslt_functions.get('word')(doc)
+                ris_ref = xslt_functions.get('ris')(doc)
 
                 references=dict(
                     code=contribution.get('code'),
                     bibtex=str(bibtex_ref, encoding='utf-8'),
                     latex=str(latex_ref, encoding='utf-8'),
-                    word=str(word_ref, encoding='utf-8')
+                    word=str(word_ref, encoding='utf-8'),
+                    ris=str(ris_ref, encoding='utf-8')
                 )
 
                 # bibtex
