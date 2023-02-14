@@ -24,7 +24,8 @@ class Contribution:
     url: str
 
     # optional
-    publisher: str = 'JaCoW Publishing, Geneva, Switzerland'
+    publisher: str = 'JaCoW Publishing'
+    publisher_venue: str = 'Geneva, Switzerland'
     language: str = 'english'
     series: str = ''
     series_number: str = ''
