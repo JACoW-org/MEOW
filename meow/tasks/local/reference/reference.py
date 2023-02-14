@@ -21,6 +21,7 @@ class Contribution:
     paper_code: str
     primary_authors: list
     title: str
+    abstract: str
     url: str
 
     # optional

@@ -47,9 +47,9 @@
     <xsl:if test="conference/series"><xsl:text>T2 - </xsl:text><xsl:value-of select="conference/series"/><xsl:text>\n</xsl:text></xsl:if>
     <xsl:if test="conference/series-number"><xsl:text>T3 - </xsl:text><xsl:value-of select="conference/series-number"/><xsl:text>\n</xsl:text></xsl:if>
     <xsl:text>LA - </xsl:text><xsl:value-of select="language"/><xsl:text>\n</xsl:text>
-    <xsl:text>AB - </xsl:text><xsl:comment>ABSTRACT</xsl:comment><xsl:text>\n</xsl:text>
+    <xsl:text>AB - </xsl:text><xsl:value-of select="contribution/abstract"/><xsl:text>\n</xsl:text>
     <xsl:text>PB - </xsl:text><xsl:value-of select="publisher"/><xsl:text>\n</xsl:text>
-    <xsl:text>CP - </xsl:text><xsl:value-of select="publisher-venue"></xsl:value-of><xsl:text>\n</xsl:text>
+    <xsl:text>CP - </xsl:text><xsl:value-of select="publisher-venue"/><xsl:text>\n</xsl:text>
     <xsl:text>SP - </xsl:text><xsl:value-of select="contribution/pages/start-page"/><xsl:text>\n</xsl:text>
     <xsl:text>EP - </xsl:text><xsl:value-of select="contribution/pages/start-page + contribution/pages/number"/><xsl:text>\n</xsl:text>
     <xsl:text>KW - </xsl:text><xsl:comment>KEYWORDS</xsl:comment><xsl:text>\n</xsl:text>

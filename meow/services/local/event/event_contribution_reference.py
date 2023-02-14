@@ -18,7 +18,7 @@ class JinjaXMLBuilder:
     def __init__(self) -> None:
         self.env = Environment(
             enable_async=True,
-            autoescape=select_autoescape(),
+            autoescape=True,
             loader=FileSystemLoader('jinja/reference')
         )
     
@@ -52,6 +52,11 @@ async def event_contribution_reference(event: dict, cookies: dict, settings: dic
         xslt_root = XML(await f.read(), XMLParser(encoding='utf-8'))
         xslt_functions['ris'] = XSLT(xslt_root)
 
+    # endNote
+    async with await open_file('xslt/end-note.xml') as f:
+        xslt_root = XML(await f.read(), XMLParser(encoding='utf-8'))
+        xslt_functions['endNote'] = XSLT(xslt_root)    
+
     xml_builder = JinjaXMLBuilder()
 
     for session in event.get('sessions', []):
@@ -69,6 +74,7 @@ async def event_contribution_reference(event: dict, cookies: dict, settings: dic
                 paper_code=contribution.get('code'),
                 primary_authors=contribution.get('primary_authors'),
                 title=contribution.get('title'),
+                abstract=contribution.get('description'),
                 url=contribution.get('url')
             )
 
@@ -81,55 +87,21 @@ async def event_contribution_reference(event: dict, cookies: dict, settings: dic
                 latex_ref = xslt_functions.get('latex')(doc)
                 word_ref = xslt_functions.get('word')(doc)
                 ris_ref = xslt_functions.get('ris')(doc)
+                end_note_ref = xslt_functions.get('endNote')(doc)
 
                 references=dict(
                     code=contribution.get('code'),
                     bibtex=str(bibtex_ref, encoding='utf-8'),
                     latex=str(latex_ref, encoding='utf-8'),
                     word=str(word_ref, encoding='utf-8'),
-                    ris=str(ris_ref, encoding='utf-8')
+                    ris=str(ris_ref, encoding='utf-8'),
+                    endNote=str(end_note_ref, encoding='utf-8')
                 )
-
-                # bibtex
-                # async with await open_file('xslt/bibtex.xml') as f:
-                #     xslt_root = XML(await f.read(), XMLParser(encoding='utf-8'))
-                #     xslt_tran = XSLT(xslt_root)
-
-                #     result = str(xslt_tran(doc), encoding='utf-8')
-
-                #     # print(result)
-
-                #     references['bibtex'] = result
 
                 yield dict(
                     type='progress',
                     value=references
                 )
-
-            # reference = Reference(
-            #     paper_id=contribution.get('code'),
-            #     authors=contribution.get('primary_authors'),
-            #     title=session['title'],
-            #     url=contribution.get('url')
-            # )
-
-            # citation = Citation(conference, reference)
-
-            # if citation.is_citable():
-                
-            #     logger.info(f'\n{citation.to_latex()}')
-
-            #     yield dict(
-            #         type='progress',
-            #         value=dict(
-            #             code=contribution.get('code'),
-            #             bibtex=citation.to_bibtex(),
-            #             latex=citation.to_latex(),
-            #             word=citation.to_word(),
-            #             ris=citation.to_ris(),
-            #             xml=citation.to_xml(),
-            #         )
-            #     )
 
 
     yield dict(

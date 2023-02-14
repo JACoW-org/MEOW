@@ -1,0 +1,58 @@
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:output omit-xml-declaration="yes" indent="yes" encoding="UTF-8" method="xml"/>
+
+<xsl:template match="reference">
+    <xml>
+        <records>
+            <record>
+                <contributors>
+                    <authors>
+                        <xsl:for-each select="contribution/primary-authors/author">
+                            <author>
+                                <xsl:value-of select="last-name"></xsl:value-of>
+                                <xsl:text>,</xsl:text>
+                                <xsl:value-of select="substring(first-name, 1, 1)"></xsl:value-of>
+                            </author>
+                        </xsl:for-each>
+                    </authors>
+                </contributors>
+                <titles>
+                    <title>
+                        <xsl:value-of select="contribution/title"/>
+                    </title>
+                </titles>
+                <publisher><xsl:value-of select="publisher"/></publisher>
+                <pub-location><xsl:value-of select="publisher-venue"/></pub-location>
+                <issn><xsl:value-of select="conference/issn"/></issn>
+                <isbn><xsl:value-of select="conference/isbn"/></isbn>
+                <electronic-resource-num><xsl:value-of select="contribution/doi"/></electronic-resource-num>
+                <language><xsl:value-of select="language"/></language>
+                <pages>
+                    <xsl:value-of select="contribution/pages/start-page"/>
+                    <xsl:text>-</xsl:text>
+                    <xsl:value-of select="contribution/pages/start-page + contribution/pages/number"/>
+                </pages>
+                <keywords></keywords>
+                <work-type><xsl:text>Contribution to a conference proceedings</xsl:text></work-type>
+                <xsl:variable name="dateString" select="conference/start-date"></xsl:variable>
+                <dates>
+                    <year><xsl:value-of select="substring($dateString, 1, 4)"/></year>
+                    <pub-dates>
+                        <xsl:value-of select="substring($dateString, 1, 4)"/>
+                        <xsl:text>-</xsl:text>
+                        <xsl:value-of select="substring($dateString, 6, 2)"/>
+                    </pub-dates>
+                </dates>
+                <urls>
+                    <related-urls>
+                        <url><xsl:value-of select="contribution/doi"/></url>
+                        <url><xsl:value-of select="contribution/url"/></url>
+                    </related-urls>
+                </urls>
+                <abstract><xsl:value-of select="contribution/abstract"/></abstract>
+            </record>
+        </records>
+    </xml>
+</xsl:template>
+
+</xsl:stylesheet>
