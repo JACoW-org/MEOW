@@ -4,11 +4,11 @@ from typing import AsyncGenerator
 
 from datetime import datetime
 
-from meow.tasks.local.reference.reference import Contribution, Citation, Conference, Reference, ConferenceStatus
+from meow.tasks.local.reference.models import ContributionRef, ConferenceStatus
 
-from jinja2 import Environment, select_autoescape, FileSystemLoader
-from lxml.etree import XML, XSLT, fromstring, tostring, XMLParser
-from anyio import open_file, run
+from jinja2 import Environment, FileSystemLoader
+from lxml.etree import XML, XSLT, fromstring, XMLParser
+from anyio import open_file
 
 
 logger = lg.getLogger(__name__)
@@ -22,7 +22,7 @@ class JinjaXMLBuilder:
             loader=FileSystemLoader('jinja/reference')
         )
     
-    async def build_reference_xml(self, contribution: Contribution) -> str:
+    async def build_reference_xml(self, contribution: ContributionRef) -> str:
         return await self.env.get_template('reference.xml.jinja').render_async(contribution.as_dict())
 
 
@@ -65,7 +65,7 @@ async def event_contribution_reference(event: dict, cookies: dict, settings: dic
         for contribution in session.get('contributions', []):
             #logger.info(contribution)
 
-            data = Contribution(
+            data = ContributionRef(
                 conference_status=ConferenceStatus.UNPUBLISHED.value,
                 conference_code=event.get('title'),
                 venue=event.get('location'),
