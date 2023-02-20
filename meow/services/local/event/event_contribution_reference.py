@@ -58,6 +58,8 @@ async def event_contribution_reference(event: dict, cookies: dict, settings: dic
         xslt_functions['endNote'] = XSLT(xslt_root)    
 
     xml_builder = JinjaXMLBuilder()
+    
+    
 
     for session in event.get('sessions', []):
         # logger.info(session)

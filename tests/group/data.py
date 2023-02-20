@@ -10,7 +10,9 @@ contributions = [
         'code': 'MOA01',
         'session': 'MOA',
         'track': ['AAA'],
-        'authors': ['Jeong, Y.U.', 'Bal, W.']
+        'authors': ['Jeong, Y.U.', 'Bal, W.'],
+        'keywords': ['laser'],
+        'institutes': ['']
     },
     {
         'code': 'MOA02',

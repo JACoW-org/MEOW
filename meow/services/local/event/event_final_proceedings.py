@@ -1,4 +1,5 @@
 import base64
+import io
 import logging as lg
 
 from typing import AsyncGenerator
@@ -6,15 +7,8 @@ from typing import AsyncGenerator
 from meow.services.local.event.final_proceedings.create_final_proceedings \
     import create_final_proceedings
 
-from meow.services.local.event.final_proceedings.generate_final_proceedings \
-    import generate_final_proceedings
-
-from meow.services.local.event.final_proceedings.compress_final_proceedings \
-    import compress_final_proceedings
-
-from meow.services.local.event.final_proceedings.clean_final_proceedings \
-    import clean_final_proceedings
-from meow.services.local.event.final_proceedings.hugo_plugin.hugo_final_proceedings_plugin import HugoFinalProceedingsPlugin
+from meow.services.local.event.final_proceedings.hugo_plugin.hugo_final_proceedings_plugin \
+    import HugoFinalProceedingsPlugin
 
 
 logger = lg.getLogger(__name__)
@@ -23,22 +17,44 @@ logger = lg.getLogger(__name__)
 async def event_final_proceedings(event: dict, cookies: dict, settings: dict) -> AsyncGenerator:
     """ """
 
-    fp = await create_final_proceedings(event, cookies, settings)
+    # Adapt and refill event data: sessions, contributions, ...
+    final_proceedings = await create_final_proceedings(event, cookies, settings)
 
-    plugin = HugoFinalProceedingsPlugin(fp)
-    
-    zip = await plugin.run()
+    # Download pdf
 
-    id = event.get('id', 'event')
-    title = event.get('title', 'title')
-    name = 'final_proceedings'
+    # Pdf keywords
 
-    value = dict(
-        b64=base64.b64encode(zip.getvalue()).decode('utf-8'),
-        filename=f'{id}_{title}_{name}.7z'
-    )
+    # Contrib Groupby
 
-    yield dict(
+    # PDF Editing
+
+    # HTML + site
+    static_site = await HugoFinalProceedingsPlugin(final_proceedings).run()
+
+    # papers metadata
+    papers_metadata = io.BytesIO()
+
+    # final result
+    yield await get_results(event, static_site, papers_metadata)
+
+
+async def get_results(event: dict, static_site: io.BytesIO, papers_metadata: io.BytesIO) -> dict:
+    """ """
+
+    event_code = event.get('id', '')
+    event_title = event.get('title', '')
+
+    return dict(
         type='final',
-        value=value
+        value=dict(
+            final_proceedings=dict(
+                b64=base64.b64encode(static_site.getvalue()).decode('utf-8'),
+                filename=f"{event_code}_{event_title}_final_proceedings.7z"
+            ),
+            papers_metadata=dict(
+                b64=base64.b64encode(
+                    papers_metadata.getvalue()).decode('utf-8'),
+                filename=f"{event_code}_{event_title}_papers_metadata.7z"
+            )
+        )
     )

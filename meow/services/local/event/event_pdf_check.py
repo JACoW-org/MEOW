@@ -9,7 +9,7 @@ from anyio import Path, to_process, to_thread, sleep
 from anyio import create_memory_object_stream, ClosedResourceError
 
 from anyio.streams.memory import MemoryObjectSendStream
-from meow.services.local.event.event_pdf_utils import is_to_download
+from meow.services.local.event.event_pdf_utils import extract_event_pdf_files, is_to_download
 
 
 from meow.utils.http import download_file
@@ -26,10 +26,8 @@ async def event_pdf_check(event: dict, cookies: dict, settings: dict):
 
     pdf_cache_dir: Path = Path('var', 'run', f"{event_id}_pdf")
     await pdf_cache_dir.mkdir(exist_ok=True, parents=True)
-
-    contributions: list[dict] = event.get("contributions", list())
-
-    files = await extract_event_pdf_files(contributions)
+    
+    files = await extract_event_pdf_files(event)
 
     total_files: int = len(files)
     checked_files: int = 0
@@ -70,22 +68,6 @@ async def event_pdf_check(event: dict, cookies: dict, settings: dict):
         except ClosedResourceError:
             pass
 
-
-async def extract_event_pdf_files(elements: list[dict]) -> list:
-    """ """
-
-    files = []
-
-    for element in elements:
-        revisions = element.get('revisions', [])
-        for file in revisions[-1].get('files', []):
-            files.append(file)
-
-        # for revision in element.get('revisions', []):
-        #     for file in revision.get('files', []):
-        #         files.append(file)
-
-    return files
 
 
 async def pdf_check_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int, current_file: dict,
@@ -133,11 +115,11 @@ async def internal_pdf_check_task(current_file: dict, cookies: dict, pdf_cache_d
 
 def event_pdf_report(path: str):
     """ """
-    
+
     report = dict()
-    
+
     # logger.info(f"event_pdf_report >>> {path}")
-    
+
     with open(path, 'rb') as fh:
         try:
             pdf = Document(stream=fh.read(), filetype='pdf')
@@ -147,7 +129,7 @@ def event_pdf_report(path: str):
             logger.error(e, exc_info=True)
 
     # logger.info(f"event_pdf_report >>> {report}")
-    
+
     return report
 
 
@@ -195,4 +177,3 @@ def extract_pdf_report(pdf: Document):
 
     except Exception as e:
         logger.error(e, exc_info=True)
-
