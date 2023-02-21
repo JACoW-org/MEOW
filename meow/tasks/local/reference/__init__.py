@@ -1,0 +1,2 @@
+class ContribRef:
+    pass

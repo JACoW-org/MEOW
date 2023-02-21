@@ -4,6 +4,7 @@ from typing import AsyncGenerator
 from meow.services.local.event.event_pdf_keywords import event_pdf_keywords
 
 from meow.tasks.infra.abstract_task import AbstractTask
+from meow.tasks.local.reference import ContribRef
 
 
 logger = lg.getLogger(__name__)
