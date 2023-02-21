@@ -1,6 +1,15 @@
 from dataclasses import dataclass, asdict, field
 from enum import Enum
 
+@dataclass
+class Reference:
+
+    bibtex: str
+    latex: str
+    word: str
+    ris: str
+    end_note: str
+
 class ConferenceStatus(Enum):
     IN_PROCEEDINGS = 'in_proceedings'
     CONFERENCE = 'conference'

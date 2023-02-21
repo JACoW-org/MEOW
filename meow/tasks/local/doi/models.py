@@ -1,4 +1,5 @@
 from dataclasses import dataclass, field
+from meow.tasks.local.reference.models import Reference
 
 @dataclass
 class AuthorDOI:
@@ -25,7 +26,7 @@ class ContributionDOI:
     references: list = field(default_factory=list)
     paper_url: str = field(default='')
     slides_url: str = field(default='')
-    reference: dict = field(default_factory=dict)  #  BibTeX, LaTeX, Text/Word, RIS, EndNote TODO usare enum?
+    reference: Reference = field(default_factory=Reference)  #  BibTeX, LaTeX, Text/Word, RIS, EndNote
     conference_code: str = field(default='')
     series: str = field(default='')
     venue: str = field(default='')

@@ -10,6 +10,13 @@ from meow.services.local.event.final_proceedings.create_final_proceedings \
 from meow.services.local.event.final_proceedings.hugo_plugin.hugo_final_proceedings_plugin \
     import HugoFinalProceedingsPlugin
 
+# TODO import from __init__
+from meow.services.local.event.subtasks.gen_contribution_references \
+    import gen_contribution_references
+
+from meow.services.local.event.subtasks.gen_contribution_doi \
+    import gen_contribution_doi
+
 
 logger = lg.getLogger(__name__)
 
@@ -22,7 +29,15 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
 
     # Download pdf
 
-    # Pdf keywords
+    # Pdf metadata (keywords, n_pages, are_fonts_embedded, page_size)
+
+    # Validation
+
+    # Reference generation TODO refactor so that it updates each contribution's references
+    references = await gen_contribution_references(event)
+
+    # DOI generation
+    dois = await gen_contribution_doi(event, references)
 
     # Contrib Groupby
 
