@@ -7,6 +7,8 @@ from meow.services.local.event.event_contribution_reference \
 
 from meow.tasks.infra.abstract_task import AbstractTask
 
+from meow.services.local.event.event_contribution_doi import event_contribution_doi
+
 
 logger = lg.getLogger(__name__)
 
@@ -20,5 +22,8 @@ class EventRefTask(AbstractTask):
         cookies: dict = params.get("cookies", dict())
         settings: dict = params.get("settings", dict())
         
-        async for r in event_contribution_reference(event, cookies, settings):
+        # async for r in event_contribution_reference(event, cookies, settings):
+        #     yield r
+
+        async for r in event_contribution_doi(event, cookies, settings):
             yield r

@@ -25,7 +25,7 @@ class ContributionDOI:
     references: list = field(default_factory=list)
     paper_url: str = field(default='')
     slides_url: str = field(default='')
-    references: dict = field(default_factory=dict)  #  BibTeX, LaTeX, Text/Word, RIS, EndNote TODO usare enum?
+    reference: dict = field(default_factory=dict)  #  BibTeX, LaTeX, Text/Word, RIS, EndNote TODO usare enum?
     conference_code: str = field(default='')
     series: str = field(default='')
     venue: str = field(default='')

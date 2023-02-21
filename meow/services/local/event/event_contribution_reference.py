@@ -2,8 +2,6 @@ import logging as lg
 
 from typing import AsyncGenerator
 
-from datetime import datetime
-
 from meow.tasks.local.reference.models import ContributionRef, ConferenceStatus
 
 from jinja2 import Environment, FileSystemLoader
