@@ -1,4 +1,4 @@
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass, asdict, field
 from enum import Enum
 
 class ConferenceStatus(Enum):
@@ -8,6 +8,7 @@ class ConferenceStatus(Enum):
 
 @dataclass
 class ContributionRef:
+    '''Model to build reference in different pattern.'''
     # mandatory
     conference_status: str
     conference_code: str
@@ -21,17 +22,17 @@ class ContributionRef:
     url: str
 
     # optional
-    publisher: str = 'JaCoW Publishing'
-    publisher_venue: str = 'Geneva, Switzerland'
-    language: str = 'english'
-    series: str = ''
-    series_number: str = ''
-    issn: str = ''
-    isbn: str = ''
-    book_title: str = ''
-    start_page: str = ''
-    number_of_pages: int = 0
-    doi: str = ''
+    publisher: str = field(default='JaCoW Publishing')
+    publisher_venue: str = field(default='Geneva, Switzerland')
+    language: str = field(default='english')
+    series: str = field(default='')
+    series_number: str = field(default='')
+    issn: str = field(default='')
+    isbn: str = field(default='')
+    book_title: str = field(default='')
+    start_page: str = field(default='')
+    number_of_pages: int = field(default=0)
+    doi: str = field(default='')
 
     def as_dict(self) -> dict:
         dict_obj = asdict(self)
