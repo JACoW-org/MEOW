@@ -38,7 +38,7 @@ def format_datetime_range(start: dt.datetime, end: dt.datetime) -> str:
         else _format_datetime_range_different_day(start, end)
 
 
-def datedict_to_tz_datetime(date: dict | None) -> dt.datetime | None:
+def datedict_to_tz_datetime(date: dict | None) -> dt.datetime:
     """ datedict to utc datetime """
 
     if date:
@@ -61,10 +61,10 @@ def datedict_to_tz_datetime(date: dict | None) -> dt.datetime | None:
 
         return tz_date_time_obj
 
-    return None
+    raise Exception('Invalid date dict')
 
 
-def datedict_to_utc_datetime(date: dict | None) -> dt.datetime | None:
+def datedict_to_utc_datetime(date: dict | None) -> dt.datetime:
     """ datedict to utc datetime """
 
     if date:
@@ -91,10 +91,10 @@ def datedict_to_utc_datetime(date: dict | None) -> dt.datetime | None:
 
         return utc_date_time_obj
 
-    return None
+    raise Exception('Invalid date dict')
 
 
-def datedict_to_utc_str(date: dict) -> str | None:
+def datedict_to_utc_str(date: dict | None) -> str | None:
     """ datetime dict to utc str """
 
     date_time_obj: dt.datetime | None = datedict_to_utc_datetime(date)
@@ -102,7 +102,7 @@ def datedict_to_utc_str(date: dict) -> str | None:
     return f"{date_time_obj}" if date_time_obj else None
 
 
-def datedict_to_utc_ts(date: dict) -> int | None:
+def datedict_to_utc_ts(date: dict | None) -> int | None:
     """ datetime dict to utc timestamp """
 
     date_time_obj: dt.datetime | None = datedict_to_utc_datetime(date)

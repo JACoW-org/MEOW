@@ -13,6 +13,10 @@ import shutil
 from anyio import create_task_group
 
 from jinja2 import Environment, select_autoescape, FileSystemLoader, Template
+from meow.models.local.event.final_proceedings.contribution_model import ContributionData
+from meow.models.local.event.final_proceedings.event_model import EventData
+from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
+from meow.models.local.event.final_proceedings.session_model import SessionData
 
 from meow.services.local.event.final_proceedings.abstract_plugin.abstract_final_proceedings_plugin import AbstractFinalProceedingsPlugin
 
@@ -54,36 +58,38 @@ class JinjaTemplateRenderer:
             sessions=sessions
         ))
 
-    async def render_contribution_list(self, session: dict) -> str:
+    async def render_contribution_list(self, event: EventData, session: SessionData, contributions: list[ContributionData]) -> str:
         return await self.render("contribution_list.html.jinja", dict(
-            session_code=session.get('code', None),
-            session_title=session.get('title', ''),
-            session_start=format_datetime_full(session.get('start', None)),
-            session_end=format_datetime_time(session.get('end', None)),
-            session_conveners=session.get('conveners', []),
-            contributions=session.get('contributions', [])
+            event_code=event.title,
+            session_code=session.code,
+            session_title=session.title,
+            session_start=format_datetime_full(session.start),
+            session_end=format_datetime_time(session.end),
+            session_conveners=[c.as_dict() for c in session.conveners],
+            contributions=[c.as_dict() for c in contributions]
         ))
 
 
 class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
     """ HugoFinalProceedingsPlugin """
 
-    def __init__(self, final_proceedings: dict) -> None:
+    def __init__(self, proceedings_data: ProceedingsData) -> None:
         """ """
 
         self.template = JinjaTemplateRenderer()
 
-        self.event: dict = final_proceedings.get('event', None)
-        self.sessions: list = final_proceedings.get('sessions', [])
+        self.event = proceedings_data.event
+        self.sessions = proceedings_data.sessions
+        self.contributions = proceedings_data.contributions
 
         self.init_paths()
 
     def init_paths(self) -> None:
 
-        event_id: str = self.event.get('id', None)
+        event_id: str = self.event.id
 
         self.tmp_dir = Path('var', 'tmp')
-        
+
         self.src_dir = Path('var', 'run', f"{event_id}_hugo_src")
         self.out_dir = Path('var', 'run', f"{event_id}_hugo_src", "out")
 
@@ -133,19 +139,19 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
             logger.error("hugo:prepare", e, exc_info=True)
 
         # try:
-        # 
+        #
         #     ssg_cmd = await self.ssg_cmd()
-        # 
+        #
         #     ssg_args = [f"{ssg_cmd}", "new", "site",
         #                 f"{self.src_dir}", "--force"]
-        # 
+        #
         #     result = await run_process(ssg_args)
-        # 
+        #
         #     if result.returncode == 0:
         #         logger.info(result.stdout.decode())
         #     else:
         #         logger.info(result.stderr.decode())
-        # 
+        #
         # except BaseException as e:
         #     logger.error("hugo:prepare", e, exc_info=True)
 
@@ -182,21 +188,21 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                                  "-aoa", f"-o{site_output_dir}"]
 
             pprint(site_extract_args)
-            
+
             result = await run_process(site_extract_args)
 
             if result.returncode == 0:
                 logger.info(result.stdout.decode())
             else:
                 logger.info(result.stderr.decode())
-                
+
             await Path(self.tmp_dir, '0_hugo_src').rename(self.src_dir)
-            
+
             shutil.rmtree(f"{await Path(self.tmp_dir, '0_hugo_src').absolute()}", ignore_errors=True)
 
         except BaseException as e:
             logger.error(e)
-                       
+
         try:
 
             zip_cmd = await self.zip_cmd()
@@ -215,7 +221,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                 logger.info(result.stdout.decode())
             else:
                 logger.info(result.stderr.decode())
-            
+
         except BaseException as e:
             logger.error(e)
 
@@ -235,7 +241,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
         try:
             await Path(self.src_dir, 'config.toml').write_text(
-                await self.template.render_config_toml(self.event)
+                await self.template.render_config_toml(self.event.as_dict())
             )
         except BaseException as e:
             logger.error("hugo:prepare", e, exc_info=True)
@@ -246,23 +252,26 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         )
 
     async def session(self) -> None:
-        await Path(self.src_session_dir, '_index.md').write_text(
-            await self.template.render_session_list(self.sessions)
+        await Path(self.src_session_dir, '_index.html').write_text(
+            await self.template.render_session_list([
+                s.as_dict() for s in self.sessions
+            ])
         )
+
+        async def _session_contribution(session: SessionData) -> None:
+            curr_dir = Path(self.src_session_dir, session.code.lower())
+            await curr_dir.mkdir(parents=True, exist_ok=True)
+
+            await Path(curr_dir, '_index.html').write_text(
+                await self.template.render_contribution_list(self.event, session, [
+                    c for c in self.contributions
+                    if c.session_code == session.code
+                ])
+            )
 
         async with create_task_group() as tg:
             for session in self.sessions:
-                tg.start_soon(self.contribution, session)
-
-    async def contribution(self, session: dict):
-
-        curr_dir = Path(self.src_session_dir, session.get('code', None))
-
-        await curr_dir.mkdir(parents=True, exist_ok=True)
-
-        await Path(curr_dir, '_index.md').write_text(
-            await self.template.render_contribution_list(session)
-        )
+                tg.start_soon(_session_contribution, session)
 
     async def classification(self) -> None:
         pass

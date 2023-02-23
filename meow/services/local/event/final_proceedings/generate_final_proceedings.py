@@ -1,7 +1,6 @@
 import logging as lg
 
-from anyio import Path
-from meow.services.local.event.final_proceedings.hugo_plugin.hugo_final_proceedings_plugin import HugoFinalProceedingsPlugin
+from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 
 
 logger = lg.getLogger(__name__)

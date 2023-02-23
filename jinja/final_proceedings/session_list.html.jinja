@@ -1,9 +1,12 @@
 ---
-title: "Session"
+title: "FEL2022 - Session"
 date: 2023-01-02T12:06:30+01:00
 ---
 
-{% for session in sessions %}
-  [{{ session.code|e }}]({% raw %}{{<{% endraw %} ref "/session/{{ session.code|e }}/" {% raw %}>}}{% endraw %} "{{ session.code|e }}")
-{% endfor %}
-
+<section>
+  <ul>
+    {% for session in sessions %}
+    <li><a href="/session/{{ session.code|lower }}"><b>{{ session.code }}</b> - {{ session.title }}</a></li>
+    {% endfor %}
+  </ul>
+</section>

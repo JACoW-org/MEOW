@@ -25,9 +25,7 @@ async def extract_event_pdf_files(event: dict) -> list:
 
     event_files = []
 
-    contributions = await extract_event_contributions(event)
-
-    for contribution in contributions:
+    for contribution in event.get('contributions', []):
         revisions = contribution.get('revisions', [])
 
         revisions_files = revisions[-1].get('files', []) \
@@ -38,8 +36,3 @@ async def extract_event_pdf_files(event: dict) -> list:
 
     return event_files
 
-
-async def extract_event_contributions(event: dict) -> list[dict]:
-    """ """
-
-    return event.get('contributions', [])

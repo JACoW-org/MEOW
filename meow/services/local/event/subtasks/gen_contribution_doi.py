@@ -13,15 +13,16 @@ async def gen_contribution_doi(event: dict, references: dict):
     DOI_BASE_URL = 'https://doi.org/10.18429'
 
     dois = dict()
+    
     for session in event.get('sessions', []):
         for contribution in session.get('contributions', []):
 
+            doi_url = f"{DOI_BASE_URL}/JACoW-{event.get('title')}-{contribution.get('code')}" # TODO improve
+            
             primary_authors = map(lambda author: AuthorDOI(
                 first_name=author.get('first_name'),
                 last_name=author.get('last_name'),
                 affiliation=author.get('affiliation')), contribution.get('primary_authors'))
-
-            doi = f"{DOI_BASE_URL}/JACoW-{event.get('title')}-{contribution.get('code')}" # TODO improve
 
             editors = list()    # TODO probabilmente da event --> board che si occupa della gestione delle contributions
 
@@ -37,19 +38,19 @@ async def gen_contribution_doi(event: dict, references: dict):
                 paper_url=contribution.get('url'),
                 slides_url=contribution.get('url'), # TODO missing data
                 reference=references.get(contribution.get('code')),
-                conference_code=event.get('title'),
-                series=event.get(''),    # TODO
-                venue=event.get('location'),
-                start_date=event.get('start_dt').get('date'),
-                end_date=event.get('end_dt').get('date'),
+                conference_code=event.get('title', ''),
+                series=event.get('series', ''),    # TODO
+                venue=event.get('location', ''),
+                start_date=event.get('start_dt', {}).get('date', ''),
+                end_date=event.get('end_dt', {}).get('date', ''),
                 editors=editors,
                 isbn=event.get('isbn', ''),
                 issn=event.get('issn', ''),
                 reception_date=contribution.get('reception_date', ''),
                 acceptance_date=contribution.get('acceptance_date', ''),
                 issuance_date=contribution.get('issuance_date', ''),
-                doi=doi,
-                start_page='',  # TODO
+                doi_url=doi_url,
+                start_page=0,  # TODO
                 number_of_pages=0, # TODO
             )
 

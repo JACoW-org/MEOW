@@ -1,4 +1,5 @@
 from dataclasses import dataclass, field
+from typing import Optional
 from meow.tasks.local.reference.models import Reference
 
 @dataclass
@@ -26,7 +27,7 @@ class ContributionDOI:
     references: list = field(default_factory=list)
     paper_url: str = field(default='')
     slides_url: str = field(default='')
-    reference: Reference = field(default_factory=Reference)  #  BibTeX, LaTeX, Text/Word, RIS, EndNote
+    reference: Optional[Reference] = field(default=None)  #  BibTeX, LaTeX, Text/Word, RIS, EndNote
     conference_code: str = field(default='')
     series: str = field(default='')
     venue: str = field(default='')
@@ -40,6 +41,6 @@ class ContributionDOI:
     reception_date: str = field(default='')
     acceptance_date: str = field(default='')
     issuance_date: str = field(default='')
-    doi: str = field(default='')
-    start_page: str = field(default='')
+    doi_url: str = field(default='')
+    start_page: int = field(default=0)
     number_of_pages: int = field(default=0)

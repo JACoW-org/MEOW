@@ -4,29 +4,104 @@ date: 2023-01-02T12:06:30+01:00
 draft: false
 ---
 
-{% for convener in session_conveners %}
-### Chair: {{ convener.first|e }} {{ convener.last|e }} ({{ convener.affiliation|e }})
-{% endfor %}
+<section>
+    {% for convener in session_conveners %}
+    <h4>Chair: {{ convener.first|e }} {{ convener.last|e }} ({{ convener.affiliation|e }})</h4>
+    {% endfor %}
+</section>
 
 {% for contribution in contributions %}
+<section>
 
-### {{ contribution.code|e }}
+    <h3>
+        {{ contribution.code|e }} /
+        {{ contribution.start.strftime('%H:%M') }} -
+        {{ contribution.end.strftime('%H:%M') }}
+    </h3>
 
-#### {{ contribution.title|e }}
+    <h4>{{ contribution.title|e }}</h4>
 
-> {{ contribution.description|e }}
+    <p>{{ contribution.description|e }}</p>
 
-- Slides: [{{ contribution.code|e }}]({% raw %}{{<{% endraw %} ref "/pdf/{{ contribution.code|e }}" {% raw %}>}}{% endraw %} "{{ contribution.code|e }}")
+    <ul>
 
-- DOI: reference for this paper
-※ https://doi.org/10.18429/JACoW-FEL2019-MOA01
+        {% if contribution.metadata: %}
 
-- About: paper received ※ 26 August 2019 -
-paper accepted ※ 09 September 2019 - 
-issue date ※ 05 November 2019
+        <li>
+            <b>Slides:</b>
+            <a href="/pdf/{{ contribution.code|lower }}.pdf">{{ contribution.code|lower }}.pdf</a>
+        </li>
 
-- Export: reference for this paper using
-※ BibTeX, ※ LaTeX, ※ Text/Word
-※ RIS, ※ EndNote (xml)
+        <li>
+            <b>Paper:</b>
+            <a href="/pdf/{{ contribution.code|lower }}.pdf">{{ contribution.code|lower }}.pdf</a>
+        </li>
 
+        {% endif %}
+
+        <li>
+            <b>DOI:</b> reference for this paper -
+            <a href="{{ contribution.doi_data.doi_url }}">{{ contribution.doi_data.doi_url }}</a>
+        </li>
+
+        <li>
+            <b>About:</b>
+            paper received <i>26 August 2019</i> -
+            paper accepted <i>09 September 2019</i> -
+            issue date <i>05 November 2019</i>
+        </li>
+
+        {% if contribution.reference: %}
+
+        <li>
+            <p>
+                <b>Export:</b> reference for this paper using:
+            </p>
+
+            <p>
+                <b>BibTeX</b>
+                <pre>{{ contribution.reference.bibtex|escape|replace('\n','<br>') }}</pre>
+
+                <b>LaTeX</b>
+                <pre>{{ contribution.reference.latex|escape|replace('\n','<br>') }}</pre>
+
+                <b>Text/Word</b>
+                <pre>{{ contribution.reference.word|escape|replace('\n','<br>') }}</pre>
+
+                <b>RIS</b>
+                <pre>{{ contribution.reference.ris|escape|replace('\n','<br>') }}</pre>
+
+                <b>EndNote</b>
+                <pre>{{ contribution.reference.endnote|escape|replace('\n','<br>') }}</pre>
+            </p>
+        </li>
+
+        {% endif %}
+
+        {% if contribution.metadata: %}
+
+        <li>
+            <b>Keywords:</b>
+            <pre>{{ contribution.metadata.keywords | tojson }}</pre>
+        </li>
+
+        <li>
+            <b>Report:</b>
+            <pre>{{ contribution.metadata.report | tojson }}</pre>
+        </li>
+
+        {% endif %}
+
+        {% if contribution.doi_data: %}
+
+        <li>
+            <b>Doi Data:</b>
+            <pre>{{ contribution.doi_data | tojson }}</pre>
+        </li>
+
+        {% endif %}
+
+    </ul>
+
+</section>
 {% endfor %}
