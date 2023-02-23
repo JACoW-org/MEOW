@@ -1,18 +1,15 @@
 import logging as lg
 
 import io
+import json
 
 from anyio import Path
-
-from typing import AsyncGenerator
-
-from pprint import pprint
 
 import shutil
 
 from anyio import create_task_group
 
-from jinja2 import Environment, select_autoescape, FileSystemLoader, Template
+from jinja2 import Environment, select_autoescape, FileSystemLoader, filters
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
 from meow.models.local.event.final_proceedings.event_model import EventData
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
@@ -20,11 +17,7 @@ from meow.models.local.event.final_proceedings.session_model import SessionData
 
 from meow.services.local.event.final_proceedings.abstract_plugin.abstract_final_proceedings_plugin import AbstractFinalProceedingsPlugin
 
-
-from anyio import open_file
-from anyio import Path
-from anyio import run_process
-from anyio.streams.file import FileReadStream
+from anyio import Path, run_process
 
 from meow.utils.datetime import format_datetime_full, format_datetime_time
 
@@ -44,9 +37,9 @@ class JinjaTemplateRenderer:
     async def render(self, name: str, args: dict) -> str:
         return await self.env.get_template(name).render_async(args)
 
-    async def render_config_toml(self, event: dict) -> str:
+    async def render_config_toml(self, event: EventData) -> str:
         return await self.render("config.toml.jinja", dict(
-            title=event.get('title', None),
+            title=event.title,
             url='http://127.0.0.1:8000/'
         ))
 
@@ -187,7 +180,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
             site_extract_args = [f"{zip_cmd}", "x", f"{site_assets_dir}",
                                  "-aoa", f"-o{site_output_dir}"]
 
-            pprint(site_extract_args)
+            logger.debug(site_extract_args)
 
             result = await run_process(site_extract_args)
 
@@ -213,7 +206,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
             theme_extract_args = [f"{zip_cmd}", "x", f"{theme_assets_dir}",
                                   "-aoa", f"-o{theme_output_dir}"]
 
-            pprint(theme_extract_args)
+            logger.debug(theme_extract_args)
 
             result = await run_process(theme_extract_args)
 
@@ -241,7 +234,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
         try:
             await Path(self.src_dir, 'config.toml').write_text(
-                await self.template.render_config_toml(self.event.as_dict())
+                await self.template.render_config_toml(self.event)
             )
         except BaseException as e:
             logger.error("hugo:prepare", e, exc_info=True)

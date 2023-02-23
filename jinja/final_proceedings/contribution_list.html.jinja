@@ -1,8 +1,10 @@
 ---
-title: "{{ session_code }} - {{ session_title }} - {{ session_start }} / {{ session_end }}"
+title: "{{ session_code }} - {{ session_title }}"
 date: 2023-01-02T12:06:30+01:00
 draft: false
 ---
+
+<h2>{{ session_start }} / {{ session_end }}</h2>
 
 <section>
     {% for convener in session_conveners %}
