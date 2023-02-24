@@ -6,7 +6,7 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import Pro
 logger = lg.getLogger(__name__)
 
 
-async def clean_final_proceedings(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
+async def refill_papers_metadata(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
     """ """
     
     return proceedings_data

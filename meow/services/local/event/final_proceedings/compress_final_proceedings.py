@@ -1,15 +1,12 @@
-import io
 import logging as lg
 
-from anyio import open_file
-from anyio import Path
-from anyio import run_process
-from anyio.streams.file import FileReadStream
+from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 
 
 logger = lg.getLogger(__name__)
 
 
-async def compress_final_proceedings(event: dict, cookies: dict, settings: dict) -> None:
-
-    pass
+async def compress_final_proceedings(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
+    """ """
+    
+    return proceedings_data

@@ -3,6 +3,7 @@ import io
 import logging as lg
 
 from typing import AsyncGenerator
+from meow.services.local.event.final_proceedings.copy_contribution_papers import copy_contribution_papers
 
 from meow.services.local.event.final_proceedings.download_contributions_papers import download_contributions_papers
 from meow.services.local.event.final_proceedings.extract_contribution_references import extract_contribution_references
@@ -11,8 +12,10 @@ from meow.services.local.event.final_proceedings.generate_contribution_doi impor
 
 from meow.services.local.event.final_proceedings.create_final_proceedings \
     import create_final_proceedings
+from meow.services.local.event.final_proceedings.generate_contributions_groups import generate_contributions_groups
 from meow.services.local.event.final_proceedings.hugo_plugin.hugo_final_proceedings_plugin \
     import HugoFinalProceedingsPlugin
+from meow.services.local.event.final_proceedings.refill_papers_metadata import refill_papers_metadata
 from meow.services.local.event.final_proceedings.validate_proceedings_data \
     import validate_proceedings_data
 
@@ -49,21 +52,37 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
     # Generate contribution references
     final_proceedings = await extract_contribution_references(final_proceedings, cookies, settings)
     
-    logger.info('event_final_proceedings - gen_contribution_doi')
+    logger.info('event_final_proceedings - generate_contribution_doi')
 
     # DOI generation
     final_proceedings = await generate_contribution_doi(final_proceedings, cookies, settings)
-
-    # Contrib Groupby
     
-    logger.info('event_final_proceedings - gen_contributions_groups')
+    logger.info('event_final_proceedings - generate_contributions_groups')
+    
+    # TODO: Contrib Groupby
+    final_proceedings = await generate_contributions_groups(final_proceedings, cookies, settings)
 
-    # PDF Editing
+    logger.info('event_final_proceedings - refill_papers_metadata')
+
+    # TODO: PDF Editing
+    final_proceedings = await refill_papers_metadata(final_proceedings, cookies, settings)
     
     logger.info('event_final_proceedings - gen_final_proceedings')
 
     # HTML + site
-    static_site = await HugoFinalProceedingsPlugin(final_proceedings).run()
+    
+    plugin = HugoFinalProceedingsPlugin(final_proceedings)
+        
+    await plugin.run_prepare()
+    
+    await plugin.run_build()
+    
+    logger.info('event_final_proceedings - copy_contribution_papers')
+
+    # TODO: PDF Copy
+    final_proceedings = await copy_contribution_papers(final_proceedings, cookies, settings)
+    
+    static_site = await plugin.run_pack()
     
     logger.info('event_final_proceedings - gen_papers_metadata')
 

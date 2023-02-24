@@ -2,8 +2,8 @@ import logging as lg
 
 from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError
-
 from anyio.streams.memory import MemoryObjectSendStream
+
 from meow.models.local.event.final_proceedings.contribution_model import FileData
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_proceedings_files
 
@@ -15,7 +15,7 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import Pro
 logger = lg.getLogger(__name__)
 
 
-async def download_contributions_papers(proceedings_data: ProceedingsData, cookies: dict, settings: dict):
+async def download_contributions_papers(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
 
     files_data: list[FileData] = await extract_proceedings_files(proceedings_data)
 

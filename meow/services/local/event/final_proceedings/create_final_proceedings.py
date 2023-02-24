@@ -10,7 +10,7 @@ async def create_final_proceedings(event: dict, cookies: dict, settings: dict) -
 
     proceedings_data = proceedings_data_factory(event)
     
-    logger.info(proceedings_data.as_dict())
+    # logger.info(proceedings_data.as_dict())
 
     return proceedings_data
 

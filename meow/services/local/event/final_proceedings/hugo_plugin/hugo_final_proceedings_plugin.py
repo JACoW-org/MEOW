@@ -1,25 +1,19 @@
 import logging as lg
 
-import io
-import json
-
-from anyio import Path
-
 import shutil
 
-from anyio import create_task_group
+from io import BytesIO
+from anyio import Path, run_process, create_task_group
+from jinja2 import Environment, select_autoescape, FileSystemLoader
 
-from jinja2 import Environment, select_autoescape, FileSystemLoader, filters
+from meow.utils.datetime import format_datetime_full, format_datetime_time
+
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
 from meow.models.local.event.final_proceedings.event_model import EventData
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.models.local.event.final_proceedings.session_model import SessionData
 
 from meow.services.local.event.final_proceedings.abstract_plugin.abstract_final_proceedings_plugin import AbstractFinalProceedingsPlugin
-
-from anyio import Path, run_process
-
-from meow.utils.datetime import format_datetime_full, format_datetime_time
 
 
 logger = lg.getLogger(__name__)
@@ -95,7 +89,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
             self.src_dir, 'content', 'doi_per_institute')
         self.src_keyword_dir = Path(self.src_dir, 'content', 'keyword')
 
-    async def run(self):
+    async def run(self) -> BytesIO:
         """ """
 
         await self.prepare()
@@ -108,8 +102,32 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
             tg.start_soon(self.institute)
             tg.start_soon(self.doi_per_institute)
             tg.start_soon(self.keyword)
+            tg.start_soon(self.static)
             tg.start_soon(self.finalize)
 
+        await self.generate()
+        zip = await self.compress()
+
+        await self.clean()
+
+        return zip
+    
+    async def run_prepare(self) -> None:
+        await self.prepare()
+
+    async def run_build(self) -> None:
+        async with create_task_group() as tg:
+            tg.start_soon(self.home)
+            tg.start_soon(self.session)
+            tg.start_soon(self.classification)
+            tg.start_soon(self.author)
+            tg.start_soon(self.institute)
+            tg.start_soon(self.doi_per_institute)
+            tg.start_soon(self.keyword)
+            tg.start_soon(self.static)
+            tg.start_soon(self.finalize)
+            
+    async def run_pack(self) -> BytesIO:
         await self.generate()
         zip = await self.compress()
 
@@ -281,6 +299,9 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
     async def keyword(self) -> None:
         pass
 
+    async def static(self) -> None:
+        pass
+
     async def finalize(self) -> None:
         pass
 
@@ -307,7 +328,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         except BaseException as e:
             logger.error("hugo:generate", e, exc_info=True)
 
-    async def compress(self) -> io.BytesIO:
+    async def compress(self) -> BytesIO:
         """ """
 
         zip_cmd = await self.zip_cmd()
@@ -332,7 +353,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
         zip = await self.get_zip(zip_file_path)
 
-        await zip_file.unlink(True)
+        # await zip_file.unlink(True)
 
         return zip
 
