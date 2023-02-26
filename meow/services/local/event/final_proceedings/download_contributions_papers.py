@@ -67,7 +67,7 @@ async def file_download_task(capacity_limiter: CapacityLimiter, total_files: int
 
         pdf_file = Path(pdf_cache_dir, pdf_name)
 
-        logger.debug(f"{pdf_md5} {pdf_name}")
+        # logger.debug(f"{pdf_md5} {pdf_name}")
 
         if await is_to_download(pdf_file, pdf_md5):
             await download_file(url=pdf_url, file=pdf_file,

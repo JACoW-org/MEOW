@@ -7,8 +7,8 @@ from starlette.staticfiles import StaticFiles
 logger = lg.getLogger(__name__)
 
 
-webui = StaticFiles(directory='webui')
+preview = StaticFiles(directory='var/html/FEL2022', html=True, check_dir=True)
 
 routes = [
-    Mount('/', webui, name='webui'),
+    Mount('/', preview, name='preview'),
 ]

@@ -6,7 +6,7 @@ date: 2023-01-02T12:06:30+01:00
 <section>
   <ul>
     {% for session in sessions %}
-    <li><a href="/session/{{ session.code|lower }}"><b>{{ session.code }}</b> - {{ session.title }}</a></li>
+    <li><a href="./{{ session.code|lower }}"><b>{{ session.code }}</b> - {{ session.title }}</a></li>
     {% endfor %}
   </ul>
 </section>

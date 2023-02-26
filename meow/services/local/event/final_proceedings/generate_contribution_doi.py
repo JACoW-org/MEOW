@@ -40,7 +40,7 @@ async def generate_contribution_doi(proceedings_data: ProceedingsData, cookies: 
                 async for result in receive_stream:
                     processed_files = processed_files + 1
 
-                    logger.info(result)
+                    # logger.info(result)
 
                     result_code: str = result.get('code', None)
                     result_value: ContributionDOI | None = result.get(
@@ -130,6 +130,6 @@ def refill_contribution_doi(proceedings_data: ProceedingsData, results: dict) ->
                 start_page = start_page + contribution_data.doi_data.number_of_pages
 
         except Exception:
-            logger.info(f'No reference for contribution {code}')
+            logger.warning(f'No reference for contribution {code}')
 
     return proceedings_data

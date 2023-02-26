@@ -34,7 +34,7 @@ class JinjaTemplateRenderer:
     async def render_config_toml(self, event: EventData) -> str:
         return await self.render("config.toml.jinja", dict(
             title=event.title,
-            url='http://127.0.0.1:8000/'
+            url='http://127.0.0.1:8000/FEL2022'
         ))
 
     async def render_home_page(self) -> str:

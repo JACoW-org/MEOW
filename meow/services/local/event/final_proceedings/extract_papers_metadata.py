@@ -61,7 +61,7 @@ async def extract_papers_metadata(proceedings_data: ProceedingsData, cookies: di
                 async for result in receive_stream:
                     processed_files = processed_files + 1
                     
-                    logger.info(result)
+                    # logger.info(result)
                     
                     file_data: FileData = result.get('file', None)
                     
@@ -88,7 +88,7 @@ async def extract_metadata_task(capacity_limiter: CapacityLimiter, total_files: 
         pdf_name = current_file.filename
         pdf_file = Path(pdf_cache_dir, pdf_name)
 
-        logger.debug(f"{pdf_file} {pdf_name}")
+        # logger.debug(f"{pdf_file} {pdf_name}")
 
         metadata = await to_process.run_sync(extract_metadata, str(await pdf_file.absolute()), stemmer, stem_keywords_dict)
 
@@ -127,6 +127,6 @@ def refill_contribution_metadata(proceedings_data: ProceedingsData, results: dic
             file_data = revision_data.files[-1]        
             contribution_data.metadata = results[file_data.uuid]
         except Exception:
-            logger.info(f'No paper for contribution {contribution_data.code}')
+            logger.warning(f'No paper for contribution {contribution_data.code}')
             
     return proceedings_data

@@ -5,7 +5,7 @@ from anyio import run
 # from tests.dataclass.main import main
 # from tests.xml.main import main
 from tests.group.main import main
-            
+
 
 if __name__ == '__main__':
     run(main)

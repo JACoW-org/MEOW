@@ -14,6 +14,7 @@ from anyio.streams.memory import MemoryObjectSendStream
 
 from meow.utils.datetime import format_datetime_full
 
+
 logger = lg.getLogger(__name__)
 
 
@@ -58,7 +59,7 @@ async def extract_contribution_references(proceedings_data: ProceedingsData, coo
                 async for result in receive_stream:
                     processed_files = processed_files + 1
 
-                    logger.info(result)
+                    # logger.info(result)
 
                     result_code: str = result.get('code', None)
                     result_value: Reference | None = result.get('value', None)
@@ -160,6 +161,6 @@ def refill_contribution_reference(proceedings_data: ProceedingsData, results: di
             if code in results:
                 contribution_data.reference = results[code]
         except Exception:
-            logger.info(f'No reference for contribution {code}')
+            logger.warning(f'No reference for contribution {code}')
 
     return proceedings_data
