@@ -36,6 +36,6 @@ def session_data_factory(session_slot: Any) -> SessionData:
         ]
     )
     
-    logger.info(session_data.as_dict())
+    # logger.info(session_data.as_dict())
 
     return session_data

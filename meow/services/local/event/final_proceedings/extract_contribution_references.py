@@ -44,7 +44,7 @@ async def extract_contribution_references(proceedings_data: ProceedingsData, coo
     xslt_functions: dict[str, XSLT] = await get_xslt_functions()
 
     send_stream, receive_stream = create_memory_object_stream()
-    capacity_limiter = CapacityLimiter(4)
+    capacity_limiter = CapacityLimiter(6)
 
     results: dict[str, Reference] = dict()
 

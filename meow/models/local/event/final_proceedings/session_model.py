@@ -1,9 +1,9 @@
 from dataclasses import dataclass, asdict
 from datetime import datetime
 
-from meow.models.local.event.final_proceedings.event_model import EventPersonData
+from meow.models.local.event.final_proceedings.event_model import PersonData
 
-@dataclass
+@dataclass(kw_only=True, slots=True)
 class SessionData:
     """ Session Data """
 
@@ -15,7 +15,7 @@ class SessionData:
     start: datetime
     end: datetime
     
-    conveners: list[EventPersonData]
+    conveners: list[PersonData]
     
     room: str | None = None
     location: str | None = None

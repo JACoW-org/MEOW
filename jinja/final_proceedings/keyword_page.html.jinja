@@ -1,0 +1,11 @@
+---
+title: "{{ keyword.name }} [{{contributions|length}}]"
+date: 2023-01-02T12:06:30+01:00
+draft: false
+---
+
+{% import 'contribution_detail.html.jinja' as contribution_detail %}
+
+{% for contribution in contributions %}
+{{ contribution_detail.render(contribution, loop.cycle('odd', 'even')) }}
+{% endfor %}

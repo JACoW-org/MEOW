@@ -85,7 +85,7 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
     
     yield dict(type='progress', value=dict(phase='generate_contributions_groups'))
     
-    # TODO: Contrib Groupby
+    # Contrib Groupby
     final_proceedings = await generate_contributions_groups(final_proceedings, cookies, settings)
     
     

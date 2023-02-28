@@ -1,12 +1,13 @@
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass, asdict, field
 from datetime import datetime
 
-from meow.models.local.event.final_proceedings.event_model import EventPersonData
+from meow.models.local.event.final_proceedings.event_model import AffiliationData, KeywordData, PersonData
+from meow.models.local.event.final_proceedings.track_model import TrackData
 from meow.tasks.local.doi.models import ContributionDOI
 from meow.tasks.local.reference.models import Reference
 
 
-@dataclass
+@dataclass(kw_only=True, slots=True)
 class ContributionGroupKey:
     """ Contribution Group Key """
 
@@ -21,7 +22,7 @@ class ContributionGroupKey:
         return asdict(self)
 
 
-@dataclass
+@dataclass(kw_only=True, slots=True)
 class ContributionFieldData:
     """ Contribution Field """
 
@@ -32,7 +33,7 @@ class ContributionFieldData:
         return asdict(self)
     
 
-@dataclass
+@dataclass(kw_only=True, slots=True)
 class FileData:
     """ File Data """
     
@@ -44,9 +45,10 @@ class FileData:
     uuid: str
     
     
-@dataclass
+@dataclass(kw_only=True, slots=True)
 class RevisionData:
     """ Revision Data """
+    
     id: str
     files: list[FileData]
     comment: str
@@ -55,7 +57,7 @@ class RevisionData:
         return asdict(self)
     
 
-@dataclass
+@dataclass(kw_only=True, slots=True)
 class ContributionData:
     """ Contribution Data """
 
@@ -65,7 +67,6 @@ class ContributionData:
     title: str
     description: str
     session_code: str
-    track: list[str]
 
     start: datetime
     end: datetime
@@ -74,24 +75,30 @@ class ContributionData:
     acceptance: datetime
     issuance: datetime
 
-    field_values: list[ContributionFieldData]
+    field_values: list[ContributionFieldData] = field(default_factory=list)
     
-    speakers: list[EventPersonData]
-    primary_authors: list[EventPersonData]
-    coauthors: list[EventPersonData]
+    speakers: list[PersonData] = field(default_factory=list)
+    primary_authors: list[PersonData] = field(default_factory=list)
+    coauthors: list[PersonData] = field(default_factory=list)
     
-    revisions: list[RevisionData]
+    revisions: list[RevisionData] = field(default_factory=list)
     
-    editor: EventPersonData | None = None    
-    duration: int | None = None
-    room: str | None = None
-    location: str | None = None    
+    keywords: list[KeywordData] = field(default_factory=list)
+    authors: list[PersonData] = field(default_factory=list)
+    institutes: list[AffiliationData] = field(default_factory=list)
     
-    metadata: dict | None = None
-    reference: Reference | None = None    
-    doi_data: ContributionDOI | None = None    
+    track: TrackData | None = field(default=None)
+    
+    editor: PersonData | None = field(default=None)
+    duration: int | None = field(default=None)
+    room: str | None = field(default=None)
+    location: str | None = field(default=None)    
+    
+    metadata: dict | None = field(default=None)
+    reference: Reference | None = field(default=None)    
+    doi_data: ContributionDOI | None = field(default=None)    
 
-    group_keys: ContributionGroupKey | None = None
+    group_keys: ContributionGroupKey | None = field(default=None)
 
     def as_dict(self) -> dict:
         return asdict(self)

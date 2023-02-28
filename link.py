@@ -29,7 +29,6 @@ async def main():
        
     # await site_preview_dir.symlink_to(static_site_dir)
     
-    return proceedings_data
 
 
 if __name__ == '__main__':

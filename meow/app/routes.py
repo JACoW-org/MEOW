@@ -25,5 +25,5 @@ routes = [
     Mount("/sse", routes=sse_routes),
     Mount("/socket", routes=socket_routes),
     Mount("/static", routes=static_routes),
-    Mount("/FEL2022", routes=preview_routes),
+    Mount("/", routes=preview_routes),
 ]

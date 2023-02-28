@@ -3,10 +3,13 @@ import logging as lg
 from typing import Any
 
 from datetime import datetime
+from meow.models.local.event.final_proceedings.track_factory import track_data_factory
 
 from meow.utils.datetime import datedict_to_tz_datetime
-from meow.models.local.event.final_proceedings.event_factory import event_person_factory
+from meow.models.local.event.final_proceedings.event_factory import event_affiliation_factory, event_person_factory
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData, ContributionFieldData, FileData, RevisionData
+
+from meow.utils.serialization import json_encode
 
 
 logger = lg.getLogger(__name__)
@@ -21,7 +24,18 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
         duration=contribution.get('duration'),
         description=contribution.get('description'),
         session_code=contribution.get('session_code'),
-        track=contribution.get('track'),
+        track=track_data_factory(
+            contribution.get('track')
+        ),
+        keywords=list(set([])),
+        authors=list(set([
+            event_person_factory(person)
+            for person in contribution.get('primary_authors', [])
+        ])),
+        institutes=list(set([
+            event_affiliation_factory(institute)
+            for institute in contribution.get('institutes', [])
+        ])),
         room=contribution.get('room'),
         location=contribution.get('location'),
         field_values=[
@@ -63,7 +77,24 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
         ]
     )
 
-    logger.info(contribution_data.as_dict())
+    # logger.info("")
+    # logger.info("CONTRIBUTION")
+    # logger.info(json_encode(contribution_data.as_dict()))
+    # 
+    # logger.info("")
+    # logger.info("CONTRIBUTION - track")
+    # logger.info(json_encode(contribution_data.track))
+    # 
+    # logger.info("")
+    # logger.info("CONTRIBUTION - authors")
+    # logger.info(json_encode(contribution_data.authors))
+    # 
+    # logger.info("")
+    # logger.info("CONTRIBUTION - institutes")
+    # logger.info(json_encode(contribution_data.institutes))
+    # 
+    # logger.info("")
+    # logger.info("")
 
     return contribution_data
 
@@ -95,3 +126,4 @@ def contribution_field_factory(field: Any) -> ContributionFieldData:
         name=field.get('name'),
         value=field.get('value'),
     )
+

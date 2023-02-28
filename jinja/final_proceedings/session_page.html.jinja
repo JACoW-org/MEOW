@@ -1,0 +1,19 @@
+---
+title: "{{ session.code }} - {{ session.title }} [{{contributions|length}}]"
+date: 2023-01-02T12:06:30+01:00
+draft: false
+---
+
+<h4>{{ session.start }} / {{ session.end }}</h4>
+
+<section>
+    {% for convener in session.conveners %}
+    <h4>Chair: {{ convener.first|e }} {{ convener.last|e }} ({{ convener.affiliation|e }})</h4>
+    {% endfor %}
+</section>
+
+{% import 'contribution_detail.html.jinja' as contribution_detail %}
+
+{% for contribution in contributions %}
+{{ contribution_detail.render(contribution, loop.cycle('odd', 'even')) }}
+{% endfor %}

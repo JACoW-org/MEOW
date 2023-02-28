@@ -10,12 +10,12 @@ from anyio import create_memory_object_stream, ClosedResourceError
 
 from anyio.streams.memory import MemoryObjectSendStream
 from meow.models.local.event.final_proceedings.contribution_model import FileData
+from meow.models.local.event.final_proceedings.event_factory import event_keyword_factory
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_proceedings_files
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.services.local.papers_metadata.pdf_keywords import get_keywords_from_text, stem_keywords_as_tree
 from meow.services.local.papers_metadata.pdf_report import get_pdf_report
-from meow.services.local.papers_metadata.pdf_to_txt import pdf_to_txt
 
 from meow.utils.keywords import KEYWORDS
 
@@ -44,8 +44,8 @@ async def extract_papers_metadata(proceedings_data: ProceedingsData, cookies: di
     stem_keywords_dict = stem_keywords_as_tree(KEYWORDS, stemmer)
 
     send_stream, receive_stream = create_memory_object_stream()
-    capacity_limiter = CapacityLimiter(4)
-    
+    capacity_limiter = CapacityLimiter(6)
+
     results = dict()
 
     async with create_task_group() as tg:
@@ -60,11 +60,11 @@ async def extract_papers_metadata(proceedings_data: ProceedingsData, cookies: di
             async with receive_stream:
                 async for result in receive_stream:
                     processed_files = processed_files + 1
-                    
+
                     # logger.info(result)
-                    
+
                     file_data: FileData = result.get('file', None)
-                    
+
                     if file_data is not None:
                         results[file_data.uuid] = result.get('meta', None)
 
@@ -73,8 +73,8 @@ async def extract_papers_metadata(proceedings_data: ProceedingsData, cookies: di
 
         except ClosedResourceError as e:
             logger.error(e)
-    
-    proceedings_data = refill_contribution_metadata(proceedings_data, results)        
+
+    proceedings_data = refill_contribution_metadata(proceedings_data, results)
 
     return proceedings_data
 
@@ -104,7 +104,7 @@ def extract_metadata(path: str, stemmer: SnowballStemmer, stem_keywords_dict: di
     """ """
 
     with open(path, 'rb') as fh:
-        
+
         try:
             pdf = Document(stream=fh.read(), filetype='pdf')
             report = get_pdf_report(pdf)
@@ -122,11 +122,24 @@ def extract_metadata(path: str, stemmer: SnowballStemmer, stem_keywords_dict: di
 
 def refill_contribution_metadata(proceedings_data: ProceedingsData, results: dict) -> ProceedingsData:
     for contribution_data in proceedings_data.contributions:
+        code: str = contribution_data.code
+
         try:
             revision_data = contribution_data.revisions[-1]
-            file_data = revision_data.files[-1]        
-            contribution_data.metadata = results[file_data.uuid]
-        except Exception:
-            logger.warning(f'No paper for contribution {contribution_data.code}')
-            
+            file_data = revision_data.files[-1]
+
+            result = results[file_data.uuid]
+
+            contribution_data.keywords = [
+                event_keyword_factory(keyword)
+                for keyword in result.get('keywords', [])
+            ]
+
+            contribution_data.metadata = result.get('report')
+
+        except IndexError:
+            logger.warning(f'No keyword for contribution {code}')
+        except Exception as e:
+            logger.error(e, exc_info=True)
+
     return proceedings_data

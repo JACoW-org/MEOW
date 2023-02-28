@@ -1,19 +1,6 @@
----
-title: "{{ session_code }} - {{ session_title }}"
-date: 2023-01-02T12:06:30+01:00
-draft: false
----
 
-<h2>{{ session_start }} / {{ session_end }}</h2>
-
-<section>
-    {% for convener in session_conveners %}
-    <h4>Chair: {{ convener.first|e }} {{ convener.last|e }} ({{ convener.affiliation|e }})</h4>
-    {% endfor %}
-</section>
-
-{% for contribution in contributions %}
-<section>
+{% macro render(contribution, class_name) -%}
+<section class="{{ class_name }}">
 
     <h3>
         {{ contribution.code|e }} /
@@ -24,6 +11,16 @@ draft: false
     <h4>{{ contribution.title|e }}</h4>
 
     <p>{{ contribution.description|e }}</p>
+
+    <pre>session: {{ contribution.session_code }}</pre>
+
+    <pre>classification: {{ contribution.track.title }}</pre>
+
+    <pre>authors: {{ contribution.authors|map(attribute="first", default="_")|join(", ") }}</pre>
+
+    <pre>institutes: {{ contribution.institutes|map(attribute="name", default="_")|join(", ") }}</pre>
+
+    <pre>keywords: {{ contribution.keywords|map(attribute="name", default="_")|join(", ") }}</pre>
 
     <ul>
 
@@ -83,13 +80,17 @@ draft: false
         {% if contribution.metadata: %}
 
         <li>
-            <b>Keywords:</b>
-            <pre>{{ contribution.metadata.keywords | tojson }}</pre>
+            <b>Metadata:</b>
+            <pre>{{ contribution.metadata | tojson }}</pre>
         </li>
 
+        {% endif %}
+
+        {% if contribution.keywords: %}
+
         <li>
-            <b>Report:</b>
-            <pre>{{ contribution.metadata.report | tojson }}</pre>
+            <b>Keywords:</b>
+            <pre>{{ contribution.keywords | tojson }}</pre>
         </li>
 
         {% endif %}
@@ -106,4 +107,4 @@ draft: false
     </ul>
 
 </section>
-{% endfor %}
+{%- endmacro %}

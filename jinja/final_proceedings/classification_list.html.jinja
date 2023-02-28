@@ -1,0 +1,16 @@
+---
+title: "FEL2022 - Classification [{{classifications|length}}]"
+date: 2023-01-02T12:06:30+01:00
+---
+
+<section>
+  <ul>
+    {% for classification in classifications %}
+    <li class="{{ loop.cycle('odd', 'even') }}">
+      <a href="./{{ classification.code|lower }}">
+        <b>{{ classification.title }}</b>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>

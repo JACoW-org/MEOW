@@ -32,7 +32,7 @@ async def download_contributions_papers(proceedings_data: ProceedingsData, cooki
     await file_cache_dir.mkdir(exist_ok=True, parents=True)
 
     send_stream, receive_stream = create_memory_object_stream()
-    capacity_limiter = CapacityLimiter(4)
+    capacity_limiter = CapacityLimiter(6)
 
     async with create_task_group() as tg:
         async with send_stream:

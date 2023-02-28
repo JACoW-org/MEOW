@@ -39,7 +39,7 @@ async def copy_contribution_papers(proceedings_data: ProceedingsData, cookies: d
     logger.info(f'{pdf_dest_dir} created!')
 
     send_stream, receive_stream = create_memory_object_stream()
-    capacity_limiter = CapacityLimiter(4)
+    capacity_limiter = CapacityLimiter(6)
 
     async with create_task_group() as tg:
         async with send_stream:
@@ -75,7 +75,7 @@ async def file_copy_task(capacity_limiter: CapacityLimiter, total_files: int, cu
 
         pdf_exists = await pdf_file.exists()
         
-        logger.info(f"{pdf_file} ({'exists!' if pdf_exists else 'not exists!!!'}) -> {pdf_dest}")
+        # logger.info(f"{pdf_file} ({'exists!' if pdf_exists else 'not exists!!!'}) -> {pdf_dest}")
 
         if pdf_exists:
             await pdf_dest.hardlink_to(pdf_file)
