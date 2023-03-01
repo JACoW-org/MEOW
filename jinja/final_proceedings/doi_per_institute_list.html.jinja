@@ -1,0 +1,18 @@
+---
+title: "FEL2022 - DOI per Institute [{{institutes|length}}]"
+date: 2023-01-02T12:06:30+01:00
+---
+
+<section>
+  <ul>
+    {% for institute in institutes %}
+    {% if institute.id: %}
+    <li class="{{ loop.cycle('odd', 'even') }}">
+      <a href="./{{ institute.id|lower }}">
+        {{ institute.name }}
+      </a>
+    </li>
+    {% endif %}
+    {% endfor %}
+  </ul>
+</section>

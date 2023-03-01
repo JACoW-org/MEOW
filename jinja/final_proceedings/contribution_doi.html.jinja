@@ -1,0 +1,16 @@
+{% macro render(contribution, class_name) -%}
+<section class="{{ class_name }}">
+
+    <h4>
+        {{ contribution.code|e }} -
+        {{ contribution.title|e }}
+    </h4>
+
+    <h5>
+        <a href="{{ contribution.doi_data.doi_url }}">
+            {{ contribution.doi_data.doi_url }}
+        </a>
+    </h5>
+
+</section>
+{%- endmacro %}

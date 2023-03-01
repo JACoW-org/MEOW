@@ -108,12 +108,19 @@ class JinjaTemplateRenderer:
             institutes=[s.as_dict() for s in institutes]
         ))
 
-    async def render_institute_page(self, event: EventData, institute: AffiliationData, contributions: list[ContributionData]) -> str:
+    async def render_institute_page(self, event: EventData, institute: AffiliationData, authors: list[PersonData]) -> str:
         return await self.render("institute_page.html.jinja", dict(
             event=event.as_dict(),
             institute=institute.as_dict(),
+            authors=[c.as_dict() for c in authors],
+        ))
+
+    async def render_institute_author_page(self, event: EventData, institute: AffiliationData, author: PersonData, contributions: list[ContributionData]) -> str:
+        return await self.render("institute_author_page.html.jinja", dict(
+            event=event.as_dict(),
+            institute=institute.as_dict(),
+            author=author.as_dict(),
             contributions=[c.as_dict() for c in contributions],
-            contributions_len=len(contributions)
         ))
 
     async def render_keyword_list(self, keywords: list[KeywordData]) -> str:
@@ -125,6 +132,19 @@ class JinjaTemplateRenderer:
         return await self.render("keyword_page.html.jinja", dict(
             event=event.as_dict(),
             keyword=keyword.as_dict(),
+            contributions=[c.as_dict() for c in contributions],
+            contributions_len=len(contributions)
+        ))
+
+    async def render_doi_per_institute_list(self, institutes: list[AffiliationData]) -> str:
+        return await self.render("doi_per_institute_list.html.jinja", dict(
+            institutes=[s.as_dict() for s in institutes]
+        ))
+
+    async def render_doi_per_institute_page(self, event: EventData, institute: AffiliationData, contributions: list[ContributionData]) -> str:
+        return await self.render("doi_per_institute_page.html.jinja", dict(
+            event=event.as_dict(),
+            institute=institute.as_dict(),
             contributions=[c.as_dict() for c in contributions],
             contributions_len=len(contributions)
         ))
@@ -362,7 +382,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                     c for c in self.contributions
                     if c.session_code == session.code
                 ]
-                
+
                 # logger.info(f"{session} -> {len(contributions)}")
 
                 await Path(curr_dir, '_index.html').write_text(
@@ -395,7 +415,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                     c for c in self.contributions
                     if c.track and c.track.code == classification.code
                 ]
-                
+
                 # logger.info(f"{classification} -> {len(contributions)}")
 
                 await Path(curr_dir, '_index.html').write_text(
@@ -428,7 +448,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                     c for c in self.contributions
                     if len(c.authors) > 0 and author in c.authors
                 ]
-                
+
                 # logger.info(f"{author} -> {len(contributions)}")
 
                 await Path(curr_dir, '_index.html').write_text(
@@ -452,21 +472,79 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
             await self.template.render_institute_list(self.institutes)
         )
 
-        async def _render_contribution(capacity_limiter: CapacityLimiter, institute: AffiliationData) -> None:
+        async def _render_contribution(capacity_limiter: CapacityLimiter, institute: AffiliationData, author: PersonData) -> None:
+            async with capacity_limiter:
+
+                curr_dir = Path(self.src_institute_dir, institute.id.lower(), author.id.lower())
+                await curr_dir.mkdir(parents=True, exist_ok=True)
+
+                contributions = [
+                    c for c in self.contributions
+                    if len(c.authors) > 0 and author in c.authors
+                ]
+
+                # logger.info(f"{institute} -> {len(contributions)}")
+
+                await Path(curr_dir, '_index.html').write_text(
+                    await self.template.render_institute_author_page(
+                        self.event, institute, author, contributions)
+                )
+
+        async def _render_institute(capacity_limiter: CapacityLimiter, institute: AffiliationData) -> None:
             async with capacity_limiter:
 
                 curr_dir = Path(self.src_institute_dir, institute.id.lower())
+                await curr_dir.mkdir(parents=True, exist_ok=True)
+
+                authors = [
+                    c for c in self.authors
+                    if c.affiliation == institute.name
+                ]
+
+                await Path(curr_dir, '_index.html').write_text(
+                    await self.template.render_institute_page(
+                        self.event, institute, authors)
+                )
+
+                capacity_limiter = CapacityLimiter(6)
+                async with create_task_group() as tg:
+                    for author in authors:
+                        if author and author.id:
+                            tg.start_soon(_render_contribution,
+                                          capacity_limiter, institute, author)
+
+        capacity_limiter = CapacityLimiter(6)
+        async with create_task_group() as tg:
+            for institute in self.institutes:
+                if institute and institute.id:
+                    tg.start_soon(_render_institute,
+                                  capacity_limiter, institute)
+
+    async def doi_per_institute(self) -> None:
+        """ """
+
+        logger.info(f'render_doi_per_institute - {len(self.institutes)}')
+
+        await Path(self.src_doi_per_institute_dir, '_index.html').write_text(
+            await self.template.render_doi_per_institute_list(self.institutes)
+        )
+
+        async def _render_contribution(capacity_limiter: CapacityLimiter, institute: AffiliationData) -> None:
+            async with capacity_limiter:
+
+                curr_dir = Path(self.src_doi_per_institute_dir,
+                                institute.id.lower())
                 await curr_dir.mkdir(parents=True, exist_ok=True)
 
                 contributions = [
                     c for c in self.contributions
                     if len(c.institutes) > 0 and institute in c.institutes
                 ]
-                
+
                 # logger.info(f"{institute} -> {len(contributions)}")
 
                 await Path(curr_dir, '_index.html').write_text(
-                    await self.template.render_institute_page(
+                    await self.template.render_doi_per_institute_page(
                         self.event, institute, contributions)
                 )
 
@@ -476,11 +554,6 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                 if institute and institute.id:
                     tg.start_soon(_render_contribution,
                                   capacity_limiter, institute)
-
-    async def doi_per_institute(self) -> None:
-        """ """
-
-        logger.info('render_doi_per_institute')
 
     async def keyword(self) -> None:
         """ """
@@ -500,7 +573,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                     c for c in self.contributions
                     if len(c.keywords) > 0 and keyword in c.keywords
                 ]
-                
+
                 # logger.info(f"{keyword} -> {len(contributions)}")
 
                 await Path(curr_dir, '_index.html').write_text(
