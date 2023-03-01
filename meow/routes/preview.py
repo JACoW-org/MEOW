@@ -7,7 +7,7 @@ from starlette.staticfiles import StaticFiles
 logger = lg.getLogger(__name__)
 
 
-preview = StaticFiles(directory='var/html', html=True, check_dir=True)
+preview = StaticFiles(directory='var/html', html=True, check_dir=False)
 
 routes = [
     Mount('/', preview, name='preview'),

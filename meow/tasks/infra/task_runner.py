@@ -35,7 +35,7 @@ class TaskRunner:
             async for p in task_obj.run(params, context):  # type: ignore
                 yield p
 
-            # logger.debug(f"run_task - task result")            
+            # logger.debug(f"run_task - task result")
 
         except BaseException as e:
             logger.error(e, exc_info=True)
@@ -87,7 +87,7 @@ class TaskRunner:
         """ """
 
         try:
-            
+
             to_send = {
                 'head': {
                     'code': event,

@@ -1,6 +1,6 @@
 # https://github.com/tiangolo/uvicorn-gunicorn-docker/tree/master/docker-images
 
-FROM python:3.10
+FROM python:3.11
 
 WORKDIR /code
 
