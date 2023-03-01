@@ -87,10 +87,8 @@ class TaskRunner:
         """ """
 
         try:
-
-            # logger.debug(f"send {event}")
-
-            message = json_encode({
+            
+            to_send = {
                 'head': {
                     'code': event,
                     'uuid': task_id,
@@ -100,7 +98,11 @@ class TaskRunner:
                     'method': task,
                     'params': params
                 }
-            })
+            }
+
+            logger.debug(f"send {to_send}")
+
+            message = json_encode(to_send)
 
             await dbs.redis_client.publish("meow:feed", message)
 

@@ -1,5 +1,7 @@
-import asyncio
+from asyncio import CancelledError
 import logging
+
+from anyio import create_task_group
 
 from starlette.routing import WebSocketRoute
 from starlette.websockets import WebSocket, WebSocketDisconnect
@@ -55,10 +57,10 @@ async def __workers():
     return workers
 
 
-async def __ws_to_r_handler(ws: WebSocket):
+async def __websocket_task(ws: WebSocket, id: str):
     """ """
-
-    logger.info("ws_to_r_handler >>> BEGIN")
+    
+    logger.info("__websocket_task >>> BEGIN")
 
     try:
         while app.state.webapp_running:
@@ -69,28 +71,11 @@ async def __ws_to_r_handler(ws: WebSocket):
                 await publish(message)
 
     except WebSocketDisconnect:
-        logger.info("ws_to_r_handler >>> DISCONNECTED")
-    except RuntimeError:
-        logger.error("ws_to_r:exc", exc_info=True)
+        logger.info("__websocket_task >>> DISCONNECTED")
+    except Exception as e:
+        logger.error("__websocket_task", e, exc_info=True)
 
-    logger.info("ws_to_r_handler >>> END")
-
-
-async def __websocket_tasks(ws: WebSocket, id: str):
-    """ """
-
-    done, pending = await asyncio.wait([
-        __ws_to_r_handler(ws),
-    ], return_when=asyncio.FIRST_COMPLETED)
-
-    # logger.debug(f"Done task: {done}")
-
-    for task in pending:
-        try:
-            # logger.debug(f"Canceling task: {task}")
-            task.cancel()
-        except Exception as exc:
-            logger.error(exc, exc_info=True)
+    logger.info("__websocket_task >>> END")
 
 
 async def __open_websocket(ws: WebSocket, id: str):
@@ -131,13 +116,13 @@ async def websocket_endpoint(ws: WebSocket):
         if credential is not None:
 
             await __open_websocket(ws, id)
-            await __websocket_tasks(ws, id)
+            await __websocket_task(ws, id)
             await __close_websocket(ws, id)
 
         else:
             raise HTTPException(status_code=401, detail="Invalid API Key")
 
-    except asyncio.exceptions.CancelledError as e:
+    except CancelledError as e:
         pass
     except BaseException as e:
         logger.error("websocket_endpoint", exc_info=True)

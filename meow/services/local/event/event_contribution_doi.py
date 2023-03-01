@@ -11,7 +11,7 @@ async def event_contribution_doi(event: dict, cookies: dict, settings: dict) -> 
     ''''''
 
     # references are empty when running the event
-    dois = gen_contribution_doi(event, dict())
+    dois = await gen_contribution_doi(event, dict())
 
     # DOI_BASE_URL = 'https://doi.org/10.18429'
 

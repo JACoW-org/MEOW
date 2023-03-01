@@ -20,9 +20,9 @@ class __Instances:
         webapp_running: bool = False
         worker_running: bool = False
         
-    state: __State = __State()
+    state: __State = field(default_factory=__State)
     
-    active_connections: dict[str, WebSocket] = field(default_factory=lambda: {})
+    active_connections: dict[str, WebSocket] = field(default_factory=dict)
 
 
 app = __Instances()
