@@ -108,7 +108,7 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         acceptance_date=format_datetime_full(contribution.acceptance),
         issuance_date=format_datetime_full(contribution.issuance),
         doi_url=f"{doi_base_url}/JACoW-{event.title}-{contribution.code}",
-        start_page=0,
+        start_page=contribution.page,
         number_of_pages=contribution.metadata.get(
             'report', {}).get('page_count', 0)
         if contribution.metadata is not None else 0,
