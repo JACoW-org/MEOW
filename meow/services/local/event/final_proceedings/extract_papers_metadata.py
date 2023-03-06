@@ -121,6 +121,8 @@ def extract_metadata(path: str, stemmer: SnowballStemmer, stem_keywords_dict: di
 
 
 def refill_contribution_metadata(proceedings_data: ProceedingsData, results: dict) -> ProceedingsData:
+
+    current_page = 1
     for contribution_data in proceedings_data.contributions:
         code: str = contribution_data.code
 
@@ -135,10 +137,14 @@ def refill_contribution_metadata(proceedings_data: ProceedingsData, results: dic
                 for keyword in result.get('keywords', [])
             ]
 
+            contribution_data.page = current_page
             contribution_data.metadata = result.get('report')
 
-        except IndexError:
+            current_page += contribution_data.metadata.get('page_count', 0)
+
+        except IndexError as e:
             logger.warning(f'No keyword for contribution {code}')
+            logger.error(e, exc_info=True)
         except Exception as e:
             logger.error(e, exc_info=True)
 
