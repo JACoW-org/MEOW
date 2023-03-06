@@ -26,7 +26,9 @@
                 <pub-location><xsl:value-of select="publisher-venue"/></pub-location>
                 <issn><xsl:value-of select="conference/issn"/></issn>
                 <isbn><xsl:value-of select="conference/isbn"/></isbn>
-                <electronic-resource-num><xsl:value-of select="contribution/doi"/></electronic-resource-num>
+                <xsl:if test="contribution/doi != ''">
+                    <electronic-resource-num><xsl:value-of select="contribution/doi"/></electronic-resource-num>
+                </xsl:if>
                 <language><xsl:value-of select="language"/></language>
                 <pages>
                     <xsl:value-of select="contribution/pages/start-page"/>
@@ -46,7 +48,7 @@
                 </dates>
                 <urls>
                     <related-urls>
-                        <url><xsl:value-of select="contribution/doi"/></url>
+                        <xsl:if test="contribution/doi != ''"><url><xsl:value-of select="contribution/doi"/></url></xsl:if>
                         <url><xsl:value-of select="contribution/url"/></url>
                     </related-urls>
                 </urls>

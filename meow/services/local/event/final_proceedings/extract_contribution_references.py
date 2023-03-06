@@ -5,6 +5,7 @@ from meow.models.local.event.final_proceedings.event_model import EventData
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 
 from meow.tasks.local.reference.models import ContributionRef, ConferenceStatus, Reference
+from meow.tasks.local.doi.utils import generate_doi_url
 from jinja2 import Environment, FileSystemLoader
 from lxml.etree import XML, XSLT, fromstring, XMLParser
 
@@ -52,7 +53,7 @@ async def extract_contribution_references(proceedings_data: ProceedingsData, coo
         async with send_stream:
             for contribution_data in proceedings_data.contributions:
                 tg.start_soon(reference_task, capacity_limiter, proceedings_data.event,
-                              contribution_data, xslt_functions, send_stream.clone())
+                              contribution_data, xslt_functions, settings, send_stream.clone())
 
         try:
             async with receive_stream:
@@ -100,13 +101,13 @@ async def get_xslt_functions() -> dict[str, XSLT]:
 
 async def reference_task(capacity_limiter: CapacityLimiter, event: EventData,
                          contribution: ContributionData, xslt_functions: dict,
-                         res: MemoryObjectSendStream) -> None:
+                         settings: dict, res: MemoryObjectSendStream) -> None:
     """ """
 
     async with capacity_limiter:
         await res.send({
             "code": contribution.code,
-            "value": await build_contribution_reference(event, contribution, xslt_functions)
+            "value": await build_contribution_reference(event, contribution, xslt_functions, settings)
         })
 
 
@@ -117,9 +118,9 @@ async def get_xslt(xslt_path: str) -> XSLT:
 
 
 async def build_contribution_reference(event: EventData, contribution: ContributionData, 
-                                       xslt_functions: dict) -> Reference | None:
+                                       xslt_functions: dict, settings: dict) -> Reference | None:
 
-    contribution_ref = await contribution_data_factory(event, contribution)
+    contribution_ref = await contribution_data_factory(event, contribution, settings)
 
     if contribution_ref.is_citable():
 
@@ -137,7 +138,14 @@ async def build_contribution_reference(event: EventData, contribution: Contribut
     return None
 
 
-async def contribution_data_factory(event: EventData, contribution: ContributionData) -> ContributionRef:
+async def contribution_data_factory(event: EventData, contribution: ContributionData, settings: dict) -> ContributionRef:
+
+    doi_base_url: str = settings.get('doi-base-url', 'https://doi.org/10.18429')
+    contribution_doi: str = generate_doi_url(doi_base_url, event.title, contribution.code)
+
+    isbn: str = settings.get('isbn', '978-3-95450-227-1')
+    issn: str = settings.get('issn', '2673-5490')
+
     return ContributionRef(
         url=contribution.url,
         title=contribution.title,
@@ -152,7 +160,10 @@ async def contribution_data_factory(event: EventData, contribution: Contribution
         start_page=contribution.page,
         number_of_pages=contribution.metadata.get(
             'report', {}).get('page_count', 0)
-        if contribution.metadata is not None else 0
+        if contribution.metadata is not None else 0,
+        doi=contribution_doi,
+        isbn=isbn,
+        issn=issn
     )
 
 

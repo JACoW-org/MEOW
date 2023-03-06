@@ -1,23 +1,20 @@
 import logging as lg
 
 from meow.tasks.local.doi.models import ContributionDOI, AuthorDOI
+from meow.tasks.local.doi.utils import generate_doi_url
 
 logger = lg.getLogger(__name__)
 
 # TODO refactor: list of contributions will be passed instead of n arguments
-async def gen_contribution_doi(event: dict, references: dict):
+async def gen_contribution_doi(event: dict, references: dict, doi_base_url: str, isbn: str, issn: str):
     ''''''
-
-    # TODO from settings
-    # TODO add dev URL
-    DOI_BASE_URL = 'https://doi.org/10.18429'
 
     dois = dict()
     
     for session in event.get('sessions', []):
         for contribution in session.get('contributions', []):
 
-            doi_url = f"{DOI_BASE_URL}/JACoW-{event.get('title')}-{contribution.get('code')}" # TODO improve
+            doi_url = generate_doi_url(doi_base_url, event.get('title'), contribution.get('code'))
             
             primary_authors = map(lambda author: AuthorDOI(
                 first_name=author.get('first_name'),

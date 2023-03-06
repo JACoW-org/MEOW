@@ -9,6 +9,7 @@ from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
 
 from meow.tasks.local.doi.models import AuthorDOI, ContributionDOI
+from meow.tasks.local.doi.utils import generate_doi_url
 from meow.utils.datetime import format_datetime_full
 
 
@@ -111,7 +112,7 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         reception_date=format_datetime_full(contribution.reception),
         acceptance_date=format_datetime_full(contribution.acceptance),
         issuance_date=format_datetime_full(contribution.issuance),
-        doi_url=f"{doi_base_url}/JACoW-{event.title}-{contribution.code}",
+        doi_url=generate_doi_url(doi_base_url, event.title, contribution.code),
         start_page=contribution.page,
         number_of_pages=contribution.metadata.get(
             'report', {}).get('page_count', 0)
