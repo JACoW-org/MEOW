@@ -25,9 +25,10 @@
     <xsl:text>TY - </xsl:text><xsl:choose><xsl:when test="conference/status = 'in_proceedings'"><xsl:text>CONF</xsl:text></xsl:when><xsl:otherwise><xsl:text>UNPB</xsl:text></xsl:otherwise></xsl:choose><xsl:text>\n</xsl:text>
     <xsl:for-each select="contribution/primary-authors/author">
         <xsl:text>AU - </xsl:text>
-        <xsl:value-of select="last-name"></xsl:value-of>
+        <xsl:value-of select="last-name"/>
         <xsl:text>,</xsl:text>
-        <xsl:value-of select="substring(first-name, 1, 1)"></xsl:value-of>
+        <xsl:value-of select="substring(first-name, 1, 1)"/>
+        <xsl:text>.</xsl:text>
         <xsl:text>\n</xsl:text>
     </xsl:for-each>
     <xsl:text>ED - </xsl:text><xsl:comment>editors - da doi ???</xsl:comment><xsl:text>\n</xsl:text>
@@ -37,7 +38,7 @@
     <xsl:value-of select="conference/venue"/><xsl:text>, </xsl:text>
     <xsl:value-of select="substring($dateString, 9, 2)"/>
     <xsl:text>-</xsl:text>
-    <xsl:value-of select="substring($endDateString, 9, 2)"></xsl:value-of>
+    <xsl:value-of select="substring($endDateString, 9, 2)"/>
     <xsl:text> </xsl:text>
     <xsl:value-of select="$month"/>
     <xsl:text> </xsl:text>
