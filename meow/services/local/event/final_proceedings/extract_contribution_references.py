@@ -149,6 +149,10 @@ async def contribution_data_factory(event: EventData, contribution: Contribution
         end_date=format_datetime_full(event.end),
         primary_authors=contribution.primary_authors,
         conference_status=ConferenceStatus.UNPUBLISHED.value,
+        start_page=contribution.page,
+        number_of_pages=contribution.metadata.get(
+            'report', {}).get('page_count', 0)
+        if contribution.metadata is not None else 0
     )
 
 
