@@ -142,10 +142,10 @@ def refill_contribution_metadata(proceedings_data: ProceedingsData, results: dic
                     for keyword in result.get('keywords', [])
                 ]
 
-            contribution_data.page = current_page
-            contribution_data.metadata = result.get('report')
+                contribution_data.page = current_page
+                contribution_data.metadata = result.get('report')
 
-            current_page += contribution_data.metadata.get('page_count', 0)
+                current_page += contribution_data.metadata.get('page_count', 0)
 
         except IndexError as e:
             logger.warning(f'No keyword for contribution {code}')

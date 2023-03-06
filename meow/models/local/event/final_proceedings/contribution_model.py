@@ -95,7 +95,7 @@ class ContributionData:
     room: str | None = field(default=None)
     location: str | None = field(default=None)    
     
-    page: int = field(default=None)
+    page: int = field(default=0)
     metadata: dict | None = field(default=None)
     reference: Reference | None = field(default=None)    
     doi_data: ContributionDOI | None = field(default=None)    
