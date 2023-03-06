@@ -38,11 +38,17 @@ async def copy_contribution_papers(proceedings_data: ProceedingsData, cookies: d
     
     logger.info(f'{pdf_dest_dir} created!')
     
-    full_name = f"{proceedings_data.event.id}_full.pdf"
-    full_pdf: Path = Path(file_cache_dir, full_name)
-    full_dest: Path = Path(pdf_dest_dir, full_name)
+    vol_name = f"{proceedings_data.event.id}_proceedings_volume.pdf"
+    vol_pdf: Path = Path(file_cache_dir, vol_name)
+    vol_dest: Path = Path(pdf_dest_dir, vol_name)
     
-    await full_dest.hardlink_to(full_pdf)
+    await vol_dest.hardlink_to(vol_pdf)
+    
+    brief_name = f"{proceedings_data.event.id}_proceedings_brief.pdf"
+    brief_pdf: Path = Path(file_cache_dir, brief_name)
+    brief_dest: Path = Path(pdf_dest_dir, brief_name)
+    
+    await brief_dest.hardlink_to(brief_pdf)
 
     send_stream, receive_stream = create_memory_object_stream()
     capacity_limiter = CapacityLimiter(6)
