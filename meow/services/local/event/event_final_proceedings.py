@@ -4,6 +4,7 @@ import logging as lg
 
 from typing import AsyncGenerator
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
+from meow.services.local.event.final_proceedings.concat_contribution_papers import concat_contribution_papers
 from meow.services.local.event.final_proceedings.copy_contribution_papers import copy_contribution_papers
 
 from meow.services.local.event.final_proceedings.download_contributions_papers import download_contributions_papers
@@ -63,6 +64,15 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
     
     
     
+    logger.info('event_final_proceedings - concat_contribution_papers')    
+
+    yield dict(type='progress', value=dict(phase='concat_contribution_papers'))
+    
+    # Concat Pdf
+    final_proceedings = await concat_contribution_papers(final_proceedings, cookies, settings)
+    
+    
+    
     logger.info('event_final_proceedings - extract_contribution_references')
     
     yield dict(type='progress', value=dict(phase='extract_contribution_references'))
@@ -94,7 +104,7 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
     
     yield dict(type='progress', value=dict(phase='refill_papers_metadata'))
 
-    # TODO: PDF Editing
+    # TODO: PDF Editing????
     final_proceedings = await refill_papers_metadata(final_proceedings, cookies, settings)
     
     

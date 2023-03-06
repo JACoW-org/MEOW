@@ -11,6 +11,7 @@ class TrackGroupData:
     code: str
     title: str
     description: str
+    position: int
     
     @property
     def name(self) -> str:
@@ -35,6 +36,7 @@ class TrackData:
     code: str
     title: str
     description: str
+    position: int
     
     track_group: TrackGroupData | None = None
     

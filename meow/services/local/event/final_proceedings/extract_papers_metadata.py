@@ -6,7 +6,7 @@ from fitz import Document
 from nltk.stem.snowball import SnowballStemmer
 
 from anyio import Path, create_task_group, CapacityLimiter, to_process
-from anyio import create_memory_object_stream, ClosedResourceError
+from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 
 from anyio.streams.memory import MemoryObjectSendStream
 from meow.models.local.event.final_proceedings.contribution_model import FileData
@@ -67,12 +67,16 @@ async def extract_papers_metadata(proceedings_data: ProceedingsData, cookies: di
 
                     if file_data is not None:
                         results[file_data.uuid] = result.get('meta', None)
-
+                        
                     if processed_files >= total_files:
                         receive_stream.close()
 
-        except ClosedResourceError as e:
-            logger.error(e)
+        except ClosedResourceError as crs:
+            logger.debug(crs, exc_info=True)
+        except EndOfStream as eos:
+            logger.debug(eos, exc_info=True)
+        except Exception as ex:
+            logger.error(ex, exc_info=True)
 
     proceedings_data = refill_contribution_metadata(proceedings_data, results)
 
@@ -127,15 +131,16 @@ def refill_contribution_metadata(proceedings_data: ProceedingsData, results: dic
         code: str = contribution_data.code
 
         try:
-            revision_data = contribution_data.revisions[-1]
-            file_data = revision_data.files[-1]
+            if contribution_data.latest_revision:
+                revision_data = contribution_data.latest_revision
+                file_data = revision_data.files[-1]
 
-            result = results[file_data.uuid]
+                result = results[file_data.uuid]
 
-            contribution_data.keywords = [
-                event_keyword_factory(keyword)
-                for keyword in result.get('keywords', [])
-            ]
+                contribution_data.keywords = [
+                    event_keyword_factory(keyword)
+                    for keyword in result.get('keywords', [])
+                ]
 
             contribution_data.page = current_page
             contribution_data.metadata = result.get('report')

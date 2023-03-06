@@ -1,7 +1,7 @@
 import logging as lg
 
 from anyio import Path, create_task_group, CapacityLimiter
-from anyio import create_memory_object_stream, ClosedResourceError
+from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
 
 from meow.models.local.event.final_proceedings.contribution_model import FileData
@@ -45,12 +45,18 @@ async def download_contributions_papers(proceedings_data: ProceedingsData, cooki
             async with receive_stream:
                 async for _ in receive_stream:
                     downloaded_files = downloaded_files + 1
+                    
+                    logger.info(f"downloaded_files: {downloaded_files} - {total_files}")
 
                     if downloaded_files >= total_files:
                         receive_stream.close()
 
-        except ClosedResourceError as e:
-            logger.error(e)
+        except ClosedResourceError as crs:
+            logger.debug(crs, exc_info=True)
+        except EndOfStream as eos:
+            logger.debug(eos, exc_info=True)
+        except Exception as ex:
+            logger.error(ex, exc_info=True)
 
     return proceedings_data
 

@@ -1,7 +1,7 @@
 import logging as lg
 
 from anyio import Path, create_task_group, CapacityLimiter
-from anyio import create_memory_object_stream, ClosedResourceError
+from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
 
 from meow.models.local.event.final_proceedings.contribution_model import FileData
@@ -57,8 +57,12 @@ async def copy_contribution_papers(proceedings_data: ProceedingsData, cookies: d
                     if elaborated_files >= total_files:
                         receive_stream.close()
 
-        except ClosedResourceError as e:
-            logger.error(e)
+        except ClosedResourceError as crs:
+            logger.debug(crs, exc_info=True)
+        except EndOfStream as eos:
+            logger.debug(eos, exc_info=True)
+        except Exception as ex:
+            logger.error(ex, exc_info=True)
 
     return proceedings_data
 

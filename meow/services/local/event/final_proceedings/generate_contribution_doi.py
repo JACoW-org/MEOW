@@ -5,7 +5,7 @@ from meow.models.local.event.final_proceedings.event_model import EventData
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 
 from anyio import create_task_group, CapacityLimiter
-from anyio import create_memory_object_stream, ClosedResourceError
+from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
 
 from meow.tasks.local.doi.models import AuthorDOI, ContributionDOI
@@ -52,8 +52,12 @@ async def generate_contribution_doi(proceedings_data: ProceedingsData, cookies: 
                     if processed_files >= total_files:
                         receive_stream.close()
 
-        except ClosedResourceError as e:
-            logger.error(e)
+        except ClosedResourceError as crs:
+            logger.debug(crs, exc_info=True)
+        except EndOfStream as eos:
+            logger.debug(eos, exc_info=True)
+        except Exception as ex:
+            logger.error(ex, exc_info=True)
 
     proceedings_data = refill_contribution_doi(proceedings_data, results)
 
