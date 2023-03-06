@@ -12,7 +12,7 @@ from anyio import open_file, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
 
-from meow.utils.datetime import format_datetime_full
+from meow.utils.datetime import format_datetime_dashed
 
 
 logger = lg.getLogger(__name__)
@@ -145,8 +145,8 @@ async def contribution_data_factory(event: EventData, contribution: Contribution
         conference_code=event.title,
         venue=event.location,
         abstract=contribution.description,
-        start_date=format_datetime_full(event.start),
-        end_date=format_datetime_full(event.end),
+        start_date=format_datetime_dashed(event.start),
+        end_date=format_datetime_dashed(event.end),
         primary_authors=contribution.primary_authors,
         conference_status=ConferenceStatus.UNPUBLISHED.value,
         start_page=contribution.page,

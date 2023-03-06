@@ -21,6 +21,9 @@ def format_datetime_full(d: dt.datetime) -> str:
 def format_datetime_time(d: dt.datetime) -> str:
     return d.strftime('%H:%M') if d else ''
 
+def format_datetime_dashed(d: dt.datetime) -> str:
+    return d.strftime('%Y-%m-%d')
+
 
 def format_datetime_range(start: dt.datetime, end: dt.datetime) -> str:
     
