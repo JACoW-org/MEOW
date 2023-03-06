@@ -38,10 +38,8 @@
     </xsl:choose>
     <xsl:text>},</xsl:text>
     <xsl:text>title = {</xsl:text><xsl:value-of select="contribution/title"/><xsl:text>},</xsl:text>
-    <xsl:if test="conference/status = 'in_proceedings'">
-        <xsl:text>booktitle = {</xsl:text>
-        <xsl:value-of select="conference/book-title"/>
-        <xsl:text>},</xsl:text>
+    <xsl:if test="conference/book-title != ''"><xsl:text>booktitle = {Proc. </xsl:text><xsl:value-of select="conference/book-title"/><xsl:text>},</xsl:text></xsl:if>
+    <xsl:if test="contribution/pages/number > 0">
         <xsl:text>pages = {</xsl:text>
         <xsl:value-of select="contribution/pages/start-page"/>
         <xsl:text>-</xsl:text>
@@ -51,7 +49,11 @@
     </xsl:if>
     <xsl:text>paper = {</xsl:text><xsl:value-of select="contribution/paper-code"></xsl:value-of><xsl:text>},</xsl:text>
     <xsl:text>venue = {</xsl:text><xsl:value-of select="conference/venue"/><xsl:text>},</xsl:text>
-    <xsl:if test="conference/status != 'in_proceedings'"><xsl:text>intype = {presented at the</xsl:text><xsl:text>},</xsl:text></xsl:if>
+    <xsl:if test="conference/status != 'in_proceedings'">
+        <xsl:text>intype = {presented at the</xsl:text>
+        <xsl:value-of select="conference/code"/>
+        <xsl:text>},</xsl:text>
+    </xsl:if>
     <xsl:if test="conference/series != ''"><xsl:text>series = {</xsl:text><xsl:value-of select="conference/series"/><xsl:text>},</xsl:text></xsl:if>
     <xsl:if test="conference/series-number != ''"><xsl:text>number = {</xsl:text><xsl:value-of select="conference/series-number"/><xsl:text>},</xsl:text></xsl:if>
     <xsl:text>publisher = {</xsl:text><xsl:value-of select="publisher"/><xsl:text>, </xsl:text><xsl:value-of select="publisher-venue"></xsl:value-of><xsl:text>},</xsl:text>

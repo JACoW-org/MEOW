@@ -152,6 +152,7 @@ async def contribution_data_factory(event: EventData, contribution: Contribution
     return ContributionRef(
         url=contribution.url,
         title=contribution.title,
+        book_title=event.title,
         paper_code=contribution.code,
         conference_code=event.title,
         venue=event.location,
