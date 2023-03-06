@@ -146,6 +146,9 @@ async def contribution_data_factory(event: EventData, contribution: Contribution
     isbn: str = settings.get('isbn', '978-3-95450-227-1')
     issn: str = settings.get('issn', '2673-5490')
 
+    number_of_pages = contribution.metadata.get('page_count', 0) if contribution.metadata is not None else 0
+    # logger.info('Contribution %s pages: %s-%s', contribution.code, contribution.page, contribution.page + number_of_pages)
+
     return ContributionRef(
         url=contribution.url,
         title=contribution.title,
@@ -158,9 +161,7 @@ async def contribution_data_factory(event: EventData, contribution: Contribution
         primary_authors=contribution.primary_authors,
         conference_status=ConferenceStatus.UNPUBLISHED.value,
         start_page=contribution.page,
-        number_of_pages=contribution.metadata.get(
-            'report', {}).get('page_count', 0)
-        if contribution.metadata is not None else 0,
+        number_of_pages=number_of_pages,
         doi=contribution_doi,
         isbn=isbn,
         issn=issn

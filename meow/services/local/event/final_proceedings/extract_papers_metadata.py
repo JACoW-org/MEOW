@@ -135,7 +135,7 @@ def refill_contribution_metadata(proceedings_data: ProceedingsData, results: dic
                 revision_data = contribution_data.latest_revision
                 file_data = revision_data.files[-1]
 
-                result = results[file_data.uuid]
+                result = results.get(file_data.uuid)
 
                 contribution_data.keywords = [
                     event_keyword_factory(keyword)
@@ -145,7 +145,9 @@ def refill_contribution_metadata(proceedings_data: ProceedingsData, results: dic
                 contribution_data.page = current_page
                 contribution_data.metadata = result.get('report')
 
-                current_page += contribution_data.metadata.get('page_count', 0)
+                current_page += result.get('report').get('page_count', 0)
+
+                # logger.info('contribution_data pages = %s - %s', contribution_data.page, contribution_data.page + result.get('report').get('page_count'))
 
         except IndexError as e:
             logger.warning(f'No keyword for contribution {code}')
