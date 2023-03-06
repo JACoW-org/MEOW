@@ -7,19 +7,19 @@ from meow.tasks.local.doi.models import ContributionDOI
 from meow.tasks.local.reference.models import Reference
 
 
-@dataclass(kw_only=True, slots=True)
-class ContributionGroupKey:
-    """ Contribution Group Key """
-
-    session: str
-    track: list[str]
-    author: list[str]
-    institute: list[str]
-    doi_per_institute: list[str]
-    keyword: list[str]
-
-    def as_dict(self) -> dict:
-        return asdict(self)
+# @dataclass(kw_only=True, slots=True)
+# class ContributionGroupKey:
+#     """ Contribution Group Key """
+# 
+#     session: str
+#     track: list[str]
+#     author: list[str]
+#     institute: list[str]
+#     doi_per_institute: list[str]
+#     keyword: list[str]
+# 
+#     def as_dict(self) -> dict:
+#         return asdict(self)
 
 
 @dataclass(kw_only=True, slots=True)
@@ -81,7 +81,8 @@ class ContributionData:
     primary_authors: list[PersonData] = field(default_factory=list)
     coauthors: list[PersonData] = field(default_factory=list)
     
-    revisions: list[RevisionData] = field(default_factory=list)
+    all_revisions: list[RevisionData] = field(default_factory=list)
+    latest_revision: RevisionData | None = field(default=None)
     
     keywords: list[KeywordData] = field(default_factory=list)
     authors: list[PersonData] = field(default_factory=list)
@@ -97,8 +98,11 @@ class ContributionData:
     metadata: dict | None = field(default=None)
     reference: Reference | None = field(default=None)    
     doi_data: ContributionDOI | None = field(default=None)    
+    
+    start_page: int = field(default=0)
+    page_count: int = field(default=0)
 
-    group_keys: ContributionGroupKey | None = field(default=None)
+    # group_keys: ContributionGroupKey | None = field(default=None)
 
     def as_dict(self) -> dict:
         return asdict(self)

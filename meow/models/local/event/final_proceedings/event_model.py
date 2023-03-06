@@ -11,7 +11,7 @@ class PersonData:
     last: str
     affiliation: str
     email: str
-    
+
     @property
     def name(self) -> str:
         return f"{self.first} {self.last}"

@@ -9,7 +9,7 @@ from jinja2 import Environment, FileSystemLoader
 from lxml.etree import XML, XSLT, fromstring, XMLParser
 
 from anyio import open_file, create_task_group, CapacityLimiter
-from anyio import create_memory_object_stream, ClosedResourceError
+from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
 
 from meow.utils.datetime import format_datetime_full
@@ -70,8 +70,12 @@ async def extract_contribution_references(proceedings_data: ProceedingsData, coo
                     if processed_files >= total_files:
                         receive_stream.close()
 
-        except ClosedResourceError as e:
-            logger.error(e)
+        except ClosedResourceError as crs:
+            logger.debug(crs, exc_info=True)
+        except EndOfStream as eos:
+            logger.debug(eos, exc_info=True)
+        except Exception as ex:
+            logger.error(ex, exc_info=True)
 
     proceedings_data = refill_contribution_reference(proceedings_data, results)
 

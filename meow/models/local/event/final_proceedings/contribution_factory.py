@@ -9,8 +9,6 @@ from meow.utils.datetime import datedict_to_tz_datetime
 from meow.models.local.event.final_proceedings.event_factory import event_affiliation_factory, event_person_factory
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData, ContributionFieldData, FileData, RevisionData
 
-from meow.utils.serialization import json_encode
-
 
 logger = lg.getLogger(__name__)
 
@@ -71,28 +69,31 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
         ],
         editor=event_person_factory(contribution.get('editor'))
         if contribution.get('editor') else None,
-        revisions=[
+        all_revisions=[
             contribution_revision_factory(revision)
-            for revision in contribution.get('revisions', [])
-        ]
+            for revision in contribution.get('all_revisions', [])
+        ],
+        latest_revision=contribution_revision_factory(
+            contribution.get('latest_revision', None)
+        ) if contribution.get('latest_revision', None) else None
     )
 
     # logger.info("")
     # logger.info("CONTRIBUTION")
     # logger.info(json_encode(contribution_data.as_dict()))
-    # 
+    #
     # logger.info("")
     # logger.info("CONTRIBUTION - track")
     # logger.info(json_encode(contribution_data.track))
-    # 
+    #
     # logger.info("")
     # logger.info("CONTRIBUTION - authors")
     # logger.info(json_encode(contribution_data.authors))
-    # 
+    #
     # logger.info("")
     # logger.info("CONTRIBUTION - institutes")
     # logger.info(json_encode(contribution_data.institutes))
-    # 
+    #
     # logger.info("")
     # logger.info("")
 
@@ -126,4 +127,3 @@ def contribution_field_factory(field: Any) -> ContributionFieldData:
         name=field.get('name'),
         value=field.get('value'),
     )
-

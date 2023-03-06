@@ -3,14 +3,35 @@ title: "FEL2022 - Classification [{{classifications|length}}]"
 date: 2023-01-02T12:06:30+01:00
 ---
 
+{% set prev_classification_group = None %}
+
 <section>
-  <ul>
+  <div class="classifications">
+
     {% for classification in classifications %}
-    <li class="{{ loop.cycle('odd', 'even') }}">
+
+
+    {% if classification.track_group %}
+    {% set classification_group = classification.track_group.title %}
+    {% else %}
+    {% set classification_group = None %}
+    {% endif %}
+
+
+    {% if prev_classification_group != classification_group and classification_group %}
+    {% set prev_classification_group = classification_group %}
+    <div class="classification-group">
+      <b>{{ classification_group }}</b>
+    </div>
+    {% endif %}
+
+
+    <div class="classification-item">
       <a href="./{{ classification.code|lower }}">
         <b>{{ classification.title }}</b>
       </a>
-    </li>
+    </div>
+
     {% endfor %}
-  </ul>
+  </div>
 </section>
