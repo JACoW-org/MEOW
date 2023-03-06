@@ -57,12 +57,14 @@ class JinjaTemplateRenderer:
 
     async def render_config_toml(self, event: EventData) -> str:
         return await self.render("config.toml.jinja", dict(
-            title=event.title,
+            event=event.as_dict(),
             url=f'http://127.0.0.1:8000/{event.title}'
         ))
 
-    async def render_home_page(self) -> str:
-        return await self.render("home_page.html.jinja", dict())
+    async def render_home_page(self, event: EventData) -> str:
+        return await self.render("home_page.html.jinja", dict(
+            event=event.as_dict(),
+        ))
 
     async def render_session_list(self, sessions: list[SessionData]) -> str:
         return await self.render("session_list.html.jinja", dict(
@@ -361,7 +363,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
     async def home(self) -> None:
         await Path(self.src_dir, 'content', '_index.html').write_text(
-            await self.template.render_home_page()
+            await self.template.render_home_page(self.event)
         )
 
     async def session(self) -> None:
