@@ -35,15 +35,21 @@
                     <xsl:text>-</xsl:text>
                     <xsl:value-of select="contribution/pages/start-page + contribution/pages/number"/>
                 </pages>
-                <keywords></keywords>
+                <keywords>
+                    <xsl:for-each select="contribution/keywords/keyword">
+                        <keyword><xsl:value-of select="."/></keyword>
+                    </xsl:for-each>
+                </keywords>
                 <work-type><xsl:text>Contribution to a conference proceedings</xsl:text></work-type>
                 <xsl:variable name="dateString" select="conference/start-date"></xsl:variable>
                 <dates>
                     <year><xsl:value-of select="substring($dateString, 1, 4)"/></year>
                     <pub-dates>
+                        <date>
                         <xsl:value-of select="substring($dateString, 1, 4)"/>
                         <xsl:text>-</xsl:text>
                         <xsl:value-of select="substring($dateString, 6, 2)"/>
+                        </date>
                     </pub-dates>
                 </dates>
                 <urls>

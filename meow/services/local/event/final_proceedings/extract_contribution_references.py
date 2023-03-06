@@ -164,7 +164,8 @@ async def contribution_data_factory(event: EventData, contribution: Contribution
         number_of_pages=number_of_pages,
         doi=contribution_doi,
         isbn=isbn,
-        issn=issn
+        issn=issn,
+        keywords=contribution.keywords
     )
 
 

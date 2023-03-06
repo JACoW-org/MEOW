@@ -41,6 +41,7 @@ class ContributionRef:
     start_page: int = field(default=0)
     number_of_pages: int = field(default=0)
     doi: str = field(default='')
+    keywords: list[str] = field(default_factory=list)
 
     def as_dict(self) -> dict:
         dict_obj = asdict(self)

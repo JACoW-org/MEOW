@@ -32,5 +32,10 @@
         </pages>
         <url>{{ url }}</url>
         <doi>{{ doi }}</doi>
+        <keywords>
+            {% for keyword in keywords %}
+            <keyword>{{ keyword.name }}</keyword>
+            {% endfor %}
+        </keywords>
     </contribution>
 </reference>
