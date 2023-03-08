@@ -33,14 +33,14 @@ date: 2023-01-02T12:06:30+01:00
         <li>
             <a href="./pdf/{{ event.id }}_proceedings_volume.pdf">
                 <b>FEL2022 Proceedings Volume</b>
-            </a>
+            </a> ({{ (volume_size / (1024 * 1024)) | int }}MB)
             <i>The complete volume of papers</i>
         </li>
 
         <li>
             <a href="./pdf/{{ event.id }}_proceedings_brief.pdf">
                 <b>FEL2022 Proceedings at a glance</b>
-            </a>
+            </a> ({{ (brief_size / (1024 * 1024)) | int }}MB)
             <i>First page only of all papers with hyperlinks to complete versions</i>
         </li>
 

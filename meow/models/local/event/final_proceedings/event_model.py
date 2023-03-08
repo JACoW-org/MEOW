@@ -17,7 +17,11 @@ class PersonData:
         return f"{self.first} {self.last}"
 
     @property
-    def full(self) -> str:
+    def short(self) -> str:
+        return f"{self.first[0]}. {self.last}"
+
+    @property
+    def long(self) -> str:
         return f"{self.first} {self.last} ({self.affiliation})"
 
     def __eq__(self, other):

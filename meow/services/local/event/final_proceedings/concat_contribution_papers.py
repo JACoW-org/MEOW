@@ -47,6 +47,12 @@ async def concat_contribution_papers(proceedings_data: ProceedingsData, cookies:
 
     await to_process.run_sync(concat_vol, pdf_files, str(await volume_pdf.absolute()))
     await to_process.run_sync(concat_brief, pdf_files, str(await brief_pdf.absolute()))
+    
+    volume_stat = await volume_pdf.stat()
+    brief_stat = await brief_pdf.stat()
+    
+    proceedings_data.proceedings_volume_size = volume_stat.st_size
+    proceedings_data.proceedings_brief_size = brief_stat.st_size
 
     return proceedings_data
 

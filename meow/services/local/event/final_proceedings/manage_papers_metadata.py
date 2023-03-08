@@ -1,17 +1,17 @@
 import logging as lg
 from typing import Any
 
-from fitz import Document
+from fitz import Document, get_pdf_str
 
 from nltk.stem.snowball import SnowballStemmer
 
-from anyio import Path, create_task_group, CapacityLimiter, to_process
+from anyio import Path, create_task_group, CapacityLimiter, to_process, to_thread
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 
 from anyio.streams.memory import MemoryObjectSendStream
-from meow.models.local.event.final_proceedings.contribution_model import FileData
+from meow.models.local.event.final_proceedings.contribution_model import ContributionData, ContributionPaperData
 from meow.models.local.event.final_proceedings.event_factory import event_keyword_factory
-from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_proceedings_files
+from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_contributions_papers
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.services.local.papers_metadata.pdf_keywords import get_keywords_from_text, stem_keywords_as_tree
@@ -23,15 +23,15 @@ from meow.utils.keywords import KEYWORDS
 logger = lg.getLogger(__name__)
 
 
-async def extract_papers_metadata(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
+async def manage_papers_metadata(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
     """ """
 
-    files_data: list[FileData] = await extract_proceedings_files(proceedings_data)
+    papers_data: list[ContributionPaperData] = await extract_contributions_papers(proceedings_data)
 
-    total_files: int = len(files_data)
+    total_files: int = len(papers_data)
     processed_files: int = 0
 
-    # logger.debug(f'extract_papers_metadata - files: {total_files}')
+    logger.info(f'manage_papers_metadata - files: {total_files}')
 
     if total_files == 0:
         raise Exception('no files found')
@@ -50,9 +50,9 @@ async def extract_papers_metadata(proceedings_data: ProceedingsData, cookies: di
 
     async with create_task_group() as tg:
         async with send_stream:
-            for current_index, current_file in enumerate(files_data):
-                tg.start_soon(extract_metadata_task, capacity_limiter, total_files,
-                              current_index, current_file, cookies, file_cache_dir,
+            for current_index, current_paper in enumerate(papers_data):
+                tg.start_soon(manage_metadata_task, capacity_limiter, total_files,
+                              current_index, current_paper, cookies, file_cache_dir,
                               stemmer, stem_keywords_dict,
                               send_stream.clone())
 
@@ -67,7 +67,7 @@ async def extract_papers_metadata(proceedings_data: ProceedingsData, cookies: di
 
                     if file_data is not None:
                         results[file_data.uuid] = result.get('meta', None)
-                        
+
                     if processed_files >= total_files:
                         receive_stream.close()
 
@@ -83,18 +83,23 @@ async def extract_papers_metadata(proceedings_data: ProceedingsData, cookies: di
     return proceedings_data
 
 
-async def extract_metadata_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int,
-                                current_file: FileData, cookies: dict, pdf_cache_dir: Path,
+async def manage_metadata_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int,
+                                current_paper: ContributionPaperData, cookies: dict, pdf_cache_dir: Path,
                                 stemmer, stem_keywords_dict, res: MemoryObjectSendStream) -> None:
     """ """
 
     async with capacity_limiter:
+        
+        contribution = current_paper.contribution
+        current_file = current_paper.paper
+        
         pdf_name = current_file.filename
         pdf_file = Path(pdf_cache_dir, pdf_name)
+        pdf_path = str(await pdf_file.absolute())
 
         # logger.debug(f"{pdf_file} {pdf_name}")
 
-        metadata = await to_process.run_sync(extract_metadata, str(await pdf_file.absolute()), stemmer, stem_keywords_dict)
+        metadata = await to_process.run_sync(manage_metadata, contribution, pdf_path, stemmer, stem_keywords_dict)
 
         await res.send({
             "index": current_index,
@@ -104,24 +109,58 @@ async def extract_metadata_task(capacity_limiter: CapacityLimiter, total_files: 
         })
 
 
-def extract_metadata(path: str, stemmer: SnowballStemmer, stem_keywords_dict: dict[str, list[str]]) -> dict:
+def manage_metadata(contribution: ContributionData, path: str, stemmer: SnowballStemmer, stem_keywords_dict: dict[str, list[str]]) -> dict:
     """ """
 
-    with open(path, 'rb') as fh:
+    doc: Document | None
+
+    try:
+        doc = Document(filename=path)
 
         try:
-            pdf = Document(stream=fh.read(), filetype='pdf')
-            report = get_pdf_report(pdf)
-            keywords = get_keywords_from_text(pdf, stemmer, stem_keywords_dict)
+            report = get_pdf_report(doc)
+            keywords = get_keywords_from_text(doc, stemmer, stem_keywords_dict)
+            
+            what, value = doc.xref_get_key(-1, "Info")  # /Info key in the trailer
+            if what != "xref":
+                raise ValueError("PDF has no metadata")
+            xref = int(value.replace("0 R", ""))  # extract the metadata xref
+            
+            doc.xref_set_key(xref, "Title", get_pdf_str(contribution.title))
+            doc.xref_set_key(xref, "Author", get_pdf_str(contribution.author))
+            doc.xref_set_key(xref, "Creator", get_pdf_str(contribution.creator))
+            doc.xref_set_key(xref, "Producer", get_pdf_str(contribution.producer))
+            doc.xref_set_key(xref, "Subject", get_pdf_str(contribution.producer))
+            doc.xref_set_key(xref, "Application", get_pdf_str("CAT--PURR_MEOW"))
+            doc.xref_set_key(xref, "Keywords", get_pdf_str(", ".join(keywords)))
+            
+            # doc.xref_set_key(xref, "Created", get_pdf_str("MEOW"))
+            # doc.xref_set_key(xref, "Modified", get_pdf_str("MEOW"))
+            
+            # Title:	Impact of Longitudinal Gradient Dipoles on Storage Ring Performance
+            # Author:	F. Zimmermann, Y. Papaphilippou, A. Poyet
+            # Subject:	MC5: Beam Dynamics and EM Fields/D01: Beam Optics - Lattices, Correction Schemes, Transport
+            # Keywords:	dipole, photon, emittance, storage-ring, electron
+            # Created:	7/15/22, 4:11:49 AM
+            # Modified:	7/15/22, 4:11:49 AM
+            # Application:	LaTeX with hyperref
+        
+            doc.saveIncr()
 
             return dict(
                 keywords=keywords,
                 report=report
             )
-
         except Exception as e:
             logger.error(e, exc_info=True)
             raise e
+        finally:
+            if doc is not None:
+                doc.close()
+
+    except Exception as e:
+        logger.error(e, exc_info=True)
+        raise e
 
 
 def refill_contribution_metadata(proceedings_data: ProceedingsData, results: dict) -> ProceedingsData:
@@ -135,7 +174,7 @@ def refill_contribution_metadata(proceedings_data: ProceedingsData, results: dic
                 revision_data = contribution_data.latest_revision
                 file_data = revision_data.files[-1]
 
-                result = results.get(file_data.uuid)
+                result: dict = results.get(file_data.uuid, {})
 
                 contribution_data.keywords = [
                     event_keyword_factory(keyword)

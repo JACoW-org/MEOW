@@ -112,7 +112,11 @@ def contribution_revision_factory(revision: Any) -> RevisionData:
 
 
 def contribution_file_factory(file: Any) -> FileData:
+    
+    file_type = "paper" if file.get('file_type').get('type') == 1 else "slide"
+    
     return FileData(
+        file_type=file_type,
         uuid=file.get('uuid'),
         md5sum=file.get('md5sum'),
         filename=file.get('filename'),

@@ -61,9 +61,11 @@ class JinjaTemplateRenderer:
             url=f'http://127.0.0.1:8000/{event.title}'
         ))
 
-    async def render_home_page(self, event: EventData) -> str:
+    async def render_home_page(self, event: EventData, volume_size: int, brief_size: int) -> str:
         return await self.render("home_page.html.jinja", dict(
             event=event.as_dict(),
+            volume_size=volume_size,
+            brief_size=brief_size
         ))
 
     async def render_session_list(self, sessions: list[SessionData]) -> str:
@@ -158,6 +160,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
     def __init__(self, proceedings_data: ProceedingsData) -> None:
         """ """
 
+        self.proceedings = proceedings_data
         self.event = proceedings_data.event
         self.contributions = proceedings_data.contributions
 
@@ -363,7 +366,9 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
     async def home(self) -> None:
         await Path(self.src_dir, 'content', '_index.html').write_text(
-            await self.template.render_home_page(self.event)
+            await self.template.render_home_page(self.event,
+                                                 self.proceedings.proceedings_volume_size,
+                                                 self.proceedings.proceedings_brief_size)
         )
 
     async def session(self) -> None:
@@ -477,7 +482,8 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         async def _render_contribution(capacity_limiter: CapacityLimiter, institute: AffiliationData, author: PersonData) -> None:
             async with capacity_limiter:
 
-                curr_dir = Path(self.src_institute_dir, institute.id.lower(), author.id.lower())
+                curr_dir = Path(self.src_institute_dir,
+                                institute.id.lower(), author.id.lower())
                 await curr_dir.mkdir(parents=True, exist_ok=True)
 
                 contributions = [

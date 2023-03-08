@@ -9,7 +9,7 @@ from meow.services.local.event.final_proceedings.copy_contribution_papers import
 
 from meow.services.local.event.final_proceedings.download_contributions_papers import download_contributions_papers
 from meow.services.local.event.final_proceedings.extract_contribution_references import extract_contribution_references
-from meow.services.local.event.final_proceedings.extract_papers_metadata import extract_papers_metadata
+from meow.services.local.event.final_proceedings.manage_papers_metadata import manage_papers_metadata
 from meow.services.local.event.final_proceedings.generate_contribution_doi import generate_contribution_doi
 
 from meow.services.local.event.final_proceedings.create_final_proceedings \
@@ -51,7 +51,7 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
     yield dict(type='progress', value=dict(phase='extract_papers_metadata'))
     
     # Pdf metadata (keywords, n_pages, are_fonts_embedded, page_size)
-    final_proceedings = await extract_papers_metadata(final_proceedings, cookies, settings)
+    final_proceedings = await manage_papers_metadata(final_proceedings, cookies, settings)
     
     
     

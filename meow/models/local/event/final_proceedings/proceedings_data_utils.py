@@ -1,6 +1,6 @@
 import logging as lg
 
-from meow.models.local.event.final_proceedings.contribution_model import FileData
+from meow.models.local.event.final_proceedings.contribution_model import ContributionPaperData, FileData
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 
 
@@ -15,7 +15,29 @@ async def extract_proceedings_files(proceedings_data: ProceedingsData) -> list[F
         if contribution_data.latest_revision:
             revision_data = contribution_data.latest_revision
             for file_data in revision_data.files:
-                files.append(file_data)
-                logger.info(f"{file_data.uuid} - {file_data.filename}")
+                if file_data.file_type == 'paper':
+                    files.append(file_data)
+                # logger.info(f"{file_data.uuid} - {file_data.filename}")
 
     return files
+
+
+async def extract_contributions_papers(proceedings_data: ProceedingsData) -> list[ContributionPaperData]:
+
+    papers: list[ContributionPaperData] = []
+
+    # files: list[FileData] = []
+
+    for contribution_data in proceedings_data.contributions:
+        if contribution_data.latest_revision:
+            revision_data = contribution_data.latest_revision
+            
+            for file_data in revision_data.files:
+                if file_data.file_type == 'paper':
+                    papers.append(ContributionPaperData(
+                        contribution=contribution_data,
+                        paper=file_data
+                    ))
+                # logger.info(f"{file_data.uuid} - {file_data.filename}")
+
+    return papers
