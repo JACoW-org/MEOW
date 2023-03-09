@@ -43,6 +43,10 @@ class TrackData:
     @property
     def name(self) -> str:
         return f"{self.title}"
+    
+    @property
+    def full_name(self) -> str:
+        return f"{self.track_group.name} / {self.name}" if self.track_group else self.name    
 
     def __eq__(self, other):
         return self.code == other.code

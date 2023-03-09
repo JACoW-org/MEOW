@@ -1,7 +1,8 @@
 import logging as lg
 from typing import Any
 
-from fitz import Document, get_pdf_str
+from fitz import Document
+from fitz.utils import set_metadata
 
 from nltk.stem.snowball import SnowballStemmer
 
@@ -9,7 +10,7 @@ from anyio import Path, create_task_group, CapacityLimiter, to_process, to_threa
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 
 from anyio.streams.memory import MemoryObjectSendStream
-from meow.models.local.event.final_proceedings.contribution_model import ContributionData, ContributionPaperData
+from meow.models.local.event.final_proceedings.contribution_model import ContributionData, ContributionPaperData, FileData
 from meow.models.local.event.final_proceedings.event_factory import event_keyword_factory
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_contributions_papers
 
@@ -121,29 +122,21 @@ def manage_metadata(contribution: ContributionData, path: str, stemmer: Snowball
             report = get_pdf_report(doc)
             keywords = get_keywords_from_text(doc, stemmer, stem_keywords_dict)
             
-            what, value = doc.xref_get_key(-1, "Info")  # /Info key in the trailer
-            if what != "xref":
-                raise ValueError("PDF has no metadata")
-            xref = int(value.replace("0 R", ""))  # extract the metadata xref
+            metadata = dict(
+                author=contribution.author_meta,
+                producer=contribution.producer_meta,
+                creator=contribution.creator_meta,
+                title=contribution.title_meta,
+                format=None,
+                encryption=None,
+                creationDate="",
+                modDate="",
+                subject=contribution.track_meta,
+                keywords=", ".join(keywords),
+                trapped=None,
+            )
             
-            doc.xref_set_key(xref, "Title", get_pdf_str(contribution.title))
-            doc.xref_set_key(xref, "Author", get_pdf_str(contribution.author))
-            doc.xref_set_key(xref, "Creator", get_pdf_str(contribution.creator))
-            doc.xref_set_key(xref, "Producer", get_pdf_str(contribution.producer))
-            doc.xref_set_key(xref, "Subject", get_pdf_str(contribution.producer))
-            doc.xref_set_key(xref, "Application", get_pdf_str("CAT--PURR_MEOW"))
-            doc.xref_set_key(xref, "Keywords", get_pdf_str(", ".join(keywords)))
-            
-            # doc.xref_set_key(xref, "Created", get_pdf_str("MEOW"))
-            # doc.xref_set_key(xref, "Modified", get_pdf_str("MEOW"))
-            
-            # Title:	Impact of Longitudinal Gradient Dipoles on Storage Ring Performance
-            # Author:	F. Zimmermann, Y. Papaphilippou, A. Poyet
-            # Subject:	MC5: Beam Dynamics and EM Fields/D01: Beam Optics - Lattices, Correction Schemes, Transport
-            # Keywords:	dipole, photon, emittance, storage-ring, electron
-            # Created:	7/15/22, 4:11:49 AM
-            # Modified:	7/15/22, 4:11:49 AM
-            # Application:	LaTeX with hyperref
+            set_metadata(doc, metadata)
         
             doc.saveIncr()
 

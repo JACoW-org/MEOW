@@ -107,18 +107,26 @@ class ContributionData:
     @property
     def authors_list(self) -> list[PersonData]:
         return self.primary_authors + self.coauthors
+    
+    @property
+    def title_meta(self) -> str:
+        return self.title
 
     @property
-    def author(self) -> str:
+    def author_meta(self) -> str:
         return ", ".join([a.short for a in self.authors_list])
 
     @property
-    def creator(self) -> str:
+    def creator_meta(self) -> str:
         return ""
 
     @property
-    def producer(self) -> str:
+    def producer_meta(self) -> str:
         return ""
+
+    @property
+    def track_meta(self) -> str:
+        return self.track.full_name if self.track else ""
 
     # group_keys: ContributionGroupKey | None = field(default=None)
 
