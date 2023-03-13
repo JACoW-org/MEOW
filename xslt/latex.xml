@@ -1,5 +1,5 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
-<xsl:output omit-xml-declaration="yes" indent="no" encoding="UTF-8" method="text" media-type="text/plain"/>
+<xsl:output omit-xml-declaration="yes" indent="yes" encoding="UTF-8" method="text" media-type="text/plain"/>
 
 <xsl:template match="reference">
     <xsl:variable name="lowercase" select="'abcdefghijklmnopqrstuvwxyz'" />
