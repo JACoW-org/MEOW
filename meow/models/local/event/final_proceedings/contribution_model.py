@@ -113,7 +113,7 @@ class ContributionData:
         return self.title
 
     @property
-    def author_meta(self) -> str:
+    def authors_meta(self) -> str:
         return ", ".join([a.short for a in self.authors_list])
 
     @property
@@ -123,6 +123,10 @@ class ContributionData:
     @property
     def producer_meta(self) -> str:
         return ""
+    
+    @property
+    def authors_ref(self) -> str:
+        return ", ".join([a.short for a in self.primary_authors])
 
     @property
     def track_meta(self) -> str:

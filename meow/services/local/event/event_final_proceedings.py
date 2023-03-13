@@ -91,6 +91,16 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     logger.info('event_final_proceedings - generate_contributions_groups')
     
     yield dict(type='progress', value=dict(phase='generate_contributions_groups'))
