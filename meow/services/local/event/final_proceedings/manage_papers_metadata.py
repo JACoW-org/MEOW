@@ -47,7 +47,8 @@ async def manage_papers_metadata(proceedings_data: ProceedingsData, cookies: dic
     stemmer = SnowballStemmer("english")
     stem_keywords_dict = stem_keywords_as_tree(KEYWORDS, stemmer)
 
-    current_dt: datetime = datetime.now()
+    # TODO timezone from indico settings
+    current_dt: datetime = datetime.now(tz=None)
     current_dt_pdf: str = format_datetime_pdf(current_dt)
 
     send_stream, receive_stream = create_memory_object_stream()
