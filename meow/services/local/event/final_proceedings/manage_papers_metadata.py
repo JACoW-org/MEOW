@@ -116,7 +116,7 @@ async def manage_metadata_task(capacity_limiter: CapacityLimiter, total_files: i
         })
 
 
-def manage_metadata(contribution: ContributionData, path: str, stemmer: SnowballStemmer, stem_keywords_dict: dict[str, list[str]]) -> dict:
+def manage_metadata(contribution: ContributionData, path: str, stemmer: SnowballStemmer, stem_keywords_dict: dict[str, list[str]], current_dt_pdf) -> dict:
     """ """
 
     doc: Document | None
@@ -127,11 +127,6 @@ def manage_metadata(contribution: ContributionData, path: str, stemmer: Snowball
         try:
             report = get_pdf_report(doc)
             keywords = get_keywords_from_text(doc, stemmer, stem_keywords_dict)
-
-            current_dt: datetime = datetime.now()
-            current_dt_pdf: str = format_datetime_pdf(current_dt)
-
-            logger.info(f"current_dt_pdf {current_dt_pdf}")
 
             metadata = dict(
                 author=contribution.author_meta,
