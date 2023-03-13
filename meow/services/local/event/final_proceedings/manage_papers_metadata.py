@@ -18,6 +18,9 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import Pro
 from meow.services.local.papers_metadata.pdf_keywords import get_keywords_from_text, stem_keywords_as_tree
 from meow.services.local.papers_metadata.pdf_report import get_pdf_report
 
+from datetime import datetime
+from meow.utils.datetime import format_datetime_pdf
+
 from meow.utils.keywords import KEYWORDS
 
 
@@ -44,6 +47,9 @@ async def manage_papers_metadata(proceedings_data: ProceedingsData, cookies: dic
     stemmer = SnowballStemmer("english")
     stem_keywords_dict = stem_keywords_as_tree(KEYWORDS, stemmer)
 
+    current_dt: datetime = datetime.now()
+    current_dt_pdf: str = format_datetime_pdf(current_dt)
+
     send_stream, receive_stream = create_memory_object_stream()
     capacity_limiter = CapacityLimiter(6)
 
@@ -54,7 +60,7 @@ async def manage_papers_metadata(proceedings_data: ProceedingsData, cookies: dic
             for current_index, current_paper in enumerate(papers_data):
                 tg.start_soon(manage_metadata_task, capacity_limiter, total_files,
                               current_index, current_paper, cookies, file_cache_dir,
-                              stemmer, stem_keywords_dict,
+                              stemmer, stem_keywords_dict, current_dt_pdf,
                               send_stream.clone())
 
         try:
@@ -86,7 +92,7 @@ async def manage_papers_metadata(proceedings_data: ProceedingsData, cookies: dic
 
 async def manage_metadata_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int,
                                current_paper: ContributionPaperData, cookies: dict, pdf_cache_dir: Path,
-                               stemmer, stem_keywords_dict, res: MemoryObjectSendStream) -> None:
+                               stemmer, stem_keywords_dict, current_dt_pdf, res: MemoryObjectSendStream) -> None:
     """ """
 
     async with capacity_limiter:
@@ -100,7 +106,7 @@ async def manage_metadata_task(capacity_limiter: CapacityLimiter, total_files: i
 
         # logger.debug(f"{pdf_file} {pdf_name}")
 
-        metadata = await to_process.run_sync(manage_metadata, contribution, pdf_path, stemmer, stem_keywords_dict)
+        metadata = await to_process.run_sync(manage_metadata, contribution, pdf_path, stemmer, stem_keywords_dict, current_dt_pdf)
 
         await res.send({
             "index": current_index,
@@ -122,6 +128,11 @@ def manage_metadata(contribution: ContributionData, path: str, stemmer: Snowball
             report = get_pdf_report(doc)
             keywords = get_keywords_from_text(doc, stemmer, stem_keywords_dict)
 
+            current_dt: datetime = datetime.now()
+            current_dt_pdf: str = format_datetime_pdf(current_dt)
+
+            logger.info(f"current_dt_pdf {current_dt_pdf}")
+
             metadata = dict(
                 author=contribution.author_meta,
                 producer=contribution.producer_meta,
@@ -129,8 +140,8 @@ def manage_metadata(contribution: ContributionData, path: str, stemmer: Snowball
                 title=contribution.title_meta,
                 format=None,
                 encryption=None,
-                creationDate="",
-                modDate="",
+                creationDate=current_dt_pdf,
+                modDate=current_dt_pdf,
                 subject=contribution.track_meta,
                 keywords=", ".join(keywords),
                 trapped=None,
