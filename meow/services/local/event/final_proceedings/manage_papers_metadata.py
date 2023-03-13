@@ -3,7 +3,7 @@ import pytz as tz
 
 from typing import Any
 
-from fitz import Document
+from fitz import Document, Rect, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER, TEXT_ALIGN_RIGHT
 from fitz.utils import set_metadata
 
 from nltk.stem.snowball import SnowballStemmer
@@ -146,6 +146,95 @@ def manage_metadata(contribution: ContributionData, path: str, stemmer: Snowball
             )
 
             set_metadata(doc, metadata)
+
+
+            for page in doc:
+                page_width = page.rect.width
+                page_height = page.rect.height
+
+                distance_header = (page_width - 100) / 3
+
+                rect_header_top_left = Rect(50, 10, 50 + distance_header, 20)
+                page.add_freetext_annot(
+                    rect=rect_header_top_left,
+                    text='Text left',
+                    align=TEXT_ALIGN_LEFT,
+                    border_color=(0, 0, 1)
+                )
+
+                rect_header_top_middle = Rect(50 + distance_header, 10, 50 + 2 * distance_header, 20)
+                page.add_freetext_annot(
+                    rect=rect_header_top_middle,
+                    text='Text middle',
+                    align=TEXT_ALIGN_CENTER,
+                    border_color=(0, 0, 1)
+                )
+
+                rect_header_top_right = Rect(50 + 2 * distance_header, 10, 50 + 3 * distance_header, 20)
+                page.add_freetext_annot(
+                    rect=rect_header_top_right,
+                    text='Text right',
+                    align=TEXT_ALIGN_RIGHT,
+                    border_color=(0, 0, 1)
+                )
+
+                rect_header_bottom_left = Rect(50, 25, 50 + distance_header, 35)
+                page.add_freetext_annot(
+                    rect=rect_header_bottom_left,
+                    text='Text left',
+                    align=TEXT_ALIGN_LEFT,
+                    border_color=(0, 0, 1)
+                )
+
+                rect_header_bottom_middle = Rect(50 + distance_header, 25, 50 + 2 * distance_header, 35)
+                page.add_freetext_annot(
+                    rect=rect_header_bottom_middle,
+                    text='Text middle',
+                    align=TEXT_ALIGN_CENTER,
+                    border_color=(0, 0, 1)
+                )
+
+                rect_header_bottom_right = Rect(50 + 2 * distance_header, 25, 50 + 3 * distance_header, 35)
+                page.add_freetext_annot(
+                    rect=rect_header_bottom_right,
+                    text='Text right',
+                    align=TEXT_ALIGN_RIGHT,
+                    border_color=(0, 0, 1)
+                )
+
+                distance_footer = (page_width - 100) / 2
+
+                rect_footer_bottom_left = Rect(50, page_height - 20, 50 + distance_footer, page_height - 10)
+                page.add_freetext_annot(
+                    rect=rect_footer_bottom_left,
+                    text='Text left',
+                    align=TEXT_ALIGN_LEFT,
+                    border_color=(0, 0, 1)
+                )
+
+                rect_footer_bottom_right = Rect(50 + distance_footer, page_height - 20, 50 + 2 * distance_footer, page_height - 10)
+                page.add_freetext_annot(
+                    rect=rect_footer_bottom_right,
+                    text='Text right',
+                    align=TEXT_ALIGN_RIGHT,
+                    border_color=(0, 0, 1)
+                )
+
+                rect_footer_top_left = Rect(50, page_height - 35, 50 + distance_footer, page_height - 25)
+                page.add_freetext_annot(
+                    rect=rect_footer_top_left,
+                    text='Text left',
+                    align=TEXT_ALIGN_LEFT,
+                    border_color=(0, 0, 1)
+                )
+
+                rect_footer_top_right = Rect(50 + distance_footer, page_height - 35, 50 + 2 * distance_footer, page_height - 25)
+                page.add_freetext_annot(
+                    rect=rect_footer_top_right,
+                    text='Text right',
+                    align=TEXT_ALIGN_RIGHT,
+                    border_color=(0, 0, 1)
+                )
 
             doc.saveIncr() # TO REMOVE
 
