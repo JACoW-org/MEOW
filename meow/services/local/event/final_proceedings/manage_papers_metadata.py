@@ -1,4 +1,6 @@
 import logging as lg
+import pytz as tz
+
 from typing import Any
 
 from fitz import Document
@@ -47,8 +49,8 @@ async def manage_papers_metadata(proceedings_data: ProceedingsData, cookies: dic
     stemmer = SnowballStemmer("english")
     stem_keywords_dict = stem_keywords_as_tree(KEYWORDS, stemmer)
 
-    # TODO timezone from indico settings
-    current_dt: datetime = datetime.now(tz=None)
+    timezone = tz.timezone(settings.get('timezone'))
+    current_dt: datetime = datetime.now(tz=timezone)
     current_dt_pdf: str = format_datetime_pdf(current_dt)
 
     send_stream, receive_stream = create_memory_object_stream()
