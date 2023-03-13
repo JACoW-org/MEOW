@@ -85,15 +85,15 @@ async def manage_papers_metadata(proceedings_data: ProceedingsData, cookies: dic
 
 
 async def manage_metadata_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int,
-                                current_paper: ContributionPaperData, cookies: dict, pdf_cache_dir: Path,
-                                stemmer, stem_keywords_dict, res: MemoryObjectSendStream) -> None:
+                               current_paper: ContributionPaperData, cookies: dict, pdf_cache_dir: Path,
+                               stemmer, stem_keywords_dict, res: MemoryObjectSendStream) -> None:
     """ """
 
     async with capacity_limiter:
-        
+
         contribution = current_paper.contribution
         current_file = current_paper.paper
-        
+
         pdf_name = current_file.filename
         pdf_file = Path(pdf_cache_dir, pdf_name)
         pdf_path = str(await pdf_file.absolute())
@@ -121,7 +121,7 @@ def manage_metadata(contribution: ContributionData, path: str, stemmer: Snowball
         try:
             report = get_pdf_report(doc)
             keywords = get_keywords_from_text(doc, stemmer, stem_keywords_dict)
-            
+
             metadata = dict(
                 author=contribution.author_meta,
                 producer=contribution.producer_meta,
@@ -135,9 +135,9 @@ def manage_metadata(contribution: ContributionData, path: str, stemmer: Snowball
                 keywords=", ".join(keywords),
                 trapped=None,
             )
-            
+
             set_metadata(doc, metadata)
-        
+
             doc.saveIncr()
 
             return dict(
@@ -159,25 +159,32 @@ def manage_metadata(contribution: ContributionData, path: str, stemmer: Snowball
 def refill_contribution_metadata(proceedings_data: ProceedingsData, results: dict) -> ProceedingsData:
 
     current_page = 1
+
     for contribution_data in proceedings_data.contributions:
         code: str = contribution_data.code
 
         try:
             if contribution_data.latest_revision:
                 revision_data = contribution_data.latest_revision
-                file_data = revision_data.files[-1]
+                file_data = revision_data.files[-1] \
+                    if len(revision_data.files) > 0 \
+                    else None
+                    
+                if file_data is not None:
 
-                result: dict = results.get(file_data.uuid, {})
+                    result: dict = results.get(file_data.uuid, {})
+                    report: dict = result.get('report', {})
 
-                contribution_data.keywords = [
-                    event_keyword_factory(keyword)
-                    for keyword in result.get('keywords', [])
-                ]
+                    contribution_data.keywords = [
+                        event_keyword_factory(keyword)
+                        for keyword in result.get('keywords', [])
+                    ]
 
-                contribution_data.page = current_page
-                contribution_data.metadata = result.get('report')
+                    contribution_data.page = current_page
+                    contribution_data.metadata = report
 
-                current_page += result.get('report').get('page_count', 0)
+                    if report and 'page_count' in report:
+                        current_page += report.get('page_count', 0)
 
                 # logger.info('contribution_data pages = %s - %s', contribution_data.page, contribution_data.page + result.get('report').get('page_count'))
 
