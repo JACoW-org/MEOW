@@ -12,7 +12,7 @@ from meow.models.local.event.final_proceedings.track_model import TrackData
 from anyio import create_task_group, CapacityLimiter, to_process
 
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
-from meow.models.local.event.final_proceedings.event_model import AffiliationData, EventData, KeywordData, PersonData
+from meow.models.local.event.final_proceedings.event_model import AffiliationData, AttachmentData, EventData, KeywordData, PersonData
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.models.local.event.final_proceedings.session_model import SessionData
 
@@ -61,9 +61,10 @@ class JinjaTemplateRenderer:
             url=f'http://127.0.0.1:8000/{event.title}'
         ))
 
-    async def render_home_page(self, event: EventData, volume_size: int, brief_size: int) -> str:
+    async def render_home_page(self, event: EventData, attachments: list[AttachmentData], volume_size: int, brief_size: int) -> str:
         return await self.render("home_page.html.jinja", dict(
             event=event.as_dict(),
+            attachments=[a.as_dict() for a in attachments],
             volume_size=volume_size,
             brief_size=brief_size
         ))
@@ -162,8 +163,8 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
         self.proceedings = proceedings_data
         self.event = proceedings_data.event
+        self.attachments = proceedings_data.attachments
         self.contributions = proceedings_data.contributions
-
         self.sessions = proceedings_data.sessions
         self.classifications = proceedings_data.classification
         self.authors = proceedings_data.author
@@ -367,6 +368,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
     async def home(self) -> None:
         await Path(self.src_dir, 'content', '_index.html').write_text(
             await self.template.render_home_page(self.event,
+                                                 self.attachments,
                                                  self.proceedings.proceedings_volume_size,
                                                  self.proceedings.proceedings_brief_size)
         )

@@ -42,7 +42,7 @@ async def concat_volumes(proceedings_data: ProceedingsData, volume_pdf: Path, br
     files_data: list[FileData] = await extract_proceedings_files(proceedings_data)
 
     pdf_files: list[str] = [
-        str(await Path(file_cache_dir, c.filename).absolute())
+        str(await Path(file_cache_dir, f"{c.filename}_jacow").absolute())
         for c in files_data if c is not None
     ]
 
