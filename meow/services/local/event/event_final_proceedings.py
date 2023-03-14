@@ -6,10 +6,11 @@ from typing import AsyncGenerator
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.services.local.event.final_proceedings.concat_contribution_papers import concat_contribution_papers
 from meow.services.local.event.final_proceedings.copy_contribution_papers import copy_contribution_papers
+from meow.services.local.event.final_proceedings.copy_event_attachments import copy_event_attachments
 
+from meow.services.local.event.final_proceedings.download_event_attachments import download_event_attachments
 from meow.services.local.event.final_proceedings.download_contributions_papers import download_contributions_papers
 from meow.services.local.event.final_proceedings.extract_contribution_references import extract_contribution_references
-from meow.services.local.event.final_proceedings.manage_papers_metadata import manage_papers_metadata
 from meow.services.local.event.final_proceedings.generate_contribution_doi import generate_contribution_doi
 
 from meow.services.local.event.final_proceedings.create_final_proceedings \
@@ -18,9 +19,11 @@ from meow.services.local.event.final_proceedings.generate_contributions_groups i
 from meow.services.local.event.final_proceedings.hugo_plugin.hugo_final_proceedings_plugin \
     import HugoFinalProceedingsPlugin
 from meow.services.local.event.final_proceedings.link_static_site import link_static_site
+from meow.services.local.event.final_proceedings.read_papers_metadata import read_papers_metadata
 from meow.services.local.event.final_proceedings.refill_papers_metadata import refill_papers_metadata
 from meow.services.local.event.final_proceedings.validate_proceedings_data \
     import validate_proceedings_data
+from meow.services.local.event.final_proceedings.write_papers_metadata import write_papers_metadata
 
 
 
@@ -35,7 +38,16 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
     # Adapt and refill event data: sessions, contributions, ...
     final_proceedings = await create_final_proceedings(event, cookies, settings)
     
+    """ """    
     
+    logger.info('event_final_proceedings - download_event_attachments')
+
+    yield dict(type='progress', value=dict(phase='download_event_attachments'))
+    
+    # Download attachments
+    final_proceedings = await download_event_attachments(final_proceedings, cookies, settings)
+    
+    """ """
     
     logger.info('event_final_proceedings - download_contributions_papers')
 
@@ -44,16 +56,16 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
     # Download pdf
     final_proceedings = await download_contributions_papers(final_proceedings, cookies, settings)
     
+    """ """
     
-    
-    logger.info('event_final_proceedings - extract_papers_metadata')    
+    logger.info('event_final_proceedings - read_papers_metadata')    
 
-    yield dict(type='progress', value=dict(phase='extract_papers_metadata'))
+    yield dict(type='progress', value=dict(phase='read_papers_metadata'))
     
     # Pdf metadata (keywords, n_pages, are_fonts_embedded, page_size)
-    final_proceedings = await manage_papers_metadata(final_proceedings, cookies, settings)
+    final_proceedings = await read_papers_metadata(final_proceedings, cookies, settings)
     
-    
+    """ """
     
     logger.info('event_final_proceedings - validate_events_data')
     
@@ -62,16 +74,7 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
     # TODO: Validation
     final_proceedings = await validate_proceedings_data(final_proceedings, cookies, settings)
     
-    
-    
-    logger.info('event_final_proceedings - concat_contribution_papers')    
-
-    yield dict(type='progress', value=dict(phase='concat_contribution_papers'))
-    
-    # Concat Pdf
-    final_proceedings = await concat_contribution_papers(final_proceedings, cookies, settings)
-    
-    
+    """ """
     
     logger.info('event_final_proceedings - extract_contribution_references')
     
@@ -80,7 +83,7 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
     # Generate contribution references
     final_proceedings = await extract_contribution_references(final_proceedings, cookies, settings)
     
-    
+    """ """
     
     logger.info('event_final_proceedings - generate_contribution_doi')
     
@@ -89,17 +92,25 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
     # DOI generation
     final_proceedings = await generate_contribution_doi(final_proceedings, cookies, settings)
     
+    """ """
     
+    logger.info('event_final_proceedings - write_papers_metadata')    
+
+    yield dict(type='progress', value=dict(phase='extract_papers_metadata'))
     
+    # Write metadata and frames
+    final_proceedings = await write_papers_metadata(final_proceedings, cookies, settings)
     
+    """ """
     
+    logger.info('event_final_proceedings - concat_contribution_papers')    
+
+    yield dict(type='progress', value=dict(phase='concat_contribution_papers'))
     
+    # Concat Pdf
+    final_proceedings = await concat_contribution_papers(final_proceedings, cookies, settings)
     
-    
-    
-    
-    
-    
+    """ """
     
     logger.info('event_final_proceedings - generate_contributions_groups')
     
@@ -108,7 +119,7 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
     # Contrib Groupby
     final_proceedings = await generate_contributions_groups(final_proceedings, cookies, settings)
     
-    
+    """ """
 
     logger.info('event_final_proceedings - refill_papers_metadata')
     
@@ -117,7 +128,7 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
     # TODO: PDF Editing????
     final_proceedings = await refill_papers_metadata(final_proceedings, cookies, settings)
     
-    
+    """ """
     
     logger.info('event_final_proceedings - gen_final_proceedings')
     
@@ -131,7 +142,16 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
     
     await plugin.run_build()
     
+    """ """
     
+    logger.info('event_final_proceedings - copy_event_attachments')
+    
+    yield dict(type='progress', value=dict(phase='copy_event_attachments'))
+
+    # PDF Copy
+    final_proceedings = await copy_event_attachments(final_proceedings, cookies, settings)
+    
+    """ """
     
     logger.info('event_final_proceedings - copy_contribution_papers')
     
@@ -140,7 +160,7 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
     # PDF Copy
     final_proceedings = await copy_contribution_papers(final_proceedings, cookies, settings)
     
-    
+    """ """
       
     yield dict(type='progress', value=dict(phase='plugin.run_pack'))
     
@@ -150,6 +170,7 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
     
     static_site = io.BytesIO() # await plugin.run_pack()
     
+    """ """
     
     # Link site
     final_proceedings = await link_static_site(final_proceedings, cookies, settings)
@@ -157,7 +178,7 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
     # papers metadata
     papers_metadata = io.BytesIO()
     
-    
+    """ """
     
     logger.info('event_final_proceedings - get_final_proceedings')
 

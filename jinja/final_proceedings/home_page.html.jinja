@@ -4,12 +4,11 @@ date: 2023-01-02T12:06:30+01:00
 ---
 
 
-
 <h1>FEL2022</h1>
 
 <h3>Proceedings of the13th International Particle Accelerator Conference</h3>
 
-<section>
+<section class="event-intro">
     <p>
         The links below lead to detailed listings of the many facets of the conference,
         including Portable Acrobat Format (PDF) files of all invited and contributed papers,
@@ -17,7 +16,15 @@ date: 2023-01-02T12:06:30+01:00
     </p>
 </section>
 
-<section>
+{% for attachment in attachments %}
+{% if attachment.content_type == "image/jpeg": %}
+<section class="event-poster">
+    <img src="./pdf/{{ attachment.filename }}">
+</section>
+{% endif %}
+{% endfor %}
+
+<section class="event-menu">
     <ul>
         <li><a href="./session">Session</a></li>
         <li><a href="./classification">Classification</a></li>
@@ -28,7 +35,7 @@ date: 2023-01-02T12:06:30+01:00
     </ul>
 </section>
 
-<section>
+<section class="event-attachments">
     <ul>
         <li>
             <a href="./pdf/{{ event.id }}_proceedings_volume.pdf">
@@ -44,32 +51,20 @@ date: 2023-01-02T12:06:30+01:00
             <i>First page only of all papers with hyperlinks to complete versions</i>
         </li>
 
+        {% for attachment in attachments %}
+        {% if attachment.content_type == "application/pdf": %}
         <li>
-            <b>FEL2022 Guide Book [70 MB]</b>
-            <i>Venue, Awards, Scientific Program, and Events</i>
+            <a href="./pdf/{{ attachment.filename }}">
+                <b>{{ attachment.title }}</b>
+            </a> ({{ (attachment.size / (1024 * 1024)) | int }}MB)
+            <i>{{ attachment.description }}</i>
         </li>
-
-        <li>
-            <b>FEL2022 Particle Accelerator Projects and Upgrades Booklet [1.5 MB]</b>
-            <i>The complete volume of paper</i>
-        </li>
-
-        <li>
-            <b>FEL2022 Student Poster Session Guide [2 MB]</b>
-            <i>Information about the Student Poster Session</i>
-        </li>
-
-        <li>
-            <b>FEL2022 Preface</b>
-        </li>
-
-        <li>
-            <b>FEL2022 Committees</b>
-        </li>
+        {% endif %}
+        {% endfor %}
     </ul>
 </section>
 
-<section>
+<section class="event-info">
     <p>
         FEL2022 was organized by the
         Synchrotron Light Research Institute (SLRI) in
@@ -79,7 +74,7 @@ date: 2023-01-02T12:06:30+01:00
     </p>
 </section>
 
-<section>
+<section class="event-board">
     <p>
         Editorial Board: Frank Zimmermann (CERN), Hitoshi Tanaka (RIKEN), Porntip Sudmuang (SLRI), Prapong Klysubun
         (SLRI), Prapaiwan Sunwong (SLRI), Thakonwat Chanwattana (SLRI), Christine Petit-Jean-Genaz (CERN), Volker RW

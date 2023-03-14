@@ -153,8 +153,12 @@ def manage_metadata(contribution: ContributionData, path: str, stemmer: Snowball
                 page_height = page.rect.height
 
                 distance_header = (page_width - 100) / 3
+                
+                # args = get_rect_header_top()
+                # page.add_freetext_annot(**args)                
 
                 rect_header_top_left = Rect(50, 10, 50 + distance_header, 20)
+                
                 page.add_freetext_annot(
                     rect=rect_header_top_left,
                     text='Text left',

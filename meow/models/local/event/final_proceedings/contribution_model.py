@@ -117,6 +117,10 @@ class ContributionData:
         return ", ".join([a.short for a in self.authors_list])
 
     @property
+    def keywords_meta(self) -> str:
+        return ", ".join([a.name for a in self.keywords])
+
+    @property
     def creator_meta(self) -> str:
         return ""
 

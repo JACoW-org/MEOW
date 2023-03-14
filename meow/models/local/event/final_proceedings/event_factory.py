@@ -2,12 +2,29 @@ import logging as lg
 
 from typing import Any
 
-from meow.models.local.event.final_proceedings.event_model import AffiliationData, EventData, KeywordData, PersonData
+from meow.models.local.event.final_proceedings.event_model import AffiliationData, AttachmentData, EventData, KeywordData, PersonData
 from meow.utils.slug import slugify
 from meow.utils.datetime import datedict_to_tz_datetime
 
 
 logger = lg.getLogger(__name__)
+
+
+def attachment_data_factory(attachment: Any) -> AttachmentData:
+    attachment_data = AttachmentData(
+        file_type=attachment.get('file_type'),
+        content_type=attachment.get('content_type'),
+        filename=attachment.get('filename'),
+        md5sum=attachment.get('md5sum'),
+        size=int(attachment.get('size')),
+        title=attachment.get('title'),
+        description=attachment.get('description'),
+        external_download_url=attachment.get('external_download_url'),
+    )
+    
+    # logger.info(attachment_data.as_dict())
+
+    return attachment_data
 
 
 def event_data_factory(event: Any) -> EventData:
