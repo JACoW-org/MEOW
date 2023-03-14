@@ -77,6 +77,23 @@ class KeywordData:
 
 
 @dataclass(kw_only=True, slots=True)
+class AttachmentData:
+
+    file_type: str
+    content_type: str
+    filename: str
+    md5sum: str
+    size: int
+    
+    title: str
+    description: str
+    external_download_url: str
+
+    def as_dict(self) -> dict:
+        return asdict(self)
+    
+
+@dataclass(kw_only=True, slots=True)
 class EventData:
     """ """
 

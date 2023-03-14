@@ -4,24 +4,22 @@ from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
 
-from meow.models.local.event.final_proceedings.contribution_model import FileData
-
+from meow.models.local.event.final_proceedings.event_model import AttachmentData
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
-from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_proceedings_files
 
 
 logger = lg.getLogger(__name__)
 
 
-async def copy_contribution_papers(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
+async def copy_event_attachments(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
     """ """
 
-    files_data: list[FileData] = await extract_proceedings_files(proceedings_data)
+    files_data: list[AttachmentData] = proceedings_data.attachments
 
     total_files: int = len(files_data)
     elaborated_files: int = 0
 
-    # logger.debug(f'copy_contribution_papers - files: {total_files}')
+    # logger.debug(f'copy_event_attachments - files: {total_files}')
 
     if total_files == 0:
         raise Exception('no file extracted')
@@ -37,6 +35,18 @@ async def copy_contribution_papers(proceedings_data: ProceedingsData, cookies: d
     await pdf_dest_dir.mkdir(exist_ok=True, parents=True)
     
     logger.info(f'{pdf_dest_dir} created!')
+    
+    vol_name = f"{proceedings_data.event.id}_proceedings_volume.pdf"
+    vol_pdf: Path = Path(file_cache_dir, vol_name)
+    vol_dest: Path = Path(pdf_dest_dir, vol_name)
+    
+    await vol_dest.hardlink_to(vol_pdf)
+    
+    brief_name = f"{proceedings_data.event.id}_proceedings_brief.pdf"
+    brief_pdf: Path = Path(file_cache_dir, brief_name)
+    brief_dest: Path = Path(pdf_dest_dir, brief_name)
+    
+    await brief_dest.hardlink_to(brief_pdf)
     
     send_stream, receive_stream = create_memory_object_stream()
     capacity_limiter = CapacityLimiter(6)
@@ -67,13 +77,13 @@ async def copy_contribution_papers(proceedings_data: ProceedingsData, cookies: d
     return proceedings_data
 
 
-async def file_copy_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int, current_file: FileData, 
+async def file_copy_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int, current_file: AttachmentData, 
                          cookies: dict, pdf_cache_dir: Path, pdf_dest_dir: Path, res: MemoryObjectSendStream) -> None:
     """ """
 
     async with capacity_limiter:
                
-        pdf_file_name = f"{current_file.filename}_jacow"
+        pdf_file_name = f"{current_file.filename}"
         pdf_file_path = Path(pdf_cache_dir, pdf_file_name)
         
         pdf_dest_name = f"{current_file.filename}"

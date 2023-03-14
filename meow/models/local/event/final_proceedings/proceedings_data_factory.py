@@ -3,7 +3,7 @@
 from typing import Any
 
 from meow.models.local.event.final_proceedings.contribution_factory import contribution_data_factory
-from meow.models.local.event.final_proceedings.event_factory import event_data_factory
+from meow.models.local.event.final_proceedings.event_factory import attachment_data_factory, event_data_factory
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.models.local.event.final_proceedings.session_factory import session_data_factory
 from meow.models.local.event.final_proceedings.session_model import SessionData
@@ -26,9 +26,15 @@ def proceedings_data_factory(event: Any) -> ProceedingsData:
     ]
 
     contributions.sort(key=sort_list_by_date)
+    
+    attachments = [
+        attachment_data_factory(attachment)
+        for attachment in event.get('attachments', [])
+    ]
 
     return ProceedingsData(
         event=event_data_factory(event),
         sessions=sessions,
-        contributions=contributions
+        contributions=contributions,
+        attachments=attachments
     )
