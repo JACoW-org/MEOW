@@ -1,10 +1,9 @@
-
 {% macro render(contribution, class_name) -%}
 <section class="{{ class_name }}">
 
     <h3>
-        {{ contribution.code|e }} /
-        {{ contribution.start.strftime('%H:%M') }} -
+        {{ contribution.code|e }} -
+        {{ contribution.start.strftime('%m/%d/%Y, %H:%M') }} /
         {{ contribution.end.strftime('%H:%M') }}
     </h3>
 
@@ -12,15 +11,17 @@
 
     <p>{{ contribution.description|e }}</p>
 
-    <pre>session: {{ contribution.session_code }}</pre>
+    <p>
+        {% for author in contribution.primary_authors %}
 
-    <pre>classification: {{ contribution.track.title }}</pre>
+        {% if loop.first %}<b>{% endif %}
+        {{ author.first }} {{ author.last }} ({{ author.affiliation }})
+        {% if loop.first %}</b>{% endif %}
 
-    <pre>authors: {{ contribution.authors|map(attribute="first", default="_")|join(", ") }}</pre>
+        {% if loop.nextitem is defined %}, {% endif %}
 
-    <pre>institutes: {{ contribution.institutes|map(attribute="name", default="_")|join(", ") }}</pre>
-
-    <pre>keywords: {{ contribution.keywords|map(attribute="name", default="_")|join(", ") }}</pre>
+        {% endfor %}
+    </p>
 
     <ul>
 
@@ -59,19 +60,19 @@
 
             <p>
                 <b>BibTeX</b>
-                <pre>{{ contribution.reference.bibtex|escape|replace('\n','<br>') }}</pre>
+            <pre>{{ contribution.reference.bibtex|escape|replace('\n','<br>') }}</pre>
 
-                <b>LaTeX</b>
-                <pre>{{ contribution.reference.latex|escape|replace('\n','<br>') }}</pre>
+            <b>LaTeX</b>
+            <pre>{{ contribution.reference.latex|escape|replace('\n','<br>') }}</pre>
 
-                <b>Text/Word</b>
-                <pre>{{ contribution.reference.word|escape|replace('\n','<br>') }}</pre>
+            <b>Text/Word</b>
+            <pre>{{ contribution.reference.word|escape|replace('\n','<br>') }}</pre>
 
-                <b>RIS</b>
-                <pre>{{ contribution.reference.ris|escape|replace('\n','<br>') }}</pre>
+            <b>RIS</b>
+            <pre>{{ contribution.reference.ris|escape|replace('\n','<br>') }}</pre>
 
-                <b>EndNote</b>
-                <pre>{{ contribution.reference.endnote|escape }}</pre>
+            <b>EndNote</b>
+            <pre>{{ contribution.reference.endnote|escape }}</pre>
             </p>
         </li>
 
