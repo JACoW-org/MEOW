@@ -26,10 +26,10 @@ async def main() -> None:
     import anyio
           
     limiter = anyio.to_thread.current_default_thread_limiter()  # type: ignore 
-    limiter.total_tokens = 128
+    limiter.total_tokens = 32
 
     limiter = anyio.to_process.current_default_process_limiter()  # type: ignore 
-    limiter.total_tokens = 64
+    limiter.total_tokens = 16
     
     from nltk import download
     
