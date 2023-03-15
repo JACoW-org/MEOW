@@ -26,10 +26,10 @@ async def extract_event_pdf_files(event: dict) -> list:
     event_files = []
 
     for contribution in event.get('contributions', []):
-        revisions = contribution.get('revisions', [])
-
-        revisions_files = revisions[-1].get('files', []) \
-            if revisions is not None and len(revisions) > 0 \
+        latest_revision = contribution.get('latest_revision', None)
+        
+        revisions_files = latest_revision.get('files', []) \
+            if latest_revision is not None \
             else []
 
         event_files.extend(revisions_files)

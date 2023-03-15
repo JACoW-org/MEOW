@@ -14,7 +14,6 @@ from meow.services.local.event.event_pdf_check import extract_event_pdf_files
 from meow.services.local.event.event_pdf_utils import is_to_download
 
 from meow.services.local.papers_metadata.pdf_keywords import get_keywords_from_text, stem_keywords_as_tree
-from meow.services.local.papers_metadata.pdf_to_txt import pdf_to_txt
 
 from meow.utils.http import download_file
 
@@ -46,7 +45,7 @@ async def event_pdf_keywords(event: dict, cookies: dict, settings: dict) -> Asyn
     total_files: int = len(files)
     checked_files: int = 0
 
-    # logger.debug(f'event_pdf_check - files: {len(files)}')
+    logger.info(f'event_pdf_keywords - files: {len(files)}')
 
     send_stream, receive_stream = create_memory_object_stream()
 
@@ -130,12 +129,12 @@ async def internal_pdf_keywords_task(current_file: dict, cookies: dict, pdf_cach
 def get_pdf_keywords(path: str, stemmer: SnowballStemmer, stem_keywords_dict: dict[str, list[str]]) -> list[str]:
 
     with open(path, 'rb') as fh:
-               
-        try:           
+
+        try:
             pdf = Document(stream=fh.read(), filetype='pdf')
             keywords = get_keywords_from_text(pdf, stemmer, stem_keywords_dict)
             return keywords
-            
+
         except Exception as e:
             logger.error(e, exc_info=True)
             raise e
