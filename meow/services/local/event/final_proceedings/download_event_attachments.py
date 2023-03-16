@@ -25,8 +25,8 @@ async def download_event_attachments(proceedings_data: ProceedingsData, cookies:
 
     # logger.debug(f'download_event_attachments - files: {total_files}')
 
-    if total_files == 0:
-        raise Exception('no file extracted')
+    # if total_files == 0:
+    #     raise Exception('no file extracted')
 
     dir_name = f"{proceedings_data.event.id}_pdf"
     file_cache_dir: Path = Path('var', 'run', dir_name)
@@ -46,8 +46,9 @@ async def download_event_attachments(proceedings_data: ProceedingsData, cookies:
             async with receive_stream:
                 async for _ in receive_stream:
                     downloaded_files = downloaded_files + 1
-                    
-                    logger.info(f"downloaded_files: {downloaded_files} - {total_files}")
+
+                    logger.info(
+                        f"downloaded_files: {downloaded_files} - {total_files}")
 
                     if downloaded_files >= total_files:
                         receive_stream.close()
@@ -66,19 +67,28 @@ async def file_download_task(capacity_limiter: CapacityLimiter, total_files: int
     """ """
 
     async with capacity_limiter:
-        pdf_md5 = current_file.md5sum
-        pdf_name = current_file.filename
-        pdf_url = current_file.external_download_url
 
-        http_sess = cookies.get('indico_session_http', '')
+        try:
 
-        pdf_file = Path(pdf_cache_dir, pdf_name)
+            pdf_md5 = current_file.md5sum
+            pdf_name = current_file.filename
+            pdf_url = current_file.external_download_url
 
-        # logger.debug(f"{pdf_md5} {pdf_name}")
+            http_sess = cookies.get('indico_session_http', '')
 
-        if await is_to_download(pdf_file, pdf_md5):
-            await download_file(url=pdf_url, file=pdf_file,
-                                cookies=dict(indico_session_http=http_sess))
+            pdf_file = Path(pdf_cache_dir, pdf_name)
+
+            # logger.debug(f"{pdf_md5} {pdf_name}")
+
+            if await is_to_download(pdf_file, pdf_md5):
+                logger.info(f"download_file --> {pdf_url}")
+                await download_file(url=pdf_url, file=pdf_file,
+                                    cookies=dict(indico_session_http=http_sess))
+            else:
+                logger.info(f"cached_file --> {pdf_url}")
+
+        except Exception as ex:
+            logger.error(ex, exc_info=True)
 
         await res.send({
             "index": current_index,
