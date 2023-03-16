@@ -43,7 +43,7 @@ async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict
     await file_cache_dir.mkdir(exist_ok=True, parents=True)
 
     send_stream, receive_stream = create_memory_object_stream()
-    capacity_limiter = CapacityLimiter(6)
+    capacity_limiter = CapacityLimiter(4)
 
     timezone = tz.timezone(settings.get('timezone'))
     current_dt: datetime = datetime.now(tz=timezone)

@@ -54,7 +54,7 @@ async def manage_papers_metadata(proceedings_data: ProceedingsData, cookies: dic
     current_dt_pdf: str = format_datetime_pdf(current_dt)
 
     send_stream, receive_stream = create_memory_object_stream()
-    capacity_limiter = CapacityLimiter(6)
+    capacity_limiter = CapacityLimiter(4)
 
     results = dict()
 

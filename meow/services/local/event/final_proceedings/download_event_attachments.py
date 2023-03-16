@@ -33,7 +33,7 @@ async def download_event_attachments(proceedings_data: ProceedingsData, cookies:
     await file_cache_dir.mkdir(exist_ok=True, parents=True)
 
     send_stream, receive_stream = create_memory_object_stream()
-    capacity_limiter = CapacityLimiter(6)
+    capacity_limiter = CapacityLimiter(4)
 
     async with create_task_group() as tg:
         async with send_stream:

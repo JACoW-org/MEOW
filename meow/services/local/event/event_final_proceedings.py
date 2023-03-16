@@ -160,7 +160,7 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
     
     """ """
     
-    logger.info('event_final_proceedings - gen_final_proceedings')
+    logger.info('event_final_proceedings - generate_final_proceedings')
     
     yield dict(type='progress', value=dict(
         phase='generate_final_proceedings',
