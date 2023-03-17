@@ -45,11 +45,12 @@ async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict
     send_stream, receive_stream = create_memory_object_stream()
     capacity_limiter = CapacityLimiter(4)
 
-    timezone = tz.timezone(settings.get('timezone'))
+    timezone = tz.timezone(settings.get('timezone', 'UTC'))
     current_dt: datetime = datetime.now(tz=timezone)
     current_dt_pdf: str = format_datetime_pdf(current_dt)
 
-    sessions_dict = dict[SessionData]()
+    sessions_dict: dict[str, SessionData] = dict()
+    
     for session in proceedings_data.sessions:
         sessions_dict[session.code] = session
 
@@ -136,8 +137,8 @@ def write_metadata(contribution: ContributionData, session: SessionData, current
 
             # logger.info(metadata)
             current_page = contribution.page
+            
             for page in doc:
-
 
                 header_data = dict(
                     series=contribution.doi_data.series,

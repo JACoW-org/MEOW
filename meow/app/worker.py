@@ -202,8 +202,8 @@ class RedisWorkerManager():
                         params = task.get('params', None)
                         context = task.get('context', None)
 
-                        # await self.execute_in_current_thread(worker_id, method, params, context)
-                        await self.execute_in_worker_thread(worker_id, method, params, context)
+                        await self.execute_in_current_thread(worker_id, method, params, context)
+                        # await self.execute_in_worker_thread(worker_id, method, params, context)
                         
                         logger.debug(f"Worker {worker_id}: End")
 

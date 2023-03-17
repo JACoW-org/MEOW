@@ -21,8 +21,8 @@ async def copy_event_attachments(proceedings_data: ProceedingsData, cookies: dic
 
     # logger.debug(f'copy_event_attachments - files: {total_files}')
 
-    if total_files == 0:
-        raise Exception('no file extracted')
+    # if total_files == 0:
+    #     raise Exception('no file extracted')
 
     file_cache_name = f"{proceedings_data.event.id}_pdf"
     file_cache_dir: Path = Path('var', 'run', file_cache_name)

@@ -84,7 +84,7 @@ async def extract_contribution_references(proceedings_data: ProceedingsData, coo
 
 
 async def get_xslt_functions() -> dict[str, XSLT]:
-    
+
     xslt_functions: dict[str, XSLT] = dict()
 
     async def xslt_task(code: str, path: str) -> None:
@@ -96,8 +96,9 @@ async def get_xslt_functions() -> dict[str, XSLT]:
         tg.start_soon(xslt_task, 'word', 'xslt/word.xml')
         tg.start_soon(xslt_task, 'ris', 'xslt/ris.xml')
         tg.start_soon(xslt_task, 'endnote', 'xslt/endnote.xml')
-        
+
     return xslt_functions
+
 
 async def reference_task(capacity_limiter: CapacityLimiter, event: EventData,
                          contribution: ContributionData, xslt_functions: dict,
@@ -117,7 +118,7 @@ async def get_xslt(xslt_path: str) -> XSLT:
         return XSLT(xslt_root)
 
 
-async def build_contribution_reference(event: EventData, contribution: ContributionData, 
+async def build_contribution_reference(event: EventData, contribution: ContributionData,
                                        xslt_functions: dict, settings: dict) -> Reference | None:
 
     contribution_ref = await contribution_data_factory(event, contribution, settings)
@@ -140,13 +141,16 @@ async def build_contribution_reference(event: EventData, contribution: Contribut
 
 async def contribution_data_factory(event: EventData, contribution: ContributionData, settings: dict) -> ContributionRef:
 
-    doi_base_url: str = settings.get('doi-base-url', 'https://doi.org/10.18429')
-    contribution_doi: str = generate_doi_url(doi_base_url, event.title, contribution.code)
+    doi_base_url: str = settings.get(
+        'doi-base-url', 'https://doi.org/10.18429')
+    contribution_doi: str = generate_doi_url(
+        doi_base_url, event.title, contribution.code)
 
     isbn: str = settings.get('isbn', '978-3-95450-227-1')
     issn: str = settings.get('issn', '2673-5490')
 
-    number_of_pages = contribution.metadata.get('page_count', 0) if contribution.metadata is not None else 0
+    number_of_pages = contribution.metadata.get(
+        'page_count', 0) if contribution.metadata is not None else 0
     # logger.info('Contribution %s pages: %s-%s', contribution.code, contribution.page, contribution.page + number_of_pages)
 
     return ContributionRef(
@@ -166,7 +170,7 @@ async def contribution_data_factory(event: EventData, contribution: Contribution
         doi=contribution_doi,
         isbn=isbn,
         issn=issn,
-        keywords=contribution.keywords
+        keywords=[k.name for k in contribution.keywords]
     )
 
 

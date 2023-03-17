@@ -20,7 +20,6 @@ from meow.services.local.event.final_proceedings.hugo_plugin.hugo_final_proceedi
     import HugoFinalProceedingsPlugin
 from meow.services.local.event.final_proceedings.link_static_site import link_static_site
 from meow.services.local.event.final_proceedings.read_papers_metadata import read_papers_metadata
-from meow.services.local.event.final_proceedings.refill_papers_metadata import refill_papers_metadata
 from meow.services.local.event.final_proceedings.validate_proceedings_data \
     import validate_proceedings_data
 from meow.services.local.event.final_proceedings.write_papers_metadata import write_papers_metadata
@@ -145,18 +144,6 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
     
     # Contrib Groupby
     final_proceedings = await generate_contributions_groups(final_proceedings, cookies, settings)
-    
-    """ """
-
-    logger.info('event_final_proceedings - refill_papers_metadata')
-    
-    yield dict(type='progress', value=dict(
-        phase='refill_papers_metadata',
-        text='Refill Papers Metadata'
-    ))
-
-    # TODO: PDF Editing????
-    final_proceedings = await refill_papers_metadata(final_proceedings, cookies, settings)
     
     """ """
     
