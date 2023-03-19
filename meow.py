@@ -1,8 +1,9 @@
 import argparse
-import fitz
 import sys
 
 from fitz import Document
+from fitz.utils import set_metadata
+
 
 def open_file(filename, password, show=False, pdf=True):
     """Open and authenticate a document."""
@@ -21,6 +22,7 @@ def open_file(filename, password, show=False, pdf=True):
     else:
         sys.exit("'%s' requires a password" % doc.name)
     return doc
+
 
 def get_list(rlist, limit, what="page"):
     """Transform a page / xref specification into a list of integers.
@@ -68,8 +70,10 @@ def get_list(rlist, limit, what="page"):
 
     return out_list
 
-def doc_join(args):
-    """Join pages from several PDF documents."""
+
+def doc_join(args) -> None:
+    """ Join pages from several PDF documents. """
+
     doc_list = args.input  # a list of input PDFs
     doc = Document()  # output PDF
     for src_item in doc_list:  # process one input PDF
@@ -82,21 +86,81 @@ def doc_join(args):
         else:  # take all pages
             page_list = range(1, src.page_count + 1)
         for i in page_list:
-            doc.insert_pdf(src, from_page=i - 1, to_page=i - 1)  # copy each source page
+            # copy each source page
+            doc.insert_pdf(src, from_page=i - 1, to_page=i - 1)
         src.close()
 
-    doc.save(args.output, deflate=True)
-    doc.close()
+    doc.save(args.output, garbage=True, clean=True, deflate=True,
+             deflate_fonts=True, deflate_images=True)
     
+    doc.close()
+
+
+def doc_metadata(args) -> None:
+
+    doc = Document(filename=args.input)
+
+    meta = dict(
+        author=args.author,
+        producer=args.producer,
+        creator=args.creator,
+        title=args.title,
+        format=args.format,
+        encryption=args.encryption,
+        creationDate=args.creationDate,
+        modDate=args.modDate,
+        subject=args.subject,
+        keywords=args.keywords,
+        trapped=args.trapped
+    )
+
+    set_metadata(doc, meta)
+
+    if args.output:
+        doc.save(filename=args.output, garbage=True, clean=True, deflate=True,
+                 deflate_fonts=True, deflate_images=True)
+    else:
+        doc.save(filename=args.input, incremental=True, encryption=False)
+
+    doc.close()
+
+
 def main():
-    print('main')
+    """ """
+
     parser = argparse.ArgumentParser(
         prog="meow",
-        description="Basic MEOW Functions",
+        description="MEOW CLI - Command line interface",
     )
+
     subps = parser.add_subparsers(
         title="Subcommands", help="Enter 'command -h' for subcommand specific help"
     )
+
+    # -------------------------------------------------------------------------
+    # 'metadata' command
+    # -------------------------------------------------------------------------
+    ps_metadata = subps.add_parser(
+        "metadata",
+        description="metadata PDF documents",
+        epilog="specify each metadata field",
+    )
+    ps_metadata.add_argument("-author", help="author metadata field")
+    ps_metadata.add_argument("-producer", help="producer metadata field")
+    ps_metadata.add_argument("-creator", help="creator metadata field")
+    ps_metadata.add_argument("-title", help="title metadata field")
+    ps_metadata.add_argument("-format", help="format metadata field")
+    ps_metadata.add_argument("-encryption", help="encryption metadata field")
+    ps_metadata.add_argument(
+        "-creationDate", help="creationDate metadata field")
+    ps_metadata.add_argument("-modDate", help="modDate metadata field")
+    ps_metadata.add_argument("-subject", help="subject metadata field")
+    ps_metadata.add_argument("-keywords", help="keywords metadata field")
+    ps_metadata.add_argument("-trapped", help="trapped metadata field")
+    ps_metadata.add_argument("-input", required=True, help="input filename")
+    ps_metadata.add_argument("-output", help="output filename")
+    ps_metadata.set_defaults(func=doc_metadata)
+
     # -------------------------------------------------------------------------
     # 'join' command
     # -------------------------------------------------------------------------
@@ -108,7 +172,7 @@ def main():
     ps_join.add_argument("input", nargs="*", help="input filenames")
     ps_join.add_argument("-output", required=True, help="output filename")
     ps_join.set_defaults(func=doc_join)
-    
+
     # -------------------------------------------------------------------------
     # start program
     # -------------------------------------------------------------------------
@@ -117,6 +181,7 @@ def main():
         parser.print_help()  # so print top level help
     else:
         args.func(args)  # execute requested command
-    
+
+
 if __name__ == "__main__":
     main()

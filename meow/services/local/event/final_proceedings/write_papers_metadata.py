@@ -20,6 +20,7 @@ from meow.services.local.papers_metadata.pdf_annotations import annot_page_heade
 
 from datetime import datetime
 from meow.utils.datetime import format_datetime_pdf
+from meow.utils.process import run_cmd
 
 
 logger = lg.getLogger(__name__)
@@ -50,7 +51,7 @@ async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict
     current_dt_pdf: str = format_datetime_pdf(current_dt)
 
     sessions_dict: dict[str, SessionData] = dict()
-    
+
     for session in proceedings_data.sessions:
         sessions_dict[session.code] = session
 
@@ -82,7 +83,7 @@ async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict
 
 
 async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int,
-                              current_paper: ContributionPaperData, sessions: dict[SessionData], current_dt_pdf: datetime, cookies: dict, pdf_cache_dir: Path,
+                              current_paper: ContributionPaperData, sessions: dict[str, SessionData], current_dt_pdf: datetime, cookies: dict, pdf_cache_dir: Path,
                               res: MemoryObjectSendStream) -> None:
     """ """
 
@@ -102,7 +103,27 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
 
         # logger.debug(f"{pdf_file} {pdf_name}")
 
-        metadata = await to_process.run_sync(write_metadata, contribution, session, current_dt_pdf, read_pdf_path, write_pdf_path)
+        metadata = dict(
+            author=contribution.authors_meta,
+            producer=contribution.producer_meta,
+            creator=contribution.creator_meta,
+            title=contribution.title_meta,
+            format=None,
+            encryption=None,
+            creationDate=current_dt_pdf,
+            modDate=current_dt_pdf,
+            subject=contribution.track_meta,
+            keywords=contribution.keywords_meta,
+            trapped=None,
+        )
+        
+        await write_metadata(read_pdf_path, write_pdf_path, metadata)
+        
+        await to_process.run_sync(draw_frame, contribution, session, write_pdf_path)
+
+        # venv/bin/python3 meow.py metadata -input var/html/FEL2022/pdf/12_proceedings_brief.pdf -title mario -author minnie  -keywords pippo
+
+        # metadata = await to_process.run_sync(write_metadata, contribution, session, current_dt_pdf, read_pdf_path, write_pdf_path)
 
         await res.send({
             "index": current_index,
@@ -110,34 +131,37 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
             "file": current_file,
             "meta": metadata
         })
+        
+
+async def write_metadata(read_path: str, write_path: str, metadata: dict) -> None:
+        
+    meow_cli_path = str(await Path("meow.py").absolute())    
+    venv_py_path = str(await Path("venv", "bin", "python3").absolute())
+    
+    cmd = [venv_py_path, meow_cli_path, 'metadata', '-input', read_path, '-output', write_path]
+    
+    for key in metadata.keys():
+        val = metadata.get(key, None)
+        if val is not None and val is not '':
+            cmd.append(f"-{key}")
+            cmd.append(val)        
+    
+    await run_cmd(cmd)
 
 
-def write_metadata(contribution: ContributionData, session: SessionData, current_dt_pdf: datetime, read_path: str, write_path: str) -> None:
+def draw_frame(contribution: ContributionData, session: SessionData, write_path: str) -> None:
     """ """
 
     doc: Document | None
 
     try:
-        doc = Document(filename=read_path)
+        doc = Document(filename=write_path)
 
         try:
-            metadata = dict(
-                author=contribution.authors_meta,
-                producer=contribution.producer_meta,
-                creator=contribution.creator_meta,
-                title=contribution.title_meta,
-                format=None,
-                encryption=None,
-                creationDate=current_dt_pdf,
-                modDate=current_dt_pdf,
-                subject=contribution.track_meta,
-                keywords=contribution.keywords_meta,
-                trapped=None,
-            )
 
             # logger.info(metadata)
             current_page = contribution.page
-            
+
             for page in doc:
 
                 header_data = dict(
@@ -162,10 +186,7 @@ def write_metadata(contribution: ContributionData, session: SessionData, current
 
                 current_page += 1
 
-            set_metadata(doc, metadata)
-
-            doc.save(filename=write_path, garbage=1, clean=1,
-                     deflate=1, deflate_fonts=1, deflate_images=1)
+            doc.save(filename=write_path, incremental=True, encryption=False)
 
         except Exception as e:
             logger.error(e, exc_info=True)

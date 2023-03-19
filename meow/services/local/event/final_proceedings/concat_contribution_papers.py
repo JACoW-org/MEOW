@@ -1,5 +1,4 @@
 import logging as lg
-from subprocess import CalledProcessError
 
 from fitz import Document
 from fitz.utils import set_metadata
@@ -10,6 +9,7 @@ from meow.models.local.event.final_proceedings.contribution_model import FileDat
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_proceedings_files
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
+from meow.utils.process import run_cmd
 
 
 logger = lg.getLogger(__name__)
@@ -80,8 +80,8 @@ async def concat_volumes(proceedings_data: ProceedingsData, volume_pdf: Path, br
     # await run_cmd(cache_pdf_path, brief_pdf_cmd)
     
     async with create_task_group() as tg:
-        tg.start_soon(run_cmd, cache_pdf_path, volume_pdf_cmd)
-        tg.start_soon(run_cmd, cache_pdf_path, brief_pdf_cmd)
+        tg.start_soon(run_cmd, volume_pdf_cmd, cache_pdf_path)
+        tg.start_soon(run_cmd, brief_pdf_cmd, cache_pdf_path)
         
     async def metadata_vol_task():
         await to_thread.run_sync(metadata_vol, str(await volume_pdf.absolute()), volume_title)
@@ -108,21 +108,6 @@ async def concat_volumes(proceedings_data: ProceedingsData, volume_pdf: Path, br
     #   
     # await run_cmd(cache_pdf_path, volume_pdf_cmd)
     # await run_cmd(cache_pdf_path, brief_pdf_cmd)
-    
-
-async def run_cmd(cwd:str, cmd: list[str]):
-    
-    try:
-        print(" ".join(cmd))
-        
-        result = await run_process(cmd, cwd=cwd, start_new_session=True)
-        
-        print(result.returncode)    
-        print(result.stdout.decode())
-        print(result.stderr.decode())
-        
-    except CalledProcessError as err:        
-        logger.error(err, exc_info=True)
 
 
 async def stat_volumes(proceedings_data: ProceedingsData, volume_pdf: Path, brief_pdf: Path):
