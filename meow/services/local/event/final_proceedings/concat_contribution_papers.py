@@ -1,14 +1,12 @@
 import logging as lg
 
-from fitz import Document
-from fitz.utils import set_metadata
-
-from anyio import Path, create_task_group, to_process, to_thread, run_process
+from anyio import Path, create_task_group
 
 from meow.models.local.event.final_proceedings.contribution_model import FileData
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_proceedings_files
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
+from meow.services.local.event.event_pdf_utils import write_metadata
 from meow.utils.process import run_cmd
 
 
@@ -82,16 +80,10 @@ async def concat_volumes(proceedings_data: ProceedingsData, volume_pdf: Path, br
     async with create_task_group() as tg:
         tg.start_soon(run_cmd, volume_pdf_cmd, cache_pdf_path)
         tg.start_soon(run_cmd, brief_pdf_cmd, cache_pdf_path)
-        
-    async def metadata_vol_task():
-        await to_thread.run_sync(metadata_vol, str(await volume_pdf.absolute()), volume_title)
-    
-    async def metadata_brief_task():
-        await to_thread.run_sync(metadata_brief, str(await brief_pdf.absolute()), volume_title)
-    
+           
     async with create_task_group() as tg:
-        tg.start_soon(metadata_vol_task)
-        tg.start_soon(metadata_brief_task)
+        tg.start_soon(metadata_vol, str(await volume_pdf.absolute()), volume_title)
+        tg.start_soon(metadata_brief, str(await brief_pdf.absolute()), volume_title)
     
     # volume_pdf_cmd = ["convert"]
     # brief_pdf_cmd = ["convert"]
@@ -122,10 +114,8 @@ async def stat_volumes(proceedings_data: ProceedingsData, volume_pdf: Path, brie
         tg.start_soon(stat_brief_task)
 
 
-def metadata_vol(full_pdf: str, volume_title: str):
+async def metadata_vol(full_pdf: str, volume_title: str):
     """ """
-
-    full_doc = Document(filename=full_pdf)
 
     try:
 
@@ -145,20 +135,15 @@ def metadata_vol(full_pdf: str, volume_title: str):
 
         logger.info(metadata)
 
-        set_metadata(full_doc, metadata)
-
-        full_doc.saveIncr()
+        await write_metadata(metadata, full_pdf)
 
     except Exception as e:
         logger.error(e, exc_info=True)
-    finally:
-        full_doc.close()
 
 
-def metadata_brief(full_pdf: str, volume_title: str):
+
+async def metadata_brief(full_pdf: str, volume_title: str):
     """ """
-
-    full_doc = Document(filename=full_pdf)
 
     try:
 
@@ -178,11 +163,8 @@ def metadata_brief(full_pdf: str, volume_title: str):
 
         logger.info(metadata)
 
-        set_metadata(full_doc, metadata)
-
-        full_doc.saveIncr()
+        await write_metadata(metadata, full_pdf)
 
     except Exception as e:
         logger.error(e, exc_info=True)
-    finally:
-        full_doc.close()
+

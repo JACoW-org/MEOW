@@ -39,13 +39,16 @@ async def execute_process(args: list[str], cwd: str | None = None) -> ProcessRes
 async def run_cmd(cmd: list[str], cwd: str | None = None):
 
     try:
+        print(cmd)
         print(" ".join(cmd))
 
-        result = await run_process(cmd, cwd=cwd, start_new_session=True)
+        result = await run_process(command=cmd, cwd=cwd)
 
-        print(result.returncode)
-        print(result.stdout.decode())
-        print(result.stderr.decode())
+        # print(result.returncode)
+        # print(result.stdout.decode())
+        # print(result.stderr.decode())
+        
+        return result
 
     except CalledProcessError as err:
         logger.error(err, exc_info=True)

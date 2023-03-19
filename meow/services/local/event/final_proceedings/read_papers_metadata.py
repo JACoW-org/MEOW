@@ -1,8 +1,6 @@
 import logging as lg
-from typing import Any
 
 from fitz import Document
-from fitz.utils import set_metadata
 
 from nltk.stem.snowball import SnowballStemmer
 

@@ -1,9 +1,7 @@
 import logging as lg
-from typing import Any
 import pytz as tz
 
 from fitz import Document
-from fitz.utils import set_metadata
 
 from anyio import Path, create_task_group, CapacityLimiter, to_process, to_thread
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
@@ -15,6 +13,7 @@ from meow.models.local.event.final_proceedings.proceedings_data_utils import ext
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.models.local.event.final_proceedings.session_model import SessionData
+from meow.services.local.event.event_pdf_utils import write_metadata
 
 from meow.services.local.papers_metadata.pdf_annotations import annot_page_header, annot_page_footer, annot_page_side
 
@@ -117,7 +116,7 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
             trapped=None,
         )
         
-        await write_metadata(read_pdf_path, write_pdf_path, metadata)
+        await write_metadata(metadata, read_pdf_path, write_pdf_path)
         
         await to_process.run_sync(draw_frame, contribution, session, write_pdf_path)
 
@@ -132,21 +131,6 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
             "meta": metadata
         })
         
-
-async def write_metadata(read_path: str, write_path: str, metadata: dict) -> None:
-        
-    meow_cli_path = str(await Path("meow.py").absolute())    
-    venv_py_path = str(await Path("venv", "bin", "python3").absolute())
-    
-    cmd = [venv_py_path, meow_cli_path, 'metadata', '-input', read_path, '-output', write_path]
-    
-    for key in metadata.keys():
-        val = metadata.get(key, None)
-        if val is not None and val is not '':
-            cmd.append(f"-{key}")
-            cmd.append(val)        
-    
-    await run_cmd(cmd)
 
 
 def draw_frame(contribution: ContributionData, session: SessionData, write_path: str) -> None:
@@ -163,24 +147,28 @@ def draw_frame(contribution: ContributionData, session: SessionData, write_path:
             current_page = contribution.page
 
             for page in doc:
+                
+                if contribution.doi_data:
 
-                header_data = dict(
-                    series=contribution.doi_data.series,
-                    venue=f'{contribution.doi_data.conference_code},{contribution.doi_data.venue}',
-                    isbn=contribution.doi_data.isbn,
-                    issn=contribution.doi_data.issn,
-                    doi=contribution.doi_data.doi_url
-                )
+                    header_data = dict(
+                        series=contribution.doi_data.series,
+                        venue=f'{contribution.doi_data.conference_code},{contribution.doi_data.venue}',
+                        isbn=contribution.doi_data.isbn,
+                        issn=contribution.doi_data.issn,
+                        doi=contribution.doi_data.doi_url
+                    )
 
-                annot_page_header(page, header_data)
+                    annot_page_header(page, header_data)
+                    
+                if contribution.track:
 
-                footer_data = dict(
-                    classificationHeader=f'{contribution.track.code}: {contribution.track.title}',
-                    sessionHeader=f'{session.code}: {session.title}' if session is not None else '',
-                    contributionCode=contribution.code
-                )
+                    footer_data = dict(
+                        classificationHeader=f'{contribution.track.code}: {contribution.track.title}',
+                        sessionHeader=f'{session.code}: {session.title}' if session is not None else '',
+                        contributionCode=contribution.code
+                    )
 
-                annot_page_footer(page, current_page, footer_data)
+                    annot_page_footer(page, current_page, footer_data)
 
                 annot_page_side(page, current_page)
 
