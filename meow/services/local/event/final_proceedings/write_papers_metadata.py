@@ -33,7 +33,7 @@ async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict
     total_files: int = len(papers_data)
     processed_files: int = 0
 
-    logger.info(f'write_papers_metadata - files: {total_files}')
+    # logger.info(f'write_papers_metadata - files: {total_files}')
 
     if total_files == 0:
         raise Exception('no files found')
@@ -54,11 +54,13 @@ async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict
     for session in proceedings_data.sessions:
         sessions_dict[session.code] = session
 
+    cc_logo_bytes = await Path('cc_by.png').read_bytes()
+
     async with create_task_group() as tg:
         async with send_stream:
             for current_index, current_paper in enumerate(papers_data):
                 tg.start_soon(write_metadata_task, capacity_limiter, total_files,
-                              current_index, current_paper, sessions_dict, current_dt_pdf, cookies, file_cache_dir,
+                              current_index, current_paper, sessions_dict, current_dt_pdf, cc_logo_bytes, cookies, file_cache_dir,
                               send_stream.clone())
 
         try:
@@ -82,7 +84,8 @@ async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict
 
 
 async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int,
-                              current_paper: ContributionPaperData, sessions: dict[str, SessionData], current_dt_pdf: datetime, cookies: dict, pdf_cache_dir: Path,
+                              current_paper: ContributionPaperData, sessions: dict[str, SessionData], current_dt_pdf: datetime, cc_logo: bytes,
+                              cookies: dict, pdf_cache_dir: Path,
                               res: MemoryObjectSendStream) -> None:
     """ """
 
@@ -118,7 +121,7 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
         
         await write_metadata(metadata, read_pdf_path, write_pdf_path)
         
-        await to_process.run_sync(draw_frame, contribution, session, write_pdf_path)
+        await to_process.run_sync(draw_frame, contribution, session, write_pdf_path, cc_logo)
 
         # venv/bin/python3 meow.py metadata -input var/html/FEL2022/pdf/12_proceedings_brief.pdf -title mario -author minnie  -keywords pippo
 
@@ -133,7 +136,7 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
         
 
 
-def draw_frame(contribution: ContributionData, session: SessionData, write_path: str) -> None:
+def draw_frame(contribution: ContributionData, session: SessionData, write_path: str, cc_logo: bytes) -> None:
     """ """
 
     doc: Document | None
@@ -170,7 +173,13 @@ def draw_frame(contribution: ContributionData, session: SessionData, write_path:
 
                     annot_page_footer(page, current_page, footer_data)
 
-                annot_page_side(page, current_page)
+                
+
+                annot_page_side(
+                    page=page,
+                    page_number=current_page,
+                    cc_logo=cc_logo
+                )
 
                 current_page += 1
 
