@@ -10,7 +10,7 @@ from anyio.streams.memory import MemoryObjectSendStream
 
 from meow.tasks.local.doi.models import AuthorDOI, ContributionDOI
 from meow.tasks.local.doi.utils import generate_doi_url
-from meow.utils.datetime import format_datetime_full
+from meow.utils.datetime import format_datetime_full, format_datetime_range_doi
 
 
 logger = lg.getLogger(__name__)
@@ -94,6 +94,7 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
     ]
 
     doi_data = ContributionDOI(
+        code=contribution.code,
         title=contribution.title,
         primary_authors=primary_authors,
         abstract=contribution.description,
@@ -106,6 +107,7 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         venue=event.location,
         start_date=format_datetime_full(event.start),
         end_date=format_datetime_full(event.end),
+        date=format_datetime_range_doi(event.start, event.end),
         editors=[contribution.editor] if contribution.editor else [],
         isbn=event_isbn,
         issn=event_issn,

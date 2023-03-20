@@ -1,6 +1,7 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, asdict
 from typing import Optional
 from meow.tasks.local.reference.models import Reference
+from datetime import datetime
 
 @dataclass
 class AuthorDOI:
@@ -21,6 +22,7 @@ class EditorDOI:
 class ContributionDOI:
     ''''''
 
+    code: str = field(default='')
     title: str = field(default='')
     primary_authors: list[AuthorDOI] = field(default_factory=list[AuthorDOI])
     abstract: str = field(default='')
@@ -33,6 +35,7 @@ class ContributionDOI:
     venue: str = field(default='')
     start_date: str = field(default='')
     end_date: str = field(default='')
+    date: str = field(default='')
     publisher: str = field(default='JaCoW Publishing')
     publisher_venue: str = field(default='Geneva, Switzerland')
     editors: list = field(default_factory=list) # TODO check Volker SCHEMA: first_name, last_name (affiliation)
@@ -44,3 +47,6 @@ class ContributionDOI:
     doi_url: str = field(default='')
     start_page: int = field(default=0)
     number_of_pages: int = field(default=0)
+
+    def as_dict(self) -> dict:
+        return asdict(self)
