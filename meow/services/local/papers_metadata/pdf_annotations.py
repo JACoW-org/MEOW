@@ -1,11 +1,12 @@
-from fitz import Page, Rect, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER, TEXT_ALIGN_RIGHT
-from fitz.utils import getColor
+from fitz import Page, Rect, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER, TEXT_ALIGN_RIGHT, TEXT_ALIGN_JUSTIFY
+from fitz.utils import getColor, insert_image
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
 
 PAGE_HORIZONTAL_MARGIN = 50
 PAGE_VERTICAL_MARGIN = 15
 LINE_SPACING = 3
 ANNOTATION_HEIGHT = 10
+SIDENOTE_LENGTH = 650
 TEXT_COLOR = getColor('GRAY10')
 FONT_SIZE = 7
 FONT_NAME = None
@@ -128,33 +129,55 @@ def annot_page_footer(page: Page, page_number: int, data: dict, options: dict = 
         text_color=options.get ('textColor', TEXT_COLOR)
     )
 
-def annot_page_side(page: Page, page_number: int, options: dict = dict()):
+def annot_page_side(page: Page, page_number: int, cc_logo, options: dict = dict()):
 
     page_width = page.rect.width
     page_height = page.rect.height
 
-    rect_even = Rect(
+    rect_even_logo = Rect(
         PAGE_HORIZONTAL_MARGIN / 2,
-        PAGE_VERTICAL_MARGIN,
+        page_height / 2 + SIDENOTE_LENGTH / 2 - 15,
         PAGE_HORIZONTAL_MARGIN / 2 + ANNOTATION_HEIGHT,
-        page_height - PAGE_VERTICAL_MARGIN
+        page_height / 2 + SIDENOTE_LENGTH / 2
     )
 
-    rect_odd = Rect(
+    rect_even_text = Rect(
+        PAGE_HORIZONTAL_MARGIN / 2 + 1,
+        page_height / 2 - SIDENOTE_LENGTH / 2,
+        PAGE_HORIZONTAL_MARGIN / 2 + ANNOTATION_HEIGHT,
+        page_height / 2 + SIDENOTE_LENGTH / 2 - 16
+    )
+
+    rect_odd_logo = Rect(
         page_width - PAGE_HORIZONTAL_MARGIN / 2 - ANNOTATION_HEIGHT,
-        PAGE_VERTICAL_MARGIN,
+        page_height / 2 + SIDENOTE_LENGTH / 2 - 15,
         page_width - PAGE_HORIZONTAL_MARGIN / 2,
-        page_height - PAGE_VERTICAL_MARGIN
+        page_height / 2 + SIDENOTE_LENGTH / 2
     )
 
-    # TODO add image CC BY
+    rect_odd_text = Rect(
+        page_width - PAGE_HORIZONTAL_MARGIN / 2 - ANNOTATION_HEIGHT + 1,
+        page_height / 2 - SIDENOTE_LENGTH / 2,
+        page_width - PAGE_HORIZONTAL_MARGIN / 2,
+        page_height / 2 + SIDENOTE_LENGTH / 2 - 16
+    )
 
+    # add cc logo
+    insert_image(
+        page=page,
+        rect=rect_even_logo if page_number % 2 == 0 else rect_odd_logo,
+        # filename='cc_by.png',
+        rotate=90,
+        stream=cc_logo
+    )
+
+    # add copyright text
     page.add_freetext_annot(
-        rect=rect_even if page_number % 2 == 0 else rect_odd,
-        align=TEXT_ALIGN_CENTER,
+        rect=rect_even_text if page_number % 2 == 0 else rect_odd_text,
+        align=TEXT_ALIGN_JUSTIFY,
         rotate=90,
         text='Content from this work may be used under the terms of the CC BY 4.0 licence (© 2022). Any distribution of this work must maintain attribution to the author(s), title of the work, publisher, and DOI.',
         fontname=options.get('fontName', FONT_NAME),
         fontsize=options.get('fontSize', FONT_SIZE),
-        text_color=options.get ('textColor', TEXT_COLOR)
+        text_color=options.get ('textColor', TEXT_COLOR),
     )
