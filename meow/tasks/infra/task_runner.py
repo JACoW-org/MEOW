@@ -22,9 +22,7 @@ class TaskRunner:
 
         try:
 
-            args = dict(
-                task_id=task_id
-            )
+            args = dict(task_id=task_id)
 
             # logger.debug(f"run_task {code} {args}")
 

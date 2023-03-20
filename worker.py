@@ -49,13 +49,10 @@ async def main() -> None:
           
     logger.debug('meow - begin')
     
-    import anyio
-        
-    limiter = anyio.to_thread.current_default_thread_limiter()  # type: ignore 
-    limiter.total_tokens = 128
-
-    limiter = anyio.to_process.current_default_process_limiter()  # type: ignore 
-    limiter.total_tokens = 64
+    from anyio import to_thread, to_process
+         
+    to_thread.current_default_thread_limiter().total_tokens = 4
+    to_process.current_default_process_limiter().total_tokens = 4
     
     from nltk import download
     

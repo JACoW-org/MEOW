@@ -21,8 +21,8 @@ async def copy_event_attachments(proceedings_data: ProceedingsData, cookies: dic
 
     # logger.debug(f'copy_event_attachments - files: {total_files}')
 
-    if total_files == 0:
-        raise Exception('no file extracted')
+    # if total_files == 0:
+    #     raise Exception('no file extracted')
 
     file_cache_name = f"{proceedings_data.event.id}_pdf"
     file_cache_dir: Path = Path('var', 'run', file_cache_name)
@@ -49,7 +49,7 @@ async def copy_event_attachments(proceedings_data: ProceedingsData, cookies: dic
     await brief_dest.hardlink_to(brief_pdf)
     
     send_stream, receive_stream = create_memory_object_stream()
-    capacity_limiter = CapacityLimiter(6)
+    capacity_limiter = CapacityLimiter(4)
 
     async with create_task_group() as tg:
         async with send_stream:
@@ -78,29 +78,40 @@ async def copy_event_attachments(proceedings_data: ProceedingsData, cookies: dic
 
 
 async def file_copy_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int, current_file: AttachmentData, 
-                         cookies: dict, pdf_cache_dir: Path, pdf_dest_dir: Path, res: MemoryObjectSendStream) -> None:
+                         cookies: dict, cache_dir: Path, dest_dir: Path, res: MemoryObjectSendStream) -> None:
     """ """
 
     async with capacity_limiter:
+        
+        file_exists = None
+        
+        try:
                
-        pdf_file_name = f"{current_file.filename}"
-        pdf_file_path = Path(pdf_cache_dir, pdf_file_name)
-        
-        pdf_dest_name = f"{current_file.filename}"
-        pdf_dest_path = Path(pdf_dest_dir, pdf_dest_name)
+            file_name = f"{current_file.filename}"
+            file_path = Path(cache_dir, file_name)
+            
+            dest_name = f"{current_file.filename}"
+            dest_path = Path(dest_dir, dest_name)
+            
+            dest_exists = await dest_path.exists()
+            file_exists = await file_path.exists()
+            
+            if dest_exists:
+                await dest_path.unlink()
+            
+            # logger.info(f"{pdf_file} ({'exists!' if pdf_exists else 'not exists!!!'}) -> {pdf_dest}")
 
-        pdf_exists = await pdf_file_path.exists()
-        
-        # logger.info(f"{pdf_file} ({'exists!' if pdf_exists else 'not exists!!!'}) -> {pdf_dest}")
-
-        if pdf_exists:
-            await pdf_dest_path.hardlink_to(pdf_file_path)
-        else:
-            logger.warning(f"{pdf_file_path} not exists")
+            if file_exists:
+                await dest_path.hardlink_to(file_path)
+            else:
+                logger.warning(f"{file_path} not exists")
+            
+        except Exception as ex:
+            logger.error(ex, exc_info=True)
 
         await res.send({
             "index": current_index,
             "total": total_files,
             "file": current_file,
-            "exists": pdf_exists
+            "exists": file_exists
         })

@@ -32,7 +32,7 @@ async def download_contributions_papers(proceedings_data: ProceedingsData, cooki
     await file_cache_dir.mkdir(exist_ok=True, parents=True)
 
     send_stream, receive_stream = create_memory_object_stream()
-    capacity_limiter = CapacityLimiter(6)
+    capacity_limiter = CapacityLimiter(4)
 
     async with create_task_group() as tg:
         async with send_stream:
@@ -45,8 +45,9 @@ async def download_contributions_papers(proceedings_data: ProceedingsData, cooki
             async with receive_stream:
                 async for _ in receive_stream:
                     downloaded_files = downloaded_files + 1
-                    
-                    logger.info(f"downloaded_files: {downloaded_files} - {total_files}")
+
+                    logger.info(
+                        f"downloaded_files: {downloaded_files} - {total_files}")
 
                     if downloaded_files >= total_files:
                         receive_stream.close()
@@ -65,19 +66,27 @@ async def file_download_task(capacity_limiter: CapacityLimiter, total_files: int
     """ """
 
     async with capacity_limiter:
-        pdf_md5 = current_file.md5sum
-        pdf_name = current_file.filename
-        pdf_url = current_file.external_download_url
 
-        http_sess = cookies.get('indico_session_http', '')
+        try:
+            pdf_md5 = current_file.md5sum
+            pdf_name = current_file.filename
+            pdf_url = current_file.external_download_url
 
-        pdf_file = Path(pdf_cache_dir, pdf_name)
+            http_sess = cookies.get('indico_session_http', '')
 
-        # logger.debug(f"{pdf_md5} {pdf_name}")
+            pdf_file = Path(pdf_cache_dir, pdf_name)
 
-        if await is_to_download(pdf_file, pdf_md5):
-            await download_file(url=pdf_url, file=pdf_file,
-                                cookies=dict(indico_session_http=http_sess))
+            # logger.debug(f"{pdf_md5} {pdf_name}")
+
+            if await is_to_download(pdf_file, pdf_md5):
+                logger.info(f"download_file --> {pdf_url}")
+                await download_file(url=pdf_url, file=pdf_file,
+                                    cookies=dict(indico_session_http=http_sess))
+            else:
+                logger.info(f"cached_file --> {pdf_url}")
+
+        except Exception as ex:
+            logger.error(ex, exc_info=True)
 
         await res.send({
             "index": current_index,

@@ -26,7 +26,7 @@ async def generate_contribution_doi(proceedings_data: ProceedingsData, cookies: 
         raise Exception('no contributions found')
 
     send_stream, receive_stream = create_memory_object_stream()
-    capacity_limiter = CapacityLimiter(6)
+    capacity_limiter = CapacityLimiter(4)
 
     results: dict[str, ContributionDOI] = dict()
 

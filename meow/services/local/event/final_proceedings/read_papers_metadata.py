@@ -1,8 +1,6 @@
 import logging as lg
-from typing import Any
 
 from fitz import Document
-from fitz.utils import set_metadata
 
 from nltk.stem.snowball import SnowballStemmer
 
@@ -45,7 +43,7 @@ async def read_papers_metadata(proceedings_data: ProceedingsData, cookies: dict,
     stem_keywords_dict = stem_keywords_as_tree(KEYWORDS, stemmer)
 
     send_stream, receive_stream = create_memory_object_stream()
-    capacity_limiter = CapacityLimiter(6)
+    capacity_limiter = CapacityLimiter(4)
 
     results = dict()
 

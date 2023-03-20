@@ -33,7 +33,7 @@ async def event_pdf_check(event: dict, cookies: dict, settings: dict):
     total_files: int = len(files)
     checked_files: int = 0
 
-    # logger.debug(f'event_pdf_check - files: {len(files)}')
+    logger.info(f'event_pdf_check - files: {len(files)}')
 
     send_stream, receive_stream = create_memory_object_stream()
 
