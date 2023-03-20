@@ -15,6 +15,7 @@ from meow.models.local.event.final_proceedings.contribution_model import Contrib
 from meow.models.local.event.final_proceedings.event_model import AffiliationData, AttachmentData, EventData, KeywordData, PersonData
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.models.local.event.final_proceedings.session_model import SessionData
+from meow.tasks.local.doi.models import ContributionDOI
 
 from meow.services.local.event.final_proceedings.abstract_plugin.abstract_final_proceedings_plugin import AbstractFinalProceedingsPlugin
 from meow.utils.filesystem import rmtree
@@ -153,6 +154,11 @@ class JinjaTemplateRenderer:
             contributions=[c.as_dict() for c in contributions],
             contributions_len=len(contributions)
         ))
+    
+    async def render_doi_contribution(self, contribution: ContributionDOI) -> str:
+        return await self.render("doi_detail.html.jinja", dict(
+            contribution=contribution.as_dict()
+        ))
 
 
 class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
@@ -196,6 +202,8 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
             Path(self.src_dir, 'content', 'doi_per_institute')
         self.src_keyword_dir = \
             Path(self.src_dir, 'content', 'keyword')
+        self.src_doi_dir = \
+            Path(self.src_dir, 'content', 'doi')
 
     async def run(self) -> BytesIO:
         """ """
@@ -222,6 +230,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         await self.institute()
         await self.doi_per_institute()
         await self.keyword()
+        await self.doi()
         await self.static()
         await self.finalize()
 
@@ -595,6 +604,30 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         async with create_task_group() as tg:
             for keyword in self.keywords:
                 tg.start_soon(_render_contribution, capacity_limiter, keyword)
+
+    async def doi(self) -> None:
+        """"""
+
+        logger.info(f"render_doi_contributions")
+
+        async def _render_doi_contribution(capacity_limiter: CapacityLimiter, code: str, doi_contribution: ContributionDOI) -> None:
+            async with capacity_limiter:
+
+                logger.info(f"{code} - {doi_contribution.title}")
+
+                curr_dir = Path(self.src_doi_dir, code.lower())
+                await curr_dir.mkdir(parents=True, exist_ok=True)
+
+                await Path(curr_dir, 'index.html').write_text(
+                    await self.template.render_doi_contribution(doi_contribution)
+                )
+
+        capacity_limiter = CapacityLimiter(4)
+        async with create_task_group() as tg:
+            for contribution in self.contributions:
+                if contribution.doi_data:
+                    tg.start_soon(_render_doi_contribution, capacity_limiter, contribution.code, contribution.doi_data)
+
 
     async def static(self) -> None:
         pass

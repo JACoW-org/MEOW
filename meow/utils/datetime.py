@@ -46,6 +46,27 @@ def format_datetime_range(start: dt.datetime, end: dt.datetime) -> str:
         if format_datetime_day(start) == format_datetime_day(end) \
         else _format_datetime_range_different_day(start, end)
 
+def format_datetime_range_doi(start: dt.datetime, end: dt.datetime) -> str:
+    """"""
+    
+    if start is None or end is None:
+        return ''
+    
+    # same day
+    if start == end:
+        return start.strftime('%d %b %Y')
+    
+    # same year
+    if start.year == end.year:
+        # same month
+        if start.month == end.month:
+            return f'{start.strftime("%d")}-{end.strftime("%d %b %Y")}'
+        # different month
+        else:
+            return f'{start.strftime("%d %b")}-{end.strftime("%d %b %Y")}'
+    
+    return f'{start.strftime("%d %b %Y")}-{end.strftime("%d %b %Y")}'
+
 
 def datedict_to_tz_datetime(date: dict | None) -> dt.datetime:
     """ datedict to utc datetime """

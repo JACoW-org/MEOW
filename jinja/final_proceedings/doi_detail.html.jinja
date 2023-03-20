@@ -1,0 +1,95 @@
+<h1>Journals of Accelerator Conferences Website (JACoW)</h1>
+<p class="doi-intro">
+    <a href="https://www.jacow.org" target="_blank">JACoW</a> is a publisher in Geneva, Switzerland that publishes the proceedings of accelator conferences held around the world by an international collaboration of editors.
+</p>
+<div class="title">
+    <a href="">{{ contribution.doi_url }}</a>
+</div>
+<table>
+    <tbody>
+        <tr class="title">
+            <th>Title</th>
+            <td>{{ contribution.title }}</td>
+        </tr>
+        <tr class="authors">
+            <th>Authors</th>
+            <td></td>
+        </tr>
+        <tr class="abstract">
+            <th>Abstract</th>
+            <td>{{ contribution.abstract }}</td>
+        </tr>
+        <tr class="paper">
+            <th>Paper</th>
+            <td>
+                download: <a href="../../pdf/{{ contribution.code|upper }}.pdf">{{ contribution.code|upper }}.pdf</a>
+            </td>
+        </tr>
+        <tr class="cite">
+            <th>Cite</th>
+            <td>
+                references
+            </td>
+        </tr>
+        <tr class="conference">
+            <th>Conference</th>
+            <td>{{ contribution.conference_code }}</td>
+        </tr>
+        <tr class="series">
+            <th>Series</th>
+            <td>{{ contribution.series }}</td>
+        </tr>
+        <tr class="location">
+            <th>Location</th>
+            <td>{{ contribution.venue }}</td>
+        </tr>
+        <tr class="date">
+            <th>Date</th>
+            <td>{{ contribution.date }}</td>
+        </tr>
+        <tr class="publisher">
+            <th>Publisher</th>
+            <td>{{ contribution.publisher }}, {{ contribution.publisher_venue }}</td>
+        </tr>
+        <tr class="editorial-board">
+            <th>Editorial Board</th>
+            <td></td>
+        </tr>
+        <tr class="isbn">
+            <th>Online ISBN</th>
+            <td>{{ contribution.isbn }}</td>
+        </tr>
+        <tr class="issn">
+            <th>Online ISSN</th>
+            <td>{{ contribution.issn }}</td>
+        </tr>
+        <tr class="received">
+            <th>Received</th>
+            <td>{{ contribution.reception_date }}</td>
+        </tr>
+        <tr class="accepted">
+            <th>Accepted</th>
+            <td>{{ contribution.acceptance_date }}</td>
+        </tr>
+        <tr class="issued">
+            <th>Issued</th>
+            <td>{{ contribution.issueance_date }}</td>
+        </tr>
+        <tr class="doi">
+            <th>DOI</th>
+            <td>{{ contribution.doi_url }}</td>
+        </tr>
+        <tr class="pages">
+            <th>Pages</th>
+            <td></td>
+        </tr>
+        <tr class="copyright">
+            <th>Copyright</th>
+            <td>
+                <i>
+                    Published by JACoW Publishing under the terms of the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0</a> license. Any further distribution of this work must maintain attribution to the author(s), the published article's title, publisher, and DOI.
+                </i>
+            </td>
+        </tr>
+    </tbody>
+</table>
