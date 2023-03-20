@@ -4,7 +4,11 @@ date: 2023-01-02T12:06:30+01:00
 draft: false
 ---
 
-<h4>{{ session.start }} / {{ session.end }}</h4>
+<h4>
+    {{ session.start.strftime('%m/%d/%Y, %H:%M') }} 
+    / 
+    {{ session.end.strftime('%H:%M') }}
+</h4>
 
 <section>
     {% for convener in session.conveners %}

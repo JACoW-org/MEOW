@@ -11,9 +11,10 @@ async def event_contribution_reference(event: dict, cookies: dict, settings: dic
     """ """
 
     final_proceedings = await create_final_proceedings(event, cookies, settings)
-    references = await extract_contribution_references(final_proceedings, cookies, settings)
+    
+    final_proceedings = await extract_contribution_references(final_proceedings, cookies, settings)
     
     yield dict(
         type='final',
-        value=references
+        value=final_proceedings
     )

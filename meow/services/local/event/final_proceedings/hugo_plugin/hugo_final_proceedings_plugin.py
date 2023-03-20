@@ -215,26 +215,26 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
     async def run_build(self) -> None:
 
-        # await self.home()
-        # await self.session()
-        # await self.classification()
-        # await self.author()
-        # await self.institute()
-        # await self.doi_per_institute()
-        # await self.keyword()
-        # await self.static()
-        # await self.finalize()
+        await self.home()
+        await self.session()
+        await self.classification()
+        await self.author()
+        await self.institute()
+        await self.doi_per_institute()
+        await self.keyword()
+        await self.static()
+        await self.finalize()
 
-        async with create_task_group() as tg:
-            tg.start_soon(self.home)
-            tg.start_soon(self.session)
-            tg.start_soon(self.classification)
-            tg.start_soon(self.author)
-            tg.start_soon(self.institute)
-            tg.start_soon(self.doi_per_institute)
-            tg.start_soon(self.keyword)
-            tg.start_soon(self.static)
-            tg.start_soon(self.finalize)
+        # async with create_task_group() as tg:
+        #     tg.start_soon(self.home)
+        #     tg.start_soon(self.session)
+        #     tg.start_soon(self.classification)
+        #     tg.start_soon(self.author)
+        #     tg.start_soon(self.institute)
+        #     tg.start_soon(self.doi_per_institute)
+        #     tg.start_soon(self.keyword)
+        #     tg.start_soon(self.static)
+        #     tg.start_soon(self.finalize)
 
     async def run_pack(self) -> BytesIO:
         await self.generate()
@@ -398,7 +398,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                     await self.template.render_session_page(self.event, session, contributions)
                 )
 
-        capacity_limiter = CapacityLimiter(6)
+        capacity_limiter = CapacityLimiter(4)
         async with create_task_group() as tg:
             for session in self.sessions:
                 if session and session.code:
@@ -432,7 +432,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                         self.event, classification, contributions)
                 )
 
-        capacity_limiter = CapacityLimiter(6)
+        capacity_limiter = CapacityLimiter(4)
         async with create_task_group() as tg:
             for classification in self.classifications:
                 if classification and classification.code:
@@ -465,7 +465,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                         self.event, author, contributions)
                 )
 
-        capacity_limiter = CapacityLimiter(6)
+        capacity_limiter = CapacityLimiter(4)
         async with create_task_group() as tg:
             for author in self.authors:
                 if author and author.id:
@@ -516,14 +516,14 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                         self.event, institute, authors)
                 )
 
-                capacity_limiter = CapacityLimiter(6)
+                capacity_limiter = CapacityLimiter(4)
                 async with create_task_group() as tg:
                     for author in authors:
                         if author and author.id:
                             tg.start_soon(_render_contribution,
                                           capacity_limiter, institute, author)
 
-        capacity_limiter = CapacityLimiter(6)
+        capacity_limiter = CapacityLimiter(4)
         async with create_task_group() as tg:
             for institute in self.institutes:
                 if institute and institute.id:
@@ -558,7 +558,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                         self.event, institute, contributions)
                 )
 
-        capacity_limiter = CapacityLimiter(6)
+        capacity_limiter = CapacityLimiter(4)
         async with create_task_group() as tg:
             for institute in self.institutes:
                 if institute and institute.id:
@@ -591,7 +591,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                         self.event, keyword, contributions)
                 )
 
-        capacity_limiter = CapacityLimiter(6)
+        capacity_limiter = CapacityLimiter(4)
         async with create_task_group() as tg:
             for keyword in self.keywords:
                 tg.start_soon(_render_contribution, capacity_limiter, keyword)
