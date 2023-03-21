@@ -1,0 +1,18 @@
+{% macro render(authors_groups) -%}
+    <ul>
+        {% for group in authors_groups %}
+            {% set is_first_institute = loop.first %}
+            <li>
+                {% for author in group.authors %}
+                    {% if is_first_institute and loop.first %}
+                        <b>{{ author }}{{ ',' if not loop.last }}</b>
+                    {% else %}
+                        {{ author }}{{ ',' if not loop.last }}
+                    {% endif %}
+                {% endfor %}
+                <br>
+                {{ group.affiliation }}
+            </li>
+        {% endfor %}
+    </ul>
+{%- endmacro %}

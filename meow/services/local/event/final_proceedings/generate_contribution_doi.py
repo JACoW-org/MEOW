@@ -8,9 +8,9 @@ from anyio import create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
 
-from meow.tasks.local.doi.models import AuthorDOI, ContributionDOI
+from meow.tasks.local.doi.models import AuthorDOI, ContributionDOI, AuthorsGroup
 from meow.tasks.local.doi.utils import generate_doi_url
-from meow.utils.datetime import format_datetime_full, format_datetime_range_doi
+from meow.utils.datetime import format_datetime_full, format_datetime_range_doi, format_datetime_doi
 
 
 logger = lg.getLogger(__name__)
@@ -84,19 +84,25 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
     event_isbn: str = settings.get('isbn', '978-3-95450-227-1')
     event_issn: str = settings.get('issn', '2673-5490')
 
-    primary_authors = [
-        AuthorDOI(
-            first_name=author.first,
-            last_name=author.last,
-            affiliation=author.affiliation
-        )
-        for author in contribution.primary_authors
-    ]
+    authors_groups: list[AuthorsGroup] = list()
+    for author in contribution.primary_authors:
+        is_new_author = True
+        for group in authors_groups:
+            if author.affiliation == group.affiliation:
+                group.authors.append(author.short)
+                is_new_author = False
+                break
+        if is_new_author:
+            authors_groups.append(AuthorsGroup(
+                affiliation=author.affiliation,
+                authors=[author.short]
+            ))
 
     doi_data = ContributionDOI(
         code=contribution.code,
         title=contribution.title,
-        primary_authors=primary_authors,
+        # primary_authors=primary_authors,
+        authors_groups=authors_groups,
         abstract=contribution.description,
         # references=contribution.references,
         paper_url=contribution.url,
@@ -111,14 +117,13 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         editors=[contribution.editor] if contribution.editor else [],
         isbn=event_isbn,
         issn=event_issn,
-        reception_date=format_datetime_full(contribution.reception),
-        acceptance_date=format_datetime_full(contribution.acceptance),
-        issuance_date=format_datetime_full(contribution.issuance),
+        reception_date=format_datetime_doi(contribution.reception),
+        acceptance_date=format_datetime_doi(contribution.acceptance),
+        issuance_date=format_datetime_doi(contribution.issuance),
         doi_url=generate_doi_url(doi_base_url, event.title, contribution.code),
-        start_page=contribution.page,
-        number_of_pages=contribution.metadata.get(
-            'report', {}).get('page_count', 0)
-        if contribution.metadata is not None else 0,
+        pages=f'{contribution.page}-{contribution.metadata.get("page_count", 0) + contribution.page - 1}' if contribution.page and contribution.metadata else ''
+        # start_page=str(contribution.page) if contribution.page else '',
+        # end_page=str(contribution.metadata.get('page_count', 0) + contribution.page - 1) if contribution.metadata else '',
     )
 
     return doi_data
