@@ -1,7 +1,11 @@
 from dataclasses import dataclass, field, asdict
 from typing import Optional
 from meow.tasks.local.reference.models import Reference
-from datetime import datetime
+
+@dataclass
+class AuthorsGroup:
+    affiliation: str = field(default='')
+    authors: list[str] = field(default_factory=list)
 
 @dataclass
 class AuthorDOI:
@@ -24,7 +28,8 @@ class ContributionDOI:
 
     code: str = field(default='')
     title: str = field(default='')
-    primary_authors: list[AuthorDOI] = field(default_factory=list[AuthorDOI])
+    # primary_authors: list[AuthorDOI] = field(default_factory=list[AuthorDOI])
+    authors_groups: list[AuthorsGroup] = field(default_factory=list)
     abstract: str = field(default='')
     references: list = field(default_factory=list)
     paper_url: str = field(default='')
@@ -42,11 +47,13 @@ class ContributionDOI:
     isbn: str = field(default='')
     issn: str = field(default='')
     reception_date: str = field(default='')
+    # TODO missing revision date
     acceptance_date: str = field(default='')
     issuance_date: str = field(default='')
     doi_url: str = field(default='')
-    start_page: int = field(default=0)
-    number_of_pages: int = field(default=0)
+    start_page: str = field(default='')
+    end_page: str = field(default='')
+    pages: str = field(default='')
 
     def as_dict(self) -> dict:
         return asdict(self)

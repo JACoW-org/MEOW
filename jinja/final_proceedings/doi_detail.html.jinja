@@ -1,3 +1,5 @@
+{% import 'authors_template.html.jinja' as authors_template %}
+
 <h1>Journals of Accelerator Conferences Website (JACoW)</h1>
 <p class="doi-intro">
     <a href="https://www.jacow.org" target="_blank">JACoW</a> is a publisher in Geneva, Switzerland that publishes the proceedings of accelator conferences held around the world by an international collaboration of editors.
@@ -13,7 +15,9 @@
         </tr>
         <tr class="authors">
             <th>Authors</th>
-            <td></td>
+            <td>
+                {{ authors_template.render(contribution.authors_groups) }}
+            </td>
         </tr>
         <tr class="abstract">
             <th>Abstract</th>
@@ -22,13 +26,13 @@
         <tr class="paper">
             <th>Paper</th>
             <td>
-                download: <a href="../../pdf/{{ contribution.code|upper }}.pdf">{{ contribution.code|upper }}.pdf</a>
+                download: <a href="../../pdf/{{ contribution.code|upper }}.pdf" download>{{ contribution.code|upper }}.pdf</a>
             </td>
         </tr>
         <tr class="cite">
             <th>Cite</th>
             <td>
-                references
+                TODO
             </td>
         </tr>
         <tr class="conference">
@@ -37,7 +41,7 @@
         </tr>
         <tr class="series">
             <th>Series</th>
-            <td>{{ contribution.series }}</td>
+            <td>{{ contribution.series }} TODO series is still empty for our dataset</td>
         </tr>
         <tr class="location">
             <th>Location</th>
@@ -53,7 +57,7 @@
         </tr>
         <tr class="editorial-board">
             <th>Editorial Board</th>
-            <td></td>
+            <td>TODO</td>
         </tr>
         <tr class="isbn">
             <th>Online ISBN</th>
@@ -73,7 +77,7 @@
         </tr>
         <tr class="issued">
             <th>Issued</th>
-            <td>{{ contribution.issueance_date }}</td>
+            <td>{{ contribution.issuance_date }}</td>
         </tr>
         <tr class="doi">
             <th>DOI</th>
@@ -81,7 +85,7 @@
         </tr>
         <tr class="pages">
             <th>Pages</th>
-            <td></td>
+            <td>{{ contribution.pages }}</td>
         </tr>
         <tr class="copyright">
             <th>Copyright</th>
