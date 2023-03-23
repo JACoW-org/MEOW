@@ -79,8 +79,7 @@ class JinjaTemplateRenderer:
         return await self.render("session_page.html.jinja", dict(
             event=event.as_dict(),
             session=session.as_dict(),
-            contributions=[c.as_dict() for c in contributions],
-            contributions_len=len(contributions)
+            contributions=[c.as_dict() for c in contributions]
         ))
 
     async def render_classification_list(self, classifications: list[TrackData]) -> str:
@@ -92,8 +91,7 @@ class JinjaTemplateRenderer:
         return await self.render("classification_page.html.jinja", dict(
             event=event.as_dict(),
             classification=classification.as_dict(),
-            contributions=[c.as_dict() for c in contributions],
-            contributions_len=len(contributions)
+            contributions=[c.as_dict() for c in contributions]
         ))
 
     async def render_author_list(self, authors: list[PersonData]) -> str:
@@ -105,8 +103,7 @@ class JinjaTemplateRenderer:
         return await self.render("author_page.html.jinja", dict(
             event=event.as_dict(),
             author=author.as_dict(),
-            contributions=[c.as_dict() for c in contributions],
-            contributions_len=len(contributions)
+            contributions=[c.as_dict() for c in contributions]
         ))
 
     async def render_institute_list(self, institutes: list[AffiliationData]) -> str:
@@ -138,8 +135,7 @@ class JinjaTemplateRenderer:
         return await self.render("keyword_page.html.jinja", dict(
             event=event.as_dict(),
             keyword=keyword.as_dict(),
-            contributions=[c.as_dict() for c in contributions],
-            contributions_len=len(contributions)
+            contributions=[c.as_dict() for c in contributions]
         ))
 
     async def render_doi_per_institute_list(self, institutes: list[AffiliationData]) -> str:
@@ -151,8 +147,13 @@ class JinjaTemplateRenderer:
         return await self.render("doi_per_institute_page.html.jinja", dict(
             event=event.as_dict(),
             institute=institute.as_dict(),
-            contributions=[c.as_dict() for c in contributions],
-            contributions_len=len(contributions)
+            contributions=[c.as_dict() for c in contributions]
+        ))
+        
+    async def render_doi_list(self, event: EventData, contributions: list[ContributionData]):
+        return await self.render("doi_list.html.jinja", dict(
+            event=event.as_dict(),
+            contributions=[c.as_dict() for c in contributions]
         ))
     
     async def render_doi_contribution(self, contribution: ContributionDOI) -> str:
@@ -359,6 +360,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
             await self.src_institute_dir.mkdir(exist_ok=True, parents=True)
             await self.src_doi_per_institute_dir.mkdir(exist_ok=True, parents=True)
             await self.src_keyword_dir.mkdir(exist_ok=True, parents=True)
+            await self.src_doi_dir.mkdir(exist_ok=True, parents=True)
 
             await self.out_dir.mkdir(exist_ok=True, parents=True)
             await self.cache_dir.mkdir(exist_ok=True, parents=True)
@@ -609,6 +611,10 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         """"""
 
         logger.info(f"render_doi_contributions")
+        
+        await Path(self.src_doi_dir, '_index.html').write_text(
+            await self.template.render_doi_list(self.event, self.contributions)
+        )
 
         async def _render_doi_contribution(capacity_limiter: CapacityLimiter, code: str, doi_contribution: ContributionDOI) -> None:
             async with capacity_limiter:
@@ -618,7 +624,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                 curr_dir = Path(self.src_doi_dir, code.lower())
                 await curr_dir.mkdir(parents=True, exist_ok=True)
 
-                await Path(curr_dir, 'index.html').write_text(
+                await Path(curr_dir, '_index.html').write_text(
                     await self.template.render_doi_contribution(doi_contribution)
                 )
 
