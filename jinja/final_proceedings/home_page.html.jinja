@@ -3,16 +3,22 @@ title: "Home Page"
 date: 2023-01-02T12:06:30+01:00
 ---
 
+<section class="event-title">
+    <h1>FEL2022</h1>
+</section>
 
-<h1>FEL2022</h1>
-
-<h3>Proceedings of the13th International Particle Accelerator Conference</h3>
+<section class="event-head">
+    <p>
+        Proceedings of the
+        <big>40th International Free Electron Laser Conference</big>
+    </p>
+</section>
 
 <section class="event-intro">
     <p>
-        The links below lead to detailed listings of the many facets of the conference,
-        including Portable Acrobat Format (PDF) files of all invited and contributed papers,
-        together with slides from oral presentations.
+        The links below lead to detailed listings of the many facets of the conference, including Portable Acrobat
+        Format (PDF) files of all invited and contributed papers, together with slides from oral presentations and PDFs
+        from poster sessions.
     </p>
 </section>
 
@@ -50,7 +56,9 @@ date: 2023-01-02T12:06:30+01:00
             </a> ({{ (brief_size / (1024 * 1024)) | int }}MB)
             <i>First page only of all papers with hyperlinks to complete versions</i>
         </li>
+    </ul>
 
+    <ul>
         {% for attachment in attachments %}
         {% if attachment.content_type == "application/pdf": %}
         <li>
@@ -64,21 +72,34 @@ date: 2023-01-02T12:06:30+01:00
     </ul>
 </section>
 
-<section class="event-info">
+<section class="event-hosted">
     <p>
-        FEL2022 was organized by the
-        Synchrotron Light Research Institute (SLRI) in
-        Nakhon Ratchasima, Thailand and hosted at the
-        IMPACT Exhibition and Convention Center
-        in Trieste, Italy ⁙ 12-17 June 2022
+        FEL2022 was hosted by Elettra-Sincrotrone Trieste, Trieste, Italy,
+        and held at the Trieste Convention Center in Trieste, Italy 22-26 Aug 2022
     </p>
 </section>
 
 <section class="event-board">
     <p>
-        Editorial Board: Frank Zimmermann (CERN), Hitoshi Tanaka (RIKEN), Porntip Sudmuang (SLRI), Prapong Klysubun
-        (SLRI), Prapaiwan Sunwong (SLRI), Thakonwat Chanwattana (SLRI), Christine Petit-Jean-Genaz (CERN), Volker RW
-        Schaa
-        (GSI) July 2022
+        Editorial Board: Peter Forck (GSI), Adriana Wawrzyniak (SOLARIS),
+        Agnieszka Cudek (SOLARIS), Volker R.W. Schaa (GSI),
+        Grzegorz W. Kowalski (SOLARIS)
     </p>
+</section>
+
+<section class="event-doi">
+    <p>
+        March 2023
+        ISBN 978-3-95450-220-2
+        ISSN 2673-5474
+        DOI:10.18429/JACoW-FEL2022
+    </p>
+</section>
+
+<section class="event-footer">
+    Copyright &copy; 2023 by
+    <a href="https://www.jacow.org/" target="_blank">JACoW</a>
+    — <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">
+        Creative Commons Attribution 4.0</a>
+    — <a href="ethics.html">Publishing Policies &amp; Ethics</a>
 </section>

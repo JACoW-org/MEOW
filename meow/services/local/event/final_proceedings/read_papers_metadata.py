@@ -120,24 +120,6 @@ def read_metadata(contribution: ContributionData, path: str, stemmer: SnowballSt
             report = get_pdf_report(doc)
             keywords = get_keywords_from_text(doc, stemmer, stem_keywords_dict)
 
-            # metadata = dict(
-            #     author=contribution.authors_meta,
-            #     producer=contribution.producer_meta,
-            #     creator=contribution.creator_meta,
-            #     title=contribution.title_meta,
-            #     format=None,
-            #     encryption=None,
-            #     creationDate="",
-            #     modDate="",
-            #     subject=contribution.track_meta,
-            #     keywords=", ".join(keywords),
-            #     trapped=None,
-            # )
-            # 
-            # set_metadata(doc, metadata)
-            # 
-            # doc.saveIncr() # TO REMOVE
-
             return dict(
                 keywords=keywords,
                 report=report
