@@ -9,6 +9,9 @@ class Reference:
     ris: str
     endnote: str
 
+    def as_dict(self) -> dict:
+        return asdict(self)
+
 class ConferenceStatus(Enum):
     IN_PROCEEDINGS = 'in_proceedings'
     CONFERENCE = 'conference'

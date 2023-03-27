@@ -160,6 +160,15 @@ class JinjaTemplateRenderer:
         return await self.render("doi_detail.html.jinja", dict(
             contribution=contribution.as_dict()
         ))
+    
+    async def render_reference(self, contribution_code: str, contribution_title: str,
+                               reference_type: str, reference: str) -> str:
+        return await self.render("reference_base.html.jinja", dict(
+            contribution_code=contribution_code,
+            contribution_title=contribution_title,
+            reference_type=reference_type,
+            reference=reference
+        ))
 
 
 class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
@@ -205,6 +214,8 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
             Path(self.src_dir, 'content', 'keyword')
         self.src_doi_dir = \
             Path(self.src_dir, 'content', 'doi')
+        self.src_ref_dir = \
+            Path(self.src_dir, 'content', 'reference')
 
     async def run(self) -> BytesIO:
         """ """
@@ -232,6 +243,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         await self.doi_per_institute()
         await self.keyword()
         await self.doi()
+        await self.reference()
         await self.static()
         await self.finalize()
 
@@ -361,6 +373,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
             await self.src_doi_per_institute_dir.mkdir(exist_ok=True, parents=True)
             await self.src_keyword_dir.mkdir(exist_ok=True, parents=True)
             await self.src_doi_dir.mkdir(exist_ok=True, parents=True)
+            await self.src_ref_dir.mkdir(exist_ok=True, parents=True)
 
             await self.out_dir.mkdir(exist_ok=True, parents=True)
             await self.cache_dir.mkdir(exist_ok=True, parents=True)
@@ -633,6 +646,47 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
             for contribution in self.contributions:
                 if contribution.doi_data:
                     tg.start_soon(_render_doi_contribution, capacity_limiter, contribution.code, contribution.doi_data)
+
+    async def reference(self) -> None:
+        """"""
+
+        logger.info(f"render_references")
+
+        async def _create_contribution_dir(capacity_limiter: CapacityLimiter, contribution_code: str) -> None:
+            async with capacity_limiter:
+
+                curr_dir = Path(self.src_ref_dir, contribution_code.lower())
+                await curr_dir.mkdir(parents=True, exist_ok=True)
+
+        async def _render_reference_contribution(capacity_limiter: CapacityLimiter, contribution_code: str,
+                                                 contribution_title: str, reference_type: str,
+                                                 reference: str) -> None:
+            async with capacity_limiter:
+
+                curr_dir = Path(self.src_ref_dir, contribution_code.lower(), reference_type)
+                await curr_dir.mkdir(parents=True, exist_ok=True)
+
+                await Path(curr_dir, '_index.html').write_text(
+                    await self.template.render_reference(contribution_code, contribution_title, reference_type, reference)
+                )
+
+
+        capacity_limiter = CapacityLimiter(4)
+        async with create_task_group() as tg:
+
+            # generate folder reference/{contribution.code} for every contribution in parallel
+            for contribution in self.contributions:
+                tg.start_soon(_create_contribution_dir, capacity_limiter, contribution.code)
+            
+            # generate all references for every contribution
+            for contribution in self.contributions:
+                if contribution.reference:
+                    reference_dict = contribution.reference.as_dict()
+                    for reference_type in reference_dict:
+                        tg.start_soon(_render_reference_contribution, capacity_limiter, contribution.code,
+                                    contribution.title, reference_type,
+                                    reference_dict.get(reference_type))
+
 
 
     async def static(self) -> None:

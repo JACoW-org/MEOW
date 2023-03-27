@@ -2,84 +2,95 @@
 <xsl:output omit-xml-declaration="yes" indent="no" encoding="UTF-8" method="text" media-type="text/plain"/>
 
 <xsl:template match="reference">
-    <xsl:choose>
-        <xsl:when test="conference/status = 'in_proceedings'">@inproceedings</xsl:when>
-        <xsl:when test="conference/status = 'conference'">@conference</xsl:when>
-        <xsl:when test="conference/status = 'unpublished'">@unpublished</xsl:when>
-    </xsl:choose>
-    <xsl:text>{</xsl:text>
-    <xsl:variable name="lowercase" select="'abcdefghijklmnopqrstuvwxyz'" />
-    <xsl:variable name="uppercase" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'" />
-    <xsl:value-of select="translate(contribution/primary-authors/author/last-name, $uppercase, $lowercase)"/><xsl:text>:</xsl:text><xsl:value-of select="translate(conference/code, $uppercase, $lowercase)"/><xsl:text>-</xsl:text><xsl:value-of select="translate(contribution/paper-code, $uppercase, $lowercase)"/><xsl:text>,</xsl:text>
-    <xsl:text>author = {</xsl:text>
-    <xsl:variable name="set" select="contribution/primary-authors/author"/>
-    <xsl:variable name="count" select="count($set)"/>
-    <xsl:choose>
-        <xsl:when test="$count > 3">
-            <xsl:value-of select="substring(contribution/primary-authors/author/first-name, 1, 1)"/>
-            <xsl:text>. </xsl:text>
-            <xsl:value-of select="contribution/primary-authors/author/last-name"/>
-            <xsl:text> et al.</xsl:text>
-        </xsl:when>
-        <xsl:otherwise>
-            <xsl:for-each select="$set">
-                <xsl:variable name="index" select="position()"/>
-                <xsl:if test="$index > 1">
-                    <xsl:choose>
-                        <xsl:when test="$index = $count"><xsl:text> and </xsl:text></xsl:when>
-                        <xsl:otherwise><xsl:text>, </xsl:text></xsl:otherwise>
-                    </xsl:choose>
-                </xsl:if>
-                <xsl:value-of select="substring(first-name, 1, 1)"></xsl:value-of>
-            <xsl:text>. </xsl:text>
-            <xsl:value-of select="last-name"/>
-            </xsl:for-each>
-        </xsl:otherwise>
-    </xsl:choose>
-    <xsl:text>},</xsl:text>
-    <xsl:text>title = {</xsl:text><xsl:value-of select="contribution/title"/><xsl:text>},</xsl:text>
-    <xsl:if test="conference/book-title != ''"><xsl:text>booktitle = {Proc. </xsl:text><xsl:value-of select="conference/book-title"/><xsl:text>},</xsl:text></xsl:if>
-    <xsl:if test="contribution/pages/number > 0">
-        <xsl:text>pages = {</xsl:text>
-        <xsl:value-of select="contribution/pages/start-page"/>
-        <xsl:text>-</xsl:text>
-        <xsl:variable name="endPage" select="contribution/pages/start-page + contribution/pages/number"/>
-        <xsl:value-of select="$endPage"/>
-        <xsl:text>},</xsl:text>
-    </xsl:if>
-    <xsl:text>paper = {</xsl:text><xsl:value-of select="contribution/paper-code"></xsl:value-of><xsl:text>},</xsl:text>
-    <xsl:text>venue = {</xsl:text><xsl:value-of select="conference/venue"/><xsl:text>},</xsl:text>
-    <xsl:if test="conference/status != 'in_proceedings'">
-        <xsl:text>intype = {presented at the</xsl:text>
-        <xsl:value-of select="conference/code"/>
-        <xsl:text>},</xsl:text>
-    </xsl:if>
-    <xsl:if test="conference/series != ''"><xsl:text>series = {</xsl:text><xsl:value-of select="conference/series"/><xsl:text>},</xsl:text></xsl:if>
-    <xsl:if test="conference/series-number != ''"><xsl:text>number = {</xsl:text><xsl:value-of select="conference/series-number"/><xsl:text>},</xsl:text></xsl:if>
-    <xsl:text>publisher = {</xsl:text><xsl:value-of select="publisher"/><xsl:text>, </xsl:text><xsl:value-of select="publisher-venue"></xsl:value-of><xsl:text>},</xsl:text>
-    <xsl:variable name="dateString" select="conference/start-date"></xsl:variable>
-    <xsl:text>month = {</xsl:text><xsl:value-of select="substring($dateString, 6, 2)"/><xsl:text>},</xsl:text>
-    <xsl:text>year = {</xsl:text><xsl:value-of select="substring($dateString, 1, 4)"/><xsl:text>},</xsl:text>
-    <xsl:if test="conference/issn != ''"><xsl:text>issn = {</xsl:text><xsl:value-of select="conference/issn"/><xsl:text>},</xsl:text></xsl:if>
-    <xsl:if test="conference/isbn != ''"><xsl:text>isbn = {</xsl:text><xsl:value-of select="conference/isbn"/><xsl:text>},</xsl:text></xsl:if>
-    <xsl:if test="contribution/doi != ''"><xsl:text>doi = {</xsl:text><xsl:value-of select="contribution/doi"/><xsl:text>},</xsl:text></xsl:if>
-    <xsl:text>url = {</xsl:text><xsl:value-of select="contribution/url"/><xsl:text>},</xsl:text>
-    <xsl:if test="conference/status != 'in_proceedings'">
-        <xsl:text>note = {presented at </xsl:text>
-        <xsl:value-of select="conference/code"></xsl:value-of>
-        <xsl:text>, </xsl:text>
-        <xsl:value-of select="conference/venue"></xsl:value-of>
-        <xsl:text>, </xsl:text>
-        <xsl:value-of select="substring($dateString, 1, 4)"></xsl:value-of>
-        <xsl:text>, paper </xsl:text>
-        <xsl:value-of select="contribution/paper-code"></xsl:value-of>
-        <xsl:text>, </xsl:text>
-        <xsl:if test="conference/status = 'conference'"><xsl:text>this conference</xsl:text></xsl:if>
-        <xsl:if test="conference/status = 'unpublished'"><xsl:text>unpublished</xsl:text></xsl:if>
-        <xsl:text>},</xsl:text>
-    </xsl:if>
-    <xsl:text>language = {</xsl:text><xsl:value-of select="language"/>
-    <xsl:text>}</xsl:text>
+<xsl:choose>
+<xsl:when test="conference/status = 'in_proceedings'">@inproceedings</xsl:when>
+<xsl:when test="conference/status = 'conference'">@conference</xsl:when>
+<xsl:when test="conference/status = 'unpublished'">@unpublished</xsl:when>
+</xsl:choose>
+<xsl:text>{</xsl:text>
+<xsl:variable name="lowercase" select="'abcdefghijklmnopqrstuvwxyz'" />
+<xsl:variable name="uppercase" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'" />
+<xsl:value-of select="translate(contribution/primary-authors/author/last-name, $uppercase, $lowercase)"/><xsl:text>:</xsl:text><xsl:value-of select="translate(conference/code, $uppercase, $lowercase)"/><xsl:text>-</xsl:text><xsl:value-of select="translate(contribution/paper-code, $uppercase, $lowercase)"/><xsl:text>,
+    author = {</xsl:text>
+<xsl:variable name="set" select="contribution/primary-authors/author"/>
+<xsl:variable name="count" select="count($set)"/>
+<xsl:choose>
+<xsl:when test="$count > 3">
+<xsl:value-of select="substring(contribution/primary-authors/author/first-name, 1, 1)"/>
+<xsl:text>. </xsl:text>
+<xsl:value-of select="contribution/primary-authors/author/last-name"/>
+<xsl:text> et al.</xsl:text>
+</xsl:when>
+<xsl:otherwise>
+<xsl:for-each select="$set">
+<xsl:variable name="index" select="position()"/>
+<xsl:if test="$index > 1">
+<xsl:choose>
+<xsl:when test="$index = $count"><xsl:text> and </xsl:text></xsl:when>
+<xsl:otherwise><xsl:text>, </xsl:text></xsl:otherwise>
+</xsl:choose>
+</xsl:if>
+<xsl:value-of select="substring(first-name, 1, 1)"></xsl:value-of>
+<xsl:text>. </xsl:text>
+<xsl:value-of select="last-name"/>
+</xsl:for-each>
+</xsl:otherwise>
+</xsl:choose>
+<xsl:text>},
+    title = {</xsl:text><xsl:value-of select="contribution/title"/><xsl:text>},
+    </xsl:text>
+<xsl:if test="conference/book-title != ''"><xsl:text>booktitle = {Proc. </xsl:text><xsl:value-of select="conference/book-title"/><xsl:text>},</xsl:text></xsl:if>
+<xsl:if test="contribution/pages/number > 0">
+<xsl:text>
+    pages = {</xsl:text>
+<xsl:value-of select="contribution/pages/start-page"/>
+<xsl:text>-</xsl:text>
+<xsl:variable name="endPage" select="contribution/pages/start-page + contribution/pages/number"/>
+<xsl:value-of select="$endPage"/>
+<xsl:text>},</xsl:text>
+</xsl:if>
+<xsl:text>
+    paper = {</xsl:text><xsl:value-of select="contribution/paper-code"></xsl:value-of><xsl:text>},</xsl:text>
+<xsl:text>
+    venue = {</xsl:text><xsl:value-of select="conference/venue"/><xsl:text>},</xsl:text>
+<xsl:if test="conference/status != 'in_proceedings'">
+<xsl:text>
+    intype = {presented at the</xsl:text>
+<xsl:value-of select="conference/code"/>
+<xsl:text>},</xsl:text>
+</xsl:if>
+<xsl:if test="conference/series != ''"><xsl:text>series = {</xsl:text><xsl:value-of select="conference/series"/><xsl:text>},</xsl:text></xsl:if>
+<xsl:if test="conference/series-number != ''"><xsl:text>number = {</xsl:text><xsl:value-of select="conference/series-number"/><xsl:text>},</xsl:text></xsl:if>
+<xsl:text>
+    publisher = {</xsl:text><xsl:value-of select="publisher"/><xsl:text>, </xsl:text><xsl:value-of select="publisher-venue"></xsl:value-of><xsl:text>},</xsl:text>
+<xsl:variable name="dateString" select="conference/start-date"></xsl:variable>
+<xsl:text>
+    month = {</xsl:text><xsl:value-of select="substring($dateString, 6, 2)"/><xsl:text>},</xsl:text>
+<xsl:text>
+    year = {</xsl:text><xsl:value-of select="substring($dateString, 1, 4)"/><xsl:text>},</xsl:text>
+<xsl:if test="conference/issn != ''"><xsl:text>issn = {</xsl:text><xsl:value-of select="conference/issn"/><xsl:text>},</xsl:text></xsl:if>
+<xsl:if test="conference/isbn != ''"><xsl:text>isbn = {</xsl:text><xsl:value-of select="conference/isbn"/><xsl:text>},</xsl:text></xsl:if>
+<xsl:if test="contribution/doi != ''"><xsl:text>doi = {</xsl:text><xsl:value-of select="contribution/doi"/><xsl:text>},</xsl:text></xsl:if>
+<xsl:text>
+    url = {</xsl:text><xsl:value-of select="contribution/url"/><xsl:text>},</xsl:text>
+<xsl:if test="conference/status != 'in_proceedings'">
+<xsl:text>
+    note = {presented at </xsl:text>
+<xsl:value-of select="conference/code"></xsl:value-of>
+<xsl:text>, </xsl:text>
+<xsl:value-of select="conference/venue"></xsl:value-of>
+<xsl:text>, </xsl:text>
+<xsl:value-of select="substring($dateString, 1, 4)"></xsl:value-of>
+<xsl:text>, paper </xsl:text>
+<xsl:value-of select="contribution/paper-code"></xsl:value-of>
+<xsl:text>, </xsl:text>
+<xsl:if test="conference/status = 'conference'"><xsl:text>this conference</xsl:text></xsl:if>
+<xsl:if test="conference/status = 'unpublished'"><xsl:text>unpublished</xsl:text></xsl:if>
+<xsl:text>},</xsl:text>
+</xsl:if>
+<xsl:text>
+    language = {</xsl:text><xsl:value-of select="language"/>
+<xsl:text>}</xsl:text>
 </xsl:template>
 
 </xsl:stylesheet>
