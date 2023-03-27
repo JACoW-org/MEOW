@@ -57,13 +57,13 @@ async def write_metadata(metadata: dict, read_path: str, write_path: str | None 
 
     cmd = [venv_py_path, meow_cli_path, 'metadata', '-input', read_path]
 
-    if write_path is not None and write_path is not '':
+    if write_path is not None and write_path != '':
         cmd.append(f"-output")
         cmd.append(write_path)
 
     for key in metadata.keys():
         val = metadata.get(key, None)
-        if val is not None and val is not '':
+        if val is not None and val != '':
             cmd.append(f"-{key}")
             cmd.append(val)
 
