@@ -56,9 +56,15 @@
         <li>
             <p>
                 <b>Export:</b> reference for this paper using:
+                <a href="../../reference/{{ contribution.code|lower }}/bibtex">BibTeX</a>, 
+                <a href="../../reference/{{ contribution.code|lower }}/latex">LaTeX</a>, 
+                <a href="../../reference/{{ contribution.code|lower }}/word">Text/Word</a>, 
+                <a href="../../reference/{{ contribution.code|lower }}/ris">RIS</a>,
+                <a href="../../reference/{{ contribution.code|lower }}/endnote">EndNote</a>
             </p>
 
-            <p>
+
+            {# <p>
                 <b>BibTeX</b>
             <pre>{{ contribution.reference.bibtex|escape|replace('\n','<br>') }}</pre>
 
@@ -73,7 +79,7 @@
 
             <b>EndNote</b>
             <pre>{{ contribution.reference.endnote|escape }}</pre>
-            </p>
+            </p> #}
         </li>
 
         {% endif %}

@@ -68,9 +68,12 @@
     month = {</xsl:text><xsl:value-of select="substring($dateString, 6, 2)"/><xsl:text>},</xsl:text>
 <xsl:text>
     year = {</xsl:text><xsl:value-of select="substring($dateString, 1, 4)"/><xsl:text>},</xsl:text>
-<xsl:if test="conference/issn != ''"><xsl:text>issn = {</xsl:text><xsl:value-of select="conference/issn"/><xsl:text>},</xsl:text></xsl:if>
-<xsl:if test="conference/isbn != ''"><xsl:text>isbn = {</xsl:text><xsl:value-of select="conference/isbn"/><xsl:text>},</xsl:text></xsl:if>
-<xsl:if test="contribution/doi != ''"><xsl:text>doi = {</xsl:text><xsl:value-of select="contribution/doi"/><xsl:text>},</xsl:text></xsl:if>
+<xsl:if test="conference/issn != ''"><xsl:text>
+    issn = {</xsl:text><xsl:value-of select="conference/issn"/><xsl:text>},</xsl:text></xsl:if>
+<xsl:if test="conference/isbn != ''"><xsl:text>
+    isbn = {</xsl:text><xsl:value-of select="conference/isbn"/><xsl:text>},</xsl:text></xsl:if>
+<xsl:if test="contribution/doi != ''"><xsl:text>
+    doi = {</xsl:text><xsl:value-of select="contribution/doi"/><xsl:text>},</xsl:text></xsl:if>
 <xsl:text>
     url = {</xsl:text><xsl:value-of select="contribution/url"/><xsl:text>},</xsl:text>
 <xsl:if test="conference/status != 'in_proceedings'">
