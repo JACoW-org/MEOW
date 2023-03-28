@@ -3,11 +3,9 @@ import logging as lg
 
 from typing import AsyncGenerator
 
-from meow.services.local.event.abstract_booklet.create_abstract_booklet \
-    import create_abstract_booklet_from_event
-
-from meow.services.local.event.abstract_booklet.export_abstract_booklet \
-    import export_abstract_booklet_to_odt
+from meow.services.local.event.abstract_booklet.collect_sessions_and_contributions import collect_sessions_and_contributions
+from meow.services.local.event.abstract_booklet.create_abstract_booklet import create_abstract_booklet_from_event
+from meow.services.local.event.abstract_booklet.export_abstract_booklet import export_abstract_booklet_to_odt
 
 
 logger = lg.getLogger(__name__)
@@ -15,10 +13,39 @@ logger = lg.getLogger(__name__)
 
 async def event_abstract_booklet(event: dict, cookies: dict, settings: dict) -> AsyncGenerator:
     """ """
+    
+    """ """
+    
+    logger.info('event_abstract_booklet - collect_sessions_and_contributions')
 
-    ab = await create_abstract_booklet_from_event(event, cookies, settings)
+    yield dict(type='progress', value=dict(
+        phase='collect_sessions_and_contributions',
+        text="Collecting sessions and contributions"
+    ))
 
-    odt = export_abstract_booklet_to_odt(ab, event, cookies, settings)
+    [sessions, contributions] = await collect_sessions_and_contributions(event, cookies, settings)
+    
+    """ """
+    
+    logger.info('event_abstract_booklet - create_abstract_booklet_from_event')
+
+    yield dict(type='progress', value=dict(
+        phase='create_abstract_booklet_from_event',
+        text="create_abstract_booklet_from_event"
+    ))
+
+    ab = await create_abstract_booklet_from_event(event, sessions, contributions)
+    
+    """ """
+    
+    logger.info('event_abstract_booklet - export_abstract_booklet_to_odt')
+
+    yield dict(type='progress', value=dict(
+        phase='export_abstract_booklet_to_odt',
+        text="export_abstract_booklet_to_odt"
+    ))
+
+    odt = export_abstract_booklet_to_odt(ab, cookies, settings)
 
     id = event.get('id', 'event')
     title = event.get('title', 'title')

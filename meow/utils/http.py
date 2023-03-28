@@ -37,9 +37,9 @@ class HttpClientSessions:
 
 async def fetch_chunks(url: str, headers: dict = {}, cookies: dict = {}) -> AsyncIterable:
     """ Fetch chunks function """
-    
+
     def json_serialize(val):
-        return str(json_encode(val),'utf-8')
+        return str(json_encode(val), 'utf-8')
 
     async with aiohttp.ClientSession(
             headers=headers,
@@ -60,13 +60,15 @@ async def fetch_chunks(url: str, headers: dict = {}, cookies: dict = {}) -> Asyn
             HttpClientSessions.del_client_session(client)
 
 
-async def fetch_json(url: str) -> Any:
+async def fetch_json(url: str, headers: dict = {}, cookies: dict = {}) -> Any:
     """ Fetch json function """
-    
+
     def json_serialize(val):
-        return str(json_encode(val),'utf-8')
+        return str(json_encode(val), 'utf-8')
 
     async with aiohttp.ClientSession(
+            headers=headers,
+            cookies=cookies,
             json_serialize=json_serialize,
             timeout=aiohttp.ClientTimeout(
                 total=conf.HTTP_REQUEST_TIMEOUT_SECONDS
@@ -81,12 +83,12 @@ async def fetch_json(url: str) -> Any:
             HttpClientSessions.del_client_session(client)
 
 
-async def download_json(url: str) -> Any:
+async def download_json(url: str, headers: dict = {}, cookies: dict = {}) -> Any:
     """ Download json function """
 
     # print('download_json -->', url)
 
-    return await fetch_json(url)
+    return await fetch_json(url, headers=headers, cookies=cookies)
 
 
 async def download_file(url: str, file: Path, headers: dict = {}, cookies: dict = {}) -> None:
@@ -105,12 +107,12 @@ async def download_stream(url: str, headers: dict = {}, cookies: dict = {}) -> i
     """ Download file function """
 
     # print(f'download_stream --> {url} --> {headers} --> {cookies}')
-    
+
     f = io.BytesIO()
 
     async for chunk in fetch_chunks(url, headers=headers, cookies=cookies):
         f.write(chunk)
 
     f.seek(0)
-    
+
     return f

@@ -4,6 +4,9 @@ import logging as lg
 
 from typing import AsyncGenerator
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
+
+from meow.services.local.event.final_proceedings.collecting_contributions_and_files import collecting_contributions_and_files
+from meow.services.local.event.final_proceedings.collecting_sessions_and_attachments import collecting_sessions_and_attachments
 from meow.services.local.event.final_proceedings.concat_contribution_papers import concat_contribution_papers
 from meow.services.local.event.final_proceedings.copy_contribution_papers import copy_contribution_papers
 from meow.services.local.event.final_proceedings.copy_event_attachments import copy_event_attachments
@@ -13,15 +16,12 @@ from meow.services.local.event.final_proceedings.download_contributions_papers i
 from meow.services.local.event.final_proceedings.extract_contribution_references import extract_contribution_references
 from meow.services.local.event.final_proceedings.generate_contribution_doi import generate_contribution_doi
 
-from meow.services.local.event.final_proceedings.create_final_proceedings \
-    import create_final_proceedings
+from meow.services.local.event.final_proceedings.create_final_proceedings import create_final_proceedings
 from meow.services.local.event.final_proceedings.generate_contributions_groups import generate_contributions_groups
-from meow.services.local.event.final_proceedings.hugo_plugin.hugo_final_proceedings_plugin \
-    import HugoFinalProceedingsPlugin
+from meow.services.local.event.final_proceedings.hugo_plugin.hugo_final_proceedings_plugin import HugoFinalProceedingsPlugin
 from meow.services.local.event.final_proceedings.link_static_site import link_static_site
 from meow.services.local.event.final_proceedings.read_papers_metadata import read_papers_metadata
-from meow.services.local.event.final_proceedings.validate_proceedings_data \
-    import validate_proceedings_data
+from meow.services.local.event.final_proceedings.validate_proceedings_data import validate_proceedings_data
 from meow.services.local.event.final_proceedings.write_papers_metadata import write_papers_metadata
 
 
@@ -34,10 +34,40 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
     
     logger.info('event_final_proceedings - create_final_proceedings')
 
-    # Adapt and refill event data: sessions, contributions, ...
-    final_proceedings = await create_final_proceedings(event, cookies, settings)
+    """ """
     
-    """ """    
+    logger.info('event_final_proceedings - collecting_sessions_and_attachments')
+
+    yield dict(type='progress', value=dict(
+        phase='collecting_sessions_and_attachments',
+        text="Collecting sessions and attachments"
+    ))
+
+    [sessions, attachments] = await collecting_sessions_and_attachments(event, cookies, settings)
+    
+    """ """
+    
+    logger.info('event_final_proceedings - collecting_contributions_and_files')
+
+    yield dict(type='progress', value=dict(
+        phase='collecting_contributions_and_files',
+        text="Collecting contributions and files"
+    ))
+
+    [contributions] = await collecting_contributions_and_files(event, sessions, cookies, settings)
+    
+    """ """
+    
+    logger.info('event_final_proceedings - adapting_final_proceedings')
+
+    yield dict(type='progress', value=dict(
+        phase='adapting_final_proceedings',
+        text="Adapting final proceedings"
+    ))
+
+    final_proceedings = await create_final_proceedings(event, sessions, contributions, attachments, cookies, settings)
+    
+    """ """
     
     logger.info('event_final_proceedings - download_event_attachments')
 

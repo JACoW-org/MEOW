@@ -646,7 +646,7 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
     return odt
 
 
-def export_abstract_booklet_to_odt(ab: dict, event: dict, cookies: dict, settings: dict) -> io.BytesIO:
+def export_abstract_booklet_to_odt(ab: dict, cookies: dict, settings: dict) -> io.BytesIO:
     """ Abstract Booklet - Open Document Format Macro """
     """
         Sub Main

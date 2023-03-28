@@ -8,19 +8,19 @@ logger = lg.getLogger(__name__)
 
 
 def _sort_list_by_date(val):
-    
+
     string = format_datetime_sec(val.get('start')) \
         + '_' + val.get('code', '')
-        
-    #print(string)
-        
+
+    # print(string)
+
     return string
 
 
-async def create_abstract_booklet_from_event(event: dict, cookies: dict, settings: dict) -> dict:
+async def create_abstract_booklet_from_event(event: dict, sessions: list, contributions: list) -> dict:
     """ """
 
-    sessions = list()
+    sessions_data = list()
 
     abstract_booklet = dict(
         event=dict(
@@ -30,22 +30,22 @@ async def create_abstract_booklet_from_event(event: dict, cookies: dict, setting
             location=event.get('location', ''),
             address=event.get('address', ''),
         ),
-        sessions=sessions
+        sessions=sessions_data
     )
 
-    for session_slot in event.get('sessions', []):
+    for session_slot in sessions:
 
         session_event: dict = session_slot.get('session', dict())
-        
+
         session_event_code = session_event.get('code', '')
-        session_slot_code = session_slot.get('code', '')        
+        session_slot_code = session_slot.get('code', '')
 
         session_code: str = session_event_code or session_slot_code
-        
+
         # print(session_code, session_event_code, session_slot_code)
 
-        conveners = list()
-        contributions = list()
+        conveners_data = list()
+        contributions_data = list()
 
         session_slot_data: dict[str, Any] = dict(
             code=session_code,
@@ -61,8 +61,8 @@ async def create_abstract_booklet_from_event(event: dict, cookies: dict, setting
                 session_slot.get('end_dt')
             ),
             is_poster=bool(session_event.get('is_poster')),
-            conveners=conveners,
-            contributions=contributions
+            conveners=conveners_data,
+            contributions=contributions_data
         )
 
         session_slot_conveners: list[dict] = session_slot.get(
@@ -75,10 +75,12 @@ async def create_abstract_booklet_from_event(event: dict, cookies: dict, setting
                 affiliation=session_slot_convener.get('affiliation')
             )
 
-            conveners.append(session_slot_convener_data)
+            conveners_data.append(session_slot_convener_data)
 
-        session_slot_contributions: list[dict] = session_slot.get(
-            'contributions', [])
+        session_slot_contributions: list[dict] = [
+            c for c in contributions
+            if c.get('session_code') == session_code
+        ]
 
         if session_slot_contributions:
             for session_slot_contribution in session_slot_contributions:
@@ -157,12 +159,12 @@ async def create_abstract_booklet_from_event(event: dict, cookies: dict, setting
 
                         contribution_data_coauthors.append(coauthor_data)
 
-                contributions.append(contribution_data)
+                contributions_data.append(contribution_data)
 
-        contributions.sort(key=_sort_list_by_date)
+        contributions_data.sort(key=_sort_list_by_date)
 
-        sessions.append(session_slot_data)
+        sessions_data.append(session_slot_data)
 
-    sessions.sort(key=_sort_list_by_date)
+    sessions_data.sort(key=_sort_list_by_date)
 
     return abstract_booklet

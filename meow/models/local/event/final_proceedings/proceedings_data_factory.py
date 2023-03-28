@@ -11,30 +11,30 @@ from meow.models.local.event.final_proceedings.session_model import SessionData
 from meow.utils.sort import sort_list_by_date
 
 
-def proceedings_data_factory(event: Any) -> ProceedingsData:
+def proceedings_data_factory(event: Any, sessions: list, contributions: list, attachments: list,) -> ProceedingsData:
 
-    sessions: list[SessionData] = [
+    sessions_data: list[SessionData] = [
         session_data_factory(session)
-        for session in event.get('sessions', [])
+        for session in sessions
     ]
 
-    sessions.sort(key=sort_list_by_date)
+    sessions_data.sort(key=sort_list_by_date)
 
-    contributions = [
+    contributions_data = [
         contribution_data_factory(contribution)
-        for contribution in event.get('contributions', [])
+        for contribution in contributions
     ]
 
-    contributions.sort(key=sort_list_by_date)
+    contributions_data.sort(key=sort_list_by_date)
     
-    attachments = [
+    attachments_data = [
         attachment_data_factory(attachment)
-        for attachment in event.get('attachments', [])
+        for attachment in attachments
     ]
 
     return ProceedingsData(
         event=event_data_factory(event),
-        sessions=sessions,
-        contributions=contributions,
-        attachments=attachments
+        sessions=sessions_data,
+        contributions=contributions_data,
+        attachments=attachments_data
     )

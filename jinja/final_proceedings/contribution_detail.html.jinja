@@ -15,8 +15,8 @@
         {% for author in contribution.primary_authors %}
 
         {% if loop.first %}<b>{% endif %}
-        {{ author.first }} {{ author.last }} ({{ author.affiliation }})
-        {% if loop.first %}</b>{% endif %}
+            {{ author.first }} {{ author.last }} ({{ author.affiliation }})
+            {% if loop.first %}</b>{% endif %}
 
         {% if loop.nextitem is defined %}, {% endif %}
 
