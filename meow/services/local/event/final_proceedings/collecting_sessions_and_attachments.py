@@ -25,7 +25,7 @@ async def collecting_sessions_and_attachments(event: dict, cookies: dict, settin
 
 async def download_sessions(event_url: str, cookies: dict, settings: dict, sessions: list):
 
-    response = await download_json(url=f"{event_url}/manage/purr/abstract-booklet-sessions-data", cookies=cookies)
+    response = await download_json(url=f"{event_url}manage/purr/abstract-booklet-sessions-data", cookies=cookies)
 
     if 'error' not in response and response.get('error') != True:
         sessions.extend(response.get('sessions'))
@@ -33,7 +33,7 @@ async def download_sessions(event_url: str, cookies: dict, settings: dict, sessi
 
 async def download_attachments(event_url: str, cookies: dict, settings: dict, attachments: list):
 
-    response = await download_json(url=f"{event_url}/manage/purr/final-proceedings-attachments-data", cookies=cookies)
+    response = await download_json(url=f"{event_url}manage/purr/final-proceedings-attachments-data", cookies=cookies)
 
     if 'error' not in response and response.get('error') != True:
         attachments.extend(response.get('attachments'))

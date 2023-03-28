@@ -46,8 +46,8 @@ async def download_contributions_papers(proceedings_data: ProceedingsData, cooki
                 async for _ in receive_stream:
                     downloaded_files = downloaded_files + 1
 
-                    logger.info(
-                        f"downloaded_files: {downloaded_files} - {total_files}")
+                    # logger.info(
+                    #     f"downloaded_files: {downloaded_files} - {total_files}")
 
                     if downloaded_files >= total_files:
                         receive_stream.close()
@@ -79,11 +79,11 @@ async def file_download_task(capacity_limiter: CapacityLimiter, total_files: int
             # logger.debug(f"{pdf_md5} {pdf_name}")
 
             if await is_to_download(pdf_file, pdf_md5):
-                logger.info(f"download_file --> {pdf_url}")
+                # logger.info(f"download_file --> {pdf_url}")
                 await download_file(url=pdf_url, file=pdf_file,
                                     cookies=dict(indico_session_http=http_sess))
-            else:
-                logger.info(f"cached_file --> {pdf_url}")
+            # else:
+            #     logger.info(f"cached_file --> {pdf_url}")
 
         except Exception as ex:
             logger.error(ex, exc_info=True)

@@ -120,21 +120,30 @@ async def get_xslt(xslt_path: str) -> XSLT:
 
 async def build_contribution_reference(event: EventData, contribution: ContributionData,
                                        xslt_functions: dict, settings: dict) -> Reference | None:
+    
+    xml_val: str = ''
 
-    contribution_ref = await contribution_data_factory(event, contribution, settings)
+    try:
 
-    if contribution_ref.is_citable():
+        contribution_ref = await contribution_data_factory(event, contribution, settings)
 
-        xml_val = await JinjaXMLBuilder().build_reference_xml(contribution_ref)
-        doc = fromstring(xml_val, parser=XMLParser(encoding='utf-8'))
+        if contribution_ref.is_citable():
 
-        return Reference(
-            bibtex=await xslt_transform(xslt_functions, 'bibtex', doc),
-            latex=await xslt_transform(xslt_functions, 'latex', doc),
-            word=await xslt_transform(xslt_functions, 'word', doc),
-            ris=await xslt_transform(xslt_functions, 'ris', doc),
-            endnote=await xslt_transform(xslt_functions, 'endnote', doc)
-        )
+            xml_val = await JinjaXMLBuilder().build_reference_xml(contribution_ref)
+
+            doc = fromstring(xml_val, parser=XMLParser(encoding='utf-8', recover=True))
+
+            return Reference(
+                bibtex=await xslt_transform(xslt_functions, 'bibtex', doc),
+                latex=await xslt_transform(xslt_functions, 'latex', doc),
+                word=await xslt_transform(xslt_functions, 'word', doc),
+                ris=await xslt_transform(xslt_functions, 'ris', doc),
+                endnote=await xslt_transform(xslt_functions, 'endnote', doc)
+            )
+        
+    except Exception as ex:
+        logger.error(ex, exc_info=True)
+        logger.error(xml_val)
 
     return None
 

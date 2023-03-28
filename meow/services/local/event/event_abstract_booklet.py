@@ -13,9 +13,7 @@ logger = lg.getLogger(__name__)
 
 async def event_abstract_booklet(event: dict, cookies: dict, settings: dict) -> AsyncGenerator:
     """ """
-    
-    """ """
-    
+
     logger.info('event_abstract_booklet - collect_sessions_and_contributions')
 
     yield dict(type='progress', value=dict(
@@ -24,25 +22,28 @@ async def event_abstract_booklet(event: dict, cookies: dict, settings: dict) -> 
     ))
 
     [sessions, contributions] = await collect_sessions_and_contributions(event, cookies, settings)
-    
+
+    # logger.info(f'event_abstract_booklet - sessions_len: {len(sessions)}' +
+    #             f' - contributions_len: { len(contributions)}')
+
     """ """
-    
+
     logger.info('event_abstract_booklet - create_abstract_booklet_from_event')
 
     yield dict(type='progress', value=dict(
         phase='create_abstract_booklet_from_event',
-        text="create_abstract_booklet_from_event"
+        text="Create Abstract Booklet From Event"
     ))
 
     ab = await create_abstract_booklet_from_event(event, sessions, contributions)
-    
+
     """ """
-    
+
     logger.info('event_abstract_booklet - export_abstract_booklet_to_odt')
 
     yield dict(type='progress', value=dict(
         phase='export_abstract_booklet_to_odt',
-        text="export_abstract_booklet_to_odt"
+        text="Export Abstract Booklet To ODT"
     ))
 
     odt = export_abstract_booklet_to_odt(ab, cookies, settings)

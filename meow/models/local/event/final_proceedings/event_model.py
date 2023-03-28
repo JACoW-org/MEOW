@@ -1,6 +1,8 @@
 from dataclasses import dataclass, asdict, field
 from datetime import datetime
 
+from meow.utils.slug import slugify
+
 
 @dataclass(kw_only=True, slots=True)
 class PersonData:
@@ -106,6 +108,10 @@ class EventData:
 
     start: datetime
     end: datetime
+
+    @property
+    def path(self) -> str:
+        return slugify(self.title)
 
     def __eq__(self, other):
         return self.id == other.id

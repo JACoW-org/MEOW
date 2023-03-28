@@ -86,7 +86,7 @@ async def fetch_json(url: str, headers: dict = {}, cookies: dict = {}) -> Any:
 async def download_json(url: str, headers: dict = {}, cookies: dict = {}) -> Any:
     """ Download json function """
 
-    # print('download_json -->', url)
+    # logger.info(f'download_json --> {url}')
 
     return await fetch_json(url, headers=headers, cookies=cookies)
 

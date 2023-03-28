@@ -19,7 +19,7 @@ async def link_static_site(proceedings_data: ProceedingsData, cookies: dict, set
     static_site_name = f"{proceedings_data.event.id}_hugo_src"
     static_site_dir = await Path('var', 'run', static_site_name, 'out').absolute()
     
-    site_preview_name = f"{proceedings_data.event.title}"
+    site_preview_name = f"{proceedings_data.event.path}"
     site_preview_dir = await Path('var', 'html', site_preview_name).absolute()
     
     logger.info(f"{static_site_dir} --> {site_preview_dir}")

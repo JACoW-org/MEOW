@@ -1,8 +1,10 @@
 ---
-title: "{{ institute.name }} [{{authors|length}}]"
+title: "[{{authors|length}}]"
 date: 2023-01-02T12:06:30+01:00
 draft: false
 ---
+
+<h1>{{ institute.name|e }}</h1>
 
 <section>
   <ul>

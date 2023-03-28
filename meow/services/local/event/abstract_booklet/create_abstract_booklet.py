@@ -20,6 +20,9 @@ def _sort_list_by_date(val):
 async def create_abstract_booklet_from_event(event: dict, sessions: list, contributions: list) -> dict:
     """ """
 
+    # for c in contributions:
+    #     logger.info(f"{c.get('code')} -> {c.get('session_code')}")
+
     sessions_data = list()
 
     abstract_booklet = dict(
@@ -37,10 +40,10 @@ async def create_abstract_booklet_from_event(event: dict, sessions: list, contri
 
         session_event: dict = session_slot.get('session', dict())
 
-        session_event_code = session_event.get('code', '')
         session_slot_code = session_slot.get('code', '')
+        session_event_code = session_event.get('code', '')
 
-        session_code: str = session_event_code or session_slot_code
+        session_code: str = session_slot_code or session_event_code
 
         # print(session_code, session_event_code, session_slot_code)
 
@@ -81,6 +84,11 @@ async def create_abstract_booklet_from_event(event: dict, sessions: list, contri
             c for c in contributions
             if c.get('session_code') == session_code
         ]
+
+        # session_slot_contributions_len = len(session_slot_contributions)
+
+        # logger.info(
+        #     f"session_code: {session_code} - session_slot_contributions_len: {session_slot_contributions_len}")
 
         if session_slot_contributions:
             for session_slot_contribution in session_slot_contributions:

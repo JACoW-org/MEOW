@@ -59,7 +59,7 @@ class JinjaTemplateRenderer:
     async def render_config_toml(self, event: EventData) -> str:
         return await self.render("config.toml.jinja", dict(
             event=event.as_dict(),
-            url=f'http://127.0.0.1:8000/{event.title}'
+            url=f'http://127.0.0.1:8000/{event.path}'
         ))
 
     async def render_home_page(self, event: EventData, attachments: list[AttachmentData], volume_size: int, brief_size: int) -> str:
@@ -632,7 +632,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         async def _render_doi_contribution(capacity_limiter: CapacityLimiter, code: str, doi_contribution: ContributionDOI) -> None:
             async with capacity_limiter:
 
-                logger.info(f"{code} - {doi_contribution.title}")
+                # logger.info(f"{code} - {doi_contribution.title}")
 
                 curr_dir = Path(self.src_doi_dir, code.lower())
                 await curr_dir.mkdir(parents=True, exist_ok=True)
