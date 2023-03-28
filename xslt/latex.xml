@@ -51,9 +51,9 @@
 <xsl:text>}\textquotedblright,
     </xsl:text>
 <xsl:choose>
-<xsl:when test="conference/status = 'in_proceedings'">
+<xsl:when test="contribution/status = 'in_proceedings'">
 <xsl:text>in emph{Proc. </xsl:text>
-<xsl:value-of select="conference/book-title"/>
+<xsl:value-of select="conference/booktitle-short"/>
 <xsl:text>}</xsl:text>
 </xsl:when>
 <xsl:otherwise>
@@ -76,7 +76,7 @@
 </xsl:otherwise>
 </xsl:choose>
 <xsl:choose>
-<xsl:when test="conference/status = 'in_proceedings'">
+<xsl:when test="contribution/status = 'in_proceedings'">
 <xsl:text>, pp. </xsl:text>
 <xsl:value-of select="contribution/pages/start-page"/>
 <xsl:text>-</xsl:text>
@@ -88,7 +88,7 @@
 <xsl:value-of select="contribution/doi"/>
 </xsl:if>
 </xsl:when>
-<xsl:when test="conference/status = 'conference'">
+<xsl:when test="contribution/status = 'conference'">
 <xsl:text>, this conference.</xsl:text>
 </xsl:when>
 <xsl:otherwise>

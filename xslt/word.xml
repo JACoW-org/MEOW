@@ -31,10 +31,10 @@
         <xsl:value-of select="contribution/title"/>
         <xsl:text>", </xsl:text>
         <xsl:choose>
-            <xsl:when test="conference/status = 'in_proceedings'">
+            <xsl:when test="contribution/status = 'in_proceedings'">
                 <xsl:text>in </xsl:text>
                 <em><xsl:text>Proc. </xsl:text>
-                <xsl:value-of select="conference/book-title"/>
+                <xsl:value-of select="conference/booktitle-short"/>
                 </em>
             </xsl:when>
             <xsl:otherwise>

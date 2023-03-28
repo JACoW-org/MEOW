@@ -3,9 +3,9 @@
     <publisher-venue>{{ publisher_venue }}</publisher-venue>
     <language>{{ language }}</language>
     <conference>
-        <status>{{ conference_status }}</status>
         <code>{{ conference_code }}</code>
-        <book-title>{{ book_title }}</book-title>
+        <booktitle-short>{{ booktitle_short }}</booktitle-short>
+        <booktitle-long>{{ booktitle_long }}</booktitle-long>
         <series>{{ series }}</series>
         <series-number>{{ series_number }}</series-number>
         <venue>{{ venue }}</venue>
@@ -15,6 +15,7 @@
         <isbn>{{ isbn }}</isbn>
     </conference>
     <contribution>
+        <status>{{ status }}</status>
         <paper-code>{{ paper_code }}</paper-code>
         <primary-authors>
             {% for author in primary_authors %}

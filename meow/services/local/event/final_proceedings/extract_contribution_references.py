@@ -4,7 +4,7 @@ from meow.models.local.event.final_proceedings.event_model import EventData
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 
-from meow.tasks.local.reference.models import ContributionRef, ConferenceStatus, Reference
+from meow.tasks.local.reference.models import ContributionRef, ReferenceStatus, Reference
 from meow.tasks.local.doi.utils import generate_doi_url
 from jinja2 import Environment, FileSystemLoader
 from lxml.etree import XML, XSLT, fromstring, XMLParser
@@ -141,6 +141,8 @@ async def build_contribution_reference(event: EventData, contribution: Contribut
 
 async def contribution_data_factory(event: EventData, contribution: ContributionData, settings: dict) -> ContributionRef:
 
+    reference_status: str = ReferenceStatus.IN_PROCEEDINGS.value if contribution.has_paper() else ReferenceStatus.UNPUBLISHED.value
+
     doi_base_url: str = settings.get(
         'doi-base-url', 'https://doi.org/10.18429')
     contribution_doi: str = generate_doi_url(
@@ -149,22 +151,31 @@ async def contribution_data_factory(event: EventData, contribution: Contribution
     isbn: str = settings.get('isbn', '978-3-95450-227-1')
     issn: str = settings.get('issn', '2673-5490')
 
+    booktitle_short: str = settings.get('booktitle_short', '')
+    booktitle_long: str = settings.get('booktitle_long', '')
+    series: str = settings.get('series', '')
+    series_number: str = settings.get('series_number', '')
+
     number_of_pages = contribution.metadata.get(
         'page_count', 0) if contribution.metadata is not None else 0
-    # logger.info('Contribution %s pages: %s-%s', contribution.code, contribution.page, contribution.page + number_of_pages)
+    
+    location: str = settings.get('location', '')
 
     return ContributionRef(
         url=contribution.url,
         title=contribution.title,
-        book_title=event.title,
+        booktitle_short=booktitle_short,
+        booktitle_long=booktitle_long,
         paper_code=contribution.code,
         conference_code=event.title,
-        venue=event.location,
+        series=series,
+        series_number=series_number,
+        venue=location,
         abstract=contribution.description,
         start_date=format_datetime_dashed(event.start),
         end_date=format_datetime_dashed(event.end),
         primary_authors=contribution.primary_authors,
-        conference_status=ConferenceStatus.UNPUBLISHED.value,
+        status=reference_status,
         start_page=contribution.page,
         number_of_pages=number_of_pages,
         doi=contribution_doi,
