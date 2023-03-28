@@ -140,6 +140,13 @@ class ContributionData:
 
     def as_dict(self) -> dict:
         return asdict(self)
+    
+    def has_paper(self) -> bool:
+        if self.latest_revision and self.latest_revision.files:
+            for file in self.latest_revision.files:
+                if file.file_type == 'paper':
+                    return True
+        return False
 
 
 @dataclass(kw_only=True, slots=True)

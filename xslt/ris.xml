@@ -22,7 +22,7 @@
 <xsl:when test="$monthNumber = 12">December</xsl:when>
 </xsl:choose>
 </xsl:variable>
-<xsl:text>TY - </xsl:text><xsl:choose><xsl:when test="conference/status = 'in_proceedings'"><xsl:text>CONF</xsl:text></xsl:when><xsl:otherwise><xsl:text>UNPB</xsl:text></xsl:otherwise></xsl:choose><xsl:text>\n</xsl:text>
+<xsl:text>TY - </xsl:text><xsl:choose><xsl:when test="contribution/status = 'in_proceedings'"><xsl:text>CONF</xsl:text></xsl:when><xsl:otherwise><xsl:text>UNPB</xsl:text></xsl:otherwise></xsl:choose>
 <xsl:for-each select="contribution/primary-authors/author">
 <xsl:text>
 AU - </xsl:text>

@@ -12,16 +12,16 @@ class Reference:
     def as_dict(self) -> dict:
         return asdict(self)
 
-class ConferenceStatus(Enum):
+class ReferenceStatus(Enum):
     IN_PROCEEDINGS = 'in_proceedings'
-    CONFERENCE = 'conference'
+    CONFERENCE = 'conference'   # not handled!
     UNPUBLISHED = 'unpublished'
 
 @dataclass
 class ContributionRef:
     '''Model to build reference in different pattern.'''
     # mandatory
-    conference_status: str
+    status: str
     conference_code: str
     venue: str
     start_date: str
@@ -40,7 +40,8 @@ class ContributionRef:
     series_number: str = field(default='')
     issn: str = field(default='')
     isbn: str = field(default='')
-    book_title: str = field(default='')
+    booktitle_short: str = field(default='')
+    booktitle_long: str = field(default='')
     start_page: int = field(default=0)
     number_of_pages: int = field(default=0)
     doi: str = field(default='')
