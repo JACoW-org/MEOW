@@ -1,13 +1,13 @@
 #!/usr/bin/python
 
+from meow.app.instances.services import srs
+from os import environ
+from anyio import create_task_group, run
 import logging as lg
 
 import uvloop
 uvloop.install()
 
-from anyio import create_task_group, run
-
-from os import environ
 
 environ['CLIENT_TYPE'] = 'worker'
 
@@ -16,20 +16,16 @@ lg.basicConfig(level=lg.INFO)
 logger = lg.getLogger(__name__)
 
 
-from meow.app.instances.services import srs
-
-
-
 async def main() -> None:
     logger.debug('meow - begin')
-    
+
     from anyio import to_thread, to_process
-          
+
     to_thread.current_default_thread_limiter().total_tokens = 4
     to_process.current_default_process_limiter().total_tokens = 4
-    
+
     from nltk import download
-    
+
     download('punkt')
     download('stopwords')
 
@@ -99,8 +95,8 @@ if __name__ == "__main__":
 #
 #
 # run(main)
-# 
-# 
+#
+#
 # async def app(scope, receive, send):
 #
 #     app = Starlette(

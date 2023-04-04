@@ -1,14 +1,16 @@
 ---
-title: "{{ session.code }} - {{ session.title|e }} [{{contributions|length}}]"
+title: "[{{contributions|length}}]"
 date: 2023-01-02T12:06:30+01:00
 draft: false
 ---
 
-<h4>
-    {{ session.start.strftime('%m/%d/%Y, %H:%M') }} 
-    / 
+<h1>
+    {{ session.code }} -
+    {{ session.title|e }} -
+    {{ session.start.strftime('%d %B %Y, %H:%M') }}
+    -
     {{ session.end.strftime('%H:%M') }}
-</h4>
+</h1>
 
 <section>
     {% for convener in session.conveners %}

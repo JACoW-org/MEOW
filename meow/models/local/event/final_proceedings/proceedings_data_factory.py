@@ -8,7 +8,7 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import Pro
 from meow.models.local.event.final_proceedings.session_factory import session_data_factory
 from meow.models.local.event.final_proceedings.session_model import SessionData
 
-from meow.utils.sort import sort_list_by_date
+from meow.utils.sort import sort_list_by_code, sort_list_by_date
 
 
 def proceedings_data_factory(event: Any, sessions: list, contributions: list, attachments: list,) -> ProceedingsData:

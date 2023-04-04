@@ -1,5 +1,5 @@
 ---
-title: "{{ contribution.code }}"
+title: "{{ contribution.code|safe|e }}"
 date: 2023-01-02T12:06:30+01:00
 draft: false
 ---
@@ -7,6 +7,7 @@ draft: false
 {% import 'authors_template.html.jinja' as authors_template %}
 
 <h1>Journals of Accelerator Conferences Website (JACoW)</h1>
+
 <p class="doi-intro">
     <a href="https://www.jacow.org" target="_blank">JACoW</a> is a publisher in Geneva, Switzerland that publishes the proceedings of accelator conferences held around the world by an international collaboration of editors.
 </p>
@@ -80,6 +81,10 @@ draft: false
         <tr class="received">
             <th>Received</th>
             <td>{{ contribution.reception_date }}</td>
+        </tr>
+        <tr class="received">
+            <th>Revised</th>
+            <td>{{ contribution.revisitation_date }}</td>
         </tr>
         <tr class="accepted">
             <th>Accepted</th>

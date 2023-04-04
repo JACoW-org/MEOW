@@ -8,8 +8,9 @@ from anyio import create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
 
-from meow.tasks.local.doi.models import AuthorDOI, ContributionDOI, AuthorsGroup
+from meow.tasks.local.doi.models import ContributionDOI
 from meow.tasks.local.doi.utils import generate_doi_url
+
 from meow.utils.datetime import format_datetime_full, format_datetime_range_doi, format_datetime_doi
 
 
@@ -22,11 +23,8 @@ async def generate_contribution_doi(proceedings_data: ProceedingsData, cookies: 
     total_files: int = len(proceedings_data.contributions)
     processed_files: int = 0
 
-    if total_files == 0:
-        raise Exception('no contributions found')
-
     send_stream, receive_stream = create_memory_object_stream()
-    capacity_limiter = CapacityLimiter(4)
+    capacity_limiter = CapacityLimiter(8)
 
     results: dict[str, ContributionDOI] = dict()
 
@@ -84,25 +82,11 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
     event_isbn: str = settings.get('isbn', '978-3-95450-227-1')
     event_issn: str = settings.get('issn', '2673-5490')
 
-    authors_groups: list[AuthorsGroup] = list()
-    for author in contribution.primary_authors:
-        is_new_author = True
-        for group in authors_groups:
-            if author.affiliation == group.affiliation:
-                group.authors.append(author.short)
-                is_new_author = False
-                break
-        if is_new_author:
-            authors_groups.append(AuthorsGroup(
-                affiliation=author.affiliation,
-                authors=[author.short]
-            ))
-
     doi_data = ContributionDOI(
         code=contribution.code,
         title=contribution.title,
         # primary_authors=primary_authors,
-        authors_groups=authors_groups,
+        authors_groups=contribution.authors_groups,
         abstract=contribution.description,
         # references=contribution.references,
         paper_url=contribution.url,
@@ -117,11 +101,19 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         editors=[contribution.editor] if contribution.editor else [],
         isbn=event_isbn,
         issn=event_issn,
-        reception_date=format_datetime_doi(contribution.reception),
-        acceptance_date=format_datetime_doi(contribution.acceptance),
-        issuance_date=format_datetime_doi(contribution.issuance),
+        reception_date=format_datetime_doi(
+            contribution.reception) if contribution.reception else '',
+        revisitation_date=format_datetime_doi(
+            contribution.revisitation) if contribution.revisitation else '',
+        acceptance_date=format_datetime_doi(
+            contribution.acceptance) if contribution.acceptance else '',
+        issuance_date=format_datetime_doi(
+            contribution.issuance) if contribution.issuance else '',
         doi_url=generate_doi_url(doi_base_url, event.title, contribution.code),
-        pages=f'{contribution.page}-{contribution.metadata.get("page_count", 0) + contribution.page - 1}' if contribution.page and contribution.metadata else ''
+        pages=f'{contribution.page}-{contribution.metadata.get("page_count", 0) + contribution.page - 1}' if contribution.page and contribution.metadata else '',
+        num_of_pages=contribution.metadata.get(
+            "page_count", 0) if contribution.metadata else 0
+
         # start_page=str(contribution.page) if contribution.page else '',
         # end_page=str(contribution.metadata.get('page_count', 0) + contribution.page - 1) if contribution.metadata else '',
     )
@@ -135,13 +127,10 @@ def refill_contribution_doi(proceedings_data: ProceedingsData, results: dict) ->
 
     for contribution_data in proceedings_data.contributions:
         code: str = contribution_data.code
-        try:
-            if code in results and results[code] is not None:
-                contribution_data.doi_data = results[code]
-                contribution_data.doi_data.start_page = start_page
-                start_page = start_page + contribution_data.doi_data.number_of_pages
 
-        except Exception:
-            logger.warning(f'No reference for contribution {code}')
+        if code in results and results[code] is not None:
+            contribution_data.doi_data = results[code]
+            contribution_data.doi_data.start_page = start_page
+            start_page = start_page + contribution_data.doi_data.num_of_pages
 
     return proceedings_data

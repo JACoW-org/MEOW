@@ -51,8 +51,8 @@ async def main() -> None:
     
     from anyio import to_thread, to_process
          
-    to_thread.current_default_thread_limiter().total_tokens = 4
-    to_process.current_default_process_limiter().total_tokens = 4
+    to_thread.current_default_thread_limiter().total_tokens = 8
+    to_process.current_default_process_limiter().total_tokens = 8
     
     from nltk import download
     

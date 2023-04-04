@@ -5,7 +5,7 @@ from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
 
 from meow.models.local.event.final_proceedings.contribution_model import FileData
-from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_proceedings_files
+from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_proceedings_papers
 
 from meow.utils.http import download_file
 from meow.services.local.event.event_pdf_utils import is_to_download
@@ -17,22 +17,19 @@ logger = lg.getLogger(__name__)
 
 async def download_contributions_papers(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
 
-    files_data: list[FileData] = await extract_proceedings_files(proceedings_data)
+    files_data: list[FileData] = await extract_proceedings_papers(proceedings_data)
 
     total_files: int = len(files_data)
     downloaded_files: int = 0
 
     # logger.debug(f'download_contributions_papers - files: {total_files}')
 
-    if total_files == 0:
-        raise Exception('no file extracted')
-
     dir_name = f"{proceedings_data.event.id}_pdf"
     file_cache_dir: Path = Path('var', 'run', dir_name)
     await file_cache_dir.mkdir(exist_ok=True, parents=True)
 
     send_stream, receive_stream = create_memory_object_stream()
-    capacity_limiter = CapacityLimiter(4)
+    capacity_limiter = CapacityLimiter(16)
 
     async with create_task_group() as tg:
         async with send_stream:

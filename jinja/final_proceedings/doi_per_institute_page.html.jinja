@@ -1,8 +1,10 @@
 ---
-title: "{{ institute.name|e }} [{{contributions|length}}]"
+title: "[{{contributions|length}}]"
 date: 2023-01-02T12:06:30+01:00
 draft: false
 ---
+
+<h1>{{ institute.name|e }}</h1>
 
 {% import 'contribution_doi.html.jinja' as contribution_detail %}
 

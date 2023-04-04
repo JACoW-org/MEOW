@@ -1,5 +1,5 @@
 
-from anyio import to_process
+from anyio import to_thread
 
 
 xml_val: str = '''\
@@ -29,11 +29,11 @@ def _main() -> str:
     doc = fromstring(xml_val, parser=None)
     result_tree = xslt_tran(doc, sel="/user/last/text()")
 
-    return tostring(result_tree)
+    return str(tostring(result_tree))
 
 
 async def main() -> None:
 
-    result_tree = await to_process.run_sync(_main)
+    result_tree = await to_thread.run_sync(_main)
 
     print(result_tree)

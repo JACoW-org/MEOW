@@ -4,25 +4,24 @@ from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
 
-from meow.models.local.event.final_proceedings.event_model import AttachmentData
+from meow.models.local.event.final_proceedings.contribution_model import FileData
+
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
+from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_proceedings_slides
 
 
 logger = lg.getLogger(__name__)
 
 
-async def copy_event_attachments(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
+async def copy_contribution_slides(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
     """ """
 
-    files_data: list[AttachmentData] = proceedings_data.attachments
+    files_data: list[FileData] = await extract_proceedings_slides(proceedings_data)
 
     total_files: int = len(files_data)
     elaborated_files: int = 0
 
-    # logger.debug(f'copy_event_attachments - files: {total_files}')
-
-    # if total_files == 0:
-    #     raise Exception('no file extracted')
+    # logger.debug(f'copy_contribution_papers - files: {total_files}')
 
     file_cache_name = f"{proceedings_data.event.id}_pdf"
     file_cache_dir: Path = Path('var', 'run', file_cache_name)
@@ -35,18 +34,6 @@ async def copy_event_attachments(proceedings_data: ProceedingsData, cookies: dic
     await pdf_dest_dir.mkdir(exist_ok=True, parents=True)
     
     logger.info(f'{pdf_dest_dir} created!')
-    
-    vol_name = f"{proceedings_data.event.id}_proceedings_volume.pdf"
-    vol_pdf: Path = Path(file_cache_dir, vol_name)
-    vol_dest: Path = Path(pdf_dest_dir, vol_name)
-    
-    await vol_dest.hardlink_to(vol_pdf)
-    
-    brief_name = f"{proceedings_data.event.id}_proceedings_brief.pdf"
-    brief_pdf: Path = Path(file_cache_dir, brief_name)
-    brief_dest: Path = Path(pdf_dest_dir, brief_name)
-    
-    await brief_dest.hardlink_to(brief_pdf)
     
     send_stream, receive_stream = create_memory_object_stream()
     capacity_limiter = CapacityLimiter(16)
@@ -77,7 +64,7 @@ async def copy_event_attachments(proceedings_data: ProceedingsData, cookies: dic
     return proceedings_data
 
 
-async def file_copy_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int, current_file: AttachmentData, 
+async def file_copy_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int, current_file: FileData, 
                          cookies: dict, cache_dir: Path, dest_dir: Path, res: MemoryObjectSendStream) -> None:
     """ """
 
@@ -92,7 +79,7 @@ async def file_copy_task(capacity_limiter: CapacityLimiter, total_files: int, cu
             
             dest_name = f"{current_file.filename}"
             dest_path = Path(dest_dir, dest_name)
-            
+
             dest_exists = await dest_path.exists()
             file_exists = await file_path.exists()
             

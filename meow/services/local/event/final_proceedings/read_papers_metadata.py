@@ -4,17 +4,18 @@ from fitz import Document
 
 from nltk.stem.snowball import SnowballStemmer
 
-from anyio import Path, create_task_group, CapacityLimiter, to_process, to_thread
+from anyio import Path, create_task_group, CapacityLimiter, to_thread
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 
 from anyio.streams.memory import MemoryObjectSendStream
-from meow.models.local.event.final_proceedings.contribution_model import ContributionData, ContributionPaperData, FileData
+from meow.models.local.event.final_proceedings.contribution_model import ContributionPaperData, FileData
 from meow.models.local.event.final_proceedings.event_factory import event_keyword_factory
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_contributions_papers
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
+from meow.services.local.event.event_pdf_utils import pdf_to_text, read_report
 from meow.services.local.papers_metadata.pdf_keywords import get_keywords_from_text, stem_keywords_as_tree
-from meow.services.local.papers_metadata.pdf_report import get_pdf_report
+
 
 from meow.utils.keywords import KEYWORDS
 
@@ -32,9 +33,6 @@ async def read_papers_metadata(proceedings_data: ProceedingsData, cookies: dict,
 
     logger.info(f'read_papers_metadata - files: {total_files}')
 
-    if total_files == 0:
-        raise Exception('no files found')
-
     dir_name = f"{proceedings_data.event.id}_pdf"
     file_cache_dir: Path = Path('var', 'run', dir_name)
     await file_cache_dir.mkdir(exist_ok=True, parents=True)
@@ -43,7 +41,7 @@ async def read_papers_metadata(proceedings_data: ProceedingsData, cookies: dict,
     stem_keywords_dict = stem_keywords_as_tree(KEYWORDS, stemmer)
 
     send_stream, receive_stream = create_memory_object_stream()
-    capacity_limiter = CapacityLimiter(4)
+    capacity_limiter = CapacityLimiter(8)
 
     results = dict()
 
@@ -83,57 +81,49 @@ async def read_papers_metadata(proceedings_data: ProceedingsData, cookies: dict,
 
 
 async def read_metadata_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int,
-                               current_paper: ContributionPaperData, cookies: dict, pdf_cache_dir: Path,
-                               stemmer, stem_keywords_dict, res: MemoryObjectSendStream) -> None:
+                             current_paper: ContributionPaperData, cookies: dict, pdf_cache_dir: Path,
+                             stemmer, stem_keywords_dict, res: MemoryObjectSendStream) -> None:
     """ """
 
     async with capacity_limiter:
 
-        contribution = current_paper.contribution
         current_file = current_paper.paper
-
         pdf_name = current_file.filename
-        pdf_file = Path(pdf_cache_dir, pdf_name)
-        pdf_path = str(await pdf_file.absolute())
+
+        pdf_path = str(Path(pdf_cache_dir, pdf_name))
 
         # logger.debug(f"{pdf_file} {pdf_name}")
 
-        metadata = await to_process.run_sync(read_metadata, contribution, pdf_path, stemmer, stem_keywords_dict)
+        [report, text] = await read_metadata_internal(pdf_path)
+
+        keywords = await to_thread.run_sync(get_keywords_from_text, text, stemmer, stem_keywords_dict)
 
         await res.send({
             "index": current_index,
             "total": total_files,
             "file": current_file,
-            "meta": metadata
-        })
-
-
-def read_metadata(contribution: ContributionData, path: str, stemmer: SnowballStemmer, stem_keywords_dict: dict[str, list[str]]) -> dict:
-    """ """
-
-    doc: Document | None
-
-    try:
-        doc = Document(filename=path)
-
-        try:
-            report = get_pdf_report(doc)
-            keywords = get_keywords_from_text(doc, stemmer, stem_keywords_dict)
-
-            return dict(
+            "meta": dict(
                 keywords=keywords,
                 report=report
             )
-        except Exception as e:
-            logger.error(e, exc_info=True)
-            raise e
-        finally:
-            if doc is not None:
-                doc.close()
+        })
 
-    except Exception as e:
-        logger.error(e, exc_info=True)
-        raise e
+
+async def read_metadata_internal(path: str) -> list:
+
+    result = dict(report=None, text=None)
+
+    async def _report_task(p, r):
+        r['report'] = await read_report(p)
+
+    async def _text_task(p, r):
+        r['text'] = await pdf_to_text(p)
+
+    async with create_task_group() as tg:
+        tg.start_soon(_report_task, path, result)
+        tg.start_soon(_text_task, path, result)
+
+    return [result.get('report'), result.get('text')]
 
 
 def refill_contribution_metadata(proceedings_data: ProceedingsData, results: dict) -> ProceedingsData:
@@ -144,12 +134,12 @@ def refill_contribution_metadata(proceedings_data: ProceedingsData, results: dic
         code: str = contribution_data.code
 
         try:
-            if contribution_data.latest_revision:
-                revision_data = contribution_data.latest_revision
+            if contribution_data.paper and contribution_data.paper.latest_revision:
+                revision_data = contribution_data.paper.latest_revision
                 file_data = revision_data.files[-1] \
                     if len(revision_data.files) > 0 \
                     else None
-                    
+
                 if file_data is not None:
 
                     result: dict = results.get(file_data.uuid, {})

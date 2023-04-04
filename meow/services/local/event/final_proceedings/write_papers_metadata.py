@@ -1,9 +1,7 @@
 import logging as lg
 import pytz as tz
 
-from fitz import Document
-
-from anyio import Path, create_task_group, CapacityLimiter, to_process, to_thread
+from anyio import Path, create_task_group, CapacityLimiter, to_thread
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 
 from anyio.streams.memory import MemoryObjectSendStream
@@ -13,13 +11,10 @@ from meow.models.local.event.final_proceedings.proceedings_data_utils import ext
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.models.local.event.final_proceedings.session_model import SessionData
-from meow.services.local.event.event_pdf_utils import write_metadata
-
-from meow.services.local.papers_metadata.pdf_annotations import annot_page_header, annot_page_footer, annot_page_side
+from meow.services.local.event.event_pdf_utils import write_metadata, draw_frame
 
 from datetime import datetime
 from meow.utils.datetime import format_datetime_pdf
-from meow.utils.process import run_cmd
 
 
 logger = lg.getLogger(__name__)
@@ -35,15 +30,12 @@ async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict
 
     # logger.info(f'write_papers_metadata - files: {total_files}')
 
-    if total_files == 0:
-        raise Exception('no files found')
-
     dir_name = f"{proceedings_data.event.id}_pdf"
     file_cache_dir: Path = Path('var', 'run', dir_name)
     await file_cache_dir.mkdir(exist_ok=True, parents=True)
 
     send_stream, receive_stream = create_memory_object_stream()
-    capacity_limiter = CapacityLimiter(4)
+    capacity_limiter = CapacityLimiter(8)
 
     timezone = tz.timezone(settings.get('timezone', 'UTC'))
     current_dt: datetime = datetime.now(tz=timezone)
@@ -60,8 +52,9 @@ async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict
         async with send_stream:
             for current_index, current_paper in enumerate(papers_data):
                 tg.start_soon(write_metadata_task, capacity_limiter, total_files,
-                              current_index, current_paper, sessions_dict, current_dt_pdf, cc_logo_bytes, cookies, file_cache_dir,
-                              send_stream.clone())
+                              current_index, current_paper, sessions_dict,
+                              current_dt_pdf, cc_logo_bytes, cookies,
+                              file_cache_dir, send_stream.clone())
 
         try:
             async with receive_stream:
@@ -97,11 +90,11 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
 
         read_pdf_name = f"{current_file.filename}"
         read_pdf_file = Path(pdf_cache_dir, read_pdf_name)
-        read_pdf_path = str(await read_pdf_file.absolute())
+        read_pdf_path = str(read_pdf_file)
 
         write_pdf_name = f"{current_file.filename}_jacow"
         write_pdf_file = Path(pdf_cache_dir, write_pdf_name)
-        write_pdf_path = str(await write_pdf_file.absolute())
+        write_pdf_path = str(write_pdf_file)
 
         # logger.debug(f"{pdf_file} {pdf_name}")
 
@@ -118,10 +111,28 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
             keywords=contribution.keywords_meta,
             trapped=None,
         )
-        
+
         await write_metadata(metadata, read_pdf_path, write_pdf_path)
-        
-        await to_process.run_sync(draw_frame, contribution, session, write_pdf_path, cc_logo)
+
+        start_page: int = contribution.page
+
+        header_data = dict(
+            series=contribution.doi_data.series,
+            venue=f'{contribution.doi_data.conference_code},{contribution.doi_data.venue}',
+            isbn=contribution.doi_data.isbn,
+            issn=contribution.doi_data.issn,
+            doi=contribution.doi_data.doi_url
+        ) if contribution.doi_data else None
+
+        footer_data = dict(
+            classificationHeader=f'{contribution.track.code}: {contribution.track.title}',
+            sessionHeader=f'{session.code}: {session.title}' if session is not None else '',
+            contributionCode=contribution.code
+        ) if contribution.track else None
+
+        await draw_frame(write_pdf_path, start_page, header_data, footer_data)
+
+        # await to_thread.run_sync(draw_frame, contribution, session, write_pdf_path, cc_logo)
 
         # venv/bin/python3 meow.py metadata -input var/html/FEL2022/pdf/12_proceedings_brief.pdf -title mario -author minnie  -keywords pippo
 
@@ -133,68 +144,6 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
             "file": current_file,
             "meta": metadata
         })
-        
-
-
-def draw_frame(contribution: ContributionData, session: SessionData, write_path: str, cc_logo: bytes) -> None:
-    """ """
-
-    doc: Document | None
-
-    try:
-        doc = Document(filename=write_path)
-
-        try:
-
-            # logger.info(metadata)
-            current_page = contribution.page
-
-            for page in doc:
-                
-                if contribution.doi_data:
-
-                    header_data = dict(
-                        series=contribution.doi_data.series,
-                        venue=f'{contribution.doi_data.conference_code},{contribution.doi_data.venue}',
-                        isbn=contribution.doi_data.isbn,
-                        issn=contribution.doi_data.issn,
-                        doi=contribution.doi_data.doi_url
-                    )
-
-                    annot_page_header(page, header_data)
-                    
-                if contribution.track:
-
-                    footer_data = dict(
-                        classificationHeader=f'{contribution.track.code}: {contribution.track.title}',
-                        sessionHeader=f'{session.code}: {session.title}' if session is not None else '',
-                        contributionCode=contribution.code
-                    )
-
-                    annot_page_footer(page, current_page, footer_data)
-
-                
-
-                annot_page_side(
-                    page=page,
-                    page_number=current_page,
-                    cc_logo=cc_logo
-                )
-
-                current_page += 1
-
-            doc.save(filename=write_path, incremental=True, encryption=False)
-
-        except Exception as e:
-            logger.error(e, exc_info=True)
-            raise e
-        finally:
-            if doc is not None:
-                doc.close()
-
-    except Exception as e:
-        logger.error(e, exc_info=True)
-        raise e
 
 
 def refill_contribution_metadata(proceedings_data: ProceedingsData, results: dict) -> ProceedingsData:
@@ -205,8 +154,8 @@ def refill_contribution_metadata(proceedings_data: ProceedingsData, results: dic
         code: str = contribution_data.code
 
         try:
-            if contribution_data.latest_revision:
-                revision_data = contribution_data.latest_revision
+            if contribution_data.paper and contribution_data.paper.latest_revision:
+                revision_data = contribution_data.paper.latest_revision
                 file_data = revision_data.files[-1] \
                     if len(revision_data.files) > 0 \
                     else None

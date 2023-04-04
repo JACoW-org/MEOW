@@ -13,7 +13,7 @@ async def collecting_contributions_and_files(event: dict, sessions: list, cookie
 
     contributions: list = []
 
-    limiter = CapacityLimiter(4)
+    limiter = CapacityLimiter(8)
     async with create_task_group() as tg:
         for session in sessions:
             tg.start_soon(download_contributions, event.get('url'), session.get('id'), cookies, settings, contributions, limiter)
@@ -26,7 +26,7 @@ async def collecting_contributions_and_files(event: dict, sessions: list, cookie
 async def download_contributions(event_url: str, session_id: int, cookies: dict, settings: dict, contributions: list, limiter: CapacityLimiter):
     async with limiter:
 
-        response = await download_json(url=f"{event_url}manage/purr/abstract-booklet-contributions-data/{session_id}", cookies=cookies)
+        response = await download_json(url=f"{event_url}manage/purr/final-proceedings-contributions-data/{session_id}", cookies=cookies)
 
         if 'error' not in response and response.get('error') != True:
             contributions.extend(response.get('contributions'))

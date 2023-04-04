@@ -1,4 +1,6 @@
 import logging as lg
+from os import path
+
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
 from meow.models.local.event.final_proceedings.event_model import EventData
 
@@ -6,7 +8,7 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import Pro
 
 from meow.tasks.local.reference.models import ContributionRef, ReferenceStatus, Reference
 from meow.tasks.local.doi.utils import generate_doi_url
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import BytecodeCache, Environment, FileSystemLoader
 from lxml.etree import XML, XSLT, fromstring, XMLParser
 
 from anyio import open_file, create_task_group, CapacityLimiter
@@ -19,12 +21,34 @@ from meow.utils.datetime import format_datetime_dashed
 logger = lg.getLogger(__name__)
 
 
+class FileSystemCache(BytecodeCache):
+
+    def __init__(self, directory):
+        from pathlib import Path
+        Path(directory).mkdir(parents=True, exist_ok=True)
+        self.directory = directory
+
+    def load_bytecode(self, bucket):
+        filename = path.join(self.directory, bucket.key)
+        if path.exists(filename):
+            with open(filename, 'rb') as f:
+                bucket.load_bytecode(f)
+
+    def dump_bytecode(self, bucket):
+        filename = path.join(self.directory, bucket.key)
+        with open(filename, 'wb') as f:
+            bucket.write_bytecode(f)
+
+
 class JinjaXMLBuilder:
 
     def __init__(self) -> None:
         self.env = Environment(
             enable_async=True,
+            auto_reload=False,
+            cache_size=1024,
             autoescape=True,
+            bytecode_cache=FileSystemCache("var/cache/reference"),
             loader=FileSystemLoader('jinja/reference')
         )
 
@@ -39,13 +63,12 @@ async def extract_contribution_references(proceedings_data: ProceedingsData, coo
     total_files: int = len(proceedings_data.contributions)
     processed_files: int = 0
 
-    if total_files == 0:
-        raise Exception('no contributions found')
+    xml_builder = JinjaXMLBuilder()
 
     xslt_functions: dict[str, XSLT] = await get_xslt_functions()
 
     send_stream, receive_stream = create_memory_object_stream()
-    capacity_limiter = CapacityLimiter(4)
+    capacity_limiter = CapacityLimiter(8)
 
     results: dict[str, Reference] = dict()
 
@@ -53,7 +76,7 @@ async def extract_contribution_references(proceedings_data: ProceedingsData, coo
         async with send_stream:
             for contribution_data in proceedings_data.contributions:
                 tg.start_soon(reference_task, capacity_limiter, proceedings_data.event,
-                              contribution_data, xslt_functions, settings, send_stream.clone())
+                              contribution_data, xml_builder, xslt_functions, settings, send_stream.clone())
 
         try:
             async with receive_stream:
@@ -101,14 +124,14 @@ async def get_xslt_functions() -> dict[str, XSLT]:
 
 
 async def reference_task(capacity_limiter: CapacityLimiter, event: EventData,
-                         contribution: ContributionData, xslt_functions: dict,
+                         contribution: ContributionData, xml_builder, xslt_functions: dict,
                          settings: dict, res: MemoryObjectSendStream) -> None:
     """ """
 
     async with capacity_limiter:
         await res.send({
             "code": contribution.code,
-            "value": await build_contribution_reference(event, contribution, xslt_functions, settings)
+            "value": await build_contribution_reference(event, contribution, xml_builder, xslt_functions, settings)
         })
 
 
@@ -119,8 +142,8 @@ async def get_xslt(xslt_path: str) -> XSLT:
 
 
 async def build_contribution_reference(event: EventData, contribution: ContributionData,
-                                       xslt_functions: dict, settings: dict) -> Reference | None:
-    
+                                       xml_builder, xslt_functions: dict, settings: dict) -> Reference | None:
+
     xml_val: str = ''
 
     try:
@@ -129,9 +152,10 @@ async def build_contribution_reference(event: EventData, contribution: Contribut
 
         if contribution_ref.is_citable():
 
-            xml_val = await JinjaXMLBuilder().build_reference_xml(contribution_ref)
+            xml_val = await xml_builder.build_reference_xml(contribution_ref)
 
-            doc = fromstring(xml_val, parser=XMLParser(encoding='utf-8', recover=True))
+            doc = fromstring(xml_val, parser=XMLParser(
+                encoding='utf-8', recover=True))
 
             return Reference(
                 bibtex=await xslt_transform(xslt_functions, 'bibtex', doc),
@@ -140,7 +164,7 @@ async def build_contribution_reference(event: EventData, contribution: Contribut
                 ris=await xslt_transform(xslt_functions, 'ris', doc),
                 endnote=await xslt_transform(xslt_functions, 'endnote', doc)
             )
-        
+
     except Exception as ex:
         logger.error(ex, exc_info=True)
         logger.error(xml_val)
@@ -150,7 +174,8 @@ async def build_contribution_reference(event: EventData, contribution: Contribut
 
 async def contribution_data_factory(event: EventData, contribution: ContributionData, settings: dict) -> ContributionRef:
 
-    reference_status: str = ReferenceStatus.IN_PROCEEDINGS.value if contribution.has_paper() else ReferenceStatus.UNPUBLISHED.value
+    reference_status: str = ReferenceStatus.IN_PROCEEDINGS.value if contribution.has_paper(
+    ) else ReferenceStatus.UNPUBLISHED.value
 
     doi_base_url: str = settings.get(
         'doi-base-url', 'https://doi.org/10.18429')
@@ -167,7 +192,7 @@ async def contribution_data_factory(event: EventData, contribution: Contribution
 
     number_of_pages = contribution.metadata.get(
         'page_count', 0) if contribution.metadata is not None else 0
-    
+
     location: str = settings.get('location', '')
 
     return ContributionRef(
@@ -203,10 +228,8 @@ async def xslt_transform(xslt_functions: dict[str, XSLT], code: str, doc) -> str
 def refill_contribution_reference(proceedings_data: ProceedingsData, results: dict) -> ProceedingsData:
     for contribution_data in proceedings_data.contributions:
         code: str = contribution_data.code
-        try:
-            if code in results:
-                contribution_data.reference = results[code]
-        except Exception:
-            logger.warning(f'No reference for contribution {code}')
+
+        if code in results:
+            contribution_data.reference = results[code]
 
     return proceedings_data

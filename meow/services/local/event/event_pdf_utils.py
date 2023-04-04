@@ -1,12 +1,18 @@
 
 import logging as lg
 from anyio import Path
+from meow.services.local.papers_metadata.pdf_annotations import annot_page_footer, annot_page_header, annot_page_side
 
 from meow.utils.hash import file_md5
 from meow.utils.process import run_cmd
+from meow.utils.serialization import json_decode, json_encode
 
 
 logger = lg.getLogger(__name__)
+
+
+def get_python_cmd():
+    return str(Path("venv", "bin", "python3.11"))
 
 
 async def is_to_download(file: Path, md5: str) -> bool:
@@ -50,12 +56,10 @@ async def extract_event_pdf_files(event: dict) -> list:
     return event_files
 
 
-async def write_metadata(metadata: dict, read_path: str, write_path: str | None = None) -> None:
+async def write_metadata(metadata: dict, read_path: str, write_path: str | None = None) -> int:
+    """ """
 
-    meow_cli_path = str(await Path("meow.py").absolute())
-    venv_py_path = str(await Path("venv", "bin", "python3").absolute())
-
-    cmd = [venv_py_path, meow_cli_path, 'metadata', '-input', read_path]
+    cmd = [get_python_cmd(), '-m', 'meow', 'metadata', '-input', read_path]
 
     if write_path is not None and write_path != '':
         cmd.append(f"-output")
@@ -67,4 +71,95 @@ async def write_metadata(metadata: dict, read_path: str, write_path: str | None 
             cmd.append(f"-{key}")
             cmd.append(val)
 
-    await run_cmd(cmd)
+    res = await run_cmd(cmd)
+
+    if res is not None and res.returncode == 0:
+
+        # print(res.returncode)
+        # print(res.stdout.decode())
+        # print(res.stderr.decode())
+
+        return res.returncode
+
+    return 1
+
+
+async def read_report(read_path: str) -> dict | None:
+    """ """
+
+    cmd = [get_python_cmd(), '-m', 'meow', 'report', '-input', read_path]
+
+    res = await run_cmd(cmd)
+
+    if res is not None and res.returncode == 0:
+
+        # print(res.returncode)
+        # print(res.stdout.decode())
+        # print(res.stderr.decode())
+
+        return json_decode(res.stdout.decode())
+
+    return None
+
+
+async def pdf_to_text(read_path: str) -> str:
+    """ """
+
+    cmd = [get_python_cmd(), '-m', 'meow', 'text', '-input', read_path]
+
+    res = await run_cmd(cmd)
+
+    if res is not None and res.returncode == 0:
+
+        # print(res.returncode)
+        # print(res.stdout.decode())
+        # print(res.stderr.decode())
+
+        return res.stdout.decode()
+
+    return ''
+
+
+async def draw_frame(write_path: str, page: int, header: dict | None, footer: dict | None) -> int:
+    """ """
+
+    cmd = [get_python_cmd(), '-m', 'meow', 'frame', '-input', write_path]
+
+    cmd.append("-page")
+    cmd.append(str(page))
+
+    cmd.append("-header")
+    cmd.append(json_encode(header).decode('utf-8'))
+
+    cmd.append("-footer")
+    cmd.append(json_encode(footer).decode('utf-8'))
+
+    res = await run_cmd(cmd)
+
+    if res is not None and res.returncode == 0:
+
+        # print(res.returncode)
+        # print(res.stdout.decode())
+        # print(res.stderr.decode())
+
+        return res.returncode
+
+    return 1
+
+
+async def concat_pdf(write_path: str, files: list[str]) -> int:
+    """ """
+
+    cmd = [get_python_cmd(), '-m', 'meow', 'join', '-o', write_path]
+    
+    res = await run_cmd(cmd + files)
+
+    if res is not None and res.returncode == 0:
+
+        # print(res.returncode)
+        # print(res.stdout.decode())
+        # print(res.stderr.decode())
+
+        return res.returncode
+
+    return 1

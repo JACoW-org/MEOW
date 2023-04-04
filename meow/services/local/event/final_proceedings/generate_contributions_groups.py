@@ -14,7 +14,7 @@ logger = lg.getLogger(__name__)
 async def generate_contributions_groups(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
     """ """
 
-    capacity_limiter = CapacityLimiter(4)
+    capacity_limiter = CapacityLimiter(8)
 
     async with create_task_group() as tg:
         tg.start_soon(contributions_group_by_session,

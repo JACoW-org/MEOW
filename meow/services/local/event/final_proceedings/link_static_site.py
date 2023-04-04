@@ -1,10 +1,6 @@
 import logging as lg
 
-import shutil
-
-from anyio import Path, run_process, to_process
-from anyio import create_memory_object_stream, ClosedResourceError
-from anyio.streams.memory import MemoryObjectSendStream
+from anyio import Path
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.utils.filesystem import rmtree, move

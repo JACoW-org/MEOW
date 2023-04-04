@@ -7,13 +7,100 @@ from meow.models.local.event.final_proceedings.track_factory import track_data_f
 
 from meow.utils.datetime import datedict_to_tz_datetime
 from meow.models.local.event.final_proceedings.event_factory import event_affiliation_factory, event_person_factory
-from meow.models.local.event.final_proceedings.contribution_model import ContributionData, ContributionFieldData, FileData, RevisionData
+from meow.models.local.event.final_proceedings.contribution_model import ContributionData, ContributionFieldData, EditableData, FileData, RevisionData, TagData
+from meow.utils.serialization import json_encode
+from meow.utils.sort import sort_revision_list_by_date
 
+from pydash import find
 
 logger = lg.getLogger(__name__)
 
 
+def contribution_editable_factory(editable: Any) -> EditableData | None:
+
+    if editable is None:
+        return None
+
+    all_revisions = [
+        contribution_revision_factory(revision)
+        for revision in editable.get('all_revisions', [])
+        if revision is not None
+    ]
+
+    all_revisions.sort(key=sort_revision_list_by_date)
+
+    latest_revision = contribution_revision_factory(
+        editable.get('latest_revision', None)
+    ) if editable.get('latest_revision', None) else None
+
+    return EditableData(
+        id=editable.get('id'),
+        type=editable.get('type'),
+        all_revisions=all_revisions,
+        latest_revision=latest_revision
+    )
+
+
 def contribution_data_factory(contribution: Any) -> ContributionData:
+
+    editables: list = contribution.get('editables', [])
+
+    paper: Any = find(editables, lambda x: x.get('type', 0) ==
+                      EditableData.EditableType.paper)
+    slides: Any = find(editables, lambda x: x.get('type', 0) ==
+                       EditableData.EditableType.slides)
+    poster: Any = find(editables, lambda x: x.get('type', 0) ==
+                       EditableData.EditableType.poster)
+
+    paper_data: EditableData | None = contribution_editable_factory(paper)
+    slides_data: EditableData | None = contribution_editable_factory(slides)
+    poster_data: EditableData | None = contribution_editable_factory(poster)
+
+    reception_revisions = [
+        r for r in paper_data.all_revisions
+        if r.initial_state == RevisionData.InitialRevisionState.new
+    ] if paper_data else []
+
+    reception_revision = reception_revisions[0] \
+        if len(reception_revisions) else None
+
+    revisitation_revisions = [
+        r for r in paper_data.all_revisions
+        if r.final_state == RevisionData.FinalRevisionState.accepted
+    ] if paper_data else []
+
+    revisitation_revision = revisitation_revisions[0] \
+        if len(revisitation_revisions) else None  
+    
+    acceptance_revisions = [
+        r for r in paper_data.all_revisions
+        if r.has_qa_tag
+    ] if paper_data else [] 
+    
+    acceptance_revision = acceptance_revisions[0] \
+        if len(acceptance_revisions) else None
+        
+
+    """ """
+
+    reception = reception_revision.creation_date \
+        if reception_revision is not None else None
+
+    revisitation = revisitation_revision.creation_date \
+        if revisitation_revision is not None else None
+
+    acceptance = acceptance_revision.creation_date \
+        if acceptance_revision is not None else None
+        
+    issuance = datetime.now()
+
+    """ """
+
+    # received: paper uploded ($revision['created_dt'])
+    # revised: paper edited ($revision['final_state']['name'] == "accepted")
+    # accepted: qa ok
+    # issue: date of proceedings
+
     contribution_data = ContributionData(
         code=contribution.get('code'),
         type=contribution.get('type'),
@@ -46,15 +133,13 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
         end=datedict_to_tz_datetime(
             contribution.get('end_dt')
         ),
-        reception=datedict_to_tz_datetime(
-            contribution.get('reception_dt')
-        ) if 'reception_dt' in contribution else datetime.now(),
-        acceptance=datedict_to_tz_datetime(
-            contribution.get('acceptance_dt')
-        ) if 'acceptance_dt' in contribution else datetime.now(),
-        issuance=datedict_to_tz_datetime(
-            contribution.get('issuance_dt')
-        ) if 'issuance_dt' in contribution else datetime.now(),
+        paper=paper_data,
+        slides=slides_data,
+        poster=poster_data,
+        reception=reception,
+        revisitation=revisitation,
+        acceptance=acceptance,
+        issuance=issuance,
         speakers=[
             event_person_factory(person)
             for person in contribution.get('speakers', [])
@@ -66,16 +151,7 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
         coauthors=[
             event_person_factory(person)
             for person in contribution.get('coauthors', [])
-        ],
-        editor=event_person_factory(contribution.get('editor'))
-        if contribution.get('editor') else None,
-        all_revisions=[
-            contribution_revision_factory(revision)
-            for revision in contribution.get('all_revisions', [])
-        ],
-        latest_revision=contribution_revision_factory(
-            contribution.get('latest_revision', None)
-        ) if contribution.get('latest_revision', None) else None
+        ]
     )
 
     # logger.info("")
@@ -104,17 +180,27 @@ def contribution_revision_factory(revision: Any) -> RevisionData:
     return RevisionData(
         id=revision.get('id'),
         comment=revision.get('comment'),
+        initial_state=revision.get('initial_state'),
+        final_state=revision.get('final_state'),
+        creation_date=datedict_to_tz_datetime(
+            revision.get('created_dt')
+        ),
         files=[
             contribution_file_factory(file)
-            for file in revision.get('files')
+            for file in revision.get('files', [])
+        ],
+        tags=[
+            contribution_tag_factory(tag)
+            for tag in revision.get('tags', [])
         ]
     )
 
 
 def contribution_file_factory(file: Any) -> FileData:
-    
-    file_type = "paper" if file.get('file_type').get('type') == 1 else "slide"
-    
+
+    file_type: int = file.get('file_type', None).get('type') \
+        if file.get('file_type', None) else 0
+
     return FileData(
         file_type=file_type,
         uuid=file.get('uuid'),
@@ -123,6 +209,15 @@ def contribution_file_factory(file: Any) -> FileData:
         content_type=file.get('content_type'),
         download_url=file.get('download_url'),
         external_download_url=file.get('external_download_url'),
+    )
+
+
+def contribution_tag_factory(tag: Any) -> TagData:
+    return TagData(
+        code=tag.get('code'),
+        color=tag.get('color'),
+        system=tag.get('system'),
+        title=tag.get('title'),
     )
 
 

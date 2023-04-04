@@ -5,13 +5,12 @@ from io import open
 from fitz import Document
 
 from anyio import create_task_group, CapacityLimiter
-from anyio import Path, to_process, to_thread, sleep
+from anyio import Path, to_process, to_thread
 from anyio import create_memory_object_stream, ClosedResourceError
 
 from anyio.streams.memory import MemoryObjectSendStream
+from meow.services.local.event.event_pdf_utils import pdf_to_text, read_report
 from meow.services.local.event.event_pdf_utils import extract_event_pdf_files, is_to_download
-from meow.services.local.papers_metadata.pdf_report import get_pdf_report
-
 
 from meow.utils.http import download_file
 
@@ -27,7 +26,7 @@ async def event_pdf_check(event: dict, cookies: dict, settings: dict):
 
     pdf_cache_dir: Path = Path('var', 'run', f"{event_id}_pdf")
     await pdf_cache_dir.mkdir(exist_ok=True, parents=True)
-    
+
     files = await extract_event_pdf_files(event)
 
     total_files: int = len(files)
@@ -70,7 +69,6 @@ async def event_pdf_check(event: dict, cookies: dict, settings: dict):
             pass
 
 
-
 async def pdf_check_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int, current_file: dict,
                          cookies: dict, pdf_cache_dir: Path, res: MemoryObjectSendStream):
     """ """
@@ -102,33 +100,6 @@ async def internal_pdf_check_task(current_file: dict, cookies: dict, pdf_cache_d
         cookies = dict(indico_session_http=http_sess)
         await download_file(url=pdf_url, file=pdf_file, cookies=cookies)
 
-    # print(l.total_tokens)
-
-    # IN PROCESS
-    # return event_pdf_report(str(await pdf_file.absolute()))
-
-    # EXTERNAL THREAD
-    # return await to_thread.run_sync(event_pdf_report, str(await pdf_file.absolute()))
-
     # EXTERNAL PROCESS
-    return await to_process.run_sync(event_pdf_report, str(await pdf_file.absolute()))
+    return await read_report(str(await pdf_file.absolute()))
 
-
-def event_pdf_report(path: str):
-    """ """
-
-    report = dict()
-
-    # logger.info(f"event_pdf_report >>> {path}")
-
-    with open(path, 'rb') as fh:
-        try:
-            pdf = Document(stream=fh.read(), filetype='pdf')
-            report = get_pdf_report(pdf)
-            pdf.close()
-        except Exception as e:
-            logger.error(e, exc_info=True)
-
-    # logger.info(f"event_pdf_report >>> {report}")
-
-    return report

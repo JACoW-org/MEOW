@@ -51,6 +51,7 @@ py==1.11.0
 pyarrow==11.0.0
 pycodestyle==2.10.0
 pycparser==2.21
+pydash==6.0.2
 pydot==1.4.2
 PyMuPDF==1.21.1
 pyparsing==3.0.9

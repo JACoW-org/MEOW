@@ -7,7 +7,7 @@ from anyio.streams.memory import MemoryObjectSendStream
 from meow.models.local.event.final_proceedings.contribution_model import FileData
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
-from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_proceedings_files
+from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_proceedings_papers
 
 
 logger = lg.getLogger(__name__)
@@ -16,15 +16,12 @@ logger = lg.getLogger(__name__)
 async def copy_contribution_papers(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
     """ """
 
-    files_data: list[FileData] = await extract_proceedings_files(proceedings_data)
+    files_data: list[FileData] = await extract_proceedings_papers(proceedings_data)
 
     total_files: int = len(files_data)
     elaborated_files: int = 0
 
     # logger.debug(f'copy_contribution_papers - files: {total_files}')
-
-    if total_files == 0:
-        raise Exception('no file extracted')
 
     file_cache_name = f"{proceedings_data.event.id}_pdf"
     file_cache_dir: Path = Path('var', 'run', file_cache_name)
@@ -39,7 +36,7 @@ async def copy_contribution_papers(proceedings_data: ProceedingsData, cookies: d
     logger.info(f'{pdf_dest_dir} created!')
     
     send_stream, receive_stream = create_memory_object_stream()
-    capacity_limiter = CapacityLimiter(4)
+    capacity_limiter = CapacityLimiter(16)
 
     async with create_task_group() as tg:
         async with send_stream:

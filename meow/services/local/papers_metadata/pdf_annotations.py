@@ -1,6 +1,5 @@
 from fitz import Page, Rect, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER, TEXT_ALIGN_RIGHT, TEXT_ALIGN_JUSTIFY
 from fitz.utils import getColor, insert_image
-from meow.models.local.event.final_proceedings.contribution_model import ContributionData
 
 PAGE_HORIZONTAL_MARGIN = 50
 PAGE_VERTICAL_MARGIN = 15
@@ -12,7 +11,8 @@ FONT_SIZE = 7
 FONT_NAME = None
 
 def annot_page_header(page: Page, data: dict, options: dict = dict()):
-    ''''''
+    """ """
+    
     rect_width = page.rect.width - 2* PAGE_HORIZONTAL_MARGIN
 
     # top line

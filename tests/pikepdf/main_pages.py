@@ -7,16 +7,10 @@ Esecuzione parallela all'interno di un task group
 
 import time
 
-from anyio import run, to_process
-from anyio import open_file, run
-
 from fitz import Document
-
-from meow.utils.http import download_stream
 
 from io import StringIO
 
-from sklearn.feature_extraction.text import TfidfVectorizer
 
 from anyio import Path
 

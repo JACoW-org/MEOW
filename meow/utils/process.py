@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from subprocess import CalledProcessError
+from subprocess import CalledProcessError, CompletedProcess
 from typing import Optional
 from anyio import open_process, run_process
 from anyio.streams.text import TextReceiveStream
@@ -36,13 +36,13 @@ async def execute_process(args: list[str], cwd: str | None = None) -> ProcessRes
     return result
 
 
-async def run_cmd(cmd: list[str], cwd: str | None = None):
+async def run_cmd(cmd: list[str]) -> CompletedProcess[bytes] | None:
 
     try:
-        print(cmd)
-        print(" ".join(cmd))
 
-        result = await run_process(command=cmd, cwd=cwd)
+        # logger.info(" ".join(cmd))
+
+        result = await run_process(command=cmd, check=True, start_new_session=True)
 
         # print(result.returncode)
         # print(result.stdout.decode())

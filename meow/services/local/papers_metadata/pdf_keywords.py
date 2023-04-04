@@ -1,12 +1,7 @@
 import logging as lg
 
-from fitz import Document
-
 from nltk.tokenize import wordpunct_tokenize
 from nltk.stem.snowball import SnowballStemmer
-
-from meow.services.local.papers_metadata.pdf_to_txt import pdf_to_txt
-
 
 logger = lg.getLogger(__name__)
 
@@ -76,10 +71,8 @@ def get_keywords_from_text_greedy(text: str, stemmer: SnowballStemmer, stem_keyw
     return get_top_keywords(text_keywords_counts)
 
 
-def get_keywords_from_text(pdf: Document, stemmer: SnowballStemmer, stem_keywords_tree: dict[str, list[str]]) -> list[str]:
+def get_keywords_from_text(text: str, stemmer: SnowballStemmer, stem_keywords_tree: dict[str, list[str]]) -> list[str]:
     
-    text = pdf_to_txt(pdf)
-
     text_tokens: list[str] = wordpunct_tokenize(text)
 
     # init keywords counts

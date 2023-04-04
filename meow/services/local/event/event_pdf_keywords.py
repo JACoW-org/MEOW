@@ -5,15 +5,14 @@ from typing import AsyncGenerator
 from io import open
 from fitz import Document
 
-from anyio import Path, create_task_group, CapacityLimiter, to_process
+from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError
 
 from anyio.streams.memory import MemoryObjectSendStream
 
-from meow.services.local.event.event_pdf_check import extract_event_pdf_files
-from meow.services.local.event.event_pdf_utils import is_to_download
+from meow.services.local.event.event_pdf_utils import is_to_download, pdf_to_text
 
-from meow.services.local.papers_metadata.pdf_keywords import get_keywords_from_text, stem_keywords_as_tree
+from meow.services.local.papers_metadata.pdf_keywords import stem_keywords_as_tree
 
 from meow.utils.http import download_file
 
@@ -40,7 +39,9 @@ async def event_pdf_keywords(event: dict, cookies: dict, settings: dict) -> Asyn
     pdf_cache_dir: Path = Path('var', 'run', f"{event_id}_pdf")
     await pdf_cache_dir.mkdir(exist_ok=True, parents=True)
 
-    files = await extract_event_pdf_files(event)
+    # files: list[ContributionPaperData] = await extract_contributions_papers(proceedings_data)
+
+    files = [] ### TODO TODO TODO
 
     total_files: int = len(files)
     checked_files: int = 0
@@ -114,6 +115,10 @@ async def internal_pdf_keywords_task(current_file: dict, cookies: dict, pdf_cach
         cookies = dict(indico_session_http=http_sess)
         await download_file(url=pdf_url, file=pdf_file, cookies=cookies)
 
+    paper_keywords = []
+    
+    text = await pdf_to_text(str(await pdf_file.absolute()))
+
     # IN PROCESS
     # paper_keywords = get_keywords_from_text(str(await pdf_file.absolute()), stemmer, stem_keywords_dict)
 
@@ -121,20 +126,8 @@ async def internal_pdf_keywords_task(current_file: dict, cookies: dict, pdf_cach
     # paper_keywords = await to_thread.run_sync(get_keywords_from_pdf, str(await pdf_file.absolute()), stemmer, stem_keywords_dict)
 
     # EXTERNAL PROCESS
-    paper_keywords = await to_process.run_sync(get_pdf_keywords, str(await pdf_file.absolute()), stemmer, stem_keywords_dict)
+    # paper_keywords = await to_process.run_sync(get_pdf_keywords, str(await pdf_file.absolute()), stemmer, stem_keywords_dict)
 
     return paper_keywords
 
 
-def get_pdf_keywords(path: str, stemmer: SnowballStemmer, stem_keywords_dict: dict[str, list[str]]) -> list[str]:
-
-    with open(path, 'rb') as fh:
-
-        try:
-            pdf = Document(stream=fh.read(), filetype='pdf')
-            keywords = get_keywords_from_text(pdf, stemmer, stem_keywords_dict)
-            return keywords
-
-        except Exception as e:
-            logger.error(e, exc_info=True)
-            raise e

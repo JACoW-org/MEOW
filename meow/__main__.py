@@ -1,8 +1,13 @@
-import argparse
+import io
 import sys
+import json
+import pathlib
+import argparse
 
 from fitz import Document
 from fitz.utils import set_metadata
+
+from meow.services.local.papers_metadata.pdf_annotations import annot_page_footer, annot_page_header, annot_page_side
 
 
 def open_file(filename, password, show=False, pdf=True):
@@ -76,11 +81,14 @@ def doc_join(args) -> None:
 
     doc_list = args.input  # a list of input PDFs
     doc = Document()  # output PDF
+
     for src_item in doc_list:  # process one input PDF
+
         src_list = src_item.split(",")
         password = src_list[1] if len(src_list) > 1 else None
         src = open_file(src_list[0], password, pdf=True)
         pages = ",".join(src_list[2:])  # get 'pages' specifications
+
         if pages:  # if anything there, retrieve a list of desired pages
             page_list = get_list(",".join(src_list[2:]), src.page_count + 1)
         else:  # take all pages
@@ -88,12 +96,114 @@ def doc_join(args) -> None:
         for i in page_list:
             # copy each source page
             doc.insert_pdf(src, from_page=i - 1, to_page=i - 1)
-        src.close()
 
-    doc.save(args.output, garbage=True, clean=True, deflate=True,
-             deflate_fonts=True, deflate_images=True)
-    
+        src.close()
+        del src
+
+    doc.save(args.output, garbage=1, clean=1, deflate=1)
+
     doc.close()
+    del doc
+
+
+def doc_text(args) -> None:
+
+    doc = Document(filename=args.input)
+
+    out = io.StringIO()
+
+    for page in doc:  # iterate the document pages
+        text = page.get_textpage().extractText()  # get plain text (is in UTF-8)
+        out.write(text)  # write text of page
+
+    txt = out.getvalue()
+
+    sys.stdout.write(f"{txt}\n")
+
+    doc.close()
+    del doc
+
+
+def doc_frame(args) -> None:
+
+    doc = Document(filename=args.input)
+
+    # logger.info(metadata)
+    page_num = int(args.page)
+
+    header = json.loads(args.header)
+    footer = json.loads(args.footer)
+
+    cc_logo = pathlib.Path('cc_by.png').read_bytes()
+
+    for page in doc:
+
+        if header:
+            annot_page_header(page, header)
+
+        if footer:
+            annot_page_footer(page, page_num, footer)
+
+        annot_page_side(
+            page=page,
+            page_number=page_num,
+            cc_logo=cc_logo
+        )
+
+        page_num += 1
+
+    doc.save(filename=args.input, incremental=1, encryption=0)
+
+    doc.close()
+    del doc
+
+
+def doc_report(args) -> None:
+
+    doc = Document(filename=args.input)
+
+    pages_report = []
+    fonts_report = []
+    xref_list = []
+
+    for page in doc:
+
+        for font in page.get_fonts(True):
+
+            xref = font[0]
+
+            if xref not in xref_list:
+
+                xref_list.append(xref)
+
+                extracted = doc.extract_font(xref)
+                font_name, font_ext, font_type, buffer = extracted
+                font_emb = (font_ext == "n/a" or len(buffer) == 0) == False
+
+                # print("font_name", font_name, "font_emb", font_emb, "font_ext", font_ext, "font_type", font_type, len(buffer)) # font.name, font.flags, font.bbox, font.buffer
+
+                fonts_report.append(dict(
+                    name=font_name, emb=font_emb,
+                    ext=font_ext, type=font_type))
+
+        page_report = dict(sizes=dict(
+            width=page.mediabox_size.y,
+            height=page.mediabox_size.x))
+
+        pages_report.append(page_report)
+
+    fonts_report.sort(key=lambda x: x.get('name'))
+
+    report = json.dumps(dict(
+        page_count=doc.page_count,
+        pages_report=pages_report,
+        fonts_report=fonts_report
+    ))
+
+    sys.stdout.write(f"{report}\n")
+
+    doc.close()
+    del doc
 
 
 def doc_metadata(args) -> None:
@@ -117,12 +227,12 @@ def doc_metadata(args) -> None:
     set_metadata(doc, meta)
 
     if args.output:
-        doc.save(filename=args.output, garbage=True, clean=True, deflate=True,
-                 deflate_fonts=True, deflate_images=True)
+        doc.save(filename=args.output, garbage=1, clean=1, deflate=1)
     else:
-        doc.save(filename=args.input, incremental=True, encryption=False)
+        doc.save(filename=args.input, incremental=1, encryption=0)
 
     doc.close()
+    del doc
 
 
 def main():
@@ -136,6 +246,42 @@ def main():
     subps = parser.add_subparsers(
         title="Subcommands", help="Enter 'command -h' for subcommand specific help"
     )
+
+    # -------------------------------------------------------------------------
+    # 'report' command
+    # -------------------------------------------------------------------------
+    ps_text = subps.add_parser(
+        "text",
+        description="get PDF text",
+        epilog="specify input file",
+    )
+    ps_text.add_argument("-input", required=True, help="input filename")
+    ps_text.set_defaults(func=doc_text)
+
+    # -------------------------------------------------------------------------
+    # 'report' command
+    # -------------------------------------------------------------------------
+    ps_report = subps.add_parser(
+        "report",
+        description="get PDF report",
+        epilog="specify input file",
+    )
+    ps_report.add_argument("-input", required=True, help="input filename")
+    ps_report.set_defaults(func=doc_report)
+
+    # -------------------------------------------------------------------------
+    # 'frame' command
+    # -------------------------------------------------------------------------
+    ps_frame = subps.add_parser(
+        "frame",
+        description="write PDF frame",
+        epilog="specify input file",
+    )
+    ps_frame.add_argument("-input", required=True, help="input filename")
+    ps_frame.add_argument("-header", required=True, help="header metadata")
+    ps_frame.add_argument("-footer", required=True, help="header metadata")
+    ps_frame.add_argument("-page", required=True, help="start page index")
+    ps_frame.set_defaults(func=doc_frame)
 
     # -------------------------------------------------------------------------
     # 'metadata' command

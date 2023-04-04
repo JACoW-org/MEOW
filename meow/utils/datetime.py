@@ -94,6 +94,10 @@ def datedict_to_tz_datetime(date: dict | None) -> dt.datetime:
 
         return tz_date_time_obj
 
+
+    print('datedict_to_tz_datetime -->')
+    print(date)
+
     raise Exception('Invalid date dict')
 
 

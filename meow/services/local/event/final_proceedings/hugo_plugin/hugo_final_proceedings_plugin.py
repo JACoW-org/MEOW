@@ -9,7 +9,7 @@ from jinja2 import Environment, select_autoescape, FileSystemLoader, BytecodeCac
 
 from meow.models.local.event.final_proceedings.track_model import TrackData
 
-from anyio import create_task_group, CapacityLimiter, to_process
+from anyio import create_task_group, CapacityLimiter
 
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
 from meow.models.local.event.final_proceedings.event_model import AffiliationData, AttachmentData, EventData, KeywordData, PersonData
@@ -27,6 +27,9 @@ logger = lg.getLogger(__name__)
 class FileSystemCache(BytecodeCache):
 
     def __init__(self, directory):
+        from pathlib import Path        
+        Path(directory).mkdir(parents=True, exist_ok=True)
+        
         self.directory = directory
 
     def load_bytecode(self, bucket):
@@ -43,16 +46,16 @@ class FileSystemCache(BytecodeCache):
 
 class JinjaTemplateRenderer:
 
-    def __init__(self, id: str) -> None:
+    def __init__(self) -> None:
         self.env = Environment(
             enable_async=True,
             auto_reload=False,
             cache_size=1024,
             autoescape=select_autoescape(),
-            bytecode_cache=FileSystemCache(f"var/cache/{id}"),
+            bytecode_cache=FileSystemCache("var/cache/final_proceedings"),
             loader=FileSystemLoader("jinja/final_proceedings"),
         )
-
+        
     async def render(self, name: str, args: dict) -> str:
         return await self.env.get_template(name).render_async(args)
 
@@ -195,8 +198,6 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
         self.tmp_dir = Path('var', 'tmp')
 
-        self.cache_dir = Path('var', 'cache', event_id)
-
         self.src_dir = Path('var', 'run', f"{event_id}_hugo_src")
         self.out_dir = Path('var', 'run', f"{event_id}_hugo_src", "out")
 
@@ -234,7 +235,6 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         await self.prepare()
 
     async def run_build(self) -> None:
-
         await self.home()
         await self.session()
         await self.classification()
@@ -255,6 +255,8 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         #     tg.start_soon(self.institute)
         #     tg.start_soon(self.doi_per_institute)
         #     tg.start_soon(self.keyword)
+        #     tg.start_soon(self.doi)
+        #     tg.start_soon(self.reference)
         #     tg.start_soon(self.static)
         #     tg.start_soon(self.finalize)
 
@@ -376,13 +378,13 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
             await self.src_ref_dir.mkdir(exist_ok=True, parents=True)
 
             await self.out_dir.mkdir(exist_ok=True, parents=True)
-            await self.cache_dir.mkdir(exist_ok=True, parents=True)
 
         except BaseException as e:
             logger.error("hugo:prepare", e, exc_info=True)
 
         try:
-            self.template = JinjaTemplateRenderer(self.event.id)
+            self.template = JinjaTemplateRenderer()
+            
             await Path(self.src_dir, 'config.toml').write_text(
                 await self.template.render_config_toml(self.event)
             )

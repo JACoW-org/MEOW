@@ -1,8 +1,10 @@
 ---
-title: "{{ keyword.name|e }} [{{contributions|length}}]"
+title: "[{{contributions|length}}]"
 date: 2023-01-02T12:06:30+01:00
 draft: false
 ---
+
+<h1>{{ keyword.name|e }}</h1>
 
 {% import 'contribution_detail.html.jinja' as contribution_detail %}
 

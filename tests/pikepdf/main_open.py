@@ -6,18 +6,10 @@ Esecuzione parallela all'interno di un task group
 
 from typing import List, Dict, Optional
 from dataclasses import dataclass
-from anyio import run_process, create_task_group, run, CapacityLimiter
+from anyio import create_task_group, CapacityLimiter
 from typing import Any
 
-import sys
 import io
-import pathlib
-import hashlib
-
-from fitz import Document
-
-from anyio import run, to_process
-from anyio import open_file, run
 
 # from pikepdf import open
 # from pikepdf.objects import Object  # type: ignore
