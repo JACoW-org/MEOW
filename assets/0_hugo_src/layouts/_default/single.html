@@ -1,0 +1,15 @@
+{{ partial "header.html" . }}
+
+SINGLE
+
+<main>
+    {{ .Content }}
+</main>
+
+{{if not .IsHome }}
+{{ range .Resources.Match "**/*.html" }}
+{{ .Content }}
+{{ end }}
+{{ end }}
+
+{{ partial "footer.html" . }}

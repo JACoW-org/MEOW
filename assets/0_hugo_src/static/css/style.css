@@ -1,0 +1,214 @@
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-flow: column;
+  min-width: 940px;
+  font-family: Calibri, Arial, sans-serif;
+}
+
+pre {
+  border: 1px solid #ddd;
+  box-shadow: 5px 5px 5px #eee;
+  padding: 1em;
+  overflow-x: auto;
+}
+
+code {
+  background: #f9f9f9;
+}
+
+pre code {
+  background: none;
+}
+
+img,
+iframe,
+video {
+  max-width: 100%;
+}
+
+.home {
+  max-width: 50rem;
+  margin: 0 auto;
+}
+
+.menu {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  padding: 0.5rem;
+  border-bottom: 0.2rem solid #ddd;
+}
+
+.menu .logo {
+  flex: 1;
+  text-align: left;
+}
+
+.menu .logo img {
+  max-width: 200px;
+  max-height: 75px;
+}
+
+.menu .title {
+  flex: 1;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 2rem;
+}
+
+.menu .nav {
+  flex: 1;
+  text-align: right
+}
+
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.content .left {
+  flex: 0 1 30%;
+  padding: 1rem;
+  border-right: 0.2rem solid #ddd;
+}
+
+.content .left .title {
+  font-size: 1.3rem;
+  border-bottom: 0.2rem solid #999;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.content .left ul {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  flex-flow: column;
+}
+
+.content .left li {
+  font-size: 1rem;
+  border-bottom: 0.1rem solid #999;
+  padding-bottom: 0.1rem;
+  margin-bottom: 0.2rem;
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 1rem;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.content .left li a {
+  flex: 0 1 2.5rem;
+}
+
+.content .left li span {
+  flex: 1;
+  line-height: 1.1rem;
+}
+
+.content .right {
+  flex: 1 1 70%;
+  padding: 0.5rem;
+}
+
+.content .right .title {
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  flex-flow: row nowrap;
+}
+
+.content .right .name {
+  flex: 1 1 auto;
+  text-align: left;
+  font-size: 2rem;
+}
+
+.content .right .date {
+  flex: 1 1 auto;
+  text-align: right;
+  font-size: 1.3rem;
+}
+
+.content .right .chair {
+  font-size: 1.3rem;
+  border-bottom: 0.2rem solid #999;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.content .right .contrib {
+  font-size: 1rem;
+  border-bottom: 0.1rem solid #999;
+  padding-bottom: 0.1rem;
+  margin-bottom: 0.2rem;
+}
+
+.event-title {
+  font-weight: bold;
+  float: left;
+}
+
+.event-head {
+  font-weight: bold;
+  float: right;
+}
+
+.event-intro {
+  font-style: italic;
+  clear: both;
+}
+
+.event-poster {
+  float: left;
+  width: 50%;
+  margin: 10px 0px;
+  padding: 10px;
+}
+
+.event-menu {
+  width: 45%;
+  float: right;
+}
+
+.event-attachments {
+  float: right;
+  width: 45%;
+}
+
+.event-info {
+  clear: both;
+}
+
+.event-hosted {
+  clear: both;
+}
+
+.event-board {
+  float: right;
+  width: 50%;
+}
+
+.event-doi {
+  float: left;
+  width: 50%;
+}
+
+.event-footer {
+  clear: both;
+  text-align: center;
+}

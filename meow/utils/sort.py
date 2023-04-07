@@ -21,6 +21,14 @@ def sort_list_of_dict_code(val):
     return val.get('code', '')
 
 
+def sort_list_of_dict_by_date(val):
+
+    string = format_datetime_sec(val.get('start', '')) \
+        + '_' + val.get('code', '')
+
+    return string
+
+
 def sort_revision_list_by_date(val: Any):
 
     string = format_datetime_sec(val.creation_date) \

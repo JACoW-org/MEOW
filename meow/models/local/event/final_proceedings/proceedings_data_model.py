@@ -20,10 +20,9 @@ class ProceedingsData:
     keyword: list[KeywordData] = field(default_factory=list)
     institute: list[AffiliationData] = field(default_factory=list)
     doi_per_institute: list[AffiliationData] = field(default_factory=list)
-    
+
     proceedings_volume_size: int = field(default=0)
-    proceedings_brief_size: int = field(default=0)   
-    
+    proceedings_brief_size: int = field(default=0)
 
     def as_dict(self) -> dict:
         return asdict(self)

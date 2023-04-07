@@ -1,0 +1,16 @@
+<div class="title">Table of Sessions</div>
+
+<ul>
+  {% for session in sessions %}
+  {% if session.code %}
+  <li class="{{ loop.cycle('odd', 'even') }}">
+    <a href="session/{{ session.code|lower }}">
+      <b>{{ session.code }}</b>
+    </a>
+    <span>
+      {{ session.title }}
+    </span>
+  </li>
+  {% endif %}
+  {% endfor %}
+</ul>

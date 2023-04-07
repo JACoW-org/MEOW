@@ -1,25 +1,19 @@
 ---
-title: "[{{contributions|length}}]"
-date: 2023-01-02T12:06:30+01:00
-draft: false
----
+type: "session"
+name: "{{ session.code|e }}"
+title: "{{ session.title|e }}"
+start: "{{ session.start.strftime('%d %B %Y, %H:%M') }}"
+end: "{{ session.end.strftime('%H:%M') }}"
 
-<h1>
-    {{ session.code }} -
-    {{ session.title|e }} -
-    {{ session.start.strftime('%d %B %Y, %H:%M') }}
-    -
-    {{ session.end.strftime('%H:%M') }}
-</h1>
+{% if session.conveners|length>0 %}
+{% set convener = session.conveners|first %}
+chair: "{{ convener.first|e }} {{ convener.last|e }} ({{ convener.affiliation|e }})"
+{% endif %}
 
-<section>
-    {% for convener in session.conveners %}
-    <h4>Chair: {{ convener.first|e }} {{ convener.last|e }} ({{ convener.affiliation|e }})</h4>
-    {% endfor %}
-</section>
-
-{% import 'contribution_detail.html.jinja' as contribution_detail %}
-
+{% if contributions|length>0 %}
+contents:
 {% for contribution in contributions %}
-{{ contribution_detail.render(contribution, loop.cycle('odd', 'even')) }}
+- contributions/{{ contribution.code|lower }}.html
 {% endfor %}
+{% endif %}
+---

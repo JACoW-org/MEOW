@@ -14,31 +14,31 @@ class AbstractFinalProceedingsPlugin(ABC):
         pass
     
     @abstractmethod
-    async def home(self):
+    async def render_home(self):
         pass
 
     @abstractmethod
-    async def session(self):
+    async def render_session(self):
         pass
     
     @abstractmethod
-    async def classification(self):
+    async def render_classification(self):
         pass
     
     @abstractmethod
-    async def author(self):
+    async def render_author(self):
         pass
     
     @abstractmethod
-    async def institute(self):
+    async def render_institute(self):
         pass
     
     @abstractmethod
-    async def doi_per_institute(self):
+    async def render_doi_per_institute(self):
         pass
     
     @abstractmethod
-    async def keyword(self):
+    async def render_keyword(self):
         pass    
     
     @abstractmethod

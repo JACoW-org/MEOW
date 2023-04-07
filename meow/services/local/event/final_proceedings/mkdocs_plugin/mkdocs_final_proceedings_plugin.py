@@ -23,26 +23,26 @@ class MkdocsFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         mkdocs_yml = Path(self.working_dir, "mkdocs.yml")
         await mkdocs_yml.write_text(await get_mkdocs_yml_content(self.final_proceedings.get('event', None)))
 
-    async def home(self) -> None:
+    async def render_home(self) -> None:
         index_md = Path(self.working_dir, "src", "home.md")
         await index_md.write_text(await get_index_md_content(self.final_proceedings.get('event', None)))
 
-    async def session(self) -> None:
+    async def render_session(self) -> None:
         await create_final_proceedings_session(self.final_proceedings, self.working_dir)
 
-    async def classification(self) -> None:
+    async def render_classification(self) -> None:
         await create_final_proceedings_classification(self.final_proceedings, self.working_dir)
 
-    async def author(self) -> None:
+    async def render_author(self) -> None:
         await create_final_proceedings_author(self.final_proceedings, self.working_dir)
 
-    async def institute(self) -> None:
+    async def render_institute(self) -> None:
         await create_final_proceedings_institute(self.final_proceedings, self.working_dir)
 
-    async def doi_per_institute(self) -> None:
+    async def render_doi_per_institute(self) -> None:
         await create_final_proceedings_doi_per_institute(self.final_proceedings, self.working_dir)
 
-    async def keyword(self) -> None:
+    async def render_keyword(self) -> None:
         await create_final_proceedings_keyword(self.final_proceedings, self.working_dir)
 
     async def finalize(self) -> None:
