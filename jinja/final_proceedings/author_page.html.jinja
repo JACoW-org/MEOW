@@ -1,13 +1,11 @@
 ---
-title: "[{{contributions|length}}]"
-date: 2023-01-02T12:06:30+01:00
-draft: false
----
+type: "author"
+title: "{{ author.first|safe|e }} {{ author.last|safe|e }} ({{ author.affiliation|safe|e }})"
 
-<h1>{{ author.first|safe|e }} {{ author.last|safe|e }} ({{ author.affiliation|safe|e }})</h1>
-
-{% import 'contribution_detail.html.jinja' as contribution_detail %}
-
+{% if contributions|length>0 %}
+contents:
 {% for contribution in contributions %}
-{{ contribution_detail.render(contribution) }}
+- contributions/{{ contribution.code|lower }}.html
 {% endfor %}
+{% endif %}
+---

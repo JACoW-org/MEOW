@@ -90,8 +90,8 @@ class JinjaTemplateRenderer:
             contributions=[c.as_dict() for c in contributions]
         ))
 
-    async def render_classification_list(self, classifications: list[TrackData]) -> str:
-        return await self.render("classification_list.html.jinja", dict(
+    async def render_classification_partial(self, classifications: list[TrackData]) -> str:
+        return await self.render("classification_partial.html.jinja", dict(
             classifications=[s.as_dict() for s in classifications]
         ))
 
@@ -102,8 +102,8 @@ class JinjaTemplateRenderer:
             contributions=[c.as_dict() for c in contributions]
         ))
 
-    async def render_author_list(self, authors: list[PersonData]) -> str:
-        return await self.render("author_list.html.jinja", dict(
+    async def render_author_partial(self, authors: list[PersonData]) -> str:
+        return await self.render("author_partial.html.jinja", dict(
             authors=[s.as_dict() for s in authors]
         ))
 
@@ -114,8 +114,8 @@ class JinjaTemplateRenderer:
             contributions=[c.as_dict() for c in contributions]
         ))
 
-    async def render_institute_list(self, institutes: list[AffiliationData]) -> str:
-        return await self.render("institute_list.html.jinja", dict(
+    async def render_institute_partial(self, institutes: list[AffiliationData]) -> str:
+        return await self.render("institute_partial.html.jinja", dict(
             institutes=[s.as_dict() for s in institutes]
         ))
 
@@ -134,8 +134,8 @@ class JinjaTemplateRenderer:
             contributions=[c.as_dict() for c in contributions],
         ))
 
-    async def render_keyword_list(self, keywords: list[KeywordData]) -> str:
-        return await self.render("keyword_list.html.jinja", dict(
+    async def render_keyword_partial(self, keywords: list[KeywordData]) -> str:
+        return await self.render("keyword_partial.html.jinja", dict(
             keywords=[s.as_dict() for s in keywords]
         ))
 
@@ -212,6 +212,15 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
             Path(self.src_dir, 'layouts', 'partials')
         self.src_layouts_partials_session_dir = \
             Path(self.src_dir, 'layouts', 'partials', 'session')
+        self.src_layouts_partials_classification_dir = \
+            Path(self.src_dir, 'layouts', 'partials', 'classification')     
+        self.src_layouts_partials_author_dir = \
+            Path(self.src_dir, 'layouts', 'partials', 'author')
+        self.src_layouts_partials_institute_dir = \
+            Path(self.src_dir, 'layouts', 'partials', 'institute')
+        self.src_layouts_partials_keyword_dir = \
+            Path(self.src_dir, 'layouts', 'partials', 'keyword')
+            
         self.src_layouts_partials_contributions_dir = \
             Path(self.src_dir, 'layouts', 'partials', 'contributions')
         self.src_contributions_dir = \
@@ -302,6 +311,11 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
             await self.src_layouts_dir.mkdir(exist_ok=True, parents=True)
             await self.src_layouts_partials_dir.mkdir(exist_ok=True, parents=True)
             await self.src_layouts_partials_session_dir.mkdir(exist_ok=True, parents=True)
+            await self.src_layouts_partials_classification_dir.mkdir(exist_ok=True, parents=True)
+            await self.src_layouts_partials_author_dir.mkdir(exist_ok=True, parents=True)
+            await self.src_layouts_partials_institute_dir.mkdir(exist_ok=True, parents=True)
+            await self.src_layouts_partials_keyword_dir.mkdir(exist_ok=True, parents=True)
+            
             await self.src_layouts_partials_contributions_dir.mkdir(exist_ok=True, parents=True)
             
             await self.src_contributions_dir.mkdir(exist_ok=True, parents=True)
@@ -363,9 +377,6 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
             await self.template.render_session_partial(self.sessions)
         )
         
-        
-        
-
         async def _render_contribution(capacity_limiter: CapacityLimiter, session: SessionData) -> None:
             async with capacity_limiter:
 
@@ -391,27 +402,25 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         """ """
 
         logger.info(f'render_classification - {len(self.classifications)}')
+        
+        classification_partial_dir = Path(self.src_dir, 'layouts', 'partials', 'classification', 'list.html')
 
-        await Path(self.src_classification_dir, '_index.html').write_text(
-            await self.template.render_classification_list(self.classifications)
+        await classification_partial_dir.write_text(
+            await self.template.render_classification_partial(self.classifications)
         )
-
+        
         async def _render_contribution(capacity_limiter: CapacityLimiter, classification: TrackData) -> None:
             async with capacity_limiter:
-                curr_dir = Path(self.src_classification_dir,
-                                classification.code.lower())
-                await curr_dir.mkdir(parents=True, exist_ok=True)
 
                 contributions = [
                     c for c in self.contributions
                     if c.track and c.track.code == classification.code
                 ]
 
-                # logger.info(f"{classification} -> {len(contributions)}")
+                # logger.info(f"{session} -> {len(contributions)}")
 
-                await Path(curr_dir, '_index.html').write_text(
-                    await self.template.render_classification_page(
-                        self.event, classification, contributions)
+                await Path(self.src_classification_dir, f'{classification.code.lower()}.md').write_text(
+                    await self.template.render_classification_page(self.event, classification, contributions)
                 )
 
         capacity_limiter = CapacityLimiter(4)
@@ -420,20 +429,56 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                 if classification and classification.code:
                     tg.start_soon(_render_contribution,
                                   capacity_limiter, classification)
+        
+        
+        
+        
+        
+        
+        
+
+        # await Path(self.src_classification_dir, '_index.html').write_text(
+        #     await self.template.render_classification_list(self.classifications)
+        # )
+# 
+        # async def _render_contribution(capacity_limiter: CapacityLimiter, classification: TrackData) -> None:
+        #     async with capacity_limiter:
+        #         curr_dir = Path(self.src_classification_dir,
+        #                         classification.code.lower())
+        #         await curr_dir.mkdir(parents=True, exist_ok=True)
+# 
+        #         contributions = [
+        #             c for c in self.contributions
+        #             if c.track and c.track.code == classification.code
+        #         ]
+# 
+        #         # logger.info(f"{classification} -> {len(contributions)}")
+# 
+        #         await Path(curr_dir, '_index.html').write_text(
+        #             await self.template.render_classification_page(
+        #                 self.event, classification, contributions)
+        #         )
+# 
+        # capacity_limiter = CapacityLimiter(4)
+        # async with create_task_group() as tg:
+        #     for classification in self.classifications:
+        #         if classification and classification.code:
+        #             tg.start_soon(_render_contribution,
+        #                           capacity_limiter, classification)
 
     async def render_author(self) -> None:
         """ """
 
         logger.info(f'render_author - {len(self.authors)}')
+        
+        author_partial_dir = Path(self.src_dir, 'layouts', 'partials', 'author', 'list.html')
 
-        await Path(self.src_author_dir, '_index.html').write_text(
-            await self.template.render_author_list(self.authors)
+        await author_partial_dir.write_text(
+            await self.template.render_author_partial(self.authors)
         )
-
+        
         async def _render_contribution(capacity_limiter: CapacityLimiter, author: PersonData) -> None:
             async with capacity_limiter:
-                curr_dir = Path(self.src_author_dir, author.id.lower())
-                await curr_dir.mkdir(parents=True, exist_ok=True)
 
                 contributions = [
                     c for c in self.contributions
@@ -442,9 +487,8 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
                 # logger.info(f"{author} -> {len(contributions)}")
 
-                await Path(curr_dir, '_index.html').write_text(
-                    await self.template.render_author_page(
-                        self.event, author, contributions)
+                await Path(self.src_author_dir, f'{author.id.lower()}.md').write_text(
+                    await self.template.render_author_page(self.event, author, contributions)
                 )
 
         capacity_limiter = CapacityLimiter(4)
@@ -453,64 +497,135 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                 if author and author.id:
                     tg.start_soon(_render_contribution,
                                   capacity_limiter, author)
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+        # await Path(self.src_author_dir, '_index.html').write_text(
+        #     await self.template.render_author_list(self.authors)
+        # )
+# 
+        # async def _render_contribution(capacity_limiter: CapacityLimiter, author: PersonData) -> None:
+        #     async with capacity_limiter:
+        #         curr_dir = Path(self.src_author_dir, author.id.lower())
+        #         await curr_dir.mkdir(parents=True, exist_ok=True)
+# 
+        #         contributions = [
+        #             c for c in self.contributions
+        #             if len(c.authors) > 0 and author in c.authors
+        #         ]
+# 
+        #         # logger.info(f"{author} -> {len(contributions)}")
+# 
+        #         await Path(curr_dir, '_index.html').write_text(
+        #             await self.template.render_author_page(
+        #                 self.event, author, contributions)
+        #         )
+# 
+        # capacity_limiter = CapacityLimiter(4)
+        # async with create_task_group() as tg:
+        #     for author in self.authors:
+        #         if author and author.id:
+        #             tg.start_soon(_render_contribution,
+        #                           capacity_limiter, author)
 
     async def render_institute(self) -> None:
         """ """
 
         logger.info(f'render_institute - {len(self.institutes)}')
+        
+        return
+        
+        
+        institute_partial_dir = Path(self.src_dir, 'layouts', 'partials', 'institute', 'list.html')
 
-        await Path(self.src_institute_dir, '_index.html').write_text(
-            await self.template.render_institute_list(self.institutes)
+        await institute_partial_dir.write_text(
+            await self.template.render_institute_partial(self.institutes)
         )
-
-        async def _render_contribution(capacity_limiter: CapacityLimiter, institute: AffiliationData, author: PersonData) -> None:
+        
+        async def _render_contribution(capacity_limiter: CapacityLimiter, institute: AffiliationData) -> None:
             async with capacity_limiter:
+                
+                # contributions = [
+                #     c for c in self.contributions
+                #     if len(c.authors) > 0 and author in c.authors
+                # ]
 
-                curr_dir = Path(self.src_institute_dir,
-                                institute.id.lower(), author.id.lower())
-                await curr_dir.mkdir(parents=True, exist_ok=True)
+                # logger.info(f"{session} -> {len(contributions)}")
 
-                contributions = [
-                    c for c in self.contributions
-                    if len(c.authors) > 0 and author in c.authors
-                ]
-
-                # logger.info(f"{institute} -> {len(contributions)}")
-
-                await Path(curr_dir, '_index.html').write_text(
-                    await self.template.render_institute_author_page(
-                        self.event, institute, author, contributions)
+                await Path(self.src_institute_dir, f'{institute.id.lower()}.md').write_text(
+                    await self.template.render_institute_page(self.event, institute, [])
                 )
-
-        async def _render_institute(capacity_limiter: CapacityLimiter, institute: AffiliationData) -> None:
-            async with capacity_limiter:
-
-                curr_dir = Path(self.src_institute_dir, institute.id.lower())
-                await curr_dir.mkdir(parents=True, exist_ok=True)
-
-                authors = [
-                    c for c in self.authors
-                    if c.affiliation == institute.name
-                ]
-
-                await Path(curr_dir, '_index.html').write_text(
-                    await self.template.render_institute_page(
-                        self.event, institute, authors)
-                )
-
-                capacity_limiter = CapacityLimiter(4)
-                async with create_task_group() as tg:
-                    for author in authors:
-                        if author and author.id:
-                            tg.start_soon(_render_contribution,
-                                          capacity_limiter, institute, author)
 
         capacity_limiter = CapacityLimiter(4)
         async with create_task_group() as tg:
             for institute in self.institutes:
                 if institute and institute.id:
-                    tg.start_soon(_render_institute,
+                    tg.start_soon(_render_contribution,
                                   capacity_limiter, institute)
+                    
+                    
+                    
+                    
+                    
+
+        # await Path(self.src_institute_dir, '_index.html').write_text(
+        #     await self.template.render_institute_list(self.institutes)
+        # )
+# 
+        # async def _render_contribution(capacity_limiter: CapacityLimiter, institute: AffiliationData, author: PersonData) -> None:
+        #     async with capacity_limiter:
+# 
+        #         curr_dir = Path(self.src_institute_dir,
+        #                         institute.id.lower(), author.id.lower())
+        #         await curr_dir.mkdir(parents=True, exist_ok=True)
+# 
+        #         contributions = [
+        #             c for c in self.contributions
+        #             if len(c.authors) > 0 and author in c.authors
+        #         ]
+# 
+        #         # logger.info(f"{institute} -> {len(contributions)}")
+# 
+        #         await Path(curr_dir, '_index.html').write_text(
+        #             await self.template.render_institute_author_page(
+        #                 self.event, institute, author, contributions)
+        #         )
+# 
+        # async def _render_institute(capacity_limiter: CapacityLimiter, institute: AffiliationData) -> None:
+        #     async with capacity_limiter:
+# 
+        #         curr_dir = Path(self.src_institute_dir, institute.id.lower())
+        #         await curr_dir.mkdir(parents=True, exist_ok=True)
+# 
+        #         authors = [
+        #             c for c in self.authors
+        #             if c.affiliation == institute.name
+        #         ]
+# 
+        #         await Path(curr_dir, '_index.html').write_text(
+        #             await self.template.render_institute_page(
+        #                 self.event, institute, authors)
+        #         )
+# 
+        #         capacity_limiter = CapacityLimiter(4)
+        #         async with create_task_group() as tg:
+        #             for author in authors:
+        #                 if author and author.id:
+        #                     tg.start_soon(_render_contribution,
+        #                                   capacity_limiter, institute, author)
+# 
+        # capacity_limiter = CapacityLimiter(4)
+        # async with create_task_group() as tg:
+        #     for institute in self.institutes:
+        #         if institute and institute.id:
+        #             tg.start_soon(_render_institute,
+        #                           capacity_limiter, institute)
 
     async def render_doi_per_institute(self) -> None:
         """ """
@@ -551,32 +666,60 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         """ """
 
         logger.info(f'render_keyword - {len(self.keywords)}')
+        
+        keyword_partial_dir = Path(self.src_dir, 'layouts', 'partials', 'keyword', 'list.html')
 
-        await Path(self.src_keyword_dir, '_index.html').write_text(
-            await self.template.render_keyword_list(self.keywords)
+        await keyword_partial_dir.write_text(
+            await self.template.render_keyword_partial(self.keywords)
         )
-
+        
         async def _render_contribution(capacity_limiter: CapacityLimiter, keyword: KeywordData) -> None:
             async with capacity_limiter:
-                curr_dir = Path(self.src_keyword_dir, keyword.code.lower())
-                await curr_dir.mkdir(parents=True, exist_ok=True)
 
                 contributions = [
                     c for c in self.contributions
                     if len(c.keywords) > 0 and keyword in c.keywords
                 ]
 
-                # logger.info(f"{keyword} -> {len(contributions)}")
+                # logger.info(f"{session} -> {len(contributions)}")
 
-                await Path(curr_dir, '_index.html').write_text(
-                    await self.template.render_keyword_page(
-                        self.event, keyword, contributions)
+                await Path(self.src_keyword_dir, f'{keyword.code.lower()}.md').write_text(
+                    await self.template.render_keyword_page(self.event, keyword, contributions)
                 )
 
         capacity_limiter = CapacityLimiter(4)
         async with create_task_group() as tg:
             for keyword in self.keywords:
-                tg.start_soon(_render_contribution, capacity_limiter, keyword)
+                if keyword and keyword.code:
+                    tg.start_soon(_render_contribution,
+                                  capacity_limiter, keyword)
+                    
+
+        # await Path(self.src_keyword_dir, '_index.html').write_text(
+        #     await self.template.render_keyword_list(self.keywords)
+        # )
+# 
+        # async def _render_contribution(capacity_limiter: CapacityLimiter, keyword: KeywordData) -> None:
+        #     async with capacity_limiter:
+        #         curr_dir = Path(self.src_keyword_dir, keyword.code.lower())
+        #         await curr_dir.mkdir(parents=True, exist_ok=True)
+# 
+        #         contributions = [
+        #             c for c in self.contributions
+        #             if len(c.keywords) > 0 and keyword in c.keywords
+        #         ]
+# 
+        #         # logger.info(f"{keyword} -> {len(contributions)}")
+# 
+        #         await Path(curr_dir, '_index.html').write_text(
+        #             await self.template.render_keyword_page(
+        #                 self.event, keyword, contributions)
+        #         )
+# 
+        # capacity_limiter = CapacityLimiter(4)
+        # async with create_task_group() as tg:
+        #     for keyword in self.keywords:
+        #         tg.start_soon(_render_contribution, capacity_limiter, keyword)
 
     async def render_doi_contributions(self) -> None:
         """"""

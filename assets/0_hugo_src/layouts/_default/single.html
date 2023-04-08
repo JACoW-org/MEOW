@@ -1,15 +1,7 @@
 {{ partial "header.html" . }}
 
-SINGLE
-
-<main>
+<div class="home">
     {{ .Content }}
-</main>
-
-{{if not .IsHome }}
-{{ range .Resources.Match "**/*.html" }}
-{{ .Content }}
-{{ end }}
-{{ end }}
+</div>
 
 {{ partial "footer.html" . }}

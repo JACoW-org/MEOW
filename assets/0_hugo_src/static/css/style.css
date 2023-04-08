@@ -111,8 +111,28 @@ video {
   align-items: center;
 }
 
-.content .left li a {
-  flex: 0 1 2.5rem;
+.content .left .sessions li a {
+  flex: 0 1 3rem;
+}
+
+.content .left .classifications li a {
+  flex: 1 1 100%;
+}
+
+.content .left .authors li a {
+  flex: 1 1 100%;
+}
+
+.content .left .institutes li a {
+  flex: 1 1 100%;
+}
+
+.content .left .dois-of-institute li a {
+  flex: 1 1 100%;
+}
+
+.content .left .keywords li a {
+  flex: 1 1 100%;
 }
 
 .content .left li span {

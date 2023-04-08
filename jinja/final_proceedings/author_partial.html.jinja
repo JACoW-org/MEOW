@@ -1,0 +1,14 @@
+<div class="title">List of Authors</div>
+
+<ul class="authors">
+  {% for author in authors %}
+  {% if author.id %}
+  <li class="{{ loop.cycle('odd', 'even') }}">
+    <a href="author/{{ author.id|lower }}">
+      <b>{{ author.first }} {{ author.last }}</b>
+      ({{ author.affiliation }})
+    </a>
+  </li>
+  {% endif %}
+  {% endfor %}
+</ul>

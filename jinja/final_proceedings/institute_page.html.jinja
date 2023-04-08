@@ -1,19 +1,11 @@
 ---
-title: "[{{authors|length}}]"
-date: 2023-01-02T12:06:30+01:00
-draft: false
+type: "institute"
+title: "{{ institute.name|safe|e }}"
+
+{% if contributions|length>0 %}
+contents:
+{% for contribution in contributions %}
+- contributions/{{ contribution.code|lower }}.html
+{% endfor %}
+{% endif %}
 ---
-
-<h1>{{ institute.name|e }}</h1>
-
-<section>
-  <ul>
-    {% for author in authors %}
-    <li class="{{ loop.cycle('odd', 'even') }}">
-      <a href="./{{ author.id|lower }}">
-        <b>{{ author.first }} {{ author.last }}</b>
-      </a>
-    </li>
-    {% endfor %}
-  </ul>
-</section>

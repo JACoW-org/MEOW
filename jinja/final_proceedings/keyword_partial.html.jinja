@@ -1,0 +1,13 @@
+<div class="title">List of Keywords</div>
+
+<ul class="keywords">
+  {% for keyword in keywords %}
+  {% if keyword.code %}
+  <li class="{{ loop.cycle('odd', 'even') }}">
+    <a href="keyword/{{ keyword.code|lower }}">
+      <b>{{ keyword.name }}</b>
+    </a>
+  </li>
+  {% endif %}
+  {% endfor %}
+</ul>

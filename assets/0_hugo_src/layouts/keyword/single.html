@@ -1,0 +1,27 @@
+{{ partial "header.html" . }}
+{{ partial "menu.html" . }}
+
+<div class="content">
+
+    <div class="left">
+        {{ partial "keyword/list.html" . }}
+    </div>
+
+    <div class="right">
+        <div class="title">
+            <div class="name">
+                <b>{{ .Params.title }}</b>
+            </div>
+        </div>
+
+        {{ range $elem_index, $elem_val := .Params.contents }}
+        <div class="contrib">
+            {{ partialCached $elem_val . }}
+        </div>
+        {{ end }}
+
+    </div>
+
+</div>
+
+{{ partial "footer.html" . }}

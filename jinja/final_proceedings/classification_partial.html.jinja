@@ -1,0 +1,13 @@
+<div class="title">Table of Classes</div>
+
+<ul class="classifications">
+  {% for classification in classifications %}
+  {% if classification.code %}
+  <li class="{{ loop.cycle('odd', 'even') }}">
+    <a href="classification/{{ classification.code|lower }}">
+      <b>{{ classification.title }}</b>
+    </a>
+  </li>
+  {% endif %}
+  {% endfor %}
+</ul>

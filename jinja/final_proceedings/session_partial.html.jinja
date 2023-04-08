@@ -1,6 +1,6 @@
 <div class="title">Table of Sessions</div>
 
-<ul>
+<ul class="sessions">
   {% for session in sessions %}
   {% if session.code %}
   <li class="{{ loop.cycle('odd', 'even') }}">

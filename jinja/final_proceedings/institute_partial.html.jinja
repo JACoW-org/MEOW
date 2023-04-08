@@ -1,0 +1,13 @@
+<div class="title">List of Institutes</div>
+
+<ul class="institutes">
+  {% for institute in institutes %}
+  {% if institute.id %}
+  <li class="{{ loop.cycle('odd', 'even') }}">
+    <a href="institute/{{ institute.id|lower }}">
+      <b>{{ institute.name }}</b>
+    </a>
+  </li>
+  {% endif %}
+  {% endfor %}
+</ul>
