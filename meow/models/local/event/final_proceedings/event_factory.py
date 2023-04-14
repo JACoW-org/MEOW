@@ -21,26 +21,48 @@ def attachment_data_factory(attachment: Any) -> AttachmentData:
         description=attachment.get('description'),
         external_download_url=attachment.get('external_download_url'),
     )
-    
+
     # logger.info(attachment_data.as_dict())
 
     return attachment_data
 
 
-def event_data_factory(event: Any) -> EventData:
+def event_data_factory(event: Any, settings: dict) -> EventData:
+
+    event_id = event.get('id', '')
+    context = settings.get('event_context', '')
+    name = settings.get('event_name', '')
+    title = settings.get('event_title', '')
+    hosted = settings.get('event_hosted', '')
+    date = settings.get('event_date', '')
+    location = settings.get('event_location', '')
+    editorial = settings.get('event_editorial', '')
+    isbn = settings.get('event_isbn', '')
+    issn = settings.get('event_issn', '')
+    doi = settings.get('event_doi', '')
+
+    start = datedict_to_tz_datetime(
+        event.get('start_dt')
+    )
+
+    end = datedict_to_tz_datetime(
+        event.get('end_dt')
+    )
+
     event_data = EventData(
-        id=event.get('id'),
-        url=event.get('url'),
-        title=event.get('title'),
-        description=event.get('description'),
-        location=event.get('location'),
-        address=event.get('address'),
-        start=datedict_to_tz_datetime(
-            event.get('start_dt')
-        ),
-        end=datedict_to_tz_datetime(
-            event.get('end_dt')
-        ),
+        id=event_id,
+        name=name,
+        title=title,
+        hosted=hosted,
+        location=location,
+        editorial=editorial,
+        isbn=isbn,
+        issn=issn,
+        doi=doi,
+        date=date,
+        context=context,
+        start=start,
+        end=end,
     )
 
     # logger.info(event_data.as_dict())

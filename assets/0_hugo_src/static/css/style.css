@@ -12,6 +12,7 @@ body {
   flex-flow: column;
   min-width: 940px;
   font-family: Calibri, Arial, sans-serif;
+  font-size: 1.1rem;
 }
 
 pre {
@@ -35,10 +36,130 @@ video {
   max-width: 100%;
 }
 
-.home {
-  max-width: 50rem;
-  margin: 0 auto;
+ul {
+  margin: 0;
 }
+
+li {
+  list-style-type: square;
+}
+
+.home {
+  max-width: 55rem;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+
+.home .event-head {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  margin: 1rem 0;
+  padding: 1rem 0;
+}
+
+.home .event-head .event-name {
+  flex: 1 1 50%;
+  font-weight: bold;
+  text-align: center;
+  font-size: 4rem;
+  color: #c1210d;
+  padding: 0;
+  margin: 0;
+}
+
+.home .event-head .event-title {
+  flex: 1 1 50%;
+  font-size: 1.3rem;
+
+  padding: 0;
+  margin: 0;
+}
+
+.home .event-head .event-title big {
+  font-weight: bold;
+  font-size: 2.2rem;
+}
+
+
+.home .event-body {
+  display: flex;
+  flex-flow: row nowrap;
+
+  border-top: 0.1rem solid #999;
+  padding-top: 0.1rem;
+  margin-top: 0.2rem;
+  
+  border-bottom: 0.1rem solid #999;
+  padding-bottom: 0.1rem;
+  margin-bottom: 0.2rem;
+}
+
+.home .event-body .event-poster {
+  flex: 1 1 50%;
+  padding: 1rem; 
+}
+
+.home .event-body .event-menu {
+  flex: 1 1 50%;
+  padding: 1rem;
+}
+
+.home .event-body .event-menu {
+  flex: 1 1 50%;
+}
+
+.home .event-body .event-menu  .event-papers {
+  border-bottom: 0.1rem solid #999;
+  padding-bottom: 0.1rem;
+  margin-bottom: 0.2rem;
+}
+
+.home .event-body .event-menu  .event-papers a {
+  font-weight: bold;
+  color: #c1210d;
+}
+
+.home .event-body .event-menu  .event-volumes {
+  border-bottom: 0.1rem solid #999;
+  padding-bottom: 0.1rem;
+  margin-bottom: 0.2rem;
+}
+
+.home .event-body .event-menu  .event-attachments {
+  border-bottom: 0.1rem solid #999;
+  padding-bottom: 0.1rem;
+  margin-bottom: 0.2rem;
+}
+
+
+
+
+.home .event-footer {
+  display: flex;
+  flex-flow: row nowrap;  
+
+  border-bottom: 0.1rem solid #999;
+  padding-bottom: 0.1rem;
+  margin-bottom: 0.2rem;
+}
+
+.home .event-footer .event-doi {
+  flex: 1 1 50%;
+}
+
+.home .event-footer .event-board {
+  flex: 1 1 50%;
+}
+
+.home .event-copy {
+  margin: 1rem;
+  text-align: center;
+}
+
+
 
 .menu {
   display: flex;
@@ -178,57 +299,6 @@ video {
   margin-bottom: 0.2rem;
 }
 
-.event-title {
-  font-weight: bold;
-  float: left;
-}
 
-.event-head {
-  font-weight: bold;
-  float: right;
-}
 
-.event-intro {
-  font-style: italic;
-  clear: both;
-}
 
-.event-poster {
-  float: left;
-  width: 50%;
-  margin: 10px 0px;
-  padding: 10px;
-}
-
-.event-menu {
-  width: 45%;
-  float: right;
-}
-
-.event-attachments {
-  float: right;
-  width: 45%;
-}
-
-.event-info {
-  clear: both;
-}
-
-.event-hosted {
-  clear: both;
-}
-
-.event-board {
-  float: right;
-  width: 50%;
-}
-
-.event-doi {
-  float: left;
-  width: 50%;
-}
-
-.event-footer {
-  clear: both;
-  text-align: center;
-}

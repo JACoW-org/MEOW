@@ -8,7 +8,7 @@ logger = lg.getLogger(__name__)
 
 async def create_final_proceedings(event: dict, sessions: list, contributions: list, attachments: list, cookies: dict, settings: dict) -> ProceedingsData:
 
-    proceedings_data = proceedings_data_factory(event, sessions, contributions, attachments)
+    proceedings_data = proceedings_data_factory(event, sessions, contributions, attachments, settings)
     
     # logger.info(proceedings_data.as_dict())
 

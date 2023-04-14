@@ -1,34 +1,31 @@
-baseURL = "{{url}}"
+baseURL = """//127.0.0.1:8080/{{event.path}}/"""
 languageCode = "en-us"
-title = "{{event.title}}"
+title = """{{event.name}}"""
 
 
 [params]
-description = "{{event.title}} - Proceedings - Trieste, Italy"
-footer = "&copy; 2022 by JACoW — cc Creative Commons Attribution 4.0"
+name = """{{event.name}}"""
+title = """{{event.title}}"""
+hosted = """{{event.hosted}}"""
+editorial = """{{event.editorial}}"""
+location = """{{event.location}}"""
+date = """{{event.date}}"""
+isbn = """{{event.isbn}}"""
+issn = """{{event.issn}}"""
+doi = """{{event.doi}}"""
 
+{% for attachment in attachments %}
+{% if 'logo' in attachment.filename: %}
+logo = """pdf/{{ attachment.filename }}"""
+{% endif %}
+{% if 'poster' in attachment.filename: %}
+poster = """pdf/{{ attachment.filename }}"""
+{% endif %}
+{% endfor %}
 
+{% for attachment in attachments %}
+[[params.attachments]]
+title = """{ attachment.title }}"""
+filename = """pdf/{{ attachment.filename }}"""
+{% endfor %}   
 
-
-[markup]
-  [markup.goldmark]
-    [markup.goldmark.extensions]
-      definitionList = true
-      footnote = true
-      linkify = true
-      linkifyProtocol = 'https'
-      strikethrough = true
-      table = true
-      taskList = true
-      typographer = true
-    [markup.goldmark.parser]
-      autoHeadingID = true
-      autoHeadingIDType = 'github'
-      wrapStandAloneImageWithinParagraph = true
-      [markup.goldmark.parser.attribute]
-        block = false
-        title = true
-    [markup.goldmark.renderer]
-      hardWraps = false
-      unsafe = true
-      xhtml = true

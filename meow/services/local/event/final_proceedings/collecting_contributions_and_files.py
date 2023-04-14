@@ -23,7 +23,7 @@ async def collecting_contributions_and_files(event: dict, sessions: list, cookie
     return [contributions]
 
 
-async def download_contributions(event_url: str, session_id: int, cookies: dict, settings: dict, contributions: list, limiter: CapacityLimiter):
+async def download_contributions(event_url: str, session_id: int, cookies: dict, settings: dict, contributions: list, limiter: CapacityLimiter) -> None:
     async with limiter:
 
         response = await download_json(url=f"{event_url}manage/purr/final-proceedings-contributions-data/{session_id}", cookies=cookies)

@@ -1,11 +1,12 @@
----
-type: "author"
-title: "{{ author.first|safe|e }} {{ author.last|safe|e }} ({{ author.affiliation|safe|e }})"
++++
+type = "author"
+title = """{{ author.first|safe|e }} {{ author.last|safe|e }}"""
 
 {% if contributions|length>0 %}
-contents:
+contents = [
 {% for contribution in contributions %}
-- contributions/{{ contribution.code|lower }}.html
+"""contributions/{{ contribution.code|lower }}.html""",
 {% endfor %}
+]
 {% endif %}
----
++++

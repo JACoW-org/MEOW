@@ -2,102 +2,131 @@
 
 <div class="home">
 
-    <section class="event-title">
-        <h1>FEL2022</h1>
-    </section>
+    <div class="event-head">
 
-    <section class="event-head">
-        <p>
-            Proceedings of the
-            <big>40th International Free Electron Laser Conference</big>
-        </p>
-    </section>
+        <div class="event-name">
+            <div>{% raw %}{{.Site.Params.name}}{% endraw %}</div>
+        </div>
 
-    <section class="event-intro">
+        <div class="event-title">
+            <div>
+                <span>Proceedings of the</span><br>
+                <big>{% raw %}{{.Site.Params.title}}{% endraw %}</big>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="event-intro">
         <p>
             The links below lead to detailed listings of the many facets of the conference, including Portable Acrobat
             Format (PDF) files of all invited and contributed papers, together with slides from oral presentations and
             PDFs from poster sessions.
         </p>
-    </section>
+    </div>
 
-    <section class="event-poster">
-        <img src="pdf/FEL2022-home-poster.jpg">
-    </section>
+    <div class="event-body">
 
-    <section class="event-menu">
-        <ul>
-            <li><a href="session">Session</a></li>
-            <li><a href="classification">Classification</a></li>
-            <li><a href="author">Author</a></li>
-            <li><a href="institute">Institute</a></li>
-            <li><a href="doi_per_institute">DOI per Institute</a></li>
-            <li><a href="keyword">Keyword</a></li>
-        </ul>
-    </section>
+        <div class="event-poster">
+            <img src="{% raw %}{{.Site.Params.poster}}{% endraw %}">
+        </div>
 
-    <section class="event-attachments">
-        <ul>
-            <li>
-                <a href="pdf/{{ event.id }}_proceedings_volume.pdf">
-                    <b>FEL2022 Proceedings Volume</b>
-                </a> ({{ (volume_size / (1024 * 1024)) | int }}MB)
-                <i>The complete volume of papers</i>
-            </li>
+        <div class="event-menu">
 
-            <li>
-                <a href="pdf/{{ event.id }}_proceedings_brief.pdf">
-                    <b>FEL2022 Proceedings at a glance</b>
-                </a> ({{ (brief_size / (1024 * 1024)) | int }}MB)
-                <i>First page only of all papers with hyperlinks to complete versions</i>
-            </li>
-        </ul>
+            <div class="event-papers">
 
-        <ul>
-            {% for attachment in attachments %}
-            {% if attachment.content_type == "application/pdf": %}
-            <li>
-                <a href="pdf/{{ attachment.filename }}">
-                    <b>{{ attachment.title }}</b>
-                </a> ({{ (attachment.size / (1024 * 1024)) | int }}MB)
-                <i>{{ attachment.description }}</i>
-            </li>
-            {% endif %}
-            {% endfor %}
-        </ul>
-    </section>
+                <div>Index of papers by:</div>
 
-    <section class="event-hosted">
-        <p>
-            FEL2022 was hosted by Elettra-Sincrotrone Trieste, Trieste, Italy,
-            and held at the Trieste Convention Center in Trieste, Italy 22-26 Aug 2022
-        </p>
-    </section>
+                <ul>
+                    <li><a href="session">Session</a></li>
+                    <li><a href="classification">Classification</a></li>
+                    <li><a href="author">Author</a></li>
+                    <li><a href="institute">Institute</a></li>
+                    <li><a href="doi_per_institute">DOI per Institute</a></li>
+                    <li><a href="keyword">Keyword</a></li>
+                </ul>
+            </div>
 
-    <section class="event-board">
-        <p>
-            Editorial Board: Peter Forck (GSI), Adriana Wawrzyniak (SOLARIS),
-            Agnieszka Cudek (SOLARIS), Volker R.W. Schaa (GSI),
-            Grzegorz W. Kowalski (SOLARIS)
-        </p>
-    </section>
+            <div class="event-volumes">
 
-    <section class="event-doi">
-        <p>
-            March 2023
-            ISBN 978-3-95450-220-2
-            ISSN 2673-5474
-            DOI:10.18429/JACoW-FEL2022
-        </p>
-    </section>
+                <ul>
+                    <li>
+                        <a href="pdf/{{ event.id }}_proceedings_volume.pdf">
+                            <b>FEL2022 Proceedings Volume</b>
+                        </a> ({{ (volume_size / (1024 * 1024)) | int }}MB)
+                        <div><i>The complete volume of papers</i></div>
+                    </li>
 
-    <section class="event-footer">
-        Copyright &copy; 2023 by
+                    <li>
+                        <a href="pdf/{{ event.id }}_proceedings_brief.pdf">
+                            <b>FEL2022 Proceedings at a glance</b>
+                        </a> ({{ (brief_size / (1024 * 1024)) | int }}MB)
+                        <div><i>First page only of all papers with hyperlinks to complete versions</i></div>
+                    </li>
+
+                    {% for attachment in attachments %}
+                    {% if '-volumes-' in attachment.filename: %}
+                    <li>
+                        <a href="pdf/{{ attachment.filename }}">
+                            <b>{{ attachment.title }}</b>
+                        </a> ({{ (attachment.size / (1024 * 1024)) | int }}MB)
+                        <div><i>{{ attachment.description }}</i></div>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+
+                </ul>
+
+            </div>
+
+            <div class="event-attachments">
+
+                <ul>
+                    {% for attachment in attachments %}
+                    {% if '-attachments-' in attachment.filename: %}
+                    <li>
+                        <a href="pdf/{{ attachment.filename }}">
+                            <b>{{ attachment.title }}</b>
+                        </a> ({{ (attachment.size / (1024 * 1024)) | int }}MB)
+                        <div><i>{{ attachment.description }}</i></div>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="event-hosted">
+                <p>{% raw %}{{.Site.Params.hosted}}{% endraw %}</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="event-footer">
+
+        <div class="event-doi">
+            <p>
+            <div>DATE: {% raw %}{{.Site.Params.date}}{% endraw %}</div>
+            <div>ISBN: {% raw %}{{.Site.Params.isbn}}{% endraw %}</div>
+            <div>ISSN: {% raw %}{{.Site.Params.issn}}{% endraw %}</div>
+            <div>DOI: {% raw %}{{.Site.Params.doi}}{% endraw %}</div>
+            </p>
+        </div>
+
+        <div class="event-board">
+            <p>Editorial Board: {% raw %}{{.Site.Params.editorial}}{% endraw %}</p>
+        </div>
+
+    </div>
+
+    <div class="event-copy">
+        Copyright &copy; {{ datetime_now.strftime('%Y') }} by
         <a href="https://www.jacow.org/" target="_blank">JACoW</a>
         — <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">
             Creative Commons Attribution 4.0</a>
-        — <a href="ethics.html">Publishing Policies &amp; Ethics</a>
-    </section>
+        — <a href="https://www.jacow.org/About/PublishingPoliciesEthics">Publishing Policies &amp; Ethics</a>
+    </div>
 
 </div>
 

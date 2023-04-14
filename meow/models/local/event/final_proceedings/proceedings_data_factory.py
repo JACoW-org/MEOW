@@ -11,7 +11,7 @@ from meow.models.local.event.final_proceedings.session_model import SessionData
 from meow.utils.sort import sort_list_by_code, sort_list_by_date
 
 
-def proceedings_data_factory(event: Any, sessions: list, contributions: list, attachments: list,) -> ProceedingsData:
+def proceedings_data_factory(event: Any, sessions: list, contributions: list, attachments: list, settings: dict) -> ProceedingsData:
 
     sessions_data: list[SessionData] = [
         session_data_factory(session)
@@ -33,7 +33,7 @@ def proceedings_data_factory(event: Any, sessions: list, contributions: list, at
     ]
 
     return ProceedingsData(
-        event=event_data_factory(event),
+        event=event_data_factory(event, settings),
         sessions=sessions_data,
         contributions=contributions_data,
         attachments=attachments_data

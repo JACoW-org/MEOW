@@ -1,5 +1,7 @@
 import logging as lg
 
+from math import sqrt
+
 from anyio import CapacityLimiter, Path, create_task_group
 
 from meow.models.local.event.final_proceedings.contribution_model import FileData
@@ -17,8 +19,8 @@ async def concat_contribution_papers(proceedings_data: ProceedingsData, cookies:
     """ """
 
     # logger.debug(f'concat_contribution_papers - files: {total_files}')
-
-    dir_name = f"{proceedings_data.event.id}_pdf"
+    
+    dir_name: str = f"{proceedings_data.event.id}_pdf"
     cache_dir: Path = Path('var', 'run', dir_name)
     await cache_dir.mkdir(exist_ok=True, parents=True)
 
@@ -47,9 +49,10 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
 
     vol_pdf_results: list[str] = []
 
+    chunk_size = int(sqrt(len(files_data))) + 1
     capacity_limiter = CapacityLimiter(4)
     async with create_task_group() as tg:
-        for index, vol_pdf_files_chunk in enumerate(split_list(vol_pdf_files, 25)):
+        for index, vol_pdf_files_chunk in enumerate(split_list(vol_pdf_files, chunk_size)):
             tg.start_soon(concat_chunks, f"{vol_pdf_path}.{index}",
                           vol_pdf_files_chunk, vol_pdf_results, capacity_limiter)
 
@@ -72,10 +75,11 @@ async def brief_pdf_task(proceedings_data: ProceedingsData,  files_data: list[Fi
     ]
 
     vol_pdf_results: list[str] = []
-
+    
+    chunk_size = int(sqrt(len(files_data))) + 1
     capacity_limiter = CapacityLimiter(4)
     async with create_task_group() as tg:
-        for index, vol_pdf_files_chunk in enumerate(split_list(brief_pdf_files, 25)):
+        for index, vol_pdf_files_chunk in enumerate(split_list(brief_pdf_files, chunk_size)):
             tg.start_soon(concat_chunks, f"{brief_pdf_path}.{index}",
                           vol_pdf_files_chunk, vol_pdf_results, capacity_limiter)
 

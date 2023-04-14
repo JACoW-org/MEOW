@@ -2,14 +2,13 @@
 
 <div class="logo">
     <a href="">
-        <img src="pdf/FEL2022-logo.jpg" alt="conference logo icon"
-            alt="FEL2022 Proceedings &mdash; Trieste, Italy logo" />
+        <img src="{{.Site.Params.logo}}" alt="conference logo icon"
+            alt="{{.Site.Params.name}} Proceedings &mdash; {{.Site.Params.location}}" />
     </a>
 </div>
 
 <div class="title">
-    FEL2022 - Proceedings<br />
-    Trieste, Italy<br />
+    {{.Site.Params.name}} - Proceedings<br />{{.Site.Params.location}}<br />
 </div>
 
 <div class="nav">

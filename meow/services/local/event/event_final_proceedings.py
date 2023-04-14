@@ -199,7 +199,7 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
 
     # HTML + site
 
-    plugin = HugoFinalProceedingsPlugin(final_proceedings)
+    plugin = HugoFinalProceedingsPlugin(final_proceedings, cookies, settings)
 
     await plugin.run_prepare()
 

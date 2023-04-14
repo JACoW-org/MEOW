@@ -86,32 +86,37 @@ class AttachmentData:
     filename: str
     md5sum: str
     size: int
-    
+
     title: str
     description: str
     external_download_url: str
 
     def as_dict(self) -> dict:
         return asdict(self)
-    
+
 
 @dataclass(kw_only=True, slots=True)
 class EventData:
     """ """
 
     id: str
-    url: str
+    name: str
     title: str
-    description: str
+    hosted: str
+    editorial: str
+    context: str
     location: str
-    address: str
+    date: str
+    isbn: str
+    issn: str
+    doi: str
 
     start: datetime
     end: datetime
 
     @property
     def path(self) -> str:
-        return slugify(self.title)
+        return slugify(self.context)
 
     def __eq__(self, other):
         return self.id == other.id
@@ -119,7 +124,11 @@ class EventData:
     def __hash__(self):
         return hash(('id', self.id,
                      'title', self.title,
-                     'url', self.url))
+                     'url', self.path))
 
     def as_dict(self) -> dict:
-        return asdict(self)
+        return {
+            **
+            asdict(self),
+            "path": self.path,
+        }
