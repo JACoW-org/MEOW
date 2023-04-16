@@ -15,6 +15,10 @@ class PersonData:
     email: str
 
     @property
+    def code(self) -> str:
+        return slugify(f"{self.id} {self.first} {self.last}")
+
+    @property
     def name(self) -> str:
         return f"{self.first} {self.last}"
 
@@ -39,7 +43,13 @@ class PersonData:
                      'id', self.id))
 
     def as_dict(self) -> dict:
-        return asdict(self)
+        return {
+            **asdict(self),
+            "name": self.name,
+            "short": self.short,
+            "long": self.long,
+            "code": self.code,
+        }
 
 
 @dataclass(kw_only=True, slots=True)

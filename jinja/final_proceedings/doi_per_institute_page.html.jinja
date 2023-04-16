@@ -1,15 +1,10 @@
----
-title: "[{{contributions|length}}]"
-date: 2023-01-02T12:06:30+01:00
-draft: false
----
++++
+type = "doi_per_institute"
+title = """{{ contribution.code|safe|e }}"""
 
-<h1>{{ institute.name|e }}</h1>
-
-{% import 'contribution_doi.html.jinja' as contribution_detail %}
-
-<ul>
-    {% for contribution in contributions %}
-    <li>{{ contribution_detail.render(contribution) }}</li>
-    {% endfor %}
-</ul>
+{% if contribution %}
+contents = [
+"contributions/{{ contribution.code|lower }}.html",
+]
+{% endif %}
++++

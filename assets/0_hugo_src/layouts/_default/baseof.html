@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en-us">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="conference, proceedings">
+    <meta name="generator" content="cat--purr_meow">
+    <meta name="author" content="fabio.meneghetti@akera.it">
+
+    <base href="{{ .Site.BaseURL }}">
+    <link rel="stylesheet" href="css/style.css" />
+
+    <title>
+        {{ block "title" . }}
+        {{ .Site.Title }}
+        {{ end }}
+    </title>
+</head>
+
+<body>
+    {{ block "menu" . }}
+    {{ partialCached "menu.html" . }}
+    {{ end }}
+
+    {{ block "main" . }}
+    {{ .Content }}
+    {{ end }}
+</body>
+
+</html>

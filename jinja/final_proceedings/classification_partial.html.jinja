@@ -3,7 +3,7 @@
 <ul class="classifications">
   {% for classification in classifications %}
   {% if classification.code %}
-  <li class="{{ loop.cycle('odd', 'even') }}">
+  <li class="classification">
     <a href="classification/{{ classification.code|lower }}">
       <b>{{ classification.title }}</b>
     </a>

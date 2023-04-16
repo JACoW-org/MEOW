@@ -1,14 +1,11 @@
----
-title: "[{{contributions|length}}]"
-date: 2023-01-02T12:06:30+01:00
----
-
-<h1>FEL2022 - DOI</h1>
++++
+title = "[{{contributions|length}}]"
++++
 
 <section>
   <ul>
     {% for contribution in contributions %}
-    <li class="{{ loop.cycle('odd', 'even') }}">
+    <li>
       <a href="./{{ contribution.code|lower }}">
         <b>{{ contribution.code }}</b>
         ({{ contribution.title }})

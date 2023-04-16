@@ -3,12 +3,10 @@ title: "{{keywords|length}}"
 date: 2023-01-02T12:06:30+01:00
 ---
 
-<h1>FEL2022 - Keyword</h1>
-
 <section>
   <ul>
     {% for keyword in keywords %}
-    <li class="{{ loop.cycle('odd', 'even') }}">
+    <li>
       <a href="./{{ keyword.code|lower }}">
         <b>{{ keyword.name }}</b>
       </a>

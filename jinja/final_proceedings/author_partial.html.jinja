@@ -3,7 +3,7 @@
 <ul class="authors">
   {% for author in authors %}
   {% if author.id %}
-  <li class="{{ loop.cycle('odd', 'even') }}">
+  <li class="author">
     <a href="author/{{ author.id|lower }}">
       <b>{{ author.first }} {{ author.last }}</b>
       ({{ author.affiliation }})

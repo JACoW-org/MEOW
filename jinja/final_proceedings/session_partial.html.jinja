@@ -3,13 +3,13 @@
 <ul class="sessions">
   {% for session in sessions %}
   {% if session.code %}
-  <li class="{{ loop.cycle('odd', 'even') }}">
+  <li class="session">
     <a href="session/{{ session.code|lower }}">
-      <b>{{ session.code }}</b>
+      <b>{{ session.code }}</b> -
+      <span>
+        {{ session.title }}
+      </span>
     </a>
-    <span>
-      {{ session.title }}
-    </span>
   </li>
   {% endif %}
   {% endfor %}

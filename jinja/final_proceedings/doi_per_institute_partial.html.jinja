@@ -1,0 +1,21 @@
+<div class="title">DOI per Institute</div>
+
+<ul class="doi-per-institutes">
+  {% for institute in institutes %}
+  <li class="doi-per-institute">
+
+    <b>{{ institute.name|e }}</b>
+
+    <ul class="contributions">
+      {% for contribution in contributionsGroups[institute.name] %}
+      <li class="contribution">
+        <a href="doi_per_institute/{{ contribution.code|lower }}">
+          <b>{{ contribution.code|lower }}</b> -
+          <span>{{ contribution.title|e }}</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </li>
+  {% endfor %}
+</ul>

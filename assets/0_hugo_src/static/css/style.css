@@ -217,7 +217,11 @@ li {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  flex-flow: column;
+  flex-flow: column nowrap;
+}
+
+.content .left li:last-child {
+  border: 0;
 }
 
 .content .left li {
@@ -226,14 +230,11 @@ li {
   padding-bottom: 0.1rem;
   margin-bottom: 0.2rem;
   display: flex;
-  flex-flow: row nowrap;
-  gap: 1rem;
-  justify-content: flex-start;
-  align-items: center;
+  flex-flow: column nowrap;
 }
 
 .content .left .sessions li a {
-  flex: 0 1 3rem;
+  flex: 1 1 100%;
 }
 
 .content .left .classifications li a {

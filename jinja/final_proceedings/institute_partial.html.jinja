@@ -3,10 +3,21 @@
 <ul class="institutes">
   {% for institute in institutes %}
   {% if institute.id %}
-  <li class="{{ loop.cycle('odd', 'even') }}">
-    <a href="institute/{{ institute.id|lower }}">
-      <b>{{ institute.name }}</b>
-    </a>
+  <li class="institute">
+    <b>{{ institute.name|e }}</b>
+
+    <ul class="authors">
+      {% if institute.name in authorsGroups %}
+      {% for author in authorsGroups[institute.name] %}
+      <li class="author">
+        <a href="institute/{{ author.code|lower }}">
+          <b>{{ author.short }}</b>
+        </a>
+      </li>
+      {% endfor %}
+      {% endif %}
+    </ul>
+
   </li>
   {% endif %}
   {% endfor %}

@@ -1,21 +1,19 @@
 import logging as lg
 
-from os import path
-from datetime import datetime
-
 from io import BytesIO
 from anyio import Path, run_process, create_task_group
+from numpy import short
 
-from jinja2 import Environment, select_autoescape, FileSystemLoader, BytecodeCache
 
 from meow.models.local.event.final_proceedings.track_model import TrackData
 
 from anyio import create_task_group, CapacityLimiter
 
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
-from meow.models.local.event.final_proceedings.event_model import AffiliationData, AttachmentData, EventData, KeywordData, PersonData
+from meow.models.local.event.final_proceedings.event_model import AffiliationData, KeywordData, PersonData
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.models.local.event.final_proceedings.session_model import SessionData
+from meow.services.local.event.final_proceedings.hugo_plugin.hugo_jinja_template_renderer import JinjaTemplateRenderer
 from meow.tasks.local.doi.models import ContributionDOI
 
 from meow.services.local.event.final_proceedings.abstract_plugin.abstract_final_proceedings_plugin import AbstractFinalProceedingsPlugin
@@ -23,163 +21,6 @@ from meow.utils.filesystem import cptree, rmtree
 
 
 logger = lg.getLogger(__name__)
-
-
-class FileSystemCache(BytecodeCache):
-
-    def __init__(self, directory):
-        from pathlib import Path
-        Path(directory).mkdir(parents=True, exist_ok=True)
-
-        self.directory = directory
-
-    def load_bytecode(self, bucket):
-        filename = path.join(self.directory, bucket.key)
-        if path.exists(filename):
-            with open(filename, 'rb') as f:
-                bucket.load_bytecode(f)
-
-    def dump_bytecode(self, bucket):
-        filename = path.join(self.directory, bucket.key)
-        with open(filename, 'wb') as f:
-            bucket.write_bytecode(f)
-
-
-class JinjaTemplateRenderer:
-
-    def __init__(self) -> None:
-        self.env = Environment(
-            enable_async=True,
-            auto_reload=False,
-            cache_size=1024,
-            autoescape=select_autoescape(),
-            bytecode_cache=FileSystemCache("var/cache/final_proceedings"),
-            loader=FileSystemLoader("jinja/final_proceedings"),
-        )
-
-    async def render(self, name: str, args: dict) -> str:
-        return await self.env.get_template(name).render_async(args)
-
-    async def render_config_toml(self, event: EventData, attachments: list[AttachmentData], settings: dict) -> str:
-        return await self.render("config.toml.jinja", dict(
-            event=event.as_dict(),
-            settings=settings,
-            attachments=[a.as_dict() for a in attachments],
-        ))
-
-    async def render_home_page(self, event: EventData, attachments: list[AttachmentData], volume_size: int, brief_size: int) -> str:
-        return await self.render("home_page.html.jinja", dict(
-            event=event.as_dict(),
-            attachments=[a.as_dict() for a in attachments],
-            volume_size=volume_size,
-            brief_size=brief_size,
-            datetime_now=datetime.now()
-        ))
-
-    async def render_contribution_partial(self, contribution: ContributionData) -> str:
-        return await self.render("contribution_partial.html.jinja", dict(
-            contribution=contribution.as_dict()
-        ))
-
-    async def render_session_partial(self, sessions: list[SessionData]) -> str:
-        return await self.render("session_partial.html.jinja", dict(
-            sessions=[s.as_dict() for s in sessions]
-        ))
-
-    async def render_session_page(self, event: EventData, session: SessionData, contributions: list[ContributionData]) -> str:
-        return await self.render("session_page.html.jinja", dict(
-            event=event.as_dict(),
-            session=session.as_dict(),
-            contributions=[c.as_dict() for c in contributions]
-        ))
-
-    async def render_classification_partial(self, classifications: list[TrackData]) -> str:
-        return await self.render("classification_partial.html.jinja", dict(
-            classifications=[s.as_dict() for s in classifications]
-        ))
-
-    async def render_classification_page(self, event: EventData, classification: TrackData, contributions: list[ContributionData]) -> str:
-        return await self.render("classification_page.html.jinja", dict(
-            event=event.as_dict(),
-            classification=classification.as_dict(),
-            contributions=[c.as_dict() for c in contributions]
-        ))
-
-    async def render_author_partial(self, authors: list[PersonData]) -> str:
-        return await self.render("author_partial.html.jinja", dict(
-            authors=[s.as_dict() for s in authors]
-        ))
-
-    async def render_author_page(self, event: EventData, author: PersonData, contributions: list[ContributionData]) -> str:
-        return await self.render("author_page.html.jinja", dict(
-            event=event.as_dict(),
-            author=author.as_dict(),
-            contributions=[c.as_dict() for c in contributions]
-        ))
-
-    async def render_institute_partial(self, institutes: list[AffiliationData]) -> str:
-        return await self.render("institute_partial.html.jinja", dict(
-            institutes=[s.as_dict() for s in institutes]
-        ))
-
-    async def render_institute_page(self, event: EventData, institute: AffiliationData, authors: list[PersonData]) -> str:
-        return await self.render("institute_page.html.jinja", dict(
-            event=event.as_dict(),
-            institute=institute.as_dict(),
-            authors=[c.as_dict() for c in authors],
-        ))
-
-    async def render_institute_author_page(self, event: EventData, institute: AffiliationData, author: PersonData, contributions: list[ContributionData]) -> str:
-        return await self.render("institute_author_page.html.jinja", dict(
-            event=event.as_dict(),
-            institute=institute.as_dict(),
-            author=author.as_dict(),
-            contributions=[c.as_dict() for c in contributions],
-        ))
-
-    async def render_keyword_partial(self, keywords: list[KeywordData]) -> str:
-        return await self.render("keyword_partial.html.jinja", dict(
-            keywords=[s.as_dict() for s in keywords]
-        ))
-
-    async def render_keyword_page(self, event: EventData, keyword: KeywordData, contributions: list[ContributionData]) -> str:
-        return await self.render("keyword_page.html.jinja", dict(
-            event=event.as_dict(),
-            keyword=keyword.as_dict(),
-            contributions=[c.as_dict() for c in contributions]
-        ))
-
-    async def render_doi_per_institute_list(self, institutes: list[AffiliationData]) -> str:
-        return await self.render("doi_per_institute_list.html.jinja", dict(
-            institutes=[s.as_dict() for s in institutes]
-        ))
-
-    async def render_doi_per_institute_page(self, event: EventData, institute: AffiliationData, contributions: list[ContributionData]) -> str:
-        return await self.render("doi_per_institute_page.html.jinja", dict(
-            event=event.as_dict(),
-            institute=institute.as_dict(),
-            contributions=[c.as_dict() for c in contributions]
-        ))
-
-    async def render_doi_list(self, event: EventData, contributions: list[ContributionData]):
-        return await self.render("doi_list.html.jinja", dict(
-            event=event.as_dict(),
-            contributions=[c.as_dict() for c in contributions]
-        ))
-
-    async def render_doi_contribution(self, contribution: ContributionDOI) -> str:
-        return await self.render("doi_detail.html.jinja", dict(
-            contribution=contribution.as_dict()
-        ))
-
-    async def render_reference(self, contribution_code: str, contribution_title: str,
-                               reference_type: str, reference: str) -> str:
-        return await self.render("reference_base.html.jinja", dict(
-            contribution_code=contribution_code,
-            contribution_title=contribution_title,
-            reference_type=reference_type,
-            reference=reference
-        ))
 
 
 class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
@@ -222,6 +63,9 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
             Path(self.src_dir, 'layouts', 'partials', 'author')
         self.src_layouts_partials_institute_dir = \
             Path(self.src_dir, 'layouts', 'partials', 'institute')
+        self.src_layouts_partials_doi_per_institute_dir = \
+            Path(self.src_dir, 'layouts', 'partials', 'doi_per_institute')
+
         self.src_layouts_partials_keyword_dir = \
             Path(self.src_dir, 'layouts', 'partials', 'keyword')
 
@@ -318,8 +162,8 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
             await self.src_layouts_partials_classification_dir.mkdir(exist_ok=True, parents=True)
             await self.src_layouts_partials_author_dir.mkdir(exist_ok=True, parents=True)
             await self.src_layouts_partials_institute_dir.mkdir(exist_ok=True, parents=True)
+            await self.src_layouts_partials_doi_per_institute_dir.mkdir(exist_ok=True, parents=True)
             await self.src_layouts_partials_keyword_dir.mkdir(exist_ok=True, parents=True)
-
             await self.src_layouts_partials_contributions_dir.mkdir(exist_ok=True, parents=True)
 
             await self.src_contributions_dir.mkdir(exist_ok=True, parents=True)
@@ -531,35 +375,62 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
         logger.info(f'render_institute - {len(self.institutes)}')
 
-        return
-
         institute_partial_dir = Path(
             self.src_dir, 'layouts', 'partials', 'institute', 'list.html')
 
+        authorsGroups: dict[str, list[dict]] = {}
+
+        for author in self.authors:
+            if not author.affiliation in authorsGroups:
+                authorsGroups[author.affiliation] = []
+            authorsGroups[author.affiliation].append(dict(
+                code=author.code,
+                short=author.short
+            ))
+
         await institute_partial_dir.write_text(
-            await self.template.render_institute_partial(self.institutes)
+            await self.template.render_institute_partial(self.institutes, authorsGroups)
         )
 
-        async def _render_contribution(capacity_limiter: CapacityLimiter, institute: AffiliationData) -> None:
-            async with capacity_limiter:
+        async def _render_contribution(contribution_capacity_limiter: CapacityLimiter, institute: AffiliationData, author: PersonData) -> None:
+            async with contribution_capacity_limiter:
 
-                # contributions = [
-                #     c for c in self.contributions
-                #     if len(c.authors) > 0 and author in c.authors
-                # ]
+                contributions = [
+                    c for c in self.contributions
+                    if len(c.authors) > 0 and author in c.authors
+                ]
 
-                # logger.info(f"{session} -> {len(contributions)}")
+                # logger.info(f"{institute} -> {len(contributions)}")
 
-                await Path(self.src_institute_dir, f'{institute.id.lower()}.md').write_text(
-                    await self.template.render_institute_page(self.event, institute, [])
+                await Path(self.src_institute_dir, f'{author.code.lower()}.md').write_text(
+                    await self.template.render_institute_page(self.event, institute, author, contributions)
                 )
 
-        capacity_limiter = CapacityLimiter(4)
+        async def _render_institute(institute_capacity_limiter: CapacityLimiter, institute: AffiliationData) -> None:
+            async with institute_capacity_limiter:
+
+                authors = [
+                    c for c in self.authors
+                    if c.affiliation == institute.name
+                ]
+
+                # logger.info(f"{institute} -> {len(authors)}")
+
+                contribution_capacity_limiter = CapacityLimiter(4)
+                async with create_task_group() as tg:
+                    for author in authors:
+                        if author and author.id:
+                            tg.start_soon(_render_contribution,
+                                          contribution_capacity_limiter,
+                                          institute, author)
+
+        institute_capacity_limiter = CapacityLimiter(4)
         async with create_task_group() as tg:
             for institute in self.institutes:
                 if institute and institute.id:
-                    tg.start_soon(_render_contribution,
-                                  capacity_limiter, institute)
+                    tg.start_soon(_render_institute,
+                                  institute_capacity_limiter,
+                                  institute)
 
         # await Path(self.src_institute_dir, '_index.html').write_text(
         #     await self.template.render_institute_list(self.institutes)
@@ -619,16 +490,32 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
         logger.info(f'render_doi_per_institute - {len(self.institutes)}')
 
-        await Path(self.src_doi_per_institute_dir, '_index.html').write_text(
-            await self.template.render_doi_per_institute_list(self.institutes)
+        doi_per_institute_partial_dir = Path(
+            self.src_dir, 'layouts', 'partials', 'doi_per_institute', 'list.html')
+
+        contributionsGroups: dict[str, list[dict]] = {}
+
+        for institute in self.institutes:
+            contributionsGroups[institute.name] = [
+                dict(code=c.code, title=c.title)
+                for c in self.contributions
+                if institute in c.institutes
+            ]
+
+        logger.info(f'render_doi_per_institute - {contributionsGroups}')
+
+        await doi_per_institute_partial_dir.write_text(
+            await self.template.render_doi_per_institute_partial(self.institutes, contributionsGroups)
         )
 
-        async def _render_contribution(capacity_limiter: CapacityLimiter, institute: AffiliationData) -> None:
-            async with capacity_limiter:
+        async def _render_contribution(contribution_capacity_limiter: CapacityLimiter, contribution: ContributionData):
+            async with contribution_capacity_limiter:
+                await Path(self.src_doi_per_institute_dir, f'{contribution.code.lower()}.md').write_text(
+                    await self.template.render_doi_per_institute_page(self.event, institute, contribution)
+                )
 
-                curr_dir = Path(self.src_doi_per_institute_dir,
-                                institute.id.lower())
-                await curr_dir.mkdir(parents=True, exist_ok=True)
+        async def _render_doi_per_institute(doi_per_institute_capacity_limiter: CapacityLimiter, institute: AffiliationData) -> None:
+            async with doi_per_institute_capacity_limiter:
 
                 contributions = [
                     c for c in self.contributions
@@ -637,17 +524,52 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
                 # logger.info(f"{institute} -> {len(contributions)}")
 
-                await Path(curr_dir, '_index.html').write_text(
-                    await self.template.render_doi_per_institute_page(
-                        self.event, institute, contributions)
-                )
+                contribution_capacity_limiter = CapacityLimiter(4)
+                async with create_task_group() as tg:
+                    for contribution in contributions:
+                        tg.start_soon(_render_contribution,
+                                      contribution_capacity_limiter,
+                                      contribution)
 
-        capacity_limiter = CapacityLimiter(4)
+        doi_per_institute_capacity_limiter = CapacityLimiter(4)
         async with create_task_group() as tg:
             for institute in self.institutes:
                 if institute and institute.id:
-                    tg.start_soon(_render_contribution,
-                                  capacity_limiter, institute)
+                    tg.start_soon(_render_doi_per_institute,
+                                  doi_per_institute_capacity_limiter,
+                                  institute)
+
+        # logger.info(f'render_doi_per_institute - {len(self.institutes)}')
+#
+        # await Path(self.src_doi_per_institute_dir, '_index.html').write_text(
+        #     await self.template.render_doi_per_institute_list(self.institutes)
+        # )
+#
+        # async def _render_contribution(capacity_limiter: CapacityLimiter, institute: AffiliationData) -> None:
+        #     async with capacity_limiter:
+#
+        #         curr_dir = Path(self.src_doi_per_institute_dir,
+        #                         institute.id.lower())
+        #         await curr_dir.mkdir(parents=True, exist_ok=True)
+#
+        #         contributions = [
+        #             c for c in self.contributions
+        #             if len(c.institutes) > 0 and institute in c.institutes
+        #         ]
+#
+        #         # logger.info(f"{institute} -> {len(contributions)}")
+#
+        #         await Path(curr_dir, '_index.html').write_text(
+        #             await self.template.render_doi_per_institute_page(
+        #                 self.event, institute, contributions)
+        #         )
+#
+        # capacity_limiter = CapacityLimiter(4)
+        # async with create_task_group() as tg:
+        #     for institute in self.institutes:
+        #         if institute and institute.id:
+        #             tg.start_soon(_render_contribution,
+        #                           capacity_limiter, institute)
 
     async def render_keyword(self) -> None:
         """ """
@@ -793,7 +715,8 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
             ssg_cmd = await self.ssg_cmd()
 
-            ssg_args = [f"{ssg_cmd}", "--source", f"{self.src_dir}",
+            ssg_args = [f"{ssg_cmd}", "--templateMetrics",
+                        "--source", f"{self.src_dir}",
                         "--destination", "out"]
 
             result = await run_process(ssg_args)

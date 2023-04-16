@@ -1,11 +1,12 @@
----
-type: "keyword"
-title: "{{ keyword.name|safe|e }}"
++++
+type = "keyword"
+title = """{{ keyword.name|safe|e }}"""
 
 {% if contributions|length>0 %}
-contents:
+contents = [
 {% for contribution in contributions %}
-- contributions/{{ contribution.code|lower }}.html
+"""contributions/{{ contribution.code|lower }}.html""",
 {% endfor %}
+]
 {% endif %}
----
++++
