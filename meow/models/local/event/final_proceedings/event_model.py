@@ -114,7 +114,6 @@ class EventData:
     title: str
     hosted: str
     editorial: str
-    context: str
     location: str
     date: str
     isbn: str
@@ -126,7 +125,7 @@ class EventData:
 
     @property
     def path(self) -> str:
-        return slugify(self.context)
+        return slugify(self.name)
 
     def __eq__(self, other):
         return self.id == other.id

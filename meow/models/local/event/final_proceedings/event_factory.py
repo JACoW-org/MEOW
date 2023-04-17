@@ -30,16 +30,21 @@ def attachment_data_factory(attachment: Any) -> AttachmentData:
 def event_data_factory(event: Any, settings: dict) -> EventData:
 
     event_id = event.get('id', '')
-    context = settings.get('event_context', '')
-    name = settings.get('event_name', '')
-    title = settings.get('event_title', '')
-    hosted = settings.get('event_hosted', '')
-    date = settings.get('event_date', '')
-    location = settings.get('event_location', '')
-    editorial = settings.get('event_editorial', '')
-    isbn = settings.get('event_isbn', '')
-    issn = settings.get('event_issn', '')
-    doi = settings.get('event_doi', '')
+    title_short = settings.get('booktitle_short', '')
+    title_long = settings.get('booktitle_long', '')
+    
+    hosted = settings.get('host_info', '')
+    date = settings.get('date', '')
+    location = settings.get('location', '')
+    editorial = settings.get('editorial_board', '')
+    isbn = settings.get('isbn', '')
+    issn = settings.get('issn', '')
+    doi = settings.get('doi_base_url', '')
+    series = settings.get('series', '')
+    series_number = settings.get('series_number', '')
+    
+    hosted = 'hosted ***Venezia***'
+    editorial = 'editorial ***Venezia***'
 
     start = datedict_to_tz_datetime(
         event.get('start_dt')
@@ -51,8 +56,8 @@ def event_data_factory(event: Any, settings: dict) -> EventData:
 
     event_data = EventData(
         id=event_id,
-        name=name,
-        title=title,
+        name=title_short,
+        title=title_long,
         hosted=hosted,
         location=location,
         editorial=editorial,
@@ -60,7 +65,6 @@ def event_data_factory(event: Any, settings: dict) -> EventData:
         issn=issn,
         doi=doi,
         date=date,
-        context=context,
         start=start,
         end=end,
     )

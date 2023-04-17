@@ -20,7 +20,11 @@
 
 <body>
     {{ block "menu" . }}
+    {{ if (.IsHome) }}
+    
+    {{ else }}
     {{ partialCached "menu.html" . }}
+    {{ end }}
     {{ end }}
 
     {{ block "main" . }}

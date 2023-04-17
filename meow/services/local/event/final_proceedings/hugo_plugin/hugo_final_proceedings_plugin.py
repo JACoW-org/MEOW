@@ -502,7 +502,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                 if institute in c.institutes
             ]
 
-        logger.info(f'render_doi_per_institute - {contributionsGroups}')
+        # logger.info(f'render_doi_per_institute - {contributionsGroups}')
 
         await doi_per_institute_partial_dir.write_text(
             await self.template.render_doi_per_institute_partial(self.institutes, contributionsGroups)
