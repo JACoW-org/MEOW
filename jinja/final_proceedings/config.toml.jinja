@@ -14,19 +14,20 @@ date = """{{event.date}}"""
 isbn = """{{event.isbn}}"""
 issn = """{{event.issn}}"""
 doi = """{{event.doi}}"""
+primaryColor = """#F39433"""
 
 {% for attachment in attachments %}
 {% if 'logo' in attachment.filename: %}
-logo = """pdf/{{ attachment.filename }}"""
+logo = """pdf/{{attachment.filename}}"""
 {% endif %}
 {% if 'poster' in attachment.filename: %}
-poster = """pdf/{{ attachment.filename }}"""
+poster = """pdf/{{attachment.filename}}"""
 {% endif %}
 {% endfor %}
 
 {% for attachment in attachments %}
 [[params.attachments]]
 title = """{ attachment.title }}"""
-filename = """pdf/{{ attachment.filename }}"""
+filename = """pdf/{{attachment.filename}}"""
 {% endfor %}   
 

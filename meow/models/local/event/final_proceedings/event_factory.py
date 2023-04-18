@@ -30,6 +30,7 @@ def attachment_data_factory(attachment: Any) -> AttachmentData:
 def event_data_factory(event: Any, settings: dict) -> EventData:
 
     event_id = event.get('id', '')
+    
     title_short = settings.get('booktitle_short', '')
     title_long = settings.get('booktitle_long', '')
     
@@ -64,6 +65,8 @@ def event_data_factory(event: Any, settings: dict) -> EventData:
         date=date,
         start=start,
         end=end,
+        series=series,
+        series_number=series_number
     )
 
     # logger.info(event_data.as_dict())

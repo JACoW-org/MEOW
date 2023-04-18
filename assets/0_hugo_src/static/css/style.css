@@ -51,7 +51,6 @@ li {
   flex-flow: column nowrap;
 }
 
-
 .home .event-head {
   display: flex;
   flex-flow: row nowrap;
@@ -65,7 +64,7 @@ li {
   font-weight: bold;
   text-align: center;
   font-size: 4rem;
-  color: #c1210d;
+  color: var(--primary-color, '#333');
   padding: 0;
   margin: 0;
 }
@@ -91,7 +90,7 @@ li {
   border-top: 0.1rem solid #999;
   padding-top: 0.1rem;
   margin-top: 0.2rem;
-  
+
   border-bottom: 0.1rem solid #999;
   padding-bottom: 0.1rem;
   margin-bottom: 0.2rem;
@@ -99,7 +98,7 @@ li {
 
 .home .event-body .event-poster {
   flex: 1 1 50%;
-  padding: 1rem; 
+  padding: 1rem;
 }
 
 .home .event-body .event-menu {
@@ -111,24 +110,24 @@ li {
   flex: 1 1 50%;
 }
 
-.home .event-body .event-menu  .event-papers {
+.home .event-body .event-menu .event-papers {
   border-bottom: 0.1rem solid #999;
   padding-bottom: 0.1rem;
   margin-bottom: 0.2rem;
 }
 
-.home .event-body .event-menu  .event-papers a {
+.home .event-body .event-menu .event-papers a {
   font-weight: bold;
-  color: #c1210d;
+  color: var(--primary-color, '#333');
 }
 
-.home .event-body .event-menu  .event-volumes {
+.home .event-body .event-menu .event-volumes {
   border-bottom: 0.1rem solid #999;
   padding-bottom: 0.1rem;
   margin-bottom: 0.2rem;
 }
 
-.home .event-body .event-menu  .event-attachments {
+.home .event-body .event-menu .event-attachments {
   border-bottom: 0.1rem solid #999;
   padding-bottom: 0.1rem;
   margin-bottom: 0.2rem;
@@ -139,7 +138,7 @@ li {
 
 .home .event-footer {
   display: flex;
-  flex-flow: row nowrap;  
+  flex-flow: row nowrap;
 
   border-bottom: 0.1rem solid #999;
   padding-bottom: 0.1rem;
@@ -192,6 +191,10 @@ li {
   text-align: right
 }
 
+.menu .nav a {
+  font-weight: bold;
+  color: var(--primary-color, '#333');
+}
 
 .content {
   flex: 1;
@@ -299,7 +302,3 @@ li {
   padding-bottom: 0.1rem;
   margin-bottom: 0.2rem;
 }
-
-
-
-

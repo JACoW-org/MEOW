@@ -16,6 +16,12 @@
         {{ .Site.Title }}
         {{ end }}
     </title>
+
+    <style>
+        body {
+            --primary-color: {{.Site.Params.primaryColor}}
+        }
+    </style>
 </head>
 
 <body>

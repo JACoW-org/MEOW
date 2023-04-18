@@ -119,6 +119,9 @@ class EventData:
     isbn: str
     issn: str
     doi: str
+    
+    series: str
+    series_number: str
 
     start: datetime
     end: datetime
