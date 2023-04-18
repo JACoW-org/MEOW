@@ -42,9 +42,6 @@ def event_data_factory(event: Any, settings: dict) -> EventData:
     doi = settings.get('doi_base_url', '')
     series = settings.get('series', '')
     series_number = settings.get('series_number', '')
-    
-    hosted = 'hosted ***Venezia***'
-    editorial = 'editorial ***Venezia***'
 
     start = datedict_to_tz_datetime(
         event.get('start_dt')
