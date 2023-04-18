@@ -24,7 +24,7 @@ class PersonData:
 
     @property
     def short(self) -> str:
-        return f"{self.first[0]}. {self.last}"
+        return f"{f'{self.first[0]}.' if len(self.first) > 0 else ''} {self.last}"
 
     @property
     def long(self) -> str:
