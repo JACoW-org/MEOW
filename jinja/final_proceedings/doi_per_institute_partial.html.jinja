@@ -2,6 +2,7 @@
 
 <ul class="doi-per-institutes">
   {% for institute in institutes %}
+  {% if institute and institute.name %}
   <li class="doi-per-institute">
 
     <b>{{ institute.name|e }}</b>
@@ -19,5 +20,6 @@
       {% endfor %}
     </ul>
   </li>
+  {% endif %}
   {% endfor %}
 </ul>

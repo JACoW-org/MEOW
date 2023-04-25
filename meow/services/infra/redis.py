@@ -6,7 +6,6 @@ from meow.models.infra.base import BaseModel
 from meow.models.models import meow_models
 
 from meow.app.config import conf
-
 from meow.app.instances.databases import dbs
 
 from meow.factory.schema.redis_schema_factory import create_search_index_info, create_search_index_meta

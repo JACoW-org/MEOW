@@ -497,11 +497,16 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                 for c in self.contributions
                 if c.is_qa_approved and institute in c.institutes
             ]
+            
+        institutes: list = [
+            i for i in self.institutes
+            if len(contributionsGroups[i.name]) > 0
+        ]
 
         # logger.info(f'render_doi_per_institute - {contributionsGroups}')
 
         await doi_per_institute_partial_dir.write_text(
-            await self.template.render_doi_per_institute_partial(self.institutes, contributionsGroups)
+            await self.template.render_doi_per_institute_partial(institutes, contributionsGroups)
         )
 
         async def _render_contribution(contribution_capacity_limiter: CapacityLimiter, contribution: ContributionData):

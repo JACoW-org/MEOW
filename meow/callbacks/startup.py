@@ -5,7 +5,7 @@ import logging
 # from meow.app.state import create_webapp_state, create_worker_state
 # from meow.app.tasks import create_task_queue
 
-from meow.services.local.credential.save_credential import create_default_credentials
+# from meow.services.local.credential.save_credential import create_default_credentials
 
 logger = logging.getLogger(__name__)
 
