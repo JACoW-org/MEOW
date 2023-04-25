@@ -70,16 +70,15 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
     ] if paper_data else []
 
     revisitation_revision = revisitation_revisions[0] \
-        if len(revisitation_revisions) else None  
-    
+        if len(revisitation_revisions) else None
+
     acceptance_revisions = [
         r for r in paper_data.all_revisions
-        if r.has_qa_tag
-    ] if paper_data else [] 
-    
+        if r.is_qa_approved
+    ] if paper_data else []
+
     acceptance_revision = acceptance_revisions[0] \
         if len(acceptance_revisions) else None
-        
 
     """ """
 
@@ -91,8 +90,59 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
 
     acceptance = acceptance_revision.creation_date \
         if acceptance_revision is not None else None
-        
+
     issuance = datetime.now()
+
+    """ """
+
+    # - #28 WEXB2 - Green only
+    # - #226 TUOAA226 - Green & QA
+    # - #222 TUOAB222 - Green & QA
+    # - #44 WEXB1 - Green & QA & QA failed
+
+    # [WEXB2]
+    # Green Only:
+    # TAG {
+    #     "code": "QA02",
+    #     "color": "yellow",
+    #     "system": true,
+    #     "title": "QA Pending"
+    # }
+
+    # [TUOAA226]
+    # Green & QA:
+    # TAG {
+    #   "code": "QA01",
+    #   "color": "green",
+    #   "system": true,
+    #   "title": "QA Approved"
+    # }
+
+    # [TUOAB222]
+    # Green & QA:
+    # TAG {
+    #   "code": "QA01",
+    #   "color": "green",
+    #   "system": true,
+    #   "title": "QA Approved"
+    # }
+
+    # [WEXB1]
+    # Green & QA:
+    # NO TAG
+    
+    logger.info(f"contribution_code: {contribution.get('code')}")
+    
+    logger.info(paper_data.all_revisions if paper_data else [])
+
+    is_qa_approved = len([
+        r for r in paper_data.all_revisions
+        if r.is_qa_approved
+    ] if paper_data else []) > 0
+    
+    logger.info(f"is_qa_approved: {is_qa_approved}")
+    
+    logger.info("\n\n")
 
     """ """
 
@@ -133,6 +183,7 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
         end=datedict_to_tz_datetime(
             contribution.get('end_dt')
         ),
+        is_qa_approved=is_qa_approved,
         paper=paper_data,
         slides=slides_data,
         poster=poster_data,

@@ -2,7 +2,11 @@
 
 {% macro render(contribution) -%}
 
-{% if contribution.metadata: %}
+<!-- 
+is_qa_approved: {{ contribution.is_qa_approved }}
+-->
+
+{% if contribution.is_qa_approved and contribution.metadata: %}
 <h3>{{ contribution.code|e }} - {{ contribution.title|e }} - {{ contribution.metadata.page_count }}</h3>
 {% else %}
 <h3><s>{{ contribution.code|e }}</s> - {{ contribution.title|e }}</h3>
@@ -23,12 +27,11 @@
 </p>
 {% endif %}
 
-{% if contribution.has_paper: %}
+{% if contribution.is_qa_approved: %}
 <p>
     <b>Paper</b>
     <a href="pdf/{{ contribution.paper_name }}">{{ contribution.code|upper }}</a>
 </p>
-{% endif %}
 
 {% if contribution.metadata: %}
 
@@ -58,6 +61,8 @@
         {% endif %}
     </span>
 </p>
+
+{% endif %}
 
 {% endif %}
 

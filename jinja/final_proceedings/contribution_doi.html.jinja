@@ -2,9 +2,10 @@
 <section class="{{ class_name }}">
     <div>
         <b>{{ contribution.code|e }}</b> -
-        <a href="{{ contribution.doi_data.doi_url }}">{{
-            contribution.doi_data.doi_url
-            }}</a><br>
+        <a href="{{ contribution.doi_data.doi_url }}">
+            {{ contribution.doi_data.doi_url|e }}
+        </a>
+        <br>
         <i>{{ contribution.title|e }}</i>
     </div>
 </section>

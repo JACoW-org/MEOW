@@ -17,6 +17,9 @@ logger = lg.getLogger(__name__)
 
 
 async def download_event_attachments(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
+    """ """
+
+    logger.info('event_final_proceedings - download_event_attachments')
 
     files_data: list[AttachmentData] = proceedings_data.attachments
 

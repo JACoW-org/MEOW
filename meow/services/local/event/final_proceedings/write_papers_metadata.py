@@ -23,6 +23,8 @@ logger = lg.getLogger(__name__)
 async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
     """ """
 
+    logger.info('event_final_proceedings - write_papers_metadata')
+
     papers_data: list[ContributionPaperData] = await extract_contributions_papers(proceedings_data)
 
     total_files: int = len(papers_data)

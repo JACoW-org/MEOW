@@ -9,6 +9,8 @@ logger = lg.getLogger(__name__)
 
 async def collecting_sessions_and_attachments(event: dict, cookies: dict, settings: dict) -> list[list]:
     """ """
+    
+    logger.info('event_final_proceedings - collecting_sessions_and_attachments')
 
     sessions: list = []
     attachments: list = []

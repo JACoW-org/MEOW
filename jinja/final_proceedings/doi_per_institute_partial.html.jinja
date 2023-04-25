@@ -8,12 +8,14 @@
 
     <ul class="contributions">
       {% for contribution in contributionsGroups[institute.name] %}
+      {% if contribution.code and contribution.is_qa_approved %}
       <li class="contribution">
         <a href="doi_per_institute/{{ contribution.code|lower }}">
           <b>{{ contribution.code|lower }}</b> -
           <span>{{ contribution.title|e }}</span>
         </a>
       </li>
+      {% endif %}
       {% endfor %}
     </ul>
   </li>

@@ -107,6 +107,9 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         await self.prepare()
 
     async def run_build(self) -> None:
+
+        logger.info('event_final_proceedings - plugin.build')
+
         await self.render_home()
         await self.render_contributions()
         await self.render_session()
@@ -132,14 +135,6 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         #     tg.start_soon(self.reference)
         #     tg.start_soon(self.static)
         #     tg.start_soon(self.finalize)
-
-    async def run_pack(self) -> BytesIO:
-        await self.generate()
-        zip = await self.compress()
-
-        await self.clean()
-
-        return zip
 
     async def prepare(self) -> None:
         """ """
@@ -497,9 +492,10 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
         for institute in self.institutes:
             contributionsGroups[institute.name] = [
-                dict(code=c.code, title=c.title)
+                dict(code=c.code, title=c.title,
+                     is_qa_approved=c.is_qa_approved)
                 for c in self.contributions
-                if institute in c.institutes
+                if c.is_qa_approved and institute in c.institutes
             ]
 
         # logger.info(f'render_doi_per_institute - {contributionsGroups}')
@@ -654,7 +650,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         capacity_limiter = CapacityLimiter(4)
         async with create_task_group() as tg:
             for contribution in self.contributions:
-                if contribution.doi_data:
+                if contribution.is_qa_approved and contribution.code and contribution.doi_data:
                     tg.start_soon(_render_doi_contribution, capacity_limiter,
                                   contribution.code, contribution.doi_data)
 
@@ -711,6 +707,8 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
     async def generate(self) -> None:
         """ """
 
+        logger.info('event_final_proceedings - plugin.generate')
+
         try:
 
             ssg_cmd = await self.ssg_cmd()
@@ -731,6 +729,8 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
     async def compress(self) -> BytesIO:
         """ """
+
+        logger.info('event_final_proceedings - plugin.compress')
 
         zip_cmd = await self.zip_cmd()
         out_dir_path = await self.out_dir.absolute()

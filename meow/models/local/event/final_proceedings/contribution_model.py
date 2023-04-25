@@ -28,8 +28,8 @@ class TagData:
     title: str
     
     @property
-    def is_qa(self):
-        return self.title == "QA Approved"
+    def is_qa_approved(self):
+        return self.title.lower() == "qa approved"
 
     def as_dict(self) -> dict:
         return asdict(self)
@@ -69,9 +69,9 @@ class RevisionData:
     creation_date: datetime
     
     @property
-    def has_qa_tag(self) -> bool:       
+    def is_qa_approved(self) -> bool:       
         for tag in self.tags:
-            if tag.is_qa:
+            if tag.is_qa_approved:
                 return True
         return False
         
@@ -139,6 +139,8 @@ class ContributionData:
 
     start: datetime
     end: datetime
+    
+    is_qa_approved: bool = field(default=False)
 
     reception: datetime | None = field(default=None)
     revisitation: datetime | None = field(default=None)

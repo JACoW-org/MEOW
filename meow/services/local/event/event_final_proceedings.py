@@ -1,8 +1,8 @@
-import base64
-import io
 import logging as lg
 
 from typing import AsyncGenerator
+
+from anyio import CapacityLimiter, create_task_group
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 
 from meow.services.local.event.final_proceedings.collecting_contributions_and_files import collecting_contributions_and_files
@@ -31,13 +31,11 @@ logger = lg.getLogger(__name__)
 
 
 async def event_final_proceedings(event: dict, cookies: dict, settings: dict) -> AsyncGenerator:
-    """ """
-
+    """ """   
+    
     logger.info('event_final_proceedings - create_final_proceedings')
-
+    
     """ """
-
-    logger.info('event_final_proceedings - collecting_sessions_and_attachments')
 
     yield dict(type='progress', value=dict(
         phase='collecting_sessions_and_attachments',
@@ -48,8 +46,6 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
 
     """ """
 
-    logger.info('event_final_proceedings - collecting_contributions_and_files')
-
     yield dict(type='progress', value=dict(
         phase='collecting_contributions_and_files',
         text="Collecting contributions and files"
@@ -58,8 +54,6 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
     [contributions] = await collecting_contributions_and_files(event, sessions, cookies, settings)
 
     """ """
-
-    logger.info('event_final_proceedings - adapting_final_proceedings')
 
     yield dict(type='progress', value=dict(
         phase='adapting_final_proceedings',
@@ -70,19 +64,14 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
 
     """ """
 
-    logger.info('event_final_proceedings - download_event_attachments')
-
     yield dict(type='progress', value=dict(
         phase='download_event_attachments',
         text="Download event attachments"
     ))
 
-    # Download attachments
     final_proceedings = await download_event_attachments(final_proceedings, cookies, settings)
 
     """ """
-
-    logger.info('event_final_proceedings - download_contributions_papers')
 
     yield dict(type='progress', value=dict(
         phase='download_contributions_papers',
@@ -94,8 +83,6 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
 
     """ """
 
-    logger.info('event_final_proceedings - download_contributions_papers')
-
     yield dict(type='progress', value=dict(
         phase='download_contributions_slides',
         text="Download Contributions Slides"
@@ -105,8 +92,6 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
     final_proceedings = await download_contributions_slides(final_proceedings, cookies, settings)
 
     """ """
-
-    logger.info('event_final_proceedings - read_papers_metadata')
 
     yield dict(type='progress', value=dict(
         phase='read_papers_metadata',
@@ -118,8 +103,6 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
 
     """ """
 
-    logger.info('event_final_proceedings - validate_events_data')
-
     yield dict(type='progress', value=dict(
         phase='validate_contributions_papers',
         text='Validate Contributions Papers'
@@ -130,19 +113,14 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
 
     """ """
 
-    logger.info('event_final_proceedings - extract_contribution_references')
-
     yield dict(type='progress', value=dict(
         phase='extract_contribution_references',
         text='Extract Contribution References'
     ))
 
-    # Generate contribution references
     final_proceedings = await extract_contribution_references(final_proceedings, cookies, settings)
 
     """ """
-
-    logger.info('event_final_proceedings - generate_contribution_doi')
 
     yield dict(type='progress', value=dict(
         phase='generate_contribution_doi',
@@ -154,8 +132,6 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
 
     """ """
 
-    logger.info('event_final_proceedings - write_papers_metadata')
-
     yield dict(type='progress', value=dict(
         phase='extract_papers_metadata',
         text='Extract Papers Metadata'
@@ -166,10 +142,17 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
 
     """ """
 
-    logger.info('event_final_proceedings - concat_contribution_papers')
+    yield dict(type='progress', value=dict(
+        phase='generate_contributions_groups',
+        text='Generate Contributions Groups'
+    ))
+
+    final_proceedings = await generate_contributions_groups(final_proceedings, cookies, settings)
+
+    """ """
 
     yield dict(type='progress', value=dict(
-        phase='concat_contributions_papers',
+        phase='concat_contribution_papers',
         text='Concat Contributions Papers'
     ))
 
@@ -178,23 +161,9 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
 
     """ """
 
-    logger.info('event_final_proceedings - generate_contributions_groups')
-
     yield dict(type='progress', value=dict(
-        phase='generate_contributions_groups',
-        text='Generate Contributions Groups'
-    ))
-
-    # Contrib Groupby
-    final_proceedings = await generate_contributions_groups(final_proceedings, cookies, settings)
-
-    """ """
-
-    logger.info('event_final_proceedings - generate_final_proceedings')
-
-    yield dict(type='progress', value=dict(
-        phase='generate_final_proceedings',
-        text='Generate Final Proceedings'
+        phase='generate_site_pages',
+        text='Generate Site Pages'
     ))
 
     # HTML + site
@@ -202,7 +171,6 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
     plugin = HugoFinalProceedingsPlugin(final_proceedings, cookies, settings)
 
     await plugin.run_prepare()
-
     await plugin.run_build()
 
     """ """
@@ -210,69 +178,51 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
     logger.info('event_final_proceedings - copy_event_attachments')
 
     yield dict(type='progress', value=dict(
-        phase='copy_event_attachments',
-        text='Copy Event Attachments'
+        phase='copy_event_pdf',
+        text='Copy event PDF'
     ))
-
-    # PDF Copy
-    final_proceedings = await copy_event_attachments(final_proceedings, cookies, settings)
-
-    """ """
-
-    logger.info('event_final_proceedings - copy_contribution_papers')
-
-    yield dict(type='progress', value=dict(
-        phase='copy_contributions_papers',
-        text='Copy Contributions Papers'
-    ))
-
-    # PDF papers
-    final_proceedings = await copy_contribution_papers(final_proceedings, cookies, settings)
-
-    """ """
-
-    logger.info('event_final_proceedings - copy_contribution_slides')
-
-    yield dict(type='progress', value=dict(
-        phase='copy_contribution_slides',
-        text='Copy Contributions Slides'
-    ))
-
-    # PDF slides
-    final_proceedings = await copy_contribution_slides(final_proceedings, cookies, settings)
+      
+    async with create_task_group() as tg:
+        tg.start_soon(copy_event_attachments, final_proceedings, cookies, settings)
+        tg.start_soon(copy_contribution_papers, final_proceedings, cookies, settings)
+        tg.start_soon(copy_contribution_slides, final_proceedings, cookies, settings)
+    
+    # # PDF Copy
+    # final_proceedings = await copy_event_attachments(final_proceedings, cookies, settings)   
+    # 
+    # # PDF papers
+    # final_proceedings = await copy_contribution_papers(final_proceedings, cookies, settings)
+    # 
+    # # PDF slides
+    # final_proceedings = await copy_contribution_slides(final_proceedings, cookies, settings)
 
     """ """
 
     yield dict(type='progress', value=dict(
         phase='compress_final_proceedings',
         text='Compress Final Proceedings'
-    ))
+    ))   
 
-    logger.info('event_final_proceedings - plugin.run_pack')
-
-    await plugin.generate()
-
-    static_site = io.BytesIO()  # await plugin.run_pack()
+    await plugin.generate()    
+    await plugin.compress()
 
     """ """
 
     # Link site
     final_proceedings = await link_static_site(final_proceedings, cookies, settings)
 
-    # papers metadata
-    papers_metadata = io.BytesIO()
 
     """ """
 
     logger.info('event_final_proceedings - get_final_proceedings')
 
     # TODO: final proceedings file url to download
-    result = await get_final_proceedings(final_proceedings, static_site, papers_metadata)
+    result = await get_final_proceedings(final_proceedings)
 
     yield result
 
 
-async def get_final_proceedings(final_proceedings: ProceedingsData, proceedings: io.BytesIO, metadata: io.BytesIO) -> dict:
+async def get_final_proceedings(final_proceedings: ProceedingsData) -> dict:
     """ """
 
     event_code = final_proceedings.event.id
@@ -281,14 +231,6 @@ async def get_final_proceedings(final_proceedings: ProceedingsData, proceedings:
     return dict(
         type='final',
         value=dict(
-            final_proceedings=dict(
-                base64=base64.b64encode(
-                    proceedings.getvalue()).decode('utf-8'),
-                filename=f"{event_code}_{event_title}_final_proceedings.7z"
-            ),
-            papers_metadata=dict(
-                base64=base64.b64encode(metadata.getvalue()).decode('utf-8'),
-                filename=f"{event_code}_{event_title}_papers_metadata.7z"
-            )
+            final_proceedings="URL PER IL DOWNLOAD"
         )
     )

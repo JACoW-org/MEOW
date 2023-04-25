@@ -60,6 +60,8 @@ class JinjaXMLBuilder:
 async def extract_contribution_references(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
     """ """
 
+    logger.info('event_final_proceedings - extract_contribution_references')
+
     total_files: int = len(proceedings_data.contributions)
     processed_files: int = 0
 

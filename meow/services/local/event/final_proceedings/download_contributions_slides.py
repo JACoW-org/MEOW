@@ -16,6 +16,9 @@ logger = lg.getLogger(__name__)
 
 
 async def download_contributions_slides(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
+    """ """
+
+    logger.info('event_final_proceedings - download_contributions_papers')
 
     files_data: list[FileData] = await extract_proceedings_slides(proceedings_data)
 

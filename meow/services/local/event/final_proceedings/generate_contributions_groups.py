@@ -14,6 +14,8 @@ logger = lg.getLogger(__name__)
 async def generate_contributions_groups(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
     """ """
 
+    logger.info('event_final_proceedings - generate_contributions_groups')
+
     capacity_limiter = CapacityLimiter(8)
 
     async with create_task_group() as tg:
@@ -69,7 +71,7 @@ async def contributions_group_by_classification(capacity_limiter: CapacityLimite
 
         def classification_sort(x: TrackData) -> str:
             return (f"{x.track_group.position:03d}_{x.track_group.name}_{x.position:03d}_{x.name}"
-                   if x.track_group else f"default_000_{x.position:03d}_{x.name}").lower()
+                    if x.track_group else f"default_000_{x.position:03d}_{x.name}").lower()
 
         classification_list.sort(key=classification_sort)
 
