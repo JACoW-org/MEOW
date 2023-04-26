@@ -131,18 +131,18 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
     # Green & QA:
     # NO TAG
     
-    logger.info(f"contribution_code: {contribution.get('code')}")
+    # logger.info(f"contribution_code: {contribution.get('code')}")
     
-    logger.info(paper_data.all_revisions if paper_data else [])
+    # logger.info(paper_data.all_revisions if paper_data else [])
 
     is_qa_approved = len([
         r for r in paper_data.all_revisions
         if r.is_qa_approved
     ] if paper_data else []) > 0
     
-    logger.info(f"is_qa_approved: {is_qa_approved}")
+    # logger.info(f"is_qa_approved: {is_qa_approved}")
     
-    logger.info("\n\n")
+    # logger.info("\n\n")
 
     """ """
 

@@ -1,7 +1,6 @@
 from asyncio import CancelledError
 import logging
-
-from anyio import create_task_group
+import time
 
 from starlette.routing import WebSocketRoute
 from starlette.websockets import WebSocket, WebSocketDisconnect
@@ -10,6 +9,7 @@ from starlette.exceptions import HTTPException
 from meow.app.instances.application import app
 from meow.app.instances.databases import dbs
 from meow.services.local.credential.find_credential import find_credential_by_secret
+from meow.utils.error import exception_to_string
 
 from meow.utils.serialization import json_encode
 
@@ -30,6 +30,10 @@ async def __publish_key() -> str:
     counter: int = await dbs.redis_client.incr('workers:stream:counter')
 
     workers: list[str] = await __workers()
+    
+    if len(workers) == 0:
+        raise Exception("No Workers")
+    
     topic_name: str = workers[counter % len(workers)]
 
     logger.info(f"publish_key {topic_name} {counter} {workers}")
@@ -57,6 +61,29 @@ async def __workers():
     return workers
 
 
+async def __websocket_error(ws: WebSocket, uuid: str, error: BaseException):
+    try:
+
+        to_send = {
+            'head': {
+                'code': 'task:error',
+                'uuid': uuid,
+                'time': int(time.time())
+            },
+            'body': {
+                'method': '',
+                'params': exception_to_string(error)
+            }
+        }
+
+        logger.debug(f"send {to_send}")
+
+        await ws.send_json(to_send)
+
+    except BaseException as e:
+        logger.error(e, exc_info=True)
+
+
 async def __websocket_task(ws: WebSocket, id: str):
     """ """
     
@@ -68,7 +95,11 @@ async def __websocket_task(ws: WebSocket, id: str):
             # logger.debug(message)
             if message:
                 # logger.debug(f"ws_to_r {message}")
-                await publish(message)
+                try:
+                    await publish(message)
+                except BaseException as e:
+                    logger.error("__websocket_task", e, exc_info=True)
+                    await __websocket_error(ws, id, e)
 
     except WebSocketDisconnect:
         logger.info("__websocket_task >>> DISCONNECTED")

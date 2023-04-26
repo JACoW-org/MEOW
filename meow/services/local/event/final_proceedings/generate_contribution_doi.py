@@ -111,7 +111,7 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
             contribution.acceptance) if contribution.acceptance else '',
         issuance_date=format_datetime_doi(
             contribution.issuance) if contribution.issuance else '',
-        doi_url=generate_doi_url(doi_base_url, event.title, contribution.code),
+        doi_url=generate_doi_url(doi_base_url, event.name, contribution.code),
         pages=f'{contribution.page}-{contribution.metadata.get("page_count", 0) + contribution.page - 1}' if contribution.page and contribution.metadata else '',
         num_of_pages=contribution.metadata.get(
             "page_count", 0) if contribution.metadata else 0

@@ -1,0 +1,10 @@
++++
+type = "doi"
+title = """{{ contribution.code|safe|e }}"""
+
+{% if contribution %}
+contents = [
+"""contributions/{{ contribution.code|lower }}_doi.html""",
+]
+{% endif %}
++++

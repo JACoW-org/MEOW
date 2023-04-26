@@ -27,7 +27,7 @@ async def link_static_site(proceedings_data: ProceedingsData, cookies: dict, set
         await rmtree(str(site_preview_dir))
         
         await move(str(static_site_dir), str(site_preview_dir))
-        await move(str(static_site_zip), str(site_preview_zip))
+        # await move(str(static_site_zip), str(site_preview_zip))
         
     else:
         

@@ -1,110 +1,107 @@
-+++
-title = """{{ contribution.code|safe|e }}"""
-+++
-
 {% import 'authors_template.html.jinja' as authors_template %}
 
-<h1>Journals of Accelerator Conferences Website (JACoW)</h1>
-
-<p class="doi-intro">
-    <a href="https://www.jacow.org" target="_blank">JACoW</a> is a publisher in Geneva, Switzerland that publishes the proceedings of accelator conferences held around the world by an international collaboration of editors.
-</p>
-<div class="title">
-    <a href="">{{ contribution.doi_url }}</a>
-</div>
 <table>
     <tbody>
-        <tr class="title">
+        <tr class="doi-title">
+            <th>URL</th>
+            <td>{{ contribution.doi_url }}</td>
+        </tr>
+        <tr class="doi-title">
             <th>Title</th>
             <td>{{ contribution.title }}</td>
         </tr>
-        <tr class="authors">
+        <tr class="doi-authors">
             <th>Authors</th>
             <td>
                 {{ authors_template.render(contribution.authors_groups) }}
             </td>
         </tr>
-        <tr class="abstract">
+        <tr class="doi-abstract">
             <th>Abstract</th>
             <td>{{ contribution.abstract }}</td>
         </tr>
-        <tr class="paper">
+        <tr class="doi-paper">
             <th>Paper</th>
             <td>
-                download: <a href="../../pdf/{{ contribution.code|upper }}.pdf" download>{{ contribution.code|upper }}.pdf</a>
+                download: <a href="../../pdf/{{ contribution.code|upper }}.pdf" download>
+                    {{ contribution.code|upper }}.pdf</a>
             </td>
         </tr>
-        <tr class="cite">
+        <tr class="doi-cite">
             <th>Cite</th>
             <td>
-                <a href="../../reference/{{ contribution.code|lower }}/bibtex">BibTeX</a>, 
-                <a href="../../reference/{{ contribution.code|lower }}/latex">LaTeX</a>, 
-                <a href="../../reference/{{ contribution.code|lower }}/word">Text/Word</a>, 
+                <a href="../../reference/{{ contribution.code|lower }}/bibtex">BibTeX</a>,
+                <a href="../../reference/{{ contribution.code|lower }}/latex">LaTeX</a>,
+                <a href="../../reference/{{ contribution.code|lower }}/word">Text/Word</a>,
                 <a href="../../reference/{{ contribution.code|lower }}/ris">RIS</a>,
                 <a href="../../reference/{{ contribution.code|lower }}/endnote">EndNote</a>
             </td>
         </tr>
-        <tr class="conference">
+        <tr class="doi-conference">
             <th>Conference</th>
             <td>{{ contribution.conference_code }}</td>
         </tr>
-        <tr class="series">
+        <tr class="doi-series">
             <th>Series</th>
             <td>{{ contribution.series }} TODO series is still empty for our dataset</td>
         </tr>
-        <tr class="location">
+        <tr class="doi-location">
             <th>Location</th>
             <td>{{ contribution.venue }}</td>
         </tr>
-        <tr class="date">
+        <tr class="doi-date">
             <th>Date</th>
             <td>{{ contribution.date }}</td>
         </tr>
-        <tr class="publisher">
+        <tr class="doi-publisher">
             <th>Publisher</th>
             <td>{{ contribution.publisher }}, {{ contribution.publisher_venue }}</td>
         </tr>
-        <tr class="editorial-board">
+        <tr class="doi-editorial-board">
             <th>Editorial Board</th>
             <td>TODO</td>
         </tr>
-        <tr class="isbn">
+        <tr class="doi-isbn">
             <th>Online ISBN</th>
             <td>{{ contribution.isbn }}</td>
         </tr>
-        <tr class="issn">
+        <tr class="doi-issn">
             <th>Online ISSN</th>
             <td>{{ contribution.issn }}</td>
         </tr>
-        <tr class="received">
+        <tr class="doi-received">
             <th>Received</th>
             <td>{{ contribution.reception_date }}</td>
         </tr>
-        <tr class="received">
+        <tr class="doi-received">
             <th>Revised</th>
             <td>{{ contribution.revisitation_date }}</td>
         </tr>
-        <tr class="accepted">
+        <tr class="doi-accepted">
             <th>Accepted</th>
             <td>{{ contribution.acceptance_date }}</td>
         </tr>
-        <tr class="issued">
+        <tr class="doi-issued">
             <th>Issued</th>
             <td>{{ contribution.issuance_date }}</td>
         </tr>
-        <tr class="doi">
+        <tr class="doi-doi">
             <th>DOI</th>
             <td>{{ contribution.doi_url }}</td>
         </tr>
-        <tr class="pages">
+        <tr class="doi-pages">
             <th>Pages</th>
             <td>{{ contribution.pages }}</td>
         </tr>
-        <tr class="copyright">
+        <tr class="doi-copyright">
             <th>Copyright</th>
             <td>
                 <i>
-                    Published by JACoW Publishing under the terms of the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0</a> license. Any further distribution of this work must maintain attribution to the author(s), the published article's title, publisher, and DOI.
+                    Published by JACoW Publishing under the terms of the
+                    <a href="https://creativecommons.org/licenses/by/4.0/">
+                        Creative Commons Attribution 4.0</a>
+                    license. Any further distribution of this work must maintain attribution
+                    to the author(s), the published article's title, publisher, and DOI.
                 </i>
             </td>
         </tr>

@@ -2,7 +2,14 @@ import logging as lg
 
 from typing import AsyncGenerator
 
+from meow.app.config import conf
+from meow.app.instances.databases import dbs
+from meow.models.infra.locks import RedisLock
+
+from redis.exceptions import LockError
+
 from anyio import CapacityLimiter, create_task_group
+
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 
 from meow.services.local.event.final_proceedings.collecting_contributions_and_files import collecting_contributions_and_files
@@ -31,11 +38,54 @@ logger = lg.getLogger(__name__)
 
 
 async def event_final_proceedings(event: dict, cookies: dict, settings: dict) -> AsyncGenerator:
-    """ """   
-    
-    logger.info('event_final_proceedings - create_final_proceedings')
-    
     """ """
+    try:
+        event_id: str = event.get('id', '')
+
+        if not event_id or event_id == '':
+            raise BaseException('Invalid event id')
+
+        async with acquire_lock(event_id) as lock:
+            async for r in _event_final_proceedings(event, cookies, settings, lock):
+                yield r
+
+    except LockError as e:
+        logger.error(e, exc_info=True)
+        raise e
+    except BaseException as e:
+        logger.error(e, exc_info=True)
+        raise e
+
+
+def acquire_lock(key: str) -> RedisLock:
+    """ Create event lock """
+
+    return RedisLock(
+        redis=dbs.redis_client,
+        name=conf.REDIS_EVENT_LOCK_KEY(key),
+        timeout=conf.REDIS_LOCK_TIMEOUT_SECONDS,
+        sleep=0.5,
+        blocking=True,
+        blocking_timeout=conf.REDIS_LOCK_BLOCKING_TIMEOUT_SECONDS,
+        thread_local=True,
+    )
+
+
+async def extend_lock(lock: RedisLock) -> RedisLock:
+    """ Reset lock timeout (conf.REDIS_LOCK_TIMEOUT_SECONDS) """
+
+    await lock.reacquire()
+    return lock
+
+
+async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, lock: RedisLock) -> AsyncGenerator:
+    """ """
+
+    logger.info('event_final_proceedings - create_final_proceedings')
+
+    """ """
+
+    await extend_lock(lock)
 
     yield dict(type='progress', value=dict(
         phase='collecting_sessions_and_attachments',
@@ -46,6 +96,8 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
 
     """ """
 
+    await extend_lock(lock)
+
     yield dict(type='progress', value=dict(
         phase='collecting_contributions_and_files',
         text="Collecting contributions and files"
@@ -54,6 +106,8 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
     [contributions] = await collecting_contributions_and_files(event, sessions, cookies, settings)
 
     """ """
+
+    await extend_lock(lock)
 
     yield dict(type='progress', value=dict(
         phase='adapting_final_proceedings',
@@ -64,6 +118,8 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
 
     """ """
 
+    await extend_lock(lock)
+
     yield dict(type='progress', value=dict(
         phase='download_event_attachments',
         text="Download event attachments"
@@ -72,6 +128,8 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
     final_proceedings = await download_event_attachments(final_proceedings, cookies, settings)
 
     """ """
+
+    await extend_lock(lock)
 
     yield dict(type='progress', value=dict(
         phase='download_contributions_papers',
@@ -83,6 +141,8 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
 
     """ """
 
+    await extend_lock(lock)
+
     yield dict(type='progress', value=dict(
         phase='download_contributions_slides',
         text="Download Contributions Slides"
@@ -92,6 +152,8 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
     final_proceedings = await download_contributions_slides(final_proceedings, cookies, settings)
 
     """ """
+
+    await extend_lock(lock)
 
     yield dict(type='progress', value=dict(
         phase='read_papers_metadata',
@@ -103,15 +165,18 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
 
     """ """
 
+    await extend_lock(lock)
+
     yield dict(type='progress', value=dict(
         phase='validate_contributions_papers',
         text='Validate Contributions Papers'
     ))
 
-    # TODO: Validation
     final_proceedings = await validate_proceedings_data(final_proceedings, cookies, settings)
 
     """ """
+
+    await extend_lock(lock)
 
     yield dict(type='progress', value=dict(
         phase='extract_contribution_references',
@@ -122,25 +187,29 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
 
     """ """
 
+    await extend_lock(lock)
+
     yield dict(type='progress', value=dict(
         phase='generate_contribution_doi',
         text='Generate Contribution Doi'
     ))
 
-    # DOI generation
     final_proceedings = await generate_contribution_doi(final_proceedings, cookies, settings)
 
     """ """
+
+    await extend_lock(lock)
 
     yield dict(type='progress', value=dict(
         phase='extract_papers_metadata',
         text='Extract Papers Metadata'
     ))
 
-    # Write metadata and frames
     final_proceedings = await write_papers_metadata(final_proceedings, cookies, settings)
 
     """ """
+
+    await extend_lock(lock)
 
     yield dict(type='progress', value=dict(
         phase='generate_contributions_groups',
@@ -151,22 +220,23 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
 
     """ """
 
+    await extend_lock(lock)
+
     yield dict(type='progress', value=dict(
         phase='concat_contribution_papers',
         text='Concat Contributions Papers'
     ))
 
-    # Concat Pdf
     final_proceedings = await concat_contribution_papers(final_proceedings, cookies, settings)
 
     """ """
+
+    await extend_lock(lock)
 
     yield dict(type='progress', value=dict(
         phase='generate_site_pages',
         text='Generate Site Pages'
     ))
-
-    # HTML + site
 
     plugin = HugoFinalProceedingsPlugin(final_proceedings, cookies, settings)
 
@@ -175,44 +245,51 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
 
     """ """
 
+    await extend_lock(lock)
+
     logger.info('event_final_proceedings - copy_event_attachments')
 
     yield dict(type='progress', value=dict(
         phase='copy_event_pdf',
         text='Copy event PDF'
     ))
-      
+
     async with create_task_group() as tg:
-        tg.start_soon(copy_event_attachments, final_proceedings, cookies, settings)
-        tg.start_soon(copy_contribution_papers, final_proceedings, cookies, settings)
-        tg.start_soon(copy_contribution_slides, final_proceedings, cookies, settings)
-    
+        tg.start_soon(copy_event_attachments,
+                      final_proceedings, cookies, settings)
+        tg.start_soon(copy_contribution_papers,
+                      final_proceedings, cookies, settings)
+        tg.start_soon(copy_contribution_slides,
+                      final_proceedings, cookies, settings)
+
     # # PDF Copy
-    # final_proceedings = await copy_event_attachments(final_proceedings, cookies, settings)   
-    # 
+    # final_proceedings = await copy_event_attachments(final_proceedings, cookies, settings)
+    #
     # # PDF papers
     # final_proceedings = await copy_contribution_papers(final_proceedings, cookies, settings)
-    # 
+    #
     # # PDF slides
     # final_proceedings = await copy_contribution_slides(final_proceedings, cookies, settings)
 
     """ """
 
+    await extend_lock(lock)
+
     yield dict(type='progress', value=dict(
         phase='compress_final_proceedings',
         text='Compress Final Proceedings'
-    ))   
+    ))
 
-    await plugin.generate()    
-    await plugin.compress()
+    await plugin.generate()
+    # await plugin.compress()
 
     """ """
 
-    # Link site
     final_proceedings = await link_static_site(final_proceedings, cookies, settings)
 
-
     """ """
+
+    await extend_lock(lock)
 
     logger.info('event_final_proceedings - get_final_proceedings')
 

@@ -21,7 +21,7 @@ async def concat_contribution_papers(proceedings_data: ProceedingsData, cookies:
     logger.info('event_final_proceedings - concat_contribution_papers')
 
     # logger.debug(f'concat_contribution_papers - files: {total_files}')
-    
+
     dir_name: str = f"{proceedings_data.event.id}_pdf"
     cache_dir: Path = Path('var', 'run', dir_name)
     await cache_dir.mkdir(exist_ok=True, parents=True)
@@ -41,7 +41,7 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
 
     event_id = proceedings_data.event.id
     event_title = proceedings_data.event.title
-    
+
     chunk_size = int(sqrt(len(files_data))) + 1
 
     vol_pdf_path = Path(cache_dir, f"{event_id}_proceedings_volume.pdf")
@@ -52,13 +52,13 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
     ]
 
     vol_pdf_results: list[str] = []
-    
+
     capacity_limiter = CapacityLimiter(4)
     async with create_task_group() as tg:
         for index, vol_pdf_files_chunk in enumerate(split_list(vol_pdf_files, chunk_size)):
-            tg.start_soon(concat_chunks, f"{vol_pdf_path}.{index}",
+            tg.start_soon(concat_chunks, f"{vol_pdf_path}." + "{:010d}".format(index),
                           vol_pdf_files_chunk, vol_pdf_results, capacity_limiter)
-            
+
     vol_pdf_results.sort()
 
     await concat_pdf(str(vol_pdf_path), vol_pdf_results)
@@ -80,16 +80,16 @@ async def brief_pdf_task(proceedings_data: ProceedingsData,  files_data: list[Fi
     ]
 
     vol_pdf_results: list[str] = []
-    
+
     chunk_size = int(sqrt(len(files_data))) + 1
     capacity_limiter = CapacityLimiter(4)
     async with create_task_group() as tg:
         for index, vol_pdf_files_chunk in enumerate(split_list(brief_pdf_files, chunk_size)):
-            tg.start_soon(concat_chunks, f"{brief_pdf_path}.{index}",
+            tg.start_soon(concat_chunks, f"{brief_pdf_path}." + "{:010d}".format(index),
                           vol_pdf_files_chunk, vol_pdf_results, capacity_limiter)
 
     brief_pdf_files.sort()
-    
+
     await concat_pdf(str(brief_pdf_path), brief_pdf_files)
     await metadata_brief(str(brief_pdf_path), event_title)
 

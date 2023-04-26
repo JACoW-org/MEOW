@@ -1,16 +1,18 @@
 +++
-title = "[{{contributions|length}}]"
+title = """[{{contributions|length}}]"""
 +++
 
 <section>
   <ul>
     {% for contribution in contributions %}
+    {% if contribution.code and contribution.is_qa_approved %}
     <li>
       <a href="./{{ contribution.code|lower }}">
         <b>{{ contribution.code }}</b>
         ({{ contribution.title }})
       </a>
     </li>
+    {% endif %}
     {% endfor %}
   </ul>
 </section>

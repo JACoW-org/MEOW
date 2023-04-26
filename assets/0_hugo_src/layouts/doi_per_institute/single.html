@@ -9,15 +9,9 @@
     </div>
 
     <div class="right">
-        <div class="title">
-            <div class="name">
-                <b>{{ .Params.title }}</b>
-            </div>
-        </div>
-
         {{ range $idx, $val := .Params.contents }}
         <div class="contrib">
-            {{ readFile ( printf "/content/doi/%s/_index.html" $val ) | safeHTML }}
+            {{ readFile ( printf "/layouts/partials/contributions/%s_doi.html" $val ) | safeHTML }}
         </div>
         {{ end }}
     </div>

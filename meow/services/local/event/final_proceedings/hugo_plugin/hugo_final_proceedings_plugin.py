@@ -196,11 +196,20 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
                 # logger.info(f"{session} -> {len(contributions)}")
 
-                content = f"{contribution.code.lower()}.html"
+                code = contribution.code.lower()
 
-                await Path(self.src_dir, 'layouts', 'partials', 'contributions', content).write_text(
-                    await self.template.render_contribution_partial(contribution)
-                )
+                base_path = Path(self.src_dir, 'layouts',
+                                 'partials', 'contributions')
+
+                if contribution.code:
+                    await Path(base_path, f"{code}.html").write_text(
+                        await self.template.render_contribution_partial(contribution)
+                    )
+
+                if contribution.code and contribution.is_qa_approved and contribution.doi_data:
+                    await Path(base_path, f"{code}_doi.html").write_text(
+                        await self.template.render_doi_partial(contribution.doi_data)
+                    )
 
         capacity_limiter = CapacityLimiter(4)
         async with create_task_group() as tg:
@@ -493,11 +502,13 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         for institute in self.institutes:
             contributionsGroups[institute.name] = [
                 dict(code=c.code, title=c.title,
-                     is_qa_approved=c.is_qa_approved)
+                     is_qa_approved=c.is_qa_approved,
+                     doi_data=c.doi_data)
                 for c in self.contributions
-                if c.is_qa_approved and institute in c.institutes
+                if c.is_qa_approved and c.doi_data
+                and institute in c.institutes
             ]
-            
+
         institutes: list = [
             i for i in self.institutes
             if len(contributionsGroups[i.name]) > 0
@@ -645,10 +656,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
                 # logger.info(f"{code} - {doi_contribution.title}")
 
-                curr_dir = Path(self.src_doi_dir, code.lower())
-                await curr_dir.mkdir(parents=True, exist_ok=True)
-
-                await Path(curr_dir, '_index.html').write_text(
+                await Path(self.src_doi_dir, f"{code.lower()}.md").write_text(
                     await self.template.render_doi_contribution(doi_contribution)
                 )
 
@@ -745,8 +753,17 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
         # 7z a /tmp/12/12.7z /tmp/12/out -m0=LZMA2:d=64k -mmt=4
 
-        zip_args = [f"{zip_cmd}", "a", f"{zip_file_path}",
-                    f"{out_dir_path}", "-m0=LZMA2:d=64k", "-mmt=4"]
+        # "7z.exe" a -t7z -m0=LZMA2:d64k:fb32 -ms=8m -mmt=30 -mx=1 -- "F:\BACKUP" "D:\Source"
+        # -t7z sets the archive type to 7-Zip.
+        # -m0=LZMA2:d64k:fb32 defines the usage of LZMA2 compression method with a dictionary size of 64 KB and a word size (fast bytes) of 32.
+        # -ms=8m enables solid mode with a solid block size of 8 MB.
+        # -mmt=30 enables multi-threading mode with up to 30 threads.
+        # -mx=1 selects fastest compressing as level of compression.
+
+        zip_args = [f"{zip_cmd}", "a",
+                    "-t7z", "-m0=LZMA2:d64k:fb32",
+                    "-ms=8m", "-mmt=8", "-mx=1", "--",
+                    f"{zip_file_path}", f"{out_dir_path}",]
 
         result = await run_process(zip_args)
 

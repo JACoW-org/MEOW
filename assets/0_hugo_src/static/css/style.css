@@ -202,6 +202,12 @@ li {
   flex-flow: row nowrap;
 }
 
+.content .full {
+  max-width: 55rem;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
 .content .left {
   flex: 0 1 30%;
   padding: 1rem;
