@@ -178,8 +178,9 @@ class JinjaTemplateRenderer:
             contribution=contribution.as_dict()
         ))
 
-    async def render_doi_partial(self, contribution: ContributionDOI) -> str:
+    async def render_doi_partial(self, event: EventData, contribution: ContributionDOI) -> str:
         return await self.render("doi_partial.html.jinja", minify=True, args=dict(
+            event=event.as_dict(),
             contribution=contribution.as_dict()
         ))
 

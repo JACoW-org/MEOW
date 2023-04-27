@@ -23,7 +23,7 @@ async def event_contribution_doi(event: dict, cookies: dict, settings: dict) -> 
     dois = await gen_contribution_doi(event, dict(), doi_base_url, isbn, issn)
 
     yield dict(
-        type='final',
+        type='result',
         value=dois
     )
 

@@ -9,6 +9,7 @@ from meow.models.infra.locks import RedisLock
 from redis.exceptions import LockError
 
 from anyio import CapacityLimiter, create_task_group
+from meow.models.local.event.final_proceedings.contribution_model import ContributionData
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 
@@ -39,6 +40,7 @@ logger = lg.getLogger(__name__)
 
 async def event_final_proceedings(event: dict, cookies: dict, settings: dict) -> AsyncGenerator:
     """ """
+
     try:
         event_id: str = event.get('id', '')
 
@@ -136,7 +138,6 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, l
         text="Download Contributions Papers"
     ))
 
-    # Download papers
     final_proceedings = await download_contributions_papers(final_proceedings, cookies, settings)
 
     """ """
@@ -148,7 +149,6 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, l
         text="Download Contributions Slides"
     ))
 
-    # Download papers
     final_proceedings = await download_contributions_slides(final_proceedings, cookies, settings)
 
     """ """
@@ -160,7 +160,6 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, l
         text='Read Papers Metadata'
     ))
 
-    # Pdf metadata (keywords, n_pages, are_fonts_embedded, page_size)
     final_proceedings = await read_papers_metadata(final_proceedings, cookies, settings)
 
     """ """
@@ -172,7 +171,18 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, l
         text='Validate Contributions Papers'
     ))
 
-    final_proceedings = await validate_proceedings_data(final_proceedings, cookies, settings)
+    def callback(c: ContributionData) -> bool:
+        return c.is_qa_approved
+
+    [metadata, errors] = await validate_proceedings_data(final_proceedings, cookies, settings, callback)
+    
+    if len(errors) > 0:
+        yield dict(type='result', value=dict(
+            metadata=metadata,
+            errors=errors
+        ))
+        
+        return
 
     """ """
 
@@ -281,7 +291,7 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, l
     ))
 
     await plugin.generate()
-    # await plugin.compress()
+    await plugin.compress()
 
     """ """
 
@@ -293,7 +303,6 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, l
 
     logger.info('event_final_proceedings - get_final_proceedings')
 
-    # TODO: final proceedings file url to download
     result = await get_final_proceedings(final_proceedings)
 
     yield result
@@ -303,11 +312,16 @@ async def get_final_proceedings(final_proceedings: ProceedingsData) -> dict:
     """ """
 
     event_code = final_proceedings.event.id
+    event_name = final_proceedings.event.name
     event_title = final_proceedings.event.title
+    event_path = final_proceedings.event.path
 
     return dict(
-        type='final',
+        type='result',
         value=dict(
-            final_proceedings="URL PER IL DOWNLOAD"
+            event_code=event_code,
+            event_name=event_name,
+            event_title=event_title,
+            event_path=event_path
         )
     )

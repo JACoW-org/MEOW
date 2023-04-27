@@ -76,7 +76,7 @@ async def event_pdf_keywords(event: dict, cookies: dict, settings: dict) -> Asyn
                         receive_stream.close()
 
                         yield dict(
-                            type='final',
+                            type='result',
                             value=None
                         )
 

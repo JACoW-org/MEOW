@@ -248,7 +248,7 @@ class RedisWorkerManager():
                 result_type = result.get('type', '')
                 result_value = result.get('value', None)
                 
-                if result_type == 'final':
+                if result_type == 'result':
                     await TaskRunner.send_result(task_id=task_id, task=method, result=result_value)
                 else:
                     await TaskRunner.send_progress(task_id=task_id, task=method, progress=result_value)

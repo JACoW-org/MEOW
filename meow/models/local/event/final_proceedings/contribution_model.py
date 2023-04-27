@@ -30,6 +30,18 @@ class TagData:
     @property
     def is_qa_approved(self):
         return self.title.lower() == "qa approved"
+    
+    @property
+    def is_qa_pending(self):
+        return self.title.lower() == "qa pending"
+    
+    @property
+    def is_yellow(self):
+        return self.color.lower() == "yellow"
+    
+    @property
+    def is_green(self):
+        return self.color.lower() == "green"
 
     def as_dict(self) -> dict:
         return asdict(self)
@@ -74,7 +86,13 @@ class RevisionData:
             if tag.is_qa_approved:
                 return True
         return False
-        
+    
+    @property
+    def is_qa_pending(self) -> bool:       
+        for tag in self.tags:
+            if tag.is_qa_pending:
+                return True
+        return False    
 
     def as_dict(self) -> dict:
         return asdict(self)
@@ -141,6 +159,7 @@ class ContributionData:
     end: datetime
     
     is_qa_approved: bool = field(default=False)
+    is_qa_pending: bool = field(default=False)
 
     reception: datetime | None = field(default=None)
     revisitation: datetime | None = field(default=None)

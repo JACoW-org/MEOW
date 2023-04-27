@@ -140,7 +140,7 @@ async def reference_task(capacity_limiter: CapacityLimiter, event: EventData,
 async def get_xslt(xslt_path: str) -> XSLT:
     async with await open_file(xslt_path) as f:
         xslt_root = XML(await f.read(), XMLParser(encoding='utf-8'))
-        return XSLT(xslt_root)
+        return XSLT(xslt_root) # type: ignore
 
 
 async def build_contribution_reference(event: EventData, contribution: ContributionData,

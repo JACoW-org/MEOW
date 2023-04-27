@@ -58,6 +58,6 @@ async def event_abstract_booklet(event: dict, cookies: dict, settings: dict) -> 
     )
 
     yield dict(
-        type='final',
+        type='result',
         value=result
     )

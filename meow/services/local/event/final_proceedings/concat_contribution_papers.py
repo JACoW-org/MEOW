@@ -5,6 +5,7 @@ from math import sqrt
 from anyio import CapacityLimiter, Path, create_task_group
 
 from meow.models.local.event.final_proceedings.contribution_model import FileData
+from meow.models.local.event.final_proceedings.event_model import AttachmentData
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_proceedings_papers
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
@@ -44,6 +45,30 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
 
     chunk_size = int(sqrt(len(files_data))) + 1
 
+    vol_pre_pdf_path: Path | None = None
+
+    try:
+        
+        attachments_data: list[AttachmentData] = proceedings_data.attachments
+        for attachment_data in attachments_data:
+            # {event_code}-{section_index}-{section_code}-{file_name}
+            attachment_name: str = attachment_data.filename.split('.')[0]
+            event_code, section_index, section_code, * \
+                file_name = attachment_name.split('-')
+
+            if section_code == 'volumes' and '-'.join(file_name) == 'proceedings-cover':
+                vol_pre_pdf_path = Path(cache_dir, attachment_data.filename)
+                
+                if not await vol_pre_pdf_path.exists():
+                    vol_pre_pdf_path = None
+
+    except Exception as e:
+        logger.error(e, exc_info=True)
+
+    logger.warn("\n\n")
+    logger.warn(str(vol_pre_pdf_path))
+    logger.warn("\n\n")
+
     vol_pdf_path = Path(cache_dir, f"{event_id}_proceedings_volume.pdf")
 
     vol_pdf_files = [
@@ -61,7 +86,10 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
 
     vol_pdf_results.sort()
 
-    await concat_pdf(str(vol_pdf_path), vol_pdf_results)
+    pdf_parts = [str(vol_pre_pdf_path)] + \
+        vol_pdf_results if vol_pre_pdf_path else vol_pdf_results
+
+    await concat_pdf(str(vol_pdf_path), pdf_parts)
     await metadata_vol(str(vol_pdf_path), event_title)
 
     proceedings_data.proceedings_volume_size = (await vol_pdf_path.stat()).st_size
@@ -71,6 +99,30 @@ async def brief_pdf_task(proceedings_data: ProceedingsData,  files_data: list[Fi
 
     event_id = proceedings_data.event.id
     event_title = proceedings_data.event.title
+    
+    brief_pre_pdf_path: Path | None = None
+    
+    try:
+
+        attachments_data: list[AttachmentData] = proceedings_data.attachments
+        for attachment_data in attachments_data:
+            # {event_code}-{section_index}-{section_code}-{file_name}
+            attachment_name: str = attachment_data.filename.split('.')[0]
+            event_code, section_index, section_code, * \
+                file_name = attachment_name.split('-')
+
+            if section_code == 'volumes' and '-'.join(file_name) == 'at-a-glance-cover':
+                brief_pre_pdf_path = Path(cache_dir, attachment_data.filename)
+                
+                if not await brief_pre_pdf_path.exists():
+                    brief_pre_pdf_path = None
+
+    except Exception as e:
+        logger.error(e, exc_info=True)
+
+    logger.warn("\n\n")
+    logger.warn(str(brief_pre_pdf_path))
+    logger.warn("\n\n")
 
     brief_pdf_path = Path(cache_dir, f"{event_id}_proceedings_brief.pdf")
 
@@ -89,8 +141,11 @@ async def brief_pdf_task(proceedings_data: ProceedingsData,  files_data: list[Fi
                           vol_pdf_files_chunk, vol_pdf_results, capacity_limiter)
 
     brief_pdf_files.sort()
+           
+    pdf_parts = [str(brief_pre_pdf_path)] + \
+        vol_pdf_results if brief_pre_pdf_path else vol_pdf_results
 
-    await concat_pdf(str(brief_pdf_path), brief_pdf_files)
+    await concat_pdf(str(brief_pdf_path), pdf_parts)
     await metadata_brief(str(brief_pdf_path), event_title)
 
     proceedings_data.proceedings_brief_size = (await brief_pdf_path.stat()).st_size

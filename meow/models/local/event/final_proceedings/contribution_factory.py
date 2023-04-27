@@ -140,6 +140,11 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
         if r.is_qa_approved
     ] if paper_data else []) > 0
     
+    is_qa_pending = len([
+        r for r in paper_data.all_revisions
+        if r.is_qa_pending
+    ] if paper_data else []) > 0
+    
     # logger.info(f"is_qa_approved: {is_qa_approved}")
     
     # logger.info("\n\n")
@@ -184,6 +189,7 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
             contribution.get('end_dt')
         ),
         is_qa_approved=is_qa_approved,
+        is_qa_pending=is_qa_pending,
         paper=paper_data,
         slides=slides_data,
         poster=poster_data,

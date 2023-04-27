@@ -23,18 +23,18 @@
         <tr class="doi-paper">
             <th>Paper</th>
             <td>
-                download: <a href="../../pdf/{{ contribution.code|upper }}.pdf" download>
+                download: <a href="pdf/{{ contribution.code|upper }}.pdf" download>
                     {{ contribution.code|upper }}.pdf</a>
             </td>
         </tr>
         <tr class="doi-cite">
             <th>Cite</th>
             <td>
-                <a href="../../reference/{{ contribution.code|lower }}/bibtex">BibTeX</a>,
-                <a href="../../reference/{{ contribution.code|lower }}/latex">LaTeX</a>,
-                <a href="../../reference/{{ contribution.code|lower }}/word">Text/Word</a>,
-                <a href="../../reference/{{ contribution.code|lower }}/ris">RIS</a>,
-                <a href="../../reference/{{ contribution.code|lower }}/endnote">EndNote</a>
+                <a href="reference/{{ contribution.code|lower }}/bibtex">BibTeX</a>,
+                <a href="reference/{{ contribution.code|lower }}/latex">LaTeX</a>,
+                <a href="reference/{{ contribution.code|lower }}/word">Text/Word</a>,
+                <a href="reference/{{ contribution.code|lower }}/ris">RIS</a>,
+                <a href="reference/{{ contribution.code|lower }}/endnote">EndNote</a>
             </td>
         </tr>
         <tr class="doi-conference">
@@ -43,7 +43,7 @@
         </tr>
         <tr class="doi-series">
             <th>Series</th>
-            <td>{{ contribution.series }} TODO series is still empty for our dataset</td>
+            <td>{{ contribution.series }}</td>
         </tr>
         <tr class="doi-location">
             <th>Location</th>
@@ -59,7 +59,7 @@
         </tr>
         <tr class="doi-editorial-board">
             <th>Editorial Board</th>
-            <td>TODO</td>
+            <td>{{ event.editorial }}</td>
         </tr>
         <tr class="doi-isbn">
             <th>Online ISBN</th>
@@ -99,9 +99,9 @@
                 <i>
                     Published by JACoW Publishing under the terms of the
                     <a href="https://creativecommons.org/licenses/by/4.0/">
-                        Creative Commons Attribution 4.0</a>
-                    license. Any further distribution of this work must maintain attribution
-                    to the author(s), the published article's title, publisher, and DOI.
+                        Creative Commons Attribution 4.0</a> license. Any further
+                    distribution of this work must maintain attribution to the author(s),
+                    the published article's title, publisher, and DOI.
                 </i>
             </td>
         </tr>

@@ -33,7 +33,7 @@ class ContributionRef:
     url: str
 
     # optional
-    publisher: str = field(default='JaCoW Publishing')
+    publisher: str = field(default='JACoW Publishing')
     publisher_venue: str = field(default='Geneva, Switzerland')
     language: str = field(default='english')
     series: str = field(default='')

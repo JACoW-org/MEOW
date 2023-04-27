@@ -52,25 +52,29 @@
                     <li>
                         <a href="pdf/{{ event.id }}_proceedings_volume.pdf">
                             <b>FEL2022 Proceedings Volume</b>
-                        </a> ({{ (volume_size / (1024 * 1024)) | int }}MB)
+                        </a> ({{ volume_size | filesizeformat }})
                         <div><i>The complete volume of papers</i></div>
                     </li>
 
                     <li>
                         <a href="pdf/{{ event.id }}_proceedings_brief.pdf">
                             <b>FEL2022 Proceedings at a glance</b>
-                        </a> ({{ (brief_size / (1024 * 1024)) | int }}MB)
+                        </a> ({{ brief_size | filesizeformat }})
                         <div><i>First page only of all papers with hyperlinks to complete versions</i></div>
                     </li>
 
                     {% for attachment in attachments %}
                     {% if '-volumes-' in attachment.filename: %}
+                    {% if not 'volumes-at-a-glance-cover' in attachment.filename: %}
+                    {% if not 'volumes-proceedings-cover' in attachment.filename: %}
                     <li>
                         <a href="pdf/{{ attachment.filename }}">
                             <b>{{ attachment.title }}</b>
-                        </a> ({{ (attachment.size / (1024 * 1024)) | int }}MB)
+                        </a> ({{ attachment.size | filesizeformat }})
                         <div><i>{{ attachment.description }}</i></div>
                     </li>
+                    {% endif %}
+                    {% endif %}
                     {% endif %}
                     {% endfor %}
 
@@ -86,7 +90,7 @@
                     <li>
                         <a href="pdf/{{ attachment.filename }}">
                             <b>{{ attachment.title }}</b>
-                        </a> ({{ (attachment.size / (1024 * 1024)) | int }}MB)
+                        </a> ({{ attachment.size | filesizeformat }})
                         <div><i>{{ attachment.description }}</i></div>
                     </li>
                     {% endif %}

@@ -178,7 +178,7 @@ def doc_report(args) -> None:
 
                 extracted = doc.extract_font(xref)
                 font_name, font_ext, font_type, buffer = extracted
-                font_emb = (font_ext == "n/a" or len(buffer) == 0) == False
+                font_emb = (font_ext == "n/a" or len(buffer) != 0)
 
                 # print("font_name", font_name, "font_emb", font_emb, "font_ext", font_ext, "font_type", font_type, len(buffer)) # font.name, font.flags, font.bbox, font.buffer
 
@@ -187,8 +187,8 @@ def doc_report(args) -> None:
                     ext=font_ext, type=font_type))
 
         page_report = dict(sizes=dict(
-            width=page.mediabox_size.y,
-            height=page.mediabox_size.x))
+            width=page.mediabox_size.x,
+            height=page.mediabox_size.y))
 
         pages_report.append(page_report)
 

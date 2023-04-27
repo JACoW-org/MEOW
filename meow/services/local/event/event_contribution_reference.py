@@ -8,6 +8,6 @@ async def event_contribution_reference(event: dict, cookies: dict, settings: dic
     """ """
     
     yield dict(
-        type='final',
+        type='result',
         value=None
     )

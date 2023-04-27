@@ -208,7 +208,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
                 if contribution.code and contribution.is_qa_approved and contribution.doi_data:
                     await Path(base_path, f"{code}_doi.html").write_text(
-                        await self.template.render_doi_partial(contribution.doi_data)
+                        await self.template.render_doi_partial(self.event, contribution.doi_data)
                     )
 
         capacity_limiter = CapacityLimiter(4)
