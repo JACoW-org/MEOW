@@ -119,6 +119,8 @@ class EventData:
     isbn: str
     issn: str
     doi: str
+    href: str
+    color: str
     
     series: str
     series_number: str
@@ -136,7 +138,7 @@ class EventData:
     def __hash__(self):
         return hash(('id', self.id,
                      'title', self.title,
-                     'url', self.path))
+                     'path', self.path))
 
     def as_dict(self) -> dict:
         return {
