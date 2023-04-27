@@ -212,6 +212,8 @@ li {
   flex: 0 1 30%;
   padding: 1rem;
   border-right: 0.2rem solid #ddd;
+  overflow: auto;
+  max-height: calc(100vh - 132px);
 }
 
 .content .left .title {
@@ -274,6 +276,8 @@ li {
 .content .right {
   flex: 1 1 70%;
   padding: 0.5rem;
+  overflow: auto;
+  max-height: calc(100vh - 132px);
 }
 
 .content .right .title {
