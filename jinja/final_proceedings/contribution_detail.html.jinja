@@ -19,14 +19,14 @@
 {% if contribution.has_slides: %}
 <p>
     <b>Slides</b>
-    <a href="pdf/{{ contribution.slides_name }}">{{ contribution.code|upper }}</a>
+    <a href="../../pdf/{{ contribution.slides_name }}">{{ contribution.code|upper }}</a>
 </p>
 {% endif %}
 
 {% if contribution.is_qa_approved: %}
 <p>
     <b>Paper</b>
-    <a href="pdf/{{ contribution.paper_name }}">{{ contribution.code|upper }}</a>
+    <a href="../../pdf/{{ contribution.paper_name }}">{{ contribution.code|upper }}</a>
 </p>
 
 {% if contribution.metadata: %}
@@ -34,7 +34,7 @@
 <p>
     <b>DOI</b>
     <span>reference for this paper:</span>
-    <a href="doi/{{ contribution.code|lower }}">{{ contribution.doi_data.doi_url }}</a>
+    <a href="../../doi/{{ contribution.code|lower }}">{{ contribution.doi_data.doi_url }}</a>
 </p>
 
 <p>
@@ -67,11 +67,11 @@
 <p>
     <b>Cite</b>
     <span>reference for this paper using:</span>
-    <a href="reference/{{ contribution.code|lower }}/bibtex">BibTeX</a>,
-    <a href="reference/{{ contribution.code|lower }}/latex">LaTeX</a>,
-    <a href="reference/{{ contribution.code|lower }}/word">Text/Word</a>,
-    <a href="reference/{{ contribution.code|lower }}/ris">RIS</a>,
-    <a href="reference/{{ contribution.code|lower }}/endnote">EndNote</a>
+    <a href="../../reference/{{ contribution.code|lower }}/bibtex/index.html">BibTeX</a>,
+    <a href="../../reference/{{ contribution.code|lower }}/latex/index.html">LaTeX</a>,
+    <a href="../../reference/{{ contribution.code|lower }}/word/index.html">Text/Word</a>,
+    <a href="../../reference/{{ contribution.code|lower }}/ris/index.html">RIS</a>,
+    <a href="../../reference/{{ contribution.code|lower }}/endnote/index.html">EndNote</a>
 </p>
 
 {% endif %}

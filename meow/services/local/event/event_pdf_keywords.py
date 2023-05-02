@@ -2,9 +2,6 @@ import logging as lg
 
 from typing import AsyncGenerator
 
-from io import open
-from fitz import Document
-
 from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError
 

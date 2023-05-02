@@ -1,24 +1,24 @@
-<section class="menu">
+<div class="menu">
 
-<div class="logo">
-    <a href="">
-        <img src="{{.Site.Params.logo}}" alt="conference logo icon"
-            alt="{{.Site.Params.name}} Proceedings &mdash; {{.Site.Params.location}}" />
-    </a>
+    <div class="logo">
+        <a onclick="openUrl('index.html')" href="javascript:void(0);">
+            <img id="logo" alt="conference logo icon"
+                alt="{{ .Site.Params.name }} Proceedings &mdash; {{ .Site.Params.location }}" />
+        </a>
+    </div>
+
+    <div class="title">
+        {{.Site.Params.name}} - Proceedings<br />{{.Site.Params.location}}<br />
+    </div>
+
+    <div class="nav">
+                <a onclick="openUrl('index.html')" href="javascript:void(0);">Home</a>
+        &mdash; <a onclick="openUrl('session/index.html')" href="javascript:void(0);">Session</a>
+        &mdash; <a onclick="openUrl('classification/index.html')" href="javascript:void(0);">Classification</a>
+        &mdash; <a onclick="openUrl('author/index.html')" href="javascript:void(0);">Authors</a>     <br>
+                <a onclick="openUrl('institute/index.html')" href="javascript:void(0);">Institutes</a>
+        &mdash; <a onclick="openUrl('doi_per_institute/index.html')" href="javascript:void(0);">DOI of Institutes</a>
+        &mdash; <a onclick="openUrl('keyword/index.html')" href="javascript:void(0);">Keywords</a>
+    </div>
+
 </div>
-
-<div class="title">
-    {{.Site.Params.name}} - Proceedings<br />{{.Site.Params.location}}<br />
-</div>
-
-<div class="nav">
-            <a href="">Home</a>
-    &mdash; <a href="session/">Session</a>
-    &mdash; <a href="classification/">Classification</a>
-    &mdash; <a href="author/">Authors</a>     <br>
-            <a href="institute/">Institutes</a>
-    &mdash; <a href="doi_per_institute/">DOI of Institutes</a>
-    &mdash; <a href="keyword/">Keywords</a>
-</div>
-
-</section>

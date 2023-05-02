@@ -3,13 +3,11 @@
 
 <head>
     <meta charset="utf-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="conference, proceedings">
     <meta name="generator" content="cat--purr_meow">
     <meta name="author" content="fabio.meneghetti@akera.it">
-
-    <base href="{{ .Site.BaseURL }}">
-    <link rel="stylesheet" href="css/style.css" />
 
     <title>
         {{ block "title" . }}
@@ -19,7 +17,7 @@
 
     <style>
         body {
-            --primary-color: {{.Site.Params.color}};
+            --primary-color: {{ .Site.Params.color }};
         }
     </style>
 </head>
@@ -27,7 +25,7 @@
 <body>
     {{ block "menu" . }}
     {{ if (.IsHome) }}
-    
+
     {{ else }}
     {{ partialCached "menu.html" . }}
     {{ end }}
@@ -36,6 +34,41 @@
     {{ block "main" . }}
     {{ .Content }}
     {{ end }}
+
+    <script id="src-prefix" type="application/json">
+        {{ if .IsHome }}"."{{ else if .IsNode }}".."{{ else }}"../.."{{ end }}
+    </script>
+
+    <script id="src-logo" type="application/json">
+        {{ .Site.Params.logo }}
+    </script>
+
+    <script>
+        const prefix = JSON.parse(document.getElementById('src-prefix').textContent);
+        const logo = JSON.parse(document.getElementById('src-logo').textContent);
+
+        document.head.appendChild(
+            Object.assign(document.createElement('link'), {
+                rel: `stylesheet`,
+                href: `${prefix}/css/style.css`
+            })            
+        );
+
+        const logoElement = document.getElementById('logo');
+        if (logoElement) {
+            logoElement.src = `${prefix}/${logo}`;
+        }        
+
+        function openUrl(part) {
+            try {
+                const next = `${prefix}/${part}`;
+                window.location.href = next;
+            } catch (err) {
+                console.error(err)
+            }
+        }           
+    </script>
+
 </body>
 
 </html>

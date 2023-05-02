@@ -9,13 +9,11 @@ title = """[{{classifications|length}}]"""
 
     {% for classification in classifications %}
 
-
     {% if classification.track_group %}
     {% set classification_group = classification.track_group.title %}
     {% else %}
     {% set classification_group = None %}
     {% endif %}
-
 
     {% if prev_classification_group != classification_group and classification_group %}
     {% set prev_classification_group = classification_group %}
@@ -24,9 +22,8 @@ title = """[{{classifications|length}}]"""
     </div>
     {% endif %}
 
-
     <div class="classification-item">
-      <a href="./{{ classification.code|lower }}">
+      <a href="../classification/{{ classification.code|lower }}/index.html">
         <b>{{ classification.title }}</b>
       </a>
     </div>

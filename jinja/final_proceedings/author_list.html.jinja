@@ -6,7 +6,7 @@ title = """[{{authors|length}}]"""
   <ul>
     {% for author in authors %}
     <li>
-      <a href="./{{ author.id|lower }}">
+      <a href="../author/{{ author.id|lower }}/index.html">
         <b>{{ author.first }} {{ author.last }}</b>
         ({{ author.affiliation }})
       </a>

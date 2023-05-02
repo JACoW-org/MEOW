@@ -10,7 +10,7 @@
       {% if institute.name in authorsGroups %}
       {% for author in authorsGroups[institute.name] %}
       <li class="author">
-        <a href="institute/{{ author.code|lower }}">
+        <a href="../institute/{{ author.code|lower }}/index.html">
           <b>{{ author.short }}</b>
         </a>
       </li>

@@ -90,18 +90,14 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         self.src_ref_dir = \
             Path(self.src_dir, 'content', 'reference')
 
-    async def run(self) -> BytesIO:
+    async def run(self) -> None:
         """ """
 
         await self.prepare()
         await self.run_build()
         await self.generate()
-
-        zip = await self.compress()
-
+        await self.compress()
         await self.clean()
-
-        return zip
 
     async def run_prepare(self) -> None:
         await self.prepare()
@@ -740,7 +736,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         except BaseException as e:
             logger.error("hugo:generate", e, exc_info=True)
 
-    async def compress(self) -> BytesIO:
+    async def compress(self) -> None:
         """ """
 
         logger.info('event_final_proceedings - plugin.compress')
@@ -774,11 +770,11 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
         # logger.debug(result.stdout.decode())
 
-        zip = await self.get_zip(zip_file_path)
+        # zip = await self.get_zip(zip_file_path)
 
         # await zip_file.unlink(True)
 
-        return zip
+        # return zip
 
     async def clean(self) -> None:
         """ """

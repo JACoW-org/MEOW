@@ -7,7 +7,7 @@ title = """[{{institutes|length}}]"""
     {% for institute in institutes %}
     {% if institute.id: %}
     <li>
-      <a href="./{{ institute.id|lower }}">
+      <a href="../institute/{{ institute.id|lower }}/index.html">
         {{ institute.name }}
       </a>
     </li>

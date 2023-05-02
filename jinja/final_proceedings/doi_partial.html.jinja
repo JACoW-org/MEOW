@@ -23,18 +23,18 @@
         <tr class="doi-paper">
             <th>Paper</th>
             <td>
-                download: <a href="pdf/{{ contribution.code|upper }}.pdf" download>
+                download: <a href="./pdf/{{ contribution.code|upper }}.pdf" download>
                     {{ contribution.code|upper }}.pdf</a>
             </td>
         </tr>
         <tr class="doi-cite">
             <th>Cite</th>
             <td>
-                <a href="reference/{{ contribution.code|lower }}/bibtex">BibTeX</a>,
-                <a href="reference/{{ contribution.code|lower }}/latex">LaTeX</a>,
-                <a href="reference/{{ contribution.code|lower }}/word">Text/Word</a>,
-                <a href="reference/{{ contribution.code|lower }}/ris">RIS</a>,
-                <a href="reference/{{ contribution.code|lower }}/endnote">EndNote</a>
+                <a href="../reference/{{ contribution.code|lower }}/bibtex/index.html">BibTeX</a>,
+                <a href="../reference/{{ contribution.code|lower }}/latex/index.html">LaTeX</a>,
+                <a href="../reference/{{ contribution.code|lower }}/word/index.html">Text/Word</a>,
+                <a href="../reference/{{ contribution.code|lower }}/ris/index.html">RIS</a>,
+                <a href="../reference/{{ contribution.code|lower }}/endnote/index.html">EndNote</a>
             </td>
         </tr>
         <tr class="doi-conference">

@@ -4,7 +4,7 @@
   {% for author in authors %}
   {% if author.id %}
   <li class="author">
-    <a href="author/{{ author.id|lower }}">
+    <a href="../author/{{ author.id|lower }}/index.html">
       <b>{{ author.first }} {{ author.last }}</b>
       ({{ author.affiliation }})
     </a>
