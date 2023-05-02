@@ -12,7 +12,7 @@ logger = lg.getLogger(__name__)
 
 
 def get_python_cmd():
-    return str(Path("venv", "bin", "python3.11"))
+    return str(Path("venv", "bin", "python3"))
 
 
 async def is_to_download(file: Path, md5: str) -> bool:
