@@ -684,7 +684,8 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                 if contribution.reference:
                     reference_dict = contribution.reference.as_dict()
                     for reference_type in reference_dict:
-                        tg.start_soon(_render_reference_contribution, capacity_limiter, contribution.code,
+                        tg.start_soon(_render_reference_contribution, 
+                                      capacity_limiter, contribution.code,
                                       contribution.title, reference_type,
                                       reference_dict.get(reference_type))
 
