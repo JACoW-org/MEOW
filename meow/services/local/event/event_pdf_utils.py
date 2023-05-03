@@ -148,7 +148,7 @@ async def draw_frame(write_path: str, page: int, header: dict | None, footer: di
 
 
 async def concat_pdf(write_path: str, files: list[str]) -> int:
-    """ """
+    """ https://pymupdf.readthedocs.io/en/latest/tutorial.html#joining-and-splitting-pdf-documents """
 
     cmd = [get_python_cmd(), '-m', 'meow', 'join', '-o', write_path]
     
@@ -166,7 +166,7 @@ async def concat_pdf(write_path: str, files: list[str]) -> int:
 
 
 async def brief_links(write_path: str, files: list[str]) -> int:
-    """ """
+    """ https://github.com/pymupdf/PyMuPDF/issues/283 """
 
     cmd = [get_python_cmd(), '-m', 'meow', 'links', '-input', write_path]
     
