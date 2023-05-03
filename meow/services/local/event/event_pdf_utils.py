@@ -163,3 +163,21 @@ async def concat_pdf(write_path: str, files: list[str]) -> int:
         return res.returncode
 
     return 1
+
+
+async def brief_links(write_path: str, files: list[str]) -> int:
+    """ """
+
+    cmd = [get_python_cmd(), '-m', 'meow', 'links', '-input', write_path]
+    
+    res = await run_cmd(cmd + files)
+
+    if res is not None and res.returncode == 0:
+
+        # print(res.returncode)
+        # print(res.stdout.decode())
+        # print(res.stderr.decode())
+
+        return res.returncode
+
+    return 1

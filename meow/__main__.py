@@ -4,8 +4,8 @@ import json
 import pathlib
 import argparse
 
-from fitz import Document
-from fitz.utils import set_metadata
+from fitz import Document, Rect, Link
+from fitz.utils import set_metadata, insert_link
 
 from meow.services.local.papers_metadata.pdf_annotations import annot_page_footer, annot_page_header, annot_page_side
 
@@ -105,6 +105,36 @@ def doc_join(args) -> None:
     doc.close()
     del doc
 
+
+def doc_links(args) -> None:
+    """ Add page links. """
+       
+    # print(args.input)
+    # print(args.links)
+    
+    doc = Document(filename=args.input)
+    
+    # print("page_count", doc.page_count)
+    # print("links_count", len(args.links))
+    
+    reversed_links = [l for l in args.links]
+    reversed_links.reverse()
+    
+    for index, link in enumerate(reversed_links):
+        page_index = (doc.page_count - index) -1
+               
+        page = doc.load_page(page_index)
+        
+        # print(page_index, link, page.mediabox_size.x, page.mediabox_size.y)
+        
+        rect = Rect(0, 0, page.mediabox_size.x, page.mediabox_size.y)
+        insert_link(page, {'kind': 2, 'from': rect, 'uri': f"{link}"})
+
+    doc.save(filename=args.input, incremental=1, encryption=0)
+
+    doc.close()
+    del doc
+    
 
 def doc_text(args) -> None:
 
@@ -318,6 +348,19 @@ def main():
     ps_join.add_argument("input", nargs="*", help="input filenames")
     ps_join.add_argument("-output", required=True, help="output filename")
     ps_join.set_defaults(func=doc_join)
+    
+    # -------------------------------------------------------------------------
+    # 'links' command
+    # -------------------------------------------------------------------------
+    ps_links = subps.add_parser(
+        "links",
+        description="insert page links",
+        epilog="specify page links",
+    )
+    ps_links.add_argument("links", nargs="*", help="input links")
+    ps_links.add_argument("-input", required=True, help="input filename")
+    ps_links.set_defaults(func=doc_links)
+    
 
     # -------------------------------------------------------------------------
     # start program
