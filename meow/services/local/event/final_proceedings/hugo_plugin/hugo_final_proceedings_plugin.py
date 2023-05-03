@@ -668,32 +668,16 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
         logger.info(f"render_references")
 
-        async def _create_contribution_dir(capacity_limiter: CapacityLimiter, contribution_code: str) -> None:
-            async with capacity_limiter:
-
-                curr_dir = Path(self.src_ref_dir, contribution_code.lower())
-                await curr_dir.mkdir(parents=True, exist_ok=True)
-
         async def _render_reference_contribution(capacity_limiter: CapacityLimiter, contribution_code: str,
                                                  contribution_title: str, reference_type: str,
                                                  reference: str) -> None:
             async with capacity_limiter:
-
-                curr_dir = Path(self.src_ref_dir,
-                                contribution_code.lower(), reference_type)
-                await curr_dir.mkdir(parents=True, exist_ok=True)
-
-                await Path(curr_dir, '_index.html').write_text(
+                await Path(self.src_ref_dir, f"{contribution_code.lower()}-{reference_type}.html").write_text(
                     await self.template.render_reference(contribution_code, contribution_title, reference_type, reference)
                 )
 
         capacity_limiter = CapacityLimiter(4)
         async with create_task_group() as tg:
-
-            # generate folder reference/{contribution.code} for every contribution in parallel
-            for contribution in self.contributions:
-                tg.start_soon(_create_contribution_dir,
-                              capacity_limiter, contribution.code)
 
             # generate all references for every contribution
             for contribution in self.contributions:

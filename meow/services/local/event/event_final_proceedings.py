@@ -291,7 +291,7 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, l
     ))
 
     await plugin.generate()
-    # await plugin.compress()
+    await plugin.compress()
 
     """ """
 
