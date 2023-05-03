@@ -7,7 +7,7 @@ title = """[{{contributions|length}}]"""
     {% for contribution in contributions %}
     {% if contribution.code and contribution.is_qa_approved %}
     <li>
-      <a href="./{{ contribution.code|lower }}">
+      <a onclick="openUrl(`doi/{{ contribution.code|lower }}/index.html`)" href="javascript:void(0);">
         <b>{{ contribution.code }}</b>
         ({{ contribution.title }})
       </a>

@@ -1,13 +1,13 @@
----
-title: "[{{institutes|length}}]"
----
++++
+title = "[{{institutes|length}}]"
++++
 
 <section>
   <ul>
     {% for institute in institutes %}
     {% if institute.id: %}
     <li>
-      <a href="../doi_per_institute/{{ institute.id|lower }}/index.html">
+      <a onclick="openUrl(`doi_per_institute/{{ institute.id|lower }}/index.html`)" href="javascript:void(0);">
         {{ institute.name }}
       </a>
     </li>

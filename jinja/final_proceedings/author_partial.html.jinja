@@ -4,7 +4,7 @@
   {% for author in authors %}
   {% if author.id %}
   <li class="author">
-    <a href="../author/{{ author.id|lower }}/index.html">
+    <a onclick="openUrl(`author/{{ author.id|lower }}/index.html`)" href="javascript:void(0);">
       <b>{{ author.first }} {{ author.last }}</b>
       ({{ author.affiliation }})
     </a>

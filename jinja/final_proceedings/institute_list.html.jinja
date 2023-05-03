@@ -7,7 +7,7 @@ title = """[{{institutes|length}}]"""
     {% for institute in institutes %}
     {% if institute.id: %}
     <li>
-      <a href="../institute/{{ institute.id|lower }}/index.html">
+      <a onclick="openUrl(`institute/{{ institute.id|lower }}/index.html`)" href="javascript:void(0);">
         {{ institute.name }}
       </a>
     </li>

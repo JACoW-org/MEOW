@@ -9,6 +9,23 @@
     </div>
 
     <div class="right">
+        <div class="title">
+            <div class="name">
+                <b>Journals of Accelerator Conferences Website (JACoW)</b>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="doi-intro">
+            <a href="https://www.jacow.org" target="_blank">JACoW</a>
+            is a publisher in Geneva, Switzerland that publishes the
+            proceedings of accelator conferences held around the world
+            by an international collaboration of editors.
+        </div>
+
+        <br>
+        
         {{ range $idx, $val := .Params.contents }}
         <div class="contrib">
             {{ readFile ( printf "/layouts/partials/contributions/%s_doi.html" $val ) | safeHTML }}

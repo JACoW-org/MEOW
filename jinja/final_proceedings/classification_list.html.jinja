@@ -23,7 +23,7 @@ title = """[{{classifications|length}}]"""
     {% endif %}
 
     <div class="classification-item">
-      <a href="../classification/{{ classification.code|lower }}/index.html">
+      <a onclick="openUrl(`classification/{{ classification.code|lower }}/index.html`)" href="javascript:void(0);">
         <b>{{ classification.title }}</b>
       </a>
     </div>
