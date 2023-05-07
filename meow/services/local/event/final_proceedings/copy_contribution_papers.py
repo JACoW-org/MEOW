@@ -58,7 +58,7 @@ async def copy_contribution_papers(proceedings_data: ProceedingsData, cookies: d
             logger.debug(crs, exc_info=True)
         except EndOfStream as eos:
             logger.debug(eos, exc_info=True)
-        except Exception as ex:
+        except BaseException as ex:
             logger.error(ex, exc_info=True)
 
     return proceedings_data

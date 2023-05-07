@@ -1,23 +1,14 @@
 import logging as lg
 
-from fitz import Document
-
-from nltk.stem.snowball import SnowballStemmer
-
-from anyio import Path, create_task_group, CapacityLimiter, to_thread
+from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 
 from anyio.streams.memory import MemoryObjectSendStream
 from meow.models.local.event.final_proceedings.contribution_model import ContributionPaperData, FileData
-from meow.models.local.event.final_proceedings.event_factory import event_keyword_factory
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_contributions_papers
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
-from meow.services.local.event.event_pdf_utils import pdf_to_text, read_report
-from meow.services.local.papers_metadata.pdf_keywords import get_keywords_from_text, stem_keywords_as_tree
-
-
-from meow.utils.keywords import KEYWORDS
+from meow.services.local.event.event_pdf_utils import read_report
 
 
 logger = lg.getLogger(__name__)
@@ -39,9 +30,6 @@ async def read_papers_report(proceedings_data: ProceedingsData, cookies: dict, s
     file_cache_dir: Path = Path('var', 'run', dir_name)
     await file_cache_dir.mkdir(exist_ok=True, parents=True)
 
-    stemmer = SnowballStemmer("english")
-    stem_keywords_dict = stem_keywords_as_tree(KEYWORDS, stemmer)
-
     send_stream, receive_stream = create_memory_object_stream()
     capacity_limiter = CapacityLimiter(8)
 
@@ -51,8 +39,7 @@ async def read_papers_report(proceedings_data: ProceedingsData, cookies: dict, s
         async with send_stream:
             for current_index, current_paper in enumerate(papers_data):
                 tg.start_soon(read_report_task, capacity_limiter, total_files,
-                              current_index, current_paper, cookies, file_cache_dir,
-                              stemmer, stem_keywords_dict,
+                              current_index, current_paper, file_cache_dir,
                               send_stream.clone())
 
         try:
@@ -83,8 +70,8 @@ async def read_papers_report(proceedings_data: ProceedingsData, cookies: dict, s
 
 
 async def read_report_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int,
-                             current_paper: ContributionPaperData, cookies: dict, pdf_cache_dir: Path,
-                             stemmer, stem_keywords_dict, res: MemoryObjectSendStream) -> None:
+                           current_paper: ContributionPaperData, pdf_cache_dir: Path,
+                           res: MemoryObjectSendStream) -> None:
     """ """
 
     async with capacity_limiter:

@@ -73,38 +73,47 @@ def get_keywords_from_text_greedy(text: str, stemmer: SnowballStemmer, stem_keyw
 
 def get_keywords_from_text(text: str, stemmer: SnowballStemmer, stem_keywords_tree: dict[str, list[str]]) -> list[str]:
     
-    text_tokens: list[str] = wordpunct_tokenize(text)
+    try:
+    
+        text_tokens: list[str] = wordpunct_tokenize(text)
 
-    # init keywords counts
-    text_keywords_counts: dict[str, int] = {}
-    # O(n)
-    # for i in range(len(text_tokens)):
-    for i, token in enumerate(text_tokens):
+        # init keywords counts
+        text_keywords_counts: dict[str, int] = {}
+        
+        # O(n)
+        # for i in range(len(text_tokens)):
+        for i, token in enumerate(text_tokens):
 
-        # token: str = text_tokens[i]
-        if stemmer.stem(token) in stem_keywords_tree:
+            # token: str = text_tokens[i]
+            if stemmer.stem(token) in stem_keywords_tree:
 
-            token_stem: str = stemmer.stem(token)
-            # O(m), m is the amount of keywords in the list with the same stem
-            for keyword in stem_keywords_tree[token_stem]:
+                token_stem: str = stemmer.stem(token)
+                # O(m), m is the amount of keywords in the list with the same stem
+                for keyword in stem_keywords_tree[token_stem]:
 
-                # TODO use different tokenization method to improve
-                keyword_tokens: list[str] = wordpunct_tokenize(keyword)
-                j: int = 1
-                isMatch: bool = True
-                keyword_tokens_len: int = len(keyword_tokens)
-                # O(k), where k is usually ~1/2
-                while (isMatch and j < keyword_tokens_len):
-                    isMatch = keyword_tokens[j] == text_tokens[i + j]
-                    j += 1
+                    # TODO use different tokenization method to improve
+                    keyword_tokens: list[str] = wordpunct_tokenize(keyword)
+                    
+                    j: int = 1
+                    isMatch: bool = True
+                    keyword_tokens_len: int = len(keyword_tokens)
+                    # O(k), where k is usually ~1/2
+                    while (isMatch and j < keyword_tokens_len):
+                        isMatch = keyword_tokens[j] == text_tokens[i + j]
+                        j += 1
 
-                if isMatch:
-                    if keyword in text_keywords_counts:
-                        text_keywords_counts[keyword] += 1
-                    else:
-                        text_keywords_counts[keyword] = 1
+                    if isMatch:
+                        if keyword in text_keywords_counts:
+                            text_keywords_counts[keyword] += 1
+                        else:
+                            text_keywords_counts[keyword] = 1
 
-    return get_top_keywords(text_keywords_counts)
+        return get_top_keywords(text_keywords_counts)
+
+    except BaseException as ex:
+        logger.error(ex, exc_info=True)
+                  
+    return []
 
 
 def get_top_keywords(candidates: dict[str, int]) -> list[str]:
