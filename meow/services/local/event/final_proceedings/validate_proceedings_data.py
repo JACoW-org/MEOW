@@ -38,29 +38,38 @@ async def validate_proceedings_data(proceedings_data: ProceedingsData, cookies: 
 
                 page_count: int = contribution_data.metadata.get(
                     'page_count', 0)
-                pages_report: list[dict] = contribution_data.metadata.get(
-                    'pages_report', [])
-                fonts_report: list[dict] = contribution_data.metadata.get(
-                    'fonts_report', [])
+                
+                if page_count == 0:
+                    
+                    error['page_size'] = False
+                    error['font_emb'] = False
+                    
+                else:
+                
+                    pages_report: list[dict] = contribution_data.metadata.get(
+                        'pages_report', [])
+                    
+                    fonts_report: list[dict] = contribution_data.metadata.get(
+                        'fonts_report', [])
+                    
+                    for page_report in pages_report:
+                        page_sizes = page_report.get('sizes', {})
+                        page_width: float = float(page_sizes.get('width', 0.0))
+                        page_height: float = float(page_sizes.get('height', 0.0))
 
-                for page_report in pages_report:
-                    page_sizes = page_report.get('sizes', {})
-                    page_width: float = float(page_sizes.get('width', 0.0))
-                    page_height: float = float(page_sizes.get('height', 0.0))
+                        if float(page_width) != pdf_page_width or page_height != pdf_page_height:
 
-                    if float(page_width) != pdf_page_width or page_height != pdf_page_height:
+                            logger.info({'page_width': page_width, 'pdf_page_width': pdf_page_width,
+                                        'page_height': page_height, 'pdf_page_height': pdf_page_height})
 
-                        logger.info({'page_width': page_width, 'pdf_page_width': pdf_page_width,
-                                    'page_height': page_height, 'pdf_page_height': pdf_page_height})
+                            error['page_size'] = False
+                            break
 
-                        error['page_size'] = False
-                        break
-
-                for font_report in fonts_report:
-                    font_emb: bool = bool(font_report.get('emb', False))
-                    if font_emb == False:
-                        error['font_emb'] = False
-                        break
+                    for font_report in fonts_report:
+                        font_emb: bool = bool(font_report.get('emb', False))
+                        if font_emb == False:
+                            error['font_emb'] = False
+                            break
 
                 if len(error.keys()) > 0:
                     errors.append({
