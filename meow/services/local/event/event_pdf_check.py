@@ -17,16 +17,11 @@ from meow.models.local.event.final_proceedings.contribution_model import Contrib
 from meow.services.local.event.event_pdf_utils import read_report
 from meow.services.local.event.event_pdf_utils import extract_event_pdf_files, is_to_download
 
-
-from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
-
 from meow.services.local.event.final_proceedings.collecting_contributions_and_files import collecting_contributions_and_files
 from meow.services.local.event.final_proceedings.collecting_sessions_and_attachments import collecting_sessions_and_attachments
-from meow.services.local.event.final_proceedings.read_papers_metadata import read_papers_metadata
+from meow.services.local.event.final_proceedings.read_papers_report import read_papers_report
 from meow.services.local.event.final_proceedings.validate_proceedings_data import validate_proceedings_data
-from meow.services.local.event.final_proceedings.download_contributions_slides import download_contributions_slides
 from meow.services.local.event.final_proceedings.create_final_proceedings import create_final_proceedings
-from meow.services.local.event.final_proceedings.download_event_attachments import download_event_attachments
 from meow.services.local.event.final_proceedings.download_contributions_papers import download_contributions_papers
 
 
@@ -131,11 +126,11 @@ async def _event_pdf_check(event: dict, cookies: dict, settings: dict, lock: Red
     await extend_lock(lock)
 
     yield dict(type='progress', value=dict(
-        phase='read_papers_metadata',
-        text='Read Papers Metadata'
+        phase='read_papers_report',
+        text='Read Papers Report'
     ))
 
-    final_proceedings = await read_papers_metadata(final_proceedings, cookies, settings)
+    final_proceedings = await read_papers_report(final_proceedings, cookies, settings)
 
     """ """
 
