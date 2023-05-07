@@ -18,10 +18,9 @@ class CheckPdfTask(AbstractTask):
         cookies: dict = params.get("cookies", dict())
         settings: dict = params.get("settings", dict())
         
-        indico_session_http: str = cookies.get('indico_session_http', None)
-        
-        cookies['indico_session_http'] = indico_session_http
-        cookies['indico_session'] = indico_session_http
+        indico_session: str = cookies.get('indico_session_http', None)
+        cookies['indico_session_http'] = indico_session
+        cookies['indico_session'] = indico_session
 
         async for r in event_pdf_check(event, cookies, settings):
             yield r

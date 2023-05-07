@@ -19,5 +19,9 @@ class EventPdfTask(AbstractTask):
         cookies: dict = params.get("cookies", dict())
         settings: dict = params.get("settings", dict())
         
+        indico_session: str = cookies.get('indico_session_http', None)
+        cookies['indico_session_http'] = indico_session
+        cookies['indico_session'] = indico_session
+        
         async for r in event_pdf_keywords(event, cookies, settings):
             yield r

@@ -19,5 +19,9 @@ class EventAbTask(AbstractTask):
         cookies: dict = params.get('cookies', dict())
         settings: dict = params.get('settings', dict())
         
+        indico_session: str = cookies.get('indico_session_http', None)
+        cookies['indico_session_http'] = indico_session
+        cookies['indico_session'] = indico_session
+        
         async for r in event_abstract_booklet(event, cookies, settings):
             yield r
