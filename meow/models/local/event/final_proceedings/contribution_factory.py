@@ -130,24 +130,30 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
     # [WEXB1]
     # Green & QA:
     # NO TAG
-    
+
     # logger.info(f"contribution_code: {contribution.get('code')}")
-    
+
     # logger.info(paper_data.all_revisions if paper_data else [])
 
     is_qa_approved = len([
         r for r in paper_data.all_revisions
         if r.is_qa_approved
     ] if paper_data else []) > 0
-    
+
     is_qa_pending = len([
         r for r in paper_data.all_revisions
         if r.is_qa_pending
     ] if paper_data else []) > 0
-    
+
     # logger.info(f"is_qa_approved: {is_qa_approved}")
-    
+
     # logger.info("\n\n")
+
+    contribution_url = contribution.get('url', '')
+    
+    contribution_url = contribution_url \
+        if not contribution_url.endswith('/') \
+        else contribution_url[:-1]
 
     """ """
 
@@ -159,7 +165,7 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
     contribution_data = ContributionData(
         code=contribution.get('code'),
         type=contribution.get('type'),
-        url=contribution.get('url'),
+        url=contribution_url,
         title=contribution.get('title'),
         duration=contribution.get('duration'),
         description=contribution.get('description'),

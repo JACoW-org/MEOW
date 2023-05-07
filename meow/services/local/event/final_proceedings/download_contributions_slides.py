@@ -73,6 +73,10 @@ async def file_download_task(capacity_limiter: CapacityLimiter, total_files: int
             pdf_url = current_file.external_download_url
 
             http_sess = cookies.get('indico_session_http', '')
+            https_sess = cookies.get('indico_session', '')
+
+            indico_cookies = dict(indico_session_http=http_sess,
+                                  indico_session=https_sess)
 
             pdf_file = Path(pdf_cache_dir, pdf_name)
 
@@ -81,7 +85,7 @@ async def file_download_task(capacity_limiter: CapacityLimiter, total_files: int
             if await is_to_download(pdf_file, pdf_md5):
                 # logger.info(f"download_file --> {pdf_url}")
                 await download_file(url=pdf_url, file=pdf_file,
-                                    cookies=dict(indico_session_http=http_sess))
+                                    cookies=indico_cookies)
             # else:
             #     logger.info(f"cached_file --> {pdf_url}")
 

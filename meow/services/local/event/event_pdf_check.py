@@ -140,7 +140,7 @@ async def _event_pdf_check(event: dict, cookies: dict, settings: dict, lock: Red
         phase='validate_contributions_papers',
         text='Validate Contributions Papers'
     ))
-    
+
     def callback(c: ContributionData) -> bool:
         return c.is_qa_approved or c.is_qa_pending
 
@@ -226,8 +226,13 @@ async def internal_pdf_check_task(current_file: dict, cookies: dict, pdf_cache_d
 
     pdf_md5 = current_file.get('md5sum', '')
     pdf_name = current_file.get('filename', '')
-    http_sess = cookies.get('indico_session_http', '')
     pdf_url = current_file.get('external_download_url', '')
+
+    http_sess = cookies.get('indico_session_http', '')
+    https_sess = cookies.get('indico_session', '')
+
+    indico_cookies = dict(indico_session_http=http_sess,
+                          indico_session=https_sess)
 
     pdf_file = Path(pdf_cache_dir, pdf_name)
 
@@ -235,7 +240,8 @@ async def internal_pdf_check_task(current_file: dict, cookies: dict, pdf_cache_d
 
     if await is_to_download(pdf_file, pdf_md5):
         cookies = dict(indico_session_http=http_sess)
-        await download_file(url=pdf_url, file=pdf_file, cookies=cookies)
+        await download_file(url=pdf_url, file=pdf_file,
+                            cookies=indico_cookies)
 
     # EXTERNAL PROCESS
     return await read_report(str(await pdf_file.absolute()))

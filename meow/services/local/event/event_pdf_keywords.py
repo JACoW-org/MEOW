@@ -38,7 +38,7 @@ async def event_pdf_keywords(event: dict, cookies: dict, settings: dict) -> Asyn
 
     # files: list[ContributionPaperData] = await extract_contributions_papers(proceedings_data)
 
-    files = [] ### TODO TODO TODO
+    files = []  # TODO TODO TODO
 
     total_files: int = len(files)
     checked_files: int = 0
@@ -101,19 +101,26 @@ async def internal_pdf_keywords_task(current_file: dict, cookies: dict, pdf_cach
 
     pdf_md5 = current_file.get('md5sum', '')
     pdf_name = current_file.get('filename', '')
-    http_sess = cookies.get('indico_session_http', '')
+
     pdf_url = current_file.get('external_download_url', '')
 
     pdf_file = Path(pdf_cache_dir, pdf_name)
+
+    http_sess = cookies.get('indico_session_http', '')
+    https_sess = cookies.get('indico_session', '')
+
+    indico_cookies = dict(indico_session_http=http_sess,
+                          indico_session=https_sess)
 
     logger.debug(f"{pdf_md5} {pdf_name}")
 
     if await is_to_download(pdf_file, pdf_md5):
         cookies = dict(indico_session_http=http_sess)
-        await download_file(url=pdf_url, file=pdf_file, cookies=cookies)
+        await download_file(url=pdf_url, file=pdf_file,
+                            cookies=indico_cookies)
 
     paper_keywords = []
-    
+
     text = await pdf_to_text(str(await pdf_file.absolute()))
 
     # IN PROCESS
@@ -126,5 +133,3 @@ async def internal_pdf_keywords_task(current_file: dict, cookies: dict, pdf_cach
     # paper_keywords = await to_process.run_sync(get_pdf_keywords, str(await pdf_file.absolute()), stemmer, stem_keywords_dict)
 
     return paper_keywords
-
-
