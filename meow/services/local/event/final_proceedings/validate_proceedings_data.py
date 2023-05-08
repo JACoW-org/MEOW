@@ -22,15 +22,19 @@ async def validate_proceedings_data(proceedings_data: ProceedingsData, cookies: 
     errors: list = []
     
     total_count: int = 0
+    metadata_count: int = 0
     qa_approved_count: int = 0
     qa_pending_count: int = 0
 
     for contribution_data in proceedings_data.contributions:
+        
+        total_count += 1
+        
         if contribution_data.code and contribution_data.metadata:
+                
+            metadata_count += 1
 
             if callback(contribution_data):
-                
-                total_count += 1
                 
                 if contribution_data.is_qa_approved:
                     qa_approved_count += 1
@@ -99,6 +103,7 @@ async def validate_proceedings_data(proceedings_data: ProceedingsData, cookies: 
     logger.info(f"")
     logger.info(f"####################")
     logger.info(f"total_count: {total_count}")
+    logger.info(f"metadata_count: {metadata_count}")
     logger.info(f"qa_approved_count: {qa_approved_count}")
     logger.info(f"qa_pending_count: {qa_pending_count}")
     logger.info(f"####################")
