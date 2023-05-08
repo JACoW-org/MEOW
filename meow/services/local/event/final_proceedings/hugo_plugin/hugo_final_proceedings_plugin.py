@@ -202,7 +202,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                         await self.template.render_contribution_partial(contribution)
                     )
 
-                if contribution.code and contribution.is_qa_approved and contribution.doi_data:
+                if contribution.code and contribution.is_included_in_proceedings and contribution.doi_data:
                     await Path(base_path, f"{code}_doi.html").write_text(
                         await self.template.render_doi_partial(self.event, contribution.doi_data)
                     )
@@ -498,10 +498,10 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         for institute in self.institutes:
             contributionsGroups[institute.name] = [
                 dict(code=c.code, title=c.title,
-                     is_qa_approved=c.is_qa_approved,
+                     is_included_in_proceedings=c.is_included_in_proceedings,
                      doi_data=c.doi_data)
                 for c in self.contributions
-                if c.is_qa_approved and c.doi_data
+                if c.is_included_in_proceedings and c.doi_data
                 and institute in c.institutes
             ]
 
@@ -659,7 +659,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         capacity_limiter = CapacityLimiter(4)
         async with create_task_group() as tg:
             for contribution in self.contributions:
-                if contribution.is_qa_approved and contribution.code and contribution.doi_data:
+                if contribution.is_included_in_proceedings and contribution.code and contribution.doi_data:
                     tg.start_soon(_render_doi_contribution, capacity_limiter,
                                   contribution.code, contribution.doi_data)
 

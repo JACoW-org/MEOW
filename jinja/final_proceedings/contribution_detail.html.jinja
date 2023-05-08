@@ -2,7 +2,7 @@
 
 {% macro render(contribution) -%}
 
-{% if contribution.is_qa_approved and contribution.metadata: %}
+{% if contribution.is_included_in_proceedings and contribution.metadata: %}
 <h3>{{ contribution.code|e }} - {{ contribution.title|e }} - {{ contribution.metadata.page_count }}</h3>
 {% else %}
 <h3><s>{{ contribution.code|e }}</s> - {{ contribution.title|e }}</h3>
@@ -25,7 +25,7 @@
 </p>
 {% endif %}
 
-{% if contribution.is_qa_approved: %}
+{% if contribution.is_included_in_proceedings: %}
 <p>
     <b>Paper</b>
     <a onclick="openUrl(`pdf/{{ contribution.paper_name }}`)" href="javascript:void(0);">
