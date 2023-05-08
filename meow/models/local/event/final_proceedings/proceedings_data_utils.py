@@ -12,12 +12,13 @@ async def extract_proceedings_papers(proceedings_data: ProceedingsData) -> list[
     files: list[FileData] = []
 
     for contribution_data in proceedings_data.contributions:
-        if contribution_data.paper and contribution_data.paper.latest_revision:
-            revision_data = contribution_data.paper.latest_revision
-            for file_data in revision_data.files:
-                if file_data.file_type == FileData.FileType.paper:
-                    files.append(file_data)
-                # logger.info(f"{file_data.uuid} - {file_data.filename}")
+        if contribution_data.is_qa_approved or contribution_data.is_qa_pending:
+            if contribution_data.paper and contribution_data.paper.latest_revision:
+                revision_data = contribution_data.paper.latest_revision
+                for file_data in revision_data.files:
+                    if file_data.file_type == FileData.FileType.paper:
+                        files.append(file_data)
+                    # logger.info(f"{file_data.uuid} - {file_data.filename}")
 
     return files
 
