@@ -176,13 +176,18 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, l
 
     [metadata, errors] = await validate_proceedings_data(final_proceedings, cookies, settings, callback)
     
-    if len(errors) > 0:
-        yield dict(type='result', value=dict(
-            metadata=metadata,
-            errors=errors
-        ))
-        
-        return
+    yield dict(type='result', value=dict(
+        metadata=metadata,
+        errors=errors
+    ))
+    
+    # if len(errors) > 0:
+    #     yield dict(type='result', value=dict(
+    #         metadata=metadata,
+    #         errors=errors
+    #     ))
+    #     
+    #     return
 
     """ """
 
