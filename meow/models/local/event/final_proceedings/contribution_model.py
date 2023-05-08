@@ -81,17 +81,25 @@ class RevisionData:
     creation_date: datetime
     
     @property
-    def is_qa_approved(self) -> bool:       
+    def is_qa_approved(self) -> bool:
+        if self.final_state == RevisionData.FinalRevisionState.accepted:
+            return True
+        
         for tag in self.tags:
             if tag.is_qa_approved:
                 return True
+        
         return False
     
     @property
-    def is_qa_pending(self) -> bool:       
+    def is_qa_pending(self) -> bool:
+        if self.is_qa_approved:
+            return False
+        
         for tag in self.tags:
             if tag.is_qa_pending:
                 return True
+            
         return False    
 
     def as_dict(self) -> dict:
