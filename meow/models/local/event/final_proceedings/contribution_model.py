@@ -96,6 +96,9 @@ class RevisionData:
         if self.is_qa_approved:
             return False
         
+        if self.final_state == RevisionData.FinalRevisionState.needs_submitter_confirmation:
+            return True
+        
         for tag in self.tags:
             if tag.is_qa_pending:
                 return True
