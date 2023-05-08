@@ -21,26 +21,25 @@ async def validate_proceedings_data(proceedings_data: ProceedingsData, cookies: 
     metadata: list = []
     errors: list = []
     
-    total_count: int = 0
-    metadata_count: int = 0
-    qa_approved_count: int = 0
-    qa_pending_count: int = 0
+    total_count: list[str] = []
+    qa_approved_count: list[str] = []
+    qa_pending_count: list[str] = []
+    qa_none_count: list[str] = []
 
     for contribution_data in proceedings_data.contributions:
         
-        total_count += 1
-        
         if contribution_data.code and contribution_data.metadata:
-                
-            metadata_count += 1
+            
+            total_count.append(contribution_data.code)
 
             if callback(contribution_data):
                 
                 if contribution_data.is_qa_approved:
-                    qa_approved_count += 1
-                    
-                if contribution_data.is_qa_pending:
-                    qa_pending_count += 1                
+                    qa_approved_count.append(contribution_data.code)                    
+                elif contribution_data.is_qa_pending:
+                    qa_pending_count.append(contribution_data.code)                    
+                else:
+                    qa_none_count.append(contribution_data.code)      
 
                 metadata.append(contribution_data.metadata)
 
@@ -102,10 +101,19 @@ async def validate_proceedings_data(proceedings_data: ProceedingsData, cookies: 
                     
     logger.info(f"")
     logger.info(f"####################")
+    logger.info(f"total_count: {len(total_count)}")
+    logger.info(f"qa_approved_count: {len(qa_approved_count)}")
+    logger.info(f"qa_pending_count: {len(qa_pending_count)}")
+    logger.info(f"qa_none_count: {len(qa_none_count)}")
+    logger.info(f"####################")
+    logger.info(f"")
+
+    logger.info(f"")
+    logger.info(f"####################")
     logger.info(f"total_count: {total_count}")
-    logger.info(f"metadata_count: {metadata_count}")
     logger.info(f"qa_approved_count: {qa_approved_count}")
     logger.info(f"qa_pending_count: {qa_pending_count}")
+    logger.info(f"qa_none_count: {qa_none_count}")
     logger.info(f"####################")
     logger.info(f"")
 
