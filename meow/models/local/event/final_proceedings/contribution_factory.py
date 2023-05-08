@@ -135,22 +135,65 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
 
     # logger.info(paper_data.all_revisions if paper_data else [])
 
-    is_qa_approved = len([
-        r for r in paper_data.all_revisions
-        if r.is_qa_approved
-    ] if paper_data else []) > 0
+    revisions: list[RevisionData] = []
+    
+    if paper_data and paper_data.all_revisions:
+        for r in paper_data.all_revisions:
+            revisions.append(r)
+      
+    revisions.reverse()
+    
+    
+    # if len(revisions) == 0:
+    #     logger.error(f"code: {contribution.get('code')}")    
+    
 
-    is_qa_pending = len([
-        r for r in paper_data.all_revisions
-        if r.is_qa_pending
-    ] if paper_data else []) > 0
+    is_included_in_proceedings: bool = False    
+    is_included_in_pdf_check: bool = False
+    
+    
+    for r in revisions:
+        if r.is_black or r.is_red:
+            break
+        
+        if r.is_green:
+            is_included_in_proceedings = True
+            is_included_in_pdf_check = True
+            break
+               
+        if r.is_yellow:
+            is_included_in_pdf_check = True
+            break   
+    
+    
+    
+    # is_not_included = len([
+    #     r for r in revisions
+    #     if r.is_black
+    # ]) > 0
+    #     
+    # 
+    # if not is_not_included:
+    #     is_included_in_proceedings = len([
+    #         r for r in revisions
+    #         if r.is_green
+    #     ]) > 0
+    # 
+    # 
+    # if not is_not_included and not is_included_in_proceedings:
+    #     
+    #     is_included_in_pdf_check = len([
+    #         r for r in revisions
+    #         if r.is_yellow
+    #     ] if paper_data else []) > 0
+        
 
     # logger.info(f"is_qa_approved: {is_qa_approved}")
 
     # logger.info("\n\n")
 
     contribution_url = contribution.get('url', '')
-    
+
     contribution_url = contribution_url \
         if not contribution_url.endswith('/') \
         else contribution_url[:-1]
@@ -194,8 +237,8 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
         end=datedict_to_tz_datetime(
             contribution.get('end_dt')
         ),
-        is_qa_approved=is_qa_approved,
-        is_qa_pending=is_qa_pending,
+        is_included_in_proceedings=is_included_in_proceedings,
+        is_included_in_pdf_check=is_included_in_pdf_check,
         paper=paper_data,
         slides=slides_data,
         poster=poster_data,

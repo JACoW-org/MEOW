@@ -22,9 +22,10 @@ async def validate_proceedings_data(proceedings_data: ProceedingsData, cookies: 
     errors: list = []
     
     total_count: list[str] = []
-    qa_approved_count: list[str] = []
-    qa_pending_count: list[str] = []
-    qa_none_count: list[str] = []
+    
+    included_in_proceedings: list[str] = []
+    included_in_check: list[str] = []
+    others: list[str] = []
 
     for contribution_data in proceedings_data.contributions:
         
@@ -34,12 +35,12 @@ async def validate_proceedings_data(proceedings_data: ProceedingsData, cookies: 
 
             if callback(contribution_data):
                 
-                if contribution_data.is_qa_approved:
-                    qa_approved_count.append(contribution_data.code)                    
-                elif contribution_data.is_qa_pending:
-                    qa_pending_count.append(contribution_data.code)                    
+                if contribution_data.is_included_in_proceedings:
+                    included_in_proceedings.append(contribution_data.code)                    
+                elif contribution_data.is_included_in_pdf_check:
+                    included_in_check.append(contribution_data.code)                    
                 else:
-                    qa_none_count.append(contribution_data.code)      
+                    others.append(contribution_data.code)      
 
                 metadata.append(contribution_data.metadata)
 
@@ -102,18 +103,18 @@ async def validate_proceedings_data(proceedings_data: ProceedingsData, cookies: 
     logger.info(f"")
     logger.info(f"####################")
     logger.info(f"total_count: {len(total_count)}")
-    logger.info(f"qa_approved_count: {len(qa_approved_count)}")
-    logger.info(f"qa_pending_count: {len(qa_pending_count)}")
-    logger.info(f"qa_none_count: {len(qa_none_count)}")
+    logger.info(f"included_in_proceedings: {len(included_in_proceedings)}")
+    logger.info(f"included_in_check: {len(included_in_check)}")
+    logger.info(f"others: {len(others)}")
     logger.info(f"####################")
     logger.info(f"")
 
     logger.info(f"")
     logger.info(f"####################")
     logger.info(f"total_count: {total_count}")
-    logger.info(f"qa_approved_count: {qa_approved_count}")
-    logger.info(f"qa_pending_count: {qa_pending_count}")
-    logger.info(f"qa_none_count: {qa_none_count}")
+    logger.info(f"included_in_proceedings: {included_in_proceedings}")
+    logger.info(f"included_in_check: {included_in_check}")
+    logger.info(f"others: {others}")
     logger.info(f"####################")
     logger.info(f"")
 

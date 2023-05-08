@@ -142,7 +142,7 @@ async def _event_pdf_check(event: dict, cookies: dict, settings: dict, lock: Red
     ))
 
     def callback(c: ContributionData) -> bool:
-        return c.is_qa_approved or c.is_qa_pending
+        return c.is_included_in_pdf_check
 
     [metadata, errors] = await validate_proceedings_data(final_proceedings, cookies, settings, callback)
 

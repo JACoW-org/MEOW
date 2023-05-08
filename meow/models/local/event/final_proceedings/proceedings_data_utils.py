@@ -12,7 +12,7 @@ async def extract_proceedings_papers(proceedings_data: ProceedingsData) -> list[
     files: list[FileData] = []
 
     for contribution_data in proceedings_data.contributions:
-        if contribution_data.is_qa_approved or contribution_data.is_qa_pending:
+        if contribution_data.is_included_in_pdf_check or contribution_data.is_included_in_proceedings:
             if contribution_data.paper and contribution_data.paper.latest_revision:
                 revision_data = contribution_data.paper.latest_revision
                 for file_data in revision_data.files:
@@ -45,7 +45,7 @@ async def extract_contributions_papers(proceedings_data: ProceedingsData) -> lis
     # files: list[FileData] = []
 
     for contribution_data in proceedings_data.contributions:
-        if contribution_data.is_qa_approved or contribution_data.is_qa_pending:
+        if contribution_data.is_included_in_pdf_check or contribution_data.is_included_in_proceedings:
             if contribution_data.paper and contribution_data.paper.latest_revision:
                 revision_data = contribution_data.paper.latest_revision
                 

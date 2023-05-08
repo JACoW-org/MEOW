@@ -172,7 +172,7 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, l
     ))
 
     def callback(c: ContributionData) -> bool:
-        return c.is_qa_approved
+        return c.is_included_in_proceedings
 
     [metadata, errors] = await validate_proceedings_data(final_proceedings, cookies, settings, callback)
     
