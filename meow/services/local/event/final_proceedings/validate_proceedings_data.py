@@ -20,11 +20,23 @@ async def validate_proceedings_data(proceedings_data: ProceedingsData, cookies: 
 
     metadata: list = []
     errors: list = []
+    
+    total_count: int = 0
+    qa_approved_count: int = 0
+    qa_pending_count: int = 0
 
     for contribution_data in proceedings_data.contributions:
         if contribution_data.code and contribution_data.metadata:
 
             if callback(contribution_data):
+                
+                total_count += 1
+                
+                if contribution_data.is_qa_approved:
+                    qa_approved_count += 1
+                    
+                if contribution_data.is_qa_pending:
+                    qa_pending_count += 1                
 
                 metadata.append(contribution_data.metadata)
 
@@ -59,6 +71,7 @@ async def validate_proceedings_data(proceedings_data: ProceedingsData, cookies: 
 
                         if float(page_width) != pdf_page_width or page_height != pdf_page_height:
 
+                            logger.info(f"code: {contribution_data.code}")
                             logger.info({'page_width': page_width, 'pdf_page_width': pdf_page_width,
                                         'page_height': page_height, 'pdf_page_height': pdf_page_height})
 
@@ -68,6 +81,10 @@ async def validate_proceedings_data(proceedings_data: ProceedingsData, cookies: 
                     for font_report in fonts_report:
                         font_emb: bool = bool(font_report.get('emb', False))
                         if font_emb == False:
+                            
+                            logger.info(f"code: {contribution_data.code}")
+                            logger.info(fonts_report)
+                            
                             error['font_emb'] = False
                             break
 
@@ -78,5 +95,13 @@ async def validate_proceedings_data(proceedings_data: ProceedingsData, cookies: 
                         'code': contribution_data.code,
                         'title': contribution_data.title,
                     })
+                    
+    logger.info(f"")
+    logger.info(f"####################")
+    logger.info(f"total_count: {total_count}")
+    logger.info(f"qa_approved_count: {qa_approved_count}")
+    logger.info(f"qa_pending_count: {qa_pending_count}")
+    logger.info(f"####################")
+    logger.info(f"")
 
     return [metadata, errors]
