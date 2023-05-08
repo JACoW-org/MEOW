@@ -8,13 +8,17 @@ from meow.models.infra.locks import RedisLock
 
 from redis.exceptions import LockError
 
-from anyio import CapacityLimiter, create_task_group
-from meow.models.local.event.final_proceedings.contribution_model import ContributionData
+from anyio import create_task_group
 
+from meow.models.local.event.final_proceedings.contribution_model import ContributionData
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 
-from meow.services.local.event.final_proceedings.collecting_contributions_and_files import collecting_contributions_and_files
-from meow.services.local.event.final_proceedings.collecting_sessions_and_attachments import collecting_sessions_and_attachments
+from meow.services.local.event.common.collecting_contributions_and_files import collecting_contributions_and_files
+from meow.services.local.event.common.collecting_sessions_and_attachments import collecting_sessions_and_attachments
+from meow.services.local.event.common.create_final_proceedings import create_final_proceedings
+from meow.services.local.event.common.validate_proceedings_data import validate_proceedings_data
+from meow.services.local.event.common.download_contributions_papers import download_contributions_papers
+
 from meow.services.local.event.final_proceedings.concat_contribution_papers import concat_contribution_papers
 from meow.services.local.event.final_proceedings.copy_contribution_papers import copy_contribution_papers
 from meow.services.local.event.final_proceedings.copy_contribution_slides import copy_contribution_slides
@@ -22,16 +26,13 @@ from meow.services.local.event.final_proceedings.copy_event_attachments import c
 from meow.services.local.event.final_proceedings.download_contributions_slides import download_contributions_slides
 
 from meow.services.local.event.final_proceedings.download_event_attachments import download_event_attachments
-from meow.services.local.event.final_proceedings.download_contributions_papers import download_contributions_papers
 from meow.services.local.event.final_proceedings.extract_contribution_references import extract_contribution_references
 from meow.services.local.event.final_proceedings.generate_contribution_doi import generate_contribution_doi
 
-from meow.services.local.event.final_proceedings.create_final_proceedings import create_final_proceedings
 from meow.services.local.event.final_proceedings.generate_contributions_groups import generate_contributions_groups
 from meow.services.local.event.final_proceedings.hugo_plugin.hugo_final_proceedings_plugin import HugoFinalProceedingsPlugin
 from meow.services.local.event.final_proceedings.link_static_site import link_static_site
 from meow.services.local.event.final_proceedings.read_papers_metadata import read_papers_metadata
-from meow.services.local.event.final_proceedings.validate_proceedings_data import validate_proceedings_data
 from meow.services.local.event.final_proceedings.write_papers_metadata import write_papers_metadata
 
 
@@ -78,6 +79,10 @@ async def extend_lock(lock: RedisLock) -> RedisLock:
 
     await lock.reacquire()
     return lock
+
+
+def callback(c: ContributionData) -> bool:
+    return c.is_included_in_proceedings
 
 
 async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, lock: RedisLock) -> AsyncGenerator:
@@ -138,7 +143,7 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, l
         text="Download Contributions Papers"
     ))
 
-    final_proceedings = await download_contributions_papers(final_proceedings, cookies, settings)
+    final_proceedings = await download_contributions_papers(final_proceedings, cookies, settings, callback)
 
     """ """
 
@@ -160,7 +165,7 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, l
         text='Read Papers Metadata'
     ))
 
-    final_proceedings = await read_papers_metadata(final_proceedings, cookies, settings)
+    final_proceedings = await read_papers_metadata(final_proceedings, cookies, settings, callback)
 
     """ """
 
@@ -171,22 +176,19 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, l
         text='Validate Contributions Papers'
     ))
 
-    def callback(c: ContributionData) -> bool:
-        return c.is_included_in_proceedings
-
     [metadata, errors] = await validate_proceedings_data(final_proceedings, cookies, settings, callback)
-    
+
     yield dict(type='result', value=dict(
         metadata=metadata,
         errors=errors
     ))
-    
+
     # if len(errors) > 0:
     #     yield dict(type='result', value=dict(
     #         metadata=metadata,
     #         errors=errors
     #     ))
-    #     
+    #
     #     return
 
     """ """
@@ -220,7 +222,7 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, l
         text='Extract Papers Metadata'
     ))
 
-    final_proceedings = await write_papers_metadata(final_proceedings, cookies, settings)
+    final_proceedings = await write_papers_metadata(final_proceedings, cookies, settings, callback)
 
     """ """
 
@@ -242,7 +244,7 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, l
         text='Concat Contributions Papers'
     ))
 
-    final_proceedings = await concat_contribution_papers(final_proceedings, cookies, settings)
+    final_proceedings = await concat_contribution_papers(final_proceedings, cookies, settings, callback)
 
     """ """
 
@@ -273,7 +275,7 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, l
         tg.start_soon(copy_event_attachments,
                       final_proceedings, cookies, settings)
         tg.start_soon(copy_contribution_papers,
-                      final_proceedings, cookies, settings)
+                      final_proceedings, cookies, settings, callback)
         tg.start_soon(copy_contribution_slides,
                       final_proceedings, cookies, settings)
 
@@ -291,11 +293,19 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, l
     await extend_lock(lock)
 
     yield dict(type='progress', value=dict(
+        phase='generate_final_proceedings',
+        text='Generate Final Proceedings'
+    ))
+
+    await plugin.generate()
+
+    await extend_lock(lock)
+
+    yield dict(type='progress', value=dict(
         phase='compress_final_proceedings',
         text='Compress Final Proceedings'
     ))
 
-    await plugin.generate()
     await plugin.compress()
 
     """ """

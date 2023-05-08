@@ -1,4 +1,5 @@
 import logging as lg
+from typing import Callable
 
 from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
@@ -14,12 +15,12 @@ from meow.services.local.event.event_pdf_utils import read_report
 logger = lg.getLogger(__name__)
 
 
-async def read_papers_report(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
+async def read_papers_report(proceedings_data: ProceedingsData, cookies: dict, settings: dict, callback: Callable) -> ProceedingsData:
     """ """
 
     logger.info('event_final_proceedings - read_papers_report')
 
-    papers_data: list[ContributionPaperData] = await extract_contributions_papers(proceedings_data)
+    papers_data: list[ContributionPaperData] = await extract_contributions_papers(proceedings_data, callback)
 
     total_files: int = len(papers_data)
     processed_files: int = 0

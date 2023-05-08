@@ -1,4 +1,5 @@
 import logging as lg
+from typing import Callable
 
 from meow.models.local.event.final_proceedings.contribution_model import ContributionPaperData, FileData
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
@@ -7,12 +8,12 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import Pro
 logger = lg.getLogger(__name__)
 
 
-async def extract_proceedings_papers(proceedings_data: ProceedingsData) -> list[FileData]:
+async def extract_proceedings_papers(proceedings_data: ProceedingsData, callback: Callable) -> list[FileData]:
 
     files: list[FileData] = []
 
     for contribution_data in proceedings_data.contributions:
-        if contribution_data.is_included_in_pdf_check or contribution_data.is_included_in_proceedings:
+        if callback(contribution_data):
             if contribution_data.paper and contribution_data.paper.latest_revision:
                 revision_data = contribution_data.paper.latest_revision
                 for file_data in revision_data.files:
@@ -38,14 +39,14 @@ async def extract_proceedings_slides(proceedings_data: ProceedingsData) -> list[
     return files
 
 
-async def extract_contributions_papers(proceedings_data: ProceedingsData) -> list[ContributionPaperData]:
+async def extract_contributions_papers(proceedings_data: ProceedingsData, callback: Callable) -> list[ContributionPaperData]:
 
     papers: list[ContributionPaperData] = []
 
     # files: list[FileData] = []
 
     for contribution_data in proceedings_data.contributions:
-        if contribution_data.is_included_in_pdf_check or contribution_data.is_included_in_proceedings:
+        if callback(contribution_data):
             if contribution_data.paper and contribution_data.paper.latest_revision:
                 revision_data = contribution_data.paper.latest_revision
                 

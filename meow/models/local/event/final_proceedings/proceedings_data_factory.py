@@ -25,7 +25,7 @@ def proceedings_data_factory(event: Any, sessions: list, contributions: list, at
         for contribution in contributions
     ]
 
-    contributions_data.sort(key=sort_list_by_date)
+    contributions_data.sort(key=sort_list_by_code)
     
     attachments_data = [
         attachment_data_factory(attachment)

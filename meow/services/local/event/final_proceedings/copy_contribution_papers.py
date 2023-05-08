@@ -1,4 +1,5 @@
 import logging as lg
+from typing import Callable
 
 from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
@@ -13,10 +14,10 @@ from meow.models.local.event.final_proceedings.proceedings_data_utils import ext
 logger = lg.getLogger(__name__)
 
 
-async def copy_contribution_papers(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
+async def copy_contribution_papers(proceedings_data: ProceedingsData, cookies: dict, settings: dict, callback: Callable) -> ProceedingsData:
     """ """
 
-    files_data: list[FileData] = await extract_proceedings_papers(proceedings_data)
+    files_data: list[FileData] = await extract_proceedings_papers(proceedings_data, callback)
 
     total_files: int = len(files_data)
     elaborated_files: int = 0

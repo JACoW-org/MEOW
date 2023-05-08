@@ -1,10 +1,11 @@
 import logging as lg
+from typing import Callable
 
 from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
 
-from meow.models.local.event.final_proceedings.contribution_model import FileData
+from meow.models.local.event.final_proceedings.contribution_model import ContributionData, FileData
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_proceedings_papers
 
 from meow.utils.http import download_file
@@ -15,12 +16,12 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import Pro
 logger = lg.getLogger(__name__)
 
 
-async def download_contributions_papers(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
+async def download_contributions_papers(proceedings_data: ProceedingsData, cookies: dict, settings: dict, callback: Callable) -> ProceedingsData:
     """ """
 
     logger.info('event_final_proceedings - download_contributions_papers')
-
-    files_data: list[FileData] = await extract_proceedings_papers(proceedings_data)
+    
+    files_data: list[FileData] = await extract_proceedings_papers(proceedings_data, callback)
 
     total_files: int = len(files_data)
     downloaded_files: int = 0

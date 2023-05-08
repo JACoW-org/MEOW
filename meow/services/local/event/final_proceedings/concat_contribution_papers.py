@@ -1,6 +1,7 @@
 import logging as lg
 
 from math import sqrt
+from typing import Callable
 
 from anyio import CapacityLimiter, Path, create_task_group
 
@@ -16,7 +17,7 @@ from meow.utils.list import split_list
 logger = lg.getLogger(__name__)
 
 
-async def concat_contribution_papers(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
+async def concat_contribution_papers(proceedings_data: ProceedingsData, cookies: dict, settings: dict, callback: Callable) -> ProceedingsData:
     """ """
 
     logger.info('event_final_proceedings - concat_contribution_papers')
@@ -27,7 +28,7 @@ async def concat_contribution_papers(proceedings_data: ProceedingsData, cookies:
     cache_dir: Path = Path('var', 'run', dir_name)
     await cache_dir.mkdir(exist_ok=True, parents=True)
 
-    files_data = await extract_proceedings_papers(proceedings_data)
+    files_data = await extract_proceedings_papers(proceedings_data, callback)
 
     async with create_task_group() as tg:
         tg.start_soon(vol_pdf_task, proceedings_data,
@@ -64,10 +65,6 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
 
     except Exception as e:
         logger.error(e, exc_info=True)
-
-    logger.warn("\n\n")
-    logger.warn(str(vol_pre_pdf_path))
-    logger.warn("\n\n")
 
     vol_pdf_path = Path(cache_dir, f"{event_id}_proceedings_volume.pdf")
 
@@ -119,10 +116,6 @@ async def brief_pdf_task(proceedings_data: ProceedingsData,  files_data: list[Fi
 
     except Exception as e:
         logger.error(e, exc_info=True)
-
-    logger.warn("\n\n")
-    logger.warn(str(brief_pre_pdf_path))
-    logger.warn("\n\n")
 
     brief_pdf_path = Path(cache_dir, f"{event_id}_proceedings_brief.pdf")
 

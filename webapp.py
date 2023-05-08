@@ -32,12 +32,7 @@ async def main() -> None:
          
     to_thread.current_default_thread_limiter().total_tokens = 8
     to_process.current_default_process_limiter().total_tokens = 8
-    
-    from nltk import download
-    
-    download('punkt')
-    download('stopwords')
-    
+       
     await srs.redis_manager.prepare()
     await srs.redis_manager.migrate()
     await srs.redis_manager.popola()

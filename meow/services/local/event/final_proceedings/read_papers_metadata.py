@@ -1,7 +1,7 @@
 import logging as lg
+from typing import Callable
 
-from fitz import Document
-
+from nltk import download
 from nltk.stem.snowball import SnowballStemmer
 
 from anyio import Path, create_task_group, CapacityLimiter, to_thread
@@ -23,12 +23,12 @@ from meow.utils.keywords import KEYWORDS
 logger = lg.getLogger(__name__)
 
 
-async def read_papers_metadata(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
+async def read_papers_metadata(proceedings_data: ProceedingsData, cookies: dict, settings: dict, callback: Callable) -> ProceedingsData:
     """ """
 
     logger.info('event_final_proceedings - read_papers_metadata')
 
-    papers_data: list[ContributionPaperData] = await extract_contributions_papers(proceedings_data)
+    papers_data: list[ContributionPaperData] = await extract_contributions_papers(proceedings_data, callback)
 
     total_files: int = len(papers_data)
     processed_files: int = 0
@@ -38,6 +38,9 @@ async def read_papers_metadata(proceedings_data: ProceedingsData, cookies: dict,
     dir_name = f"{proceedings_data.event.id}_pdf"
     file_cache_dir: Path = Path('var', 'run', dir_name)
     await file_cache_dir.mkdir(exist_ok=True, parents=True)
+    
+    download('punkt')
+    download('stopwords')
 
     stemmer = SnowballStemmer("english")
     stem_keywords_dict = stem_keywords_as_tree(KEYWORDS, stemmer)

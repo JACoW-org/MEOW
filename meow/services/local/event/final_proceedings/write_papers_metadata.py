@@ -1,11 +1,12 @@
 import logging as lg
+from typing import Callable
 import pytz as tz
 
-from anyio import Path, create_task_group, CapacityLimiter, to_thread
+from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 
 from anyio.streams.memory import MemoryObjectSendStream
-from meow.models.local.event.final_proceedings.contribution_model import ContributionData, ContributionPaperData
+from meow.models.local.event.final_proceedings.contribution_model import ContributionPaperData
 from meow.models.local.event.final_proceedings.event_factory import event_keyword_factory
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_contributions_papers
 
@@ -20,12 +21,12 @@ from meow.utils.datetime import format_datetime_pdf
 logger = lg.getLogger(__name__)
 
 
-async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
+async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict, settings: dict, callback: Callable) -> ProceedingsData:
     """ """
 
     logger.info('event_final_proceedings - write_papers_metadata')
 
-    papers_data: list[ContributionPaperData] = await extract_contributions_papers(proceedings_data)
+    papers_data: list[ContributionPaperData] = await extract_contributions_papers(proceedings_data, callback)
 
     total_files: int = len(papers_data)
     processed_files: int = 0

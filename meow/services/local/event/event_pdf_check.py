@@ -9,23 +9,16 @@ from meow.models.infra.locks import RedisLock
 
 from redis.exceptions import LockError
 
-from anyio import Path, create_task_group, CapacityLimiter
-from anyio import create_memory_object_stream, ClosedResourceError
-
-from anyio.streams.memory import MemoryObjectSendStream
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
-from meow.services.local.event.event_pdf_utils import read_report
-from meow.services.local.event.event_pdf_utils import extract_event_pdf_files, is_to_download
 
-from meow.services.local.event.final_proceedings.collecting_contributions_and_files import collecting_contributions_and_files
-from meow.services.local.event.final_proceedings.collecting_sessions_and_attachments import collecting_sessions_and_attachments
-from meow.services.local.event.final_proceedings.read_papers_report import read_papers_report
-from meow.services.local.event.final_proceedings.validate_proceedings_data import validate_proceedings_data
-from meow.services.local.event.final_proceedings.create_final_proceedings import create_final_proceedings
-from meow.services.local.event.final_proceedings.download_contributions_papers import download_contributions_papers
+from meow.services.local.event.common.collecting_contributions_and_files import collecting_contributions_and_files
+from meow.services.local.event.common.collecting_sessions_and_attachments import collecting_sessions_and_attachments
+from meow.services.local.event.common.download_contributions_papers import download_contributions_papers
+from meow.services.local.event.common.validate_proceedings_data import validate_proceedings_data
+from meow.services.local.event.common.create_final_proceedings import create_final_proceedings
 
+from meow.services.local.event.check_pdf.read_papers_report import read_papers_report
 
-from meow.utils.http import download_file
 
 logger = lg.getLogger(__name__)
 
@@ -72,10 +65,16 @@ async def extend_lock(lock: RedisLock) -> RedisLock:
     return lock
 
 
+def callback(c: ContributionData) -> bool:
+    return c.is_included_in_pdf_check
+
+
 async def _event_pdf_check(event: dict, cookies: dict, settings: dict, lock: RedisLock) -> AsyncGenerator:
     """ """
 
-    logger.info('event_final_proceedings - create_final_proceedings')
+    logger.info('event_check_pdf - create_final_proceedings')
+
+    """ """
 
     """ """
 
@@ -119,7 +118,7 @@ async def _event_pdf_check(event: dict, cookies: dict, settings: dict, lock: Red
         text="Download Contributions Papers"
     ))
 
-    final_proceedings = await download_contributions_papers(final_proceedings, cookies, settings)
+    final_proceedings = await download_contributions_papers(final_proceedings, cookies, settings, callback)
 
     """ """
 
@@ -130,7 +129,7 @@ async def _event_pdf_check(event: dict, cookies: dict, settings: dict, lock: Red
         text='Read Papers Report'
     ))
 
-    final_proceedings = await read_papers_report(final_proceedings, cookies, settings)
+    final_proceedings = await read_papers_report(final_proceedings, cookies, settings, callback)
 
     """ """
 
@@ -141,107 +140,9 @@ async def _event_pdf_check(event: dict, cookies: dict, settings: dict, lock: Red
         text='Validate Contributions Papers'
     ))
 
-    def callback(c: ContributionData) -> bool:
-        return c.is_included_in_pdf_check
-
     [metadata, errors] = await validate_proceedings_data(final_proceedings, cookies, settings, callback)
 
     yield dict(type='result', value=dict(
         metadata=metadata,
         errors=errors
     ))
-
-
-async def __event_pdf_check(event: dict, cookies: dict, settings: dict, lock: RedisLock):
-    """ """
-
-    # logger.debug(f'event_pdf_check - count: {len(contributions)} - cookies: {cookies}')
-
-    event_id = event.get('id', 'event')
-
-    pdf_cache_dir: Path = Path('var', 'run', f"{event_id}_pdf")
-    await pdf_cache_dir.mkdir(exist_ok=True, parents=True)
-
-    files = await extract_event_pdf_files(event)
-
-    total_files: int = len(files)
-    checked_files: int = 0
-
-    logger.info(f'event_pdf_check - files: {len(files)}')
-
-    send_stream, receive_stream = create_memory_object_stream()
-
-    capacity_limiter = CapacityLimiter(4)
-
-    async with create_task_group() as tg:
-        async with send_stream:
-            for current_index, current_file in enumerate(files):
-                tg.start_soon(pdf_check_task, capacity_limiter, total_files, current_index,
-                              current_file, cookies, pdf_cache_dir, send_stream.clone())
-
-        try:
-            async with receive_stream:
-                async for report in receive_stream:
-                    checked_files = checked_files + 1
-
-                    # print('receive_reports_stream::report-->',
-                    #       checked_files, total_files, report)
-
-                    yield dict(
-                        type='progress',
-                        value=report
-                    )
-
-                    await extend_lock(lock)
-
-                    if checked_files >= total_files:
-                        receive_stream.close()
-
-                        yield dict(
-                            type='result',
-                            value=None
-                        )
-
-        except ClosedResourceError:
-            pass
-
-
-async def pdf_check_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int, current_file: dict,
-                         cookies: dict, pdf_cache_dir: Path, res: MemoryObjectSendStream):
-    """ """
-
-    async with capacity_limiter:
-        report = await internal_pdf_check_task(current_file, cookies, pdf_cache_dir)
-
-        await res.send({
-            "index": current_index,
-            "total": total_files,
-            "file": current_file,
-            "report": report
-        })
-
-
-async def internal_pdf_check_task(current_file: dict, cookies: dict, pdf_cache_dir: Path):
-    """ """
-
-    pdf_md5 = current_file.get('md5sum', '')
-    pdf_name = current_file.get('filename', '')
-    pdf_url = current_file.get('external_download_url', '')
-
-    http_sess = cookies.get('indico_session_http', '')
-    https_sess = cookies.get('indico_session', '')
-
-    indico_cookies = dict(indico_session_http=http_sess,
-                          indico_session=https_sess)
-
-    pdf_file = Path(pdf_cache_dir, pdf_name)
-
-    logger.debug(f"{pdf_md5} {pdf_name}")
-
-    if await is_to_download(pdf_file, pdf_md5):
-        cookies = dict(indico_session_http=http_sess)
-        await download_file(url=pdf_url, file=pdf_file,
-                            cookies=indico_cookies)
-
-    # EXTERNAL PROCESS
-    return await read_report(str(await pdf_file.absolute()))

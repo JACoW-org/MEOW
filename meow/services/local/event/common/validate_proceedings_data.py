@@ -1,5 +1,5 @@
 import logging as lg
-from typing import Any
+from typing import Callable
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 
@@ -7,7 +7,7 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import Pro
 logger = lg.getLogger(__name__)
 
 
-async def validate_proceedings_data(proceedings_data: ProceedingsData, cookies: dict, settings: dict, callback: Any) -> list:
+async def validate_proceedings_data(proceedings_data: ProceedingsData, cookies: dict, settings: dict, callback: Callable) -> list:
     """ """
 
     logger.info('event_final_proceedings - validate_events_data')
@@ -18,33 +18,38 @@ async def validate_proceedings_data(proceedings_data: ProceedingsData, cookies: 
     logger.error(pdf_page_width)
     logger.error(pdf_page_height)
 
-    metadata: list = []
-    errors: list = []
-    
+    metadatas: list[dict] = []
+    errors: list[dict] = []
+
     total_count: list[str] = []
-    
+
     included_in_proceedings: list[str] = []
     included_in_check: list[str] = []
     others: list[str] = []
 
     for contribution_data in proceedings_data.contributions:
-        
+
         if contribution_data.code and contribution_data.metadata:
-            
+
+            metadata: dict = contribution_data.metadata
+
             total_count.append(contribution_data.code)
 
             if callback(contribution_data):
-                
+
                 if contribution_data.is_included_in_proceedings:
-                    included_in_proceedings.append(contribution_data.code)                    
+                    included_in_proceedings.append(contribution_data.code)
                 elif contribution_data.is_included_in_pdf_check:
-                    included_in_check.append(contribution_data.code)                    
+                    included_in_check.append(contribution_data.code)
                 else:
-                    others.append(contribution_data.code)      
+                    others.append(contribution_data.code)
 
-                metadata.append(contribution_data.metadata)
+                metadatas.append(metadata)
 
-                error: dict = dict()
+                error: dict = {}
+
+                pages_report: list[dict] = []
+                fonts_report: list[dict] = []
 
                 # {
                 # 'page_count': 1,
@@ -52,26 +57,22 @@ async def validate_proceedings_data(proceedings_data: ProceedingsData, cookies: 
                 # 'fonts_report': [{'name': 'CSKTLK+LMRoman10-Regular', 'emb': True, 'ext': 'cff', 'type': 'Type1'}]
                 # }
 
-                page_count: int = contribution_data.metadata.get(
-                    'page_count', 0)
-                
+                page_count: int = metadata.get('page_count', 0)
+                pages_report = metadata.get('pages_report', [])
+                fonts_report = metadata.get('fonts_report', [])
+
                 if page_count == 0:
-                    
+
                     error['page_size'] = False
                     error['font_emb'] = False
-                    
+
                 else:
-                
-                    pages_report: list[dict] = contribution_data.metadata.get(
-                        'pages_report', [])
-                    
-                    fonts_report: list[dict] = contribution_data.metadata.get(
-                        'fonts_report', [])
-                    
+
                     for page_report in pages_report:
+
                         page_sizes = page_report.get('sizes', {})
-                        page_width: float = float(page_sizes.get('width', 0.0))
-                        page_height: float = float(page_sizes.get('height', 0.0))
+                        page_width = float(page_sizes.get('width', 0.0))
+                        page_height = float(page_sizes.get('height', 0.0))
 
                         if float(page_width) != pdf_page_width or page_height != pdf_page_height:
 
@@ -84,11 +85,12 @@ async def validate_proceedings_data(proceedings_data: ProceedingsData, cookies: 
 
                     for font_report in fonts_report:
                         font_emb: bool = bool(font_report.get('emb', False))
+                        
                         if font_emb == False:
-                            
+
                             logger.info(f"code: {contribution_data.code}")
                             logger.info(fonts_report)
-                            
+
                             error['font_emb'] = False
                             break
 
@@ -99,23 +101,23 @@ async def validate_proceedings_data(proceedings_data: ProceedingsData, cookies: 
                         'code': contribution_data.code,
                         'title': contribution_data.title,
                     })
-                    
-    logger.info(f"")
-    logger.info(f"####################")
-    logger.info(f"total_count: {len(total_count)}")
-    logger.info(f"included_in_proceedings: {len(included_in_proceedings)}")
-    logger.info(f"included_in_check: {len(included_in_check)}")
-    logger.info(f"others: {len(others)}")
-    logger.info(f"####################")
-    logger.info(f"")
 
-    logger.info(f"")
-    logger.info(f"####################")
-    logger.info(f"total_count: {total_count}")
-    logger.info(f"included_in_proceedings: {included_in_proceedings}")
-    logger.info(f"included_in_check: {included_in_check}")
-    logger.info(f"others: {others}")
-    logger.info(f"####################")
-    logger.info(f"")
+    logger.debug(f"")
+    logger.debug(f"####################")
+    logger.debug(f"total_count: {len(total_count)}")
+    logger.debug(f"included_in_proceedings: {len(included_in_proceedings)}")
+    logger.debug(f"included_in_check: {len(included_in_check)}")
+    logger.debug(f"others: {len(others)}")
+    logger.debug(f"####################")
+    logger.debug(f"")
 
-    return [metadata, errors]
+    # logger.debug(f"")
+    # logger.debug(f"####################")
+    # logger.debug(f"total_count: {total_count}")
+    # logger.debug(f"included_in_proceedings: {included_in_proceedings}")
+    # logger.debug(f"included_in_check: {included_in_check}")
+    # logger.debug(f"others: {others}")
+    # logger.debug(f"####################")
+    # logger.debug(f"")
+
+    return [metadatas, errors]
