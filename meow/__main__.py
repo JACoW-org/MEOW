@@ -4,7 +4,7 @@ import json
 import pathlib
 import argparse
 
-from fitz import Document, Rect, Link
+from fitz import Document, Rect, Font
 from fitz.utils import set_metadata, insert_link
 
 from meow.services.local.papers_metadata.pdf_annotations import annot_page_footer, annot_page_header, annot_page_side
@@ -108,25 +108,25 @@ def doc_join(args) -> None:
 
 def doc_links(args) -> None:
     """ Add page links. """
-       
+
     # print(args.input)
     # print(args.links)
-    
+
     doc = Document(filename=args.input)
-    
+
     # print("page_count", doc.page_count)
     # print("links_count", len(args.links))
-    
+
     reversed_links = [l for l in args.links]
     reversed_links.reverse()
-    
+
     for index, link in enumerate(reversed_links):
-        page_index = (doc.page_count - index) -1
-               
+        page_index = (doc.page_count - index) - 1
+
         page = doc.load_page(page_index)
-        
+
         # print(page_index, link, page.mediabox_size.x, page.mediabox_size.y)
-        
+
         rect = Rect(0, 0, page.mediabox_size.x, page.mediabox_size.y)
         insert_link(page, {'kind': 2, 'from': rect, 'uri': f"{link}"})
 
@@ -134,7 +134,7 @@ def doc_links(args) -> None:
 
     doc.close()
     del doc
-    
+
 
 def doc_text(args) -> None:
 
@@ -206,19 +206,20 @@ def doc_report(args) -> None:
 
                 xref_list.append(xref)
 
-                extracted = doc.extract_font(xref)
-                font_name, font_ext, font_type, buffer = extracted
-                font_emb = (font_ext == "n/a" or len(buffer) != 0)
+                font_name, font_ext, font_type, buffer = doc.extract_font(xref)
+                font_emb = not (font_ext == "n/a" or not buffer)
+
+                # print("{: >40} {: >5} {: >5}".format(
+                #     font_name, font_emb, font_ext
+                # ))
 
                 # print("font_name", font_name, "font_emb", font_emb, "font_ext", font_ext, "font_type", font_type, len(buffer)) # font.name, font.flags, font.bbox, font.buffer
 
-                fonts_report.append(dict(
-                    name=font_name, emb=font_emb,
-                    ext=font_ext, type=font_type))
+                fonts_report.append(dict(name=font_name, emb=font_emb,
+                                         ext=font_ext, type=font_type))
 
-        page_report = dict(sizes=dict(
-            width=page.mediabox_size.x,
-            height=page.mediabox_size.y))
+        page_report = dict(sizes=dict(width=page.mediabox_size.x,
+                                      height=page.mediabox_size.y))
 
         pages_report.append(page_report)
 
@@ -348,7 +349,7 @@ def main():
     ps_join.add_argument("input", nargs="*", help="input filenames")
     ps_join.add_argument("-output", required=True, help="output filename")
     ps_join.set_defaults(func=doc_join)
-    
+
     # -------------------------------------------------------------------------
     # 'links' command
     # -------------------------------------------------------------------------
@@ -360,7 +361,6 @@ def main():
     ps_links.add_argument("links", nargs="*", help="input links")
     ps_links.add_argument("-input", required=True, help="input filename")
     ps_links.set_defaults(func=doc_links)
-    
 
     # -------------------------------------------------------------------------
     # start program
