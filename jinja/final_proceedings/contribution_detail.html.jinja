@@ -2,8 +2,19 @@
 
 {% macro render(contribution) -%}
 
+<div id="{{ contribution.code|lower }}" class="contrib-anchor"></div>
+{% if contribution.duplicate_of %}
+<span>{{ contribution.duplicate_of.code }} - {{ contribution.duplicate_of.session_code }}</span>
+{% endif %}
+
 {% if contribution.is_included_in_proceedings and contribution.metadata: %}
 <h3>{{ contribution.code|e }} - {{ contribution.title|e }} - {{ contribution.metadata.page_count }}</h3>
+{% elif contribution.metadata is none and contribution.duplicate_of %}
+<h3>
+    <a onclick="openUrl(`session/{{ contribution.duplicate_of.session_code|lower }}/index.html#{{ contribution.duplicate_of.code|lower }}`)" href="javascript:void(0);">
+        <s>{{ contribution.code|e }}</s>
+    </a> - {{ contribution.title|e }}
+</h3>
 {% else %}
 <h3><s>{{ contribution.code|e }}</s> - {{ contribution.title|e }}</h3>
 {% endif %}

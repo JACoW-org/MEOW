@@ -195,6 +195,15 @@ class EditableData:
         slides = 2
         poster = 3
 
+@dataclass
+class DuplicateContributionData:
+    """Duplicate Contribution Data"""
+
+    code: str
+    session_code: str
+
+    def as_dict(self):
+        return asdict(self)
 
 @dataclass(kw_only=True, slots=True)
 class ContributionData:
@@ -244,6 +253,11 @@ class ContributionData:
     reference: Reference | None = field(default=None)
     doi_data: ContributionDOI | None = field(default=None)
 
+    duplicate_of: DuplicateContributionData = field(default=None)
+
+    # duplicate_of: str = field(default=None)
+    # duplicate_of_data: dict = field(default_factory=dict)
+
     @property
     def authors_list(self) -> list[PersonData]:
         return self.primary_authors + self.coauthors
@@ -292,6 +306,19 @@ class ContributionData:
     @property
     def track_meta(self) -> str:
         return self.track.full_name if self.track else ""
+    
+    @property
+    def duplicate_of_code(self) -> str:
+        # after duplicate of is initialized, use this condition
+        if self.duplicate_of is not None:
+            return self.duplicate_of.code
+        
+        for field in self.field_values:
+            if field.name == 'duplicate_of' and field.value is not None:
+                return field.value
+        
+        return None
+
 
     def as_dict(self) -> dict:
         return {
@@ -304,6 +331,7 @@ class ContributionData:
             'paper_name': self.paper_name(),
             'slides_name': self.slides_name(),
             'poster_name': self.poster_name(),
+            'duplicate_of': self.duplicate_of.as_dict()
         }
 
     def has_paper(self) -> bool:
@@ -347,6 +375,12 @@ class ContributionData:
                 if file.file_type == FileData.FileType.poster:
                     return file.filename
         return None
+    
+    # def duplicate_of(self) -> str:
+    #     for field in self.field_values:
+    #         if field.name == "duplicate_of" and field.value is not None:
+    #             return field.value
+    #     return None
 
 
 @dataclass(kw_only=True, slots=True)
