@@ -8,6 +8,7 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import Pro
 from meow.models.local.event.final_proceedings.session_factory import session_data_factory
 from meow.models.local.event.final_proceedings.session_model import SessionData
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData, DuplicateContributionData
+from meow.utils.datetime import format_datetime_sec
 
 from meow.utils.sort import sort_list_by_code, sort_list_by_date
 
@@ -31,8 +32,15 @@ def proceedings_data_factory(event: Any, sessions: list, contributions: list, at
     # resolve duplicate of
     contributions_data = resolve_duplicates_of(contributions_data)
 
-    # TODO by session_date, session_code, by contribution_code
-    contributions_data.sort(key=sort_list_by_code)
+    # sort by session_date, session_code, by contribution_code
+    sessions_dates = {
+        f'{session.code}': session.start for session in sessions_data
+    }
+    contributions_data.sort(key=lambda x: (
+            format_datetime_sec(sessions_dates.get(x.session_code)),    # session date
+            x.session_code,                                             # session code
+            x.code                                                      # contribution code
+        ))
     
     attachments_data = [
         attachment_data_factory(attachment)
