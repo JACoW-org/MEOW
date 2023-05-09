@@ -48,7 +48,7 @@ def proceedings_data_factory(event: Any, sessions: list, contributions: list, at
 
 def resolve_duplicates_of(contributions: list[ContributionData]) -> list[ContributionData]:
     for contribution in contributions:
-        duplicate_of_code: str = contribution.duplicate_of_code()
+        duplicate_of_code: str = contribution.duplicate_of_code
         if duplicate_of_code:
             duplicate_contribution: ContributionData = find(contributions, lambda contrib: contrib.code == duplicate_of_code)
             contribution.duplicate_of = DuplicateContributionData(

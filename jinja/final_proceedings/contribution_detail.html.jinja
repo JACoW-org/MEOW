@@ -2,7 +2,7 @@
 
 {% macro render(contribution) -%}
 
-<div id="{{ contribution.code|e }}" class="contrib-ancor"></div>
+<div id="{{ contribution.code|lower }}" class="contrib-ancor"></div>
 
 {% if contribution.is_included_in_proceedings and contribution.metadata: %}
 <h3>{{ contribution.code|e }} - {{ contribution.title|e }} - {{ contribution.metadata.page_count }}</h3>

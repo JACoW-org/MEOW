@@ -344,7 +344,7 @@ class ContributionData:
             'paper_name': self.paper_name(),
             'slides_name': self.slides_name(),
             'poster_name': self.poster_name(),
-            'duplicate_of': self.duplicate_of.as_dict()
+            'duplicate_of': self.duplicate_of.as_dict() if self.duplicate_of is not None else None
         }
 
     def has_paper(self) -> bool:
