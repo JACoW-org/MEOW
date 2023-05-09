@@ -743,7 +743,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
         zip_args = [f"{zip_cmd}", "a",
                     "-t7z", "-m0=LZMA2:d64k:fb32",
-                    "-ms=8m", "-mmt=8", "-mx=1", "--",
+                    "-ms=8m", "-mmt=4", "-mx=1", "--",
                     f"{zip_file_path}", f"{out_dir_path}",]
 
         result = await run_process(zip_args)

@@ -35,6 +35,10 @@
     {{ .Content }}
     {{ end }}
 
+    <script id="src-type" type="application/json">
+        {{ block "type" . }}""{{ end }}
+    </script>
+
     <script id="src-prefix" type="application/json">
         {{ if .IsHome }}"."{{ else if .IsNode }}".."{{ else }}"../.."{{ end }}
     </script>
@@ -57,7 +61,7 @@
         const logoElement = document.getElementById('logo');
         if (logoElement) {
             logoElement.src = `${prefix}/${logo}`;
-        }        
+        }
 
         function openUrl(part) {
             try {

@@ -27,8 +27,12 @@ async def collecting_contributions_and_files(event: dict, sessions: list, cookie
 
 async def download_contributions(event_url: str, session_id: int, cookies: dict, settings: dict, contributions: list, limiter: CapacityLimiter) -> None:
     async with limiter:
+        
+        download_url = f"{event_url}manage/purr/final-proceedings-contributions-data/{session_id}"
+        
+        logger.info(download_url)
 
-        response = await download_json(url=f"{event_url}manage/purr/final-proceedings-contributions-data/{session_id}", cookies=cookies)
+        response = await download_json(url=download_url, cookies=cookies)
 
         if 'error' not in response and response.get('error') != True:
             contributions.extend(response.get('contributions'))

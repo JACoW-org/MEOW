@@ -34,8 +34,9 @@ def contribution_editable_factory(editable: Any) -> EditableData | None:
     ) if editable.get('latest_revision', None) else None
 
     return EditableData(
-        id=editable.get('id'),
-        type=editable.get('type'),
+        id=editable.get('id', None),
+        type=editable.get('type', None),
+        state=editable.get('state', None),
         all_revisions=all_revisions,
         latest_revision=latest_revision
     )
@@ -145,26 +146,50 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
     
     
     # if len(revisions) == 0:
-    #     logger.error(f"code: {contribution.get('code')}")    
+    #     logger.error(f"code: {contribution.get('code')}")
     
+
 
     is_included_in_proceedings: bool = False    
     is_included_in_pdf_check: bool = False
     
-    
-    for r in revisions:
-        if r.is_black or r.is_red:
-            break
+     
+    if paper_data and paper_data.state:
         
-        if r.is_green:
+        if paper_data.state == EditableData.EditableState.accepted:
             is_included_in_proceedings = True
             is_included_in_pdf_check = True
-            break
-               
-        if r.is_yellow:
+        elif paper_data.state == EditableData.EditableState.needs_submitter_confirmation:
             is_included_in_pdf_check = True
-            break   
+            
+    else:
+        
+        for r in revisions:
+            if r.is_black or r.is_red:
+                break
+            
+            if r.is_green:
+                is_included_in_proceedings = True
+                is_included_in_pdf_check = True
+                break
+                
+            if r.is_yellow:
+                is_included_in_pdf_check = True
+                break   
     
+    
+    # logger.debug(f"code: {contribution.get('code')}")
+    # logger.debug(f"in_proceedings: {is_included_in_proceedings} {editable_is_included_in_proceedings}")
+    # 
+    # 
+    # if is_included_in_proceedings != editable_is_included_in_proceedings:
+    #     logger.warning(f"{contribution.get('code')}: in_proceedings ERROR")
+    # 
+    # 
+    # logger.debug(f"in_pdf_check: {is_included_in_pdf_check} {editable_is_included_in_pdf_check}")
+    # 
+    # if is_included_in_pdf_check != editable_is_included_in_pdf_check:
+    #     logger.warning(f"{contribution.get('code')}: in_pdf_check ERROR")    
     
     
     # is_not_included = len([
