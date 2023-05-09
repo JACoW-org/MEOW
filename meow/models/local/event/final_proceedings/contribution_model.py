@@ -184,6 +184,7 @@ class EditableData:
 
     id: str
     type: int
+    state: int
 
     all_revisions: list[RevisionData] = field(default_factory=list)
     latest_revision: RevisionData | None = field(default=None)
@@ -194,6 +195,18 @@ class EditableData:
         paper = 1
         slides = 2
         poster = 3
+        
+    class EditableState:
+        # __titles__ = [None, _('New'), _('Ready for Review'), _('Needs Confirmation'), _('Needs Changes'),
+        #             _('Accepted'), _('Rejected')]
+        # __css_classes__ = [None, 'highlight', 'ready', 'warning', 'warning', 'success', 'error']
+    
+        new = 1
+        ready_for_review = 2
+        needs_submitter_confirmation = 3
+        needs_submitter_changes = 4
+        accepted = 5
+        rejected = 6
 
 @dataclass
 class DuplicateContributionData:

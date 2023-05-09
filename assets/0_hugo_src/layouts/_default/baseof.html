@@ -20,6 +20,18 @@
             --primary-color: {{ .Site.Params.color }};
         }
     </style>
+
+    <script id="src-type" type="application/json">
+        {{ block "type" . }}""{{ end }}
+    </script>
+
+    <script id="src-prefix" type="application/json">
+        {{ if .IsHome }}"."{{ else if .IsNode }}".."{{ else }}"../.."{{ end }}
+    </script>
+
+    <script id="src-logo" type="application/json">
+        {{ .Site.Params.logo }}
+    </script>
 </head>
 
 <body>
@@ -35,15 +47,7 @@
     {{ .Content }}
     {{ end }}
 
-    <script id="src-prefix" type="application/json">
-        {{ if .IsHome }}"."{{ else if .IsNode }}".."{{ else }}"../.."{{ end }}
-    </script>
-
-    <script id="src-logo" type="application/json">
-        {{ .Site.Params.logo }}
-    </script>
-
-    <script>
+    <script type="application/javascript">
         const prefix = JSON.parse(document.getElementById('src-prefix').textContent);
         const logo = JSON.parse(document.getElementById('src-logo').textContent);
 
@@ -57,15 +61,15 @@
         const logoElement = document.getElementById('logo');
         if (logoElement) {
             logoElement.src = `${prefix}/${logo}`;
-        }        
+        }
 
         function openUrl(part) {
             try {
-                const next = `${prefix}/${part}`;
-                window.location.href = next;
+                window.location = `${prefix}/${part}`;
             } catch (err) {
                 console.error(err)
             }
+            return false;
         }           
     </script>
 

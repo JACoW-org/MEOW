@@ -2,10 +2,7 @@
 
 {% macro render(contribution) -%}
 
-<div id="{{ contribution.code|lower }}" class="contrib-anchor"></div>
-{% if contribution.duplicate_of %}
-<span>{{ contribution.duplicate_of.code }} - {{ contribution.duplicate_of.session_code }}</span>
-{% endif %}
+<div id="{{ contribution.code|e }}" class="contrib-ancor"></div>
 
 {% if contribution.is_included_in_proceedings and contribution.metadata: %}
 <h3>{{ contribution.code|e }} - {{ contribution.title|e }} - {{ contribution.metadata.page_count }}</h3>
