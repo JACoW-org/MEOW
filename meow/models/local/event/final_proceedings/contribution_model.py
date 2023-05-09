@@ -266,7 +266,7 @@ class ContributionData:
     reference: Reference | None = field(default=None)
     doi_data: ContributionDOI | None = field(default=None)
 
-    duplicate_of: DuplicateContributionData = field(default=None)
+    duplicate_of: DuplicateContributionData | None = field(default=None)
 
     # duplicate_of: str = field(default=None)
     # duplicate_of_data: dict = field(default_factory=dict)
@@ -321,7 +321,7 @@ class ContributionData:
         return self.track.full_name if self.track else ""
     
     @property
-    def duplicate_of_code(self) -> str:
+    def duplicate_of_code(self) -> str | None:
         # after duplicate of is initialized, use this condition
         if self.duplicate_of is not None:
             return self.duplicate_of.code
