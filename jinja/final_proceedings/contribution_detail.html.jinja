@@ -5,15 +5,31 @@
 <div id="{{ contribution.code|lower }}" class="contrib-ancor"></div>
 
 {% if contribution.is_included_in_proceedings and contribution.metadata: %}
-<h3>{{ contribution.code|e }} - {{ contribution.title|e }} - {{ contribution.metadata.page_count }}</h3>
-{% elif contribution.metadata is none and contribution.duplicate_of %}
-<h3>
-    <a onclick="openUrl(`session/{{ contribution.duplicate_of.session_code|lower }}/index.html#{{ contribution.duplicate_of.code|lower }}`)" href="javascript:void(0);">
-        <s>{{ contribution.code|e }}</s>
-    </a> - {{ contribution.title|e }}
-</h3>
+
+<div class="contrib-header">
+    <div class="contrib-code">{{ contribution.code|e }}</div>
+    <div class="contrib-title">{{ contribution.title|e }}</div>
+    <div class="contrib-pages">{{ contribution.metadata.page_count }}</div>
+</div>
+
+{% elif contribution.duplicate_of %}
+
+<div class="contrib-header">
+    <div class="contrib-code">
+        <a onclick="openUrl(`session/{{ contribution.duplicate_of.session_code|lower }}/index.html#{{ contribution.duplicate_of.code|lower }}`)" href="javascript:void(0);">
+            <s>{{ contribution.code|e }}</s>
+        </a>
+    </div>
+    <div class="contrib-title">{{ contribution.title|e }}</div>
+</div>
+
 {% else %}
-<h3><s>{{ contribution.code|e }}</s> - {{ contribution.title|e }}</h3>
+
+<div class="contrib-header">
+    <div class="contrib-code"><s>{{ contribution.code|e }}</s></div>
+    <div class="contrib-title">{{ contribution.title|e }}</div>
+</div>
+
 {% endif %}
 
 {% if contribution.description: %}

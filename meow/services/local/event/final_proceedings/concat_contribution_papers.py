@@ -29,12 +29,17 @@ async def concat_contribution_papers(proceedings_data: ProceedingsData, cookies:
     await cache_dir.mkdir(exist_ok=True, parents=True)
 
     files_data = await extract_proceedings_papers(proceedings_data, callback)
+    
+    if len(files_data) > 0:
+    
+        await brief_pdf_task(proceedings_data, files_data, cache_dir)
+        await vol_pdf_task(proceedings_data, files_data, cache_dir)
 
-    async with create_task_group() as tg:
-        tg.start_soon(vol_pdf_task, proceedings_data,
-                      files_data, cache_dir)
-        tg.start_soon(brief_pdf_task, proceedings_data,
-                      files_data, cache_dir)
+        # async with create_task_group() as tg:
+        #     tg.start_soon(vol_pdf_task, proceedings_data,
+        #                   files_data, cache_dir)
+        #     tg.start_soon(brief_pdf_task, proceedings_data,
+        #                   files_data, cache_dir)
 
     return proceedings_data
 

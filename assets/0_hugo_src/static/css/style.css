@@ -312,3 +312,38 @@ li {
   padding-bottom: 0.1rem;
   margin-bottom: 0.2rem;
 }
+
+.content .right .contrib .contrib-ancor {
+  display: flex;
+  height: 1rem;
+}
+
+.content .right .contrib .contrib-header {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  justify-content: stretch;
+  align-items: center;
+  gap: 1rem;
+  background-color: #eee;
+}
+
+.content .right .contrib .contrib-header .contrib-code {
+  padding: 0.5rem;
+  font-weight: bold;
+  flex: 0;
+}
+
+.content .right .contrib .contrib-header .contrib-title {
+  padding: 0.5rem;
+  font-weight: bold;
+  flex: 1;
+  font-weight: bold;
+  background-color: var(--primary-color, '#333');
+}
+
+.content .right .contrib .contrib-header .contrib-pages {
+  padding: 0.5rem;
+  font-weight: bold;
+  flex: 0;
+}

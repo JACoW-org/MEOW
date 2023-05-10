@@ -57,7 +57,7 @@ class JinjaXMLBuilder:
             .render_async(contribution.as_dict())
 
 
-async def extract_contribution_references(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
+async def generate_contribution_references(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
     """ """
 
     logger.info('event_final_proceedings - extract_contribution_references')

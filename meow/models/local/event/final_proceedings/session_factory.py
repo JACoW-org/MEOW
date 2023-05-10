@@ -17,7 +17,7 @@ def session_data_factory(session_slot: Any) -> SessionData:
     session_event_code = session_event.get('code', '')
     session_slot_code = session_slot.get('code', '')
 
-    session_code: str = session_event_code or session_slot_code
+    session_code: str = session_slot_code or session_event_code
 
     session_data = SessionData(
         code=session_code,

@@ -9,20 +9,20 @@ datedict -> dict(
     tz="Europe/Zurich"
 )
 """
-def format_datetime_sec(d: dt.datetime) -> str:
+def format_datetime_sec(d: dt.datetime | None) -> str:
     return str(d.timestamp()) if d else '' 
 
-def format_datetime_day(d: dt.datetime) -> str:
+def format_datetime_day(d: dt.datetime | None) -> str:
     return d.strftime('%-j') if d else ''
 
-def format_datetime_full(d: dt.datetime) -> str:
+def format_datetime_full(d: dt.datetime | None) -> str:
     return d.strftime('%d %B %Y %H:%M') if d else ''
 
-def format_datetime_time(d: dt.datetime) -> str:
+def format_datetime_time(d: dt.datetime | None) -> str:
     return d.strftime('%H:%M') if d else ''
 
-def format_datetime_dashed(d: dt.datetime) -> str:
-    return d.strftime('%Y-%m-%d')
+def format_datetime_dashed(d: dt.datetime | None) -> str:
+    return d.strftime('%Y-%m-%d') if d else ''
 
 def format_datetime_pdf(d: dt.datetime) -> str:
     # D:YYYYMMDDHHmmSSOHH'mm'
@@ -30,8 +30,8 @@ def format_datetime_pdf(d: dt.datetime) -> str:
     # TODO pass or derive local timezone offset
     return d.strftime(f"D:%Y%m%d%H%M%S{utc_offset[0:3]}'{utc_offset[3:]}'")
 
-def format_datetime_doi(d: dt.datetime) -> str:
-    return d.strftime(f"%d %B %y")
+def format_datetime_doi(d: dt.datetime | None) -> str:
+    return d.strftime(f"%d %B %y") if d else ''
 
 
 def format_datetime_range(start: dt.datetime, end: dt.datetime) -> str:

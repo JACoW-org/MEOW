@@ -5,10 +5,10 @@ from typing import Any
 from datetime import datetime
 from meow.models.local.event.final_proceedings.track_factory import track_data_factory
 
-from meow.utils.datetime import datedict_to_tz_datetime
 from meow.models.local.event.final_proceedings.event_factory import event_affiliation_factory, event_person_factory
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData, ContributionFieldData, EditableData, FileData, RevisionData, TagData
-from meow.utils.serialization import json_encode
+
+from meow.utils.datetime import datedict_to_tz_datetime
 from meow.utils.sort import sort_revision_list_by_date
 
 from pydash import find
@@ -175,7 +175,7 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
                 
             if r.is_yellow:
                 is_included_in_pdf_check = True
-                break   
+                break
     
     
     # logger.debug(f"code: {contribution.get('code')}")
