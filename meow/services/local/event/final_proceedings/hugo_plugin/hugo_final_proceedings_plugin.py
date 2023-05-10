@@ -707,7 +707,8 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
             ssg_cmd = await self.ssg_cmd()
 
-            ssg_args = [f"{ssg_cmd}", "--templateMetrics",
+            # "--templateMetrics",
+            ssg_args = [f"{ssg_cmd}", 
                         "--source", f"{self.src_dir}",
                         "--destination", "out"]
 
@@ -740,11 +741,17 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         # -ms=8m enables solid mode with a solid block size of 8 MB.
         # -mmt=30 enables multi-threading mode with up to 30 threads.
         # -mx=1 selects fastest compressing as level of compression.
+        
+        zip_args = [f"bin/p7zip/7z", "a", "-m0=lz4", 
+                    "-mx=1", "-mmt=4", "-bd", "--", 
+                    f"{zip_file_path}", f"{out_dir_path}"]
+        
+        # bin/p7zip/7z a -m0=lz4 -mx=1 -mmt=4 -bd -- out.7z var/run/21_hugo_src/out
 
-        zip_args = [f"{zip_cmd}", "a",
-                    "-t7z", "-m0=LZMA2:d64k:fb32",
-                    "-ms=8m", "-mmt=4", "-mx=1", "--",
-                    f"{zip_file_path}", f"{out_dir_path}",]
+        # zip_args = [f"{zip_cmd}", "a",
+        #             "-t7z", "-m0=LZMA2:d64k:fb32",
+        #             "-ms=8m", "-mmt=4", "-mx=1", "--",
+        #             f"{zip_file_path}", f"{out_dir_path}",]
 
         result = await run_process(zip_args)
 

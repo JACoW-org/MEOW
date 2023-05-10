@@ -136,32 +136,45 @@ def refill_contribution_metadata(proceedings_data: ProceedingsData, results: dic
     current_page = 1
 
     for contribution_data in proceedings_data.contributions:
-        code: str = contribution_data.code
+        code: str = ''
 
         try:
-            if contribution_data.paper and contribution_data.paper.latest_revision:
-                revision_data = contribution_data.paper.latest_revision
-                file_data = revision_data.files[-1] \
-                    if len(revision_data.files) > 0 \
-                    else None
+            
+            if contribution_data and contribution_data.is_included_in_proceedings:
+                
+                code = contribution_data.code
+            
+                if contribution_data.paper and contribution_data.paper.latest_revision:
+                    
+                    revision_data = contribution_data.paper.latest_revision
+                    
+                    file_data = revision_data.files[-1] \
+                        if len(revision_data.files) > 0 \
+                        else None
 
-                if file_data is not None:
+                    if file_data is not None:
 
-                    result: dict = results.get(file_data.uuid, {})
-                    report: dict = result.get('report', {})
+                        result: dict = results.get(file_data.uuid, {})
+                        report: dict = result.get('report', {})
 
-                    contribution_data.keywords = [
-                        event_keyword_factory(keyword)
-                        for keyword in result.get('keywords', [])
-                    ]
+                        contribution_data.keywords = [
+                            event_keyword_factory(keyword)
+                            for keyword in result.get('keywords', [])
+                        ]
 
-                    contribution_data.page = current_page
-                    contribution_data.metadata = report
+                        contribution_data.page = current_page
+                        contribution_data.metadata = report
 
-                    if report and 'page_count' in report:
-                        current_page += report.get('page_count', 0)
+                        if report and 'page_count' in report:
+                            current_page += report.get('page_count', 0)
+                            
+                    else:
+                        logger.error(f"SKIPPED - no file_data: {code}")
+                            
+                else:                
+                    logger.error(f"SKIPPED: {code}")
 
-                # logger.info('contribution_data pages = %s - %s', contribution_data.page, contribution_data.page + result.get('report').get('page_count'))
+                    # logger.info('contribution_data pages = %s - %s', contribution_data.page, contribution_data.page + result.get('report').get('page_count'))
 
         except IndexError as e:
             logger.warning(f'No keyword for contribution {code}')

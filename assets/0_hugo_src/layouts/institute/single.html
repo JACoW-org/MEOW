@@ -15,7 +15,7 @@
     <div class="right">
         <div class="title">
             <div class="name">
-                <b>{{ .Params.title }}</b>
+                <b>{{ .Params.title | safeHTML }}</b>
             </div>
         </div>
 

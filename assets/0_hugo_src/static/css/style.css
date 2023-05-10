@@ -281,34 +281,48 @@ li {
 }
 
 .content .right .title {
-  font-size: 2rem;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex-flow: row nowrap;
+  justify-content: flex-start;
 }
 
-.content .right .name {
-  flex: 1 1 auto;
-  text-align: left;
-  font-size: 2rem;
+.content .right .title .code {
+  flex: 0;
+  padding: 0 0.5rem;
+  font-size: 1.4rem;
 }
 
-.content .right .date {
+.content .right .title .sep {
+  flex: 0;
+  padding: 0 0.5rem;
+  font-size: 1.4rem;
+}
+
+.content .right .title .name {
   flex: 1 1 auto;
-  text-align: right;
-  font-size: 1.3rem;
+  padding: 0 0.5rem;
+  font-size: 1.4rem;
+}
+
+.content .right .title .date {
+  flex: 0;
+  padding: 0 0.5rem;
+  font-size: 1.4rem;
+  max-width: 18rem;
+  min-width: 18rem;
 }
 
 .content .right .chair {
-  font-size: 1.3rem;
-  border-bottom: 0.2rem solid #999;
-  padding-bottom: 0.5rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  padding: 0.5rem;
+  margin: 1rem 0;
+  background-color: #eee;
 }
 
 .content .right .contrib {
   font-size: 1rem;
-  border-bottom: 0.1rem solid #999;
+  border-top: 0.1rem solid #999;
   padding-bottom: 0.1rem;
   margin-bottom: 0.2rem;
 }
@@ -320,22 +334,22 @@ li {
 
 .content .right .contrib .contrib-header {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row;
   width: 100%;
   justify-content: stretch;
   align-items: center;
-  gap: 1rem;
   background-color: #eee;
+  font-size: 1.1rem;
 }
 
 .content .right .contrib .contrib-header .contrib-code {
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   font-weight: bold;
   flex: 0;
 }
 
 .content .right .contrib .contrib-header .contrib-title {
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   font-weight: bold;
   flex: 1;
   font-weight: bold;
@@ -343,7 +357,7 @@ li {
 }
 
 .content .right .contrib .contrib-header .contrib-pages {
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   font-weight: bold;
   flex: 0;
 }

@@ -30,7 +30,7 @@
     </script>
 
     <script id="src-logo" type="application/json">
-        {{ .Site.Params.logo }}
+        {{ if .Site.Params.logo }}{{ .Site.Params.logo }}{{ else }}""{{ end }}
     </script>
 </head>
 

@@ -18,6 +18,7 @@ async def event_contribution_doi(event: dict, cookies: dict, settings: dict) -> 
 
     isbn: str = settings.get('isbn', '')
     issn: str = settings.get('issn', '')
+    issn: str = settings.get('booktitle_short', '')
 
     # references are empty when running the event
     dois = await gen_contribution_doi(event, dict(), doi_base_url, isbn, issn)

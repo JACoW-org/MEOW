@@ -26,19 +26,19 @@ class TagData:
     color: str
     system: bool
     title: str
-    
+
     @property
     def is_qa_approved(self):
         return self.title.lower() == "qa approved"
-    
+
     @property
     def is_qa_pending(self):
         return self.title.lower() == "qa pending"
-    
+
     @property
     def is_yellow(self):
         return self.color.lower() == "yellow"
-    
+
     @property
     def is_green(self):
         return self.color.lower() == "green"
@@ -79,72 +79,61 @@ class RevisionData:
     final_state: int
 
     creation_date: datetime
-    
-    
-    
+
     @property
     def is_included_in_pdf_check(self) -> bool:
         """ qa_approved, sui qa_pending (sono i verdi non ancora in QA) e sui gialli (che non sono sicuramente qa_pending)... """
         return self.is_green or self.is_yellow
-    
+
     @property
     def is_included_in_proceedings(self) -> bool:
         """ qa_approved, sui qa_pending (sono i verdi non ancora in QA) """
-        return self.is_green   
-    
-    
-    
-    
+        return self.is_green
+
     @property
     def is_black(self) -> bool:
-        red_status = self.final_state == RevisionData.FinalRevisionState.rejected    
-        return red_status    
-    
+        red_status = self.final_state == RevisionData.FinalRevisionState.rejected
+        return red_status
+
     @property
     def is_red(self) -> bool:
-        red_status = self.final_state == RevisionData.FinalRevisionState.needs_submitter_changes    
+        red_status = self.final_state == RevisionData.FinalRevisionState.needs_submitter_changes
         return red_status
-    
+
     @property
     def is_green(self) -> bool:
-        green_status = self.final_state == RevisionData.FinalRevisionState.accepted    
+        green_status = self.final_state == RevisionData.FinalRevisionState.accepted
         return green_status
-    
+
     @property
     def is_yellow(self) -> bool:
         yellow_status = not self.is_green and self.final_state == RevisionData.FinalRevisionState.needs_submitter_confirmation
         return yellow_status
-    
-    
-    
-    
-    
+
     @property
     def is_qa_approved(self) -> bool:
         if self.final_state == RevisionData.FinalRevisionState.accepted:
             return True
-        
+
         for tag in self.tags:
             if tag.is_qa_approved:
                 return True
-        
+
         return False
-    
+
     @property
     def is_qa_pending(self) -> bool:
         if self.is_qa_approved:
             return False
-        
+
         if self.final_state == RevisionData.FinalRevisionState.needs_submitter_confirmation:
             return True
-        
+
         for tag in self.tags:
             if tag.is_qa_pending:
                 return True
-            
+
         return False
-    
-    
 
     def as_dict(self) -> dict:
         return asdict(self)
@@ -195,18 +184,19 @@ class EditableData:
         paper = 1
         slides = 2
         poster = 3
-        
+
     class EditableState:
         # __titles__ = [None, _('New'), _('Ready for Review'), _('Needs Confirmation'), _('Needs Changes'),
         #             _('Accepted'), _('Rejected')]
         # __css_classes__ = [None, 'highlight', 'ready', 'warning', 'warning', 'success', 'error']
-    
+
         new = 1
         ready_for_review = 2
         needs_submitter_confirmation = 3
         needs_submitter_changes = 4
         accepted = 5
         rejected = 6
+
 
 @dataclass
 class DuplicateContributionData:
@@ -217,6 +207,7 @@ class DuplicateContributionData:
 
     def as_dict(self):
         return asdict(self)
+
 
 @dataclass(kw_only=True, slots=True)
 class ContributionData:
@@ -231,7 +222,7 @@ class ContributionData:
 
     start: datetime
     end: datetime
-    
+
     is_included_in_pdf_check: bool = field(default=False)
     is_included_in_proceedings: bool = field(default=False)
 
@@ -319,19 +310,29 @@ class ContributionData:
     @property
     def track_meta(self) -> str:
         return self.track.full_name if self.track else ""
-    
+
+    @property
+    def cat_publish(self) -> bool:
+        field_value: str = 'yes'
+        
+        for field in self.field_values:
+            if field.name == 'CAT_publish' and field.value is not None:
+                field_value = field.value.lower()
+                break
+
+        return field_value in ['yes', 'true', '1']
+
     @property
     def duplicate_of_code(self) -> str | None:
         # after duplicate of is initialized, use this condition
         if self.duplicate_of is not None:
             return self.duplicate_of.code
-        
+
         for field in self.field_values:
             if field.name == 'duplicate_of' and field.value is not None:
                 return field.value
-        
-        return None
 
+        return None
 
     def as_dict(self) -> dict:
         return {
@@ -388,7 +389,7 @@ class ContributionData:
                 if file.file_type == FileData.FileType.poster:
                     return file.filename
         return None
-    
+
     # def duplicate_of(self) -> str:
     #     for field in self.field_values:
     #         if field.name == "duplicate_of" and field.value is not None:

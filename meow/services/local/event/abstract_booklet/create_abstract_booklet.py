@@ -1,8 +1,7 @@
 import logging as lg
 
 from typing import Any
-from meow.utils.datetime import datedict_to_tz_datetime
-from meow.utils.sort import sort_list_by_date, sort_list_of_dict_by_date
+from meow.utils.datetime import datedict_to_tz_datetime, format_datetime_sec
 
 
 logger = lg.getLogger(__name__)
@@ -159,11 +158,16 @@ async def create_abstract_booklet_from_event(event: dict, sessions: list, contri
                         contribution_data_coauthors.append(coauthor_data)
 
                 contributions_data.append(contribution_data)
-
-        contributions_data.sort(key=sort_list_of_dict_by_date)
+        
+        contributions_data.sort(key=lambda x: (
+            x.get('code', '')
+        ))
 
         sessions_data.append(session_slot_data)
-
-    sessions_data.sort(key=sort_list_of_dict_by_date)
+    
+    sessions_data.sort(key=lambda x: (
+        format_datetime_sec(x.get('start', '')),
+        x.get('code', '')
+    ))
 
     return abstract_booklet

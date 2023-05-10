@@ -14,9 +14,16 @@
 
     <div class="right">
         <div class="title">
+            <div class="code">
+                <b>{{ .Params.name | safeHTML }}</b>
+            </div>
+
+            <div class="sep">
+                -
+            </div>
+
             <div class="name">
-                <b>{{ .Params.name }}</b> -
-                {{ .Params.title }}
+                {{ .Params.title | safeHTML }}
             </div>
 
             <div class="date">

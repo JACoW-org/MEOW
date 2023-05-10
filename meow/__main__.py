@@ -207,11 +207,13 @@ def doc_report(args) -> None:
                 xref_list.append(xref)
 
                 font_name, font_ext, font_type, buffer = doc.extract_font(xref)
-                font_emb = not (font_ext == "n/a" or not buffer)
+                font_emb = not ((font_ext == "n/a" or not buffer) and font_type != "Type3")
 
-                # print("{: >40} {: >5} {: >5}".format(
-                #     font_name, font_emb, font_ext
+                # print("{: >40} {: >5} {: >5} {: >5}".format(
+                #     font_name, font_emb, font_ext, font_type
                 # ))
+                
+                # print(buffer)
 
                 # print("font_name", font_name, "font_emb", font_emb, "font_ext", font_ext, "font_type", font_type, len(buffer)) # font.name, font.flags, font.bbox, font.buffer
 

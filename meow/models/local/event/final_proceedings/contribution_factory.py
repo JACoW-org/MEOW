@@ -1,17 +1,16 @@
 import logging as lg
 
 from typing import Any
-
 from datetime import datetime
+
 from meow.models.local.event.final_proceedings.track_factory import track_data_factory
 
 from meow.models.local.event.final_proceedings.event_factory import event_affiliation_factory, event_person_factory
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData, ContributionFieldData, EditableData, FileData, RevisionData, TagData
 
-from meow.utils.datetime import datedict_to_tz_datetime
-from meow.utils.sort import sort_revision_list_by_date
+from meow.utils.datetime import datedict_to_tz_datetime, format_datetime_sec
+from meow.utils.list import find
 
-from pydash import find
 
 logger = lg.getLogger(__name__)
 
@@ -27,7 +26,12 @@ def contribution_editable_factory(editable: Any) -> EditableData | None:
         if revision is not None
     ]
 
-    all_revisions.sort(key=sort_revision_list_by_date)
+    # all_revisions.sort(key=sort_revision_list_by_date)
+    
+    all_revisions.sort(key=lambda x: (
+        format_datetime_sec(x.creation_date),
+        x.id
+    ))
 
     latest_revision = contribution_revision_factory(
         editable.get('latest_revision', None)
@@ -137,81 +141,74 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
     # logger.info(paper_data.all_revisions if paper_data else [])
 
     revisions: list[RevisionData] = []
-    
+
     if paper_data and paper_data.all_revisions:
         for r in paper_data.all_revisions:
             revisions.append(r)
-      
+
     revisions.reverse()
-    
-    
+
     # if len(revisions) == 0:
     #     logger.error(f"code: {contribution.get('code')}")
-    
 
-
-    is_included_in_proceedings: bool = False    
+    is_included_in_proceedings: bool = False
     is_included_in_pdf_check: bool = False
-    
-     
+
     if paper_data and paper_data.state:
-        
+
         if paper_data.state == EditableData.EditableState.accepted:
             is_included_in_proceedings = True
             is_included_in_pdf_check = True
         elif paper_data.state == EditableData.EditableState.needs_submitter_confirmation:
             is_included_in_pdf_check = True
-            
+
     else:
-        
+
         for r in revisions:
             if r.is_black or r.is_red:
                 break
-            
+
             if r.is_green:
                 is_included_in_proceedings = True
                 is_included_in_pdf_check = True
                 break
-                
+
             if r.is_yellow:
                 is_included_in_pdf_check = True
                 break
-    
-    
+
     # logger.debug(f"code: {contribution.get('code')}")
     # logger.debug(f"in_proceedings: {is_included_in_proceedings} {editable_is_included_in_proceedings}")
-    # 
-    # 
+    #
+    #
     # if is_included_in_proceedings != editable_is_included_in_proceedings:
     #     logger.warning(f"{contribution.get('code')}: in_proceedings ERROR")
-    # 
-    # 
+    #
+    #
     # logger.debug(f"in_pdf_check: {is_included_in_pdf_check} {editable_is_included_in_pdf_check}")
-    # 
+    #
     # if is_included_in_pdf_check != editable_is_included_in_pdf_check:
-    #     logger.warning(f"{contribution.get('code')}: in_pdf_check ERROR")    
-    
-    
+    #     logger.warning(f"{contribution.get('code')}: in_pdf_check ERROR")
+
     # is_not_included = len([
     #     r for r in revisions
     #     if r.is_black
     # ]) > 0
-    #     
-    # 
+    #
+    #
     # if not is_not_included:
     #     is_included_in_proceedings = len([
     #         r for r in revisions
     #         if r.is_green
     #     ]) > 0
-    # 
-    # 
+    #
+    #
     # if not is_not_included and not is_included_in_proceedings:
-    #     
+    #
     #     is_included_in_pdf_check = len([
     #         r for r in revisions
     #         if r.is_yellow
     #     ] if paper_data else []) > 0
-        
 
     # logger.info(f"is_qa_approved: {is_qa_approved}")
 

@@ -131,6 +131,10 @@ class EventData:
     @property
     def path(self) -> str:
         return slugify(self.name)
+    
+    @property
+    def doi_code(self) -> str:
+        return slugify(self.name).upper()
 
     def __eq__(self, other):
         return self.id == other.id
