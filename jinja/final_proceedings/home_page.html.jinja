@@ -51,14 +51,14 @@
                 <ul>
                     <li>
                         <a href="./pdf/{{ event.id }}_proceedings_volume.pdf">
-                            <b>FEL2022 Proceedings Volume</b>
+                            <b>{% raw %}{{.Site.Params.name}}{% endraw %} Proceedings Volume</b>
                         </a> ({{ volume_size | filesizeformat }})
                         <div><i>The complete volume of papers</i></div>
                     </li>
 
                     <li>
                         <a href="./pdf/{{ event.id }}_proceedings_brief.pdf">
-                            <b>FEL2022 Proceedings at a glance</b>
+                            <b>{% raw %}{{.Site.Params.name}}{% endraw %} Proceedings at a glance</b>
                         </a> ({{ brief_size | filesizeformat }})
                         <div><i>First page only of all papers with hyperlinks to complete versions</i></div>
                     </li>

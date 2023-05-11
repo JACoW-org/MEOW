@@ -15,7 +15,7 @@ async def collecting_contributions_and_files(event: dict, sessions: list, cookie
 
     contributions: list = []
 
-    limiter = CapacityLimiter(16)
+    limiter = CapacityLimiter(4)
     async with create_task_group() as tg:
         for session in sessions:
             tg.start_soon(download_contributions, event.get('url'), session.get('id'), cookies, settings, contributions, limiter)
