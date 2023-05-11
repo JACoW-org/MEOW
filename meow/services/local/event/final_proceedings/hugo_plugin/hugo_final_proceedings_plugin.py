@@ -730,8 +730,15 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         zip_cmd = await self.zip_cmd()
         out_dir_path = await self.out_dir.absolute()
 
-        zip_file = Path(self.src_dir, "out.7z")
+        zip_file = Path(self.src_dir, "out.tar.gz")
         zip_file_path = await zip_file.absolute()
+        
+        # tar --use-compress-program="pigz -k --fast" -cf out.tar.gz out
+        
+        # zip_args = ["tar", "--use-compress-program=\"pigz -k --fast\"", "-cf",
+        #             f"{zip_file_path}", f"{out_dir_path}"]
+        
+        # zip_args = ["tar", "-czf", f"{zip_file_path}", f"{out_dir_path}"]
 
         # 7z a /tmp/12/12.7z /tmp/12/out -m0=LZMA2:d=64k -mmt=4
 
@@ -742,18 +749,23 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         # -mmt=30 enables multi-threading mode with up to 30 threads.
         # -mx=1 selects fastest compressing as level of compression.
         
-        zip_args = [f"bin/p7zip/7z", "a", "-m0=lz4", 
-                    "-mx=1", "-mmt=4", "-bd", "--", 
-                    f"{zip_file_path}", f"{out_dir_path}"]
+        ######### OK 7Z LZ4
+        # zip_args = [f"bin/p7zip/7z", "a", "-m0=lz4", 
+        #             "-mx=1", "-mmt=4", "-bd", "--", 
+        #             f"{zip_file_path}", f"{out_dir_path}"]
         
         # bin/p7zip/7z a -m0=lz4 -mx=1 -mmt=4 -bd -- out.7z var/run/21_hugo_src/out
 
-        # zip_args = [f"{zip_cmd}", "a",
-        #             "-t7z", "-m0=LZMA2:d64k:fb32",
-        #             "-ms=8m", "-mmt=4", "-mx=1", "--",
-        #             f"{zip_file_path}", f"{out_dir_path}",]
+        ######### OK 7Z LZMA
+        zip_args = [f"{zip_cmd}", "a",
+                    "-t7z", "-m0=LZMA2:d64k:fb32",
+                    "-ms=8m", "-mmt=4", "-mx=1", "--",
+                    f"{zip_file_path}", f"{out_dir_path}"]
 
         result = await run_process(zip_args)
+        
+        logger.info(result.stdout.decode())
+        logger.info(result.stderr.decode())
 
         if result.returncode == 0:
             logger.info(result.stdout.decode())
