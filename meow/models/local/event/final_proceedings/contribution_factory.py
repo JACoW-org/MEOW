@@ -63,7 +63,7 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
 
     reception_revisions = [
         r for r in paper_data.all_revisions
-        if r.initial_state == RevisionData.InitialRevisionState.new
+        if len(r.files) > 0
     ] if paper_data else []
 
     reception_revision = reception_revisions[0] \
