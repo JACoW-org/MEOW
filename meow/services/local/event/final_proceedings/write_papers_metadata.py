@@ -1,5 +1,5 @@
 import logging as lg
-from typing import Callable
+from typing import Callable, Optional
 import pytz as tz
 
 from anyio import Path, create_task_group, CapacityLimiter
@@ -118,20 +118,8 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
         await write_metadata(metadata, read_pdf_path, write_pdf_path)
 
         start_page: int = contribution.page
-
-        header_data = dict(
-            series=contribution.doi_data.series,
-            venue=f'{contribution.doi_data.conference_code},{contribution.doi_data.venue}',
-            isbn=contribution.doi_data.isbn,
-            issn=contribution.doi_data.issn,
-            doi=contribution.doi_data.doi_url
-        ) if contribution.doi_data else None
-
-        footer_data = dict(
-            classificationHeader=f'{contribution.track.code}: {contribution.track.title}',
-            sessionHeader=f'{session.code}: {session.title}' if session is not None else '',
-            contributionCode=contribution.code
-        ) if contribution.track else None
+        header_data: Optional[dict] = get_header_data(contribution)
+        footer_data: Optional[dict] = get_footer_data(contribution, session)
 
         await draw_frame(write_pdf_path, start_page, header_data, footer_data)
 
@@ -147,6 +135,35 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
             "file": current_file,
             "meta": metadata
         })
+
+
+def get_footer_data(contribution, session) -> dict[str, str] | None:
+
+    classificationHeader = f'{contribution.track.code}: {contribution.track.title}' if contribution.track else ''
+    sessionHeader = f'{session.code}: {session.title}' if session else ''
+
+    footer_data = dict(
+        classificationHeader=classificationHeader,
+        sessionHeader=sessionHeader,
+        contributionCode=contribution.code
+    )
+
+    return footer_data
+
+
+def get_header_data(contribution) -> dict[str, str] | None:
+
+    venue = f'{contribution.doi_data.conference_code},{contribution.doi_data.venue}'
+
+    header_data = dict(
+        series=contribution.doi_data.series,
+        venue=venue,
+        isbn=contribution.doi_data.isbn,
+        issn=contribution.doi_data.issn,
+        doi=contribution.doi_data.doi_url
+    ) if contribution.doi_data else None
+
+    return header_data
 
 
 def refill_contribution_metadata(proceedings_data: ProceedingsData, results: dict) -> ProceedingsData:

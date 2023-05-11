@@ -128,11 +128,13 @@ async def draw_frame(write_path: str, page: int, header: dict | None, footer: di
     cmd.append("-page")
     cmd.append(str(page))
 
-    cmd.append("-header")
-    cmd.append(json_encode(header).decode('utf-8'))
+    if header:
+        cmd.append("-header")
+        cmd.append(json_encode(header).decode('utf-8'))
 
-    cmd.append("-footer")
-    cmd.append(json_encode(footer).decode('utf-8'))
+    if footer:
+        cmd.append("-footer")
+        cmd.append(json_encode(footer).decode('utf-8'))
     
     logger.info(cmd)
 
