@@ -134,7 +134,7 @@ async def draw_frame(write_path: str, page: int, header: dict | None, footer: di
     cmd.append("-footer")
     cmd.append(json_encode(footer).decode('utf-8'))
     
-    logger.info('draw_frame', cmd)
+    logger.info(cmd)
 
     res = await run_cmd(cmd)
 
