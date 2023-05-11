@@ -32,11 +32,11 @@
             </div>
         </div>
 
-        <div class="chair">
         {{ if (.Params.chair) }}
+        <div class="chair">
             Chair: {{ .Params.chair }}
-        {{ end }}
         </div>
+        {{ end }}
 
         {{ range $idx, $val := .Params.contents }}
         <div class="contrib">

@@ -93,6 +93,7 @@ def doc_join(args) -> None:
             page_list = get_list(",".join(src_list[2:]), src.page_count + 1)
         else:  # take all pages
             page_list = range(1, src.page_count + 1)
+            
         for i in page_list:
             # copy each source page
             doc.insert_pdf(src, from_page=i - 1, to_page=i - 1)
