@@ -730,7 +730,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         zip_cmd = await self.zip_cmd()
         out_dir_path = await self.out_dir.absolute()
 
-        zip_file = Path(self.src_dir, "out.tar.gz")
+        zip_file = Path(self.src_dir, "out.7z")
         zip_file_path = await zip_file.absolute()
         
         # tar --use-compress-program="pigz -k --fast" -cf out.tar.gz out
