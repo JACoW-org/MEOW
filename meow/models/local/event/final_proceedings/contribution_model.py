@@ -313,14 +313,14 @@ class ContributionData:
 
     @property
     def cat_publish(self) -> bool:
-        field_value: str = 'yes'
+        field_value: str = ''
         
         for field in self.field_values:
             if field.name == 'CAT_publish' and field.value is not None:
                 field_value = field.value.lower()
                 break
 
-        return field_value in ['yes', 'true', '1']
+        return field_value in ['', 'yes', 'true', '1']
 
     @property
     def duplicate_of_code(self) -> str | None:
