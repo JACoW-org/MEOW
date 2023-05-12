@@ -12,24 +12,28 @@
     <div class="contrib-pages">{{ contribution.metadata.page_count }}</div>
 </div>
 
-{% elif contribution.duplicate_of %}
-
-<div class="contrib-header">
-    <div class="contrib-code">
-        <a onclick="openUrl(`session/{{ contribution.duplicate_of.session_code|lower }}/index.html#{{ contribution.duplicate_of.code|lower }}`)" href="javascript:void(0);">
-            <s>{{ contribution.code|e }}</s>
-        </a>
-    </div>
-    <div class="contrib-title">{{ contribution.title|e }}</div>
-</div>
-
 {% else %}
 
 <div class="contrib-header">
+    {% if contribution.duplicate_of and contribution.duplicate_of.has_metadata %}
+        <div class="contrib-code" title="Check primary paper code below for contribution">{{ contribution.code|e }}</div>
+    {% else %}
     <div class="contrib-code"><s>{{ contribution.code|e }}</s></div>
+    {% endif %}
     <div class="contrib-title">{{ contribution.title|e }}</div>
 </div>
 
+{% endif %}
+
+{% if contribution.duplicate_of %}
+<div class="contrib-subheader">
+    <div class="contrib-code">
+        <a onclick="openUrl(`session/{{ contribution.duplicate_of.session_code|lower }}/index.html#{{ contribution.duplicate_of.code|lower }}`)" href="javascript:void(0);">
+            {{ contribution.duplicate_of.code|e }}
+        </a>
+    </div>
+    <div class="description"><i>use link to access more material from this paper's primary code</i></div>
+</div>
 {% endif %}
 
 {% if contribution.description: %}
@@ -58,50 +62,91 @@
 </p>
 
 {% if contribution.metadata: %}
-<p>
-    <b>DOI</b>
-    <span>reference for this paper:</span>
-    <a onclick="openUrl(`doi/{{ contribution.code|lower }}/index.html`)" href="javascript:void(0);">
-        {{ contribution.doi_data.doi_url }}
-    </a>
-</p>
+    <p>
+        <b>DOI</b>
+        <span>reference for this paper:</span>
+        <a onclick="openUrl(`doi/{{ contribution.code|lower }}/index.html`)" href="javascript:void(0);">
+            {{ contribution.doi_data.doi_url }}
+        </a>
+    </p>
 
-<p>
-    <b>About</b>
-    <span>
-        {% if contribution.reception: %}
-        Received: {{ contribution.reception.strftime('%d %B %Y') }} —
-        {% endif %}
+    <p>
+        <b>About</b>
+        <span>
+            {% if contribution.reception: %}
+            Received: {{ contribution.reception.strftime('%d %B %Y') }} —
+            {% endif %}
 
-        {% if contribution.revisitation: %}
-        Revised: {{ contribution.revisitation.strftime('%d %B %Y') }} —
-        {% endif %}
+            {% if contribution.revisitation: %}
+            Revised: {{ contribution.revisitation.strftime('%d %B %Y') }} —
+            {% endif %}
 
-        {% if contribution.acceptance: %}
-        Accepted: {{ contribution.acceptance.strftime('%d %B %Y') }} —
-        {% endif %}
+            {% if contribution.acceptance: %}
+            Accepted: {{ contribution.acceptance.strftime('%d %B %Y') }} —
+            {% endif %}
 
-        {% if contribution.issuance: %}
-        Issue date: {{ contribution.issuance.strftime('%d %B %Y') }}
-        {% endif %}
-    </span>
-</p>
-
-{% endif %}
+            {% if contribution.issuance: %}
+            Issue date: {{ contribution.issuance.strftime('%d %B %Y') }}
+            {% endif %}
+        </span>
+    </p>
 
 {% endif %}
 
-{% if contribution.reference: %}
+{% endif %}
 
-<p>
-    <b>Cite</b>
-    <span>reference for this paper using:</span>
-    <a onclick="openUrl(`reference/{{ contribution.code|lower }}-bibtex/index.html`)" href="javascript:void(0);">BibTeX</a>,
-    <a onclick="openUrl(`reference/{{ contribution.code|lower }}-latex/index.html`)" href="javascript:void(0);">LaTeX</a>,
-    <a onclick="openUrl(`reference/{{ contribution.code|lower }}-word/index.html`)" href="javascript:void(0);">Text/Word</a>,
-    <a onclick="openUrl(`reference/{{ contribution.code|lower }}-ris/index.html`)" href="javascript:void(0);">RIS</a>,
-    <a onclick="openUrl(`reference/{{ contribution.code|lower }}-endnote/index.html`)" href="javascript:void(0);">EndNote</a>
-</p>
+{% if contribution.duplicate_of.has_metadata %}
+
+    <p>
+        <b>DOI</b>
+        <span>reference for this paper:</span>
+        <a onclick="openUrl(`doi/{{ contribution.duplicate_of.code|lower }}/index.html`)" href="javascript:void(0);">
+            {{ contribution.duplicate_of.doi_url }}
+        </a>
+    </p>
+
+    <p>
+        <b>About</b>
+        <span>
+            {% if contribution.duplicate_of.reception: %}
+            Received: {{ contribution.duplicate_of.reception.strftime('%d %B %Y') }} —
+            {% endif %}
+
+            {% if contribution.duplicate_of.revisitation: %}
+            Revised: {{ contribution.duplicate_of.revisitation.strftime('%d %B %Y') }} —
+            {% endif %}
+
+            {% if contribution.duplicate_of.acceptance: %}
+            Accepted: {{ contribution.duplicate_of.acceptance.strftime('%d %B %Y') }} —
+            {% endif %}
+
+            {% if contribution.duplicate_of.issuance: %}
+            Issue date: {{ contribution.duplicate_of.issuance.strftime('%d %B %Y') }}
+            {% endif %}
+        </span>
+    </p>
+
+    <p>
+        <b>Cite</b>
+        <span>reference for this paper using:</span>
+        <a onclick="openUrl(`reference/{{ contribution.duplicate_of.code|lower }}-bibtex/index.html`)" href="javascript:void(0);">BibTeX</a>,
+        <a onclick="openUrl(`reference/{{ contribution.duplicate_of.code|lower }}-latex/index.html`)" href="javascript:void(0);">LaTeX</a>,
+        <a onclick="openUrl(`reference/{{ contribution.duplicate_of.code|lower }}-word/index.html`)" href="javascript:void(0);">Text/Word</a>,
+        <a onclick="openUrl(`reference/{{ contribution.duplicate_of.code|lower }}-ris/index.html`)" href="javascript:void(0);">RIS</a>,
+        <a onclick="openUrl(`reference/{{ contribution.duplicate_of.code|lower }}-endnote/index.html`)" href="javascript:void(0);">EndNote</a>
+    </p>
+
+{% elif contribution.reference %}
+
+    <p>
+        <b>Cite</b>
+        <span>reference for this paper using:</span>
+        <a onclick="openUrl(`reference/{{ contribution.code|lower }}-bibtex/index.html`)" href="javascript:void(0);">BibTeX</a>,
+        <a onclick="openUrl(`reference/{{ contribution.code|lower }}-latex/index.html`)" href="javascript:void(0);">LaTeX</a>,
+        <a onclick="openUrl(`reference/{{ contribution.code|lower }}-word/index.html`)" href="javascript:void(0);">Text/Word</a>,
+        <a onclick="openUrl(`reference/{{ contribution.code|lower }}-ris/index.html`)" href="javascript:void(0);">RIS</a>,
+        <a onclick="openUrl(`reference/{{ contribution.code|lower }}-endnote/index.html`)" href="javascript:void(0);">EndNote</a>
+    </p>
 
 {% endif %}
 

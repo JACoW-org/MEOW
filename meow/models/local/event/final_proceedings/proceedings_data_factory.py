@@ -62,7 +62,7 @@ def proceedings_data_factory(event: Any, sessions: list, contributions: list, at
     """ resolve contributions duplicates_of """
 
     # resolve duplicate of
-    contributions_data = resolve_duplicates_of(contributions_data)
+    # contributions_data = resolve_duplicates_of(contributions_data)
     
     """ sort contributions data """
 
@@ -98,9 +98,17 @@ def resolve_duplicates_of(contributions: list[ContributionData]) -> list[Contrib
             predicate = find_predicate(duplicate_of_code)
             duplicate_contribution: ContributionData | None = find(
                 contributions, predicate)
+            if duplicate_contribution and duplicate_contribution.metadata:
+                logger.info(f"Contribution {contribution.code} has duplicate {contribution.duplicate_of_code} with metadata")
             contribution.duplicate_of = DuplicateContributionData(
                 code=duplicate_contribution.code,
-                session_code=duplicate_contribution.session_code
+                session_code=duplicate_contribution.session_code,
+                has_metadata=True if duplicate_contribution.metadata else False,
+                doi_url=duplicate_contribution.doi_data.doi_url if duplicate_contribution.doi_data else '',
+                reception=duplicate_contribution.reception,
+                revisitation=duplicate_contribution.revisitation,
+                acceptance=duplicate_contribution.acceptance,
+                issuance=duplicate_contribution.issuance
             ) if duplicate_contribution else None
     return contributions
 

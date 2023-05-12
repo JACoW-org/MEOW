@@ -31,6 +31,7 @@ from meow.services.local.event.common.download_contributions_papers import downl
 from meow.services.local.event.final_proceedings.generate_contribution_references import generate_contribution_references
 from meow.services.local.event.final_proceedings.generate_contributions_groups import generate_contributions_groups
 from meow.services.local.event.final_proceedings.generate_contribution_doi import generate_contribution_doi
+from meow.services.local.event.final_proceedings.manage_duplicates import manage_duplicates
 
 from meow.services.local.event.final_proceedings.link_static_site import link_static_site
 from meow.services.local.event.final_proceedings.read_papers_metadata import read_papers_metadata
@@ -215,6 +216,18 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, l
     ))
 
     final_proceedings = await generate_contribution_doi(final_proceedings, cookies, settings)
+
+    """ """
+
+    await extend_lock(lock)
+
+    yield dict(type='progress', value=dict(
+        phase='manage_duplicates',
+        text='Managing duplicates'
+    ))
+
+    final_proceedings = await manage_duplicates(final_proceedings)
+
 
     """ """
 
