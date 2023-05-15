@@ -381,3 +381,37 @@ li {
   padding: 0.5rem 1rem;
   flex: 1;
 }
+
+.content .left .az {
+  border-bottom: 0.2rem solid #999;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+.content .left .az a {
+  width: 1em;
+  display: inline-block;
+  padding: 3px;
+  text-align: center;
+  text-decoration: none;
+  color: var(--primary-color, '#333');
+  font-size: 1.2em;
+}
+
+.content .left .az a.disabled-link {
+  pointer-events: none;
+  cursor: default;
+  color: #999;
+}
+
+.content .left .group-header {
+  border-bottom: 1px solid #555;
+}
+
+.content .left .authors a {
+  text-decoration: none;
+  /* color: var(--primary-color, '#333'); */
+}

@@ -16,6 +16,9 @@ from os import path
 from jinja2 import BytecodeCache
 
 import minify_html
+from meow.utils.collections import (get_authors_initials_dict, get_institutes_initials_dict,
+    get_keywords_initials_dict, group_authors_by_last_initial_for_render,
+    group_institutes_by_initial, group_keywords_by_initial)
 
 
 logger = lg.getLogger(__name__)
@@ -105,7 +108,8 @@ class JinjaTemplateRenderer:
 
     async def render_author_partial(self, authors: list[PersonData]) -> str:
         return await self.render("author_partial.html.jinja", minify=True, args=dict(
-            authors=[s.as_dict() for s in authors]
+            initials=get_authors_initials_dict(authors),
+            authors_groups=group_authors_by_last_initial_for_render(authors)
         ))
 
     async def render_author_page(self, event: EventData, author: PersonData, contributions: list[ContributionData]) -> str:
@@ -117,8 +121,9 @@ class JinjaTemplateRenderer:
 
     async def render_institute_partial(self, institutes: list[AffiliationData], authorsGroups: dict[str, list[dict]]) -> str:
         return await self.render("institute_partial.html.jinja", minify=True, args=dict(
-            institutes=[s.as_dict() for s in institutes],
-            authorsGroups=authorsGroups
+            authorsGroups=authorsGroups,
+            institutes_groups=group_institutes_by_initial(institutes),
+            initials=get_institutes_initials_dict(institutes)
         ))
 
     async def render_institute_page(self, event: EventData, institute: AffiliationData, author: PersonData, contributions: list[ContributionData]) -> str:
@@ -139,7 +144,8 @@ class JinjaTemplateRenderer:
 
     async def render_keyword_partial(self, keywords: list[KeywordData]) -> str:
         return await self.render("keyword_partial.html.jinja", minify=True, args=dict(
-            keywords=[s.as_dict() for s in keywords]
+            initials=get_keywords_initials_dict(keywords),
+            keywords_groups=group_keywords_by_initial(keywords)
         ))
 
     async def render_keyword_page(self, event: EventData, keyword: KeywordData, contributions: list[ContributionData]) -> str:

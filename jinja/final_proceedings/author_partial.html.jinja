@@ -1,14 +1,23 @@
 <div class="title">List of Authors</div>
 
-<ul class="authors">
-  {% for author in authors %}
-  {% if author.id %}
-  <li class="author">
-    <a onclick="openUrl(`author/{{ author.id|lower }}/index.html`)" href="javascript:void(0);">
-      <b>{{ author.first }} {{ author.last }}</b>
-      ({{ author.affiliation }})
-    </a>
-  </li>
-  {% endif %}
+<div class="az">
+  {% for letter, is_present in initials|dictsort %}
+  <a class="letter {% if not is_present %} disabled-link {% endif %}" href="#group-{{letter}}">{{ letter|upper }}</a>
   {% endfor %}
-</ul>
+</div>
+
+{% for lastname_initial, group in authors_groups|dictsort %}
+  <h2 class="group-header" id="group-{{ lastname_initial|lower }}">{{ lastname_initial|upper }}</h2>
+  <ul class="authors">
+    {% for author in group %}
+      {% if author.id %}
+        <li class="author">
+          <a onclick="openUrl(`author/{{ author.id|lower }}/index.html`)" href="javascript:void(0);">
+            <b>{{ author.first }} {{ author.last }}</b>
+            ({{ author.affiliation }})
+          </a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+{% endfor %}
