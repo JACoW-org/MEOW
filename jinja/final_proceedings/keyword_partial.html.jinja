@@ -1,13 +1,22 @@
 <div class="title">List of Keywords</div>
 
-<ul class="keywords">
-  {% for keyword in keywords %}
-  {% if keyword.code %}
-  <li class="keyword">
-    <a onclick="openUrl(`keyword/{{ keyword.code|lower }}/index.html`)" href="javascript:void(0);">
-      <b>{{ keyword.name }}</b>
-    </a>
-  </li>
-  {% endif %}
+<div class="az">
+  {% for letter, is_present in initials|dictsort %}
+  <a class="letter {% if not is_present %} disabled-link {% endif %}" href="#group-{{letter}}">{{ letter|upper }}</a>
+  {% endfor %}
+</div>
+
+{% for initial, group in keywords_groups|dictsort %}
+  <h2 class="group-header" id="group-{{ initial|lower }}">{{ initial|upper }}</h2>
+  <ul class="keywords">
+  {% for keyword in group %}
+    {% if keyword.code %}
+      <li class="keyword">
+        <a onclick="openUrl(`keyword/{{ keyword.code|lower }}/index.html`)" href="javascript:void(0);">
+          <b>{{ keyword.name }}</b>
+        </a>
+      </li>
+    {% endif %}
   {% endfor %}
 </ul>
+{% endfor %}
