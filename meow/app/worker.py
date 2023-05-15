@@ -34,7 +34,7 @@ class RedisWorkerManager():
 
     async def run(self):
 
-        logger.debug('### run - create_worker_state')
+        logger.debug('### run')
         
         sender, receiver = create_memory_object_stream(4096)
 
@@ -42,7 +42,7 @@ class RedisWorkerManager():
             tg.start_soon(self.start_listener, sender)
             tg.start_soon(self.start_workers, receiver)
                
-        logger.debug('### run - destroy_worker_state')
+        logger.debug('### run')
 
     async def start_listener(self, sender: MemoryObjectSendStream):
         logger.debug('start_listener...')

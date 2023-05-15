@@ -4,7 +4,13 @@ import json
 import pathlib
 import argparse
 
-from fitz import Document, Rect, Font
+import os
+import gzip
+import tarfile
+import shutil
+import multiprocessing as mp
+
+from fitz import Document, Rect
 from fitz.utils import set_metadata, insert_link
 
 from meow.services.local.papers_metadata.pdf_annotations import annot_page_footer, annot_page_header, annot_page_side
@@ -93,7 +99,7 @@ def doc_join(args) -> None:
             page_list = get_list(",".join(src_list[2:]), src.page_count + 1)
         else:  # take all pages
             page_list = range(1, src.page_count + 1)
-            
+
         for i in page_list:
             # copy each source page
             doc.insert_pdf(src, from_page=i - 1, to_page=i - 1)
@@ -208,12 +214,13 @@ def doc_report(args) -> None:
                 xref_list.append(xref)
 
                 font_name, font_ext, font_type, buffer = doc.extract_font(xref)
-                font_emb = not ((font_ext == "n/a" or not buffer) and font_type != "Type3")
+                font_emb = not ((font_ext == "n/a" or not buffer)
+                                and font_type != "Type3")
 
                 # print("{: >40} {: >5} {: >5} {: >5}".format(
                 #     font_name, font_emb, font_ext, font_type
                 # ))
-                
+
                 # print(buffer)
 
                 # print("font_name", font_name, "font_emb", font_emb, "font_ext", font_ext, "font_type", font_type, len(buffer)) # font.name, font.flags, font.bbox, font.buffer
@@ -267,6 +274,47 @@ def doc_metadata(args) -> None:
 
     doc.close()
     del doc
+
+
+# https://www.driftinginrecursion.com/post/parallel_archiving/
+# https://docs.python.org/3/library/tarfile.html#examples
+def gzip_compress_file(p):
+    print ('gzip_compress_file', p, p + '.gz')
+    with open(p, 'rb') as f:
+        with gzip.open(p + '.gz',  'wb', compresslevel=1) as gz:
+            shutil.copyfileobj(f, gz)
+    # os.remove(p)
+
+def search_fs(p):
+    file_list = [os.path.join(dp, f) for dp, dn, fn in os.walk(os.path.expanduser(p)) for f in fn]
+    return file_list
+
+def tar_dir(s):
+    with tarfile.open(s + '.tar', 'w') as tar:
+        for f in search_fs(s):
+            tar.add(f, f[len(s):])
+                            
+def compress_dir(args):
+    
+    folder = args.input
+
+    files = search_fs(folder)
+    procs = mp.cpu_count()
+    with mp.Pool(procs) as pool:
+        pool.map(gzip_compress_file, files)
+        # r = list(tqdm.tqdm(pool.imap(gzip_compress_file, files),
+        #                    total=len(files), desc='Compressing Files'))
+
+        # r = list(tqdm.tqdm(
+        #    pool.imap(gzip_compress_file, files),
+        #
+        #                   total=len(files), desc='Compressing Files'))
+
+    print('Adding Compressed Files to TAR....')
+    tar_dir(folder)
+    
+    # if rmbool == True:
+    #     shutil.rmtree(dir)
 
 
 def main():
@@ -364,6 +412,18 @@ def main():
     ps_links.add_argument("links", nargs="*", help="input links")
     ps_links.add_argument("-input", required=True, help="input filename")
     ps_links.set_defaults(func=doc_links)
+
+    # -------------------------------------------------------------------------
+    # 'compress' command
+    # -------------------------------------------------------------------------
+    ps_compress = subps.add_parser(
+        "compress",
+        description="compress folder",
+        epilog="specify folder to compress",
+    )
+    ps_compress.add_argument("-input", required=True, help="input dir")
+    # ps_compress.add_argument("-output", required=True, help="output file")
+    ps_compress.set_defaults(func=compress_dir)
 
     # -------------------------------------------------------------------------
     # start program

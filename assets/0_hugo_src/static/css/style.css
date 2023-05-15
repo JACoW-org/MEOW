@@ -13,6 +13,11 @@ body {
   min-width: 940px;
   font-family: Calibri, Arial, sans-serif;
   font-size: 1.1rem;
+  transition: opacity .5s;
+}
+
+body.body {
+  opacity: 1;
 }
 
 pre {

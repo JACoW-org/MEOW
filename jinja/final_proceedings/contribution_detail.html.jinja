@@ -33,40 +33,44 @@
 {% endif %}
 
 {% if contribution.description: %}
-<p>{{ contribution.description|e }}</p>
+<div class="contrib-desc">
+    {{ contribution.description|e }}
+</div>
 {% endif %}
 
 {% if contribution.authors_groups: %}
-<p>{{ authors_template.render(contribution.authors_groups) }}</p>
+<div class="contrib-authors">
+    {{ authors_template.render(contribution.authors_groups) }}
+</div>
 {% endif %}
 
 {% if contribution.has_slides: %}
-<p>
+<div class="contrib-slides">
     <b>Slides</b>
     <a onclick="openUrl(`pdf/{{ contribution.slides_name }}`)" href="javascript:void(0);">
         {{ contribution.code|upper }}
     </a>
-</p>
+</div>
 {% endif %}
 
 {% if contribution.is_included_in_proceedings: %}
-<p>
+<div class="contrib-paper">
     <b>Paper</b>
     <a onclick="openUrl(`pdf/{{ contribution.paper_name }}`)" href="javascript:void(0);">
         {{ contribution.code|upper }}
     </a>
-</p>
+</div>
 
 {% if contribution.metadata: %}
-<p>
+<div class="contrib-doi">
     <b>DOI</b>
     <span>reference for this paper:</span>
     <a onclick="openUrl(`doi/{{ contribution.code|lower }}/index.html`)" href="javascript:void(0);">
         {{ contribution.doi_data.doi_url }}
     </a>
-</p>
+</div>
 
-<p>
+<div class="contrib-dates">
     <b>About</b>
     <span>
         {% if contribution.reception: %}
@@ -85,7 +89,7 @@
         Issue date: {{ contribution.issuance.strftime('%d %B %Y') }}
         {% endif %}
     </span>
-</p>
+</div>
 
 {% endif %}
 
@@ -93,7 +97,7 @@
 
 {% if contribution.reference: %}
 
-<p>
+<div class="contrib-cite">
     <b>Cite</b>
     <span>reference for this paper using:</span>
     <a onclick="openUrl(`reference/{{ contribution.code|lower }}-bibtex/index.html`)" href="javascript:void(0);">BibTeX</a>,
@@ -101,7 +105,7 @@
     <a onclick="openUrl(`reference/{{ contribution.code|lower }}-word/index.html`)" href="javascript:void(0);">Text/Word</a>,
     <a onclick="openUrl(`reference/{{ contribution.code|lower }}-ris/index.html`)" href="javascript:void(0);">RIS</a>,
     <a onclick="openUrl(`reference/{{ contribution.code|lower }}-endnote/index.html`)" href="javascript:void(0);">EndNote</a>
-</p>
+</div>
 
 {% endif %}
 

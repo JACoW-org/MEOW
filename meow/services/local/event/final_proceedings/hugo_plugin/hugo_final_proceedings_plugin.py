@@ -711,6 +711,8 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
             ssg_args = [f"{ssg_cmd}", 
                         "--source", f"{self.src_dir}",
                         "--destination", "out"]
+            
+            logger.info(ssg_args)
 
             result = await run_process(ssg_args)
 
@@ -728,10 +730,10 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         logger.info('event_final_proceedings - plugin.compress')
 
         zip_cmd = await self.zip_cmd()
-        out_dir_path = await self.out_dir.absolute()
-
+        
+        out_dir_path = str(self.out_dir)
         zip_file = Path(self.src_dir, "out.7z")
-        zip_file_path = await zip_file.absolute()
+        zip_file_path = str(zip_file)
         
         # tar --use-compress-program="pigz -k --fast" -cf out.tar.gz out
         
@@ -743,11 +745,8 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         # 7z a /tmp/12/12.7z /tmp/12/out -m0=LZMA2:d=64k -mmt=4
 
         # "7z.exe" a -t7z -m0=LZMA2:d64k:fb32 -ms=8m -mmt=30 -mx=1 -- "F:\BACKUP" "D:\Source"
-        # -t7z sets the archive type to 7-Zip.
-        # -m0=LZMA2:d64k:fb32 defines the usage of LZMA2 compression method with a dictionary size of 64 KB and a word size (fast bytes) of 32.
-        # -ms=8m enables solid mode with a solid block size of 8 MB.
-        # -mmt=30 enables multi-threading mode with up to 30 threads.
-        # -mx=1 selects fastest compressing as level of compression.
+        
+
         
         ######### OK 7Z LZ4
         # zip_args = [f"bin/p7zip/7z", "a", "-m0=lz4", 
@@ -755,12 +754,41 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         #             f"{zip_file_path}", f"{out_dir_path}"]
         
         # bin/p7zip/7z a -m0=lz4 -mx=1 -mmt=4 -bd -- out.7z var/run/21_hugo_src/out
-
-        ######### OK 7Z LZMA
+        
+        """ LZMA2 """
+        
+        # -t7z sets the archive type to 7-Zip.
+        # -m0=LZMA2:d64k:fb32 defines the usage of LZMA2 compression method with a dictionary size of 64 KB and a word size (fast bytes) of 32.
+        # -ms=8m enables solid mode with a solid block size of 8 MB.
+        # -mmt=30 enables multi-threading mode with up to 30 threads.
+        # -mx=1 selects fastest compressing as level of compression.
+        
+        # zip_args = [f"{zip_cmd}", "a",
+        #             "-t7z", "-m0=LZMA2:d64k:fb32",
+        #             "-ms=16m", "-mmt=4", "-mx=1", "--",
+        #             f"{zip_file_path}", f"{out_dir_path}"]        
+        
+        """ Deflate"""
+        
+        # ./bin/7zzs a -t7z -m0=deflate -mx=1 -mmt=4 var/html/fel2022.7z var/html/fel2022
+        
         zip_args = [f"{zip_cmd}", "a",
-                    "-t7z", "-m0=LZMA2:d64k:fb32",
-                    "-ms=8m", "-mmt=4", "-mx=1", "--",
-                    f"{zip_file_path}", f"{out_dir_path}"]
+            "-t7z", "-m0=Deflate",
+            "-ms=16m", "-mmt=4", "-mx=1", "--",
+            f"{zip_file_path}", f"{out_dir_path}"]
+        
+        """ LZMA """
+        
+        # 7z a -t7z -m0=lzma -mx=1 -mfb=64 -md=32m -ms=on
+        
+        #zip_args = [f"{zip_cmd}", "a",
+        #    "-t7z", "-m0=LZMA", "-mx=1", "-ms=on",
+        #    "-mfb=64", "-md=32m", "-mmt=2",  "--",
+        #    f"{zip_file_path}", f"{out_dir_path}"]
+        
+        """ """
+        
+        logger.info(zip_args)
 
         result = await run_process(zip_args)
         
