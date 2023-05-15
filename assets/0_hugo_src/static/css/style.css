@@ -386,3 +386,27 @@ li {
   padding: 0.5rem 1rem;
   flex: 1;
 }
+
+.content .right .contrib .contrib-header {
+  margin: 1rem 0;
+}
+
+.content .right .contrib .contrib-desc {
+  margin: 1rem 0;
+}
+
+.content .right .contrib .contrib-authors {
+  margin: 1rem 0;
+}
+
+.content .right .contrib .contrib-cite {
+  margin: 1rem 0;
+}
+
+.content .right .contrib .contrib-dates {
+  margin: 1rem 0;
+}
+
+.content .right .contrib .contrib-doi {
+  margin: 1rem 0;
+}
