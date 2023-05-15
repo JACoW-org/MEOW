@@ -3,19 +3,16 @@
 from anyio.abc import CancelScope
 from anyio import open_signal_receiver
 from anyio import create_task_group
-from anyio import get_cancelled_exc_class, run
-import signal
-from os import environ
+from anyio import run
+
+
 import logging as lg
 
-import uvloop
+# import uvloop
+# uvloop.install()
 
 # from meow.app.state import create_worker_state, destroy_worker_state
 
-uvloop.install()
-
-
-environ["CLIENT_TYPE"] = "worker"
 
 
 # from systemd.journal import JournaldLogHandler
@@ -40,6 +37,8 @@ logger = lg.getLogger(__name__)
 
 
 async def app_wrap(scope: CancelScope):
+    import signal
+    
     with open_signal_receiver(signal.SIGINT, signal.SIGTERM) as signals:
         async for signum in signals:
             logger.warning("SIGINT" if signum == signal.SIGINT else "SIGTERM")
@@ -53,6 +52,9 @@ async def app_pre():
     logger.warning("###################")
     logger.warning("###### PRE ########")
     logger.warning("###################")
+    
+    import os
+    os.environ["CLIENT_TYPE"] = "worker"
 
     from anyio import to_thread, to_process
 
