@@ -36,7 +36,7 @@ class RedisManager:
             logger.info(f'--> fill_model_meta: STOP')
         except LockError as e:
             logger.error(e, exc_info=True)
-        except Exception as e:
+        except BaseException as e:
             logger.error(e, exc_info=True)
 
     async def migrate(self):
@@ -52,20 +52,24 @@ class RedisManager:
                 logger.info(f'--> migrate_model_schema: STOP - {lock.name}')
         except LockError as e:
             logger.error(e, exc_info=True)
-        except Exception as e:
+        except BaseException as e:
             logger.error(e, exc_info=True)
 
     async def destroy(self):
         """ """
+        
+        logger.error("destroy - destroy - destroy")
+        
         try:
             await HttpClientSessions.close_client_sessions()
             await RedisLockList.release_all_locks()
-        except LockError as e:
+        except BaseException as e:
             logger.error(e, exc_info=True)
-        except Exception as e:
-            logger.error(e, exc_info=True)
-    
-        await dbs.redis_client.close()
+        finally:
+            try:
+                await dbs.redis_client.close()
+            except BaseException as e:
+                logger.error(e, exc_info=True)
         
     async def popola(self):
         """ """
@@ -74,7 +78,7 @@ class RedisManager:
             await create_default_credentials()
         except LockError as e:
             logger.error(e, exc_info=True)
-        except Exception as e:
+        except BaseException as e:
             logger.error(e, exc_info=True)
 
 

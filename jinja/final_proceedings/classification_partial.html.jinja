@@ -1,13 +1,34 @@
 <div class="title">Table of Classes</div>
 
 <ul class="classifications">
+
   {% for classification in classifications %}
-  {% if classification.code %}
-  <li class="classification">
-    <a onclick="openUrl(`classification/{{ classification.code|lower }}/index.html`)" href="javascript:void(0);">
-      <b>{{ classification.title }}</b>
-    </a>
-  </li>
-  {% endif %}
+
+    {% if loop.previtem is defined and loop.previtem.track_group %}
+      {% set prev_classification_group = loop.previtem.track_group.title %}
+    {% else %}
+      {% set prev_classification_group = 'Default' %}
+    {% endif %}
+
+    {% if classification.track_group %}
+      {% set classification_group = classification.track_group.title %}
+    {% else %}
+      {% set classification_group = 'Default' %}
+    {% endif %}
+
+    {% if prev_classification_group != classification_group %}
+      <li class="classification-group">
+        <b>{{ classification_group }}</b> 
+      </li>
+    {% endif %}
+
+    {% if classification.code %}
+      <li class="classification">
+        <a onclick="openUrl(`classification/{{ classification.code|lower }}/index.html`)" href="javascript:void(0);">
+          <b>{{ classification.title }}</b>
+        </a>
+      </li>
+    {% endif %}
+
   {% endfor %}
 </ul>

@@ -18,6 +18,7 @@ from meow.services.local.event.common.collecting_sessions_and_attachments import
 
 from meow.services.local.event.common.adapting_final_proceedings import adapting_final_proceedings
 from meow.services.local.event.common.validate_proceedings_data import validate_proceedings_data
+from meow.services.local.event.final_proceedings.compress_static_site import compress_static_site
 
 from meow.services.local.event.final_proceedings.concat_contribution_papers import concat_contribution_papers
 from meow.services.local.event.final_proceedings.copy_contribution_papers import copy_contribution_papers
@@ -53,8 +54,13 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
             raise BaseException('Invalid event id')
 
         async with acquire_lock(event_id) as lock:
+            
+            logger.info(f"acquire_lock -> {lock.name}")
+            
             async for r in _event_final_proceedings(event, cookies, settings, lock):
                 yield r
+                
+            logger.info(f"release_lock -> {lock.name}")
 
     except LockError as e:
         logger.error(e, exc_info=True)
@@ -67,7 +73,7 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
 def acquire_lock(key: str) -> RedisLock:
     """ Create event lock """
 
-    return RedisLock(
+    redis_lock = RedisLock(
         redis=dbs.redis_client,
         name=conf.REDIS_EVENT_LOCK_KEY(key),
         timeout=conf.REDIS_LOCK_TIMEOUT_SECONDS,
@@ -76,6 +82,10 @@ def acquire_lock(key: str) -> RedisLock:
         blocking_timeout=conf.REDIS_LOCK_BLOCKING_TIMEOUT_SECONDS,
         thread_local=True,
     )
+    
+    redis_lock.register_scripts
+    
+    return redis_lock
 
 
 async def extend_lock(lock: RedisLock) -> RedisLock:
@@ -317,14 +327,14 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, l
     
     """ """
 
-    await extend_lock(lock)
-
-    yield dict(type='progress', value=dict(
-        phase='compress_final_proceedings',
-        text='Compress Final Proceedings'
-    ))
-
-    await plugin.compress()
+    # await extend_lock(lock)
+    # 
+    # yield dict(type='progress', value=dict(
+    #     phase='compress_final_proceedings',
+    #     text='Compress Final Proceedings'
+    # ))
+    # 
+    # await plugin.compress()
 
     """ """
 
@@ -337,6 +347,17 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, l
 
     final_proceedings = await link_static_site(final_proceedings, cookies, settings)
 
+    """ """
+    
+    await extend_lock(lock)
+    
+    yield dict(type='progress', value=dict(
+        phase='compress_static_site',
+        text='Compress Static site'
+    ))
+    
+    final_proceedings = await compress_static_site(final_proceedings, cookies, settings)
+    
     """ """
 
     await extend_lock(lock)

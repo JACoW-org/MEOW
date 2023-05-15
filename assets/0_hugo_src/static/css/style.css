@@ -13,6 +13,11 @@ body {
   min-width: 940px;
   font-family: Calibri, Arial, sans-serif;
   font-size: 1.1rem;
+  transition: opacity .5s;
+}
+
+body.body {
+  opacity: 1;
 }
 
 pre {
@@ -414,4 +419,26 @@ li {
 .content .left .authors a {
   text-decoration: none;
   /* color: var(--primary-color, '#333'); */
+.content .right .contrib .contrib-header {
+  margin: 1rem 0;
+}
+
+.content .right .contrib .contrib-desc {
+  margin: 1rem 0;
+}
+
+.content .right .contrib .contrib-authors {
+  margin: 1rem 0;
+}
+
+.content .right .contrib .contrib-cite {
+  margin: 1rem 0;
+}
+
+.content .right .contrib .contrib-dates {
+  margin: 1rem 0;
+}
+
+.content .right .contrib .contrib-doi {
+  margin: 1rem 0;
 }

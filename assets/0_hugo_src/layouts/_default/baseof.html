@@ -15,9 +15,19 @@
         {{ end }}
     </title>
 
-    <style>
+    <style type="text/css">
         body {
-            --primary-color: {{ .Site.Params.color }};
+            --primary-color: {
+                    {
+                    .Site.Params.color
+                }
+            }
+
+            ;
+        }
+
+        .body {
+            opacity: 0;
         }
     </style>
 
@@ -32,9 +42,28 @@
     <script id="src-logo" type="application/json">
         {{ if .Site.Params.logo }}{{ .Site.Params.logo }}{{ else }}""{{ end }}
     </script>
+
+    <script type="application/javascript">
+        function getPrefix() {
+            return JSON.parse(document.getElementById('src-prefix').textContent);
+        }
+
+        function getLogo() {
+            return JSON.parse(document.getElementById('src-logo').textContent);
+        }
+
+        function openUrl(part) {
+            try {
+                window.location = `${getPrefix()}/${part}`;
+            } catch (err) {
+                console.error(err)
+            }
+            return false;
+        }       
+    </script>
 </head>
 
-<body>
+<body class="body">
     {{ block "menu" . }}
     {{ if (.IsHome) }}
 
@@ -48,29 +77,17 @@
     {{ end }}
 
     <script type="application/javascript">
-        const prefix = JSON.parse(document.getElementById('src-prefix').textContent);
-        const logo = JSON.parse(document.getElementById('src-logo').textContent);
-
         document.head.appendChild(
             Object.assign(document.createElement('link'), {
                 rel: `stylesheet`,
-                href: `${prefix}/css/style.css`
-            })            
+                href: `${getPrefix()}/css/style.css`
+            })
         );
 
         const logoElement = document.getElementById('logo');
         if (logoElement) {
-            logoElement.src = `${prefix}/${logo}`;
-        }
-
-        function openUrl(part) {
-            try {
-                window.location = `${prefix}/${part}`;
-            } catch (err) {
-                console.error(err)
-            }
-            return false;
-        }           
+            logoElement.src = `${getPrefix()}/${getLogo()}`;
+        }   
     </script>
 
 </body>

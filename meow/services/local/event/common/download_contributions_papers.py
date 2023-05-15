@@ -57,7 +57,7 @@ async def download_contributions_papers(proceedings_data: ProceedingsData, cooki
             logger.debug(crs, exc_info=True)
         except EndOfStream as eos:
             logger.debug(eos, exc_info=True)
-        except Exception as ex:
+        except BaseException as ex:
             logger.error(ex, exc_info=True)
 
     return proceedings_data
@@ -90,7 +90,7 @@ async def file_download_task(capacity_limiter: CapacityLimiter, total_files: int
             # else:
             #     logger.info(f"cached_file --> {pdf_url}")
 
-        except Exception as ex:
+        except BaseException as ex:
             logger.error(ex, exc_info=True)
 
         await res.send({
