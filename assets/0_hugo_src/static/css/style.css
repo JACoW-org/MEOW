@@ -366,3 +366,23 @@ li {
   font-weight: bold;
   flex: 0;
 }
+
+.content .right .contrib .contrib-subheader {
+  display: flex;
+  flex-flow: row;
+  width: 100%;
+  justify-content: stretch;
+  align-items: flex-start;
+  font-size: 1.1rem;
+}
+
+.content .right .contrib .contrib-subheader .contrib-code {
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  flex: 0;
+}
+
+.content .right .contrib .contrib-subheader .description {
+  padding: 0.5rem 1rem;
+  flex: 1;
+}

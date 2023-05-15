@@ -205,6 +205,13 @@ class DuplicateContributionData:
     code: str
     session_code: str
 
+    has_metadata: bool = field(default=False)
+    doi_url: str = field(default='')
+    reception: datetime | None = field(default=None)
+    revisitation: datetime | None = field(default=None)
+    acceptance: datetime | None = field(default=None)
+    issuance: datetime | None = field(default=None)
+
     def as_dict(self):
         return asdict(self)
 
@@ -258,9 +265,6 @@ class ContributionData:
     doi_data: ContributionDOI | None = field(default=None)
 
     duplicate_of: DuplicateContributionData | None = field(default=None)
-
-    # duplicate_of: str = field(default=None)
-    # duplicate_of_data: dict = field(default_factory=dict)
 
     @property
     def authors_list(self) -> list[PersonData]:
