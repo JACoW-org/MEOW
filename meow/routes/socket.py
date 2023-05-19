@@ -1,6 +1,7 @@
-from asyncio import CancelledError
+from asyncio import CancelledError, create_task
 import logging
 import time
+from anyio import sleep
 
 from starlette.routing import WebSocketRoute
 from starlette.websockets import WebSocket, WebSocketDisconnect
@@ -16,7 +17,7 @@ from meow.utils.serialization import json_encode
 logger = logging.getLogger(__name__)
 
 
-async def publish(message: dict):
+async def publish(message: dict) -> str:
     topic_name: str = await __publish_key()
 
     message_id = await dbs.redis_client.publish(
@@ -25,29 +26,31 @@ async def publish(message: dict):
 
     logger.info(f"publish_task {topic_name} {message_id}")
 
+    return topic_name
+
 
 async def __publish_key() -> str:
     counter: int = await dbs.redis_client.incr('workers:stream:counter')
 
     workers: list[str] = await __workers()
-    
+
     if len(workers) == 0:
         raise Exception("No Workers")
-    
+
     topic_name: str = workers[counter % len(workers)]
 
-    logger.info(f"publish_key {topic_name} {counter} {workers}")
+    logger.debug(f"publish_key {topic_name} {counter} {workers}")
 
     return topic_name
 
 
 async def __workers():
 
-    def client_filter(c) -> bool: 
+    def client_filter(c) -> bool:
         return (str(c['name']).startswith('worker_'))
 
     client_list = await dbs.redis_client.client_list('pubsub')
-    
+
     workers: list[str] = sorted(list(map(
         lambda w: str(w['name']),
         filter(
@@ -84,10 +87,34 @@ async def __websocket_error(ws: WebSocket, uuid: str, error: BaseException):
         logger.error(e, exc_info=True)
 
 
-async def __websocket_task(ws: WebSocket, id: str):
+async def __websocket_task(ws: WebSocket, id: str) -> None:
     """ """
-    
-    logger.info("__websocket_task >>> BEGIN")
+
+    logger.debug("__websocket_task >>> BEGIN")
+
+    worker: str = ''
+    connected: bool = True
+
+    async def monitor():
+        logger.info(f"start_monitor_{id}")
+        
+        while app.state.webapp_running and connected:
+            
+            if worker != '':
+           
+                exists = worker in (await __workers())
+                
+                logger.info(f"check {worker} {exists}")
+                
+                if not exists:
+                    await ws.close()
+                    break
+            
+            await sleep(5)
+            
+        logger.info(f"stop_monitor_{id}")
+            
+    monitor_task = create_task(monitor(), name=f"monitor_task_{id}")
 
     try:
         while app.state.webapp_running:
@@ -96,30 +123,37 @@ async def __websocket_task(ws: WebSocket, id: str):
             if message:
                 # logger.debug(f"ws_to_r {message}")
                 try:
-                    await publish(message)
+                    worker = await publish(message)
                 except BaseException as e:
                     logger.error("__websocket_task", e, exc_info=True)
                     await __websocket_error(ws, id, e)
 
     except WebSocketDisconnect:
         logger.info("__websocket_task >>> DISCONNECTED")
-    except Exception as e:
+    except BaseException as e:
         logger.error("__websocket_task", e, exc_info=True)
+    finally:
+        try:
+            connected = False
+            monitor_task.cancel()
+        except BaseException as e:
+            logger.error("__websocket_task", e, exc_info=True)        
+    
 
-    logger.info("__websocket_task >>> END")
+    logger.warning(f"__websocket_task >>> END")
 
 
 async def __open_websocket(ws: WebSocket, id: str):
-    logger.warning('open_websocket')
+    logger.info('open_websocket')
 
     await ws.accept()
-    
+
     # app.active_connections.append(ws)
     app.active_connections[id] = ws
 
 
 async def __close_websocket(ws: WebSocket, id: str):
-    logger.warning('close_websocket')
+    logger.info('close_websocket')
 
     # app.active_connections.remove(ws)
     del app.active_connections[id]
@@ -127,20 +161,20 @@ async def __close_websocket(ws: WebSocket, id: str):
 
 async def websocket_endpoint(ws: WebSocket):
     try:
-               
+
         id: str = ws.path_params.get("task_id", None)
-        
+
         assert isinstance(id, str), f"Invalid task_id: {id}"
 
         # cookie_api_key = ws.cookies.get('X-API-KEY', None)
         # header_api_key = ws.headers.get('X-API-KEY', None)
         # logger.info(f'cookie_api_key->{cookie_api_key}')
         # logger.info(f'header_api_key->{header_api_key}')
-        
+
         # credential = await find_credential_by_secret(
         #     cookie_api_key if cookie_api_key is not None else header_api_key
         # )
-        
+
         api_key: str = ws.path_params.get("api_key", None)
         credential = await find_credential_by_secret(api_key)
 
