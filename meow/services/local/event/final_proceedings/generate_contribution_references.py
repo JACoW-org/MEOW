@@ -180,7 +180,7 @@ async def contribution_data_factory(event: EventData, contribution: Contribution
     ) else ReferenceStatus.UNPUBLISHED.value
 
     doi_base_url: str = settings.get(
-        'doi-base-url', 'https://doi.org/10.18429')
+        'doi-base-url', 'doi:10.18429')
     contribution_doi: str = generate_doi_url(
         doi_base_url, event.title, contribution.code)
 
