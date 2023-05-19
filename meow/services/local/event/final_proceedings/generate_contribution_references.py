@@ -140,7 +140,7 @@ async def reference_task(capacity_limiter: CapacityLimiter, event: EventData,
 async def get_xslt(xslt_path: str) -> XSLT:
     async with await open_file(xslt_path) as f:
         xslt_root = XML(await f.read(), XMLParser(encoding='utf-8'))
-        return XSLT(xslt_root) # type: ignore
+        return XSLT(xslt_root)  # type: ignore
 
 
 async def build_contribution_reference(event: EventData, contribution: ContributionData,
@@ -181,8 +181,14 @@ async def contribution_data_factory(event: EventData, contribution: Contribution
 
     doi_base_url: str = settings.get(
         'doi-base-url', 'doi:10.18429')
+    organization_segment: str = settings.get('organization_segment', 'JACoW')
+    conference_segment: str = settings.get('conference_segment', 'CONF-YY')
     contribution_doi: str = generate_doi_url(
-        doi_base_url, event.title, contribution.code)
+        doi_base_url,
+        organization_segment,
+        conference_segment,
+        contribution.code
+    )
 
     isbn: str = settings.get('isbn', '978-3-95450-227-1')
     issn: str = settings.get('issn', '2673-5490')

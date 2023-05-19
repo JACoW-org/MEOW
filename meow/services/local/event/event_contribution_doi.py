@@ -37,7 +37,7 @@ async def gen_contribution_doi(event: dict, references: dict, doi_base_url: str,
     for session in event.get('sessions', []):
         for contribution in session.get('contributions', []):
 
-            doi_url = generate_doi_url(doi_base_url, event.get(
+            doi_url = generate_doi_url(doi_base_url, 'JACoW', event.get(
                 'title', ''), contribution.get('code', ''))
 
             primary_authors = map(lambda author: AuthorDOI(

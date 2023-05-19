@@ -79,7 +79,15 @@ async def generate_doi_task(capacity_limiter: CapacityLimiter, event: EventData,
 async def build_contribution_doi(event: EventData, contribution: ContributionData, settings: dict[str, str]):
 
     doi_base_url: str = settings.get(
-        'doi_base_url', 'https://doi.org/10.18429')
+        'doi-base-url', 'doi:10.18429')
+    organization_segment: str = settings.get('organization_segment', 'JACoW')
+    conference_segment: str = settings.get('conference_segment', 'CONF-YY')
+    contribution_doi: str = generate_doi_url(
+        doi_base_url,
+        organization_segment,
+        conference_segment,
+        contribution.code
+    )
 
     event_isbn: str = settings.get('isbn', '978-3-95450-227-1')
     event_issn: str = settings.get('issn', '2673-5490')
@@ -111,7 +119,7 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
             contribution.acceptance) if contribution.acceptance else '',
         issuance_date=format_datetime_doi(
             contribution.issuance) if contribution.issuance else '',
-        doi_url=generate_doi_url(doi_base_url, event.doi_code, contribution.code),
+        doi_url=contribution_doi,
         pages=f'{contribution.page}-{contribution.metadata.get("page_count", 0) + contribution.page - 1}' if contribution.page and contribution.metadata else '',
         num_of_pages=contribution.metadata.get(
             "page_count", 0) if contribution.metadata else 0

@@ -1,2 +1,2 @@
-def generate_doi_url(base_url: str, conference_code: str, contribution_code: str) -> str:
-    return f"{base_url}/JACoW-{conference_code}-{contribution_code}"
+def generate_doi_url(base_url: str, organization_segment: str, conference_code: str, contribution_code: str) -> str:
+    return f"{base_url}/{organization_segment}-{conference_code}-{contribution_code}"
