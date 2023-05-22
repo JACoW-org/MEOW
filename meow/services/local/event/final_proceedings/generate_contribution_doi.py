@@ -78,15 +78,13 @@ async def generate_doi_task(capacity_limiter: CapacityLimiter, event: EventData,
 
 async def build_contribution_doi(event: EventData, contribution: ContributionData, settings: dict[str, str]):
 
-    doi_base_url: str = settings.get(
-        'doi-base-url', 'doi:10.18429')
-    organization_segment: str = settings.get('organization_segment', 'JACoW')
-    conference_segment: str = settings.get('conference_segment', 'CONF-YY')
     contribution_doi: str = generate_doi_url(
-        doi_base_url,
-        organization_segment,
-        conference_segment,
-        contribution.code
+        protocol=settings.get('doi_protocol', 'https'),
+        domain=settings.get('doi_domain', 'doi.org'),
+        context=settings.get('doi_context', '10.18429'),
+        organization=settings.get('doi_organization', 'JACoW'),
+        conference=settings.get('doi_conference', 'CONF-YY'),
+        contribution=contribution.code
     )
 
     event_isbn: str = settings.get('isbn', '978-3-95450-227-1')

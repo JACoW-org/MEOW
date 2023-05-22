@@ -1,2 +1,5 @@
-def generate_doi_url(base_url: str, organization_segment: str, conference_code: str, contribution_code: str) -> str:
-    return f"{base_url}/{organization_segment}-{conference_code}-{contribution_code}"
+def generate_doi_url(protocol: str, domain: str, context: str, organization: str, conference: str, contribution: str) -> str:
+    return f"{protocol}://{domain}/{context}/{organization}-{conference}-{contribution}"
+
+def generate_doi_short(context: str, organization: str, conference: str, contribution: str) -> str:
+    return f"{context}/{organization}-{conference}-{contribution}"
