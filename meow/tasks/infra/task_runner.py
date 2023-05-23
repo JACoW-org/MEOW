@@ -55,6 +55,11 @@ class TaskRunner:
         await cls.send('task:progress', task_id, task, progress)
 
     @classmethod
+    async def send_log(cls, task_id: str, task: str, log: dict) -> None:
+        logger.debug(f"send_log {task_id} {task}")
+        await cls.send('task:log', task_id, task, log)
+
+    @classmethod
     async def send_result(cls, task_id: str, task: str, result: dict) -> None:
         logger.debug(f"send_result {task_id} {task}")
         await cls.send('task:result', task_id, task, result)

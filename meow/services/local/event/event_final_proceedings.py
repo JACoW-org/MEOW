@@ -12,6 +12,7 @@ from anyio import create_task_group
 
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
+from meow.models.local.event.final_proceedings.client_log import ClientLog
 
 from meow.services.local.event.common.collecting_contributions_and_files import collecting_contributions_and_files
 from meow.services.local.event.common.collecting_sessions_and_attachments import collecting_sessions_and_attachments
@@ -54,12 +55,12 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
             raise BaseException('Invalid event id')
 
         async with acquire_lock(event_id) as lock:
-            
+
             logger.info(f"acquire_lock -> {lock.name}")
-            
+
             async for r in _event_final_proceedings(event, cookies, settings, lock):
                 yield r
-                
+
             logger.info(f"release_lock -> {lock.name}")
 
     except LockError as e:
@@ -82,9 +83,9 @@ def acquire_lock(key: str) -> RedisLock:
         blocking_timeout=conf.REDIS_LOCK_BLOCKING_TIMEOUT_SECONDS,
         thread_local=True,
     )
-    
+
     redis_lock.register_scripts
-    
+
     return redis_lock
 
 
@@ -112,6 +113,10 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, l
         phase='collecting_sessions_and_attachments',
         text="Collecting sessions and attachments"
     ))
+
+    yield dict(type='log', value=ClientLog(severity='info', message='This is a test INFO log').as_dict())
+    yield dict(type='log', value=ClientLog(severity='warning', message='This is a test WARNING log').as_dict())
+    yield dict(type='log', value=ClientLog(severity='error', message='This is a test ERROR log').as_dict())
 
     [sessions, attachments] = await collecting_sessions_and_attachments(event, cookies, settings)
 
@@ -238,7 +243,6 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, l
 
     final_proceedings = await manage_duplicates(final_proceedings)
 
-
     """ """
 
     await extend_lock(lock)
@@ -324,16 +328,16 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, l
     ))
 
     await plugin.generate()
-    
+
     """ """
 
     # await extend_lock(lock)
-    # 
+    #
     # yield dict(type='progress', value=dict(
     #     phase='compress_final_proceedings',
     #     text='Compress Final Proceedings'
     # ))
-    # 
+    #
     # await plugin.compress()
 
     """ """
@@ -348,16 +352,16 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, l
     final_proceedings = await link_static_site(final_proceedings, cookies, settings)
 
     """ """
-    
+
     await extend_lock(lock)
-    
+
     yield dict(type='progress', value=dict(
         phase='compress_static_site',
         text='Compress Static site'
     ))
-    
-    final_proceedings = await compress_static_site(final_proceedings, cookies, settings)
-    
+
+    # final_proceedings = await compress_static_site(final_proceedings, cookies, settings)
+
     """ """
 
     await extend_lock(lock)
