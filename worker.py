@@ -10,7 +10,7 @@ import os
 
 os.environ["CLIENT_TYPE"] = "worker"
 
-lg.basicConfig(level=lg.DEBUG)
+lg.basicConfig(level=lg.INFO)
 
 logger = lg.getLogger(__name__)
 
