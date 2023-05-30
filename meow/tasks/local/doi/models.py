@@ -64,6 +64,7 @@ class ContributionDOI:
     acceptance_date: str = field(default='')
     issuance_date: str = field(default='')
     doi_url: str = field(default='')
+    doi_identifier: str = field(default='')
     start_page: str = field(default='')
     end_page: str = field(default='')
     pages: str = field(default='')
@@ -76,7 +77,7 @@ class ContributionDOI:
 
         data = dict()
 
-        data['id'] = self.doi_url
+        data['id'] = self.doi_identifier
         data['type'] = 'dois'
 
         data['attributes'] = self._build_doi_attributes()
@@ -87,18 +88,106 @@ class ContributionDOI:
 
         attributes = dict()
 
-        attributes['event'] = 'publish'
-        attributes['doi'] = self.doi_url
+        attributes['doi'] = self.doi_identifier
+
+        attributes['identifiers'] = [dict(
+            identifierType='DOI',
+            identifier=self.doi_url
+        )]
+
         attributes['creators'] = [dict(
-            nameIdentifier=author.id,
-            creatorName=f'{author.last_name},{author.first_name}',
-            affiliation=author.affiliation
+            name=f'{author.last_name},{author.first_name}',
+            affiliation=[dict(
+                name=author.affiliation
+            )],
+            nameIdentifiers=[dict(
+                nameIdentifier=author.id,
+                schemeUri='https://jacow.org',
+                nameIdentifierScheme='JACoW-ID'
+            )]
         ) for author in self.primary_authors]
-        attributes['titles'] = list()
+
+        attributes['titles'] = [dict(
+            title=self.title,
+            lang='en-us'
+        )]
+
         attributes['publisher'] = self.publisher
+
         attributes['publicationYear'] = datetime.date.today().year
-        attributes['types'] = dict()
-        attributes['url'] = 'https://schema.datacite.org/meta/kernel-4.0/index.html',
+
+        attributes['subjects'] = [dict(
+            subject='Accelerator Physics',
+            lang='en-us'
+        ), dict(
+            subject='',
+            lang='en-us'
+        )]
+
+        attributes['contributors'] = [dict(
+            name='',
+            contributorType='Editor',
+            affiliation=[dict(
+                name=''
+            )],
+            nameIdentifiers=[dict(
+                nameIdentifier='',
+                schemeUri='https://jacow.org',
+                nameIdentifierScheme='JACoW-ID'
+            )]
+        ) for editor in self.editors]
+
+        attributes['dates'] = [dict(
+            date=self.reception_date,
+            dateType='Created'
+        ), dict(
+            date=self.acceptance_date,
+            dateType='Accepted'
+        ), dict(
+            date=self.issuance_date,
+            dateType='Issued'
+        )]
+
+        attributes['language'] = 'en-us'
+
+        attributes['types'] = dict(
+            resourceTypeGeneral='Text',
+            resourceType='ConferencePaper'
+        )
+
+        attributes['relatedIdentifiers'] = [dict(
+            relatedIdentifier=self.isbn,
+            relatedIdentifierType='ISBN',
+            relationType='isPartOf'
+        ), dict(
+            relatedIdentifier=self.issn,
+            relatedIdentifierType='ISSN',
+            relationType='isPartOf'
+        )]
+
+        attributes['sizes'] = [
+            self.pages
+        ]
+
+        attributes['formats'] = ['PDF']
+
+        attributes['rightsList'] = [dict(
+            rights='CC 3.0',
+            rightsUri='https://creativecommons.org/licenses/by/3.0',
+            lang='en-us'
+        )]
+
+        # descriptions
+        attributes['descriptions'] = [dict(
+            description=self.abstract,
+            descriptionType='Abstract',
+            lang='en-us'
+        )]
+
+        attributes['landingPage'] = dict()
+
+        attributes['url'] = 'https://schema.datacite.org/meta/kernel-4.0/index.html'
+
         attributes['schemaVersion'] = 'http://datacite.org/schema/kernel-4'
 
         return attributes

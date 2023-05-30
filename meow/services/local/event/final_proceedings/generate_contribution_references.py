@@ -7,7 +7,7 @@ from meow.models.local.event.final_proceedings.event_model import EventData
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 
 from meow.tasks.local.reference.models import ContributionRef, ReferenceStatus, Reference
-from meow.tasks.local.doi.utils import generate_doi_short
+from meow.tasks.local.doi.utils import generate_doi_identifier
 from jinja2 import BytecodeCache, Environment, FileSystemLoader
 from lxml.etree import XML, XSLT, fromstring, XMLParser
 
@@ -179,7 +179,7 @@ async def contribution_data_factory(event: EventData, contribution: Contribution
     reference_status: str = ReferenceStatus.IN_PROCEEDINGS.value if contribution.has_paper(
     ) else ReferenceStatus.UNPUBLISHED.value
 
-    reference_doi: str = generate_doi_short(
+    reference_doi: str = generate_doi_identifier(
         context=settings.get('doi_context', '10.18429'),
         organization=settings.get('doi_organization', 'JACoW'),
         conference=settings.get('doi_conference', 'CONF-YY'),

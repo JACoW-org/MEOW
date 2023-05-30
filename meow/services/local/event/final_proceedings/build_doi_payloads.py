@@ -4,6 +4,7 @@ from anyio import create_task_group, CapacityLimiter, create_memory_object_strea
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.tasks.local.doi.models import ContributionDOI
+from meow.utils.filesystem import rmtree
 
 logger = lg.getLogger(__name__)
 
@@ -17,6 +18,8 @@ async def build_doi_payloads(proceedings_data: ProceedingsData) -> ProceedingsDa
 
     # handle directory
     doi_dir = Path('var', 'run', f'{proceedings_data.event.id}_doi')
+    if await doi_dir.exists():
+        await rmtree(str(doi_dir))
     await doi_dir.mkdir(exist_ok=True, parents=True)
 
     async with create_task_group() as tg:
@@ -36,6 +39,6 @@ async def generate_doi_payload_task(capacity_limiter: CapacityLimiter, contribut
         json_text = contribution_doi.as_json()
 
         # write to a file
-        file_path = Path(doi_dir, contribution_doi.code)
+        file_path = Path(doi_dir, f'{contribution_doi.code}.json')
         async with await open_file(file_path, 'w') as json_file:
             await json_file.write(json_text)
