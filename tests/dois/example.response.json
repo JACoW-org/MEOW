@@ -1,0 +1,95 @@
+{
+    "data": {
+        "id": "10.18429/jacow-ipac-23-moa02",
+        "type": "dois",
+        "attributes": {
+            "doi": "10.18429/jacow-ipac-23-moa02",
+            "prefix": "10.18429",
+            "suffix": "jacow-ipac-23-moa02",
+            "identifiers": [],
+            "alternateIdentifiers": [],
+            "creators": [],
+            "titles": [],
+            "publisher": null,
+            "container": {},
+            "publicationYear": null,
+            "subjects": [],
+            "contributors": [],
+            "dates": [],
+            "language": null,
+            "types": {},
+            "relatedIdentifiers": [],
+            "relatedItems": [],
+            "sizes": [],
+            "formats": [],
+            "version": null,
+            "rightsList": [],
+            "descriptions": [],
+            "geoLocations": [],
+            "fundingReferences": [],
+            "xml": null,
+            "url": null,
+            "contentUrl": null,
+            "metadataVersion": 0,
+            "schemaVersion": null,
+            "source": "api",
+            "isActive": false,
+            "state": "draft",
+            "reason": null,
+            "landingPage": null,
+            "viewCount": 0,
+            "viewsOverTime": [],
+            "downloadCount": 0,
+            "downloadsOverTime": [],
+            "referenceCount": 0,
+            "citationCount": 0,
+            "citationsOverTime": [],
+            "partCount": 0,
+            "partOfCount": 0,
+            "versionCount": 0,
+            "versionOfCount": 0,
+            "created": "2023-05-30T12:54:04.000Z",
+            "registered": null,
+            "published": "",
+            "updated": "2023-05-30T12:54:04.000Z"
+        },
+        "relationships": {
+            "client": {
+                "data": {
+                    "id": "cern.jacow",
+                    "type": "clients"
+                }
+            },
+            "provider": {
+                "data": {
+                    "id": "cern",
+                    "type": "providers"
+                }
+            },
+            "media": {
+                "data": {
+                    "id": "10.18429/jacow-ipac-23",
+                    "type": "media"
+                }
+            },
+            "references": {
+                "data": []
+            },
+            "citations": {
+                "data": []
+            },
+            "parts": {
+                "data": []
+            },
+            "partOf": {
+                "data": []
+            },
+            "versions": {
+                "data": []
+            },
+            "versionOf": {
+                "data": []
+            }
+        }
+    }
+}
