@@ -2,6 +2,9 @@ from dataclasses import dataclass, field, asdict
 from typing import Optional
 from meow.tasks.local.reference.models import Reference
 
+import json
+import datetime
+
 @dataclass
 class AuthorsGroup:
     affiliation: str = field(default='')
@@ -12,6 +15,7 @@ class AuthorsGroup:
 
 @dataclass
 class AuthorDOI:
+    id: str = field(default='')
     first_name: str = field(default='')
     last_name: str = field(default='')
     affiliation: str = field(default='')
@@ -37,7 +41,7 @@ class ContributionDOI:
 
     code: str = field(default='')
     title: str = field(default='')
-    # primary_authors: list[AuthorDOI] = field(default_factory=list[AuthorDOI])
+    primary_authors: list[AuthorDOI] = field(default_factory=list[AuthorDOI])
     authors_groups: list[AuthorsGroup] = field(default_factory=list)
     abstract: str = field(default='')
     references: list = field(default_factory=list)
@@ -67,3 +71,34 @@ class ContributionDOI:
 
     def as_dict(self) -> dict:
         return asdict(self)
+    
+    def as_json(self) -> str:
+
+        data = dict()
+
+        data['id'] = self.doi_url
+        data['type'] = 'dois'
+
+        data['attributes'] = self._build_doi_attributes()
+
+        return json.dumps(dict(data=data))
+    
+    def _build_doi_attributes(self) -> dict:
+
+        attributes = dict()
+
+        attributes['event'] = 'publish'
+        attributes['doi'] = self.doi_url
+        attributes['creators'] = [dict(
+            nameIdentifier=author.id,
+            creatorName=f'{author.last_name},{author.first_name}',
+            affiliation=author.affiliation
+        ) for author in self.primary_authors]
+        attributes['titles'] = list()
+        attributes['publisher'] = self.publisher
+        attributes['publicationYear'] = datetime.date.today().year
+        attributes['types'] = dict()
+        attributes['url'] = 'https://schema.datacite.org/meta/kernel-4.0/index.html',
+        attributes['schemaVersion'] = 'http://datacite.org/schema/kernel-4'
+
+        return attributes

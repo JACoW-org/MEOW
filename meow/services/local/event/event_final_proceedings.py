@@ -35,6 +35,7 @@ from meow.services.local.event.common.download_contributions_papers import downl
 from meow.services.local.event.final_proceedings.generate_contribution_references import generate_contribution_references
 from meow.services.local.event.final_proceedings.generate_contributions_groups import generate_contributions_groups
 from meow.services.local.event.final_proceedings.generate_contribution_doi import generate_contribution_doi
+from meow.services.local.event.final_proceedings.build_doi_payloads import build_doi_payloads
 from meow.services.local.event.final_proceedings.manage_duplicates import manage_duplicates
 
 from meow.services.local.event.final_proceedings.link_static_site import link_static_site
@@ -231,10 +232,20 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, l
 
     yield dict(type='progress', value=dict(
         phase='generate_contribution_doi',
-        text='Generate Contribution Doi'
+        text='Generate Contribution DOI'
     ))
 
     final_proceedings = await generate_contribution_doi(final_proceedings, cookies, settings)
+
+    # generation of payloads for DOIs
+    await extend_lock(lock)
+
+    yield dict(type='progress', value=dict(
+        phase='generate_doi_payloads',
+        text='Generate DOI payloads'
+    ))
+
+    final_proceedings = await build_doi_payloads(final_proceedings)
 
     """ """
 

@@ -8,7 +8,7 @@ from anyio import create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
 
-from meow.tasks.local.doi.models import ContributionDOI
+from meow.tasks.local.doi.models import AuthorDOI, ContributionDOI
 from meow.tasks.local.doi.utils import generate_doi_url
 
 from meow.utils.datetime import format_datetime_full, format_datetime_range_doi, format_datetime_doi
@@ -90,10 +90,17 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
     event_isbn: str = settings.get('isbn', '978-3-95450-227-1')
     event_issn: str = settings.get('issn', '2673-5490')
 
+    primary_authors = [AuthorDOI(
+        id=author.id,
+        first_name=author.first,
+        last_name=author.last,
+        affiliation=author.affiliation
+    ) for author in contribution.authors]
+
     doi_data = ContributionDOI(
         code=contribution.code,
         title=contribution.title,
-        # primary_authors=primary_authors,
+        primary_authors=primary_authors,
         authors_groups=contribution.authors_groups,
         abstract=contribution.description,
         # references=contribution.references,
@@ -141,4 +148,4 @@ def refill_contribution_doi(proceedings_data: ProceedingsData, results: dict) ->
             contribution_data.doi_data.start_page = start_page
             start_page = start_page + contribution_data.doi_data.num_of_pages
 
-    return proceedings_data
+    return proceedings_data      
