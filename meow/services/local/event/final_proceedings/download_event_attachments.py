@@ -54,9 +54,9 @@ async def download_event_attachments(proceedings_data: ProceedingsData, cookies:
                         receive_stream.close()
 
         except ClosedResourceError as crs:
-            logger.debug(crs, exc_info=True)
+            logger.debug(crs, exc_info=False)
         except EndOfStream as eos:
-            logger.debug(eos, exc_info=True)
+            logger.debug(eos, exc_info=False)
         except Exception as ex:
             logger.error(ex, exc_info=True)
 

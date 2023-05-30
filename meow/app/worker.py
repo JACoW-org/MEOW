@@ -10,9 +10,11 @@ from typing import Callable, Any
 from meow.app.workers.logic import AbsRedisWorkerLogicComponent
 from meow.tasks.infra.task_runner import TaskRunner
 
-from anyio import create_task_group
+from anyio import CancelScope, create_task_group
 from anyio import create_memory_object_stream
 from anyio import to_thread
+
+from anyio.abc import TaskStatus
 
 from anyio.from_thread import BlockingPortal
 
@@ -25,24 +27,30 @@ from meow.utils.serialization import json_decode, json_encode
 logger = lg.getLogger(__name__)
 
 
+
+tasks_cancel_scopes: dict[str, CancelScope] = dict()
+
+
+
 class RedisWorkerManager():
     """ """
+    
+    
 
     def __init__(self, logic: AbsRedisWorkerLogicComponent):
         self.logic: AbsRedisWorkerLogicComponent = logic
-                   
 
     async def run(self):
 
-        logger.debug('### run')
-        
+        logger.debug('### run - begin')
+
         sender, receiver = create_memory_object_stream(4096)
 
         async with create_task_group() as tg:
             tg.start_soon(self.start_listener, sender)
             tg.start_soon(self.start_workers, receiver)
-               
-        logger.debug('### run')
+
+        logger.debug('### run - end')
 
     async def start_listener(self, sender: MemoryObjectSendStream):
         logger.debug('start_listener...')
@@ -50,7 +58,7 @@ class RedisWorkerManager():
         async with create_task_group() as tg:
             async with sender:
                 tg.start_soon(self.subscribe_topic, sender.clone())
-        
+
         logger.debug('close_listener...')
 
     async def start_workers(self, receiver: MemoryObjectReceiveStream):
@@ -60,8 +68,8 @@ class RedisWorkerManager():
             async with receiver:
                 for i in range(2):
                     tg.start_soon(self.process_task_worker,
-                                  i, receiver.clone())
-                    
+                                   i, receiver.clone())
+
         logger.debug('close_workers workers...')
 
     # async def start_workers(self, receiver: MemoryObjectReceiveStream):
@@ -136,15 +144,37 @@ class RedisWorkerManager():
                     # logger.debug(f"######### __process data {data}")
 
                     # {'code': 'task:exec', 'time': '1665050907325', 'uuid': '01GEPC94NXJGJ79YHYKSBRXJEA'}
-                    head: dict = data.get('head', None)
-                    body: dict = data.get('body', None)
 
-                    if head is not None and body is not None:
+                    head: dict = data.get('head', None)
+
+                    if head is not None:
 
                         code: str = head.get('code', None)
                         uuid: str = head.get('uuid', None)
                         time: str = head.get('time', None)
+                        
+                        if code == 'task:kill':
+                            
+                            logger.error(f'KILLLLLLLLLLLLLLLL {code} {uuid}')
 
+                            try:
+                                # logger.info(f'kill {code} {uuid}')
+                                
+                                await TaskRunner.kill_task(task_id=uuid)
+                                
+                                logger.error(tasks_cancel_scopes.keys())
+                                
+                                if uuid in tasks_cancel_scopes:
+                                    cancel_scope = tasks_cancel_scopes[uuid] 
+                                    cancel_scope.cancel()
+                                    del tasks_cancel_scopes[uuid] 
+                                else:
+                                    logger.error('task_id noi in dictionary')
+                                
+                            except BaseException as bex:
+                                logger.error(bex, exc_info=True)
+
+                        body: dict = data.get('body', {})
                         method: str = body.get('method', None)
                         params: dict = body.get('params', None)
 
@@ -159,6 +189,7 @@ class RedisWorkerManager():
                                 }
 
                                 sender.send_nowait(json_encode({
+                                    'task_id': uuid,
                                     'method': method,
                                     'params': params,
                                     'context': context,
@@ -168,10 +199,10 @@ class RedisWorkerManager():
 
                                 await TaskRunner.send_queued(task_id=uuid, task=method)
 
-                            except WouldBlock as error:
-                                await TaskRunner.send_error(task_id=uuid, task=method, error=error)
+                            except WouldBlock as err:
+                                await TaskRunner.send_error(task_id=uuid, task=method, error=err)
                                 msg = f"Worker sub: exausted"
-                                logger.error(msg, e, exc_info=True)
+                                logger.error(msg, err, exc_info=True)
 
                 __callable: Callable = await self.logic.subscribe(on_message=on_message)
 
@@ -180,8 +211,7 @@ class RedisWorkerManager():
         except CancelledError:
             logger.info(f"Worker sub: Cancelled")
         except BaseException as e:
-            logger.error(f"Worker sub: Internal Error", e, exc_info=True)
-
+            logger.error(f"Worker sub: Internal Error", exc_info=True)
 
     async def process_task_worker(self, worker_id: int, receiver: MemoryObjectReceiveStream):
         """ """
@@ -192,24 +222,45 @@ class RedisWorkerManager():
 
             async with receiver:
                 async for raw in receiver:
-
-                    try:
-                        logger.debug(f"Worker {worker_id}: Begin")
-
-                        task = json_decode(raw)
-
-                        method = task.get('method', None)
-                        params = task.get('params', None)
-                        context = task.get('context', None)
-
-                        await self.execute_in_current_thread(worker_id, method, params, context)
-                        # await self.execute_in_worker_thread(worker_id, method, params, context)
+                    
+                    async def _cancel_task(scope: CancelScope):
                         
-                        logger.debug(f"Worker {worker_id}: End")
+                        task_id: str | None = None
+                        
+                        try:
+                            task = json_decode(raw)
+                            task_id = task.get('task_id', None)
+                            
+                            if task_id is not None:
+                                logger.debug(f"Worker {worker_id}: Begin")
+                                
+                                tasks_cancel_scopes[task_id] = scope
+                                
+                                method = task.get('method', None)
+                                params = task.get('params', None)
+                                context = task.get('context', None)
 
-                    except BaseException:
-                        logger.error(
-                            f"Worker {worker_id}: Internal Error", exc_info=True)
+                                await self.execute_in_current_thread(worker_id, method, params, context)
+                                # await self.execute_in_worker_thread(worker_id, method, params, context)
+
+                                logger.debug(f"Worker {worker_id}: End")
+
+                        except BaseException:
+                            logger.error(
+                                f"Worker {worker_id}: Internal Error", exc_info=True)
+                        finally:
+                            try:
+                                if task_id is not None:
+                                    if task_id in tasks_cancel_scopes:
+                                        del tasks_cancel_scopes[task_id]
+                            except BaseException as bex:
+                                logger.error(bex, exc_info=True)
+                    
+                    
+                    async with create_task_group() as tg:
+                        with CancelScope() as scope:
+                            tg.start_soon(_cancel_task, tg.cancel_scope)
+
 
         except CancelledError:
             logger.info(f"Worker {worker_id}: Cancelled")
@@ -247,7 +298,7 @@ class RedisWorkerManager():
             async for result in async_generator:
                 result_type = result.get('type', '')
                 result_value = result.get('value', None)
-                
+
                 if result_type == 'result':
                     await TaskRunner.send_result(task_id=task_id, task=method, result=result_value)
                 elif result_type == 'progress':

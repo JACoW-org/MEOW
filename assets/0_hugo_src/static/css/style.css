@@ -138,9 +138,6 @@ li {
   margin-bottom: 0.2rem;
 }
 
-
-
-
 .home .event-footer {
   display: flex;
   flex-flow: row nowrap;
@@ -162,6 +159,7 @@ li {
   margin: 1rem;
   text-align: center;
 }
+
 
 
 
@@ -200,6 +198,10 @@ li {
   font-weight: bold;
   color: var(--primary-color, '#333');
 }
+
+
+
+
 
 .content {
   flex: 1;

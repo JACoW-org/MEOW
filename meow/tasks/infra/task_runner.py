@@ -1,11 +1,15 @@
+from asyncio import CancelledError
 import logging as lg
 import time
 
-from typing import Any, AsyncGenerator
+from typing import AsyncGenerator
+from meow.app.errors.service_error import ServiceError
 
 from meow.tasks.infra.task_factory import TaskFactory
 
 from meow.app.instances.databases import dbs
+from meow.tasks.infra.task_status import TaskStatus
+
 from meow.utils.error import exception_to_string
 from meow.utils.serialization import json_encode
 
@@ -22,22 +26,35 @@ class TaskRunner:
 
         try:
 
-            args = dict(task_id=task_id)
-
             # logger.debug(f"run_task {code} {args}")
 
-            task_obj = await TaskFactory.create_task(code, args)
+            task_obj = await TaskFactory.create_task(code, task_id)
 
             # logger.debug(f"run_task - task created")
 
-            async for p in task_obj.run(params, context):  # type: ignore
+            TaskStatus.start_task(task_id=task_id)
+
+            gen = task_obj.run(params, context)
+
+            async for p in gen:  # type: ignore
                 yield p
 
             # logger.debug(f"run_task - task result")
 
-        except BaseException as e:
-            logger.error(e, exc_info=True)
-            raise e
+        except ServiceError as se:
+            logger.error(f"Task killed {task_id}")
+        except CancelledError as ce:
+            logger.error(f"Task cancelled {task_id}")
+        except BaseException as be:
+            logger.error(be, exc_info=True)
+            raise be
+        finally:
+            TaskStatus.stop_task(task_id=task_id)
+
+    @classmethod
+    async def kill_task(cls, task_id: str) -> None:
+        logger.debug(f"kill_task {task_id}")
+        TaskStatus.stop_task(task_id=task_id)
 
     @classmethod
     async def send_queued(cls, task_id: str, task: str) -> None:
@@ -75,7 +92,7 @@ class TaskRunner:
         await cls.send('task:error', task_id, task, exception_to_string(error))
 
     @classmethod
-    async def send(cls, event: str, task_id: str, task: str, params: dict | None) -> None:
+    async def send(cls, event: str, task_id: str, task: str | None, params: dict | None) -> None:
 
         # head: {
         #     code: 'exec_task',
@@ -100,14 +117,13 @@ class TaskRunner:
                 'body': {
                     'method': task,
                     'params': params
-                }
+                } if task else None
             }
 
-            logger.debug(f"send {to_send}")
+            # logger.debug(f"send {to_send}")
 
-            message = json_encode(to_send)
-
-            await dbs.redis_client.publish("meow:feed", message)
+            await dbs.redis_client.publish("meow:feed",
+                                           json_encode(to_send))
 
         except BaseException as e:
             logger.error(e, exc_info=True)

@@ -1,8 +1,10 @@
+from asyncio import CancelledError
 import logging as lg
 
 from typing import AsyncGenerator
 
 from meow.app.config import conf
+from meow.app.errors.service_error import ServiceError
 from meow.app.instances.databases import dbs
 from meow.models.infra.locks import RedisLock
 
@@ -56,19 +58,23 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict) ->
 
         async with acquire_lock(event_id) as lock:
 
-            logger.info(f"acquire_lock -> {lock.name}")
-
+            logger.debug(f"acquire_lock -> {lock.name}")
+            
             async for r in _event_final_proceedings(event, cookies, settings, lock):
                 yield r
 
-            logger.info(f"release_lock -> {lock.name}")
+            logger.debug(f"release_lock -> {lock.name}")
 
-    except LockError as e:
-        logger.error(e, exc_info=True)
-        raise e
-    except BaseException as e:
-        logger.error(e, exc_info=True)
-        raise e
+    except GeneratorExit:
+        logger.error("Generator Exit")
+    except CancelledError:
+        logger.error("Task Cancelled")
+    except LockError as le:
+        logger.error("Lock error", le, exc_info=True)
+        raise le
+    except BaseException as be:
+        logger.error("Generic error", be, exc_info=True)
+        raise be
 
 
 def acquire_lock(key: str) -> RedisLock:
@@ -83,8 +89,6 @@ def acquire_lock(key: str) -> RedisLock:
         blocking_timeout=conf.REDIS_LOCK_BLOCKING_TIMEOUT_SECONDS,
         thread_local=True,
     )
-
-    redis_lock.register_scripts
 
     return redis_lock
 

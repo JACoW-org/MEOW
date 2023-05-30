@@ -1,10 +1,7 @@
 import logging as lg
 
-
 from typing import AsyncGenerator
-
-from meow.services.local.event.event_final_proceedings \
-    import event_final_proceedings
+from meow.services.local.event.event_pdf_check import event_pdf_check
 
 from meow.tasks.infra.abstract_task import AbstractTask
 
@@ -12,17 +9,19 @@ from meow.tasks.infra.abstract_task import AbstractTask
 logger = lg.getLogger(__name__)
 
 
-class EventZipTask(AbstractTask):
-    """ EventZipTask """
+class EventPapersCheckTask(AbstractTask):
+    """ EventPapersCheckTask """
 
     async def run(self, params: dict, context: dict = {}) -> AsyncGenerator[dict, None]:
+
         event: dict = params.get('event', dict())
-        cookies: dict = params.get('cookies', dict())
-        settings: dict = params.get('settings', dict())
+        cookies: dict = params.get("cookies", dict())
+        settings: dict = params.get("settings", dict())
         
         indico_session: str = cookies.get('indico_session_http', None)
         cookies['indico_session_http'] = indico_session
         cookies['indico_session'] = indico_session
 
-        async for r in event_final_proceedings(event, cookies, settings):
+        async for r in event_pdf_check(event, cookies, settings):
+            self.assert_is_running()
             yield r

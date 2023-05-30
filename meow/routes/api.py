@@ -1,9 +1,11 @@
 import logging as lg
 
+from starlette.exceptions import HTTPException
 from starlette.requests import Request
-from starlette.responses import JSONResponse, Response
-from starlette.responses import StreamingResponse
+from starlette.responses import JSONResponse
 from starlette.routing import Route
+
+from meow.services.local.credential.find_credential import find_credential_by_secret
 
 # from meow.services.local.abstract_booklet.create_abstract_booklet \
 #     import create_abstract_booklet_from_event
@@ -29,7 +31,44 @@ logger = lg.getLogger(__name__)
 
 
 async def api_list_endpoint() -> JSONResponse:
-    return JSONResponse({'code': 'list'})
+    return JSONResponse({'method': 'list'})
+
+
+async def api_ping_endpoint(req: Request) -> JSONResponse:
+
+    api_key: str = str(req.path_params['api_key'])
+    credential = await find_credential_by_secret(api_key)
+
+    if credential is not None:
+        return JSONResponse({
+            'method': 'ping',
+            'params': {
+                'id': credential.id
+            }
+        })
+
+    raise HTTPException(status_code=401, detail="Invalid API Key")
+
+
+async def api_info_endpoint(req: Request) -> JSONResponse:
+
+    event_id: int = int(req.path_params['event_id'])
+    api_key: str = str(req.path_params['api_key'])
+    credential = await find_credential_by_secret(api_key)
+
+    if credential is not None:
+        return JSONResponse({
+            'method': 'info',
+            'params': {
+                'event_id': event_id,
+                'pre_press': True,
+                'datacite_json': True,
+                'final_proceedings': True,
+                'proceedings_archive': True,
+            }
+        })
+
+    raise HTTPException(status_code=401, detail="Invalid API Key")
 
 
 # async def api_del_conference(req: Request) -> JSONResponse:
@@ -215,6 +254,12 @@ routes = [
     Route('/', api_list_endpoint,
           methods=['GET', 'POST', 'PUT', 'DELETE']),
 
+    Route('/ping/{api_key}', api_ping_endpoint,
+          methods=['GET', 'POST', 'PUT', 'DELETE']),
+
+    Route('/info/{event_id}/{api_key}', api_info_endpoint,
+          methods=['GET', 'POST', 'PUT', 'DELETE']),
+
     # Obsolete
     # Route('/conference/{id}/del', api_del_conference,
     #       methods=['GET', 'POST', 'PUT', 'DELETE']),
@@ -226,7 +271,7 @@ routes = [
     #       methods=['GET', 'POST', 'PUT', 'DELETE']),
 
     # API to run event_ab task
-    # Route('/task-event-ab.odt', api_task_event_ab_odt, 
+    # Route('/task-event-ab.odt', api_task_event_ab_odt,
     #       methods=['PUT']),
 
     # API to run check_pdf task

@@ -1,17 +1,17 @@
 import logging as lg
 
 from typing import AsyncGenerator
-from meow.services.local.event.event_pdf_keywords import event_pdf_keywords
 
 from meow.tasks.infra.abstract_task import AbstractTask
-from meow.tasks.local.reference import ContribRef
+
+from meow.services.local.event.event_contribution_doi import event_contribution_doi
 
 
 logger = lg.getLogger(__name__)
 
 
-class EventPdfTask(AbstractTask):
-    """ EventPdfTask """
+class EventDoiReferenceTask(AbstractTask):
+    """ EventDoiReferenceTask """
 
     async def run(self, params: dict, context: dict = {}) -> AsyncGenerator[dict, None]:
 
@@ -23,5 +23,6 @@ class EventPdfTask(AbstractTask):
         cookies['indico_session_http'] = indico_session
         cookies['indico_session'] = indico_session
         
-        async for r in event_pdf_keywords(event, cookies, settings):
+        async for r in event_contribution_doi(event, cookies, settings):
+            self.assert_is_running()
             yield r

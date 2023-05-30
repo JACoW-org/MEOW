@@ -1,17 +1,12 @@
 import logging as lg
 
 from meow.tasks.infra.abstract_task import AbstractTask
-from meow.tasks.local.check_pdf import CheckPdfTask
-from meow.tasks.local.event_ab import EventAbTask
-from meow.tasks.local.event_pdf import EventPdfTask
-from meow.tasks.local.event_ref import EventRefTask
-from meow.tasks.local.event_zip import EventZipTask
 
-# from meow.tasks.local.event_put import EventPutTask
-# from meow.tasks.local.xml_download import XmlDownloadTask
-# from meow.tasks.local.xml_exec import ExecProcessTask
-# from meow.tasks.local.xml_merge import XmlMergeTask
-# from meow.tasks.local.xml_split import XmlSplitTask
+from meow.tasks.local.event_ab import EventAbstractBookletTask
+from meow.tasks.local.event_pc import EventPapersCheckTask
+from meow.tasks.local.event_dr import EventDoiReferenceTask
+from meow.tasks.local.event_pp import EventPrePressTask
+from meow.tasks.local.event_fp import EventFinalProceedingsTask
 
 
 logger = lg.getLogger(__name__)
@@ -21,17 +16,11 @@ class TaskRepository:
     """ """
 
     __tasks = dict(
-        event_ab=EventAbTask,
-        check_pdf=CheckPdfTask,
-        event_zip=EventZipTask,
-        event_pdf=EventPdfTask,
-        event_ref=EventRefTask,
-        
-        # event_put=EventPutTask,
-        # xml_exec=ExecProcessTask,
-        # xml_download=XmlDownloadTask,
-        # xml_merge=XmlMergeTask,
-        # xml_split=XmlSplitTask
+        event_ab=EventAbstractBookletTask,
+        event_pc=EventPapersCheckTask,
+        event_dr=EventDoiReferenceTask,
+        event_pp=EventPrePressTask,
+        event_fp=EventFinalProceedingsTask,
     )
 
     @classmethod

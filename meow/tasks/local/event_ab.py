@@ -10,8 +10,8 @@ from meow.tasks.infra.abstract_task import AbstractTask
 logger = lg.getLogger(__name__)
 
 
-class EventAbTask(AbstractTask):
-    """ EventAbTask """
+class EventAbstractBookletTask(AbstractTask):
+    """ EventAbstractBookletTask """
 
     async def run(self, params: dict, context: dict = {}) -> AsyncGenerator[dict, None]:
 
@@ -24,4 +24,5 @@ class EventAbTask(AbstractTask):
         cookies['indico_session'] = indico_session
         
         async for r in event_abstract_booklet(event, cookies, settings):
+            self.assert_is_running()
             yield r

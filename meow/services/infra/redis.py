@@ -95,7 +95,7 @@ def acquire_global_lock() -> RedisLock:
     )
 
 
-async def fill_model_meta(cls: type[BaseModel]):
+async def fill_model_meta(cls: type[BaseModel]) -> None:
     try:
 
         logger.debug('fill_model_meta >>>')
@@ -106,7 +106,7 @@ async def fill_model_meta(cls: type[BaseModel]):
         logger.exception(e)
 
 
-async def migrate_model_schema(cls: type[BaseModel]):
+async def migrate_model_schema(cls: type[BaseModel]) -> None:
     try:
 
         logger.debug('migrate_model_schema >>>')

@@ -146,7 +146,7 @@ class StreamRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
             key, messages = payload[0]
             last_id, data = messages[0]
 
-            logger.debug(f"REDIS NAME: {conf.REDIS_CLIENT_NAME}", )
+            logger.debug(f"\n\nREDIS NAME: {conf.REDIS_CLIENT_NAME}", )
             logger.debug(f"REDIS ID: {last_id}")
             # logger.debug(f"      --> {data}")
 

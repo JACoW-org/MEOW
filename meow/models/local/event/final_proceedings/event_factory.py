@@ -2,7 +2,13 @@ import logging as lg
 
 from typing import Any
 
-from meow.models.local.event.final_proceedings.event_model import AffiliationData, AttachmentData, EventData, KeywordData, PersonData
+from meow.models.local.event.final_proceedings.event_model import (
+    AffiliationData,
+    AttachmentData,
+    EventData,
+    KeywordData,
+    PersonData,
+)
 from meow.utils.slug import slugify
 from meow.utils.datetime import datedict_to_tz_datetime
 
@@ -12,14 +18,14 @@ logger = lg.getLogger(__name__)
 
 def attachment_data_factory(attachment: Any) -> AttachmentData:
     attachment_data = AttachmentData(
-        file_type=attachment.get('file_type'),
-        content_type=attachment.get('content_type'),
-        filename=attachment.get('filename'),
-        md5sum=attachment.get('md5sum'),
-        size=int(attachment.get('size')),
-        title=attachment.get('title'),
-        description=attachment.get('description'),
-        external_download_url=attachment.get('external_download_url'),
+        file_type=attachment.get("file_type"),
+        content_type=attachment.get("content_type"),
+        filename=attachment.get("filename"),
+        md5sum=attachment.get("md5sum"),
+        size=int(attachment.get("size")),
+        title=attachment.get("title"),
+        description=attachment.get("description"),
+        external_download_url=attachment.get("external_download_url"),
     )
 
     # logger.info(attachment_data.as_dict())
@@ -28,32 +34,27 @@ def attachment_data_factory(attachment: Any) -> AttachmentData:
 
 
 def event_data_factory(event: Any, settings: dict) -> EventData:
+    event_id = event.get("id", "")
 
-    event_id = event.get('id', '')
-    
-    site_base_url = settings.get('site_base_url', '')
-    primary_color = settings.get('primary_color', '')
-    
-    title_short = settings.get('booktitle_short', '')
-    title_long = settings.get('booktitle_long', '')
-    
-    hosted = settings.get('host_info', '')
-    date = settings.get('date', '')
-    location = settings.get('location', '')
-    editorial = settings.get('editorial_board', '')
-    isbn = settings.get('isbn', '')
-    issn = settings.get('issn', '')
-    doi = settings.get('doi_base_url', '')
-    series = settings.get('series', '')
-    series_number = settings.get('series_number', '')
+    site_base_url = settings.get("site_base_url", "")
+    primary_color = settings.get("primary_color", "")
 
-    start = datedict_to_tz_datetime(
-        event.get('start_dt')
-    )
+    title_short = settings.get("booktitle_short", "")
+    title_long = settings.get("booktitle_long", "")
 
-    end = datedict_to_tz_datetime(
-        event.get('end_dt')
-    )
+    hosted = settings.get("host_info", "")
+    date = settings.get("date", "")
+    location = settings.get("location", "")
+    editorial = settings.get("editorial_board", "")
+    isbn = settings.get("isbn", "")
+    issn = settings.get("issn", "")
+    doi = settings.get("doi_base_url", "")
+    series = settings.get("series", "")
+    series_number = settings.get("series_number", "")
+
+    start = datedict_to_tz_datetime(event.get("start_dt"))
+
+    end = datedict_to_tz_datetime(event.get("end_dt"))
 
     event_data = EventData(
         id=event_id,
@@ -71,7 +72,7 @@ def event_data_factory(event: Any, settings: dict) -> EventData:
         start=start,
         end=end,
         series=series,
-        series_number=series_number
+        series_number=series_number,
     )
 
     # logger.info(event_data.as_dict())
@@ -80,10 +81,7 @@ def event_data_factory(event: Any, settings: dict) -> EventData:
 
 
 def event_keyword_factory(keyword: str) -> KeywordData:
-    keyword_data = KeywordData(
-        code=slugify(keyword),
-        name=keyword.strip()
-    )
+    keyword_data = KeywordData(code=slugify(keyword), name=keyword.strip())
 
     # logger.info(keyword_data.as_dict())
 
@@ -91,11 +89,10 @@ def event_keyword_factory(keyword: str) -> KeywordData:
 
 
 def event_person_factory(person: Any) -> PersonData:
-
-    first = person.get('first_name').strip()
-    last = person.get('last_name').strip()
-    affiliation = person.get('affiliation').strip()
-    email = person.get('email').strip() if person.get('email') else ''
+    first = person.get("first_name").strip()
+    last = person.get("last_name").strip()
+    affiliation = person.get("affiliation").strip()
+    email = person.get("email").strip() if person.get("email") else ""
 
     id = slugify("-".join([first, last, affiliation]))
 
@@ -114,12 +111,12 @@ def event_person_factory(person: Any) -> PersonData:
 
 def event_affiliation_factory(affiliation: Any) -> AffiliationData:
     affiliation_data = AffiliationData(
-        id=slugify(affiliation.get('name')),
-        name=affiliation.get('name').strip(),
-        city=affiliation.get('city'),
-        country_code=affiliation.get('country_code'),
-        postcode=affiliation.get('postcode'),
-        street=affiliation.get('postcode'),
+        id=slugify(affiliation.get("name")),
+        name=affiliation.get("name").strip(),
+        city=affiliation.get("city"),
+        country_code=affiliation.get("country_code"),
+        postcode=affiliation.get("postcode"),
+        street=affiliation.get("postcode"),
     )
 
     # logger.info(affiliation_data.as_dict())

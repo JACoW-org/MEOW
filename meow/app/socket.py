@@ -76,23 +76,32 @@ class WebSocketManager():
                         await sleep(0.01)
 
             except BaseException:
-                pass
+                logger.error("__reader", exc_info=True)
            
 
     async def _send(self, message: str):
         try:
             
-            payload: dict = json_decode(message)
+            if message:
             
-            head: dict = payload.get('head', None)
-            uuid: str = head.get('uuid', None)
-            
-            conn = app.active_connections.get(uuid, None)
-            
-            if conn is not None:
-                await conn.send_text(message)
-            else:
-                logger.error(f"task_id: {uuid} have not a connection")
+                payload: dict = json_decode(message)
+                
+                head: dict | None = payload.get('head', None) if payload else None
+                uuid: str | None = head.get('uuid', None) if head else None
+                conn = app.active_connections.get(uuid, None) if uuid else None
+                
+                await conn.send_text(message) if conn else None
+                
+                # code: str | None = head.get('code', None) if head else None
+                
+                # phase:str = payload.get('body', {}).get('params', {}).get('phase', '') \
+                #     if payload and code else ''                
+                
+                # if conn is not None:                    
+                    # print(f"send_text {phase}")                    
+                # else:
+                #     logger.error(f"task_id: {uuid} have not a connection")
                 
         except BaseException as e:
+            logger.error(message)
             logger.error("subscribe", e, exc_info=True)

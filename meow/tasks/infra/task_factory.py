@@ -11,13 +11,13 @@ class TaskFactory:
     """ """
 
     @classmethod
-    async def create_task(cls, code: str, args: dict) -> AbstractTask:
+    async def create_task(cls, code: str, task_id: str) -> AbstractTask:
         """" """
 
         task_cls = await TaskRepository.get_task(code)
 
         logger.debug(f"create_task {code}")
 
-        task_obj = task_cls(args)
+        task_obj = task_cls(code, task_id)
 
         return task_obj

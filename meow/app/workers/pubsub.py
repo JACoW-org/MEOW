@@ -12,7 +12,8 @@ from meow.app.instances.databases import dbs
 from meow.app.instances.application import app
 
 from meow.app.workers.logic import AbsRedisWorkerLogicComponent
-from meow.utils.serialization import json_encode
+
+from redis.exceptions import ConnectionError
 
 logger = logging.getLogger(__name__)
 
@@ -30,22 +31,6 @@ class PubsubRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
 
             logger.debug('__read')
             
-            # try:
-            #     
-            #     payload = await p.get_message(
-            #         ignore_subscribe_messages=True,
-            #         timeout=1
-            #     )
-            # 
-            #     self.__log_payload(payload)
-            # 
-            #     return payload
-            # 
-            # except BaseException as e:
-            #     pass
-            # finally:
-            #     await sleep(0.01)
-
             async with create_task_group() as tg:
                 with move_on_after(2) as scope:
                     try:
@@ -59,20 +44,27 @@ class PubsubRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
             
                         return payload
                 
-                    except BaseException as e:
-                        pass
+                    except ConnectionError as ce:
+                        logger.error("get_message:ConnectionError")
+                    except BaseException as be:
+                        logger.error("get_message:BaseException", exc_info=True)
                     finally:
                         await sleep(0.01)
                         
 
         async def __reader(p: PubSub):
             while app.state.worker_running:
-                payload = await __read(p)
-                
-                if payload and payload['type'] == 'message':
-                    await on_message(payload['data'])
-                
-                # await anyio.sleep(0.01)
+                try:
+                    payload = await __read(p)
+                    
+                    if payload and payload['type'] == 'message':
+                        await on_message(payload['data'])
+                    
+                    # await anyio.sleep(0.01)
+                except asyncio.CancelledError as ce:
+                    logger.debug("__reader:CancelledError")
+            
+            logger.warning(f"app.state.worker_running: {app.state.worker_running}")
 
 
         async def __task():
@@ -81,6 +73,7 @@ class PubsubRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
 
             try:
                 pubsub: Optional[PubSub] = dbs.redis_client.pubsub()
+                
                 try:
                     if pubsub is not None:
                         async with pubsub as p:
@@ -92,19 +85,22 @@ class PubsubRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
                             
                             await p.unsubscribe(conf.REDIS_NODE_TOPIC)
 
-                except Exception as e:
-                    logger.error(e, exc_info=True)
+                except asyncio.CancelledError as ce:
+                    logger.info("__task:CancelledError")
+                except BaseException as be:
+                    logger.error(be, exc_info=True)
                 finally:
                     if pubsub is not None:
                         logger.debug('pubsub.close()')
                         await pubsub.close()
-            except Exception as e:
+                        
+            except BaseException as e:
                 logger.error(e, exc_info=True)
 
         return __task
 
     def __log_payload(self, payload: dict):
-        logger.debug(f"REDIS NAME: {conf.REDIS_CLIENT_NAME}", )
+        logger.debug(f"\n\nREDIS NAME: {conf.REDIS_CLIENT_NAME}", )
 
         if payload:
             # data = payload['data']

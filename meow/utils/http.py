@@ -81,6 +81,29 @@ async def fetch_json(url: str, headers: dict = {}, cookies: dict = {}) -> Any:
                 return await resp.json()
         finally:
             HttpClientSessions.del_client_session(client)
+            
+
+async def send_json(url: str, body: dict, headers: dict = {}, cookies: dict = {}) -> Any:
+    """ Send json function """
+
+    def json_serialize(val):
+        return str(json_encode(val), 'utf-8')
+
+    async with aiohttp.ClientSession(
+            headers=headers,
+            cookies=cookies,
+            json_serialize=json_serialize,
+            timeout=aiohttp.ClientTimeout(
+                total=conf.HTTP_REQUEST_TIMEOUT_SECONDS
+            )
+    ) as client:
+        try:
+            HttpClientSessions.add_client_session(client)
+            async with client.get(url) as resp:
+                assert resp.status == 200
+                return await resp.json()
+        finally:
+            HttpClientSessions.del_client_session(client)
 
 
 async def download_json(url: str, headers: dict = {}, cookies: dict = {}) -> Any:
