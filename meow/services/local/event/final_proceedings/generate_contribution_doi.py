@@ -9,7 +9,7 @@ from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
 
 from meow.tasks.local.doi.models import AuthorDOI, ContributionDOI
-from meow.tasks.local.doi.utils import generate_doi_identifier, generate_doi_url
+from meow.tasks.local.doi.utils import generate_doi_identifier, generate_doi_path, generate_doi_url
 
 from meow.utils.datetime import format_datetime_full, format_datetime_range_doi, format_datetime_doi
 
@@ -86,6 +86,12 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         conference=settings.get('doi_conference', 'CONF-YY'),
         contribution=contribution.code
     )
+    
+    doi_path: str = generate_doi_path(
+        organization=settings.get('doi_organization', 'JACoW'),
+        conference=settings.get('doi_conference', 'CONF-YY'),
+        contribution=contribution.code
+    )
 
     doi_identifier: str = generate_doi_identifier(
         context=settings.get('doi_context', '10.18429'),
@@ -132,6 +138,7 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         issuance_date=format_datetime_doi(
             contribution.issuance) if contribution.issuance else '',
         doi_url=doi_url,
+        doi_path=doi_path,
         doi_identifier=doi_identifier,
         pages=f'{contribution.page}-{contribution.metadata.get("page_count", 0) + contribution.page - 1}' if contribution.page and contribution.metadata else '',
         num_of_pages=contribution.metadata.get(

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from anyio import run, sleep
+from anyio import run
 from anyio import create_task_group
 from anyio import open_signal_receiver
 from anyio.abc import CancelScope
@@ -18,10 +18,7 @@ logger = lg.getLogger(__name__)
 async def app_wrap(scope: CancelScope):
     import signal
 
-    with open_signal_receiver(
-            signal.SIGINT, 
-            signal.SIGTERM
-    ) as signals:
+    with open_signal_receiver(signal.SIGINT,             signal.SIGTERM) as signals:
         async for signum in signals:
             logger.warning("SIGINT" if signum == signal.SIGINT else "SIGTERM")
             await app_post()
@@ -43,8 +40,6 @@ async def app_pre():
     from meow.app.instances.application import app
     app.state.worker_running = True
 
-    logger.warning("!!!app_pre!!! --> worker_running: True")
-
 
 async def app_run():
     from meow.app.instances.services import srs
@@ -58,11 +53,8 @@ async def app_post():
     from meow.app.instances.application import app
     app.state.worker_running = False
 
-    logger.warning("!!!app_post!!! --> worker_running: False")
-
 
 async def main() -> None:
-    logger.debug("meow - begin")
 
     logger.info(f"Started worker process [{os.getpid()}]")
 
@@ -76,8 +68,6 @@ async def main() -> None:
 
     except BaseException as e:
         logger.error(e, exc_info=True)
-
-    logger.debug("meow - end")
 
 
 if __name__ == "__main__":

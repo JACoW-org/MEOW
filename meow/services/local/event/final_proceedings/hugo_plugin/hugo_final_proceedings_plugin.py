@@ -651,8 +651,8 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
             async with capacity_limiter:
 
                 # logger.info(f"{code} - {doi_contribution.title}")
-
-                await Path(self.src_doi_dir, f"{code.lower()}.md").write_text(
+                               
+                await Path(self.src_doi_dir, f"{doi_contribution.doi_path}.html").write_text(
                     await self.template.render_doi_contribution(doi_contribution)
                 )
 

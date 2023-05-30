@@ -5,9 +5,7 @@ from meow.models.local.event.final_proceedings.track_model import TrackData
 
 from meow.tasks.local.doi.models import ContributionDOI
 
-
 from jinja2 import Environment, FileSystemLoader, select_autoescape
-
 
 from datetime import datetime
 import logging as lg
@@ -16,6 +14,7 @@ from os import path
 from jinja2 import BytecodeCache
 
 import minify_html
+
 from meow.utils.collections import (get_authors_initials_dict, get_institutes_initials_dict,
     get_keywords_initials_dict, group_authors_by_last_initial_for_render,
     group_institutes_by_initial, group_keywords_by_initial)
