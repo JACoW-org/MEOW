@@ -1,4 +1,5 @@
 
+
 from asyncio import CancelledError
 import logging as lg
 
@@ -10,21 +11,17 @@ from meow.models.infra.locks import RedisLock
 
 from redis.exceptions import LockError
 
-from meow.models.local.event.final_proceedings.contribution_model import ContributionData
-
+from meow.models.infra.locks import RedisLock
+from meow.services.local.event.common.adapting_final_proceedings import adapting_final_proceedings
 from meow.services.local.event.common.collecting_contributions_and_files import collecting_contributions_and_files
 from meow.services.local.event.common.collecting_sessions_and_attachments import collecting_sessions_and_attachments
-from meow.services.local.event.common.download_contributions_papers import download_contributions_papers
-from meow.services.local.event.common.validate_proceedings_data import validate_proceedings_data
-from meow.services.local.event.common.adapting_final_proceedings import adapting_final_proceedings
-
-from meow.services.local.event.check_pdf.read_papers_report import read_papers_report
+from meow.services.local.event.doi.event_doi_delete import delete_contribution_doi
 
 
 logger = lg.getLogger(__name__)
 
 
-async def event_pdf_check(event: dict, cookies: dict, settings: dict) -> AsyncGenerator:
+async def event_doi_delete(event: dict, cookies: dict, settings: dict) -> AsyncGenerator:
     """ """
 
     try:
@@ -34,8 +31,13 @@ async def event_pdf_check(event: dict, cookies: dict, settings: dict) -> AsyncGe
             raise BaseException('Invalid event id')
 
         async with acquire_lock(event_id) as lock:
-            async for r in _event_pdf_check(event, cookies, settings, lock):
+
+            logger.debug(f"acquire_lock -> {lock.name}")
+
+            async for r in _event_doi_delete(event, cookies, settings, lock):
                 yield r
+
+            logger.debug(f"release_lock -> {lock.name}")
 
     except GeneratorExit:
         logger.error("Generator Exit")
@@ -52,7 +54,7 @@ async def event_pdf_check(event: dict, cookies: dict, settings: dict) -> AsyncGe
 def acquire_lock(key: str) -> RedisLock:
     """ Create event lock """
 
-    return RedisLock(
+    redis_lock = RedisLock(
         redis=dbs.redis_client,
         name=conf.REDIS_EVENT_LOCK_KEY(key),
         timeout=conf.REDIS_LOCK_TIMEOUT_SECONDS,
@@ -62,6 +64,8 @@ def acquire_lock(key: str) -> RedisLock:
         thread_local=True,
     )
 
+    return redis_lock
+
 
 async def extend_lock(lock: RedisLock) -> RedisLock:
     """ Reset lock timeout (conf.REDIS_LOCK_TIMEOUT_SECONDS) """
@@ -70,16 +74,10 @@ async def extend_lock(lock: RedisLock) -> RedisLock:
     return lock
 
 
-def callback(c: ContributionData) -> bool:
-    return c.is_included_in_pdf_check
-
-
-async def _event_pdf_check(event: dict, cookies: dict, settings: dict, lock: RedisLock) -> AsyncGenerator:
+async def _event_doi_delete(event: dict, cookies: dict, settings: dict, lock: RedisLock) -> AsyncGenerator:
     """ """
 
-    logger.info('event_check_pdf - create_final_proceedings')
-
-    """ """
+    logger.info('event_doi_delete - create_final_proceedings')
 
     """ """
 
@@ -114,40 +112,17 @@ async def _event_pdf_check(event: dict, cookies: dict, settings: dict, lock: Red
 
     final_proceedings = await adapting_final_proceedings(event, sessions, contributions, attachments, cookies, settings)
 
-    """ """
+    logger.info('event_doi_delete - event_doi_delete - begin')
 
     await extend_lock(lock)
 
     yield dict(type='progress', value=dict(
-        phase='download_contributions_papers',
-        text="Download Contributions Papers"
+        phase='delete_contribution_doi',
+        text="Delete contribution doi"
     ))
 
-    final_proceedings = await download_contributions_papers(final_proceedings, cookies, settings, callback)
+    results = await delete_contribution_doi(final_proceedings, cookies, settings)
 
-    """ """
+    logger.info('event_doi_delete - event_doi_delete - end')
 
-    await extend_lock(lock)
-
-    yield dict(type='progress', value=dict(
-        phase='read_papers_report',
-        text='Read Papers Report'
-    ))
-
-    final_proceedings = await read_papers_report(final_proceedings, cookies, settings, callback)
-
-    """ """
-
-    await extend_lock(lock)
-
-    yield dict(type='progress', value=dict(
-        phase='validate_contributions_papers',
-        text='Validate Contributions Papers'
-    ))
-
-    [metadata, errors] = await validate_proceedings_data(final_proceedings, cookies, settings, callback)
-
-    yield dict(type='result', value=dict(
-        metadata=metadata,
-        errors=errors
-    ))
+    yield dict(type='result', value=results)

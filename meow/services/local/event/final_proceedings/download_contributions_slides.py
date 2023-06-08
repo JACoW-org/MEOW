@@ -27,7 +27,7 @@ async def download_contributions_slides(proceedings_data: ProceedingsData, cooki
 
     # logger.debug(f'download_contributions_papers - files: {total_files}')
 
-    dir_name = f"{proceedings_data.event.id}_pdf"
+    dir_name = f"{proceedings_data.event.id}_tmp"
     file_cache_dir: Path = Path('var', 'run', dir_name)
     await file_cache_dir.mkdir(exist_ok=True, parents=True)
 

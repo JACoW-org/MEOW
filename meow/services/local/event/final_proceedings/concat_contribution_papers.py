@@ -24,7 +24,7 @@ async def concat_contribution_papers(proceedings_data: ProceedingsData, cookies:
 
     # logger.debug(f'concat_contribution_papers - files: {total_files}')
 
-    dir_name: str = f"{proceedings_data.event.id}_pdf"
+    dir_name: str = f"{proceedings_data.event.id}_tmp"
     cache_dir: Path = Path('var', 'run', dir_name)
     await cache_dir.mkdir(exist_ok=True, parents=True)
 

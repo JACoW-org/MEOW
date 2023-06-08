@@ -2,11 +2,16 @@ import logging as lg
 
 from meow.tasks.infra.abstract_task import AbstractTask
 
-from meow.tasks.local.event_ab import EventAbstractBookletTask
-from meow.tasks.local.event_pc import EventPapersCheckTask
-from meow.tasks.local.event_dr import EventDoiReferenceTask
-from meow.tasks.local.event_pp import EventPrePressTask
-from meow.tasks.local.event_fp import EventFinalProceedingsTask
+from meow.tasks.local.event_abstract_booklet import EventAbstractBookletTask
+from meow.tasks.local.event_compress_proceedings import EventCompressProceedingsTask
+from meow.tasks.local.event_doi_delete import EventDoiDeleteTask
+from meow.tasks.local.event_doi_draft import EventDoiDraftTask
+from meow.tasks.local.event_doi_hide import EventDoiHideTask
+from meow.tasks.local.event_doi_publish import EventDoiPublishTask
+from meow.tasks.local.event_papers_check import EventPapersCheckTask
+from meow.tasks.local.event_doi_reference import EventDoiReferenceTask
+from meow.tasks.local.event_pre_press import EventPrePressTask
+from meow.tasks.local.event_final_proceedings import EventFinalProceedingsTask
 
 
 logger = lg.getLogger(__name__)
@@ -16,11 +21,16 @@ class TaskRepository:
     """ """
 
     __tasks = dict(
-        event_ab=EventAbstractBookletTask,
-        event_pc=EventPapersCheckTask,
-        event_dr=EventDoiReferenceTask,
-        event_pp=EventPrePressTask,
-        event_fp=EventFinalProceedingsTask,
+        event_abstract_booklet=EventAbstractBookletTask,
+        event_papers_check=EventPapersCheckTask,
+        event_doi_reference=EventDoiReferenceTask,
+        event_pre_press=EventPrePressTask,
+        event_final_proceedings=EventFinalProceedingsTask,
+        event_compress_proceedings=EventCompressProceedingsTask,
+        event_doi_draft=EventDoiDraftTask,
+        event_doi_delete=EventDoiDeleteTask,
+        event_doi_publish=EventDoiPublishTask,
+        event_doi_hide=EventDoiHideTask,
     )
 
     @classmethod

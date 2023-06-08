@@ -11,7 +11,7 @@ from anyio import create_task_group, CapacityLimiter
 
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
 from meow.models.local.event.final_proceedings.event_model import AffiliationData, KeywordData, PersonData
-from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
+from meow.models.local.event.final_proceedings.proceedings_data_model import FinalProceedingsConfig, ProceedingsData
 from meow.models.local.event.final_proceedings.session_model import SessionData
 from meow.services.local.event.final_proceedings.hugo_plugin.hugo_jinja_template_renderer import JinjaTemplateRenderer
 from meow.tasks.local.doi.models import ContributionDOI
@@ -26,10 +26,13 @@ logger = lg.getLogger(__name__)
 class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
     """ HugoFinalProceedingsPlugin """
 
-    def __init__(self, proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> None:
+    def __init__(self, proceedings_data: ProceedingsData, cookies: dict, settings: dict, config: FinalProceedingsConfig) -> None:
         """ """
 
+        self.cookies = cookies
         self.settings = settings
+        self.config = config
+        
         self.proceedings = proceedings_data
         self.event = proceedings_data.event
         self.attachments = proceedings_data.attachments
@@ -48,8 +51,8 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
         self.tmp_dir = Path('var', 'tmp')
 
-        self.src_dir = Path('var', 'run', f"{event_id}_hugo_src")
-        self.out_dir = Path('var', 'run', f"{event_id}_hugo_src", "out")
+        self.src_dir = Path('var', 'run', f"{event_id}_src")
+        self.out_dir = Path('var', 'run', f"{event_id}_src", "out")
 
         self.src_layouts_dir = \
             Path(self.src_dir, 'layouts')
@@ -90,15 +93,6 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         self.src_ref_dir = \
             Path(self.src_dir, 'content', 'reference')
 
-    async def run(self) -> None:
-        """ """
-
-        await self.prepare()
-        await self.run_build()
-        await self.generate()
-        await self.compress()
-        await self.clean()
-
     async def run_prepare(self) -> None:
         await self.prepare()
 
@@ -119,63 +113,47 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         await self.static()
         await self.finalize()
 
-        # async with create_task_group() as tg:
-        #     tg.start_soon(self.home)
-        #     tg.start_soon(self.session)
-        #     tg.start_soon(self.classification)
-        #     tg.start_soon(self.author)
-        #     tg.start_soon(self.institute)
-        #     tg.start_soon(self.doi_per_institute)
-        #     tg.start_soon(self.keyword)
-        #     tg.start_soon(self.doi)
-        #     tg.start_soon(self.reference)
-        #     tg.start_soon(self.static)
-        #     tg.start_soon(self.finalize)
-
     async def prepare(self) -> None:
         """ """
 
-        try:
-            await rmtree(f"{await self.src_dir.absolute()}")
-            await self.tmp_dir.mkdir(exist_ok=True, parents=True)
-            await self.src_dir.mkdir(exist_ok=True, parents=True)
+        await rmtree(f"{self.src_dir}")
+        await self.tmp_dir.mkdir(exist_ok=True, parents=True)
+        # await self.src_dir.mkdir(exist_ok=True, parents=True)
 
-            site_assets_dir = Path('assets', '0_hugo_src')
+        site_assets_dir = Path('assets', 'hugo_tpl')
 
-            logger.info(f"cptree -> {site_assets_dir} - {self.src_dir}")
+        logger.info(f"cptree -> {site_assets_dir} - {self.src_dir}")
 
-            await rmtree(f"{self.src_dir}")
-            await cptree(f"{site_assets_dir}", f"{self.src_dir}")
+        # await rmtree(f"{self.src_dir}")
+        await cptree(f"{site_assets_dir}", f"{self.src_dir}")
 
-            await self.src_layouts_dir.mkdir(exist_ok=True, parents=True)
-            await self.src_layouts_partials_dir.mkdir(exist_ok=True, parents=True)
-            await self.src_layouts_partials_session_dir.mkdir(exist_ok=True, parents=True)
-            await self.src_layouts_partials_classification_dir.mkdir(exist_ok=True, parents=True)
-            await self.src_layouts_partials_author_dir.mkdir(exist_ok=True, parents=True)
-            await self.src_layouts_partials_institute_dir.mkdir(exist_ok=True, parents=True)
-            await self.src_layouts_partials_doi_per_institute_dir.mkdir(exist_ok=True, parents=True)
-            await self.src_layouts_partials_keyword_dir.mkdir(exist_ok=True, parents=True)
-            await self.src_layouts_partials_contributions_dir.mkdir(exist_ok=True, parents=True)
+        await self.src_layouts_dir.mkdir(exist_ok=True, parents=True)
+        await self.src_layouts_partials_dir.mkdir(exist_ok=True, parents=True)
+        await self.src_layouts_partials_session_dir.mkdir(exist_ok=True, parents=True)
+        await self.src_layouts_partials_classification_dir.mkdir(exist_ok=True, parents=True)
+        await self.src_layouts_partials_author_dir.mkdir(exist_ok=True, parents=True)
+        await self.src_layouts_partials_institute_dir.mkdir(exist_ok=True, parents=True)
+        await self.src_layouts_partials_doi_per_institute_dir.mkdir(exist_ok=True, parents=True)
+        await self.src_layouts_partials_keyword_dir.mkdir(exist_ok=True, parents=True)
+        await self.src_layouts_partials_contributions_dir.mkdir(exist_ok=True, parents=True)
 
-            await self.src_contributions_dir.mkdir(exist_ok=True, parents=True)
-            await self.src_session_dir.mkdir(exist_ok=True, parents=True)
-            await self.src_classification_dir.mkdir(exist_ok=True, parents=True)
-            await self.src_author_dir.mkdir(exist_ok=True, parents=True)
-            await self.src_institute_dir.mkdir(exist_ok=True, parents=True)
-            await self.src_doi_per_institute_dir.mkdir(exist_ok=True, parents=True)
-            await self.src_keyword_dir.mkdir(exist_ok=True, parents=True)
-            await self.src_doi_dir.mkdir(exist_ok=True, parents=True)
-            await self.src_ref_dir.mkdir(exist_ok=True, parents=True)
+        await self.src_contributions_dir.mkdir(exist_ok=True, parents=True)
+        await self.src_session_dir.mkdir(exist_ok=True, parents=True)
+        await self.src_classification_dir.mkdir(exist_ok=True, parents=True)
+        await self.src_author_dir.mkdir(exist_ok=True, parents=True)
+        await self.src_institute_dir.mkdir(exist_ok=True, parents=True)
+        await self.src_doi_per_institute_dir.mkdir(exist_ok=True, parents=True)
+        await self.src_keyword_dir.mkdir(exist_ok=True, parents=True)
+        await self.src_doi_dir.mkdir(exist_ok=True, parents=True)
+        await self.src_ref_dir.mkdir(exist_ok=True, parents=True)
 
-            await self.out_dir.mkdir(exist_ok=True, parents=True)
+        await self.out_dir.mkdir(exist_ok=True, parents=True)
 
-            self.template = JinjaTemplateRenderer()
+        self.template = JinjaTemplateRenderer()
 
-            await Path(self.src_dir, 'config.toml').write_text(
-                await self.template.render_config_toml(self.event, self.attachments, self.settings)
-            )
-        except BaseException as e:
-            logger.error("hugo:prepare", e, exc_info=True)
+        await Path(self.src_dir, 'config.toml').write_text(
+            await self.template.render_config_toml(self.event, self.attachments, self.settings)
+        )
 
     async def render_home(self) -> None:
         await Path(self.src_dir, 'layouts', 'index.html').write_text(
@@ -199,7 +177,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
                 if contribution.code:
                     await Path(base_path, f"{code}.html").write_text(
-                        await self.template.render_contribution_partial(contribution)
+                        await self.template.render_contribution_partial(contribution, self.config.include_event_slides)
                     )
 
                 if contribution.code and contribution.is_included_in_proceedings and contribution.doi_data:
@@ -651,7 +629,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
             async with capacity_limiter:
 
                 # logger.info(f"{code} - {doi_contribution.title}")
-                               
+
                 await Path(self.src_doi_dir, f"{doi_contribution.doi_path}.html").write_text(
                     await self.template.render_doi_contribution(doi_contribution)
                 )
@@ -684,7 +662,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                 if contribution.reference:
                     reference_dict = contribution.reference.as_dict()
                     for reference_type in reference_dict:
-                        tg.start_soon(_render_reference_contribution, 
+                        tg.start_soon(_render_reference_contribution,
                                       capacity_limiter, contribution.code,
                                       contribution.title, reference_type,
                                       reference_dict.get(reference_type))
@@ -708,10 +686,10 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
             ssg_cmd = await self.ssg_cmd()
 
             # "--templateMetrics",
-            ssg_args = [f"{ssg_cmd}", 
+            ssg_args = [f"{ssg_cmd}",
                         "--source", f"{self.src_dir}",
                         "--destination", "out"]
-            
+
             logger.info(ssg_args)
 
             result = await run_process(ssg_args)
@@ -723,96 +701,3 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
         except BaseException as e:
             logger.error("hugo:generate", e, exc_info=True)
-
-    async def compress(self) -> None:
-        """ """
-
-        logger.info('event_final_proceedings - plugin.compress')
-
-        zip_cmd = await self.zip_cmd()
-        
-        out_dir_path = str(self.out_dir)
-        zip_file = Path(self.src_dir, "out.7z")
-        zip_file_path = str(zip_file)
-        
-        # tar --use-compress-program="pigz -k --fast" -cf out.tar.gz out
-        
-        # zip_args = ["tar", "--use-compress-program=\"pigz -k --fast\"", "-cf",
-        #             f"{zip_file_path}", f"{out_dir_path}"]
-        
-        # zip_args = ["tar", "-czf", f"{zip_file_path}", f"{out_dir_path}"]
-
-        # 7z a /tmp/12/12.7z /tmp/12/out -m0=LZMA2:d=64k -mmt=4
-
-        # "7z.exe" a -t7z -m0=LZMA2:d64k:fb32 -ms=8m -mmt=30 -mx=1 -- "F:\BACKUP" "D:\Source"
-        
-
-        
-        ######### OK 7Z LZ4
-        # zip_args = [f"bin/p7zip/7z", "a", "-m0=lz4", 
-        #             "-mx=1", "-mmt=4", "-bd", "--", 
-        #             f"{zip_file_path}", f"{out_dir_path}"]
-        
-        # bin/p7zip/7z a -m0=lz4 -mx=1 -mmt=4 -bd -- out.7z var/run/21_hugo_src/out
-        
-        """ LZMA2 """
-        
-        # -t7z sets the archive type to 7-Zip.
-        # -m0=LZMA2:d64k:fb32 defines the usage of LZMA2 compression method with a dictionary size of 64 KB and a word size (fast bytes) of 32.
-        # -ms=8m enables solid mode with a solid block size of 8 MB.
-        # -mmt=30 enables multi-threading mode with up to 30 threads.
-        # -mx=1 selects fastest compressing as level of compression.
-        
-        # zip_args = [f"{zip_cmd}", "a",
-        #             "-t7z", "-m0=LZMA2:d64k:fb32",
-        #             "-ms=16m", "-mmt=4", "-mx=1", "--",
-        #             f"{zip_file_path}", f"{out_dir_path}"]        
-        
-        """ Deflate"""
-        
-        # ./bin/7zzs a -t7z -m0=deflate -mx=1 -mmt=4 var/html/fel2022.7z var/html/fel2022
-        
-        zip_args = [f"{zip_cmd}", "a",
-            "-t7z", "-m0=Deflate",
-            "-ms=16m", "-mmt=4", "-mx=1", "--",
-            f"{zip_file_path}", f"{out_dir_path}"]
-        
-        """ LZMA """
-        
-        # 7z a -t7z -m0=lzma -mx=1 -mfb=64 -md=32m -ms=on
-        
-        #zip_args = [f"{zip_cmd}", "a",
-        #    "-t7z", "-m0=LZMA", "-mx=1", "-ms=on",
-        #    "-mfb=64", "-md=32m", "-mmt=2",  "--",
-        #    f"{zip_file_path}", f"{out_dir_path}"]
-        
-        """ """
-        
-        logger.info(zip_args)
-
-        result = await run_process(zip_args)
-        
-        logger.info(result.stdout.decode())
-        logger.info(result.stderr.decode())
-
-        if result.returncode == 0:
-            logger.info(result.stdout.decode())
-        else:
-            logger.info(result.stderr.decode())
-
-        # logger.debug(result.stdout.decode())
-
-        # zip = await self.get_zip(zip_file_path)
-
-        # await zip_file.unlink(True)
-
-        # return zip
-
-    async def clean(self) -> None:
-        """ """
-
-        # TODO: to implement
-
-        await self.src_dir.mkdir(parents=True, exist_ok=True)
-
-        logger.debug(f"temporary directory {await self.src_dir.absolute()}")

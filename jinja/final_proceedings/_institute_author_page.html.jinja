@@ -7,5 +7,5 @@ title = """[{{contributions|length}}]"""
 {% import 'contribution_detail.html.jinja' as contribution_detail %}
 
 {% for contribution in contributions %}
-{{ contribution_detail.render(contribution) }}
+{{ contribution_detail.render(contribution, include_event_slides) }}
 {% endfor %}

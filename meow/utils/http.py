@@ -8,6 +8,7 @@ import aiohttp
 from anyio import open_file, Path
 
 from meow.app.config import conf
+from meow.models.local.common.auth import BasicAuthData
 from meow.utils.serialization import json_encode
 
 logger = logging.getLogger(__name__)
@@ -53,22 +54,30 @@ async def fetch_chunks(url: str, headers: dict = {}, cookies: dict = {}) -> Asyn
             HttpClientSessions.add_client_session(client)
 
             async with client.get(url) as resp:
-                assert resp.status == 200
-                async for chunk in resp.content.iter_chunked(16 * 1024):
-                    yield chunk
+                if resp.ok:
+                    async for chunk in resp.content.iter_chunked(16 * 1024):
+                        yield chunk
+                else:
+                    raise BaseException(
+                        f"invalid response status {resp.status}")
         finally:
             HttpClientSessions.del_client_session(client)
 
 
-async def fetch_json(url: str, headers: dict = {}, cookies: dict = {}) -> Any:
+async def fetch_json(url: str, headers: dict = {}, cookies: dict = {}, auth: BasicAuthData | None = None) -> Any:
     """ Fetch json function """
 
     def json_serialize(val):
         return str(json_encode(val), 'utf-8')
 
+    basic_auth = aiohttp.BasicAuth(
+        auth.login, auth.password) \
+        if auth else None
+
     async with aiohttp.ClientSession(
             headers=headers,
             cookies=cookies,
+            auth=basic_auth,
             json_serialize=json_serialize,
             timeout=aiohttp.ClientTimeout(
                 total=conf.HTTP_REQUEST_TIMEOUT_SECONDS
@@ -77,21 +86,32 @@ async def fetch_json(url: str, headers: dict = {}, cookies: dict = {}) -> Any:
         try:
             HttpClientSessions.add_client_session(client)
             async with client.get(url) as resp:
-                assert resp.status == 200
-                return await resp.json()
+                try:
+                    if resp.ok:
+                        return await resp.json()
+                    raise BaseException(
+                        f"invalid response status {resp.status}")
+                except BaseException as ex:
+                    logger.error(ex, exc_info=True)
+                    raise ex
         finally:
             HttpClientSessions.del_client_session(client)
-            
 
-async def send_json(url: str, body: dict, headers: dict = {}, cookies: dict = {}) -> Any:
-    """ Send json function """
+
+async def delete_json(url: str, headers: dict = {}, cookies: dict = {}, auth: BasicAuthData | None = None) -> Any:
+    """ Delete json function """
 
     def json_serialize(val):
         return str(json_encode(val), 'utf-8')
 
+    basic_auth = aiohttp.BasicAuth(
+        auth.login, auth.password) \
+        if auth else None
+
     async with aiohttp.ClientSession(
             headers=headers,
             cookies=cookies,
+            auth=basic_auth,
             json_serialize=json_serialize,
             timeout=aiohttp.ClientTimeout(
                 total=conf.HTTP_REQUEST_TIMEOUT_SECONDS
@@ -99,9 +119,57 @@ async def send_json(url: str, body: dict, headers: dict = {}, cookies: dict = {}
     ) as client:
         try:
             HttpClientSessions.add_client_session(client)
-            async with client.get(url) as resp:
-                assert resp.status == 200
-                return await resp.json()
+            async with client.delete(url) as resp:
+                try:
+                    if resp.ok:
+                        return
+                    raise BaseException(
+                        f"invalid response status {resp.status}")
+                except BaseException as ex:
+                    logger.error(ex, exc_info=True)
+                    raise ex
+        finally:
+            HttpClientSessions.del_client_session(client)
+
+
+async def put_json(url: str, body: Any, headers: dict = {}, cookies: dict = {}, auth: BasicAuthData | None = None) -> Any:
+    """ Send HTTP PUT json function """
+
+    def json_serialize(val):
+        return str(json_encode(val), 'utf-8')
+
+    basic_auth = aiohttp.BasicAuth(
+        auth.login, auth.password) \
+        if auth else None
+
+    async with aiohttp.ClientSession(
+            headers=headers,
+            cookies=cookies,
+            auth=basic_auth,
+            json_serialize=json_serialize,
+            timeout=aiohttp.ClientTimeout(
+                total=conf.HTTP_REQUEST_TIMEOUT_SECONDS
+            )
+    ) as client:
+        try:
+            HttpClientSessions.add_client_session(client)
+            async with client.put(url, data=body) as resp:
+                try:
+                    body: str = ''
+                    if resp.ok:
+                        return await resp.json()
+                    try:
+                        body = await resp.text()
+                    except BaseException:
+                        logger.error(ex, exc_info=True)
+                    raise BaseException(f"invalid response status" +
+                                        f" {resp.status} - {body}")
+                except BaseException as ex:
+                    logger.error(ex, exc_info=True)
+                    raise ex
+        except BaseException as ex:
+            logger.error(ex, exc_info=True)
+            raise ex
         finally:
             HttpClientSessions.del_client_session(client)
 

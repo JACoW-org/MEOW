@@ -1,7 +1,6 @@
 
 import logging as lg
 from anyio import Path
-from meow.services.local.papers_metadata.pdf_annotations import annot_page_footer, annot_page_header, annot_page_side
 
 from meow.utils.hash import file_md5
 from meow.utils.process import run_cmd

@@ -33,7 +33,7 @@ async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict
 
     # logger.info(f'write_papers_metadata - files: {total_files}')
 
-    dir_name = f"{proceedings_data.event.id}_pdf"
+    dir_name = f"{proceedings_data.event.id}_tmp"
     file_cache_dir: Path = Path('var', 'run', dir_name)
     await file_cache_dir.mkdir(exist_ok=True, parents=True)
 

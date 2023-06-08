@@ -140,7 +140,10 @@ class ContributionDOI:
 
         attributes['dates'] = [dict(
             date=self.reception_date,
-            dateType='Created'
+            dateType='Submitted'
+        ), dict(
+            date=self.revisitation_date,
+            dateType='Valid'
         ), dict(
             date=self.acceptance_date,
             dateType='Accepted'
@@ -167,7 +170,8 @@ class ContributionDOI:
         )]
 
         attributes['sizes'] = [
-            self.pages
+            f"{self.pages} pages",
+            f"{self.file_size} {self.file_size_unit}",
         ]
 
         attributes['formats'] = ['PDF']
@@ -178,13 +182,13 @@ class ContributionDOI:
             lang='en-us'
         )]
 
-        # descriptions
         attributes['descriptions'] = [dict(
             description=self.abstract,
             descriptionType='Abstract',
             lang='en-us'
         )]
 
+        # TODO: da aggiungere
         attributes['landingPage'] = dict()
 
         attributes['url'] = 'https://schema.datacite.org/meta/kernel-4.0/index.html'

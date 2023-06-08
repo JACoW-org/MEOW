@@ -1,18 +1,15 @@
 import logging as lg
-
-
 from typing import AsyncGenerator
 
-from meow.services.local.event.event_final_proceedings import event_final_proceedings
-
+from meow.services.local.event.event_doi_delete import event_doi_delete
 from meow.tasks.infra.abstract_task import AbstractTask
 
 
 logger = lg.getLogger(__name__)
 
 
-class EventFinalProceedingsTask(AbstractTask):
-    """EventFinalProceedingsTask"""
+class EventDoiDeleteTask(AbstractTask):
+    """EventDoiDeleteTask"""
 
     async def run(self, params: dict, context: dict = {}) -> AsyncGenerator[dict, None]:
         event: dict = params.get("event", dict())
@@ -23,6 +20,6 @@ class EventFinalProceedingsTask(AbstractTask):
         cookies["indico_session_http"] = indico_session
         cookies["indico_session"] = indico_session
 
-        async for r in event_final_proceedings(event, cookies, settings):
+        async for r in event_doi_delete(event, cookies, settings):
             self.assert_is_running()
             yield r

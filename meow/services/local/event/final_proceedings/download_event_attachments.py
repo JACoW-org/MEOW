@@ -4,9 +4,7 @@ from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
 
-from meow.models.local.event.final_proceedings.contribution_model import FileData
 from meow.models.local.event.final_proceedings.event_model import AttachmentData
-from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_proceedings_papers
 
 from meow.utils.http import download_file
 from meow.services.local.event.event_pdf_utils import is_to_download
@@ -28,7 +26,7 @@ async def download_event_attachments(proceedings_data: ProceedingsData, cookies:
 
     # logger.debug(f'download_event_attachments - files: {total_files}')
 
-    dir_name = f"{proceedings_data.event.id}_pdf"
+    dir_name = f"{proceedings_data.event.id}_tmp"
     file_cache_dir: Path = Path('var', 'run', dir_name)
     await file_cache_dir.mkdir(exist_ok=True, parents=True)
 

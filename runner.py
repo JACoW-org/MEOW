@@ -8,7 +8,7 @@ from anyio.streams.text import TextReceiveStream
 from anyio import create_task_group, run, CapacityLimiter
 from anyio import create_task_group, create_memory_object_stream, run
 
-INPUT = {"method": "report", "params": {"input": "var/run/18_pdf/MOBI3.pdf"}}
+INPUT = {"method": "report", "params": {"input": "var/run/18_tmp/MOBI3.pdf"}}
 
 
 def split_list(lst, chunk_size):

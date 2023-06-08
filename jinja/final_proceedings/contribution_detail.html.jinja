@@ -1,6 +1,6 @@
 {% import 'authors_template.html.jinja' as authors_template %}
 
-{% macro render(contribution) -%}
+{% macro render(contribution, include_event_slides) -%}
 
 <div id="{{ contribution.code|lower }}" class="contrib-ancor"></div>
 
@@ -48,7 +48,7 @@
 </div>
 {% endif %}
 
-{% if contribution.has_slides: %}
+{% if include_event_slides and contribution.has_slides: %}
 <div class="contrib-slides">
     <b>Slides:</b>
     <span>&nbsp;</span>

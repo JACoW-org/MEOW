@@ -28,13 +28,13 @@ async def copy_event_attachments(
     # if total_files == 0:
     #     raise Exception('no file extracted')
 
-    file_cache_name = f"{proceedings_data.event.id}_pdf"
+    file_cache_name = f"{proceedings_data.event.id}_tmp"
     file_cache_dir: Path = Path("var", "run", file_cache_name)
     await file_cache_dir.mkdir(exist_ok=True, parents=True)
 
     logger.info(f"{file_cache_dir} created!")
 
-    pdf_dest_name = f"{proceedings_data.event.id}_hugo_src"
+    pdf_dest_name = f"{proceedings_data.event.id}_src"
     pdf_dest_dir: Path = Path("var", "run", pdf_dest_name, "static", "pdf")
     await pdf_dest_dir.mkdir(exist_ok=True, parents=True)
 

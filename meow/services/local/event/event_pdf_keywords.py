@@ -4,17 +4,13 @@ from typing import AsyncGenerator
 
 from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError
-
 from anyio.streams.memory import MemoryObjectSendStream
 
 from meow.services.local.event.event_pdf_utils import is_to_download, pdf_to_text
-
 from meow.services.local.papers_metadata.pdf_keywords import stem_keywords_as_tree
-
 from meow.utils.http import download_file
 
 from nltk.stem.snowball import SnowballStemmer
-
 from meow.utils import keywords
 
 
@@ -33,7 +29,7 @@ async def event_pdf_keywords(event: dict, cookies: dict, settings: dict) -> Asyn
 
     event_id = event.get('id', 'event')
 
-    pdf_cache_dir: Path = Path('var', 'run', f"{event_id}_pdf")
+    pdf_cache_dir: Path = Path('var', 'run', f"{event_id}_tmp")
     await pdf_cache_dir.mkdir(exist_ok=True, parents=True)
 
     # files: list[ContributionPaperData] = await extract_contributions_papers(proceedings_data)

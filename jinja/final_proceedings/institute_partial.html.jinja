@@ -31,26 +31,3 @@
   {% endfor %}
 </ul>
 {% endfor %}
-
-{# <ul class="institutes">
-  {% for institute in institutes %}
-  {% if institute.id %}
-  <li class="institute">
-    <b>{{ institute.name|e }}</b>
-
-    <ul class="authors">
-      {% if institute.name in authorsGroups %}
-      {% for author in authorsGroups[institute.name] %}
-      <li class="author">
-        <a onclick="openUrl(`institute/{{ author.code|lower }}/index.html`)" href="javascript:void(0);">
-          <b>{{ author.short }}</b>
-        </a>
-      </li>
-      {% endfor %}
-      {% endif %}
-    </ul>
-
-  </li>
-  {% endif %}
-  {% endfor %}
-</ul> #}
