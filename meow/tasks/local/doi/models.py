@@ -171,7 +171,7 @@ class ContributionDOI:
 
         attributes['sizes'] = [
             f"{self.pages} pages",
-            f"{self.file_size} {self.file_size_unit}",
+            # f"{self.file_size} {self.file_size_unit}",
         ]
 
         attributes['formats'] = ['PDF']

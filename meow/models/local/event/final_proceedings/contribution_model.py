@@ -273,7 +273,9 @@ class ContributionData:
     @property
     def authors_groups(self) -> list[AuthorsGroup]:
         authors_groups: list[AuthorsGroup] = list()
-        for author in self.primary_authors:
+
+        for author in self.authors_list:
+            
             is_new_author = True
             for group in authors_groups:
                 if author.affiliation == group.affiliation:
@@ -285,6 +287,7 @@ class ContributionData:
                     affiliation=author.affiliation,
                     authors=[author.short]
                 ))
+        
         return authors_groups
 
     @property
@@ -318,7 +321,7 @@ class ContributionData:
     @property
     def cat_publish(self) -> bool:
         field_value: str = ''
-        
+
         for field in self.field_values:
             if field.name == 'CAT_publish' and field.value is not None:
                 field_value = field.value.lower()

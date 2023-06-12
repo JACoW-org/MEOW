@@ -27,7 +27,7 @@ def contribution_editable_factory(editable: Any) -> EditableData | None:
     ]
 
     # all_revisions.sort(key=sort_revision_list_by_date)
-    
+
     all_revisions.sort(key=lambda x: (
         format_datetime_sec(x.creation_date),
         x.id
@@ -222,6 +222,16 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
 
     """ """
 
+    authors = [
+        event_person_factory(person)
+        for person in (
+            contribution.get('primary_authors', []) +
+            contribution.get('coauthors', [])
+        )
+    ]
+
+    """ """
+
     # received: paper uploded ($revision['created_dt'])
     # revised: paper edited ($revision['final_state']['name'] == "accepted")
     # accepted: qa ok
@@ -239,10 +249,7 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
             contribution.get('track')
         ),
         keywords=list(set([])),
-        authors=list(set([
-            event_person_factory(person)
-            for person in contribution.get('primary_authors', [])
-        ])),
+        authors=list(set(authors)),
         institutes=list(set([
             event_affiliation_factory(institute)
             for institute in contribution.get('institutes', [])
