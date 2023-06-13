@@ -119,7 +119,6 @@ class EventData:
     isbn: str
     issn: str
     doi: str
-    href: str
     color: str
     
     series: str

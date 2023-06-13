@@ -36,7 +36,6 @@ def attachment_data_factory(attachment: Any) -> AttachmentData:
 def event_data_factory(event: Any, settings: dict) -> EventData:
     event_id = event.get("id", "")
 
-    site_base_url = settings.get("site_base_url", "")
     primary_color = settings.get("primary_color", "")
 
     title_short = settings.get("booktitle_short", "")
@@ -58,7 +57,6 @@ def event_data_factory(event: Any, settings: dict) -> EventData:
 
     event_data = EventData(
         id=event_id,
-        href=site_base_url,
         color=primary_color,
         name=title_short,
         title=title_long,
