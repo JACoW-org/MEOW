@@ -151,18 +151,18 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
 
         if paper_data.state == EditableData.EditableState.accepted:
             is_included_in_prepress = True
-            
+
             for r in paper_data.all_revisions:
                 if r.is_qa_approved:
                     is_included_in_proceedings = True
                     break
-            
+
             is_included_in_pdf_check = True
         elif paper_data.state == EditableData.EditableState.needs_submitter_confirmation:
             is_included_in_pdf_check = True
 
     else:
-        
+
         revisions: list[RevisionData] = []
 
         if paper_data and paper_data.all_revisions:
@@ -178,7 +178,7 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
             if r.is_green:
                 is_included_in_prepress = True
                 is_included_in_proceedings = r.is_qa_approved
-                
+
                 is_included_in_pdf_check = True
                 break
 
@@ -186,11 +186,11 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
                 is_included_in_pdf_check = True
                 break
 
-    logger.warning(f"code: {contribution.get('code')}")
-    logger.warning(f"is_included_in_prepress: {is_included_in_prepress}")
-    logger.warning(f"is_included_in_proceedings: {is_included_in_proceedings}")
-    logger.warning(f"is_included_in_pdf_check: {is_included_in_pdf_check}")
-    
+    # logger.warning(f"code: {contribution.get('code')}")
+    # logger.warning(f"is_included_in_prepress: {is_included_in_prepress}")
+    # logger.warning(f"is_included_in_proceedings: {is_included_in_proceedings}")
+    # logger.warning(f"is_included_in_pdf_check: {is_included_in_pdf_check}")
+
     #
     #
     # if is_included_in_proceedings != editable_is_included_in_proceedings:
@@ -244,6 +244,26 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
 
     """ """
 
+    # {
+    #     "last_revision": {
+    #       "judgment_comment": ""
+    #     },
+    #     "state": 2,
+    #     "title": "Upgrades on ultra-fast pulse generator for impact ionization",
+    #     "verbose_title": "#551 (Upgrades on ultra-fast pulse generator for impact ionization)"
+    # }
+
+    paper = contribution.get('paper', None)
+    state = paper.get('state', 0) \
+        if paper else None
+    peer_reviewing_accepted = state == 2 \
+        if state else False
+        
+    # logger.warning(f"code: {contribution.get('code')}")
+    # logger.warning(f"peer_reviewing_accepted: {peer_reviewing_accepted}")
+
+    """ """
+
     # received: paper uploded ($revision['created_dt'])
     # revised: paper edited ($revision['final_state']['name'] == "accepted")
     # accepted: qa ok
@@ -281,6 +301,7 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
         is_included_in_proceedings=is_included_in_proceedings,
         is_included_in_prepress=is_included_in_prepress,
         is_included_in_pdf_check=is_included_in_pdf_check,
+        peer_reviewing_accepted=peer_reviewing_accepted,
         paper=paper_data,
         slides=slides_data,
         poster=poster_data,

@@ -233,6 +233,8 @@ class ContributionData:
     is_included_in_pdf_check: bool = field(default=False)
     is_included_in_proceedings: bool = field(default=False)
     is_included_in_prepress: bool = field(default=False)
+    
+    peer_reviewing_accepted: bool = field(default=False)
 
     reception: datetime | None = field(default=None)
     revisitation: datetime | None = field(default=None)
