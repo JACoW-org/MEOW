@@ -140,36 +140,45 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
 
     # logger.info(paper_data.all_revisions if paper_data else [])
 
-    revisions: list[RevisionData] = []
-
-    if paper_data and paper_data.all_revisions:
-        for r in paper_data.all_revisions:
-            revisions.append(r)
-
-    revisions.reverse()
-
     # if len(revisions) == 0:
     #     logger.error(f"code: {contribution.get('code')}")
 
     is_included_in_proceedings: bool = False
+    is_included_in_prepress: bool = False
     is_included_in_pdf_check: bool = False
 
     if paper_data and paper_data.state:
 
         if paper_data.state == EditableData.EditableState.accepted:
-            is_included_in_proceedings = True
+            is_included_in_prepress = True
+            
+            for r in paper_data.all_revisions:
+                if r.is_qa_approved:
+                    is_included_in_proceedings = True
+                    break
+            
             is_included_in_pdf_check = True
         elif paper_data.state == EditableData.EditableState.needs_submitter_confirmation:
             is_included_in_pdf_check = True
 
     else:
+        
+        revisions: list[RevisionData] = []
+
+        if paper_data and paper_data.all_revisions:
+            for r in paper_data.all_revisions:
+                revisions.append(r)
+
+        revisions.reverse()
 
         for r in revisions:
             if r.is_black or r.is_red:
                 break
 
             if r.is_green:
-                is_included_in_proceedings = True
+                is_included_in_prepress = True
+                is_included_in_proceedings = r.is_qa_approved
+                
                 is_included_in_pdf_check = True
                 break
 
@@ -177,8 +186,11 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
                 is_included_in_pdf_check = True
                 break
 
-    # logger.debug(f"code: {contribution.get('code')}")
-    # logger.debug(f"in_proceedings: {is_included_in_proceedings} {editable_is_included_in_proceedings}")
+    logger.warning(f"code: {contribution.get('code')}")
+    logger.warning(f"is_included_in_prepress: {is_included_in_prepress}")
+    logger.warning(f"is_included_in_proceedings: {is_included_in_proceedings}")
+    logger.warning(f"is_included_in_pdf_check: {is_included_in_pdf_check}")
+    
     #
     #
     # if is_included_in_proceedings != editable_is_included_in_proceedings:
@@ -267,6 +279,7 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
             contribution.get('end_dt')
         ),
         is_included_in_proceedings=is_included_in_proceedings,
+        is_included_in_prepress=is_included_in_prepress,
         is_included_in_pdf_check=is_included_in_pdf_check,
         paper=paper_data,
         slides=slides_data,

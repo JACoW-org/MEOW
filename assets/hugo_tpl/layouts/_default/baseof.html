@@ -17,13 +17,7 @@
 
     <style type="text/css">
         body {
-            --primary-color: {
-                    {
-                    .Site.Params.color
-                }
-            }
-
-            ;
+            --primary-color: {{.Site.Params.color }};
         }
 
         .body {
@@ -54,7 +48,7 @@
 
         function openUrl(part) {
             try {
-                window.location = `${getPrefix()}/${part}`;
+                window.location = `${part}`.startsWith('http') ? `${part}` : `${getPrefix()}/${part}`;
             } catch (err) {
                 console.error(err)
             }

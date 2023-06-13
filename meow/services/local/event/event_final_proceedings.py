@@ -96,14 +96,18 @@ async def extend_lock(lock: RedisLock) -> RedisLock:
     return lock
 
 
-def callback(c: ContributionData) -> bool:
-    return c.is_included_in_proceedings
-
 
 async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, config: FinalProceedingsConfig, lock: RedisLock) -> AsyncGenerator:
     """ """
 
     logger.info('event_final_proceedings - create_final_proceedings')
+    
+    """ """
+    
+    def filter_contributions_pubblicated(c: ContributionData) -> bool:
+        if config.include_only_qa_green_contributions: 
+            return c.is_included_in_proceedings
+        return c.is_included_in_prepress
 
     """ """
 
@@ -113,6 +117,8 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, c
         phase='collecting_sessions_and_attachments',
         text="Collecting sessions and attachments"
     ))
+    
+    ## Bloccante
 
     [sessions, attachments] = await collecting_sessions_and_attachments(event, cookies, settings)
 
@@ -124,6 +130,8 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, c
         phase='collecting_contributions_and_files',
         text="Collecting contributions and files"
     ))
+    
+    ## Bloccante
 
     [contributions] = await collecting_contributions_and_files(event, sessions, cookies, settings)
 
@@ -135,20 +143,40 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, c
         phase='adapting_final_proceedings',
         text="Adapting final proceedings"
     ))
+    
+    ## Bloccante
 
     final_proceedings = await adapting_final_proceedings(event, sessions, contributions, attachments, cookies, settings)
 
     """ """
+    
+    try:
 
-    await extend_lock(lock)
+        await extend_lock(lock)
 
-    yield dict(type='progress', value=dict(
-        phase='download_event_attachments',
-        text="Download event attachments"
-    ))
+        yield dict(type='progress', value=dict(
+            phase='download_event_attachments',
+            text="Download event attachments"
+        ))
+        
+        ## Bloccante
 
-    await download_event_attachments(final_proceedings, cookies, settings)
-
+        await download_event_attachments(final_proceedings, cookies, settings)
+    
+    except Exception as ex:
+        logger.error(ex, exc_info=True)
+        
+        ## Produzione logs
+        
+        ## Produzione result
+        yield dict(type='result', value=dict(
+            # metadata=metadata,
+            # errors=errors
+        ))
+        
+        ## Se l'errore è bloccante
+        return
+        
     """ """
 
     await extend_lock(lock)
@@ -157,8 +185,11 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, c
         phase='download_contributions_papers',
         text="Download Contributions Papers"
     ))
+    
+    ## Bloccante
 
-    await download_contributions_papers(final_proceedings, cookies, settings, callback)
+    # [papers] = 
+    await download_contributions_papers(final_proceedings, cookies, settings, filter_contributions_pubblicated)
 
     """ """
 
@@ -170,6 +201,8 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, c
             phase='download_contributions_slides',
             text="Download Contributions Slides"
         ))
+        
+        ## Bloccante
 
         await download_contributions_slides(final_proceedings, cookies, settings)
 
@@ -181,8 +214,10 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, c
         phase='read_papers_metadata',
         text='Read Papers Metadata'
     ))
+    
+    ## Bloccante
 
-    await read_papers_metadata(final_proceedings, cookies, settings, callback)
+    await read_papers_metadata(final_proceedings, cookies, settings, filter_contributions_pubblicated)
 
     """ """
 
@@ -192,21 +227,30 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, c
         phase='validate_contributions_papers',
         text='Validate Contributions Papers'
     ))
+    
+    ## Bloccante il processo di validazione
+    ## Mentre il risultato della validazione 
+    ## è bloccante se strict_pdf_check
 
-    [metadata, errors] = await validate_proceedings_data(final_proceedings, cookies, settings, callback)
+    [metadata, errors] = await validate_proceedings_data(final_proceedings, cookies, settings, filter_contributions_pubblicated)
+    
+    # if len(errors) > 0:
+        
+    
+    if config.strict_pdf_check and len(errors) > 0:
+        
+        yield dict(type='result', value=dict(
+            # metadata=metadata,
+            # errors=errors
+        ))
+
+        return
+        
 
     yield dict(type='result', value=dict(
-        metadata=metadata,
-        errors=errors
+        # metadata=metadata,
+        # errors=errors
     ))
-
-    # if len(errors) > 0:
-    #     yield dict(type='result', value=dict(
-    #         metadata=metadata,
-    #         errors=errors
-    #     ))
-    #
-    #     return
 
     """ """
 
@@ -216,8 +260,10 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, c
         phase='extract_contribution_references',
         text='Extract Contribution References'
     ))
+    
+    ## Bloccante
 
-    await generate_contribution_references(final_proceedings, cookies, settings)
+    await generate_contribution_references(final_proceedings, cookies, settings, config)
 
     """ """
 
@@ -227,18 +273,26 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, c
         phase='generate_contribution_doi',
         text='Generate Contribution DOI'
     ))
+    
+    ## Bloccante
 
-    await generate_contribution_doi(final_proceedings, cookies, settings)
+    await generate_contribution_doi(final_proceedings, cookies, settings, config)
+    
+    """ """
+    
+    if config.generate_doi_payload:
 
-    # generation of payloads for DOIs
-    await extend_lock(lock)
+        await extend_lock(lock)
 
-    yield dict(type='progress', value=dict(
-        phase='generate_doi_payloads',
-        text='Generate DOI payloads'
-    ))
+        yield dict(type='progress', value=dict(
+            phase='generate_doi_payloads',
+            text='Generate DOI payloads'
+        ))
+        
+        ## Bloccante
 
-    await build_doi_payloads(final_proceedings)
+        # generation of payloads for DOIs
+        await build_doi_payloads(final_proceedings)
 
     """ """
 
@@ -248,6 +302,8 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, c
         phase='manage_duplicates',
         text='Managing duplicates'
     ))
+    
+    ## Bloccante
 
     await manage_duplicates(final_proceedings)
 
@@ -260,7 +316,9 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, c
         text='Write Papers Metadata'
     ))
 
-    await write_papers_metadata(final_proceedings, cookies, settings, callback)
+    ## Bloccante
+    
+    await write_papers_metadata(final_proceedings, cookies, settings, filter_contributions_pubblicated)
 
     """ """
 
@@ -282,7 +340,7 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, c
         text='Concat Contributions Papers'
     ))
 
-    await concat_contribution_papers(final_proceedings, cookies, settings, callback)
+    await concat_contribution_papers(final_proceedings, cookies, settings, filter_contributions_pubblicated)
 
     """ """
 
@@ -310,7 +368,7 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, c
     ))
 
     await copy_event_attachments(final_proceedings, cookies, settings)
-    await copy_contribution_papers(final_proceedings, cookies, settings, callback)
+    await copy_contribution_papers(final_proceedings, cookies, settings, filter_contributions_pubblicated)
 
     if config.include_event_slides:
         await copy_contribution_slides(final_proceedings, cookies, settings)

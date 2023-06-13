@@ -80,8 +80,8 @@ async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict
 
 
 async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int,
-                              current_paper: ContributionPaperData, sessions: dict[str, SessionData], current_dt_pdf: datetime, cc_logo: bytes,
-                              cookies: dict, pdf_cache_dir: Path,
+                              current_paper: ContributionPaperData, sessions: dict[str, SessionData],
+                              current_dt_pdf: datetime, cc_logo: bytes, cookies: dict, pdf_cache_dir: Path,
                               res: MemoryObjectSendStream) -> None:
     """ """
 

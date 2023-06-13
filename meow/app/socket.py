@@ -4,6 +4,7 @@ import logging
 from typing import Optional
 
 from redis.asyncio.client import PubSub
+from redis.exceptions import ConnectionError
 
 from anyio import create_task_group, move_on_after, sleep
 
@@ -17,11 +18,10 @@ logger = logging.getLogger(__name__)
 
 class WebSocketManager():
     """ """
-                         
-    async def run(self):   
-        await self.__task()     
-   
-    
+
+    async def run(self):
+        await self.__task()
+
     async def __task(self):
         logger.debug(f"subscribe >>>")
 
@@ -40,25 +40,28 @@ class WebSocketManager():
 
             except CancelledError:
                 logger.info(f"subscribe: Cancelled")
+            except ConnectionError:
+                logger.info(f"subscribe: Disconnected")
             except BaseException:
                 logger.error("subscribe", exc_info=True)
             finally:
                 if pubsub is not None:
                     logger.debug('pubsub.close()')
                     await pubsub.close()
-        
+
         except CancelledError:
             logger.info(f"subscribe: Cancelled")
+        except ConnectionError:
+            logger.info(f"subscribe: Disconnected")
         except BaseException:
             logger.error("subscribe", exc_info=True)
-          
-                      
+
     async def __reader(self, p: PubSub):
         while app.state.webapp_running:
             try:
                 async with create_task_group() as tg:
                     with move_on_after(2) as scope:
-                        
+
                         logger.debug(f'__read')
 
                         payload = await p.get_message(
@@ -70,38 +73,40 @@ class WebSocketManager():
 
                         if payload and payload['type'] == 'message':
                             data = str(payload['data'], 'UTF-8')
-                            # logger.debug(f"broadcast {data}")                               
+                            # logger.debug(f"broadcast {data}")
                             await self._send(data)
 
                         await sleep(0.01)
 
+            except ConnectionError:
+                logger.info(f"subscribe: Disconnected")
             except BaseException:
                 logger.error("__reader", exc_info=True)
-           
 
     async def _send(self, message: str):
         try:
-            
+
             if message:
-            
+
                 payload: dict = json_decode(message)
-                
-                head: dict | None = payload.get('head', None) if payload else None
+
+                head: dict | None = payload.get(
+                    'head', None) if payload else None
                 uuid: str | None = head.get('uuid', None) if head else None
                 conn = app.active_connections.get(uuid, None) if uuid else None
-                
+
                 await conn.send_text(message) if conn else None
-                
+
                 # code: str | None = head.get('code', None) if head else None
-                
+
                 # phase:str = payload.get('body', {}).get('params', {}).get('phase', '') \
-                #     if payload and code else ''                
-                
-                # if conn is not None:                    
-                    # print(f"send_text {phase}")                    
+                #     if payload and code else ''
+
+                # if conn is not None:
+                # print(f"send_text {phase}")
                 # else:
                 #     logger.error(f"task_id: {uuid} have not a connection")
-                
+
         except BaseException as e:
             logger.error(message)
             logger.error("subscribe", e, exc_info=True)

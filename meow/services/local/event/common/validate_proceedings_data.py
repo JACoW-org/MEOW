@@ -24,8 +24,8 @@ async def validate_proceedings_data(proceedings_data: ProceedingsData, cookies: 
     total_count: list[str] = []
 
     included_in_proceedings: list[str] = []
+    included_in_prepress: list[str] = []
     included_in_check: list[str] = []
-    others: list[str] = []
 
     for contribution_data in proceedings_data.contributions:
 
@@ -39,11 +39,13 @@ async def validate_proceedings_data(proceedings_data: ProceedingsData, cookies: 
 
                 if contribution_data.is_included_in_proceedings:
                     included_in_proceedings.append(contribution_data.code)
-                elif contribution_data.is_included_in_pdf_check:
+                    
+                if contribution_data.is_included_in_prepress:
+                    included_in_prepress.append(contribution_data.code)
+                    
+                if contribution_data.is_included_in_pdf_check:
                     included_in_check.append(contribution_data.code)
-                else:
-                    others.append(contribution_data.code)
-
+                    
                 metadatas.append(metadata)
 
                 error: dict = {}
@@ -106,18 +108,9 @@ async def validate_proceedings_data(proceedings_data: ProceedingsData, cookies: 
     logger.info(f"####################")
     logger.info(f"total_count: {len(total_count)}")
     logger.info(f"included_in_proceedings: {len(included_in_proceedings)}")
+    logger.info(f"included_in_prepress: {len(included_in_prepress)}")
     logger.info(f"included_in_check: {len(included_in_check)}")
-    logger.info(f"others: {len(others)}")
     logger.info(f"####################")
     logger.info(f"")
-
-    # logger.debug(f"")
-    # logger.debug(f"####################")
-    # logger.debug(f"total_count: {total_count}")
-    # logger.debug(f"included_in_proceedings: {included_in_proceedings}")
-    # logger.debug(f"included_in_check: {included_in_check}")
-    # logger.debug(f"others: {others}")
-    # logger.debug(f"####################")
-    # logger.debug(f"")
 
     return [metadatas, errors]

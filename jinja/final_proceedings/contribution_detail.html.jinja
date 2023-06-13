@@ -69,8 +69,8 @@
     <div class="contrib-doi">
         <b>DOI:</b>
         <span>&nbsp;reference for this paper:&nbsp;</span>
-        <a onclick="openUrl(`doi/{{ contribution.doi_data.doi_path|lower }}/index.html`)" 
-            href="javascript:void(0);">{{ contribution.doi_data.doi_url }}</a>
+        <a onclick="openUrl(`{{ contribution.doi_data.doi_url }}`)" 
+            href="javascript:void(0);">{{ contribution.doi_data.doi_label }}</a>
     </div>
 
     <div class="contrib-dates">

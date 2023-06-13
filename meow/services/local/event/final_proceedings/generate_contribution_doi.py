@@ -2,14 +2,14 @@ import logging as lg
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
 from meow.models.local.event.final_proceedings.event_model import EventData
 
-from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
+from meow.models.local.event.final_proceedings.proceedings_data_model import FinalProceedingsConfig, ProceedingsData
 
 from anyio import create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
 
 from meow.tasks.local.doi.models import AuthorDOI, ContributionDOI
-from meow.tasks.local.doi.utils import generate_doi_identifier, generate_doi_path, generate_doi_url
+from meow.tasks.local.doi.utils import generate_doi_identifier, generate_doi_internal_url, generate_doi_path, generate_doi_external_url
 
 from meow.utils.datetime import format_datetime_full, format_datetime_range_doi, format_datetime_doi
 
@@ -17,7 +17,8 @@ from meow.utils.datetime import format_datetime_full, format_datetime_range_doi,
 logger = lg.getLogger(__name__)
 
 
-async def generate_contribution_doi(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
+async def generate_contribution_doi(proceedings_data: ProceedingsData, cookies: dict, settings: dict,
+                                    config: FinalProceedingsConfig) -> ProceedingsData:
     """ """
 
     logger.info('event_final_proceedings - generate_contribution_doi')
@@ -34,7 +35,7 @@ async def generate_contribution_doi(proceedings_data: ProceedingsData, cookies: 
         async with send_stream:
             for contribution_data in proceedings_data.contributions:
                 tg.start_soon(generate_doi_task, capacity_limiter, proceedings_data.event,
-                              contribution_data, settings, send_stream.clone())
+                              contribution_data, settings, config, send_stream.clone())
 
         try:
             async with receive_stream:
@@ -66,19 +67,34 @@ async def generate_contribution_doi(proceedings_data: ProceedingsData, cookies: 
 
 
 async def generate_doi_task(capacity_limiter: CapacityLimiter, event: EventData, contribution: ContributionData,
-                            settings: dict, res: MemoryObjectSendStream) -> None:
+                            settings: dict, config: FinalProceedingsConfig, res: MemoryObjectSendStream) -> None:
     """ """
 
     async with capacity_limiter:
         await res.send({
             "code": contribution.code,
-            "value": await build_contribution_doi(event, contribution, settings)
+            "value": await build_contribution_doi(
+                event, contribution, settings, config)
         })
 
 
-async def build_contribution_doi(event: EventData, contribution: ContributionData, settings: dict[str, str]):
+async def build_contribution_doi(event: EventData, contribution: ContributionData,
+                                 settings: dict[str, str], config: FinalProceedingsConfig):
 
-    doi_url: str = generate_doi_url(
+    doi_url: str = generate_doi_external_url(
+        protocol=settings.get('doi_protocol', 'https'),
+        domain=settings.get('doi_domain', 'doi.org'),
+        context=settings.get('doi_context', '10.18429'),
+        organization=settings.get('doi_organization', 'JACoW'),
+        conference=settings.get('doi_conference', 'CONF-YY'),
+        contribution=contribution.code
+    ) if config.generate_external_doi_url else generate_doi_internal_url(
+        organization=settings.get('doi_organization', 'JACoW'),
+        conference=settings.get('doi_conference', 'CONF-YY'),
+        contribution=contribution.code
+    )
+    
+    doi_label: str = generate_doi_external_url(
         protocol=settings.get('doi_protocol', 'https'),
         domain=settings.get('doi_domain', 'doi.org'),
         context=settings.get('doi_context', '10.18429'),
@@ -86,7 +102,7 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         conference=settings.get('doi_conference', 'CONF-YY'),
         contribution=contribution.code
     )
-    
+
     doi_path: str = generate_doi_path(
         organization=settings.get('doi_organization', 'JACoW'),
         conference=settings.get('doi_conference', 'CONF-YY'),
@@ -137,6 +153,7 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
             contribution.acceptance) if contribution.acceptance else '',
         issuance_date=format_datetime_doi(
             contribution.issuance) if contribution.issuance else '',
+        doi_label=doi_label,
         doi_url=doi_url,
         doi_path=doi_path,
         doi_identifier=doi_identifier,
@@ -163,4 +180,4 @@ def refill_contribution_doi(proceedings_data: ProceedingsData, results: dict) ->
             contribution_data.doi_data.start_page = start_page
             start_page = start_page + contribution_data.doi_data.num_of_pages
 
-    return proceedings_data      
+    return proceedings_data

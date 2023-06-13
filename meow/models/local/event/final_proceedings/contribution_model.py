@@ -232,6 +232,7 @@ class ContributionData:
 
     is_included_in_pdf_check: bool = field(default=False)
     is_included_in_proceedings: bool = field(default=False)
+    is_included_in_prepress: bool = field(default=False)
 
     reception: datetime | None = field(default=None)
     revisitation: datetime | None = field(default=None)
@@ -282,6 +283,7 @@ class ContributionData:
                     group.authors.append(author.short)
                     is_new_author = False
                     break
+                
             if is_new_author:
                 authors_groups.append(AuthorsGroup(
                     affiliation=author.affiliation,

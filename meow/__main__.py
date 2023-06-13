@@ -282,7 +282,7 @@ def gzip_compress_file(p):
     print ('gzip_compress_file', p, p + '.gz')
     with open(p, 'rb') as f:
         with gzip.open(p + '.gz',  'wb', compresslevel=1) as gz:
-            shutil.copyfileobj(f, gz)
+            shutil.copyfileobj(f, gz) # type: ignore
     # os.remove(p)
 
 def search_fs(p):

@@ -24,6 +24,9 @@ class FinalProceedingsConfig:
     # indica se interrompere il task nel caso la validazione 
     # pdf produca degli errori oppure mostrare un warning
     strict_pdf_check: bool = field()
+    
+    # indica se includere la generazione dei json relativi ai doi
+    generate_doi_payload: bool = field()
 
     def as_dict(self) -> dict:
         return asdict(self)

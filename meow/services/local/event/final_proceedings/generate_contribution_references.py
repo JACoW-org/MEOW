@@ -4,10 +4,10 @@ from os import path
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
 from meow.models.local.event.final_proceedings.event_model import EventData
 
-from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
+from meow.models.local.event.final_proceedings.proceedings_data_model import FinalProceedingsConfig, ProceedingsData
 
 from meow.tasks.local.reference.models import ContributionRef, ReferenceStatus, Reference
-from meow.tasks.local.doi.utils import generate_doi_identifier
+from meow.tasks.local.doi.utils import generate_doi_identifier, generate_doi_external_url
 from jinja2 import BytecodeCache, Environment, FileSystemLoader
 from lxml.etree import XML, XSLT, fromstring, XMLParser
 
@@ -57,7 +57,7 @@ class JinjaXMLBuilder:
             .render_async(contribution.as_dict())
 
 
-async def generate_contribution_references(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
+async def generate_contribution_references(proceedings_data: ProceedingsData, cookies: dict, settings: dict, config: FinalProceedingsConfig) -> ProceedingsData:
     """ """
 
     logger.info('event_final_proceedings - extract_contribution_references')
@@ -78,7 +78,8 @@ async def generate_contribution_references(proceedings_data: ProceedingsData, co
         async with send_stream:
             for contribution_data in proceedings_data.contributions:
                 tg.start_soon(reference_task, capacity_limiter, proceedings_data.event,
-                              contribution_data, xml_builder, xslt_functions, settings, send_stream.clone())
+                              contribution_data, xml_builder, xslt_functions, settings,
+                              config, send_stream.clone())
 
         try:
             async with receive_stream:
@@ -127,13 +128,14 @@ async def get_xslt_functions() -> dict[str, XSLT]:
 
 async def reference_task(capacity_limiter: CapacityLimiter, event: EventData,
                          contribution: ContributionData, xml_builder, xslt_functions: dict,
-                         settings: dict, res: MemoryObjectSendStream) -> None:
+                         settings: dict, config: FinalProceedingsConfig, res: MemoryObjectSendStream) -> None:
     """ """
 
     async with capacity_limiter:
         await res.send({
             "code": contribution.code,
-            "value": await build_contribution_reference(event, contribution, xml_builder, xslt_functions, settings)
+            "value": await build_contribution_reference(event, contribution, xml_builder,
+                                                        xslt_functions, settings, config)
         })
 
 
@@ -144,13 +146,14 @@ async def get_xslt(xslt_path: str) -> XSLT:
 
 
 async def build_contribution_reference(event: EventData, contribution: ContributionData,
-                                       xml_builder, xslt_functions: dict, settings: dict) -> Reference | None:
+                                       xml_builder, xslt_functions: dict, settings: dict,
+                                       config: FinalProceedingsConfig) -> Reference | None:
 
     xml_val: str = ''
 
     try:
 
-        contribution_ref = await contribution_data_factory(event, contribution, settings)
+        contribution_ref = await contribution_data_factory(event, contribution, settings, config)
 
         if contribution_ref.is_citable():
 
@@ -174,7 +177,8 @@ async def build_contribution_reference(event: EventData, contribution: Contribut
     return None
 
 
-async def contribution_data_factory(event: EventData, contribution: ContributionData, settings: dict) -> ContributionRef:
+async def contribution_data_factory(event: EventData, contribution: ContributionData, settings: dict,
+                                    config: FinalProceedingsConfig) -> ContributionRef:
 
     reference_status: str = ReferenceStatus.IN_PROCEEDINGS.value if contribution.has_paper(
     ) else ReferenceStatus.UNPUBLISHED.value

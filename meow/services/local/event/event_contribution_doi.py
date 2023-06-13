@@ -3,7 +3,7 @@ import logging as lg
 from typing import AsyncGenerator
 
 from meow.tasks.local.doi.models import ContributionDOI, AuthorDOI
-from meow.tasks.local.doi.utils import generate_doi_url
+from meow.tasks.local.doi.utils import generate_doi_external_url
 
 logger = lg.getLogger(__name__)
 
@@ -38,6 +38,7 @@ async def gen_contribution_doi(event: dict, references: dict, doi_base_url: str,
         for contribution in session.get('contributions', []):
 
             doi_url = '' # TODO fix if necessary
+            doi_label = '' # TODO fix if necessary
 
             primary_authors = map(lambda author: AuthorDOI(
                 first_name=author.get('first_name'),
@@ -69,7 +70,8 @@ async def gen_contribution_doi(event: dict, references: dict, doi_base_url: str,
                 reception_date=contribution.get('reception_date', ''),
                 acceptance_date=contribution.get('acceptance_date', ''),
                 issuance_date=contribution.get('issuance_date', ''),
-                doi_url=doi_url
+                doi_url=doi_url,
+                doi_label=doi_label
             )
 
             dois[contribution.get('code')] = data

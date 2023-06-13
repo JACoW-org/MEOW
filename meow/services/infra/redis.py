@@ -57,9 +57,7 @@ class RedisManager:
 
     async def destroy(self):
         """ """
-        
-        logger.error("destroy - destroy - destroy")
-        
+               
         try:
             await HttpClientSessions.close_client_sessions()
             await RedisLockList.release_all_locks()

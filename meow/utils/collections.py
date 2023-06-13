@@ -38,7 +38,7 @@ def group_institutes_by_initial(institutes: list[AffiliationData]) -> dict:
             groups[key].append(institute.as_dict())
     return groups
 
-def get_authors_initials_dict(authors: list[PersonData]) -> dict[bool]:
+def get_authors_initials_dict(authors: list[PersonData]) -> dict[str, bool]:
     """"""
     
     initials = {}
@@ -57,7 +57,7 @@ def get_authors_initials_dict(authors: list[PersonData]) -> dict[bool]:
 
     return initials
 
-def get_keywords_initials_dict(keywords: list[KeywordData]) -> dict[bool]:
+def get_keywords_initials_dict(keywords: list[KeywordData]) -> dict[str, bool]:
     """"""
 
     initials = {}

@@ -64,6 +64,7 @@ class ContributionDOI:
     acceptance_date: str = field(default='')
     issuance_date: str = field(default='')
     doi_url: str = field(default='')
+    doi_label: str = field(default='')
     doi_path: str = field(default='')
     doi_identifier: str = field(default='')
     start_page: str = field(default='')
