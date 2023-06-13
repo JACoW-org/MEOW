@@ -38,6 +38,7 @@ from meow.services.local.event.final_proceedings.read_papers_metadata import rea
 from meow.services.local.event.final_proceedings.write_papers_metadata import write_papers_metadata
 
 from meow.services.local.event.final_proceedings.hugo_plugin.hugo_final_proceedings_plugin import HugoFinalProceedingsPlugin
+from meow.models.local.event.final_proceedings.client_log import ClientLog, ClientLogSeverity
 
 
 logger = lg.getLogger(__name__)
@@ -122,6 +123,18 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, c
 
     [sessions, attachments] = await collecting_sessions_and_attachments(event, cookies, settings)
 
+    # log number of sessions and attachments
+    yield dict(type='log', value=ClientLog(
+        severity=ClientLogSeverity.INFO,
+        message=f'Found {len(sessions)} sessions.'
+    ))
+
+    yield dict(type='log', value=ClientLog(
+        severity=ClientLogSeverity.INFO,
+        message=f'Found {len(attachments)} attachments.'
+    ))
+
+
     """ """
 
     await extend_lock(lock)
@@ -134,6 +147,12 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, c
     ## Bloccante
 
     [contributions] = await collecting_contributions_and_files(event, sessions, cookies, settings)
+
+    # log number of contributions
+    yield dict(type='log', value=ClientLog(
+        severity=ClientLogSeverity.INFO,
+        message=f'Found {len(contributions)} contributions.'
+    ))
 
     """ """
 
@@ -188,8 +207,13 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, c
     
     ## Bloccante
 
-    # [papers] = 
-    await download_contributions_papers(final_proceedings, cookies, settings, filter_contributions_pubblicated)
+    [final_proceedings, papers_data] = await download_contributions_papers(final_proceedings, cookies, settings, filter_contributions_pubblicated)
+
+    # log number of files 
+    yield dict(type='log', value=ClientLog(
+        severity=ClientLogSeverity.INFO,
+        message=f'Downloaded {len(papers_data)} papers.'
+    ))
 
     """ """
 

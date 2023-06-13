@@ -16,7 +16,7 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import Pro
 logger = lg.getLogger(__name__)
 
 
-async def download_contributions_papers(proceedings_data: ProceedingsData, cookies: dict, settings: dict, callback: Callable) -> ProceedingsData:
+async def download_contributions_papers(proceedings_data: ProceedingsData, cookies: dict, settings: dict, callback: Callable) -> list[list]:
     """ """
 
     logger.info('event_final_proceedings - download_contributions_papers')
@@ -60,7 +60,7 @@ async def download_contributions_papers(proceedings_data: ProceedingsData, cooki
         except BaseException as ex:
             logger.error(ex, exc_info=True)
 
-    return proceedings_data
+    return [proceedings_data, files_data]
 
 
 async def file_download_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int, current_file: FileData, cookies: dict, pdf_cache_dir: Path, res: MemoryObjectSendStream) -> None:
