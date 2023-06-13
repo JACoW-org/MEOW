@@ -56,7 +56,7 @@ class ContributionDOI:
     date: str = field(default='')
     publisher: str = field(default='JACoW Publishing')
     publisher_venue: str = field(default='Geneva, Switzerland')
-    editors: list = field(default_factory=list) # TODO check Volker SCHEMA: first_name, last_name (affiliation)
+    editors: list = field(default_factory=list)
     isbn: str = field(default='')
     issn: str = field(default='')
     reception_date: str = field(default='')

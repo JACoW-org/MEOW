@@ -27,7 +27,6 @@ def format_datetime_dashed(d: dt.datetime | None) -> str:
 def format_datetime_pdf(d: dt.datetime) -> str:
     # D:YYYYMMDDHHmmSSOHH'mm'
     utc_offset = d.strftime('%z')
-    # TODO pass or derive local timezone offset
     return d.strftime(f"D:%Y%m%d%H%M%S{utc_offset[0:3]}'{utc_offset[3:]}'")
 
 def format_datetime_doi(d: dt.datetime | None) -> str:

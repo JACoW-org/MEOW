@@ -34,7 +34,7 @@ async def event_pdf_keywords(event: dict, cookies: dict, settings: dict) -> Asyn
 
     # files: list[ContributionPaperData] = await extract_contributions_papers(proceedings_data)
 
-    files = []  # TODO TODO TODO
+    files = []
 
     total_files: int = len(files)
     checked_files: int = 0

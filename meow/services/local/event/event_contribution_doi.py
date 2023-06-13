@@ -29,6 +29,7 @@ async def event_contribution_doi(event: dict, cookies: dict, settings: dict) -> 
     )
 
 
+# TODO REMOVE 
 async def gen_contribution_doi(event: dict, references: dict, doi_base_url: str, isbn: str, issn: str):
     ''''''
 
@@ -37,30 +38,25 @@ async def gen_contribution_doi(event: dict, references: dict, doi_base_url: str,
     for session in event.get('sessions', []):
         for contribution in session.get('contributions', []):
 
-            doi_url = '' # TODO fix if necessary
-            doi_label = '' # TODO fix if necessary
+            doi_url = ''
+            doi_label = ''
 
             primary_authors = map(lambda author: AuthorDOI(
                 first_name=author.get('first_name'),
                 last_name=author.get('last_name'),
                 affiliation=author.get('affiliation')), contribution.get('primary_authors'))
 
-            # TODO probabilmente da event --> board che si occupa della gestione delle contributions
             editors = list()
-
-            # TODO series aka "titolo" della conferenza
-
-            # TODO start_page e number_of_pages da ricavare dal metadato del pdf
 
             data = ContributionDOI(
                 title=contribution.get('title'),
                 abstract=contribution.get('description'),
                 references=contribution.get('references'),
                 paper_url=contribution.get('url'),
-                slides_url=contribution.get('url'),  # TODO missing data
+                slides_url=contribution.get('url'),
                 reference=references.get(contribution.get('code')),
                 conference_code=event.get('title', ''),
-                series=event.get('series', ''),    # TODO
+                series=event.get('series', ''),
                 venue=event.get('location', ''),
                 start_date=event.get('start_dt', {}).get('date', ''),
                 end_date=event.get('end_dt', {}).get('date', ''),

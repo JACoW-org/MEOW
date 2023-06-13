@@ -17,6 +17,7 @@ from meow.utils.datetime import format_datetime_full, format_datetime_range_doi,
 logger = lg.getLogger(__name__)
 
 
+# TODO REMOVE
 async def generate_contribution_doi(proceedings_data: ProceedingsData, cookies: dict, settings: dict,
                                     config: FinalProceedingsConfig) -> ProceedingsData:
     """ """
@@ -134,10 +135,10 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         abstract=contribution.description,
         # references=contribution.references,
         paper_url=contribution.url,
-        slides_url=contribution.url,  # TODO missing data
+        slides_url=contribution.url,
         reference=contribution.reference,
         conference_code=event.title,
-        # series=event.get(''),    # TODO
+        # series=event.get(''),
         venue=event.location,
         start_date=format_datetime_full(event.start),
         end_date=format_datetime_full(event.end),
