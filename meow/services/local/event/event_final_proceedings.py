@@ -39,6 +39,7 @@ from meow.services.local.event.final_proceedings.write_papers_metadata import wr
 
 from meow.services.local.event.final_proceedings.hugo_plugin.hugo_final_proceedings_plugin import HugoFinalProceedingsPlugin
 from meow.models.local.event.final_proceedings.client_log import ClientLog, ClientLogSeverity
+from meow.app.errors.service_error import ProceedingsError
 
 
 logger = lg.getLogger(__name__)
@@ -69,6 +70,9 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict, co
     except LockError as le:
         logger.error("Lock error", exc_info=True)
         raise le
+    except ProceedingsError as pe:
+        async for r in handle_proceedings_error(pe):
+            yield r
     except BaseException as be:
         logger.error("Generic error", exc_info=True)
         raise be
@@ -257,24 +261,28 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, c
     ## è bloccante se strict_pdf_check
 
     [metadata, errors] = await validate_proceedings_data(final_proceedings, cookies, settings, filter_contributions_pubblicated)
-    
-    # if len(errors) > 0:
         
     
-    if config.strict_pdf_check and len(errors) > 0:
-        
-        yield dict(type='result', value=dict(
-            # metadata=metadata,
-            # errors=errors
-        ))
+    if len(errors) > 0:
+        if config.strict_pdf_check:
 
-        return
-        
+            yield dict(type='log', value=ClientLog(
+                severity=ClientLogSeverity.ERROR,
+                message='Errors when validating proceedings data.'
+            ))
+            
+            yield dict(type='result', value=dict(
+                metadata=metadata,
+                errors=errors
+            ))
 
-    yield dict(type='result', value=dict(
-        # metadata=metadata,
-        # errors=errors
-    ))
+            return
+        
+        else:
+            yield dict(type='log', value=ClientLog(
+                severity=ClientLogSeverity.WARNING,
+                message='Errors when validating proceedings data.'
+            ))
 
     """ """
 
@@ -447,3 +455,17 @@ async def get_final_proceedings(final_proceedings: ProceedingsData) -> dict:
             event_path=event_path
         )
     )
+
+async def handle_proceedings_error(error: ProceedingsError):
+    """ Handle proceedings error """
+
+    yield dict(type='log', value=ClientLog(
+        severity=ClientLogSeverity.ERROR,
+        message=error.message
+    ))
+
+    # stop generation
+    yield dict(type='result', value=dict())
+
+    raise error
+
