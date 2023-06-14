@@ -25,7 +25,7 @@ class EventFinalProceedingsTask(AbstractTask):
         cookies["indico_session"] = indico_session
         
         config = FinalProceedingsConfig(
-            strict_pdf_check=True,
+            strict_pdf_check=False,
             include_event_slides=True,
             generate_doi_payload=False,
             generate_external_doi_url=True,
