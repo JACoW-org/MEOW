@@ -257,7 +257,7 @@ class ContributionData:
 
     track: TrackData | None = field(default=None)
 
-    editor: PersonData | None = field(default=None)
+    editors: list[PersonData] = field(default_factory=list)
     duration: int | None = field(default=None)
     room: str | None = field(default=None)
     location: str | None = field(default=None)
