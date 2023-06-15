@@ -47,7 +47,7 @@
     pages = {</xsl:text>
 <xsl:value-of select="contribution/pages/start-page"/>
 <xsl:text>-</xsl:text>
-<xsl:variable name="endPage" select="contribution/pages/start-page + contribution/pages/number"/>
+<xsl:variable name="endPage" select="contribution/pages/start-page + contribution/pages/number -1"/>
 <xsl:value-of select="$endPage"/>
 <xsl:text>},</xsl:text>
 </xsl:if>

@@ -61,7 +61,7 @@ CP - </xsl:text><xsl:value-of select="publisher-venue"/>
 <xsl:text>
 SP - </xsl:text><xsl:value-of select="contribution/pages/start-page"/>
 <xsl:text>
-EP - </xsl:text><xsl:value-of select="contribution/pages/start-page + contribution/pages/number"/>
+EP - </xsl:text><xsl:value-of select="contribution/pages/start-page + contribution/pages/number -1"/>
 <xsl:text>
 KW - </xsl:text><xsl:comment>KEYWORDS</xsl:comment>
 <xsl:text>
