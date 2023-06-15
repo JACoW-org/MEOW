@@ -80,7 +80,7 @@ async def read_papers_metadata(proceedings_data: ProceedingsData, cookies: dict,
         except Exception as ex:
             logger.error(ex, exc_info=True)
 
-    proceedings_data = refill_contribution_metadata(proceedings_data, results)
+    proceedings_data = await refill_contribution_metadata(proceedings_data, results, file_cache_dir)
 
     return proceedings_data
 
@@ -131,7 +131,7 @@ async def read_metadata_internal(path: str) -> list:
     return [result.get('report'), result.get('text')]
 
 
-def refill_contribution_metadata(proceedings_data: ProceedingsData, results: dict) -> ProceedingsData:
+async def refill_contribution_metadata(proceedings_data: ProceedingsData, results: dict, pdf_cache_dir: Path) -> ProceedingsData:
 
     current_page = 1
 
@@ -153,6 +153,12 @@ def refill_contribution_metadata(proceedings_data: ProceedingsData, results: dic
                         else None
 
                     if file_data is not None:
+                    
+                        pdf_path = Path(pdf_cache_dir, file_data.filename)
+                        
+                        if await pdf_path.exists():
+                            contribution_data.paper_size = await (await pdf_path.stat()).st_size
+                        
 
                         result: dict = results.get(file_data.uuid, {})
                         report: dict = result.get('report', {})
