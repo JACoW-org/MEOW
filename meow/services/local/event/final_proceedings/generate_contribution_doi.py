@@ -8,8 +8,9 @@ from anyio import create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
 
-from meow.tasks.local.doi.models import AuthorDOI, ContributionDOI
-from meow.tasks.local.doi.utils import generate_doi_identifier, generate_doi_internal_url, generate_doi_path, generate_doi_external_url
+from meow.tasks.local.doi.models import AuthorDOI, ContributionDOI, EditorDOI
+from meow.tasks.local.doi.utils import (generate_doi_external_url, generate_doi_identifier,
+    generate_doi_internal_url, generate_doi_landing_page_url, generate_doi_path)
 
 from meow.utils.datetime import format_datetime_full, format_datetime_range_doi, format_datetime_doi
 
@@ -81,7 +82,7 @@ async def generate_doi_task(capacity_limiter: CapacityLimiter, event: EventData,
 
 async def build_contribution_doi(event: EventData, contribution: ContributionData,
                                  settings: dict[str, str], config: FinalProceedingsConfig):
-
+    
     doi_url: str = generate_doi_external_url(
         protocol=settings.get('doi_protocol', 'https'),
         domain=settings.get('doi_domain', 'doi.org'),
@@ -117,6 +118,12 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         contribution=contribution.code
     )
 
+    doi_landing_page = generate_doi_landing_page_url(
+        organization=settings.get('doi_organization', 'JACoW'),
+        conference=settings.get('doi_conference', 'CONF-YY'),
+        contribution=contribution.code
+    )
+
     event_isbn: str = settings.get('isbn', '978-3-95450-227-1')
     event_issn: str = settings.get('issn', '2673-5490')
 
@@ -126,6 +133,15 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         last_name=author.last,
         affiliation=author.affiliation
     ) for author in contribution.authors]
+
+    track = None
+    subtrack = None
+    if contribution.track:
+        if contribution.track.track_group:
+            track = f'{contribution.track.track_group.code} - {contribution.track.track_group.title}'
+            subtrack = f'{contribution.track.code} - {contribution.track.title}'
+        else:
+            track = f'{contribution.track.code} - {contribution.track.title}'
 
     doi_data = ContributionDOI(
         code=contribution.code,
@@ -143,7 +159,10 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         start_date=format_datetime_full(event.start),
         end_date=format_datetime_full(event.end),
         date=format_datetime_range_doi(event.start, event.end),
-        editors=[contribution.editor] if contribution.editor else [],
+        editors=[
+            EditorDOI(first_name=editor.first, last_name=editor.last, affiliation=editor.affiliation)
+            for editor in contribution.editors
+            ],
         isbn=event_isbn,
         issn=event_issn,
         reception_date=format_datetime_doi(
@@ -158,9 +177,13 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         doi_url=doi_url,
         doi_path=doi_path,
         doi_identifier=doi_identifier,
+        doi_landing_page=doi_landing_page,
         pages=f'{contribution.page}-{contribution.metadata.get("page_count", 0) + contribution.page - 1}' if contribution.page and contribution.metadata else '',
         num_of_pages=contribution.metadata.get(
-            "page_count", 0) if contribution.metadata else 0
+            "page_count", 0) if contribution.metadata else 0,
+        paper_size=contribution.paper_size,
+        track=track,
+        subtrack=subtrack
 
         # start_page=str(contribution.page) if contribution.page else '',
         # end_page=str(contribution.metadata.get('page_count', 0) + contribution.page - 1) if contribution.metadata else '',

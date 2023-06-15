@@ -9,3 +9,6 @@ def generate_doi_identifier(context: str, organization: str, conference: str, co
 
 def generate_doi_path(organization: str, conference: str, contribution: str) -> str:
     return f"{organization}-{conference}-{contribution}".lower()
+
+def generate_doi_landing_page_url(organization: str, conference: str, contribution: str) -> str:
+    return f'https://jacow.org/{conference}/doi/{organization}-{conference}-{contribution}'

@@ -5,7 +5,8 @@ from typing import Any, Callable
 from datetime import datetime
 
 from meow.models.local.event.final_proceedings.contribution_factory import contribution_data_factory
-from meow.models.local.event.final_proceedings.event_factory import attachment_data_factory, event_data_factory
+from meow.models.local.event.final_proceedings.event_factory import (attachment_data_factory,
+    event_data_factory, event_person_factory)
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.models.local.event.final_proceedings.session_factory import session_data_factory
 from meow.models.local.event.final_proceedings.session_model import SessionData
@@ -14,6 +15,8 @@ from meow.models.local.event.final_proceedings.contribution_model import Contrib
 from meow.utils.datetime import format_datetime_sec
 
 from meow.utils.list import find
+from meow.utils.serialization import json_decode
+from meow.models.local.event.final_proceedings.event_model import PersonData
 
 
 logger = lg.getLogger(__name__)
@@ -22,6 +25,13 @@ logger = lg.getLogger(__name__)
 def proceedings_data_factory(event: Any, sessions: list, contributions: list, attachments: list, settings: dict) -> ProceedingsData:
 
     logger.info('proceedings_data_factory')
+
+    """ build editors """
+    editors_dict_list = json_decode(settings.get('editorial_json'))
+    editors: list[PersonData] = [
+        event_person_factory(person)
+        for person in editors_dict_list
+    ]
     
     """ create sessions data """
     
@@ -34,7 +44,7 @@ def proceedings_data_factory(event: Any, sessions: list, contributions: list, at
 
     contributions_data: list[ContributionData] = [
         c for c in [
-            contribution_data_factory(c) for c in contributions
+            contribution_data_factory(c, editors) for c in contributions
         ] if c and c.cat_publish
     ]
     

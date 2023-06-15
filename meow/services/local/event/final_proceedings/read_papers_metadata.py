@@ -157,7 +157,7 @@ async def refill_contribution_metadata(proceedings_data: ProceedingsData, result
                         pdf_path = Path(pdf_cache_dir, file_data.filename)
                         
                         if await pdf_path.exists():
-                            contribution_data.paper_size = await (await pdf_path.stat()).st_size
+                            contribution_data.paper_size = (await pdf_path.stat()).st_size
                         
 
                         result: dict = results.get(file_data.uuid, {})

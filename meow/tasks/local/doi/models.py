@@ -56,7 +56,7 @@ class ContributionDOI:
     date: str = field(default='')
     publisher: str = field(default='JACoW Publishing')
     publisher_venue: str = field(default='Geneva, Switzerland')
-    editors: list = field(default_factory=list)
+    editors: list[EditorDOI] = field(default_factory=list)
     isbn: str = field(default='')
     issn: str = field(default='')
     reception_date: str = field(default='')
@@ -67,10 +67,19 @@ class ContributionDOI:
     doi_label: str = field(default='')
     doi_path: str = field(default='')
     doi_identifier: str = field(default='')
+    doi_landing_page: str = field(default='')
     start_page: str = field(default='')
     end_page: str = field(default='')
     pages: str = field(default='')
     num_of_pages: int = field(default=0)
+    paper_size: int = field(default=0)
+    track: str = field(default='')
+    subtrack: str = field(default='')
+
+    @property
+    def paper_size_mb(self) -> float:
+        paper_size_mb_full = self.paper_size / (1024*1024)
+        return float('{:.2g}'.format(paper_size_mb_full)) if paper_size_mb_full < 100 else float('{:.3g}'.format(paper_size_mb_full))
 
     def as_dict(self) -> dict:
         return asdict(self)
@@ -121,23 +130,32 @@ class ContributionDOI:
         attributes['subjects'] = [dict(
             subject='Accelerator Physics',
             lang='en-us'
-        ), dict(
-            subject='',
-            lang='en-us'
         )]
 
+        if self.track:
+            attributes['subjects'].append(dict(
+                subject=self.track,
+                lang='en-us'
+            ))
+
+        if self.subtrack:
+            attributes['subjects'].append(dict(
+                subject=self.subtrack,
+                lang='en-us'
+            ))
+
         attributes['contributors'] = [dict(
-            name='',
+            name=f'{editor.last_name},{editor.first_name}',
             contributorType='Editor',
             affiliation=[dict(
-                name=''
+                name=editor.affiliation
             )],
             nameIdentifiers=[dict(
-                nameIdentifier='',
+                nameIdentifier=f'{index}',
                 schemeUri='https://jacow.org',
                 nameIdentifierScheme='JACoW-ID'
             )]
-        ) for editor in self.editors]
+        ) for index, editor in enumerate(self.editors)]
 
         attributes['dates'] = [dict(
             date=self.reception_date,
@@ -172,7 +190,7 @@ class ContributionDOI:
 
         attributes['sizes'] = [
             f"{self.pages} pages",
-            # f"{self.file_size} {self.file_size_unit}",
+            f"{self.paper_size_mb} MB",
         ]
 
         attributes['formats'] = ['PDF']
@@ -189,10 +207,7 @@ class ContributionDOI:
             lang='en-us'
         )]
 
-        # TODO: da aggiungere
-        attributes['landingPage'] = dict()
-
-        attributes['url'] = 'https://schema.datacite.org/meta/kernel-4.0/index.html'
+        attributes['url'] = self.doi_landing_page
 
         attributes['schemaVersion'] = 'http://datacite.org/schema/kernel-4'
 

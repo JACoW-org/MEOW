@@ -10,6 +10,7 @@ from meow.models.local.event.final_proceedings.contribution_model import Contrib
 
 from meow.utils.datetime import datedict_to_tz_datetime, format_datetime_sec
 from meow.utils.list import find
+from meow.models.local.event.final_proceedings.event_model import PersonData
 
 
 logger = lg.getLogger(__name__)
@@ -46,7 +47,7 @@ def contribution_editable_factory(editable: Any) -> EditableData | None:
     )
 
 
-def contribution_data_factory(contribution: Any) -> ContributionData:
+def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> ContributionData:
 
     editables: list = contribution.get('editables', [])
 
@@ -320,7 +321,8 @@ def contribution_data_factory(contribution: Any) -> ContributionData:
         coauthors=[
             event_person_factory(person)
             for person in contribution.get('coauthors', [])
-        ]
+        ],
+        editors=editors
     )
 
     # logger.info("")
