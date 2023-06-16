@@ -255,10 +255,10 @@ routes = [
           methods=['GET', 'POST', 'PUT', 'DELETE']),
 
     Route('/ping/{api_key}', api_ping_endpoint,
-          methods=['GET', 'POST', 'PUT', 'DELETE']),
+          methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']),
 
     Route('/info/{event_id}/{api_key}', api_info_endpoint,
-          methods=['GET', 'POST', 'PUT', 'DELETE']),
+          methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']),
 
     # Obsolete
     # Route('/conference/{id}/del', api_del_conference,
