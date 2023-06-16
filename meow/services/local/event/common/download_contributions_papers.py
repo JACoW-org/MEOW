@@ -16,7 +16,7 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import Pro
 logger = lg.getLogger(__name__)
 
 
-async def download_contributions_papers(proceedings_data: ProceedingsData, cookies: dict, settings: dict, callback: Callable) -> list[list]:
+async def download_contributions_papers(proceedings_data: ProceedingsData, cookies: dict, settings: dict, callback: Callable):
     """ """
 
     logger.info('event_final_proceedings - download_contributions_papers')
