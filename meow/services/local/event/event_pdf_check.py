@@ -9,6 +9,7 @@ from meow.app.instances.databases import dbs
 from meow.models.infra.locks import RedisLock
 
 from redis.exceptions import LockError
+from meow.models.local.event.final_proceedings.client_log import ClientLog, ClientLogSeverity
 
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
 
@@ -123,7 +124,13 @@ async def _event_pdf_check(event: dict, cookies: dict, settings: dict, lock: Red
         text="Download Contributions Papers"
     ))
 
-    final_proceedings = await download_contributions_papers(final_proceedings, cookies, settings, callback)
+    [final_proceedings, papers_data] = await download_contributions_papers(final_proceedings, cookies, settings, callback)
+    
+    # log number of files 
+    yield dict(type='log', value=ClientLog(
+        severity=ClientLogSeverity.INFO,
+        message=f'Downloaded {len(papers_data)} papers.'
+    ))
 
     """ """
 
