@@ -461,7 +461,7 @@ async def handle_proceedings_error(error: ProceedingsError):
 
     yield dict(type='log', value=ClientLog(
         severity=ClientLogSeverity.ERROR,
-        message=error.message
+        message=str(error)
     ))
 
     # stop generation
