@@ -9,7 +9,7 @@ from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
 
 from meow.tasks.local.doi.models import AuthorDOI, ContributionDOI, EditorDOI
-from meow.tasks.local.doi.utils import (generate_doi_external_url, generate_doi_identifier,
+from meow.tasks.local.doi.utils import (generate_doi_external_label, generate_doi_external_url, generate_doi_identifier,
                                         generate_doi_internal_url, generate_doi_landing_page_url, generate_doi_path)
 
 from meow.utils.datetime import format_datetime_full, format_datetime_range_doi, format_datetime_doi
@@ -83,23 +83,23 @@ async def generate_doi_task(capacity_limiter: CapacityLimiter, event: EventData,
 async def build_contribution_doi(event: EventData, contribution: ContributionData,
                                  settings: dict[str, str], config: FinalProceedingsConfig):
 
-    doi_url: str = generate_doi_external_url(
+    doi_label: str = generate_doi_external_label(
         protocol=settings.get('doi_protocol', 'https'),
         domain=settings.get('doi_domain', 'doi.org'),
-        context=settings.get('doi_context', '10.18429'),
-        organization=settings.get('doi_organization', 'JACoW'),
-        conference=settings.get('doi_conference', 'CONF-YY'),
-        contribution=contribution.code
-    ) if config.generate_external_doi_url else generate_doi_internal_url(
+        context=settings.get('doi_context', 'CONF-CTX'),
         organization=settings.get('doi_organization', 'JACoW'),
         conference=settings.get('doi_conference', 'CONF-YY'),
         contribution=contribution.code
     )
 
-    doi_label: str = generate_doi_external_url(
+    doi_url: str = generate_doi_external_url(
         protocol=settings.get('doi_protocol', 'https'),
         domain=settings.get('doi_domain', 'doi.org'),
-        context=settings.get('doi_context', '10.18429'),
+        context=settings.get('doi_context', 'CONF-CTX'),
+        organization=settings.get('doi_organization', 'JACoW'),
+        conference=settings.get('doi_conference', 'CONF-YY'),
+        contribution=contribution.code
+    ) if config.generate_external_doi_url else generate_doi_internal_url(
         organization=settings.get('doi_organization', 'JACoW'),
         conference=settings.get('doi_conference', 'CONF-YY'),
         contribution=contribution.code
@@ -124,8 +124,8 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         contribution=contribution.code
     )
 
-    event_isbn: str = settings.get('isbn', '978-3-95450-227-1')
-    event_issn: str = settings.get('issn', '2673-5490')
+    event_isbn: str = settings.get('isbn', 'CONF-ISBN')
+    event_issn: str = settings.get('issn', 'CONF-ISSN')
 
     primary_authors = [AuthorDOI(
         id=author.id,
@@ -149,12 +149,10 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         primary_authors=primary_authors,
         authors_groups=contribution.authors_groups,
         abstract=contribution.description,
-        # references=contribution.references,
         paper_url=contribution.url,
         slides_url=contribution.url,
         reference=contribution.reference,
         conference_code=event.title,
-        # series=event.get(''),
         venue=event.location,
         start_date=format_datetime_full(event.start),
         end_date=format_datetime_full(event.end),
@@ -187,8 +185,6 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         track=track if track else '',
         subtrack=subtrack if subtrack else ''
 
-        # start_page=str(contribution.page) if contribution.page else '',
-        # end_page=str(contribution.metadata.get('page_count', 0) + contribution.page - 1) if contribution.metadata else '',
     )
 
     return doi_data

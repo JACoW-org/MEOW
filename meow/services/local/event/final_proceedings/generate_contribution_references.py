@@ -7,7 +7,7 @@ from meow.models.local.event.final_proceedings.event_model import EventData
 from meow.models.local.event.final_proceedings.proceedings_data_model import FinalProceedingsConfig, ProceedingsData
 
 from meow.tasks.local.reference.models import ContributionRef, ReferenceStatus, Reference
-from meow.tasks.local.doi.utils import generate_doi_identifier, generate_doi_external_url
+from meow.tasks.local.doi.utils import generate_doi_identifier
 from jinja2 import BytecodeCache, Environment, FileSystemLoader
 from lxml.etree import XML, XSLT, fromstring, XMLParser
 
