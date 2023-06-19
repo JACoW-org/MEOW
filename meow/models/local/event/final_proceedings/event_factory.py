@@ -60,7 +60,7 @@ def event_data_factory(event: Any, settings: dict) -> EventData:
     doi_password = settings.get("doi_password", "doi.pass")
     
     doi_url = f'{doi_protocol}://{doi_domain}/{doi_context}/{doi_organization}-{doi_conference}' # https://doi.org/10.18429/JACoW-PCaPAC2022	
-    doi_label = f'DOI:{doi_context}/{doi_organization}-{doi_conference}' # DOI:10.18429/JACoW-PCaPAC2022
+    doi_label = f'{doi_context}/{doi_organization}-{doi_conference}' # DOI:10.18429/JACoW-PCaPAC2022
     
     series = settings.get("series", "")
     series_number = settings.get("series_number", "")
