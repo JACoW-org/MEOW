@@ -95,7 +95,7 @@ async def contributions_group_by_author(capacity_limiter: CapacityLimiter, proce
         author_list = list(set(author_list))
 
         author_list.sort(
-            key=lambda x: f"{x.first} {x.last} {x.affiliation}".lower())
+            key=lambda x: f"{x.last} {x.first} {x.affiliation}".lower())
 
         proceedings_data.author = author_list
 

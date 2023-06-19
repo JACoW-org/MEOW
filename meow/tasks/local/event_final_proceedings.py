@@ -27,7 +27,7 @@ class EventFinalProceedingsTask(AbstractTask):
         config = FinalProceedingsConfig(
             strict_pdf_check=False,
             include_event_slides=True,
-            generate_doi_payload=False,
+            generate_doi_payload=True,
             generate_external_doi_url=True,
             include_only_qa_green_contributions=True,
         )
