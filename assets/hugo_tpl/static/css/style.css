@@ -66,6 +66,7 @@ li {
 
 .home .event-head .event-name {
   flex: 1 1 50%;
+  text-transform: uppercase;
   font-weight: bold;
   text-align: center;
   font-size: 4rem;
@@ -187,6 +188,7 @@ li {
   font-size: 2rem;
   font-weight: bold;
   line-height: 2rem;
+  text-transform: uppercase;
 }
 
 .menu .nav {
