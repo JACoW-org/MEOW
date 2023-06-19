@@ -10,7 +10,7 @@ from anyio.streams.memory import MemoryObjectSendStream
 
 from meow.tasks.local.doi.models import AuthorDOI, ContributionDOI, EditorDOI
 from meow.tasks.local.doi.utils import (generate_doi_external_url, generate_doi_identifier,
-    generate_doi_internal_url, generate_doi_landing_page_url, generate_doi_path)
+                                        generate_doi_internal_url, generate_doi_landing_page_url, generate_doi_path)
 
 from meow.utils.datetime import format_datetime_full, format_datetime_range_doi, format_datetime_doi
 
@@ -82,7 +82,7 @@ async def generate_doi_task(capacity_limiter: CapacityLimiter, event: EventData,
 
 async def build_contribution_doi(event: EventData, contribution: ContributionData,
                                  settings: dict[str, str], config: FinalProceedingsConfig):
-    
+
     doi_url: str = generate_doi_external_url(
         protocol=settings.get('doi_protocol', 'https'),
         domain=settings.get('doi_domain', 'doi.org'),
@@ -95,7 +95,7 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         conference=settings.get('doi_conference', 'CONF-YY'),
         contribution=contribution.code
     )
-    
+
     doi_label: str = generate_doi_external_url(
         protocol=settings.get('doi_protocol', 'https'),
         domain=settings.get('doi_domain', 'doi.org'),
@@ -160,9 +160,10 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         end_date=format_datetime_full(event.end),
         date=format_datetime_range_doi(event.start, event.end),
         editors=[
-            EditorDOI(first_name=editor.first, last_name=editor.last, affiliation=editor.affiliation)
+            EditorDOI(first_name=editor.first, last_name=editor.last,
+                      affiliation=editor.affiliation)
             for editor in contribution.editors
-            ],
+        ],
         isbn=event_isbn,
         issn=event_issn,
         reception_date=format_datetime_doi(
@@ -178,12 +179,13 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         doi_path=doi_path,
         doi_identifier=doi_identifier,
         doi_landing_page=doi_landing_page,
-        pages=f'{contribution.page}-{contribution.metadata.get("page_count", 0) + contribution.page - 1}' if contribution.page and contribution.metadata else '',
+        pages=f'{contribution.page}-{contribution.metadata.get("page_count", 0) + contribution.page - 1}' \
+            if contribution.page and contribution.metadata else '',
         num_of_pages=contribution.metadata.get(
             "page_count", 0) if contribution.metadata else 0,
         paper_size=contribution.paper_size,
-        track=track,
-        subtrack=subtrack
+        track=track if track else '',
+        subtrack=subtrack if subtrack else ''
 
         # start_page=str(contribution.page) if contribution.page else '',
         # end_page=str(contribution.metadata.get('page_count', 0) + contribution.page - 1) if contribution.metadata else '',

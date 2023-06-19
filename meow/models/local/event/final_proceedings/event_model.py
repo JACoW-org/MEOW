@@ -118,11 +118,13 @@ class EventData:
     date: str
     isbn: str
     issn: str
-    doi: str
     color: str
     
     series: str
     series_number: str
+    
+    doi_url: str
+    doi_label: str
 
     start: datetime
     end: datetime

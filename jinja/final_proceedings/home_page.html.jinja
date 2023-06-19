@@ -112,7 +112,7 @@
             <div>DATE: {% raw %}{{.Site.Params.date}}{% endraw %}</div>
             <div>ISBN: {% raw %}{{.Site.Params.isbn}}{% endraw %}</div>
             <div>ISSN: {% raw %}{{.Site.Params.issn}}{% endraw %}</div>
-            <div>DOI: {% raw %}{{.Site.Params.doi}}{% endraw %}</div>
+            <div>DOI: {% raw %}<a target="_blank" href="{{.Site.Params.doi_url}}">{{.Site.Params.doi_label}}</a>{% endraw %}</div>
             </p>
         </div>
 

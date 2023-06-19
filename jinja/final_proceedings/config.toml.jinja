@@ -15,7 +15,8 @@ location = """{{event.location}}"""
 date = """{{event.date}}"""
 isbn = """{{event.isbn}}"""
 issn = """{{event.issn}}"""
-doi = """{{event.doi}}"""
+doi_url = """{{event.doi_url}}"""
+doi_label = """{{event.doi_label}}"""
 
 {% for attachment in attachments %}
 {% if 'logo' in attachment.filename: %}

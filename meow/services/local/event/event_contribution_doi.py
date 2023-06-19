@@ -8,20 +8,33 @@ from meow.tasks.local.doi.utils import generate_doi_external_url
 logger = lg.getLogger(__name__)
 
 
+# TODO REMOVE
 async def event_contribution_doi(event: dict, cookies: dict, settings: dict) -> AsyncGenerator:
     ''''''
 
-    doi_base_url: str = settings.get(
-        'doi-base-url',
-        'https://doi.org/10.18429'
-    )
+    # doi_base_url: str = settings.get(
+    #     'doi-base-url', 'https://doi.org/10.18429')
+
+    doi_protocol = settings.get("doi_protocol", "https")
+    doi_domain = settings.get("doi_domain", "doi.org")
+    doi_context = settings.get("doi_context", "10.18429")
+    doi_organization = settings.get("doi_organization", "JACoW")
+    doi_conference = settings.get("doi_conference", "FEL2022")
+
+    doi_user = settings.get("doi_user", "doi.user")
+    doi_password = settings.get("doi_password", "doi.pass")
+
+    # https://doi.org/10.18429/JACoW-PCaPAC2022
+    doi_url = f'{doi_protocol}//{doi_domain}/{doi_context}/{doi_organization}-{doi_conference}'
+    # DOI:10.18429/JACoW-PCaPAC2022
+    doi_label = f'DOI:{doi_context}/{doi_organization}-{doi_conference}'
 
     isbn: str = settings.get('isbn', '')
     issn: str = settings.get('issn', '')
     issn: str = settings.get('booktitle_short', '')
 
     # references are empty when running the event
-    dois = await gen_contribution_doi(event, dict(), doi_base_url, isbn, issn)
+    dois = await gen_contribution_doi(event, dict(), doi_url, isbn, issn)
 
     yield dict(
         type='result',
@@ -29,7 +42,7 @@ async def event_contribution_doi(event: dict, cookies: dict, settings: dict) -> 
     )
 
 
-# TODO REMOVE 
+# TODO REMOVE
 async def gen_contribution_doi(event: dict, references: dict, doi_base_url: str, isbn: str, issn: str):
     ''''''
 
