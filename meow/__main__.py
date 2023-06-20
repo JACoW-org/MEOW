@@ -166,12 +166,15 @@ def doc_frame(args) -> None:
     doc = Document(filename=args.input)
 
     # logger.info(metadata)
-    page_num = int(args.page)
+    page_number = int(args.page)
+    pre_print = args.preprint
 
     header = json.loads(args.header)
     footer = json.loads(args.footer)
 
     cc_logo = pathlib.Path('cc_by.png').read_bytes()
+    
+    # print([args.input, page_number, pre_print])
 
     for page in doc:
 
@@ -179,15 +182,16 @@ def doc_frame(args) -> None:
             annot_page_header(page, header)
 
         if footer:
-            annot_page_footer(page, page_num, footer)
+            annot_page_footer(page, page_number, footer)
 
         annot_page_side(
             page=page,
-            page_number=page_num,
+            pre_print=pre_print,
+            page_number=page_number,
             cc_logo=cc_logo
         )
 
-        page_num += 1
+        page_number += 1
 
     doc.save(filename=args.input, incremental=1, encryption=0)
 
@@ -363,6 +367,7 @@ def main():
     ps_frame.add_argument("-header", required=True, help="header metadata")
     ps_frame.add_argument("-footer", required=True, help="header metadata")
     ps_frame.add_argument("-page", required=True, help="start page index")
+    ps_frame.add_argument("-preprint", required=False, help="preprint text")
     ps_frame.set_defaults(func=doc_frame)
 
     # -------------------------------------------------------------------------

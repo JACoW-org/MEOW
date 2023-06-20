@@ -7,10 +7,10 @@ from meow.app.errors.service_error import ServiceError
 from meow.models.local.common.auth import BasicAuthData
 
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
+from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.tasks.local.doi.utils import generate_doi_identifier
 
 from meow.utils.http import delete_json
-from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 
 
 logger = lg.getLogger(__name__)

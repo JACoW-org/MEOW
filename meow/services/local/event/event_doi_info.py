@@ -15,13 +15,13 @@ from meow.models.infra.locks import RedisLock
 from meow.services.local.event.common.adapting_final_proceedings import adapting_final_proceedings
 from meow.services.local.event.common.collecting_contributions_and_files import collecting_contributions_and_files
 from meow.services.local.event.common.collecting_sessions_and_attachments import collecting_sessions_and_attachments
-from meow.services.local.event.doi.event_doi_draft import draft_contribution_doi
+from meow.services.local.event.doi.event_doi_info import get_contribution_doi
 
 
 logger = lg.getLogger(__name__)
 
 
-async def event_doi_draft(event: dict, cookies: dict, settings: dict) -> AsyncGenerator:
+async def event_doi_info(event: dict, cookies: dict, settings: dict) -> AsyncGenerator:
     """ """
 
     try:
@@ -34,7 +34,7 @@ async def event_doi_draft(event: dict, cookies: dict, settings: dict) -> AsyncGe
 
             logger.debug(f"acquire_lock -> {lock.name}")
 
-            async for r in _event_doi_draft(event, cookies, settings, lock):
+            async for r in _event_doi_info(event, cookies, settings, lock):
                 yield r
 
             logger.debug(f"release_lock -> {lock.name}")
@@ -74,10 +74,10 @@ async def extend_lock(lock: RedisLock) -> RedisLock:
     return lock
 
 
-async def _event_doi_draft(event: dict, cookies: dict, settings: dict, lock: RedisLock) -> AsyncGenerator:
+async def _event_doi_info(event: dict, cookies: dict, settings: dict, lock: RedisLock) -> AsyncGenerator:
     """ """
 
-    logger.info('event_doi_draft - create_final_proceedings')
+    logger.info('event_doi_delete - create_final_proceedings')
 
     """ """
 
@@ -112,20 +112,17 @@ async def _event_doi_draft(event: dict, cookies: dict, settings: dict, lock: Red
 
     final_proceedings = await adapting_final_proceedings(event, sessions, contributions, attachments, cookies, settings)
 
-    logger.info('event_doi_draft - event_doi_draft - begin')
+    logger.info('event_doi_info - event_doi_info - begin')
 
     await extend_lock(lock)
 
     yield dict(type='progress', value=dict(
-        phase='send_contribution_doi_draft_state',
-        text="Send contribution doi draft state"
+        phase='delete_contribution_doi',
+        text="Delete contribution doi"
     ))
 
-    async for result in draft_contribution_doi(final_proceedings, cookies, settings):
-        yield dict(type='progress', value=dict(phase='doi_result', result=result))
+    results = await get_contribution_doi(final_proceedings, cookies, settings)
 
-    # results = await draft_contribution_doi(final_proceedings, cookies, settings)
+    logger.info('event_doi_info - event_doi_info - end')
 
-    logger.info('event_doi_draft - event_doi_draft - end')
-
-    yield dict(type='result', value={})
+    yield dict(type='result', value=results)

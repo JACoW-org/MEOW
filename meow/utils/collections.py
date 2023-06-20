@@ -84,7 +84,7 @@ def get_keywords_initials_dict(keywords: list[KeywordData]) -> dict[str, bool]:
 
     return initials
 
-def get_institutes_initials_dict(institutes: list[AffiliationData]) -> dict[bool]:
+def get_institutes_initials_dict(institutes: list[AffiliationData]) -> dict[str, bool]:
     """"""
 
     initials = {}
@@ -110,6 +110,6 @@ def get_initial(name, alphabet):
     initial = unidecode(name)[0].lower()
 
     if initial not in alphabet:
-        return get_initial(name[1:])
+        return get_initial(name[1:], alphabet)
     
     return initial

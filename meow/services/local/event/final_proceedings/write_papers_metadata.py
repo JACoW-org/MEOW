@@ -49,15 +49,13 @@ async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict
     for session in proceedings_data.sessions:
         sessions_dict[session.code] = session
 
-    cc_logo_bytes = await Path('cc_by.png').read_bytes()
-
     async with create_task_group() as tg:
         async with send_stream:
             for current_index, current_paper in enumerate(papers_data):
                 tg.start_soon(write_metadata_task, capacity_limiter, total_files,
                               current_index, current_paper, sessions_dict,
-                              current_dt_pdf, cc_logo_bytes, cookies,
-                              file_cache_dir, send_stream.clone())
+                              current_dt_pdf, settings, file_cache_dir, 
+                              send_stream.clone())
 
         try:
             async with receive_stream:
@@ -81,8 +79,8 @@ async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict
 
 async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int,
                               current_paper: ContributionPaperData, sessions: dict[str, SessionData],
-                              current_dt_pdf: datetime, cc_logo: bytes, cookies: dict, pdf_cache_dir: Path,
-                              res: MemoryObjectSendStream) -> None:
+                              current_dt_pdf: datetime, settings: dict, pdf_cache_dir: Path,
+                              stream: MemoryObjectSendStream) -> None:
     """ """
 
     async with capacity_limiter:
@@ -115,21 +113,20 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
             trapped=None,
         )
 
-        await write_metadata(metadata, read_pdf_path, write_pdf_path)
-
-        start_page: int = contribution.page
         header_data: Optional[dict] = get_header_data(contribution)
         footer_data: Optional[dict] = get_footer_data(contribution, session)
+        
+        pre_print: str = settings.get('pre_print', 'This is a preprint') \
+            if contribution.peer_reviewing_accepted else ''
 
-        await draw_frame(write_pdf_path, start_page, header_data, footer_data)
+        # async with create_task_group() as tg:
+        #     tg.start_soon(write_metadata, metadata, read_pdf_path, write_pdf_path)
+        #     tg.start_soon(draw_frame, write_pdf_path, contribution.page, pre_print, header_data, footer_data)
+            
+        await write_metadata(metadata, read_pdf_path, write_pdf_path)
+        await draw_frame(write_pdf_path, contribution.page, pre_print, header_data, footer_data)
 
-        # await to_thread.run_sync(draw_frame, contribution, session, write_pdf_path, cc_logo)
-
-        # venv/bin/python3 meow.py metadata -input var/html/FEL2022/pdf/12_proceedings_brief.pdf -title mario -author minnie  -keywords pippo
-
-        # metadata = await to_process.run_sync(write_metadata, contribution, session, current_dt_pdf, read_pdf_path, write_pdf_path)
-
-        await res.send({
+        await stream.send({
             "index": current_index,
             "total": total_files,
             "file": current_file,

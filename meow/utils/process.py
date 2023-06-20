@@ -36,13 +36,15 @@ async def execute_process(args: list[str], cwd: str | None = None) -> ProcessRes
     return result
 
 
-async def run_cmd(cmd: list[str]) -> CompletedProcess[bytes] | None:
+async def run_cmd(command: list[str]) -> CompletedProcess[bytes] | None:
+
+    result: CompletedProcess[bytes] | None = None
 
     try:
 
         # logger.info(" ".join(cmd))
 
-        result = await run_process(command=cmd, check=True, start_new_session=True)
+        result = await run_process(command=command, check=True, start_new_session=True)
 
         # print(result.returncode)
         # print(result.stdout.decode())
@@ -51,4 +53,11 @@ async def run_cmd(cmd: list[str]) -> CompletedProcess[bytes] | None:
         return result
 
     except CalledProcessError as err:
+        
+        if err:
+            print(" ".join(command))
+            print(err.returncode)
+            print(err.stdout.decode())
+            print(err.stderr.decode())
+        
         logger.error(err, exc_info=True)

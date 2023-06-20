@@ -72,15 +72,12 @@ async def write_metadata(metadata: dict, read_path: str, write_path: str | None 
 
     res = await run_cmd(cmd)
 
-    if res is not None and res.returncode == 0:
+    # if res:
+    #     print(res.returncode)
+    #     print(res.stdout.decode())
+    #     print(res.stderr.decode())
 
-        # print(res.returncode)
-        # print(res.stdout.decode())
-        # print(res.stderr.decode())
-
-        return res.returncode
-
-    return 1
+    return 0 if res and res.returncode == 0 else 1
 
 
 async def read_report(read_path: str) -> dict | None:
@@ -90,15 +87,12 @@ async def read_report(read_path: str) -> dict | None:
 
     res = await run_cmd(cmd)
 
-    if res is not None and res.returncode == 0:
+    # if res:
+    #     print(res.returncode)
+    #     print(res.stdout.decode())
+    #     print(res.stderr.decode())
 
-        # print(res.returncode)
-        # print(res.stdout.decode())
-        # print(res.stderr.decode())
-
-        return json_decode(res.stdout.decode())
-
-    return None
+    return json_decode(res.stdout.decode()) if res and res.returncode == 0 else None
 
 
 async def pdf_to_text(read_path: str) -> str:
@@ -119,13 +113,17 @@ async def pdf_to_text(read_path: str) -> str:
     return ''
 
 
-async def draw_frame(write_path: str, page: int, header: dict | None, footer: dict | None) -> int:
+async def draw_frame(write_path: str, page: int, pre_print: str | None, header: dict | None, footer: dict | None) -> int:
     """ """
 
     cmd = [get_python_cmd(), '-m', 'meow', 'frame', '-input', write_path]
 
     cmd.append("-page")
     cmd.append(str(page))
+
+    if pre_print:
+        cmd.append("-preprint")
+        cmd.append(pre_print)
 
     if header:
         cmd.append("-header")
@@ -134,27 +132,24 @@ async def draw_frame(write_path: str, page: int, header: dict | None, footer: di
     if footer:
         cmd.append("-footer")
         cmd.append(json_encode(footer).decode('utf-8'))
-    
+
     # logger.info(cmd)
 
     res = await run_cmd(cmd)
 
-    if res is not None and res.returncode == 0:
+    # if res:
+    #     print(res.returncode)
+    #     print(res.stdout.decode())
+    #     print(res.stderr.decode())
 
-        # print(res.returncode)
-        # print(res.stdout.decode())
-        # print(res.stderr.decode())
-
-        return res.returncode
-
-    return 1
+    return 0 if res and res.returncode == 0 else 1
 
 
 async def concat_pdf(write_path: str, files: list[str]) -> int:
     """ https://pymupdf.readthedocs.io/en/latest/tutorial.html#joining-and-splitting-pdf-documents """
 
     cmd = [get_python_cmd(), '-m', 'meow', 'join', '-o', write_path]
-    
+
     res = await run_cmd(cmd + files)
 
     if res is not None and res.returncode == 0:
@@ -172,7 +167,7 @@ async def brief_links(write_path: str, files: list[str]) -> int:
     """ https://github.com/pymupdf/PyMuPDF/issues/283 """
 
     cmd = [get_python_cmd(), '-m', 'meow', 'links', '-input', write_path]
-    
+
     res = await run_cmd(cmd + files)
 
     if res is not None and res.returncode == 0:
