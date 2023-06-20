@@ -153,6 +153,9 @@ class RedisWorkerManager():
                         uuid: str = head.get('uuid', None)
                         time: str = head.get('time', None)
                         
+                        if code is None:
+                            logger.error("Code is None")
+                        
                         if code == 'task:kill':
                             
                             logger.error(f'KILLLLLLLLLLLLLLLL {code} {uuid}')

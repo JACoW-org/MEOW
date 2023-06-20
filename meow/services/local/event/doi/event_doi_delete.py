@@ -31,6 +31,7 @@ async def delete_contribution_doi(proceedings_data: ProceedingsData, cookies: di
 
     contributions_data: list[ContributionData] = [
         c for c in proceedings_data.contributions
+        if await Path(doi_dir, f'{c.code}.json').exists()
     ]
 
     total_contributions: int = len(contributions_data)
@@ -56,7 +57,7 @@ async def delete_contribution_doi(proceedings_data: ProceedingsData, cookies: di
 
                     logger.info(f"elaborated: {len(results)}" +
                                 f" - {total_contributions}")
-                    
+
                     yield result
 
                     if len(results) >= total_contributions:
@@ -84,39 +85,33 @@ async def _doi_task(capacity_limiter: CapacityLimiter, total: int, index: int,
 
             doi_file = Path(doi_dir, f'{contribution.code}.json')
 
-            doi_exists = await doi_file.exists()
+            # logger.info(str(doi_file))
 
-            if doi_exists:
+            doi_identifier: str = generate_doi_identifier(
+                context=settings.get('doi_context', '10.18429'),
+                organization=settings.get('doi_organization', 'JACoW'),
+                conference=settings.get('doi_conference', 'CONF-YY'),
+                contribution=contribution.code
+            )
 
-                logger.info(str(doi_file))
+            proto = f"https:"
+            host = f"api.test.datacite.org"
+            context = f"dois"
+            path = f"{doi_identifier}"
 
-                # doi_json = await doi_file.read_text()
+            doi_url = f"{proto}//{host}/{context}/{path}".lower()
 
-                doi_identifier: str = generate_doi_identifier(
-                    context=settings.get('doi_context', '10.18429'),
-                    organization=settings.get('doi_organization', 'JACoW'),
-                    conference=settings.get('doi_conference', 'CONF-YY'),
-                    contribution=contribution.code
-                )
+            logger.info(f"{doi_file} -> {doi_url}")
 
-                proto = f"https:"
-                host = f"api.test.datacite.org"
-                context = f"dois"
-                path = f"{doi_identifier}"
+            # logger.info(doi_data)
+            # logger.info(doi_json)
 
-                doi_url = f"{proto}//{host}/{context}/{path}".lower()
+            auth = BasicAuthData(login='CERN.JACOW',
+                                 password='DataCite.cub-gwd')
 
-                logger.info(f"{doi_file} -> {doi_url}")
+            # headers = {'Content-Type': 'application/vnd.api+json'}
 
-                # logger.info(doi_data)
-                # logger.info(doi_json)
-
-                auth = BasicAuthData(login='CERN.JACOW',
-                                     password='DataCite.cub-gwd')
-
-                # headers = {'Content-Type': 'application/vnd.api+json'}
-
-                response = await delete_json(url=doi_url, auth=auth)
+            response = await delete_json(url=doi_url, auth=auth)
 
         except BaseException as ex:
             error = str(ex)

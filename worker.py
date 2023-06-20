@@ -18,7 +18,7 @@ logger = lg.getLogger(__name__)
 async def app_wrap(scope: CancelScope):
     import signal
 
-    with open_signal_receiver(signal.SIGINT,             signal.SIGTERM) as signals:
+    with open_signal_receiver(signal.SIGINT, signal.SIGTERM) as signals:
         async for signum in signals:
             logger.warning("SIGINT" if signum == signal.SIGINT else "SIGTERM")
             await app_post()

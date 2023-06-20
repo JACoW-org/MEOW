@@ -31,6 +31,7 @@ async def draft_contribution_doi(proceedings_data: ProceedingsData, cookies: dic
 
     contributions_data: list[ContributionData] = [
         c for c in proceedings_data.contributions
+        if await Path(doi_dir, f'{c.code}.json').exists()
     ]
 
     total_contributions: int = len(contributions_data)
@@ -86,39 +87,35 @@ async def _doi_task(capacity_limiter: CapacityLimiter, total: int, index: int,
 
             doi_file = Path(doi_dir, f'{contribution.code}.json')
 
-            doi_exists = await doi_file.exists()
+            # logger.info(str(doi_file))
 
-            if doi_exists:
+            doi_json = await doi_file.read_text()
 
-                logger.info(str(doi_file))
+            doi_identifier: str = generate_doi_identifier(
+                context=settings.get('doi_context', '10.18429'),
+                organization=settings.get('doi_organization', 'JACoW'),
+                conference=settings.get('doi_conference', 'CONF-YY'),
+                contribution=contribution.code
+            )
 
-                doi_json = await doi_file.read_text()
+            proto = f"https:"
+            host = f"api.test.datacite.org"
+            context = f"dois"
+            path = f"{doi_identifier}"
 
-                doi_identifier: str = generate_doi_identifier(
-                    context=settings.get('doi_context', '10.18429'),
-                    organization=settings.get('doi_organization', 'JACoW'),
-                    conference=settings.get('doi_conference', 'CONF-YY'),
-                    contribution=contribution.code
-                )
+            doi_url = f"{proto}//{host}/{context}/{path}".lower()
 
-                proto = f"https:"
-                host = f"api.test.datacite.org"
-                context = f"dois"
-                path = f"{doi_identifier}"
+            logger.info(f"{doi_file} -> {doi_url}")
 
-                doi_url = f"{proto}//{host}/{context}/{path}".lower()
+            # logger.info(doi_data)
+            # logger.info(doi_json)
 
-                logger.info(f"{doi_file} -> {doi_url}")
+            auth = BasicAuthData(login='CERN.JACOW',
+                                 password='DataCite.cub-gwd')
 
-                # logger.info(doi_data)
-                # logger.info(doi_json)
+            headers = {'Content-Type': 'application/vnd.api+json'}
 
-                auth = BasicAuthData(login='CERN.JACOW',
-                                     password='DataCite.cub-gwd')
-
-                headers = {'Content-Type': 'application/vnd.api+json'}
-
-                response = await put_json(url=doi_url, data=doi_json, headers=headers, auth=auth)
+            response = await put_json(url=doi_url, data=doi_json, headers=headers, auth=auth)
 
         except BaseException as ex:
             error = str(ex)

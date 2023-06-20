@@ -132,7 +132,9 @@ async def __websocket_task(ws: WebSocket, id: str) -> None:
     try:
         while app.state.webapp_running:
             message = await ws.receive_json(mode="text")
-            # logger.debug(message)
+            
+            # logger.warning(message)
+            
             if message:
                 # logger.debug(f"ws_to_r {message}")
                 try:
@@ -143,8 +145,8 @@ async def __websocket_task(ws: WebSocket, id: str) -> None:
 
     except WebSocketDisconnect:
         logger.info("__websocket_task >>> DISCONNECTED")
-    except BaseException as e:
-        logger.error("__websocket_task", e, exc_info=True)
+    except BaseException:
+        logger.error("__websocket_task", exc_info=True)
     finally:
         try:
             connected = False
