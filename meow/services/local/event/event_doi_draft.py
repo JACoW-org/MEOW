@@ -121,8 +121,11 @@ async def _event_doi_draft(event: dict, cookies: dict, settings: dict, lock: Red
         text="Send contribution doi draft state"
     ))
 
-    results = await draft_contribution_doi(final_proceedings, cookies, settings)
+    async for result in draft_contribution_doi(final_proceedings, cookies, settings):
+        yield dict(type='progress', value=dict(phase='doi_result', result=result))
+
+    # results = await draft_contribution_doi(final_proceedings, cookies, settings)
 
     logger.info('event_doi_draft - event_doi_draft - end')
 
-    yield dict(type='result', value=results)
+    yield dict(type='result', value={})

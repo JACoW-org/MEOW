@@ -1,4 +1,5 @@
 import logging as lg
+from typing import AsyncGenerator
 
 from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
@@ -16,7 +17,7 @@ from meow.utils.http import put_json
 logger = lg.getLogger(__name__)
 
 
-async def draft_contribution_doi(proceedings_data: ProceedingsData, cookies: dict, settings: dict):
+async def draft_contribution_doi(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> AsyncGenerator:
     """ """
 
     logger.info('draft_contribution_doi - draft_contribution_doi')
@@ -56,6 +57,8 @@ async def draft_contribution_doi(proceedings_data: ProceedingsData, cookies: dic
                     logger.info(f"elaborated: {len(results)}" +
                                 f" - {total_contributions}")
 
+                    yield result
+
                     if len(results) >= total_contributions:
                         receive_stream.close()
 
@@ -66,7 +69,7 @@ async def draft_contribution_doi(proceedings_data: ProceedingsData, cookies: dic
         except BaseException as ex:
             logger.error(ex, exc_info=True)
 
-    return results
+    # return results
 
 
 async def _doi_task(capacity_limiter: CapacityLimiter, total: int, index: int,
@@ -124,11 +127,11 @@ async def _doi_task(capacity_limiter: CapacityLimiter, total: int, index: int,
         await send_res(stream, total, index, contribution, response=response, error=error)
 
 
-async def send_res(stream: MemoryObjectSendStream, total, index, contribution, response, error=None):
+async def send_res(stream: MemoryObjectSendStream, total: int, index: int, contribution: ContributionData, response, error=None):
     await stream.send({
         "total": total,
         "index": index,
-        "contribution": contribution,
-        "response": response,
+        "code": contribution.code,
+        "doi": response.get('data', None) if response else None,
         "error": error
     })
