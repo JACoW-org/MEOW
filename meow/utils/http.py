@@ -132,7 +132,7 @@ async def delete_json(url: str, headers: dict = {}, cookies: dict = {}, auth: Ba
             HttpClientSessions.del_client_session(client)
 
 
-async def put_json(url: str, body: Any, headers: dict = {}, cookies: dict = {}, auth: BasicAuthData | None = None) -> Any:
+async def put_json(url: str, data: Any, headers: dict = {}, cookies: dict = {}, auth: BasicAuthData | None = None) -> Any:
     """ Send HTTP PUT json function """
 
     def json_serialize(val):
@@ -153,14 +153,14 @@ async def put_json(url: str, body: Any, headers: dict = {}, cookies: dict = {}, 
     ) as client:
         try:
             HttpClientSessions.add_client_session(client)
-            async with client.put(url, data=body) as resp:
+            async with client.put(url, data=data) as resp:
                 try:
                     body: str = ''
                     if resp.ok:
                         return await resp.json()
                     try:
                         body = await resp.text()
-                    except BaseException:
+                    except BaseException as ex:
                         logger.error(ex, exc_info=True)
                     raise BaseException(f"invalid response status" +
                                         f" {resp.status} - {body}")

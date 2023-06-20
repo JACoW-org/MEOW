@@ -1,5 +1,5 @@
 import logging as lg
-from typing import AsyncGenerator
+from typing import Any, AsyncGenerator
 
 from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
@@ -118,7 +118,7 @@ async def _doi_task(capacity_limiter: CapacityLimiter, total: int, index: int,
 
                 headers = {'Content-Type': 'application/vnd.api+json'}
 
-                response = await put_json(url=doi_url, body=doi_json, headers=headers, auth=auth)
+                response = await put_json(url=doi_url, data=doi_json, headers=headers, auth=auth)
 
         except BaseException as ex:
             error = str(ex)
@@ -127,11 +127,13 @@ async def _doi_task(capacity_limiter: CapacityLimiter, total: int, index: int,
         await send_res(stream, total, index, contribution, response=response, error=error)
 
 
-async def send_res(stream: MemoryObjectSendStream, total: int, index: int, contribution: ContributionData, response, error=None):
+async def send_res(stream: MemoryObjectSendStream, total: int, index: int, contribution: ContributionData, response: Any, error=None):
+    doi = response.get('data', None) if response else None
+
     await stream.send({
         "total": total,
         "index": index,
         "code": contribution.code,
-        "doi": response.get('data', None) if response else None,
+        "doi": doi,
         "error": error
     })

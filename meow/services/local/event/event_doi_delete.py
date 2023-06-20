@@ -121,8 +121,11 @@ async def _event_doi_delete(event: dict, cookies: dict, settings: dict, lock: Re
         text="Delete contribution doi"
     ))
 
-    results = await delete_contribution_doi(final_proceedings, cookies, settings)
+    # results = await delete_contribution_doi(final_proceedings, cookies, settings)
+    
+    async for result in delete_contribution_doi(final_proceedings, cookies, settings):
+        yield dict(type='progress', value=dict(phase='doi_result', result=result))
 
     logger.info('event_doi_delete - event_doi_delete - end')
 
-    yield dict(type='result', value=results)
+    yield dict(type='result', value={})

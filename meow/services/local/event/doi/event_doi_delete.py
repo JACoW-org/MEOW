@@ -1,4 +1,5 @@
 import logging as lg
+from typing import Any
 
 from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
@@ -55,6 +56,8 @@ async def delete_contribution_doi(proceedings_data: ProceedingsData, cookies: di
 
                     logger.info(f"elaborated: {len(results)}" +
                                 f" - {total_contributions}")
+                    
+                    yield result
 
                     if len(results) >= total_contributions:
                         receive_stream.close()
@@ -65,8 +68,6 @@ async def delete_contribution_doi(proceedings_data: ProceedingsData, cookies: di
             logger.debug(eos, exc_info=False)
         except BaseException as ex:
             logger.error(ex, exc_info=True)
-
-    return results
 
 
 async def _doi_task(capacity_limiter: CapacityLimiter, total: int, index: int,
@@ -124,11 +125,13 @@ async def _doi_task(capacity_limiter: CapacityLimiter, total: int, index: int,
         await send_res(stream, total, index, contribution, response=response, error=error)
 
 
-async def send_res(stream: MemoryObjectSendStream, total, index, contribution, response, error=None):
+async def send_res(stream: MemoryObjectSendStream, total: int, index: int, contribution: ContributionData, response: Any, error=None):
+    doi = response.get('data', None) if response else None
+
     await stream.send({
         "total": total,
         "index": index,
-        "contribution": contribution,
-        "response": response,
+        "code": contribution.code,
+        "doi": doi,
         "error": error
     })
