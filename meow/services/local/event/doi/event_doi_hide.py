@@ -6,11 +6,11 @@ from anyio.streams.memory import MemoryObjectSendStream
 from meow.app.errors.service_error import ServiceError
 from meow.models.local.common.auth import BasicAuthData
 
+from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
 from meow.tasks.local.doi.utils import generate_doi_identifier
 
 from meow.utils.http import put_json
-from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.utils.serialization import json_decode, json_encode
 
 
