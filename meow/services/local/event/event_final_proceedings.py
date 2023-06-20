@@ -308,7 +308,7 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, c
     
     ## Bloccante
 
-    await generate_contribution_doi(final_proceedings, cookies, settings, config)
+    await generate_contribution_doi(final_proceedings, cookies, settings, config, filter_contributions_pubblicated)
     
     """ """
     

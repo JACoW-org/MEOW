@@ -1,4 +1,5 @@
 import logging as lg
+from typing import Callable
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
 from meow.models.local.event.final_proceedings.event_model import EventData
 
@@ -20,12 +21,14 @@ logger = lg.getLogger(__name__)
 
 # TODO REMOVE
 async def generate_contribution_doi(proceedings_data: ProceedingsData, cookies: dict, settings: dict,
-                                    config: FinalProceedingsConfig) -> ProceedingsData:
+                                    config: FinalProceedingsConfig, callable: Callable) -> ProceedingsData:
     """ """
 
     logger.info('event_final_proceedings - generate_contribution_doi')
 
-    total_files: int = len(proceedings_data.contributions)
+    contributions = [c for c in proceedings_data.contributions if callable(c)]
+
+    total_files: int = len(contributions)
     processed_files: int = 0
 
     send_stream, receive_stream = create_memory_object_stream()
@@ -35,7 +38,7 @@ async def generate_contribution_doi(proceedings_data: ProceedingsData, cookies: 
 
     async with create_task_group() as tg:
         async with send_stream:
-            for contribution_data in proceedings_data.contributions:
+            for contribution_data in contributions:
                 tg.start_soon(generate_doi_task, capacity_limiter, proceedings_data.event,
                               contribution_data, settings, config, send_stream.clone())
 
@@ -63,7 +66,7 @@ async def generate_contribution_doi(proceedings_data: ProceedingsData, cookies: 
         except Exception as ex:
             logger.error(ex, exc_info=True)
 
-    proceedings_data = refill_contribution_doi(proceedings_data, results)
+    proceedings_data = refill_contribution_doi(proceedings_data, results, callable)
 
     return proceedings_data
 
@@ -177,8 +180,8 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         doi_path=doi_path,
         doi_identifier=doi_identifier,
         doi_landing_page=doi_landing_page,
-        pages=f'{contribution.page}-{contribution.metadata.get("page_count", 0) + contribution.page - 1}' \
-            if contribution.page and contribution.metadata else '',
+        pages=f'{contribution.page}-{contribution.metadata.get("page_count", 0) + contribution.page - 1}'
+        if contribution.page and contribution.metadata else '',
         num_of_pages=contribution.metadata.get(
             "page_count", 0) if contribution.metadata else 0,
         paper_size=contribution.paper_size,
@@ -190,16 +193,18 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
     return doi_data
 
 
-def refill_contribution_doi(proceedings_data: ProceedingsData, results: dict) -> ProceedingsData:
+def refill_contribution_doi(proceedings_data: ProceedingsData, results: dict, callable: Callable) -> ProceedingsData:
 
     start_page: int = 0
 
     for contribution_data in proceedings_data.contributions:
-        code: str = contribution_data.code
+        
+        if callable(contribution_data):
+            code: str = contribution_data.code
 
-        if code in results and results[code] is not None:
-            contribution_data.doi_data = results[code]
-            contribution_data.doi_data.start_page = start_page
-            start_page = start_page + contribution_data.doi_data.num_of_pages
+            if code in results and results[code] is not None:
+                contribution_data.doi_data = results[code]
+                contribution_data.doi_data.start_page = start_page
+                start_page = start_page + contribution_data.doi_data.num_of_pages
 
     return proceedings_data
