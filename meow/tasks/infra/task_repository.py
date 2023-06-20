@@ -7,6 +7,7 @@ from meow.tasks.local.event_compress_proceedings import EventCompressProceedings
 from meow.tasks.local.event_doi_delete import EventDoiDeleteTask
 from meow.tasks.local.event_doi_draft import EventDoiDraftTask
 from meow.tasks.local.event_doi_hide import EventDoiHideTask
+from meow.tasks.local.event_doi_info import EventDoiInfoTask
 from meow.tasks.local.event_doi_publish import EventDoiPublishTask
 from meow.tasks.local.event_papers_check import EventPapersCheckTask
 from meow.tasks.local.event_pre_press import EventPrePressTask
@@ -29,6 +30,7 @@ class TaskRepository:
         event_doi_delete=EventDoiDeleteTask,
         event_doi_publish=EventDoiPublishTask,
         event_doi_hide=EventDoiHideTask,
+        event_doi_info=EventDoiInfoTask,
     )
 
     @classmethod
