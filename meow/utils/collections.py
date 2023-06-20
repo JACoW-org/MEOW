@@ -4,7 +4,6 @@ from unidecode import unidecode
 
 from meow.models.local.event.final_proceedings.event_model import (AffiliationData, KeywordData,
     PersonData)
-from meow.callbacks.tasks import get
 
 def group_authors_by_last_initial_for_render(authors: list[PersonData]) -> dict:
     """"""
