@@ -181,11 +181,11 @@ class ContributionDOI:
         attributes['relatedIdentifiers'] = [dict(
             relatedIdentifier=self.isbn,
             relatedIdentifierType='ISBN',
-            relationType='isPartOf'
+            relationType='IsPartOf'
         ), dict(
             relatedIdentifier=self.issn,
             relatedIdentifierType='ISSN',
-            relationType='isPartOf'
+            relationType='IsPartOf'
         )]
 
         attributes['sizes'] = [
