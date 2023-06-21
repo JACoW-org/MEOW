@@ -87,7 +87,7 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
                                  settings: dict[str, str], config: FinalProceedingsConfig):
 
     doi_label: str = generate_doi_external_label(
-        protocol=settings.get('doi_protocol', 'https'),
+        protocol=settings.get('doi_proto', 'https'),
         domain=settings.get('doi_domain', 'doi.org'),
         context=settings.get('doi_context', 'CONF-CTX'),
         organization=settings.get('doi_organization', 'JACoW'),
@@ -96,7 +96,7 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
     )
 
     doi_url: str = generate_doi_external_url(
-        protocol=settings.get('doi_protocol', 'https'),
+        protocol=settings.get('doi_proto', 'https'),
         domain=settings.get('doi_domain', 'doi.org'),
         context=settings.get('doi_context', 'CONF-CTX'),
         organization=settings.get('doi_organization', 'JACoW'),

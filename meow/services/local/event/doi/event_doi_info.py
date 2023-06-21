@@ -9,6 +9,7 @@ from meow.models.local.common.auth import BasicAuthData
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
+from meow.services.local.event.doi.event_doi_utils import get_doi_api_login, get_doi_api_password, get_doi_api_url
 from meow.tasks.local.doi.utils import generate_doi_identifier
 
 from meow.utils.http import fetch_json
@@ -94,24 +95,21 @@ async def _doi_task(capacity_limiter: CapacityLimiter, total: int, index: int,
                 contribution=contribution.code
             )
 
-            proto = f"https:"
-            host = f"api.test.datacite.org"
-            context = f"dois"
-            path = f"{doi_identifier}"
+            doi_user = get_doi_api_login(settings=settings)
+            doi_password = get_doi_api_password(settings=settings)
+            doi_api_url = get_doi_api_url(settings=settings,
+                                          doi_id=doi_identifier)
 
-            doi_url = f"{proto}//{host}/{context}/{path}".lower()
-
-            logger.info(f"{doi_file} -> {doi_url}")
+            logger.info(f"{doi_file} -> {doi_api_url}")
 
             # logger.info(doi_data)
             # logger.info(doi_json)
 
-            auth = BasicAuthData(login='CERN.JACOW',
-                                 password='DataCite.cub-gwd')
+            auth = BasicAuthData(login=doi_user, password=doi_password)
 
             headers = {'accept': 'application/vnd.api+json'}
 
-            response = await fetch_json(url=doi_url, headers=headers, auth=auth)
+            response = await fetch_json(url=doi_api_url, headers=headers, auth=auth)
 
         except BaseException as ex:
             error = str(ex)
