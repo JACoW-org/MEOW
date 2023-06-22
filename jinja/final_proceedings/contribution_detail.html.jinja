@@ -76,9 +76,9 @@
     <a onclick="openUrl(`pdf/{{ contribution.paper_name }}`)" 
         href="javascript:void(0);">{{ contribution.code|upper }}</a>
 
-    {% if contribution.peer_reviewing_accepted: %}
+    {#{% if contribution.peer_reviewing_accepted: %}
     <span>&nbsp;(Accepted)</span>
-    {% endif %}
+    {% endif %}#}
 </div>
 
 {% if contribution.metadata: %}

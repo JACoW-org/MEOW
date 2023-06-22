@@ -1,9 +1,8 @@
 
-from asyncio import to_thread
 import io
 import pathlib
 import logging as lg
-from anyio import Path
+from anyio import Path, to_process
 
 from meow.utils.hash import file_md5
 from meow.utils.keywords import KEYWORDS
@@ -11,7 +10,7 @@ from meow.utils.process import run_cmd
 from meow.utils.serialization import json_decode, json_encode
 
 from fitz import Document
-from fitz.utils import set_metadata, insert_link
+from fitz.utils import set_metadata
 
 
 from nltk.stem.snowball import SnowballStemmer
@@ -133,8 +132,8 @@ def _read_report_thread(input: str, keywords: bool):
     
     return report
     
-async def read_report_thread(read_path: str, keywords: bool) -> dict | None:
-    return await to_thread(_read_report_thread, read_path, keywords)
+async def read_report_anyio(read_path: str, keywords: bool) -> dict | None:
+    return await to_process.run_sync(_read_report_thread, read_path, keywords)
 
 
 async def pdf_to_text(read_path: str) -> str:
@@ -227,8 +226,8 @@ def _draw_frame_thread_thread(input: str, output:str, page_number: int, pre_prin
     doc.close()
     del doc
 
-async def draw_frame_thread(read_path: str, write_path: str, page: int, pre_print: str | None, header: dict | None, footer: dict | None, metadata: dict | None):
-    return await to_thread(_draw_frame_thread_thread, read_path, write_path, page, pre_print, header, footer, metadata)
+async def draw_frame_anyio(read_path: str, write_path: str, page: int, pre_print: str | None, header: dict | None, footer: dict | None, metadata: dict | None):
+    return await to_process.run_sync(_draw_frame_thread_thread, read_path, write_path, page, pre_print, header, footer, metadata)
 
 async def write_metadata(metadata: dict, read_path: str, write_path: str | None = None) -> int:
     """ """

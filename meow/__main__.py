@@ -89,11 +89,11 @@ def doc_join(args) -> None:
 
     doc = Document()  # output PDF
     
-    print(args.input)
+    # print(args.input)
 
     for src_item in args.input:  # process one input PDF
         
-        print(src_item)
+        # print(src_item)
 
         src_list = src_item.split(",")
         password = src_list[1] if len(src_list) > 1 else None
@@ -105,7 +105,7 @@ def doc_join(args) -> None:
         else:  # take all pages
             page_list = range(1, src.page_count + 1)
 
-        print(page_list)
+        # print(page_list)
 
         for i in page_list:
             # copy each source page

@@ -9,7 +9,7 @@ from meow.models.local.event.final_proceedings.contribution_model import Contrib
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_contributions_papers
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
-from meow.services.local.event.event_pdf_utils import read_report
+from meow.services.local.event.event_pdf_utils import read_report_anyio
 
 
 logger = lg.getLogger(__name__)
@@ -84,7 +84,7 @@ async def read_report_task(capacity_limiter: CapacityLimiter, total_files: int, 
 
         # logger.debug(f"{pdf_file} {pdf_name}")
 
-        report = await read_report(pdf_path, False)
+        report = await read_report_anyio(pdf_path, False)
 
         await res.send({
             "index": current_index,
