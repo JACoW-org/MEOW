@@ -221,7 +221,7 @@ def _draw_frame_thread_thread(input: str, output:str, page_number: int, pre_prin
 
         page_number += 1
 
-    doc.save(filename=output, garbage=0, clean=0, deflate=1)
+    doc.save(filename=output, garbage=1, clean=1, deflate=1)
 
     doc.close()
     del doc

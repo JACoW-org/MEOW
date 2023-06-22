@@ -117,7 +117,7 @@ def doc_join(args) -> None:
     if args.metadata:
         set_metadata(doc, json.loads(args.metadata))
 
-    doc.save(args.output, garbage=0, clean=0, deflate=1)
+    doc.save(args.output, garbage=1, clean=1, deflate=1)
 
     doc.close()
     del doc
@@ -188,7 +188,7 @@ def doc_frame(args) -> None:
 
         page_number += 1
 
-    doc.save(filename=args.output, garbage=0, clean=0, deflate=1)
+    doc.save(filename=args.output, garbage=1, clean=1, deflate=1)
 
     doc.close()
     del doc

@@ -1,6 +1,8 @@
 import logging as lg
 from typing import Callable
 
+from meow.utils.filesystem import rmtree, move
+
 from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
@@ -90,7 +92,8 @@ async def file_copy_task(capacity_limiter: CapacityLimiter, total_files: int, cu
             # logger.info(f"{pdf_file} ({'exists!' if pdf_exists else 'not exists!!!'}) -> {pdf_dest}")
 
             if file_exists:
-                await dest_path.hardlink_to(file_path)
+                # await dest_path.hardlink_to(file_path)
+                await move(str(file_path), str(dest_path))
             else:
                 logger.warning(f"{file_path} not exists")
             
