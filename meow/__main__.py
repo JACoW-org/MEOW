@@ -87,10 +87,13 @@ def get_list(rlist, limit, what="page"):
 def doc_join(args) -> None:
     """ Join pages from several PDF documents. """
 
-    doc_list = args.input  # a list of input PDFs
     doc = Document()  # output PDF
+    
+    print(args.input)
 
-    for src_item in doc_list:  # process one input PDF
+    for src_item in args.input:  # process one input PDF
+        
+        print(src_item)
 
         src_list = src_item.split(",")
         password = src_list[1] if len(src_list) > 1 else None
@@ -101,6 +104,8 @@ def doc_join(args) -> None:
             page_list = get_list(",".join(src_list[2:]), src.page_count + 1)
         else:  # take all pages
             page_list = range(1, src.page_count + 1)
+
+        print(page_list)
 
         for i in page_list:
             # copy each source page
