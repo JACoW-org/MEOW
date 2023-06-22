@@ -13,7 +13,8 @@ async def link_static_site(proceedings_data: ProceedingsData, cookies: dict, set
     """ """
 
     static_site_name = f"{proceedings_data.event.id}_src"
-    static_site_dir = Path('var', 'run', static_site_name, 'out')
+    static_site_src = Path('var', 'run', static_site_name)
+    static_site_dir = Path(static_site_src, 'out')
 
     site_preview_name = f"{proceedings_data.event.id}"
     site_preview_dir = Path('var', 'html', site_preview_name)
@@ -22,5 +23,6 @@ async def link_static_site(proceedings_data: ProceedingsData, cookies: dict, set
 
     await rmtree(str(site_preview_dir))
     await move(str(static_site_dir), str(site_preview_dir))
+    await rmtree(str(static_site_src))
 
     return proceedings_data

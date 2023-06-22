@@ -10,7 +10,7 @@ from meow.models.local.event.final_proceedings.event_model import AttachmentData
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_proceedings_papers
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
-from meow.services.local.event.event_pdf_utils import brief_links, concat_pdf, write_metadata
+from meow.services.local.event.event_pdf_utils import brief_links, concat_pdf
 from meow.utils.list import split_list
 
 
@@ -90,9 +90,23 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
 
     pdf_parts = [str(vol_pre_pdf_path)] + \
         vol_pdf_results if vol_pre_pdf_path else vol_pdf_results
+        
+    metadata = dict(
+        author=f"JACoW - Joint Accelerator Conferences Website",
+        producer=None,
+        creator=f"cat--purr_meow",
+        title=f"{event_title} - Proceedings Volume",
+        format=None,
+        encryption=None,
+        creationDate=None,
+        modDate=None,
+        subject=f"The complete volume of papers",
+        keywords=None,
+        trapped=None,
+    )
 
-    await concat_pdf(str(vol_pdf_path), pdf_parts)
-    await metadata_vol(str(vol_pdf_path), event_title)
+    await concat_pdf(str(vol_pdf_path), pdf_parts, metadata)
+    # await metadata_vol(str(vol_pdf_path), event_title)
 
     proceedings_data.proceedings_volume_size = (await vol_pdf_path.stat()).st_size
 
@@ -146,9 +160,22 @@ async def brief_pdf_task(proceedings_data: ProceedingsData,  files_data: list[Fi
            
     pdf_parts = [str(brief_pre_pdf_path)] + \
         vol_pdf_results if brief_pre_pdf_path else vol_pdf_results
+        
+    metadata = dict(
+        author=f"JACoW - Joint Accelerator Conferences Website",
+        producer=None,
+        creator=f"cat--purr_meow",
+        title=f"{event_title} - Proceedings at a Glance",
+        format=None,
+        encryption=None,
+        creationDate=None,
+        modDate=None,
+        subject=f"First page only of all papers with hyperlinks to complete versions",
+        keywords=None,
+        trapped=None,
+    )
 
-    await concat_pdf(str(brief_pdf_path), pdf_parts)
-    await metadata_brief(str(brief_pdf_path), event_title)
+    await concat_pdf(str(brief_pdf_path), pdf_parts, metadata)
     await brief_links(str(brief_pdf_path), brief_pdf_links)   
 
     proceedings_data.proceedings_brief_size = (await brief_pdf_path.stat()).st_size
@@ -157,58 +184,6 @@ async def brief_pdf_task(proceedings_data: ProceedingsData,  files_data: list[Fi
 async def concat_chunks(write_path: str, pdf_files: list[str], results: list[str], limiter: CapacityLimiter) -> None:
     async with limiter:
         results.append(write_path)
-        await concat_pdf(write_path, pdf_files)
+        await concat_pdf(write_path, pdf_files, None)
 
 
-async def metadata_vol(full_pdf: str, volume_title: str) -> None:
-    """ """
-
-    try:
-
-        metadata = dict(
-            author=f"JACoW - Joint Accelerator Conferences Website",
-            producer=None,
-            creator=f"cat--purr_meow",
-            title=f"{volume_title} - Proceedings Volume",
-            format=None,
-            encryption=None,
-            creationDate=None,
-            modDate=None,
-            subject=f"The complete volume of papers",
-            keywords=None,
-            trapped=None,
-        )
-
-        # logger.info(metadata)
-
-        await write_metadata(metadata, full_pdf)
-
-    except Exception as e:
-        logger.error(e, exc_info=True)
-
-
-async def metadata_brief(full_pdf: str, volume_title: str) -> None:
-    """ """
-
-    try:
-
-        metadata = dict(
-            author=f"JACoW - Joint Accelerator Conferences Website",
-            producer=None,
-            creator=f"cat--purr_meow",
-            title=f"{volume_title} - Proceedings at a Glance",
-            format=None,
-            encryption=None,
-            creationDate=None,
-            modDate=None,
-            subject=f"First page only of all papers with hyperlinks to complete versions",
-            keywords=None,
-            trapped=None,
-        )
-
-        # logger.info(metadata)
-
-        await write_metadata(metadata, full_pdf)
-
-    except Exception as e:
-        logger.error(e, exc_info=True)

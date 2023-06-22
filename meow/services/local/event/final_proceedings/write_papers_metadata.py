@@ -1,5 +1,5 @@
 import logging as lg
-from typing import Callable, Optional
+from typing import Any, Callable, Optional
 import pytz as tz
 
 from anyio import Path, create_task_group, CapacityLimiter
@@ -12,7 +12,7 @@ from meow.models.local.event.final_proceedings.proceedings_data_utils import ext
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.models.local.event.final_proceedings.session_model import SessionData
-from meow.services.local.event.event_pdf_utils import write_metadata, draw_frame
+from meow.services.local.event.event_pdf_utils import draw_frame
 
 from datetime import datetime
 from meow.utils.datetime import format_datetime_pdf
@@ -54,7 +54,7 @@ async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict
             for current_index, current_paper in enumerate(papers_data):
                 tg.start_soon(write_metadata_task, capacity_limiter, total_files,
                               current_index, current_paper, sessions_dict,
-                              current_dt_pdf, settings, file_cache_dir, 
+                              current_dt_pdf, settings, file_cache_dir,
                               send_stream.clone())
 
         try:
@@ -91,47 +91,48 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
 
         read_pdf_name = f"{current_file.filename}"
         read_pdf_file = Path(pdf_cache_dir, read_pdf_name)
-        read_pdf_path = str(read_pdf_file)
 
         write_pdf_name = f"{current_file.filename}_jacow"
         write_pdf_file = Path(pdf_cache_dir, write_pdf_name)
-        write_pdf_path = str(write_pdf_file)
+
+        if await write_pdf_file.exists():
+            await write_pdf_file.unlink()
 
         # logger.debug(f"{pdf_file} {pdf_name}")
 
-        metadata = dict(
-            author=contribution.authors_meta,
-            producer=contribution.producer_meta,
-            creator=contribution.creator_meta,
-            title=contribution.title_meta,
-            format=None,
-            encryption=None,
-            creationDate=current_dt_pdf,
-            modDate=current_dt_pdf,
-            subject=contribution.track_meta,
-            keywords=contribution.keywords_meta,
-            trapped=None,
-        )
-
         header_data: Optional[dict] = get_header_data(contribution)
         footer_data: Optional[dict] = get_footer_data(contribution, session)
-        
+        metadata: Optional[dict] = get_metadata(current_dt_pdf, contribution)
+
         pre_print: str = settings.get('pre_print', 'This is a preprint') \
             if contribution.peer_reviewing_accepted else ''
 
-        # async with create_task_group() as tg:
-        #     tg.start_soon(write_metadata, metadata, read_pdf_path, write_pdf_path)
-        #     tg.start_soon(draw_frame, write_pdf_path, contribution.page, pre_print, header_data, footer_data)
-            
-        await write_metadata(metadata, read_pdf_path, write_pdf_path)
-        await draw_frame(write_pdf_path, contribution.page, pre_print, header_data, footer_data)
+        await draw_frame(str(read_pdf_file), str(write_pdf_file), contribution.page, pre_print, header_data, footer_data, metadata)
 
         await stream.send({
             "index": current_index,
             "total": total_files,
-            "file": current_file,
-            "meta": metadata
+            "file": current_file
         })
+
+
+def get_metadata(current_dt_pdf, contribution) -> dict[str, Any] | None:
+
+    metadata = dict(
+        author=contribution.authors_meta,
+        producer=contribution.producer_meta,
+        creator=contribution.creator_meta,
+        title=contribution.title_meta,
+        format=None,
+        encryption=None,
+        creationDate=current_dt_pdf,
+        modDate=current_dt_pdf,
+        subject=contribution.track_meta,
+        keywords=contribution.keywords_meta,
+        trapped=None,
+    )
+
+    return metadata
 
 
 def get_footer_data(contribution, session) -> dict[str, str] | None:

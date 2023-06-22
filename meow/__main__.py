@@ -13,6 +13,8 @@ import multiprocessing as mp
 from fitz import Document, Rect
 from fitz.utils import set_metadata, insert_link
 
+from meow.utils.keywords import KEYWORDS
+
 from meow.services.local.papers_metadata.pdf_annotations import annot_page_footer, annot_page_header, annot_page_side
 
 
@@ -88,6 +90,9 @@ def doc_join(args) -> None:
     doc_list = args.input  # a list of input PDFs
     doc = Document()  # output PDF
 
+    if args.metadata:
+        set_metadata(doc, json.loads(args.metadata))
+
     for src_item in doc_list:  # process one input PDF
 
         src_list = src_item.split(",")
@@ -107,7 +112,7 @@ def doc_join(args) -> None:
         src.close()
         del src
 
-    doc.save(args.output, garbage=1, clean=1, deflate=1)
+    doc.save(args.output, garbage=0, clean=0, deflate=1)
 
     doc.close()
     del doc
@@ -143,24 +148,6 @@ def doc_links(args) -> None:
     del doc
 
 
-def doc_text(args) -> None:
-
-    doc = Document(filename=args.input)
-
-    out = io.StringIO()
-
-    for page in doc:  # iterate the document pages
-        text = page.get_textpage().extractText()  # get plain text (is in UTF-8)
-        out.write(text)  # write text of page
-
-    txt = out.getvalue()
-
-    sys.stdout.write(f"{txt}\n")
-
-    doc.close()
-    del doc
-
-
 def doc_frame(args) -> None:
 
     doc = Document(filename=args.input)
@@ -172,8 +159,11 @@ def doc_frame(args) -> None:
     header = json.loads(args.header)
     footer = json.loads(args.footer)
 
+    if args.metadata:
+        set_metadata(doc, json.loads(args.metadata))
+
     cc_logo = pathlib.Path('cc_by.png').read_bytes()
-    
+
     # print([args.input, page_number, pre_print])
 
     for page in doc:
@@ -193,7 +183,25 @@ def doc_frame(args) -> None:
 
         page_number += 1
 
-    doc.save(filename=args.input, incremental=1, encryption=0)
+    doc.save(filename=args.output, garbage=0, clean=0, deflate=1)
+
+    doc.close()
+    del doc
+
+
+def doc_text(args) -> None:
+
+    doc = Document(filename=args.input)
+
+    out = io.StringIO()
+
+    for page in doc:  # iterate the document pages
+        text = page.get_textpage().extractText()  # get plain text (is in UTF-8)
+        out.write(text)  # write text of page
+
+    txt = out.getvalue()
+
+    sys.stdout.write(f"{txt}\n")
 
     doc.close()
     del doc
@@ -201,13 +209,26 @@ def doc_frame(args) -> None:
 
 def doc_report(args) -> None:
 
+    from nltk.stem.snowball import SnowballStemmer
+    from meow.services.local.papers_metadata.pdf_keywords import get_keywords_from_text, stem_keywords_as_tree
+
     doc = Document(filename=args.input)
+
+    pdf_value = io.StringIO()
 
     pages_report = []
     fonts_report = []
     xref_list = []
 
+    stemmer = SnowballStemmer("english") if args.keywords == 'True' else None
+    stem_keywords = stem_keywords_as_tree(
+        KEYWORDS, stemmer) if stemmer else None
+
     for page in doc:
+
+        if args.keywords == 'True':
+            # get plain text (is in UTF-8)
+            pdf_value.write(page.get_textpage().extractText())
 
         for font in page.get_fonts(True):
 
@@ -220,15 +241,6 @@ def doc_report(args) -> None:
                 font_name, font_ext, font_type, buffer = doc.extract_font(xref)
                 font_emb = not ((font_ext == "n/a" or not buffer)
                                 and font_type != "Type3")
-
-                # print("{: >40} {: >5} {: >5} {: >5}".format(
-                #     font_name, font_emb, font_ext, font_type
-                # ))
-
-                # print(buffer)
-
-                # print("font_name", font_name, "font_emb", font_emb, "font_ext", font_ext, "font_type", font_type, len(buffer)) # font.name, font.flags, font.bbox, font.buffer
-
                 fonts_report.append(dict(name=font_name, emb=font_emb,
                                          ext=font_ext, type=font_type))
 
@@ -239,10 +251,14 @@ def doc_report(args) -> None:
 
     fonts_report.sort(key=lambda x: x.get('name'))
 
+    keywords = get_keywords_from_text(str(pdf_value.getvalue()), stemmer, stem_keywords) \
+        if stemmer and stem_keywords else []
+
     report = json.dumps(dict(
         page_count=doc.page_count,
         pages_report=pages_report,
-        fonts_report=fonts_report
+        fonts_report=fonts_report,
+        keywords=keywords
     ))
 
     sys.stdout.write(f"{report}\n")
@@ -283,23 +299,27 @@ def doc_metadata(args) -> None:
 # https://www.driftinginrecursion.com/post/parallel_archiving/
 # https://docs.python.org/3/library/tarfile.html#examples
 def gzip_compress_file(p):
-    print ('gzip_compress_file', p, p + '.gz')
+    print('gzip_compress_file', p, p + '.gz')
     with open(p, 'rb') as f:
         with gzip.open(p + '.gz',  'wb', compresslevel=1) as gz:
-            shutil.copyfileobj(f, gz) # type: ignore
+            shutil.copyfileobj(f, gz)  # type: ignore
     # os.remove(p)
 
+
 def search_fs(p):
-    file_list = [os.path.join(dp, f) for dp, dn, fn in os.walk(os.path.expanduser(p)) for f in fn]
+    file_list = [os.path.join(dp, f) for dp, dn, fn in os.walk(
+        os.path.expanduser(p)) for f in fn]
     return file_list
+
 
 def tar_dir(s):
     with tarfile.open(s + '.tar', 'w') as tar:
         for f in search_fs(s):
             tar.add(f, f[len(s):])
-                            
+
+
 def compress_dir(args):
-    
+
     folder = args.input
 
     files = search_fs(folder)
@@ -316,7 +336,7 @@ def compress_dir(args):
 
     print('Adding Compressed Files to TAR....')
     tar_dir(folder)
-    
+
     # if rmbool == True:
     #     shutil.rmtree(dir)
 
@@ -353,6 +373,8 @@ def main():
         epilog="specify input file",
     )
     ps_report.add_argument("-input", required=True, help="input filename")
+    ps_report.add_argument("-keywords", required=False,
+                           help="extract keywords")
     ps_report.set_defaults(func=doc_report)
 
     # -------------------------------------------------------------------------
@@ -364,10 +386,13 @@ def main():
         epilog="specify input file",
     )
     ps_frame.add_argument("-input", required=True, help="input filename")
+    ps_frame.add_argument("-output", required=True, help="output filename")
     ps_frame.add_argument("-header", required=True, help="header metadata")
     ps_frame.add_argument("-footer", required=True, help="header metadata")
     ps_frame.add_argument("-page", required=True, help="start page index")
     ps_frame.add_argument("-preprint", required=False, help="preprint text")
+    ps_frame.add_argument("-metadata", required=False, help="pdf metadata")
+
     ps_frame.set_defaults(func=doc_frame)
 
     # -------------------------------------------------------------------------
@@ -404,6 +429,7 @@ def main():
     )
     ps_join.add_argument("input", nargs="*", help="input filenames")
     ps_join.add_argument("-output", required=True, help="output filename")
+    ps_join.add_argument("-metadata", required=False, help="set metadata")
     ps_join.set_defaults(func=doc_join)
 
     # -------------------------------------------------------------------------

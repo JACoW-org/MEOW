@@ -55,35 +55,11 @@ async def extract_event_pdf_files(event: dict) -> list:
     return event_files
 
 
-async def write_metadata(metadata: dict, read_path: str, write_path: str | None = None) -> int:
+async def read_report(read_path: str, keywords: bool) -> dict | None:
     """ """
 
-    cmd = [get_python_cmd(), '-m', 'meow', 'metadata', '-input', read_path]
-
-    if write_path is not None and write_path != '':
-        cmd.append(f"-output")
-        cmd.append(write_path)
-
-    for key in metadata.keys():
-        val = metadata.get(key, None)
-        if val is not None and val != '':
-            cmd.append(f"-{key}")
-            cmd.append(val)
-
-    res = await run_cmd(cmd)
-
-    # if res:
-    #     print(res.returncode)
-    #     print(res.stdout.decode())
-    #     print(res.stderr.decode())
-
-    return 0 if res and res.returncode == 0 else 1
-
-
-async def read_report(read_path: str) -> dict | None:
-    """ """
-
-    cmd = [get_python_cmd(), '-m', 'meow', 'report', '-input', read_path]
+    cmd = [get_python_cmd(), '-m', 'meow', 'report', '-input',
+           read_path, '-keywords', str(keywords)]
 
     res = await run_cmd(cmd)
 
@@ -113,10 +89,10 @@ async def pdf_to_text(read_path: str) -> str:
     return ''
 
 
-async def draw_frame(write_path: str, page: int, pre_print: str | None, header: dict | None, footer: dict | None) -> int:
+async def draw_frame(read_path: str, write_path: str, page: int, pre_print: str | None, header: dict | None, footer: dict | None, metadata: dict | None) -> int:
     """ """
 
-    cmd = [get_python_cmd(), '-m', 'meow', 'frame', '-input', write_path]
+    cmd = [get_python_cmd(), '-m', 'meow', 'frame', '-input', read_path]
 
     cmd.append("-page")
     cmd.append(str(page))
@@ -133,6 +109,13 @@ async def draw_frame(write_path: str, page: int, pre_print: str | None, header: 
         cmd.append("-footer")
         cmd.append(json_encode(footer).decode('utf-8'))
 
+    if metadata:
+        cmd.append("-metadata")
+        cmd.append(json_encode(metadata).decode('utf-8'))
+        
+    cmd.append("-output")
+    cmd.append(write_path)
+
     # logger.info(cmd)
 
     res = await run_cmd(cmd)
@@ -145,10 +128,37 @@ async def draw_frame(write_path: str, page: int, pre_print: str | None, header: 
     return 0 if res and res.returncode == 0 else 1
 
 
-async def concat_pdf(write_path: str, files: list[str]) -> int:
+async def write_metadata(metadata: dict, read_path: str, write_path: str | None = None) -> int:
+    """ """
+
+    cmd = [get_python_cmd(), '-m', 'meow', 'metadata', '-input', read_path]
+
+    if write_path is not None and write_path != '':
+        cmd.append(f"-output")
+        cmd.append(write_path)
+
+    for key in metadata.keys():
+        val = metadata.get(key, None)
+        if val is not None and val != '':
+            cmd.append(f"-{key}")
+            cmd.append(val)
+
+    res = await run_cmd(cmd)
+
+    # if res:
+    #     print(res.returncode)
+    #     print(res.stdout.decode())
+    #     print(res.stderr.decode())
+
+    return 0 if res and res.returncode == 0 else 1
+
+
+async def concat_pdf(write_path: str, files: list[str], metadata: dict | None) -> int:
     """ https://pymupdf.readthedocs.io/en/latest/tutorial.html#joining-and-splitting-pdf-documents """
 
     cmd = [get_python_cmd(), '-m', 'meow', 'join', '-o', write_path]
+    
+    
 
     res = await run_cmd(cmd + files)
 

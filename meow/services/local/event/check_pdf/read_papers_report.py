@@ -84,7 +84,7 @@ async def read_report_task(capacity_limiter: CapacityLimiter, total_files: int, 
 
         # logger.debug(f"{pdf_file} {pdf_name}")
 
-        report = await read_report(pdf_path)
+        report = await read_report(pdf_path, False)
 
         await res.send({
             "index": current_index,

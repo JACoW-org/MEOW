@@ -120,8 +120,8 @@
     <div class="contrib-doi">
         <b>DOI:</b>
         <span>&nbsp;reference for this paper:&nbsp;</span>
-        <a onclick="openUrl(`doi/{{ contribution.duplicate_of.code|lower }}/index.html`)" 
-            href="javascript:void(0);">{{ contribution.duplicate_of.doi_url }}</a>
+        <a onclick="openUrl(`{{ contribution.duplicate_of.doi_url }}`)" 
+            href="javascript:void(0);">{{ contribution.duplicate_of.doi_label }}</a>
     </div>
 
     <div class="contrib-dates">

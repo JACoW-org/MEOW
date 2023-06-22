@@ -2,9 +2,8 @@ import logging as lg
 from typing import Callable
 
 from nltk import download
-from nltk.stem.snowball import SnowballStemmer
 
-from anyio import Path, create_task_group, CapacityLimiter, to_thread
+from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 
 from anyio.streams.memory import MemoryObjectSendStream
@@ -13,11 +12,7 @@ from meow.models.local.event.final_proceedings.event_factory import event_keywor
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_contributions_papers
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
-from meow.services.local.event.event_pdf_utils import pdf_to_text, read_report
-from meow.services.local.papers_metadata.pdf_keywords import get_keywords_from_text, stem_keywords_as_tree
-
-
-from meow.utils.keywords import KEYWORDS
+from meow.services.local.event.event_pdf_utils import read_report
 
 
 logger = lg.getLogger(__name__)
@@ -38,12 +33,9 @@ async def read_papers_metadata(proceedings_data: ProceedingsData, cookies: dict,
     dir_name = f"{proceedings_data.event.id}_tmp"
     file_cache_dir: Path = Path('var', 'run', dir_name)
     await file_cache_dir.mkdir(exist_ok=True, parents=True)
-    
+
     download('punkt')
     download('stopwords')
-
-    stemmer = SnowballStemmer("english")
-    stem_keywords_dict = stem_keywords_as_tree(KEYWORDS, stemmer)
 
     send_stream, receive_stream = create_memory_object_stream()
     capacity_limiter = CapacityLimiter(8)
@@ -55,7 +47,6 @@ async def read_papers_metadata(proceedings_data: ProceedingsData, cookies: dict,
             for current_index, current_paper in enumerate(papers_data):
                 tg.start_soon(read_metadata_task, capacity_limiter, total_files,
                               current_index, current_paper, cookies, file_cache_dir,
-                              stemmer, stem_keywords_dict,
                               send_stream.clone())
 
         try:
@@ -87,7 +78,7 @@ async def read_papers_metadata(proceedings_data: ProceedingsData, cookies: dict,
 
 async def read_metadata_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int,
                              current_paper: ContributionPaperData, cookies: dict, pdf_cache_dir: Path,
-                             stemmer, stem_keywords_dict, res: MemoryObjectSendStream) -> None:
+                             res: MemoryObjectSendStream) -> None:
     """ """
 
     async with capacity_limiter:
@@ -99,36 +90,14 @@ async def read_metadata_task(capacity_limiter: CapacityLimiter, total_files: int
 
         # logger.debug(f"{pdf_file} {pdf_name}")
 
-        [report, text] = await read_metadata_internal(pdf_path)
-
-        keywords = await to_thread.run_sync(get_keywords_from_text, text, stemmer, stem_keywords_dict)
+        report = await read_report(pdf_path, True)
 
         await res.send({
             "index": current_index,
             "total": total_files,
             "file": current_file,
-            "meta": dict(
-                keywords=keywords,
-                report=report
-            )
+            "meta": report
         })
-
-
-async def read_metadata_internal(path: str) -> list:
-
-    result = dict(report=None, text=None)
-
-    async def _report_task(p, r):
-        r['report'] = await read_report(p)
-
-    async def _text_task(p, r):
-        r['text'] = await pdf_to_text(p)
-
-    async with create_task_group() as tg:
-        tg.start_soon(_report_task, path, result)
-        tg.start_soon(_text_task, path, result)
-
-    return [result.get('report'), result.get('text')]
 
 
 async def refill_contribution_metadata(proceedings_data: ProceedingsData, results: dict, pdf_cache_dir: Path) -> ProceedingsData:
@@ -139,33 +108,32 @@ async def refill_contribution_metadata(proceedings_data: ProceedingsData, result
         code: str = ''
 
         try:
-            
+
             if contribution_data and contribution_data.is_included_in_proceedings:
-                
+
                 code = contribution_data.code
-            
+
                 if contribution_data.paper and contribution_data.paper.latest_revision:
-                    
+
                     revision_data = contribution_data.paper.latest_revision
-                    
+
                     file_data = revision_data.files[-1] \
                         if len(revision_data.files) > 0 \
                         else None
 
                     if file_data is not None:
-                    
+
                         pdf_path = Path(pdf_cache_dir, file_data.filename)
-                        
+
                         if await pdf_path.exists():
                             contribution_data.paper_size = (await pdf_path.stat()).st_size
-                        
 
                         result: dict = results.get(file_data.uuid, {})
                         report: dict = result.get('report', {})
-
+                        
                         contribution_data.keywords = [
                             event_keyword_factory(keyword)
-                            for keyword in result.get('keywords', [])
+                            for keyword in report.get('keywords', [])
                         ]
 
                         contribution_data.page = current_page
@@ -173,11 +141,11 @@ async def refill_contribution_metadata(proceedings_data: ProceedingsData, result
 
                         if report and 'page_count' in report:
                             current_page += report.get('page_count', 0)
-                            
+
                     else:
                         logger.error(f"SKIPPED - no file_data: {code}")
-                            
-                else:                
+
+                else:
                     logger.error(f"SKIPPED: {code}")
 
                     # logger.info('contribution_data pages = %s - %s', contribution_data.page, contribution_data.page + result.get('report').get('page_count'))
