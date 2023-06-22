@@ -59,7 +59,7 @@ async def read_papers_metadata(proceedings_data: ProceedingsData, cookies: dict,
                     file_data: FileData = result.get('file', None)
 
                     if file_data is not None:
-                        results[file_data.uuid] = result.get('meta', None)
+                        results[file_data.uuid] = result.get('report', None)
 
                     if processed_files >= total_files:
                         receive_stream.close()
@@ -96,7 +96,7 @@ async def read_metadata_task(capacity_limiter: CapacityLimiter, total_files: int
             "index": current_index,
             "total": total_files,
             "file": current_file,
-            "meta": report
+            "report": report
         })
 
 
@@ -127,20 +127,21 @@ async def refill_contribution_metadata(proceedings_data: ProceedingsData, result
 
                         if await pdf_path.exists():
                             contribution_data.paper_size = (await pdf_path.stat()).st_size
-
-                        result: dict = results.get(file_data.uuid, {})
-                        report: dict = result.get('report', {})
-                        
-                        contribution_data.keywords = [
-                            event_keyword_factory(keyword)
-                            for keyword in report.get('keywords', [])
-                        ]
-
+                            
                         contribution_data.page = current_page
-                        contribution_data.metadata = report
 
-                        if report and 'page_count' in report:
-                            current_page += report.get('page_count', 0)
+                        report: dict | None = results.get(file_data.uuid, None)
+                        
+                        if report:
+                            contribution_data.keywords = [
+                                event_keyword_factory(keyword)
+                                for keyword in report.get('keywords', [])
+                            ]
+
+                            contribution_data.metadata = report
+
+                            if 'page_count' in report:
+                                current_page += report.get('page_count', 0)
 
                     else:
                         logger.error(f"SKIPPED - no file_data: {code}")

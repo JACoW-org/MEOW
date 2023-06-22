@@ -23,14 +23,14 @@ class AbstractTask(ABC):
         
         TaskStatus.print()
         
-        is_running = TaskStatus.is_running(self.task_id)
+        # is_running = TaskStatus.is_running(self.task_id)
         
-        logger.warning(f"task_id: {self.task_id} - is_running: {is_running}")
+        # logger.warning(f"task_id: {self.task_id} - is_running: {is_running}")
         
         if not TaskStatus.is_running(self.task_id):
             raise ServiceError(f"task_id {self.task_id} killed")
         
-        logger.warning(f"task_id: {self.task_id} - is_running: {is_running}")
+        # logger.warning(f"task_id: {self.task_id} - is_running: {is_running}")
         
 
     @abstractmethod
