@@ -90,9 +90,6 @@ def doc_join(args) -> None:
     doc_list = args.input  # a list of input PDFs
     doc = Document()  # output PDF
 
-    if args.metadata:
-        set_metadata(doc, json.loads(args.metadata))
-
     for src_item in doc_list:  # process one input PDF
 
         src_list = src_item.split(",")
@@ -111,6 +108,9 @@ def doc_join(args) -> None:
 
         src.close()
         del src
+
+    if args.metadata:
+        set_metadata(doc, json.loads(args.metadata))
 
     doc.save(args.output, garbage=0, clean=0, deflate=1)
 
