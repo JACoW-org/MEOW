@@ -12,7 +12,7 @@ from meow.models.local.event.final_proceedings.event_factory import event_keywor
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_contributions_papers
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
-from meow.services.local.event.event_pdf_utils import read_report
+from meow.services.local.event.event_pdf_utils import read_report_thread
 
 
 logger = lg.getLogger(__name__)
@@ -90,7 +90,7 @@ async def read_metadata_task(capacity_limiter: CapacityLimiter, total_files: int
 
         # logger.debug(f"{pdf_file} {pdf_name}")
 
-        report = await read_report(pdf_path, True)
+        report = await read_report_thread(pdf_path, True)
 
         await res.send({
             "index": current_index,

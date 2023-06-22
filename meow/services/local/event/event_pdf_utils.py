@@ -1,11 +1,22 @@
 
+from asyncio import to_thread
+import io
+import pathlib
 import logging as lg
 from anyio import Path
 
 from meow.utils.hash import file_md5
+from meow.utils.keywords import KEYWORDS
 from meow.utils.process import run_cmd
 from meow.utils.serialization import json_decode, json_encode
 
+from fitz import Document
+from fitz.utils import set_metadata, insert_link
+
+
+from nltk.stem.snowball import SnowballStemmer
+from meow.services.local.papers_metadata.pdf_keywords import get_keywords_from_text, stem_keywords_as_tree
+from meow.services.local.papers_metadata.pdf_annotations import annot_page_footer, annot_page_header, annot_page_side
 
 logger = lg.getLogger(__name__)
 
@@ -70,6 +81,61 @@ async def read_report(read_path: str, keywords: bool) -> dict | None:
 
     return json_decode(res.stdout.decode()) if res and res.returncode == 0 else None
 
+   
+def _read_report_thread(input: str, keywords: bool):
+    doc = Document(filename=input)
+
+    pdf_value = io.StringIO()
+
+    pages_report = []
+    fonts_report = []
+    xref_list = []
+
+    stemmer = SnowballStemmer("english") if keywords else None
+    stem_keywords = stem_keywords_as_tree(KEYWORDS, stemmer) if keywords and stemmer else None
+
+    for page in doc:
+
+        if keywords:
+            # get plain text (is in UTF-8)
+            pdf_value.write(page.get_textpage().extractText())
+
+        for font in page.get_fonts(True):
+
+            xref = font[0]
+
+            if xref not in xref_list:
+
+                xref_list.append(xref)
+
+                font_name, font_ext, font_type, buffer = doc.extract_font(xref)
+                font_emb = not ((font_ext == "n/a" or not buffer)
+                                and font_type != "Type3")
+                fonts_report.append(dict(name=font_name, emb=font_emb,
+                                        ext=font_ext, type=font_type))
+
+        page_report = dict(sizes=dict(width=page.mediabox_size.x,
+                                    height=page.mediabox_size.y))
+
+        pages_report.append(page_report)
+
+    fonts_report.sort(key=lambda x: x.get('name'))
+
+    keywords_list = get_keywords_from_text(str(pdf_value.getvalue()), stemmer, stem_keywords) \
+        if stemmer and stem_keywords else []
+
+    report = dict(
+        page_count=doc.page_count,
+        pages_report=pages_report,
+        fonts_report=fonts_report,
+        keywords=keywords_list
+    )
+    
+    return report
+    
+async def read_report_thread(read_path: str, keywords: bool) -> dict | None:
+    return await to_thread(_read_report_thread, read_path, keywords)
+
 
 async def pdf_to_text(read_path: str) -> str:
     """ """
@@ -127,6 +193,42 @@ async def draw_frame(read_path: str, write_path: str, page: int, pre_print: str 
 
     return 0 if res and res.returncode == 0 else 1
 
+
+def _draw_frame_thread_thread(input: str, output:str, page_number: int, pre_print: str | None, header: dict | None, footer: dict | None, metadata: dict | None):
+    
+    doc = Document(filename=input)
+
+    if metadata:
+        set_metadata(doc, metadata)
+
+    cc_logo = pathlib.Path('cc_by.png').read_bytes()
+
+    # print([args.input, page_number, pre_print])
+
+    for page in doc:
+
+        if header:
+            annot_page_header(page, header)
+
+        if footer:
+            annot_page_footer(page, page_number, footer)
+
+        annot_page_side(
+            page=page,
+            pre_print=pre_print,
+            page_number=page_number,
+            cc_logo=cc_logo
+        )
+
+        page_number += 1
+
+    doc.save(filename=output, garbage=0, clean=0, deflate=1)
+
+    doc.close()
+    del doc
+
+async def draw_frame_thread(read_path: str, write_path: str, page: int, pre_print: str | None, header: dict | None, footer: dict | None, metadata: dict | None):
+    return await to_thread(_draw_frame_thread_thread, read_path, write_path, page, pre_print, header, footer, metadata)
 
 async def write_metadata(metadata: dict, read_path: str, write_path: str | None = None) -> int:
     """ """

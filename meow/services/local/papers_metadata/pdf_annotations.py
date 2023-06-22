@@ -1,3 +1,4 @@
+from typing import Any
 from fitz import Page, Rect, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER, TEXT_ALIGN_RIGHT, TEXT_ALIGN_JUSTIFY
 from fitz.utils import getColor, insert_image
 
@@ -142,7 +143,7 @@ def annot_page_footer(page: Page, page_number: int, data: dict, options: dict = 
     )
 
 
-def annot_page_side(page: Page, pre_print: str, page_number: int, cc_logo, options: dict = dict()):
+def annot_page_side(page: Page, pre_print: str | None, page_number: int | None, cc_logo: Any | None, options: dict = dict()):
 
     page_width = page.rect.width
     page_height = page.rect.height
@@ -178,7 +179,7 @@ def annot_page_side(page: Page, pre_print: str, page_number: int, cc_logo, optio
     # add cc logo
     insert_image(
         page=page,
-        rect=rect_even_logo if page_number % 2 == 0 else rect_odd_logo,
+        rect=rect_even_logo if page_number and page_number % 2 == 0 else rect_odd_logo,
         # filename='cc_by.png',
         rotate=90,
         stream=cc_logo
@@ -186,7 +187,7 @@ def annot_page_side(page: Page, pre_print: str, page_number: int, cc_logo, optio
 
     # add copyright text
     page.add_freetext_annot(
-        rect=rect_even_text if page_number % 2 == 0 else rect_odd_text,
+        rect=rect_even_text if page_number and page_number % 2 == 0 else rect_odd_text,
         align=TEXT_ALIGN_JUSTIFY,
         rotate=90,
         text='Content from this work may be used under the terms of the CC BY 4.0 licence (© 2022). Any distribution of this work must maintain attribution to the author(s), title of the work, publisher, and DOI.',
@@ -199,7 +200,7 @@ def annot_page_side(page: Page, pre_print: str, page_number: int, cc_logo, optio
 
         # add pre print
         page.add_freetext_annot(
-            rect=rect_even_text if page_number % 2 != 0 else rect_odd_text,
+            rect=rect_even_text if page_number and page_number % 2 != 0 else rect_odd_text,
             align=TEXT_ALIGN_JUSTIFY,
             rotate=90,
             text=pre_print,

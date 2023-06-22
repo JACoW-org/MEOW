@@ -221,8 +221,7 @@ def doc_report(args) -> None:
     xref_list = []
 
     stemmer = SnowballStemmer("english") if args.keywords == 'True' else None
-    stem_keywords = stem_keywords_as_tree(
-        KEYWORDS, stemmer) if stemmer else None
+    stem_keywords = stem_keywords_as_tree(KEYWORDS, stemmer) if stemmer else None
 
     for page in doc:
 

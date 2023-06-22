@@ -12,7 +12,7 @@ from meow.models.local.event.final_proceedings.proceedings_data_utils import ext
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.models.local.event.final_proceedings.session_model import SessionData
-from meow.services.local.event.event_pdf_utils import draw_frame
+from meow.services.local.event.event_pdf_utils import draw_frame_thread
 
 from datetime import datetime
 from meow.utils.datetime import format_datetime_pdf
@@ -107,7 +107,7 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
         pre_print: str = settings.get('pre_print', 'This is a preprint') \
             if contribution.peer_reviewing_accepted else ''
 
-        await draw_frame(str(read_pdf_file), str(write_pdf_file), contribution.page, pre_print, header_data, footer_data, metadata)
+        await draw_frame_thread(str(read_pdf_file), str(write_pdf_file), contribution.page, pre_print, header_data, footer_data, metadata)
 
         await stream.send({
             "index": current_index,
