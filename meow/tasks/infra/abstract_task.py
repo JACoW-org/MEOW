@@ -21,7 +21,7 @@ class AbstractTask(ABC):
     def assert_is_running(self) -> None:
         """ """
         
-        TaskStatus.print()
+        # TaskStatus.print()
         
         # is_running = TaskStatus.is_running(self.task_id)
         
