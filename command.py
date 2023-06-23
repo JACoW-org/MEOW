@@ -39,9 +39,12 @@ def doc_report(args) -> None:
                     name=font_name, emb=font_emb,
                     ext=font_ext, type=font_type))
 
+        page_width = page.rect.width
+        page_height = page.rect.height
+
         page_report = dict(sizes=dict(
-            width=page.mediabox_size.y,
-            height=page.mediabox_size.x))
+            width=page_width,
+            height=page_height))
 
         pages_report.append(page_report)
 

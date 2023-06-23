@@ -80,7 +80,7 @@ async def read_report(read_path: str, keywords: bool) -> dict | None:
 
     return json_decode(res.stdout.decode()) if res and res.returncode == 0 else None
 
-   
+
 def _read_report_thread(input: str, keywords: bool):
     doc = Document(filename=input)
 
@@ -91,7 +91,8 @@ def _read_report_thread(input: str, keywords: bool):
     xref_list = []
 
     stemmer = SnowballStemmer("english") if keywords else None
-    stem_keywords = stem_keywords_as_tree(KEYWORDS, stemmer) if keywords and stemmer else None
+    stem_keywords = stem_keywords_as_tree(
+        KEYWORDS, stemmer) if keywords and stemmer else None
 
     for page in doc:
 
@@ -111,10 +112,13 @@ def _read_report_thread(input: str, keywords: bool):
                 font_emb = not ((font_ext == "n/a" or not buffer)
                                 and font_type != "Type3")
                 fonts_report.append(dict(name=font_name, emb=font_emb,
-                                        ext=font_ext, type=font_type))
+                                         ext=font_ext, type=font_type))
 
-        page_report = dict(sizes=dict(width=page.mediabox_size.x,
-                                    height=page.mediabox_size.y))
+        page_width = page.rect.width
+        page_height = page.rect.height
+
+        page_report = dict(sizes=dict(width=page_width,
+                                      height=page_height))
 
         pages_report.append(page_report)
 
@@ -129,9 +133,10 @@ def _read_report_thread(input: str, keywords: bool):
         fonts_report=fonts_report,
         keywords=keywords_list
     )
-    
+
     return report
-    
+
+
 async def read_report_anyio(read_path: str, keywords: bool) -> dict | None:
     return await to_thread.run_sync(_read_report_thread, read_path, keywords)
 
@@ -177,7 +182,7 @@ async def draw_frame(read_path: str, write_path: str, page: int, pre_print: str 
     if metadata:
         cmd.append("-metadata")
         cmd.append(json_encode(metadata).decode('utf-8'))
-        
+
     cmd.append("-output")
     cmd.append(write_path)
 
@@ -193,8 +198,8 @@ async def draw_frame(read_path: str, write_path: str, page: int, pre_print: str 
     return 0 if res and res.returncode == 0 else 1
 
 
-def _draw_frame_thread_thread(input: str, output:str, page_number: int, pre_print: str | None, header: dict | None, footer: dict | None, metadata: dict | None):
-    
+def _draw_frame_thread_thread(input: str, output: str, page_number: int, pre_print: str | None, header: dict | None, footer: dict | None, metadata: dict | None):
+
     doc = Document(filename=input)
 
     if metadata:
@@ -226,8 +231,10 @@ def _draw_frame_thread_thread(input: str, output:str, page_number: int, pre_prin
     doc.close()
     del doc
 
+
 async def draw_frame_anyio(read_path: str, write_path: str, page: int, pre_print: str | None, header: dict | None, footer: dict | None, metadata: dict | None):
     return await to_thread.run_sync(_draw_frame_thread_thread, read_path, write_path, page, pre_print, header, footer, metadata)
+
 
 async def write_metadata(metadata: dict, read_path: str, write_path: str | None = None) -> int:
     """ """
@@ -254,12 +261,38 @@ async def write_metadata(metadata: dict, read_path: str, write_path: str | None 
     return 0 if res and res.returncode == 0 else 1
 
 
+async def pdf_unite(write_path: str, files: list[str]) -> int:
+    """ 
+        pdfunite version 23.06.0
+        Copyright 2005-2023 The Poppler Developers - http://poppler.freedesktop.org
+        Copyright 1996-2011, 2022 Glyph & Cog, LLC
+        Usage: pdfunite [options] <PDF-sourcefile-1>..<PDF-sourcefile-n> <PDF-destfile>
+        -v             : print copyright and version info
+        -h             : print usage information
+        -help          : print usage information
+        --help         : print usage information
+        -?             : print usage information
+    """
+    
+    print(['pdfunite'] + files + [write_path])
+
+    res = await run_cmd(['pdfunite'] + files + [write_path])
+
+    if res is not None and res.returncode == 0:
+
+        # print(res.returncode)
+        # print(res.stdout.decode())
+        # print(res.stderr.decode())
+
+        return res.returncode
+
+    return 1
+
+
 async def concat_pdf(write_path: str, files: list[str], metadata: dict | None) -> int:
     """ https://pymupdf.readthedocs.io/en/latest/tutorial.html#joining-and-splitting-pdf-documents """
 
     cmd = [get_python_cmd(), '-m', 'meow', 'join', '-o', write_path]
-    
-    
 
     res = await run_cmd(cmd + files)
 

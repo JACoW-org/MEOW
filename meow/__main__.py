@@ -248,8 +248,14 @@ def doc_report(args) -> None:
                 fonts_report.append(dict(name=font_name, emb=font_emb,
                                          ext=font_ext, type=font_type))
 
-        page_report = dict(sizes=dict(width=page.mediabox_size.x,
-                                      height=page.mediabox_size.y))
+        page_width = page.rect.width
+        page_height = page.rect.height
+        
+        # print(page.rect)
+        # print(page.mediabox_size)
+        
+        page_report = dict(sizes=dict(width=page_width,
+                                      height=page_height))
 
         pages_report.append(page_report)
 

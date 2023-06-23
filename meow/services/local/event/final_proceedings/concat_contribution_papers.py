@@ -10,7 +10,7 @@ from meow.models.local.event.final_proceedings.event_model import AttachmentData
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_proceedings_papers
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
-from meow.services.local.event.event_pdf_utils import brief_links, concat_pdf
+from meow.services.local.event.event_pdf_utils import brief_links, concat_pdf, pdf_unite, write_metadata
 from meow.utils.list import split_list
 
 
@@ -105,8 +105,8 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
         trapped=None,
     )
 
-    await concat_pdf(str(vol_pdf_path), pdf_parts, metadata)
-    # await metadata_vol(str(vol_pdf_path), event_title)
+    await pdf_unite(str(vol_pdf_path), pdf_parts)
+    await write_metadata(metadata, str(vol_pdf_path))
 
     proceedings_data.proceedings_volume_size = (await vol_pdf_path.stat()).st_size
 
@@ -175,7 +175,8 @@ async def brief_pdf_task(proceedings_data: ProceedingsData,  files_data: list[Fi
         trapped=None,
     )
 
-    await concat_pdf(str(brief_pdf_path), pdf_parts, metadata)
+    await pdf_unite(str(brief_pdf_path), pdf_parts)
+    await write_metadata(metadata, str(brief_pdf_path))
     await brief_links(str(brief_pdf_path), brief_pdf_links)   
 
     proceedings_data.proceedings_brief_size = (await brief_pdf_path.stat()).st_size
