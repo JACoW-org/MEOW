@@ -137,7 +137,7 @@ def get_metadata(current_dt_pdf, contribution) -> dict[str, Any] | None:
 
 def get_footer_data(contribution, session) -> dict[str, str] | None:
 
-    classificationHeader = f'{contribution.track.code}: {contribution.track.title}' if contribution.track else ''
+    classificationHeader = f'{contribution.track.title}' if contribution.track else ''
     sessionHeader = f'{session.code}: {session.title}' if session else ''
 
     footer_data = dict(
