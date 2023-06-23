@@ -232,8 +232,8 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int, pre_pri
     del doc
 
 
-async def draw_frame_anyio(read_path: str, write_path: str, page: int, pre_print: str | None, header: dict | None, footer: dict | None, metadata: dict | None):
-    return await to_thread.run_sync(_draw_frame_thread_thread, read_path, write_path, page, pre_print, header, footer, metadata)
+async def draw_frame_anyio(input: str, output: str, page: int, pre_print: str | None, header: dict | None, footer: dict | None, metadata: dict | None):
+    return await to_thread.run_sync(_draw_frame_thread_thread, input, output, page, pre_print, header, footer, metadata)
 
 
 async def write_metadata(metadata: dict, read_path: str, write_path: str | None = None) -> int:
@@ -241,7 +241,7 @@ async def write_metadata(metadata: dict, read_path: str, write_path: str | None 
 
     cmd = [get_python_cmd(), '-m', 'meow', 'metadata', '-input', read_path]
 
-    if write_path is not None and write_path != '':
+    if write_path:
         cmd.append(f"-output")
         cmd.append(write_path)
 
@@ -261,7 +261,43 @@ async def write_metadata(metadata: dict, read_path: str, write_path: str | None 
     return 0 if res and res.returncode == 0 else 1
 
 
-async def pdf_unite(write_path: str, files: list[str]) -> int:
+async def pdf_separate(input: str, output: str, first: int, last: int) -> int:
+    """
+        pdfseparate version 22.02.0
+        Copyright 2005-2022 The Poppler Developers - http://poppler.freedesktop.org
+        Copyright 1996-2011 Glyph & Cog, LLC
+        Usage: pdfseparate [options] <PDF-sourcefile> <PDF-pattern-destfile>
+        -f <int>       : first page to extract
+        -l <int>       : last page to extract
+        -v             : print copyright and version info
+        -h             : print usage information
+        -help          : print usage information
+        --help         : print usage information
+        -?             : print usage information
+    """
+   
+    # cmd = ['pdfseparate', '-f', str(first), '-l', str(last), input, output]
+    
+    # pdftk full-pdf.pdf cat 12-15 output outfile_p12-15.pdf
+    
+    cmd = ['pdftk', input, 'cat', f'{first}-{last}', 'output', output]    
+
+    print(" ".join(cmd))
+
+    res = await run_cmd(cmd)
+
+    if res is not None and res.returncode == 0:
+
+        # print(res.returncode)
+        # print(res.stdout.decode())
+        # print(res.stderr.decode())
+
+        return res.returncode
+
+    return 1
+
+
+async def pdf_unite(write_path: str, files: list[str], first: bool = False) -> int:
     """ 
         pdfunite version 23.06.0
         Copyright 2005-2023 The Poppler Developers - http://poppler.freedesktop.org
@@ -273,10 +309,24 @@ async def pdf_unite(write_path: str, files: list[str]) -> int:
         --help         : print usage information
         -?             : print usage information
     """
-    
-    print(['pdfunite'] + files + [write_path])
 
-    res = await run_cmd(['pdfunite'] + files + [write_path])
+    # cmd = ['pdfunite'] + files + [write_path]
+    # cmd = ['pdftk'] + files + ['cat', 'output'] + [write_path]
+    
+    # qpdf --empty --pages var/run/18_tmp/MOA03.pdf 1-1 var/run/18_tmp/MOA08.pdf 1-1 -- out.pdf
+    
+    items:list[str] = []
+    
+    for f in files:
+        items.append(f)
+        if first:
+            items.append('1-1')
+    
+    cmd = ['qpdf', '--empty', '--pages'] + items + ['--', write_path]
+
+    print(" ".join(cmd))
+
+    res = await run_cmd(cmd)
 
     if res is not None and res.returncode == 0:
 

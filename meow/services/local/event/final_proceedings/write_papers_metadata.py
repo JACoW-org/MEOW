@@ -12,7 +12,7 @@ from meow.models.local.event.final_proceedings.proceedings_data_utils import ext
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.models.local.event.final_proceedings.session_model import SessionData
-from meow.services.local.event.event_pdf_utils import draw_frame_anyio
+from meow.services.local.event.event_pdf_utils import draw_frame_anyio, pdf_separate
 
 from datetime import datetime
 from meow.utils.datetime import format_datetime_pdf
@@ -89,14 +89,14 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
         session = sessions.get(contribution.session_code)
         current_file = current_paper.paper
 
-        read_pdf_name = f"{current_file.filename}"
-        read_pdf_file = Path(pdf_cache_dir, read_pdf_name)
+        original_pdf_name = f"{current_file.filename}"
+        original_pdf_file = Path(pdf_cache_dir, original_pdf_name)
 
-        write_pdf_name = f"{current_file.filename}_jacow"
-        write_pdf_file = Path(pdf_cache_dir, write_pdf_name)
+        jacow_pdf_name = f"{current_file.filename}_jacow"
+        jacow_pdf_file = Path(pdf_cache_dir, jacow_pdf_name)
 
-        if await write_pdf_file.exists():
-            await write_pdf_file.unlink()
+        if await jacow_pdf_file.exists():
+            await jacow_pdf_file.unlink()
 
         # logger.debug(f"{pdf_file} {pdf_name}")
 
@@ -107,7 +107,7 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
         pre_print: str = settings.get('pre_print', 'This is a preprint') \
             if contribution.peer_reviewing_accepted else ''
 
-        await draw_frame_anyio(str(read_pdf_file), str(write_pdf_file), contribution.page, pre_print, header_data, footer_data, metadata)
+        await draw_frame_anyio(str(original_pdf_file), str(jacow_pdf_file), contribution.page, pre_print, header_data, footer_data, metadata)
 
         await stream.send({
             "index": current_index,
