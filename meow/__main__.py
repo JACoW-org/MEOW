@@ -279,11 +279,10 @@ def doc_report(args) -> None:
 
 def doc_toc(args) -> None:
 
-    # the result is a Python dictionary:
     toc_data = json.loads(args.toc)
 
-    MEDIABOX = paper_rect("letter")  # output page format: Letter
-    WHERE = MEDIABOX + (57, 57, -57, -57)
+    MEDIABOX = Rect(0.0, 0.0, 595.0, 792.0) # paper_rect("letter")
+    WHERE = MEDIABOX + (57, 57, -57, -57) # internal margins
     writer = DocumentWriter(args.output)  # create the writer
 
     story = Story()
@@ -300,11 +299,11 @@ def doc_toc(args) -> None:
             else:
                 para.add_span()
                 para.set_color("#990000")
-                para.set_fontsize(14)
+                para.set_fontsize(12)
                 para.set_bold()
                 para.add_text(f"{attribute} ")
                 para.add_span()
-                para.set_fontsize(18)
+                para.set_fontsize(14)
                 para.add_text(f"{value}")
 
         body.add_horizontal_line()
