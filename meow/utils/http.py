@@ -1,3 +1,4 @@
+import asyncio
 from email import header
 import logging
 from typing import Any, AsyncIterable, Optional
@@ -90,10 +91,16 @@ async def fetch_json(url: str, headers: dict = {}, cookies: dict = {}, auth: Bas
                     if resp.ok:
                         return await resp.json()
                     raise BaseException(
-                        f"invalid response status {resp.status}")
+                        # f"invalid response status {resp.status}"
+                        dict(code=resp.status,
+                             message=f"invalid response status {resp.status}")
+                    )
                 except BaseException as ex:
                     logger.error(ex, exc_info=True)
                     raise ex
+        except asyncio.TimeoutError as ex:
+            logger.error(ex, exc_info=True)
+            raise BaseException(dict(code=504, message=f"timeout exception"))
         finally:
             HttpClientSessions.del_client_session(client)
 
@@ -124,10 +131,16 @@ async def delete_json(url: str, headers: dict = {}, cookies: dict = {}, auth: Ba
                     if resp.ok:
                         return
                     raise BaseException(
-                        f"invalid response status {resp.status}")
+                        # f"invalid response status {resp.status}"
+                        dict(code=resp.status,
+                             message=f"invalid response status {resp.status}")
+                    )
                 except BaseException as ex:
                     logger.error(ex, exc_info=True)
                     raise ex
+        except asyncio.TimeoutError as ex:
+            logger.error(ex, exc_info=True)
+            raise BaseException(dict(code=504, message=f"timeout exception"))
         finally:
             HttpClientSessions.del_client_session(client)
 
@@ -162,11 +175,17 @@ async def put_json(url: str, data: Any, headers: dict = {}, cookies: dict = {}, 
                         body = await resp.text()
                     except BaseException as ex:
                         logger.error(ex, exc_info=True)
-                    raise BaseException(f"invalid response status" +
-                                        f" {resp.status} - {body}")
+                    raise BaseException(
+                        # f"invalid response status" + f" {resp.status} - {body}"
+                        dict(
+                            code=resp.status, message=f"invalid response status" + f" {resp.status} - {body}")
+                    )
                 except BaseException as ex:
                     logger.error(ex, exc_info=True)
                     raise ex
+        except asyncio.TimeoutError as ex:
+            logger.error(ex, exc_info=True)
+            raise BaseException(dict(code=504, message=f"timeout exception"))
         except BaseException as ex:
             logger.error(ex, exc_info=True)
             raise ex

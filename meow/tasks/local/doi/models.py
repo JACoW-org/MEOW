@@ -101,6 +101,8 @@ class ContributionDOI:
 
         attributes['doi'] = self.doi_identifier
 
+        attributes['event'] = 'draft'
+
         attributes['identifiers'] = [dict(
             identifierType='DOI',
             identifier=self.doi_url

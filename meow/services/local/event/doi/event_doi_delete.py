@@ -113,7 +113,8 @@ async def _doi_task(capacity_limiter: CapacityLimiter, total: int, index: int,
             response = await delete_json(url=doi_api_url, auth=auth)
 
         except BaseException as ex:
-            error = str(ex)
+            if ex.args:
+                error = ex.args[0].get('code')
             logger.error(ex, exc_info=True)
 
         await send_res(stream, total, index, contribution, doi_identifier, response=response, error=error)
