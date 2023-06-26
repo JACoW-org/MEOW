@@ -85,8 +85,9 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
 
     vol_pdf_results.sort()
 
-    pdf_parts = [str(vol_pre_pdf_path)] + \
-        vol_pdf_results if vol_pre_pdf_path else vol_pdf_results
+    pdf_parts = [str(vol_pre_pdf_path)] if vol_pre_pdf_path else []
+    pdf_parts = pdf_parts + [str(vol_toc_pdf_path)] if vol_toc_pdf_path else []
+    pdf_parts = pdf_parts + vol_pdf_results
 
     metadata = dict(
         author=f"JACoW - Joint Accelerator Conferences Website",

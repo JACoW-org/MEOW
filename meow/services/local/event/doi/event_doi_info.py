@@ -120,9 +120,9 @@ async def _doi_task(capacity_limiter: CapacityLimiter, total: int, index: int,
         await send_res(stream, total, index, contribution, doi_identifier, response=response, error=error)
 
 
-async def send_res(stream: MemoryObjectSendStream, total: int, index: int, contribution: ContributionData, 
+async def send_res(stream: MemoryObjectSendStream, total: int, index: int, contribution: ContributionData,
                    doi_identifier: str | None, response: Any, error=None):
-    
+
     doi = response.get('data', None) if response else None
 
     await stream.send({
