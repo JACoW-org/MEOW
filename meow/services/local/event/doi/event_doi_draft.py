@@ -81,6 +81,7 @@ async def _doi_task(capacity_limiter: CapacityLimiter, total: int, index: int,
 
     async with capacity_limiter:
 
+        doi_identifier: str | None = None
         response: str | None = None
         error: str | None = None
 
@@ -92,7 +93,7 @@ async def _doi_task(capacity_limiter: CapacityLimiter, total: int, index: int,
 
             doi_json = await doi_file.read_text()
 
-            doi_identifier: str = generate_doi_identifier(
+            doi_identifier: str | None = generate_doi_identifier(
                 context=settings.get('doi_context', '10.18429'),
                 organization=settings.get('doi_organization', 'JACoW'),
                 conference=settings.get('doi_conference', 'CONF-YY'),
@@ -119,16 +120,19 @@ async def _doi_task(capacity_limiter: CapacityLimiter, total: int, index: int,
             error = str(ex)
             logger.error(ex, exc_info=True)
 
-        await send_res(stream, total, index, contribution, response=response, error=error)
+        await send_res(stream, total, index, contribution, doi_identifier, response=response, error=error)
 
 
-async def send_res(stream: MemoryObjectSendStream, total: int, index: int, contribution: ContributionData, response: Any, error=None):
+async def send_res(stream: MemoryObjectSendStream, total: int, index: int, contribution: ContributionData, 
+                   doi_identifier: str | None, response: Any, error=None):
+    
     doi = response.get('data', None) if response else None
 
     await stream.send({
         "total": total,
         "index": index,
         "code": contribution.code,
+        "id": doi_identifier,
         "doi": doi,
         "error": error
     })

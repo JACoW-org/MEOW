@@ -10,7 +10,7 @@ import tarfile
 import shutil
 import multiprocessing as mp
 
-from fitz import Document, Rect
+from fitz import Document, Rect, Story, DocumentWriter, paper_rect
 from fitz.utils import set_metadata, insert_link
 
 from meow.utils.keywords import KEYWORDS
@@ -275,6 +275,54 @@ def doc_report(args) -> None:
 
     doc.close()
     del doc
+    
+
+def doc_toc(args) -> None:
+
+    # the result is a Python dictionary:
+    toc_data = json.loads(args.toc)
+
+    MEDIABOX = paper_rect("letter")  # output page format: Letter
+    WHERE = MEDIABOX + (57, 57, -57, -57)
+    writer = DocumentWriter(args.output)  # create the writer
+
+    story = Story()
+    body = story.body
+
+    for i, entry in enumerate(toc_data):
+
+        for attribute, value in entry.items():
+            para = body.add_paragraph()
+
+            if attribute == "position":
+                para.set_fontsize(10)
+                para.add_link(f"www.google.com/maps/@{value},14z")
+            else:
+                para.add_span()
+                para.set_color("#990000")
+                para.set_fontsize(14)
+                para.set_bold()
+                para.add_text(f"{attribute} ")
+                para.add_span()
+                para.set_fontsize(18)
+                para.add_text(f"{value}")
+
+        body.add_horizontal_line()
+
+    # This while condition will check a value from the Story `place` method
+    # for whether all content for the story has been written (0), otherwise
+    # more content is waiting to be written (1)
+    more = 1
+    while more:
+        device = writer.begin_page(MEDIABOX)  # make new page
+        more, _ = story.place(WHERE)
+        story.draw(device)
+        writer.end_page()  # finish page
+
+    writer.close()  # close output file
+
+    del story
+    
 
 
 def doc_metadata(args) -> None:
@@ -386,6 +434,18 @@ def main():
     ps_report.add_argument("-keywords", required=False,
                            help="extract keywords")
     ps_report.set_defaults(func=doc_report)
+
+    # -------------------------------------------------------------------------
+    # 'toc' command
+    # -------------------------------------------------------------------------
+    ps_toc = subps.add_parser(
+        "toc",
+        description="write TOC ti pdf",
+        epilog="specify output file",
+    )
+    ps_toc.add_argument("-output", required=True, help="output filename")
+    ps_toc.add_argument("-toc", required=False, help="toc data")
+    ps_toc.set_defaults(func=doc_toc)  
 
     # -------------------------------------------------------------------------
     # 'frame' command

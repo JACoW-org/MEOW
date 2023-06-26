@@ -71,6 +71,8 @@ async def read_report(read_path: str, keywords: bool) -> dict | None:
     cmd = [get_python_cmd(), '-m', 'meow', 'report', '-input',
            read_path, '-keywords', str(keywords)]
 
+    print(" ".join(cmd))
+
     res = await run_cmd(cmd)
 
     # if res:
@@ -146,6 +148,8 @@ async def pdf_to_text(read_path: str) -> str:
 
     cmd = [get_python_cmd(), '-m', 'meow', 'text', '-input', read_path]
 
+    print(" ".join(cmd))
+
     res = await run_cmd(cmd)
 
     if res is not None and res.returncode == 0:
@@ -187,6 +191,8 @@ async def draw_frame(read_path: str, write_path: str, page: int, pre_print: str 
     cmd.append(write_path)
 
     # logger.info(cmd)
+
+    print(" ".join(cmd))
 
     res = await run_cmd(cmd)
 
@@ -251,6 +257,8 @@ async def write_metadata(metadata: dict, read_path: str, write_path: str | None 
             cmd.append(f"-{key}")
             cmd.append(val)
 
+    print(" ".join(cmd))
+
     res = await run_cmd(cmd)
 
     # if res:
@@ -275,12 +283,12 @@ async def pdf_separate(input: str, output: str, first: int, last: int) -> int:
         --help         : print usage information
         -?             : print usage information
     """
-   
+
     # cmd = ['pdfseparate', '-f', str(first), '-l', str(last), input, output]
-    
+
     # pdftk full-pdf.pdf cat 12-15 output outfile_p12-15.pdf
-    
-    cmd = ['pdftk', input, 'cat', f'{first}-{last}', 'output', output]    
+
+    cmd = ['pdftk', input, 'cat', f'{first}-{last}', 'output', output]
 
     print(" ".join(cmd))
 
@@ -312,16 +320,16 @@ async def pdf_unite(write_path: str, files: list[str], first: bool = False) -> i
 
     # cmd = ['pdfunite'] + files + [write_path]
     # cmd = ['pdftk'] + files + ['cat', 'output'] + [write_path]
-    
+
     # qpdf --empty --pages var/run/18_tmp/MOA03.pdf 1-1 var/run/18_tmp/MOA08.pdf 1-1 -- out.pdf
-    
-    items:list[str] = []
-    
+
+    items: list[str] = []
+
     for f in files:
         items.append(f)
         if first:
             items.append('1-1')
-    
+
     cmd = ['qpdf', '--empty', '--pages'] + items + ['--', write_path]
 
     print(" ".join(cmd))
@@ -342,9 +350,11 @@ async def pdf_unite(write_path: str, files: list[str], first: bool = False) -> i
 async def concat_pdf(write_path: str, files: list[str], metadata: dict | None) -> int:
     """ https://pymupdf.readthedocs.io/en/latest/tutorial.html#joining-and-splitting-pdf-documents """
 
-    cmd = [get_python_cmd(), '-m', 'meow', 'join', '-o', write_path]
+    cmd = [get_python_cmd(), '-m', 'meow', 'join', '-o', write_path] + files
 
-    res = await run_cmd(cmd + files)
+    print(" ".join(cmd))
+
+    res = await run_cmd(cmd)
 
     if res is not None and res.returncode == 0:
 
@@ -360,9 +370,37 @@ async def concat_pdf(write_path: str, files: list[str], metadata: dict | None) -
 async def brief_links(write_path: str, files: list[str]) -> int:
     """ https://github.com/pymupdf/PyMuPDF/issues/283 """
 
-    cmd = [get_python_cmd(), '-m', 'meow', 'links', '-input', write_path]
+    cmd = [get_python_cmd(), '-m', 'meow', 'links', '-input', write_path] + files
+    
+    print(" ".join(cmd))
 
-    res = await run_cmd(cmd + files)
+    res = await run_cmd(cmd)
+
+    if res is not None and res.returncode == 0:
+
+        # print(res.returncode)
+        # print(res.stdout.decode())
+        # print(res.stderr.decode())
+
+        return res.returncode
+
+    return 1
+
+
+async def vol_toc(write_path: str, toc_data: list[dict]) -> int:
+
+    cmd = [get_python_cmd(), '-m', 'meow', 'toc']
+    
+    if toc_data:
+        cmd.append("-toc")
+        cmd.append(json_encode(toc_data).decode('utf-8'))
+        
+    cmd.append("-o")
+    cmd.append(write_path)
+    
+    print(" ".join(cmd))
+
+    res = await run_cmd(cmd)
 
     if res is not None and res.returncode == 0:
 
