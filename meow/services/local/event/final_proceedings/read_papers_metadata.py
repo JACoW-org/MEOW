@@ -3,6 +3,9 @@ from typing import Callable
 
 from nltk import download
 
+from concurrent.futures import as_completed
+
+from anyio.from_thread import start_blocking_portal
 from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 
@@ -38,7 +41,7 @@ async def read_papers_metadata(proceedings_data: ProceedingsData, cookies: dict,
     download('stopwords')
 
     send_stream, receive_stream = create_memory_object_stream()
-    capacity_limiter = CapacityLimiter(8)
+    capacity_limiter = CapacityLimiter(16)
 
     results = dict()
 
