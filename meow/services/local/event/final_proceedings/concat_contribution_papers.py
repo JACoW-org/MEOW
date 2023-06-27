@@ -151,7 +151,7 @@ async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, vol_pre_pdf_pa
             ]
         }
         
-        header = dict(
+        data = dict(
             name=proceedings_data.event.name,
             title=proceedings_data.event.title,
             series=proceedings_data.event.series,
@@ -159,15 +159,8 @@ async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, vol_pre_pdf_pa
             doi=proceedings_data.event.doi_label,
             issn=proceedings_data.event.issn,
         )
-        
-        footer = dict(
-            name=proceedings_data.event.name,
-            title=proceedings_data.event.title,
-            date=proceedings_data.event.date,
-            location=proceedings_data.event.location,
-        )
 
-        await vol_toc(str(vol_toc_pdf_path), toc_data, header, footer)
+        await vol_toc(str(vol_toc_pdf_path), toc_data, data)
 
     except Exception as e:
         logger.error(e, exc_info=True)

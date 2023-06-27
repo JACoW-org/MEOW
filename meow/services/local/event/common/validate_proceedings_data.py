@@ -104,13 +104,13 @@ async def validate_proceedings_data(proceedings_data: ProceedingsData, cookies: 
                         'title': contribution_data.title,
                     })
 
-    logger.info(f"")
-    logger.info(f"####################")
-    logger.info(f"total_count: {len(total_count)}")
-    logger.info(f"included_in_proceedings: {len(included_in_proceedings)}")
-    logger.info(f"included_in_prepress: {len(included_in_prepress)}")
-    logger.info(f"included_in_check: {len(included_in_check)}")
-    logger.info(f"####################")
-    logger.info(f"")
+    # logger.info(f"")
+    # logger.info(f"####################")
+    # logger.info(f"total_count: {len(total_count)}")
+    # logger.info(f"included_in_proceedings: {len(included_in_proceedings)}")
+    # logger.info(f"included_in_prepress: {len(included_in_prepress)}")
+    # logger.info(f"included_in_check: {len(included_in_check)}")
+    # logger.info(f"####################")
+    # logger.info(f"")
 
     return [metadatas, errors]

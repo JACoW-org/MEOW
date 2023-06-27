@@ -288,8 +288,7 @@ def doc_report(args) -> None:
 
 def doc_toc(args) -> None:
     
-    header = json.loads(args.header)
-    footer = json.loads(args.footer)
+    data = json.loads(args.data)
 
     PAGE_WIDTH = 595
     PAGE_HEIGHT = 792
@@ -324,12 +323,12 @@ def doc_toc(args) -> None:
     
     annot_toc_header(
         page=page,
-        data=header
+        data=data
     )
     
     annot_toc_footer(
         page=page,
-        data=footer,
+        data=data,
         page_number=start_page + page.number + 1,
     )
 
@@ -367,12 +366,12 @@ def doc_toc(args) -> None:
 
             annot_toc_header(
                 page=page,
-                data=header
+                data=data
             )
             
             annot_toc_footer(
                 page=page,
-                data=footer,
+                data=data,
                 page_number=start_page + page.number + 1,
             )
 
@@ -711,8 +710,7 @@ def main():
     )
     ps_toc.add_argument("-output", required=True, help="output filename")
     ps_toc.add_argument("-toc", required=False, help="toc data")
-    ps_toc.add_argument("-header", required=True, help="toc header")
-    ps_toc.add_argument("-footer", required=True, help="toc footer")
+    ps_toc.add_argument("-data", required=True, help="toc eventdata")
     ps_toc.set_defaults(func=doc_toc)
 
     # -------------------------------------------------------------------------
