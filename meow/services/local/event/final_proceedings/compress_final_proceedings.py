@@ -12,26 +12,27 @@ logger = lg.getLogger(__name__)
 async def compress_final_proceedings(final_proceedings: ProceedingsData, cookies: dict, settings: dict):
     """ """
 
-    zip_cmd = Path('bin', '7zzs')
-
     site_preview_ctx = f'{final_proceedings.event.id}'
-    site_preview_dir = Path('var', 'html', site_preview_ctx)
-    site_preview_zip = Path('var', 'html', f"{site_preview_ctx}.7z")
-
-    await rmtree(str(site_preview_zip))
+    site_preview_dir = Path(site_preview_ctx)
+    site_preview_zip = Path(f"{site_preview_ctx}.7z")
+    working_dir = Path('var', 'html')
+    
+    zip_cmd = await Path('bin', '7zzs').absolute()
+    
+    full_dest_path = await Path(working_dir, f"{site_preview_ctx}.7z").absolute()
+    if await full_dest_path.exists():
+        await full_dest_path.unlink()
 
     zip_args = [f"{zip_cmd}", "a",
                 "-t7z", "-m0=Deflate",
-                "-ms=16m", "-mmt=4", "-mx=1", "--",
+                "-ms=16m", "-mmt=4", 
+                "-bd", "-mx=1", "--",
                 f"{site_preview_zip}",
                 f"{site_preview_dir}"]
 
-    logger.info(zip_args)
+    logger.info(" ".join(zip_args))
 
-    result = await run_process(zip_args)
-
-    logger.info(result.stdout.decode())
-    logger.info(result.stderr.decode())
+    result = await run_process(zip_args, cwd=str(working_dir))
 
     if result.returncode == 0:
         logger.info(result.stdout.decode())

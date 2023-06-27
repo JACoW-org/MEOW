@@ -10,16 +10,11 @@ from meow.models.infra.locks import RedisLock
 from redis.exceptions import LockError
 
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
-from meow.models.local.event.final_proceedings.proceedings_data_model import FinalProceedingsConfig, ProceedingsData
+from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 
 
 from meow.services.local.event.common.adapting_final_proceedings import adapting_final_proceedings
 from meow.services.local.event.final_proceedings.compress_final_proceedings import compress_final_proceedings
-
-
-
-
-
 
 
 logger = lg.getLogger(__name__)
@@ -114,7 +109,7 @@ async def _event_compress_proceedings(event: dict, cookies: dict, settings: dict
     ))
 
     await compress_final_proceedings(final_proceedings, cookies, settings)
-    
+
     result = await get_final_proceedings(final_proceedings)
 
     yield result

@@ -338,7 +338,7 @@ def doc_toc(args) -> None:
     # toc_title_rect = Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN, PAGE_HORIZONTAL_MARGIN +
     #                       RECT_WIDTH, PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT * 2)
 
-    toc_title_point = Point(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN + PAGE_VERTICAL_SPACE)
+    toc_title_point = Point(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN + PAGE_VERTICAL_SPACE + LINE_SPACING)
 
     # page.add_freetext_annot(
     #     rect=toc_title_rect,

@@ -1,14 +1,13 @@
 import logging as lg
 
-from io import BytesIO
-from anyio import Path, run_process, create_task_group
-from numpy import short
+from concurrent.futures import as_completed
 
+
+from anyio import Path, run_process
+from anyio import create_task_group, CapacityLimiter
+from anyio.from_thread import start_blocking_portal
 
 from meow.models.local.event.final_proceedings.track_model import TrackData
-
-from anyio import create_task_group, CapacityLimiter
-
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
 from meow.models.local.event.final_proceedings.event_model import AffiliationData, KeywordData, PersonData
 from meow.models.local.event.final_proceedings.proceedings_data_model import FinalProceedingsConfig, ProceedingsData
@@ -99,19 +98,37 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
     async def run_build(self) -> None:
 
         logger.info('event_final_proceedings - plugin.build')
+        
+        with start_blocking_portal() as portal:
+            futures = [
+                portal.start_task_soon(self.render_home),
+                portal.start_task_soon(self.render_contributions),
+                portal.start_task_soon(self.render_session),
+                portal.start_task_soon(self.render_classification),
+                portal.start_task_soon(self.render_author),
+                portal.start_task_soon(self.render_institute),
+                portal.start_task_soon(self.render_doi_per_institute),
+                portal.start_task_soon(self.render_keyword),
+                portal.start_task_soon(self.render_doi_contributions),
+                portal.start_task_soon(self.render_references),
+                portal.start_task_soon(self.static),
+                portal.start_task_soon(self.finalize),
+            ]
+            for future in as_completed(futures):
+                pass
 
-        await self.render_home()
-        await self.render_contributions()
-        await self.render_session()
-        await self.render_classification()
-        await self.render_author()
-        await self.render_institute()
-        await self.render_doi_per_institute()
-        await self.render_keyword()
-        await self.render_doi_contributions()
-        await self.render_references()
-        await self.static()
-        await self.finalize()
+        # await self.render_home()
+        # await self.render_contributions()
+        # await self.render_session()
+        # await self.render_classification()
+        # await self.render_author()
+        # await self.render_institute()
+        # await self.render_doi_per_institute()
+        # await self.render_keyword()
+        # await self.render_doi_contributions()
+        # await self.render_references()
+        # await self.static()
+        # await self.finalize()
 
     async def prepare(self) -> None:
         """ """
