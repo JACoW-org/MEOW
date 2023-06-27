@@ -11,7 +11,10 @@ class FinalProceedingsConfig:
     """ """
     
     # indica se le slide sono da includere o meno
-    include_event_slides: bool = field()
+    include_event_slides: bool = field()    
+    
+    # indica se il link al paper debba essere assoluto o relativo
+    absolute_pdf_link: bool = field()
     
     # indica se considerare come contribution pubblicate tutte 
     # le verdi oppure le verdi che hanno rievuto il tag QA

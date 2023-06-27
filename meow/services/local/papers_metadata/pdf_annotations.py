@@ -19,7 +19,7 @@ def annot_page_header(page: Page, data: dict, options: dict = dict()):
 
     # top line
 
-    # left_
+    # left
     page.add_freetext_annot(
         rect=Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN, PAGE_HORIZONTAL_MARGIN +
                   rect_width, PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT),

@@ -6,7 +6,7 @@ from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 
 from anyio.streams.memory import MemoryObjectSendStream
-from meow.models.local.event.final_proceedings.contribution_model import ContributionPaperData
+from meow.models.local.event.final_proceedings.contribution_model import ContributionData, ContributionPaperData
 from meow.models.local.event.final_proceedings.event_factory import event_keyword_factory
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_contributions_papers
 
@@ -149,16 +149,14 @@ def get_footer_data(contribution, session) -> dict[str, str] | None:
     return footer_data
 
 
-def get_header_data(contribution) -> dict[str, str] | None:
-
-    venue = f'{contribution.doi_data.conference_code},{contribution.doi_data.venue}'
+def get_header_data(contribution: ContributionData) -> dict[str, str] | None:
 
     header_data = dict(
         series=contribution.doi_data.series,
-        venue=venue,
+        venue=f'{contribution.doi_data.conference_code},{contribution.doi_data.venue}',
         isbn=contribution.doi_data.isbn,
         issn=contribution.doi_data.issn,
-        doi=contribution.doi_data.doi_url
+        doi=contribution.doi_data.doi_identifier
     ) if contribution.doi_data else None
 
     return header_data

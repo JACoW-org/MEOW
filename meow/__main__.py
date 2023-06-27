@@ -1,5 +1,6 @@
 import io
 import sys
+import math
 import json
 import pathlib
 import argparse
@@ -10,7 +11,10 @@ import tarfile
 import shutil
 import multiprocessing as mp
 
-from fitz import Document, Rect, Story, DocumentWriter, paper_rect
+from fitz import Document, Page, Rect, Point, Story, DocumentWriter
+
+from fitz import TEXT_ALIGN_RIGHT, TEXT_ALIGN_LEFT, LINK_GOTOR, LINK_GOTO
+
 from fitz.utils import set_metadata, insert_link
 
 from meow.utils.keywords import KEYWORDS
@@ -88,11 +92,11 @@ def doc_join(args) -> None:
     """ Join pages from several PDF documents. """
 
     doc = Document()  # output PDF
-    
+
     # print(args.input)
 
     for src_item in args.input:  # process one input PDF
-        
+
         # print(src_item)
 
         src_list = src_item.split(",")
@@ -226,7 +230,8 @@ def doc_report(args) -> None:
     xref_list = []
 
     stemmer = SnowballStemmer("english") if args.keywords == 'True' else None
-    stem_keywords = stem_keywords_as_tree(KEYWORDS, stemmer) if stemmer else None
+    stem_keywords = stem_keywords_as_tree(
+        KEYWORDS, stemmer) if stemmer else None
 
     for page in doc:
 
@@ -250,10 +255,10 @@ def doc_report(args) -> None:
 
         page_width = page.rect.width
         page_height = page.rect.height
-        
+
         # print(page.rect)
         # print(page.mediabox_size)
-        
+
         page_report = dict(sizes=dict(width=page_width,
                                       height=page_height))
 
@@ -275,36 +280,266 @@ def doc_report(args) -> None:
 
     doc.close()
     del doc
-    
+
 
 def doc_toc(args) -> None:
 
+    PAGE_WIDTH = 595
+    PAGE_HEIGHT = 792
+
+    ITEMS_PER_PAGE = 46
+
+    PAGE_HORIZONTAL_MARGIN = 57
+    PAGE_VERTICAL_MARGIN = 57
+    PAGE_VERTICAL_SPACE = 30
+    ANNOTATION_HEIGHT = 10
+    LINE_SPACING = 4
+
+    ITEM_CODE_RECT_WIDTH = 47
+
+    RECT_WIDTH = PAGE_WIDTH - 2 * PAGE_HORIZONTAL_MARGIN
+
+    toc_data: dict = json.loads(args.toc)
+
+    pre_pdf: str = toc_data.get('pre_pdf', None)
+
+    pre_doc: Document = Document(filename=pre_pdf)
+    start_page = int(pre_doc.page_count)
+    pre_doc.close()
+
+    items = [{}, {}] + toc_data.get('items', [])
+
+    total_pages = math.ceil(len(items) / ITEMS_PER_PAGE)
+
+    doc: Document = Document()
+
+    page: Page = doc.new_page(-1, width=PAGE_WIDTH, height=PAGE_HEIGHT)
+
+    toc_title = toc_data.get('title', 'Table of Contents')
+
+    toc_title_rect = Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN, PAGE_HORIZONTAL_MARGIN +
+                          RECT_WIDTH, PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT * 2)
+
+    toc_title_point = Point(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN)
+
+    # page.add_freetext_annot(
+    #     rect=toc_title_rect,
+    #     align=TEXT_ALIGN_LEFT,
+    #     text=f"{toc_title}",
+    #     fontname='CoBo',
+    #     fontsize=12,
+    # )
+
+    page.insert_text(toc_title_point,  # bottom-left of 1st char
+                     f"{toc_title}",  # the text (honors '\n')
+                     fontname="CoBo",  # the default font
+                     fontsize=11,  # the default font size
+                     )
+
+    item_index = 0
+    for i, item in enumerate(items):
+
+        if i < 2:
+            continue
+
+        item_index = i % ITEMS_PER_PAGE
+
+        if item_index == 0:
+            page = doc.new_page(-1, width=PAGE_WIDTH, height=PAGE_HEIGHT)
+
+        space = (item_index * (LINE_SPACING + ANNOTATION_HEIGHT)) + \
+            (PAGE_VERTICAL_SPACE)
+
+        item_code_rect = Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN + space, PAGE_HORIZONTAL_MARGIN +
+                              RECT_WIDTH - ITEM_CODE_RECT_WIDTH - 20, PAGE_VERTICAL_MARGIN + space + ANNOTATION_HEIGHT)
+
+        item_code_point = Point(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN + space)
+
+        # page.add_freetext_annot(
+        #     rect=item_code_rect,
+        #     align=TEXT_ALIGN_LEFT,
+        #     text=item.get('code', ''),
+        #     fontname='Cour',
+        #     fontsize=9,
+        # )
+
+        page.insert_text(item_code_point,  # bottom-left of 1st char
+                         item.get('code', ''),  # the text (honors '\n')
+                         fontname="Cour",  # the default font
+                         fontsize=9,  # the default font size
+                         )
+
+        item_title_original = item.get('title', '')
+        item_title_parts = item_title_original.split()
+
+        item_title: str = ''
+
+        for title_part in item_title_parts:
+            if (len(item_title) + len(title_part) + 1) <= 70:
+                item_title = item_title + ' ' + title_part
+
+        item_title = item_title + '...' if len(item_title) < \
+            len(item_title_original) else item_title
+
+        print([item_title_original, item_title_parts, item_title])
+
+        item_title_rect = Rect(PAGE_HORIZONTAL_MARGIN + ITEM_CODE_RECT_WIDTH, PAGE_VERTICAL_MARGIN + space, PAGE_HORIZONTAL_MARGIN +
+                               RECT_WIDTH - 20, PAGE_VERTICAL_MARGIN + space + ANNOTATION_HEIGHT)
+
+        item_title_point = Point(PAGE_HORIZONTAL_MARGIN + ITEM_CODE_RECT_WIDTH, PAGE_VERTICAL_MARGIN + space)
+
+        page.insert_text(item_title_point,  # bottom-left of 1st char
+                         f"{item_title}",  # the text (honors '\n')
+                         fontname="Cour",  # the default font
+                         fontsize=9,  # the default font size
+                         )
+
+        # page.add_freetext_annot(
+        #     rect=item_title_rect,
+        #     align=TEXT_ALIGN_LEFT,
+        #     text=f"{item_title}",
+        #     fontname='Cour',
+        #     fontsize=9,
+        # )
+
+        # page.add_freetext_annot(
+        #     rect=link_rect,
+        #     align=TEXT_ALIGN_RIGHT,
+        #     text=f"{item.get('page', 0)}",
+        #     fontname='CoBo',
+        #     fontsize=9,
+        # )
+
+        # print(PAGE_HORIZONTAL_MARGIN + RECT_WIDTH - 40, PAGE_VERTICAL_MARGIN + space)
+
+        link_point = Point(PAGE_HORIZONTAL_MARGIN +
+                           RECT_WIDTH - 24, PAGE_VERTICAL_MARGIN + space)
+
+        page.insert_text(link_point,  # bottom-left of 1st char
+                         f"{item.get('page', 0)}",  # the text (honors '\n')
+                         fontname="CoBo",  # the default font
+                         fontsize=9,  # the default font size
+                         )
+
+        to_page = item.get('page', 0) + start_page + total_pages - 2
+        to_file = toc_data.get('file')
+        to_point = (0, 0)
+        link_rect = Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN + space - 10, PAGE_HORIZONTAL_MARGIN +
+                         RECT_WIDTH, PAGE_VERTICAL_MARGIN + space + ANNOTATION_HEIGHT - 5)
+
+        link: dict = {'kind': LINK_GOTOR, 'from': link_rect,
+                      "to": to_point, "page": to_page, "file": to_file}
+
+        insert_link(page, link, mark=True)
+
+    # for i, item in enumerate(toc_data.get('items', [])):
+    #
+    #     index = i % (35 if not page or page.number == 0 else 45)
+    #
+    #     to_page = item.get('page') + start_page
+    #     to_file = toc_data.get('file')
+    #     to_point = (0, 0)
+    #
+    #     space = (index * (LINE_SPACING + ANNOTATION_HEIGHT)) + \
+    #         (FIRST_PAGE_VERTICAL_SPACE if not page or page.number ==
+    #          0 else OTHER_PAGE_VERTICAL_SPACE)
+    #
+    #     link_rect = Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN + space, PAGE_HORIZONTAL_MARGIN +
+    #                      RECT_WIDTH, PAGE_VERTICAL_MARGIN + space + ANNOTATION_HEIGHT)
+    #
+    #     link: dict = {'kind': LINK_GOTOR, 'from': link_rect,
+    #                   "to": to_point, "page": to_page, "file": to_file}
+    #
+    #     insert_link(page, link, mark=False)
+
+    doc.save(args.output, garbage=1, clean=1, deflate=1)
+
+
+def __doc_toc(args) -> None:
+
+    def rectfn(rect_num, filled):
+        MEDIABOX = Rect(0.0, 0.0, 595.0, 792.0)
+        WHERE = MEDIABOX + (50, 50, -57, -57)  # internal margins
+
+        return MEDIABOX, WHERE, None
+
     toc_data = json.loads(args.toc)
 
-    MEDIABOX = Rect(0.0, 0.0, 595.0, 792.0) # paper_rect("letter")
-    WHERE = MEDIABOX + (57, 57, -57, -57) # internal margins
+    html = f'''
+<!DOCTYPE html>
+<body>
+
+<h1>Table of Contents</h1>
+
+<div>
+    <span><b>MOA01</b><span>
+    <span>....<span>
+    <span><a href=\"#34\">34</a><span>
+</div>
+
+<div>
+    <span><b>MOA02</b><span>
+    <span>....<span>
+    <span><a href=\"#35\">35</a><span>
+</div>
+
+<div>
+    <span><b>MOA03</b><span>
+    <span>....<span>
+    <span><a href=\"#36\">36</a><span>
+</div>
+
+</body>
+'''
+
+    story = Story(html, em=8)
+
+    writer = DocumentWriter(args.output)  # create the writer
+
+    story.write(writer, rectfn)
+    writer.close()
+
+
+def _doc_toc(args) -> None:
+
+    toc_data = json.loads(args.toc)
+
+    MEDIABOX = Rect(0.0, 0.0, 595.0, 792.0)  # paper_rect("letter")
+    WHERE = MEDIABOX + (50, 50, -57, -57)  # internal margins
     writer = DocumentWriter(args.output)  # create the writer
 
     story = Story()
+
     body = story.body
 
-    for i, entry in enumerate(toc_data):
+    body.set_font("sans-serif")
 
-        for attribute, value in entry.items():
-            para = body.add_paragraph()
+    body.add_header(1).add_text("Table of Contents")
 
-            if attribute == "position":
-                para.set_fontsize(10)
-                para.add_link(f"www.google.com/maps/@{value},14z")
-            else:
-                para.add_span()
-                para.set_color("#990000")
-                para.set_fontsize(12)
-                para.set_bold()
-                para.add_text(f"{attribute} ")
-                para.add_span()
-                para.set_fontsize(14)
-                para.add_text(f"{value}")
+    for index, entry in enumerate(toc_data):
+
+        para = body.add_paragraph()
+
+        para.add_span()
+        para.set_bold(True)
+        para.set_fontsize(12)
+        para.set_color("#333333")
+        para.set_align(TEXT_ALIGN_LEFT)
+        para.add_text(f"{entry.get('code')}")
+
+        para.add_span()
+        para.set_bold(False)
+        para.set_fontsize(12)
+        para.set_color("#333333")
+        para.set_align(TEXT_ALIGN_LEFT)
+        para.add_text(f" - {entry.get('title')}")
+
+        para.add_span()
+        para.set_bold(False)
+        para.set_fontsize(12)
+        para.set_color("#000000")
+        para.set_align(TEXT_ALIGN_RIGHT)
+        para.add_link(f"#MOA05", 'MOA05')
 
         body.add_horizontal_line()
 
@@ -321,7 +556,6 @@ def doc_toc(args) -> None:
     writer.close()  # close output file
 
     del story
-    
 
 
 def doc_metadata(args) -> None:
@@ -444,7 +678,7 @@ def main():
     )
     ps_toc.add_argument("-output", required=True, help="output filename")
     ps_toc.add_argument("-toc", required=False, help="toc data")
-    ps_toc.set_defaults(func=doc_toc)  
+    ps_toc.set_defaults(func=doc_toc)
 
     # -------------------------------------------------------------------------
     # 'frame' command

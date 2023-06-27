@@ -8,7 +8,7 @@ from anyio import CapacityLimiter, Path, create_task_group
 from meow.models.local.event.final_proceedings.contribution_model import FileData
 from meow.models.local.event.final_proceedings.event_model import AttachmentData
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_proceedings_papers
-from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
+from meow.models.local.event.final_proceedings.proceedings_data_model import FinalProceedingsConfig, ProceedingsData
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.services.local.event.event_pdf_utils import brief_links, vol_toc, pdf_separate, pdf_unite, write_metadata
 from meow.utils.list import split_list
@@ -17,7 +17,7 @@ from meow.utils.list import split_list
 logger = lg.getLogger(__name__)
 
 
-async def concat_contribution_papers(proceedings_data: ProceedingsData, cookies: dict, settings: dict, callback: Callable) -> ProceedingsData:
+async def concat_contribution_papers(proceedings_data: ProceedingsData, cookies: dict, settings: dict, config: FinalProceedingsConfig, callback: Callable) -> ProceedingsData:
     """ """
 
     logger.info('event_final_proceedings - concat_contribution_papers')
@@ -33,8 +33,8 @@ async def concat_contribution_papers(proceedings_data: ProceedingsData, cookies:
     if len(files_data) > 0:
 
         # await first_pdf_task(proceedings_data, files_data, cache_dir)
-        await brief_pdf_task(proceedings_data, files_data, cache_dir)
-        await vol_pdf_task(proceedings_data, files_data, cache_dir)
+        await brief_pdf_task(proceedings_data, files_data, cache_dir, settings.get('doi_conference', 'CONF-YY'), config.absolute_pdf_link)
+        await vol_pdf_task(proceedings_data, files_data, cache_dir, callback)
 
     return proceedings_data
 
@@ -58,7 +58,7 @@ async def first_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
             tg.start_soon(_task, current_file, capacity_limiter)
 
 
-async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileData], cache_dir: Path):
+async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileData], cache_dir: Path, callback: Callable):
 
     event_id = proceedings_data.event.id
     event_title = proceedings_data.event.title
@@ -67,8 +67,8 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
 
     vol_pdf_path = Path(cache_dir, f"{event_id}_proceedings_volume.pdf")
 
-    vol_pre_pdf_path = await get_vol_pre_pdf_path(proceedings_data, cache_dir)
-    vol_toc_pdf_path = await get_vol_toc_pdf_path(proceedings_data, cache_dir)
+    vol_pre_pdf_path = await get_vol_pre_pdf_path(proceedings_data, cache_dir, callback)
+    vol_toc_pdf_path = await get_vol_toc_pdf_path(proceedings_data, vol_pre_pdf_path, cache_dir, callback)
 
     vol_pdf_files = [
         str(Path(cache_dir, f"{f.filename}_jacow"))
@@ -109,7 +109,7 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
     proceedings_data.proceedings_volume_size = (await vol_pdf_path.stat()).st_size
 
 
-async def get_vol_pre_pdf_path(proceedings_data: ProceedingsData, cache_dir: Path):
+async def get_vol_pre_pdf_path(proceedings_data: ProceedingsData, cache_dir: Path, callback: Callable):
     vol_pre_pdf_path: Path | None = None
 
     try:
@@ -132,7 +132,7 @@ async def get_vol_pre_pdf_path(proceedings_data: ProceedingsData, cache_dir: Pat
     return vol_pre_pdf_path
 
 
-async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, cache_dir: Path):
+async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, vol_pre_pdf_path: Path | None, cache_dir: Path, callback: Callable):
 
     vol_toc_pdf_path: Path | None = None
 
@@ -140,162 +140,16 @@ async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, cache_dir: Pat
         vol_toc_pdf_path = Path(
             cache_dir, f'{proceedings_data.event.id}_proceedings_toc.pdf')
 
-        toc_data = [
-            {
-                "name":           "Five-storied Pagoda",
-                "temple":         "Rurikō-ji",
-                "founded":        "middle Muromachi period, 1442",
-                "region":         "Yamaguchi, Yamaguchi",
-                "position":       "34.190181,131.472917"
-            },
-            {
-                "name":           "Founder's Hall",
-                "temple":         "Eihō-ji",
-                "founded":        "early Muromachi period",
-                "region":         "Tajimi, Gifu",
-                "position":       "35.346144,137.129189"
-            },
-            {
-                "name":           "Fudōdō",
-                "temple":         "Kongōbu-ji",
-                "founded":        "early Kamakura period",
-                "region":         "Kōya, Wakayama",
-                "position":       "34.213103,135.580397"
-            },
-            {
-                "name":           "Goeidō",
-                "temple":         "Nishi Honganji",
-                "founded":        "Edo period, 1636",
-                "region":         "Kyoto",
-                "position":       "34.991394,135.751689"
-            },
-            {
-                "name":           "Golden Hall",
-                "temple":         "Murō-ji",
-                "founded":        "early Heian period",
-                "region":         "Uda, Nara",
-                "position":       "34.536586819357986,136.0395548452301"
-            },
-            {
-                "name":           "Golden Hall",
-                "temple":         "Fudō-in",
-                "founded":        "late Muromachi period, 1540",
-                "region":         "Hiroshima",
-                "position":       "34.427014,132.471117"
-            },
-            {
-                "name":           "Golden Hall",
-                "temple":         "Ninna-ji",
-                "founded":        "Momoyama period, 1613",
-                "region":         "Kyoto",
-                "position":       "35.031078,135.713811"
-            },
-            {
-                "name":           "Golden Hall",
-                "temple":         "Mii-dera",
-                "founded":        "Momoyama period, 1599",
-                "region":         "Ōtsu, Shiga",
-                "position":       "35.013403,135.852861"
-            },
-            {
-                "name":           "Golden Hall",
-                "temple":         "Tōshōdai-ji",
-                "founded":        "Nara period, 8th century",
-                "region":         "Nara, Nara",
-                "position":       "34.675619,135.784842"
-            },
-            {
-                "name":           "Golden Hall",
-                "temple":         "Tō-ji",
-                "founded":        "Momoyama period, 1603",
-                "region":         "Kyoto",
-                "position":       "34.980367,135.747686"
-            },
-            {
-                "name":           "Golden Hall",
-                "temple":         "Tōdai-ji",
-                "founded":        "middle Edo period, 1705",
-                "region":         "Nara, Nara",
-                "position":       "34.688992,135.839822"
-            },
-            {
-                "name":           "Golden Hall",
-                "temple":         "Hōryū-ji",
-                "founded":        "Asuka period, by 693",
-                "region":         "Ikaruga, Nara",
-                "position":       "34.614317,135.734458"
-            },
-            {
-                "name":           "Golden Hall",
-                "temple":         "Daigo-ji",
-                "founded":        "late Heian period",
-                "region":         "Kyoto",
-                "position":       "34.951481,135.821747"
-            },
-            {
-                "name":           "Keigū-in Main Hall",
-                "temple":         "Kōryū-ji",
-                "founded":        "early Kamakura period, before 1251",
-                "region":         "Kyoto",
-                "position":       "35.015028,135.705425"
-            },
-            {
-                "name":           "Konpon-chūdō",
-                "temple":         "Enryaku-ji",
-                "founded":        "early Edo period, 1640",
-                "region":         "Ōtsu, Shiga",
-                "position":       "35.070456,135.840942"
-            },
-            {
-                "name":           "Korō",
-                "temple":         "Tōshōdai-ji",
-                "founded":        "early Kamakura period, 1240",
-                "region":         "Nara, Nara",
-                "position":       "34.675847,135.785069"
-            },
-            {
-                "name":           "Kōfūzō",
-                "temple":         "Hōryū-ji",
-                "founded":        "early Heian period",
-                "region":         "Ikaruga, Nara",
-                "position":       "34.614439,135.735428"
-            },
-            {
-                "name":           "Large Lecture Hall",
-                "temple":         "Hōryū-ji",
-                "founded":        "middle Heian period, 990",
-                "region":         "Ikaruga, Nara",
-                "position":       "34.614783,135.734175"
-            },
-            {
-                "name":           "Lecture Hall",
-                "temple":         "Zuiryū-ji",
-                "founded":        "early Edo period, 1655",
-                "region":         "Takaoka, Toyama",
-                "position":       "36.735689,137.010019"
-            },
-            {
-                "name":           "Lecture Hall",
-                "temple":         "Tōshōdai-ji",
-                "founded":        "Nara period, 763",
-                "region":         "Nara, Nara",
-                "position":       "34.675933,135.784842"
-            },
-            {
-                "name":           "Lotus Flower Gate",
-                "temple":         "Tō-ji",
-                "founded":        "early Kamakura period",
-                "region":         "Kyoto",
-                "position":       "34.980678,135.746314"
-            },
-            {
-                "name":           "Main Hall",
-                "temple":         "Akishinodera",
-                "founded":        "early Kamakura period",
-                "region":         "Nara, Nara",
-                "position":       "34.703769,135.776189"
-            }
-        ]
+        toc_data: dict = {
+            "title": "Table of Contents",
+            "pre_pdf": str(vol_pre_pdf_path),
+            "file": f"{proceedings_data.event.id}_proceedings_volume.pdf",
+            "items": [
+                {"code": c.code, "title": c.title, "page": c.page}
+                for c in proceedings_data.contributions
+                if callback(c) is True
+            ]
+        }
 
         await vol_toc(str(vol_toc_pdf_path), toc_data)
 
@@ -305,7 +159,7 @@ async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, cache_dir: Pat
     return vol_toc_pdf_path
 
 
-async def brief_pdf_task(proceedings_data: ProceedingsData,  files_data: list[FileData], cache_dir: Path):
+async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileData], cache_dir: Path, doi_conference: str, absolute_pdf_link: bool):
 
     event_id = proceedings_data.event.id
     event_title = proceedings_data.event.title
@@ -339,6 +193,8 @@ async def brief_pdf_task(proceedings_data: ProceedingsData,  files_data: list[Fi
 
     brief_pdf_links = [
         f.filename for f in files_data
+    ] if absolute_pdf_link else [
+        f"https://jacow.org/{doi_conference}/{f.filename}" for f in files_data
     ]
 
     vol_pdf_results: list[str] = []

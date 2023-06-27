@@ -71,7 +71,7 @@ async def read_report(read_path: str, keywords: bool) -> dict | None:
     cmd = [get_python_cmd(), '-m', 'meow', 'report', '-input',
            read_path, '-keywords', str(keywords)]
 
-    print(" ".join(cmd))
+    # print(" ".join(cmd))
 
     res = await run_cmd(cmd)
 
@@ -148,7 +148,7 @@ async def pdf_to_text(read_path: str) -> str:
 
     cmd = [get_python_cmd(), '-m', 'meow', 'text', '-input', read_path]
 
-    print(" ".join(cmd))
+    # print(" ".join(cmd))
 
     res = await run_cmd(cmd)
 
@@ -192,7 +192,7 @@ async def draw_frame(read_path: str, write_path: str, page: int, pre_print: str 
 
     # logger.info(cmd)
 
-    print(" ".join(cmd))
+    # print(" ".join(cmd))
 
     res = await run_cmd(cmd)
 
@@ -257,7 +257,7 @@ async def write_metadata(metadata: dict, read_path: str, write_path: str | None 
             cmd.append(f"-{key}")
             cmd.append(val)
 
-    print(" ".join(cmd))
+    # print(" ".join(cmd))
 
     res = await run_cmd(cmd)
 
@@ -290,7 +290,7 @@ async def pdf_separate(input: str, output: str, first: int, last: int) -> int:
 
     cmd = ['pdftk', input, 'cat', f'{first}-{last}', 'output', output]
 
-    print(" ".join(cmd))
+    # print(" ".join(cmd))
 
     res = await run_cmd(cmd)
 
@@ -332,7 +332,7 @@ async def pdf_unite(write_path: str, files: list[str], first: bool = False) -> i
 
     cmd = ['qpdf', '--empty', '--pages'] + items + ['--', write_path]
 
-    print(" ".join(cmd))
+    # print(" ".join(cmd))
 
     res = await run_cmd(cmd)
 
@@ -352,7 +352,7 @@ async def concat_pdf(write_path: str, files: list[str], metadata: dict | None) -
 
     cmd = [get_python_cmd(), '-m', 'meow', 'join', '-o', write_path] + files
 
-    print(" ".join(cmd))
+    # print(" ".join(cmd))
 
     res = await run_cmd(cmd)
 
@@ -372,7 +372,7 @@ async def brief_links(write_path: str, files: list[str]) -> int:
 
     cmd = [get_python_cmd(), '-m', 'meow', 'links', '-input', write_path] + files
     
-    print(" ".join(cmd))
+    # print(" ".join(cmd))
 
     res = await run_cmd(cmd)
 
@@ -387,7 +387,7 @@ async def brief_links(write_path: str, files: list[str]) -> int:
     return 1
 
 
-async def vol_toc(write_path: str, toc_data: list[dict]) -> int:
+async def vol_toc(write_path: str, toc_data: dict) -> int:
 
     cmd = [get_python_cmd(), '-m', 'meow', 'toc']
     

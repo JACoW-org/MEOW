@@ -27,6 +27,7 @@ class EventPrePressTask(AbstractTask):
             include_event_slides=False,
             generate_external_doi_url=False,
             include_only_qa_green_contributions=False,
+            absolute_pdf_link=False
         )
         
         async for r in event_final_proceedings(event, cookies, settings, config):

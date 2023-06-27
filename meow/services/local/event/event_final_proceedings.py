@@ -372,7 +372,7 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, c
         text='Concat Contributions Papers'
     ))
 
-    await concat_contribution_papers(final_proceedings, cookies, settings, filter_contributions_pubblicated)
+    await concat_contribution_papers(final_proceedings, cookies, settings, config, filter_contributions_pubblicated)
 
     """ """
 
