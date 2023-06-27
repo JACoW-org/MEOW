@@ -387,7 +387,7 @@ async def brief_links(write_path: str, files: list[str]) -> int:
     return 1
 
 
-async def vol_toc(write_path: str, toc_data: dict) -> int:
+async def vol_toc(write_path: str, toc_data: dict, header: dict, footer: dict) -> int:
 
     cmd = [get_python_cmd(), '-m', 'meow', 'toc']
     
@@ -397,6 +397,12 @@ async def vol_toc(write_path: str, toc_data: dict) -> int:
         
     cmd.append("-o")
     cmd.append(write_path)
+    
+    cmd.append("-header")
+    cmd.append(json_encode(header).decode('utf-8'))
+    
+    cmd.append("-footer")
+    cmd.append(json_encode(footer).decode('utf-8'))
     
     # print(" ".join(cmd))
 

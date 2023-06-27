@@ -12,14 +12,13 @@ import shutil
 import multiprocessing as mp
 
 from fitz import Document, Page, Rect, Point, Story, DocumentWriter
-
-from fitz import TEXT_ALIGN_RIGHT, TEXT_ALIGN_LEFT, LINK_GOTOR, LINK_GOTO
+from fitz import TEXT_ALIGN_RIGHT, TEXT_ALIGN_LEFT, LINK_GOTOR, LINK_URI
 
 from fitz.utils import set_metadata, insert_link
 
 from meow.utils.keywords import KEYWORDS
-
 from meow.services.local.papers_metadata.pdf_annotations import annot_page_footer, annot_page_header, annot_page_side
+from meow.services.local.papers_metadata.pdf_annotations import annot_toc_footer, annot_toc_header
 
 
 def open_file(filename, password, show=False, pdf=True):
@@ -149,7 +148,7 @@ def doc_links(args) -> None:
         # print(page_index, link, page.mediabox_size.x, page.mediabox_size.y)
 
         rect = Rect(0, 0, page.mediabox_size.x, page.mediabox_size.y)
-        insert_link(page, {'kind': 2, 'from': rect, 'uri': f"{link}"})
+        insert_link(page, {'kind': LINK_URI, 'from': rect, 'uri': f"{link}"})
 
     doc.save(filename=args.input, incremental=1, encryption=0)
 
@@ -177,12 +176,17 @@ def doc_frame(args) -> None:
 
     for page in doc:
 
-        if header:
-            annot_page_header(page, header)
-
-        if footer:
-            annot_page_footer(page, page_number, footer)
-
+        annot_page_header(
+            page=page,
+            data=header
+        )
+        
+        annot_page_footer(
+            page=page,
+            page_number=page_number,
+            data=footer
+        )
+        
         annot_page_side(
             page=page,
             pre_print=pre_print,
@@ -283,6 +287,9 @@ def doc_report(args) -> None:
 
 
 def doc_toc(args) -> None:
+    
+    header = json.loads(args.header)
+    footer = json.loads(args.footer)
 
     PAGE_WIDTH = 595
     PAGE_HEIGHT = 792
@@ -295,7 +302,7 @@ def doc_toc(args) -> None:
     ANNOTATION_HEIGHT = 10
     LINE_SPACING = 4
 
-    ITEM_CODE_RECT_WIDTH = 47
+    ITEM_CODE_RECT_WIDTH = 40
 
     RECT_WIDTH = PAGE_WIDTH - 2 * PAGE_HORIZONTAL_MARGIN
 
@@ -314,13 +321,24 @@ def doc_toc(args) -> None:
     doc: Document = Document()
 
     page: Page = doc.new_page(-1, width=PAGE_WIDTH, height=PAGE_HEIGHT)
+    
+    annot_toc_header(
+        page=page,
+        data=header
+    )
+    
+    annot_toc_footer(
+        page=page,
+        data=footer,
+        page_number=start_page + page.number + 1,
+    )
 
     toc_title = toc_data.get('title', 'Table of Contents')
 
-    toc_title_rect = Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN, PAGE_HORIZONTAL_MARGIN +
-                          RECT_WIDTH, PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT * 2)
+    # toc_title_rect = Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN, PAGE_HORIZONTAL_MARGIN +
+    #                       RECT_WIDTH, PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT * 2)
 
-    toc_title_point = Point(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN)
+    toc_title_point = Point(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN + PAGE_VERTICAL_SPACE)
 
     # page.add_freetext_annot(
     #     rect=toc_title_rect,
@@ -347,13 +365,25 @@ def doc_toc(args) -> None:
         if item_index == 0:
             page = doc.new_page(-1, width=PAGE_WIDTH, height=PAGE_HEIGHT)
 
+            annot_toc_header(
+                page=page,
+                data=header
+            )
+            
+            annot_toc_footer(
+                page=page,
+                data=footer,
+                page_number=start_page + page.number + 1,
+            )
+
         space = (item_index * (LINE_SPACING + ANNOTATION_HEIGHT)) + \
             (PAGE_VERTICAL_SPACE)
 
-        item_code_rect = Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN + space, PAGE_HORIZONTAL_MARGIN +
-                              RECT_WIDTH - ITEM_CODE_RECT_WIDTH - 20, PAGE_VERTICAL_MARGIN + space + ANNOTATION_HEIGHT)
+        # item_code_rect = Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN + space, PAGE_HORIZONTAL_MARGIN +
+        #                       RECT_WIDTH - ITEM_CODE_RECT_WIDTH - 20, PAGE_VERTICAL_MARGIN + space + ANNOTATION_HEIGHT)
 
-        item_code_point = Point(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN + space)
+        item_code_point = Point(PAGE_HORIZONTAL_MARGIN,
+                                PAGE_VERTICAL_MARGIN + space)
 
         # page.add_freetext_annot(
         #     rect=item_code_rect,
@@ -378,15 +408,18 @@ def doc_toc(args) -> None:
             if (len(item_title) + len(title_part) + 1) <= 70:
                 item_title = item_title + ' ' + title_part
 
-        item_title = item_title + '...' if len(item_title) < \
+        item_title = item_title + '[...]' if len(item_title) < \
             len(item_title_original) else item_title
 
-        print([item_title_original, item_title_parts, item_title])
+        item_title = f"{item_title:.<75}"
 
-        item_title_rect = Rect(PAGE_HORIZONTAL_MARGIN + ITEM_CODE_RECT_WIDTH, PAGE_VERTICAL_MARGIN + space, PAGE_HORIZONTAL_MARGIN +
-                               RECT_WIDTH - 20, PAGE_VERTICAL_MARGIN + space + ANNOTATION_HEIGHT)
+        # print([item_title_original, item_title_parts, item_title])
 
-        item_title_point = Point(PAGE_HORIZONTAL_MARGIN + ITEM_CODE_RECT_WIDTH, PAGE_VERTICAL_MARGIN + space)
+        # item_title_rect = Rect(PAGE_HORIZONTAL_MARGIN + ITEM_CODE_RECT_WIDTH, PAGE_VERTICAL_MARGIN + space, PAGE_HORIZONTAL_MARGIN +
+        #                        RECT_WIDTH - 20, PAGE_VERTICAL_MARGIN + space + ANNOTATION_HEIGHT)
+
+        item_title_point = Point(
+            PAGE_HORIZONTAL_MARGIN + ITEM_CODE_RECT_WIDTH, PAGE_VERTICAL_MARGIN + space)
 
         page.insert_text(item_title_point,  # bottom-left of 1st char
                          f"{item_title}",  # the text (honors '\n')
@@ -412,11 +445,11 @@ def doc_toc(args) -> None:
 
         # print(PAGE_HORIZONTAL_MARGIN + RECT_WIDTH - 40, PAGE_VERTICAL_MARGIN + space)
 
-        link_point = Point(PAGE_HORIZONTAL_MARGIN +
-                           RECT_WIDTH - 24, PAGE_VERTICAL_MARGIN + space)
+        link_point = Point(PAGE_HORIZONTAL_MARGIN + RECT_WIDTH - 24,
+                           PAGE_VERTICAL_MARGIN + space)
 
         page.insert_text(link_point,  # bottom-left of 1st char
-                         f"{item.get('page', 0)}",  # the text (honors '\n')
+                         f"{item.get('page', 0):4d}",  # the text (honors '\n')
                          fontname="CoBo",  # the default font
                          fontsize=9,  # the default font size
                          )
@@ -678,6 +711,8 @@ def main():
     )
     ps_toc.add_argument("-output", required=True, help="output filename")
     ps_toc.add_argument("-toc", required=False, help="toc data")
+    ps_toc.add_argument("-header", required=True, help="toc header")
+    ps_toc.add_argument("-footer", required=True, help="toc footer")
     ps_toc.set_defaults(func=doc_toc)
 
     # -------------------------------------------------------------------------

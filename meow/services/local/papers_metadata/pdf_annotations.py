@@ -12,6 +12,92 @@ FONT_SIZE = 7
 FONT_NAME = None
 
 
+def annot_toc_header(page: Page, data: dict, options: dict = dict()):
+    """ """
+
+    # header = dict(
+    #     name=proceedings_data.event.name,
+    #     series=proceedings_data.event.series,
+    #     location=proceedings_data.event.location,
+    #     date=proceedings_data.event.date,
+    #     isbn=proceedings_data.event.isbn,
+    #     doi=proceedings_data.event.doi_label,
+    #     issn=proceedings_data.event.issn,
+    # )
+
+    rect_width = page.rect.width - 2 * PAGE_HORIZONTAL_MARGIN
+
+    # top line
+
+    # left
+    page.add_freetext_annot(
+        rect=Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN, PAGE_HORIZONTAL_MARGIN +
+                  rect_width, PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT),
+        align=TEXT_ALIGN_LEFT,
+        text='',
+        fontname=options.get('fontName', FONT_NAME),
+        fontsize=options.get('fontSize', FONT_SIZE),
+        text_color=options.get('textColor', TEXT_COLOR)
+    )
+
+    # middle
+    page.add_freetext_annot(
+        rect=Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN, PAGE_HORIZONTAL_MARGIN +
+                  rect_width, PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT),
+        align=TEXT_ALIGN_CENTER,
+        text=data.get('title', 'Title'),
+        fontname=options.get('fontName', FONT_NAME),
+        fontsize=options.get('fontSize', FONT_SIZE),
+        text_color=options.get('textColor', TEXT_COLOR)
+    )
+
+    # right
+    page.add_freetext_annot(
+        rect=Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN, PAGE_HORIZONTAL_MARGIN +
+                  rect_width, PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT),
+        align=TEXT_ALIGN_RIGHT,
+        text=data.get('publisher', 'JACoW Publishing'),
+        fontname=options.get('fontName', FONT_NAME),
+        fontsize=options.get('fontSize', FONT_SIZE),
+        text_color=options.get('textColor', TEXT_COLOR)
+    )
+
+    # bottom line
+
+    # left
+    page.add_freetext_annot(
+        rect=Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT + LINE_SPACING,
+                  PAGE_HORIZONTAL_MARGIN + rect_width, PAGE_VERTICAL_MARGIN + 2 * ANNOTATION_HEIGHT + LINE_SPACING),
+        align=TEXT_ALIGN_LEFT,
+        text=f"ISBN: {data.get('isbn', 'isbn')}",
+        fontname=options.get('fontName', FONT_NAME),
+        fontsize=options.get('fontSize', FONT_SIZE),
+        text_color=options.get('textColor', TEXT_COLOR)
+    )
+
+    # middle
+    page.add_freetext_annot(
+        rect=Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT + LINE_SPACING,
+                  PAGE_HORIZONTAL_MARGIN + rect_width, PAGE_VERTICAL_MARGIN + 2 * ANNOTATION_HEIGHT + LINE_SPACING),
+        align=TEXT_ALIGN_CENTER,
+        text=f"ISSN: {data.get('issn', 'issn')}",
+        fontname=options.get('fontName', FONT_NAME),
+        fontsize=options.get('fontSize', FONT_SIZE),
+        text_color=options.get('textColor', TEXT_COLOR)
+    )
+
+    # right
+    page.add_freetext_annot(
+        rect=Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT + LINE_SPACING,
+                  PAGE_HORIZONTAL_MARGIN + rect_width, PAGE_VERTICAL_MARGIN + 2 * ANNOTATION_HEIGHT + LINE_SPACING),
+        align=TEXT_ALIGN_RIGHT,
+        text=f"doi: {data.get('doi', 'doi')}",
+        fontname=options.get('fontName', FONT_NAME),
+        fontsize=options.get('fontSize', FONT_SIZE),
+        text_color=options.get('textColor', TEXT_COLOR)
+    )
+
+
 def annot_page_header(page: Page, data: dict, options: dict = dict()):
     """ """
 
@@ -82,6 +168,35 @@ def annot_page_header(page: Page, data: dict, options: dict = dict()):
                   PAGE_HORIZONTAL_MARGIN + rect_width, PAGE_VERTICAL_MARGIN + 2 * ANNOTATION_HEIGHT + LINE_SPACING),
         align=TEXT_ALIGN_RIGHT,
         text=f"doi: {data.get('doi', 'doi')}",
+        fontname=options.get('fontName', FONT_NAME),
+        fontsize=options.get('fontSize', FONT_SIZE),
+        text_color=options.get('textColor', TEXT_COLOR)
+    )
+
+
+def annot_toc_footer(page: Page, page_number: int, data: dict, options: dict = dict()):
+    """ """
+
+    rect_width = page.rect.width - 2 * PAGE_HORIZONTAL_MARGIN
+    page_height = page.rect.height
+
+    # left
+    page.add_freetext_annot(
+        rect=Rect(PAGE_HORIZONTAL_MARGIN, page_height - PAGE_VERTICAL_MARGIN - ANNOTATION_HEIGHT,
+                  PAGE_HORIZONTAL_MARGIN + rect_width, page_height - PAGE_VERTICAL_MARGIN),
+        align=TEXT_ALIGN_LEFT,
+        text=f"{intToRoman(page_number) if page_number % 2 != 1 else data.get('name', '')}",
+        fontname=options.get('fontName', FONT_NAME),
+        fontsize=options.get('fontSize', FONT_SIZE),
+        text_color=options.get('textColor', TEXT_COLOR)
+    )
+
+    # right
+    page.add_freetext_annot(
+        rect=Rect(PAGE_HORIZONTAL_MARGIN, page_height - PAGE_VERTICAL_MARGIN - ANNOTATION_HEIGHT,
+                  PAGE_HORIZONTAL_MARGIN + rect_width, page_height - PAGE_VERTICAL_MARGIN),
+        align=TEXT_ALIGN_RIGHT,
+        text=f"{data.get('name', '') if page_number % 2 != 1 else intToRoman(page_number)}",
         fontname=options.get('fontName', FONT_NAME),
         fontsize=options.get('fontSize', FONT_SIZE),
         text_color=options.get('textColor', TEXT_COLOR)
@@ -195,7 +310,7 @@ def annot_page_side(page: Page, pre_print: str | None, page_number: int | None, 
         fontsize=options.get('fontSize', FONT_SIZE),
         text_color=options.get('textColor', TEXT_COLOR),
     )
-    
+
     if pre_print:
 
         # add pre print
@@ -208,3 +323,28 @@ def annot_page_side(page: Page, pre_print: str | None, page_number: int | None, 
             fontsize=options.get('fontSize', FONT_SIZE),
             text_color=options.get('textColor', TEXT_COLOR),
         )
+
+
+def intToRoman(num: int) -> str:
+
+
+    # Storing roman values of digits from 0-9
+    # when placed at different places
+    m = ["", "M", "MM", "MMM"]
+    c = ["", "C", "CC", "CCC", "CD", "D",
+        "DC", "DCC", "DCCC", "CM "]
+    x = ["", "X", "XX", "XXX", "XL", "L",
+        "LX", "LXX", "LXXX", "XC"]
+    i = ["", "I", "II", "III", "IV", "V",
+        "VI", "VII", "VIII", "IX"]
+
+    # Converting to roman
+    thousands = m[num // 1000]
+    hundreds = c[(num % 1000) // 100]
+    tens = x[(num % 100) // 10]
+    ones = i[num % 10]
+
+    ans = (thousands + hundreds +
+        tens + ones)
+
+    return ans
