@@ -398,7 +398,7 @@ async def vol_toc(write_path: str, toc_data: dict) -> int:
     cmd.append("-o")
     cmd.append(write_path)
     
-    print(" ".join(cmd))
+    # print(" ".join(cmd))
 
     res = await run_cmd(cmd)
 
