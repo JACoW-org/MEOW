@@ -10,6 +10,9 @@ def generate_doi_internal_url(organization: str, conference: str, contribution: 
 def generate_doi_identifier(context: str, organization: str, conference: str, contribution: str) -> str:
     return f"{context}/{organization}-{conference}-{contribution}".lower()
 
+def generate_doi_name(context: str, organization: str, conference: str, contribution: str) -> str:
+    return f"{context}/{organization}-{conference}-{contribution}"
+
 def generate_doi_path(organization: str, conference: str, contribution: str) -> str:
     return f"{organization}-{conference}-{contribution}".lower()
 

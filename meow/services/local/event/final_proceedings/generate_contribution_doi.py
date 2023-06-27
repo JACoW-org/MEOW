@@ -11,7 +11,7 @@ from anyio.streams.memory import MemoryObjectSendStream
 
 from meow.tasks.local.doi.models import AuthorDOI, ContributionDOI, EditorDOI
 from meow.tasks.local.doi.utils import (generate_doi_external_label, generate_doi_external_url, generate_doi_identifier,
-                                        generate_doi_internal_url, generate_doi_landing_page_url, generate_doi_path)
+                                        generate_doi_internal_url, generate_doi_landing_page_url, generate_doi_name, generate_doi_path)
 
 from meow.utils.datetime import format_datetime_full, format_datetime_range_doi, format_datetime_doi
 
@@ -120,6 +120,13 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         conference=settings.get('doi_conference', 'CONF-YY'),
         contribution=contribution.code
     )
+    
+    doi_name: str = generate_doi_name(
+        context=settings.get('doi_context', '10.18429'),
+        organization=settings.get('doi_organization', 'JACoW'),
+        conference=settings.get('doi_conference', 'CONF-YY'),
+        contribution=contribution.code
+    )
 
     doi_landing_page = generate_doi_landing_page_url(
         organization=settings.get('doi_organization', 'JACoW'),
@@ -179,6 +186,7 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         doi_url=doi_url,
         doi_path=doi_path,
         doi_identifier=doi_identifier,
+        doi_name=doi_name,
         doi_landing_page=doi_landing_page,
         pages=f'{contribution.page}-{contribution.metadata.get("page_count", 0) + contribution.page - 1}'
         if contribution.page and contribution.metadata else '',

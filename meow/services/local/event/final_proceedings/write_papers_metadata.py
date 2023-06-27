@@ -156,7 +156,7 @@ def get_header_data(contribution: ContributionData) -> dict[str, str] | None:
         venue=f'{contribution.doi_data.conference_code},{contribution.doi_data.venue}',
         isbn=contribution.doi_data.isbn,
         issn=contribution.doi_data.issn,
-        doi=contribution.doi_data.doi_identifier
+        doi=contribution.doi_data.doi_name
     ) if contribution.doi_data else None
 
     return header_data
