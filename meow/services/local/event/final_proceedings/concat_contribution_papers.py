@@ -192,9 +192,9 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
     ]
 
     brief_pdf_links = [
-        f.filename for f in files_data
-    ] if absolute_pdf_link else [
         f"https://jacow.org/{doi_conference}/{f.filename}" for f in files_data
+    ] if absolute_pdf_link else [
+        f.filename for f in files_data
     ]
 
     vol_pdf_results: list[str] = []
