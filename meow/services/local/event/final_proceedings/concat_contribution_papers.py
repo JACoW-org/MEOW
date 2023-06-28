@@ -169,6 +169,9 @@ async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, vol_pre_pdf_pa
 
     except Exception as e:
         logger.error(e, exc_info=True)
+    finally:
+        if vol_toc_conf_path and await vol_toc_conf_path.exists():
+            await vol_toc_conf_path.unlink()
 
     return vol_toc_pdf_path
 

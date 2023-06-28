@@ -180,13 +180,13 @@ def doc_frame(args) -> None:
             page=page,
             data=header
         )
-        
+
         annot_page_footer(
             page=page,
             page_number=page_number,
             data=footer
         )
-        
+
         annot_page_side(
             page=page,
             pre_print=pre_print,
@@ -287,18 +287,18 @@ def doc_report(args) -> None:
 
 
 def doc_toc(args) -> None:
-    
+
     toc_data: dict | None = None
-    
+
     # print(args.config)
-    
+
     with open(args.config) as f:
         contents = f.read()
         # print(contents)
         toc_data = json.loads(contents)
-        
+
     if not toc_data:
-        return
+        raise RuntimeError('Invalid config')
 
     PAGE_WIDTH = 595
     PAGE_HEIGHT = 792
@@ -321,6 +321,7 @@ def doc_toc(args) -> None:
     pre_doc: Document = Document(filename=pre_pdf)
     start_page = int(pre_doc.page_count)
     pre_doc.close()
+    del pre_doc
 
     items = [{}, {}] + toc_data.get('toc_items', [])
 
@@ -329,12 +330,12 @@ def doc_toc(args) -> None:
     doc: Document = Document()
 
     page: Page = doc.new_page(-1, width=PAGE_WIDTH, height=PAGE_HEIGHT)
-    
+
     annot_toc_header(
         page=page,
         data=event
     )
-    
+
     annot_toc_footer(
         page=page,
         data=event,
@@ -346,7 +347,8 @@ def doc_toc(args) -> None:
     # toc_title_rect = Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN, PAGE_HORIZONTAL_MARGIN +
     #                       RECT_WIDTH, PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT * 2)
 
-    toc_title_point = Point(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN + PAGE_VERTICAL_SPACE + LINE_SPACING)
+    toc_title_point = Point(
+        PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN + PAGE_VERTICAL_SPACE + LINE_SPACING)
 
     # page.add_freetext_annot(
     #     rect=toc_title_rect,
@@ -375,12 +377,12 @@ def doc_toc(args) -> None:
 
             annot_toc_header(
                 page=page,
-                data=data
+                data=event
             )
-            
+
             annot_toc_footer(
                 page=page,
-                data=data,
+                data=event,
                 page_number=start_page + page.number + 1,
             )
 
@@ -463,13 +465,12 @@ def doc_toc(args) -> None:
                          )
 
         to_page = item.get('page', 0) + start_page + total_pages - 2
-        to_file = toc_data.get('vol_file')
-        to_point = (0, 0)
+        to_file = toc_data.get('vol_file', None)
         link_rect = Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN + space - 10, PAGE_HORIZONTAL_MARGIN +
                          RECT_WIDTH, PAGE_VERTICAL_MARGIN + space + ANNOTATION_HEIGHT - 5)
 
         link: dict = {'kind': LINK_GOTOR, 'from': link_rect,
-                      "to": to_point, "page": to_page, "file": to_file}
+                      "to": (0, 0), "page": to_page, "file": to_file}
 
         insert_link(page, link, mark=True)
 
