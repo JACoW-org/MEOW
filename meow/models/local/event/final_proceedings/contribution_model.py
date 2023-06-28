@@ -207,6 +207,10 @@ class DuplicateContributionData:
 
     has_metadata: bool = field(default=False)
     doi_url: str = field(default='')
+    doi_label: str = field(default='')
+    doi_name: str = field(default='')
+    doi_path: str = field(default='')
+    doi_identifier: str = field(default='')
     reception: datetime | None = field(default=None)
     revisitation: datetime | None = field(default=None)
     acceptance: datetime | None = field(default=None)

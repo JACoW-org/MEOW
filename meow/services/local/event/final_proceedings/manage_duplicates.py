@@ -19,7 +19,7 @@ async def manage_duplicates(proceedings_data: ProceedingsData) -> ProceedingsDat
 
 def resolve_duplicate_contributions(proceedings_data: ProceedingsData) -> ProceedingsData:
     """"""
-
+    
     for contribution in proceedings_data.contributions:
         duplicate_of_code: str | None = contribution.duplicate_of_code
         if duplicate_of_code:
@@ -31,6 +31,10 @@ def resolve_duplicate_contributions(proceedings_data: ProceedingsData) -> Procee
                 session_code=duplicate_contribution.session_code,
                 has_metadata=True if duplicate_contribution.metadata else False,
                 doi_url=duplicate_contribution.doi_data.doi_url if duplicate_contribution.doi_data else '',
+                doi_name=duplicate_contribution.doi_data.doi_name if duplicate_contribution.doi_data else '',
+                doi_label=duplicate_contribution.doi_data.doi_label if duplicate_contribution.doi_data else '',
+                doi_path=duplicate_contribution.doi_data.doi_path if duplicate_contribution.doi_data else '',
+                doi_identifier=duplicate_contribution.doi_data.doi_identifier if duplicate_contribution.doi_data else '',
                 reception=duplicate_contribution.reception,
                 revisitation=duplicate_contribution.revisitation,
                 acceptance=duplicate_contribution.acceptance,
