@@ -12,6 +12,7 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import Fin
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.services.local.event.event_pdf_utils import brief_links, vol_toc, pdf_separate, pdf_unite, write_metadata
 from meow.utils.list import split_list
+from meow.utils.serialization import json_encode
 
 
 logger = lg.getLogger(__name__)
@@ -135,32 +136,36 @@ async def get_vol_pre_pdf_path(proceedings_data: ProceedingsData, cache_dir: Pat
 async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, vol_pre_pdf_path: Path | None, cache_dir: Path, callback: Callable):
 
     vol_toc_pdf_path: Path | None = None
+    vol_toc_conf_path: Path | None = None
 
     try:
-        vol_toc_pdf_path = Path(
-            cache_dir, f'{proceedings_data.event.id}_proceedings_toc.pdf')
+        vol_toc_name = f'{proceedings_data.event.id}_proceedings_toc'
+        
+        vol_toc_pdf_path = Path(cache_dir, f"{vol_toc_name}.pdf")
+        vol_toc_conf_path = Path(cache_dir, f"{vol_toc_name}.json")
 
         toc_data: dict = {
-            "title": "Table of Contents",
+            "toc_title": "Table of Contents",
             "pre_pdf": str(vol_pre_pdf_path),
-            "file": f"{proceedings_data.event.id}_proceedings_volume.pdf",
-            "items": [
+            "vol_file": f"{proceedings_data.event.id}_proceedings_volume.pdf",
+            "toc_items": [
                 {"code": c.code, "title": c.title, "page": c.page}
                 for c in proceedings_data.contributions
                 if callback(c) is True
-            ]
+            ],
+            "event": dict(
+                name=proceedings_data.event.name,
+                title=proceedings_data.event.title,
+                series=proceedings_data.event.series,
+                isbn=proceedings_data.event.isbn,
+                doi=proceedings_data.event.doi_label,
+                issn=proceedings_data.event.issn,
+            )
         }
-        
-        data = dict(
-            name=proceedings_data.event.name,
-            title=proceedings_data.event.title,
-            series=proceedings_data.event.series,
-            isbn=proceedings_data.event.isbn,
-            doi=proceedings_data.event.doi_label,
-            issn=proceedings_data.event.issn,
-        )
 
-        await vol_toc(str(vol_toc_pdf_path), toc_data, data)
+        await vol_toc_conf_path.write_text(json_encode(toc_data).decode('utf-8'))
+
+        await vol_toc(str(vol_toc_pdf_path), str(vol_toc_conf_path))
 
     except Exception as e:
         logger.error(e, exc_info=True)

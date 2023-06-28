@@ -288,7 +288,17 @@ def doc_report(args) -> None:
 
 def doc_toc(args) -> None:
     
-    data = json.loads(args.data)
+    toc_data: dict | None = None
+    
+    # print(args.config)
+    
+    with open(args.config) as f:
+        contents = f.read()
+        # print(contents)
+        toc_data = json.loads(contents)
+        
+    if not toc_data:
+        return
 
     PAGE_WIDTH = 595
     PAGE_HEIGHT = 792
@@ -305,15 +315,14 @@ def doc_toc(args) -> None:
 
     RECT_WIDTH = PAGE_WIDTH - 2 * PAGE_HORIZONTAL_MARGIN
 
-    toc_data: dict = json.loads(args.toc)
-
+    event: dict = toc_data.get('event', None)
     pre_pdf: str = toc_data.get('pre_pdf', None)
 
     pre_doc: Document = Document(filename=pre_pdf)
     start_page = int(pre_doc.page_count)
     pre_doc.close()
 
-    items = [{}, {}] + toc_data.get('items', [])
+    items = [{}, {}] + toc_data.get('toc_items', [])
 
     total_pages = math.ceil(len(items) / ITEMS_PER_PAGE)
 
@@ -323,16 +332,16 @@ def doc_toc(args) -> None:
     
     annot_toc_header(
         page=page,
-        data=data
+        data=event
     )
     
     annot_toc_footer(
         page=page,
-        data=data,
+        data=event,
         page_number=start_page + page.number + 1,
     )
 
-    toc_title = toc_data.get('title', 'Table of Contents')
+    toc_title = toc_data.get('toc_title', 'Table of Contents')
 
     # toc_title_rect = Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN, PAGE_HORIZONTAL_MARGIN +
     #                       RECT_WIDTH, PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT * 2)
@@ -454,7 +463,7 @@ def doc_toc(args) -> None:
                          )
 
         to_page = item.get('page', 0) + start_page + total_pages - 2
-        to_file = toc_data.get('file')
+        to_file = toc_data.get('vol_file')
         to_point = (0, 0)
         link_rect = Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN + space - 10, PAGE_HORIZONTAL_MARGIN +
                          RECT_WIDTH, PAGE_VERTICAL_MARGIN + space + ANNOTATION_HEIGHT - 5)
@@ -709,8 +718,7 @@ def main():
         epilog="specify output file",
     )
     ps_toc.add_argument("-output", required=True, help="output filename")
-    ps_toc.add_argument("-toc", required=False, help="toc data")
-    ps_toc.add_argument("-data", required=True, help="toc eventdata")
+    ps_toc.add_argument("-config", required=False, help="toc config data")
     ps_toc.set_defaults(func=doc_toc)
 
     # -------------------------------------------------------------------------
