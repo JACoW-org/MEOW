@@ -3,22 +3,16 @@ import logging
 import signal
 
 from asyncio import Task
-from datetime import datetime
 from typing import Any
 
-from concurrent.futures import as_completed
 
-from anyio import sleep, TASK_STATUS_IGNORED, create_task_group
-from anyio.from_thread import start_blocking_portal
-from anyio import to_thread, run
+from anyio import TASK_STATUS_IGNORED, create_task_group
 from anyio.abc import TaskStatus
 
 from meow.models.infra.locks import RedisLockList
-from meow.tasks.infra.task_runner import TaskRunner
 from meow.utils.http import HttpClientSessions
 from meow.utils.task_exception import create_task
 
-from meow.app.instances.services import srs
 from meow.app.instances.application import app
 
 
@@ -26,13 +20,13 @@ logger = logging.getLogger(__name__)
 
 
 async def create_task_queue():
-       
+
     async def _create_task_group():
         async with create_task_group() as tg:
             for i in range(1, 2):
                 logger.info(f'start worker {i}')
                 await tg.start(process_task_worker, i)
-    
+
     create_task(
         _create_task_group(),
         name='create_task_group',
@@ -41,17 +35,18 @@ async def create_task_queue():
     )
 
 
-async def process_task_worker(worker_id: int, task_status: TaskStatus = TASK_STATUS_IGNORED):
+async def process_task_worker(worker_id: int, task_status: TaskStatus =
+                              TASK_STATUS_IGNORED):
     """ """
 
     try:
         task_status.started()
-        
+
         while app.state.worker_running:
             await process_task_executor(worker_id)
-            
-    except BaseException as e:
-        logger.error(f"Worker {worker_id}: Internal Error", e, exc_info=True)
+
+    except BaseException:
+        logger.error(f"Worker {worker_id}: Internal Error", exc_info=True)
 
 
 async def process_task_executor(worker_id: int):
@@ -112,4 +107,5 @@ async def create_signals_handler():
 
     loop = asyncio.get_event_loop()
     for curr in (signal.SIGHUP, signal.SIGTERM, signal.SIGINT):
-        loop.add_signal_handler(curr, lambda s=curr: asyncio.create_task(shutdown(s)))
+        loop.add_signal_handler(
+            curr, lambda s=curr: asyncio.create_task(shutdown(s)))

@@ -9,7 +9,8 @@ from starlette.exceptions import HTTPException
 
 from meow.app.instances.application import app
 from meow.app.instances.databases import dbs
-from meow.services.local.credential.find_credential import find_credential_by_secret
+from meow.services.local.credential.find_credential import (
+    find_credential_by_secret)
 from meow.utils.error import exception_to_string
 
 from meow.utils.serialization import json_encode
@@ -132,9 +133,9 @@ async def __websocket_task(ws: WebSocket, id: str) -> None:
     try:
         while app.state.webapp_running:
             message = await ws.receive_json(mode="text")
-            
+
             # logger.warning(message)
-            
+
             if message:
                 # logger.debug(f"ws_to_r {message}")
                 try:
@@ -155,7 +156,7 @@ async def __websocket_task(ws: WebSocket, id: str) -> None:
         except BaseException as e:
             logger.error("__websocket_task", e, exc_info=True)
 
-    logger.warning(f"__websocket_task >>> END")
+    logger.warning("__websocket_task >>> END")
 
 
 async def __open_websocket(ws: WebSocket, id: str):

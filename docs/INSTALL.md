@@ -31,3 +31,6 @@ rm -rfv venv ; python3 -m venv venv ; . ./venv/bin/activate ; ./venv/bin/pip ins
 
 htop -u fabio.meneghetti -F "python main"
 
+
+
+./venv/bin/pip install starlette uvicorn websockets uvloop anyio redis minify_html odfpy lxml orjson nltk ulid pymupdf jinja2 aiohttp unidecode pylance autopep8 flake8      

@@ -2,7 +2,7 @@
 import io
 import pathlib
 import logging as lg
-from anyio import Path, to_process, to_thread
+from anyio import Path, to_process
 
 from meow.utils.hash import file_md5
 from meow.utils.keywords import KEYWORDS
@@ -14,8 +14,10 @@ from fitz.utils import set_metadata
 
 
 from nltk.stem.snowball import SnowballStemmer
-from meow.services.local.papers_metadata.pdf_keywords import get_keywords_from_text, stem_keywords_as_tree
-from meow.services.local.papers_metadata.pdf_annotations import annot_page_footer, annot_page_header, annot_page_side
+from meow.services.local.papers_metadata.pdf_keywords import (
+    get_keywords_from_text, stem_keywords_as_tree)
+from meow.services.local.papers_metadata.pdf_annotations import (
+    annot_page_footer, annot_page_header, annot_page_side)
 
 logger = lg.getLogger(__name__)
 
@@ -36,7 +38,8 @@ async def is_to_download(file: Path, md5: str) -> bool:
 
     # print(file_path, md5, md5_hex)
 
-    # is_to_download = md5 == '' or already_exists == False or md5 != hl.md5(await file.read_bytes()).hexdigest()
+    # is_to_download = md5 == '' or already_exists == False
+    # or md5 != hl.md5(await file.read_bytes()).hexdigest()
 
     # if is_to_download == True:
     #     print(await file.absolute(), '-->', 'download')
@@ -80,67 +83,83 @@ async def read_report(read_path: str, keywords: bool) -> dict | None:
     #     print(res.stdout.decode())
     #     print(res.stderr.decode())
 
-    return json_decode(res.stdout.decode()) if res and res.returncode == 0 else None
+    return json_decode(res.stdout.decode()) if res and (
+        res.returncode == 0) else None
 
 
 def _read_report_thread(input: str, keywords: bool):
-    doc = Document(filename=input)
 
-    pdf_value = io.StringIO()
+    doc: Document | None
 
-    pages_report = []
-    fonts_report = []
-    xref_list = []
+    try:
 
-    stemmer = SnowballStemmer("english") if keywords else None
-    stem_keywords = stem_keywords_as_tree(
-        KEYWORDS, stemmer) if keywords and stemmer else None
+        doc = Document(filename=input)
 
-    for page in doc:
+        pdf_value = io.StringIO()
 
-        if keywords:
-            # get plain text (is in UTF-8)
-            pdf_value.write(page.get_textpage().extractText())
+        pages_report = []
+        fonts_report = []
+        xref_list = []
 
-        for font in page.get_fonts(True):
+        stemmer = SnowballStemmer("english") if keywords else None
+        stem_keywords = stem_keywords_as_tree(
+            KEYWORDS, stemmer) if keywords and stemmer else None
 
-            xref = font[0]
+        for page in doc:
 
-            if xref not in xref_list:
+            if keywords:
+                # get plain text (is in UTF-8)
+                pdf_value.write(page.get_textpage().extractText())
 
-                xref_list.append(xref)
+            for font in page.get_fonts(True):
 
-                font_name, font_ext, font_type, buffer = doc.extract_font(xref)
-                font_emb = not ((font_ext == "n/a" or not buffer)
-                                and font_type != "Type3")
-                fonts_report.append(dict(name=font_name, emb=font_emb,
-                                         ext=font_ext, type=font_type))
+                xref = font[0]
 
-        page_width = page.rect.width
-        page_height = page.rect.height
+                if xref not in xref_list:
 
-        page_report = dict(sizes=dict(width=page_width,
-                                      height=page_height))
+                    xref_list.append(xref)
 
-        pages_report.append(page_report)
+                    font_name, font_ext, font_type, buffer = doc.extract_font(
+                        xref)
+                    font_emb = not ((font_ext == "n/a" or not buffer)
+                                    and font_type != "Type3")
+                    fonts_report.append(dict(name=font_name, emb=font_emb,
+                                             ext=font_ext, type=font_type))
 
-    fonts_report.sort(key=lambda x: x.get('name'))
+            page_width = page.rect.width
+            page_height = page.rect.height
 
-    keywords_list = get_keywords_from_text(str(pdf_value.getvalue()), stemmer, stem_keywords) \
-        if stemmer and stem_keywords else []
+            page_report = dict(sizes=dict(width=page_width,
+                                          height=page_height))
 
-    report = dict(
-        page_count=doc.page_count,
-        pages_report=pages_report,
-        fonts_report=fonts_report,
-        keywords=keywords_list
-    )
+            pages_report.append(page_report)
 
-    return report
+        fonts_report.sort(key=lambda x: x.get('name'))
+
+        keywords_list = get_keywords_from_text(str(pdf_value.getvalue()),
+                                               stemmer, stem_keywords) \
+            if stemmer and stem_keywords else []
+
+        report = dict(
+            page_count=doc.page_count,
+            pages_report=pages_report,
+            fonts_report=fonts_report,
+            keywords=keywords_list
+        )
+
+        return report
+
+    except BaseException as be:
+        logger.error('Error draw frame')
+        raise be
+    finally:
+        if doc is None:
+            doc.close()
+            del doc
 
 
 async def read_report_anyio(read_path: str, keywords: bool) -> dict | None:
-    return await to_thread.run_sync(_read_report_thread, read_path, keywords)
+    return await to_process.run_sync(_read_report_thread, read_path, keywords)
 
 
 async def pdf_to_text(read_path: str) -> str:
@@ -163,7 +182,9 @@ async def pdf_to_text(read_path: str) -> str:
     return ''
 
 
-async def draw_frame(read_path: str, write_path: str, page: int, pre_print: str | None, header: dict | None, footer: dict | None, metadata: dict | None) -> int:
+async def draw_frame(read_path: str, write_path: str, page: int,
+                     pre_print: str | None, header: dict | None,
+                     footer: dict | None, metadata: dict | None) -> int:
     """ """
 
     cmd = [get_python_cmd(), '-m', 'meow', 'frame', '-input', read_path]
@@ -204,51 +225,66 @@ async def draw_frame(read_path: str, write_path: str, page: int, pre_print: str 
     return 0 if res and res.returncode == 0 else 1
 
 
-def _draw_frame_thread_thread(input: str, output: str, page_number: int, pre_print: str | None, header: dict | None, footer: dict | None, metadata: dict | None):
+def _draw_frame_thread_thread(input: str, output: str, page_number: int,
+                              pre_print: str | None, header: dict | None,
+                              footer: dict | None, metadata: dict | None):
 
-    doc = Document(filename=input)
+    doc: Document | None
 
-    if metadata:
-        set_metadata(doc, metadata)
+    try:
 
-    cc_logo = pathlib.Path('cc_by.png').read_bytes()
+        doc = Document(filename=input)
 
-    # print([args.input, page_number, pre_print])
+        if metadata:
+            set_metadata(doc, metadata)
 
-    for page in doc:
+        cc_logo = pathlib.Path('cc_by.png').read_bytes()
 
-        if header:
-            annot_page_header(page, header)
+        # print([args.input, page_number, pre_print])
 
-        if footer:
-            annot_page_footer(page, page_number, footer)
+        for page in doc:
 
-        annot_page_side(
-            page=page,
-            pre_print=pre_print,
-            page_number=page_number,
-            cc_logo=cc_logo
-        )
+            if header:
+                annot_page_header(page, header)
 
-        page_number += 1
+            if footer:
+                annot_page_footer(page, page_number, footer)
 
-    doc.save(filename=output, garbage=1, clean=1, deflate=1)
+            annot_page_side(
+                page=page,
+                pre_print=pre_print,
+                page_number=page_number,
+                cc_logo=cc_logo
+            )
 
-    doc.close()
-    del doc
+            page_number += 1
+
+        doc.save(filename=output, garbage=1, clean=1, deflate=1)
+
+    except BaseException as be:
+        logger.error('', exc_info=True)
+        raise be
+    finally:
+        if doc:
+            doc.close()
+            del doc
 
 
-async def draw_frame_anyio(input: str, output: str, page: int, pre_print: str | None, header: dict | None, footer: dict | None, metadata: dict | None):
-    return await to_thread.run_sync(_draw_frame_thread_thread, input, output, page, pre_print, header, footer, metadata)
+async def draw_frame_anyio(input: str, output: str, page: int,
+                           pre_print: str | None, header: dict | None,
+                           footer: dict | None, metadata: dict | None):
+    return await to_process.run_sync(_draw_frame_thread_thread, input, output,
+                                     page, pre_print, header, footer, metadata)
 
 
-async def write_metadata(metadata: dict, read_path: str, write_path: str | None = None) -> int:
+async def write_metadata(metadata: dict, read_path: str,
+                         write_path: str | None = None) -> int:
     """ """
 
     cmd = [get_python_cmd(), '-m', 'meow', 'metadata', '-input', read_path]
 
     if write_path:
-        cmd.append(f"-output")
+        cmd.append("-output")
         cmd.append(write_path)
 
     for key in metadata.keys():
@@ -270,20 +306,6 @@ async def write_metadata(metadata: dict, read_path: str, write_path: str | None 
 
 
 async def pdf_separate(input: str, output: str, first: int, last: int) -> int:
-    """
-        pdfseparate version 22.02.0
-        Copyright 2005-2022 The Poppler Developers - http://poppler.freedesktop.org
-        Copyright 1996-2011 Glyph & Cog, LLC
-        Usage: pdfseparate [options] <PDF-sourcefile> <PDF-pattern-destfile>
-        -f <int>       : first page to extract
-        -l <int>       : last page to extract
-        -v             : print copyright and version info
-        -h             : print usage information
-        -help          : print usage information
-        --help         : print usage information
-        -?             : print usage information
-    """
-
     # cmd = ['pdfseparate', '-f', str(first), '-l', str(last), input, output]
 
     # pdftk full-pdf.pdf cat 12-15 output outfile_p12-15.pdf
@@ -305,23 +327,14 @@ async def pdf_separate(input: str, output: str, first: int, last: int) -> int:
     return 1
 
 
-async def pdf_unite(write_path: str, files: list[str], first: bool = False) -> int:
-    """ 
-        pdfunite version 23.06.0
-        Copyright 2005-2023 The Poppler Developers - http://poppler.freedesktop.org
-        Copyright 1996-2011, 2022 Glyph & Cog, LLC
-        Usage: pdfunite [options] <PDF-sourcefile-1>..<PDF-sourcefile-n> <PDF-destfile>
-        -v             : print copyright and version info
-        -h             : print usage information
-        -help          : print usage information
-        --help         : print usage information
-        -?             : print usage information
-    """
+async def pdf_unite(write_path: str, files: list[str],
+                    first: bool = False) -> int:
 
     # cmd = ['pdfunite'] + files + [write_path]
     # cmd = ['pdftk'] + files + ['cat', 'output'] + [write_path]
 
-    # qpdf --empty --pages var/run/18_tmp/MOA03.pdf 1-1 var/run/18_tmp/MOA08.pdf 1-1 -- out.pdf
+    # qpdf --empty --pages var/run/18_tmp/MOA03.pdf 1-1
+    # var/run/18_tmp/MOA08.pdf 1-1 -- out.pdf
 
     items: list[str] = []
 
@@ -347,8 +360,9 @@ async def pdf_unite(write_path: str, files: list[str], first: bool = False) -> i
     return 1
 
 
-async def concat_pdf(write_path: str, files: list[str], metadata: dict | None) -> int:
-    """ https://pymupdf.readthedocs.io/en/latest/tutorial.html#joining-and-splitting-pdf-documents """
+async def concat_pdf(write_path: str, files: list[str]) -> int:
+    """ https://pymupdf.readthedocs.io/en/latest/tutorial.html
+    #joining-and-splitting-pdf-documents """
 
     cmd = [get_python_cmd(), '-m', 'meow', 'join', '-o', write_path] + files
 
@@ -370,8 +384,9 @@ async def concat_pdf(write_path: str, files: list[str], metadata: dict | None) -
 async def brief_links(write_path: str, files: list[str]) -> int:
     """ https://github.com/pymupdf/PyMuPDF/issues/283 """
 
-    cmd = [get_python_cmd(), '-m', 'meow', 'links', '-input', write_path] + files
-    
+    cmd = [get_python_cmd(), '-m', 'meow', 'links',
+           '-input', write_path] + files
+
     # print(" ".join(cmd))
 
     res = await run_cmd(cmd)
@@ -390,13 +405,13 @@ async def brief_links(write_path: str, files: list[str]) -> int:
 async def vol_toc(write_path: str, conf_path: str) -> int:
 
     cmd = [get_python_cmd(), '-m', 'meow', 'toc']
-    
+
     cmd.append("-c")
     cmd.append(conf_path)
-        
+
     cmd.append("-o")
     cmd.append(write_path)
-       
+
     print(" ".join(cmd))
 
     res = await run_cmd(cmd)
@@ -404,8 +419,8 @@ async def vol_toc(write_path: str, conf_path: str) -> int:
     if res is not None and res.returncode == 0:
 
         # print(res.returncode)
-        # print(res.stdout.decode())
-        # print(res.stderr.decode())
+        print(res.stdout.decode())
+        print(res.stderr.decode())
 
         return res.returncode
 

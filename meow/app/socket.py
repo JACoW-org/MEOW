@@ -23,7 +23,7 @@ class WebSocketManager():
         await self.__task()
 
     async def __task(self):
-        logger.debug(f"subscribe >>>")
+        logger.debug("subscribe >>>")
 
         try:
 
@@ -39,9 +39,9 @@ class WebSocketManager():
                         await p.unsubscribe("meow:feed")
 
             except CancelledError:
-                logger.info(f"subscribe: Cancelled")
+                logger.info("subscribe: Cancelled")
             except ConnectionError:
-                logger.info(f"subscribe: Disconnected")
+                logger.info("subscribe: Disconnected")
             except BaseException:
                 logger.error("subscribe", exc_info=True)
             finally:
@@ -50,23 +50,23 @@ class WebSocketManager():
                     await pubsub.close()
 
         except CancelledError:
-            logger.info(f"subscribe: Cancelled")
+            logger.info("subscribe: Cancelled")
         except ConnectionError:
-            logger.info(f"subscribe: Disconnected")
+            logger.info("subscribe: Disconnected")
         except BaseException:
             logger.error("subscribe", exc_info=True)
 
     async def __reader(self, p: PubSub):
         while app.state.webapp_running:
             try:
-                async with create_task_group() as tg:
-                    with move_on_after(2) as scope:
+                async with create_task_group():
+                    with move_on_after(2):
 
-                        logger.debug(f'__read')
+                        logger.debug('__read')
 
                         payload = await p.get_message(
                             ignore_subscribe_messages=True,
-                            timeout=1
+                            timeout=5
                         )
 
                         # logger.debug(f"payload {payload}")
@@ -78,8 +78,11 @@ class WebSocketManager():
 
                         await sleep(0.01)
 
+            except CancelledError:
+                logger.debug("__reader:CancelledError",
+                             exc_info=False)
             except ConnectionError:
-                logger.info(f"subscribe: Disconnected")
+                logger.info("__reader: ConnectionError")
             except BaseException:
                 logger.error("__reader", exc_info=True)
 
@@ -96,16 +99,6 @@ class WebSocketManager():
                 conn = app.active_connections.get(uuid, None) if uuid else None
 
                 await conn.send_text(message) if conn else None
-
-                # code: str | None = head.get('code', None) if head else None
-
-                # phase:str = payload.get('body', {}).get('params', {}).get('phase', '') \
-                #     if payload and code else ''
-
-                # if conn is not None:
-                # print(f"send_text {phase}")
-                # else:
-                #     logger.error(f"task_id: {uuid} have not a connection")
 
         except BaseException as e:
             logger.error(message)

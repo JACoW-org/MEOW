@@ -1,23 +1,28 @@
-from meow.models.local.event.final_proceedings.contribution_model import ContributionData
-from meow.models.local.event.final_proceedings.event_model import AffiliationData, AttachmentData, EventData, KeywordData, PersonData
+from meow.models.local.event.final_proceedings.contribution_model import (
+    ContributionData)
+from meow.models.local.event.final_proceedings.event_model import (
+    AffiliationData, AttachmentData, EventData, KeywordData, PersonData)
 from meow.models.local.event.final_proceedings.session_model import SessionData
 from meow.models.local.event.final_proceedings.track_model import TrackData
 
 from meow.tasks.local.doi.models import ContributionDOI
 
-from jinja2 import Environment, FileSystemLoader, select_autoescape
+from jinja2 import (Environment, FileSystemLoader,
+                    select_autoescape, BytecodeCache)
 
 from datetime import datetime
 import logging as lg
 
 from os import path
-from jinja2 import BytecodeCache
 
 import minify_html
 
-from meow.utils.collections import (get_authors_initials_dict, get_institutes_initials_dict,
-                                    get_keywords_initials_dict, group_authors_by_last_initial_for_render,
-                                    group_institutes_by_initial, group_keywords_by_initial)
+from meow.utils.collections import (get_authors_initials_dict,
+                                    get_institutes_initials_dict,
+                                    get_keywords_initials_dict,
+                                    group_authors_by_last_initial_for_render,
+                                    group_institutes_by_initial,
+                                    group_keywords_by_initial)
 
 
 logger = lg.getLogger(__name__)
@@ -57,7 +62,7 @@ class JinjaTemplateRenderer:
 
     async def render(self, name: str, args: dict, minify: bool = False) -> str:
         html = await self.env.get_template(name).render_async(args)
-        return html if minify == False else minify_html.minify(
+        return html if minify is False else minify_html.minify(
             html, remove_processing_instructions=True)
 
     async def render_config_toml(self, event: EventData, attachments: list[AttachmentData], settings: dict) -> str:
@@ -133,15 +138,6 @@ class JinjaTemplateRenderer:
             author=author.as_dict(),
             contributions=[c.as_dict() for c in contributions],
         ))
-
-    # async def render_institute_author_page(self, event: EventData, institute: AffiliationData, author: PersonData, contributions: list[ContributionData], include_event_slides: bool) -> str:
-    #     return await self.render("institute_author_page.html.jinja", minify=False, args=dict(
-    #         event=event.as_dict(),
-    #         institute=institute.as_dict(),
-    #         author=author.as_dict(),
-    #         contributions=[c.as_dict() for c in contributions],
-    #         include_event_slides=include_event_slides
-    #     ))
 
     async def render_keyword_partial(self, keywords: list[KeywordData]) -> str:
         return await self.render("keyword_partial.html.jinja", minify=True, args=dict(

@@ -4,7 +4,8 @@ from redis.exceptions import RedisError
 
 from meow.app.errors.service_error import ServiceError
 from meow.models.application import Credential
-from meow.services.local.credential.delete_credential import del_all_credentials
+from meow.services.local.credential.delete_credential import (
+    del_all_credentials)
 
 logger = lg.getLogger(__name__)
 

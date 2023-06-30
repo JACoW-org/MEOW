@@ -18,21 +18,9 @@ class StreamRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
     """ """
 
     def __init__(self):
-        super().__init__( '__stream_redis_worker_logic')
+        super().__init__('__stream_redis_worker_logic')
 
     async def subscribe(self, on_message: Callable) -> Callable:
-
-        # async def __read_stream():
-        #     last_id: str = '$'
-        #     stream_key: str = await self.__stream_key_subscribe()
-        #     logger.info(f"subscribe >>> stream_key: {stream_key}")
-        #
-        #     payload = await redis.xread(
-        #         streams={stream_key: '$'},
-        #         block=sleep_ms
-        #     )
-        #
-        #     print(f"payload {payload}")
 
         async def __read():
             try:
@@ -49,14 +37,14 @@ class StreamRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
                 return payload
             except BaseException:
                 pass
-            
+
         async def __task():
 
             await self.__ensure_stream()
 
             try:
 
-                logger.info(f"subscribe >>> worker_group: 'worker_group'")
+                logger.info("subscribe >>> worker_group: 'worker_group'")
 
                 while app.state.worker_running:
                     payload = await __read()
@@ -86,29 +74,6 @@ class StreamRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
     async def __publish_key(self) -> str:
         return 'worker_stream'
 
-        # redis: aioredis.Redis = self.app.state.REDIS_CLI
-        #
-        # counter: int = await redis.incr('workers_stream_counter')
-        #
-        # workers: list[str] = await self.__workers()
-        # stream_idx: int = counter % len(workers)
-        # stream_key: str = f"worker_{stream_idx}"
-        #
-        # logger.debug(f"__stream_key_publish {stream_key} {counter} {workers}")
-        #
-        # return stream_key
-
-    # async def __stream_key_subscribe(self) -> str:
-    #     redis_name: str = self.app.state.REDIS_NAME
-    #     workers: list[str] = await self.__workers()
-    #
-    #     stream_idx: int = workers.index(redis_name)
-    #     stream_key: str = f"worker_{stream_idx}"
-    #
-    #     logger.debug(f"__stream_key_subscribe {stream_key} {workers}")
-    #
-    #     return stream_key
-
     async def __ensure_stream(self):
 
         async def __stream_exists() -> bool:
@@ -127,7 +92,8 @@ class StreamRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
             return create_group
 
         async def __groups_list():
-            groups_info = await dbs.redis_client.xinfo_groups(name='worker_stream')
+            groups_info = await dbs.redis_client.xinfo_groups(
+                name='worker_stream')
             groups = [str(x['name'], 'UTF-8') for x in groups_info]
             # logger.debug(f"groups {groups}")
             return groups

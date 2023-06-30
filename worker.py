@@ -62,7 +62,7 @@ async def main() -> None:
         await app_pre()
 
         async with create_task_group() as tg:
-            with CancelScope() as scope:
+            with CancelScope():
                 tg.start_soon(app_wrap, tg.cancel_scope)
                 tg.start_soon(app_run)
 

@@ -2,17 +2,18 @@ import logging as lg
 
 from redis.exceptions import LockError
 
-from meow.models.infra.base import BaseModel
 from meow.models.models import meow_models
 
 from meow.app.config import conf
 from meow.app.instances.databases import dbs
 
-from meow.factory.schema.redis_schema_factory import create_search_index_info, create_search_index_meta
+from meow.factory.schema.redis_schema_factory import (
+    create_search_index_info, create_search_index_meta)
 from meow.models.infra.base import BaseModel
 from meow.models.infra.locks import RedisLock, RedisLockList
 from meow.models.infra.schema import RedisIndexMeta
-from meow.services.local.credential.save_credential import create_default_credentials
+from meow.services.local.credential.save_credential import (
+    create_default_credentials)
 from meow.utils.http import HttpClientSessions
 
 logger = lg.getLogger(__name__)
@@ -20,20 +21,20 @@ logger = lg.getLogger(__name__)
 
 class RedisManager:
     """ """
-    
+
     def __init__(self):
         self.models: list[type[BaseModel]] = meow_models
-    
+
     async def prepare(self):
         """ """
-        
+
         try:
-            logger.info(f'--> fill_model_meta: START')
+            logger.info('--> fill_model_meta: START')
 
             for cls in self.models:
                 await fill_model_meta(cls)
 
-            logger.info(f'--> fill_model_meta: STOP')
+            logger.info('--> fill_model_meta: STOP')
         except LockError as e:
             logger.error(e, exc_info=True)
         except BaseException as e:
@@ -41,7 +42,7 @@ class RedisManager:
 
     async def migrate(self):
         """ """
-        
+
         try:
             async with acquire_global_lock() as lock:
                 logger.info(f'--> migrate_model_schema: START - {lock.name}')
@@ -57,7 +58,7 @@ class RedisManager:
 
     async def destroy(self):
         """ """
-               
+
         try:
             await HttpClientSessions.close_client_sessions()
             await RedisLockList.release_all_locks()
@@ -68,10 +69,10 @@ class RedisManager:
                 await dbs.redis_client.close()
             except BaseException as e:
                 logger.error(e, exc_info=True)
-        
+
     async def popola(self):
         """ """
-        
+
         try:
             await create_default_credentials()
         except LockError as e:
@@ -110,7 +111,7 @@ async def migrate_model_schema(cls: type[BaseModel]) -> None:
         logger.debug('migrate_model_schema >>>')
 
         meta: RedisIndexMeta = create_search_index_meta(cls)
-        hash_val: bytes = await dbs.redis_client.get(meta.hash_key)  # type: ignore
+        hash_val: bytes | None = await dbs.redis_client.get(meta.hash_key)
 
         if hash_val is not None and str(hash_val, 'utf-8') == meta.hash_val:
             logger.debug(f'migrate_model_schema >>> {cls} >>> exit')
@@ -130,4 +131,3 @@ async def migrate_model_schema(cls: type[BaseModel]) -> None:
 
     except Exception as e:
         logger.exception(e)
-

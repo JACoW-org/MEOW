@@ -5,7 +5,8 @@ import logging
 import re
 from datetime import datetime
 from functools import partial
-from typing import Any, AsyncIterable, Callable, Coroutine, Dict, Optional, Union
+from typing import (Any, AsyncIterable, Callable,
+                    Coroutine, Dict, Optional, Union)
 
 import anyio
 from starlette.background import BackgroundTask
@@ -75,8 +76,8 @@ class ServerSentEvent:
             specifying the reconnection time in milliseconds. If a non-integer
             value is specified, the field is ignored.
         :param str comment: A colon as the first character of a line is essence
-            a comment, and is ignored. Usually used as a ping message to keep connecting.
-            If set, this will be a comment message.
+            a comment, and is ignored. Usually used as a ping message to keep 
+            connecting. If set, this will be a comment message.
         """
         self.data = data
         self.event = event
@@ -160,7 +161,8 @@ class EventSourceResponse(Response):
             self.body_iterator = iterate_in_threadpool(content)  # type: ignore
         self.status_code = status_code
         self.media_type = self.media_type if media_type is None else media_type
-        self.background = background  # type: ignore  # follows https://github.com/encode/starlette/blob/master/starlette/responses.py
+        # type: ignore  # follows https://github.com/encode/starlette/blob/master/starlette/responses.py
+        self.background = background
 
         _headers = {}
         if headers is not None:  # pragma: no cover
@@ -222,7 +224,7 @@ class EventSourceResponse(Response):
             task_group.start_soon(wrap, self.listen_for_exit_signal)
             await wrap(partial(self.listen_for_disconnect, receive))
 
-        if self.background is not None:  # pragma: no cover, tested in StreamResponse
+        if self.background is not None: 
             await self.background()
 
     def enable_compression(self, force: bool = False) -> None:
@@ -256,7 +258,8 @@ class EventSourceResponse(Response):
         while self.active:
             await anyio.sleep(self._ping_interval)
             if self.ping_message_factory:
-                assert isinstance(self.ping_message_factory, Callable)  # type: ignore  # https://github.com/python/mypy/issues/6864
+                # type: ignore  # https://github.com/python/mypy/issues/6864
+                assert isinstance(self.ping_message_factory, Callable)
             ping = (
                 ServerSentEvent(datetime.utcnow(), event="ping").encode()
                 if self.ping_message_factory is None

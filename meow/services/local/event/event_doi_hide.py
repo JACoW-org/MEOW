@@ -122,7 +122,7 @@ async def _event_doi_hide(event: dict, cookies: dict, settings: dict, lock: Redi
     ))
 
     # results = await hide_contribution_doi(final_proceedings, cookies, settings)
-    
+
     async for result in hide_contribution_doi(final_proceedings, cookies, settings):
         yield dict(type='progress', value=dict(phase='doi_result', result=result))
 

@@ -24,48 +24,54 @@ class PubsubRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
     def __init__(self):
         super().__init__('__pubsub_redis_worker_logic')
 
-
     async def subscribe(self, on_message: Callable):
 
         async def __read(p: PubSub):
 
             logger.debug('__read')
-            
-            async with create_task_group() as tg:
-                with move_on_after(2) as scope:
+
+            async with create_task_group():
+                with move_on_after(2):
                     try:
-                        
+
                         payload = await p.get_message(
                             ignore_subscribe_messages=True,
-                            timeout=1
+                            timeout=5
                         )
-            
+
                         self.__log_payload(payload)
-            
+
                         return payload
-                
-                    except ConnectionError as ce:
-                        logger.error("get_message:ConnectionError")
-                    except BaseException as be:
-                        logger.error("get_message:BaseException", exc_info=True)
+
+                    except asyncio.CancelledError:
+                        logger.debug("__read:CancelledError",
+                                     exc_info=False)
+                    except ConnectionError:
+                        logger.warning("__read:ConnectionError",
+                                       exc_info=False)
+                    except BaseException:
+                        logger.error("__read:BaseException",
+                                     exc_info=True)
                     finally:
                         await sleep(0.01)
-                        
 
         async def __reader(p: PubSub):
             while app.state.worker_running:
                 try:
                     payload = await __read(p)
-                    
+
                     if payload and payload['type'] == 'message':
                         await on_message(payload['data'])
-                    
-                    # await anyio.sleep(0.01)
-                except asyncio.CancelledError as ce:
-                    logger.debug("__reader:CancelledError")
-            
-            logger.warning(f"app.state.worker_running: {app.state.worker_running}")
 
+                    # await anyio.sleep(0.01)
+                except asyncio.CancelledError:
+                    logger.debug("__reader:CancelledError")
+                except ConnectionError:
+                    logger.warning("__reader:ConnectionError",
+                                   exc_info=False)
+
+            logger.warning(
+                f"app.state.worker_running: {app.state.worker_running}")
 
         async def __task():
 
@@ -73,27 +79,30 @@ class PubsubRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
 
             try:
                 pubsub: Optional[PubSub] = dbs.redis_client.pubsub()
-                
+
                 try:
                     if pubsub is not None:
                         async with pubsub as p:
                             await p.subscribe(conf.REDIS_NODE_TOPIC)
-                            
+
                             await __reader(p)
-                            
+
                             logger.warning('### unsubscribe ###')
-                            
+
                             await p.unsubscribe(conf.REDIS_NODE_TOPIC)
 
-                except asyncio.CancelledError as ce:
+                except asyncio.CancelledError:
                     logger.info("__task:CancelledError")
+                except ConnectionError:
+                    logger.warning("__reader:ConnectionError",
+                                   exc_info=False)
                 except BaseException as be:
                     logger.error(be, exc_info=True)
                 finally:
                     if pubsub is not None:
                         logger.debug('pubsub.close()')
                         await pubsub.close()
-                        
+
             except BaseException as e:
                 logger.error(e, exc_info=True)
 

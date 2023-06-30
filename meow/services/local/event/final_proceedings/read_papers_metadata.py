@@ -41,7 +41,7 @@ async def read_papers_metadata(proceedings_data: ProceedingsData, cookies: dict,
     download('stopwords')
 
     send_stream, receive_stream = create_memory_object_stream()
-    capacity_limiter = CapacityLimiter(16)
+    capacity_limiter = CapacityLimiter(32)
 
     results = dict()
 

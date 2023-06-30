@@ -1,13 +1,16 @@
 import logging as lg
 from typing import Callable
 
-from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
+from meow.models.local.event.final_proceedings.proceedings_data_model import (
+    ProceedingsData)
 
 
 logger = lg.getLogger(__name__)
 
 
-async def validate_proceedings_data(proceedings_data: ProceedingsData, cookies: dict, settings: dict, callback: Callable) -> list:
+async def validate_proceedings_data(proceedings_data: ProceedingsData,
+                                    cookies: dict, settings: dict,
+                                    callback: Callable) -> list:
     """ """
 
     logger.info('event_final_proceedings - validate_events_data')
@@ -15,8 +18,8 @@ async def validate_proceedings_data(proceedings_data: ProceedingsData, cookies: 
     pdf_page_width: float = float(settings.get('pdf_page_width', 0))
     pdf_page_height: float = float(settings.get('pdf_page_height', 0))
 
-    logger.error(pdf_page_width)
-    logger.error(pdf_page_height)
+    # logger.error(pdf_page_width)
+    # logger.error(pdf_page_height)
 
     metadatas: list[dict] = []
     errors: list[dict] = []
@@ -39,13 +42,13 @@ async def validate_proceedings_data(proceedings_data: ProceedingsData, cookies: 
 
                 if contribution_data.is_included_in_proceedings:
                     included_in_proceedings.append(contribution_data.code)
-                    
+
                 if contribution_data.is_included_in_prepress:
                     included_in_prepress.append(contribution_data.code)
-                    
+
                 if contribution_data.is_included_in_pdf_check:
                     included_in_check.append(contribution_data.code)
-                    
+
                 metadatas.append(metadata)
 
                 error: dict = {}
@@ -55,8 +58,10 @@ async def validate_proceedings_data(proceedings_data: ProceedingsData, cookies: 
 
                 # {
                 # 'page_count': 1,
-                # 'pages_report': [{'sizes': {'width': 792.0, 'height': 595.0}}],
-                # 'fonts_report': [{'name': 'CSKTLK+LMRoman10-Regular', 'emb': True, 'ext': 'cff', 'type': 'Type1'}]
+                # 'pages_report': [{'sizes': {
+                # 'width': 792.0, 'height': 595.0}}],
+                # 'fonts_report': [{'name': 'CSKTLK+LMRoman10-Regular',
+                # 'emb': True, 'ext': 'cff', 'type': 'Type1'}]
                 # }
 
                 page_count: int = metadata.get('page_count', 0)
@@ -76,19 +81,22 @@ async def validate_proceedings_data(proceedings_data: ProceedingsData, cookies: 
                         page_width = float(page_sizes.get('width', 0.0))
                         page_height = float(page_sizes.get('height', 0.0))
 
-                        if float(page_width) != pdf_page_width or page_height != pdf_page_height:
+                        if (float(page_width) != pdf_page_width) or (
+                                page_height != pdf_page_height):
 
                             logger.info(f"code: {contribution_data.code}")
-                            logger.info({'page_width': page_width, 'pdf_page_width': pdf_page_width,
-                                        'page_height': page_height, 'pdf_page_height': pdf_page_height})
+                            logger.info({'page_width': page_width,
+                                         'pdf_page_width': pdf_page_width,
+                                        'page_height': page_height,
+                                         'pdf_page_height': pdf_page_height})
 
                             error['page_size'] = False
                             break
 
                     for font_report in fonts_report:
                         font_emb: bool = bool(font_report.get('emb', False))
-                        
-                        if font_emb == False:
+
+                        if font_emb is False:
 
                             logger.info(f"code: {contribution_data.code}")
                             logger.info(fonts_report)

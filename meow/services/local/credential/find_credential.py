@@ -14,7 +14,7 @@ async def find_credential_by_secret(secret: str | None) -> Credential | None:
     """ """
 
     try:
-        
+
         if secret is None:
             raise ServiceError('Invalid secret')
 
@@ -33,12 +33,12 @@ async def find_credential_by_secret(secret: str | None) -> Credential | None:
         raise ServiceError('Generic error')
 
 
-
 async def get_local_credential() -> Credential:
     """ """
 
     try:
-        data = await Credential.r().get(Credential.key('meow.indico.plugin.dev'), Path('.'))
+        data = await Credential.r().get(Credential.key(
+            'meow.indico.plugin.dev'), Path('.'))
 
         settings = Credential(**data)
 

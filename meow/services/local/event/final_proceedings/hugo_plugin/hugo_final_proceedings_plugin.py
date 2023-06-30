@@ -31,7 +31,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         self.cookies = cookies
         self.settings = settings
         self.config = config
-        
+
         self.proceedings = proceedings_data
         self.event = proceedings_data.event
         self.attachments = proceedings_data.attachments
@@ -98,7 +98,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
     async def run_build(self) -> None:
 
         logger.info('event_final_proceedings - plugin.build')
-        
+
         with start_blocking_portal() as portal:
             futures = [
                 portal.start_task_soon(self.render_home),
@@ -114,8 +114,9 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                 portal.start_task_soon(self.static),
                 portal.start_task_soon(self.finalize),
             ]
+
             for future in as_completed(futures):
-                pass
+                logger.debug(future.result())
 
         # await self.render_home()
         # await self.render_contributions()
@@ -275,35 +276,6 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                     tg.start_soon(_render_contribution,
                                   capacity_limiter, classification)
 
-        # await Path(self.src_classification_dir, '_index.html').write_text(
-        #     await self.template.render_classification_list(self.classifications)
-        # )
-#
-        # async def _render_contribution(capacity_limiter: CapacityLimiter, classification: TrackData) -> None:
-        #     async with capacity_limiter:
-        #         curr_dir = Path(self.src_classification_dir,
-        #                         classification.code.lower())
-        #         await curr_dir.mkdir(parents=True, exist_ok=True)
-#
-        #         contributions = [
-        #             c for c in self.contributions
-        #             if c.track and c.track.code == classification.code
-        #         ]
-#
-        #         # logger.info(f"{classification} -> {len(contributions)}")
-#
-        #         await Path(curr_dir, '_index.html').write_text(
-        #             await self.template.render_classification_page(
-        #                 self.event, classification, contributions)
-        #         )
-#
-        # capacity_limiter = CapacityLimiter(4)
-        # async with create_task_group() as tg:
-        #     for classification in self.classifications:
-        #         if classification and classification.code:
-        #             tg.start_soon(_render_contribution,
-        #                           capacity_limiter, classification)
-
     async def render_author(self) -> None:
         """ """
 
@@ -336,34 +308,6 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                 if author and author.id:
                     tg.start_soon(_render_contribution,
                                   capacity_limiter, author)
-
-        # await Path(self.src_author_dir, '_index.html').write_text(
-        #     await self.template.render_author_list(self.authors)
-        # )
-#
-        # async def _render_contribution(capacity_limiter: CapacityLimiter, author: PersonData) -> None:
-        #     async with capacity_limiter:
-        #         curr_dir = Path(self.src_author_dir, author.id.lower())
-        #         await curr_dir.mkdir(parents=True, exist_ok=True)
-#
-        #         contributions = [
-        #             c for c in self.contributions
-        #             if len(c.authors) > 0 and author in c.authors
-        #         ]
-#
-        #         # logger.info(f"{author} -> {len(contributions)}")
-#
-        #         await Path(curr_dir, '_index.html').write_text(
-        #             await self.template.render_author_page(
-        #                 self.event, author, contributions)
-        #         )
-#
-        # capacity_limiter = CapacityLimiter(4)
-        # async with create_task_group() as tg:
-        #     for author in self.authors:
-        #         if author and author.id:
-        #             tg.start_soon(_render_contribution,
-        #                           capacity_limiter, author)
 
     async def render_institute(self) -> None:
         """ """
@@ -427,59 +371,6 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                                   institute_capacity_limiter,
                                   institute)
 
-        # await Path(self.src_institute_dir, '_index.html').write_text(
-        #     await self.template.render_institute_list(self.institutes)
-        # )
-#
-        # async def _render_contribution(capacity_limiter: CapacityLimiter, institute: AffiliationData, author: PersonData) -> None:
-        #     async with capacity_limiter:
-#
-        #         curr_dir = Path(self.src_institute_dir,
-        #                         institute.id.lower(), author.id.lower())
-        #         await curr_dir.mkdir(parents=True, exist_ok=True)
-#
-        #         contributions = [
-        #             c for c in self.contributions
-        #             if len(c.authors) > 0 and author in c.authors
-        #         ]
-#
-        #         # logger.info(f"{institute} -> {len(contributions)}")
-#
-        #         await Path(curr_dir, '_index.html').write_text(
-        #             await self.template.render_institute_author_page(
-        #                 self.event, institute, author, contributions)
-        #         )
-#
-        # async def _render_institute(capacity_limiter: CapacityLimiter, institute: AffiliationData) -> None:
-        #     async with capacity_limiter:
-#
-        #         curr_dir = Path(self.src_institute_dir, institute.id.lower())
-        #         await curr_dir.mkdir(parents=True, exist_ok=True)
-#
-        #         authors = [
-        #             c for c in self.authors
-        #             if c.affiliation == institute.name
-        #         ]
-#
-        #         await Path(curr_dir, '_index.html').write_text(
-        #             await self.template.render_institute_page(
-        #                 self.event, institute, authors)
-        #         )
-#
-        #         capacity_limiter = CapacityLimiter(4)
-        #         async with create_task_group() as tg:
-        #             for author in authors:
-        #                 if author and author.id:
-        #                     tg.start_soon(_render_contribution,
-        #                                   capacity_limiter, institute, author)
-#
-        # capacity_limiter = CapacityLimiter(4)
-        # async with create_task_group() as tg:
-        #     for institute in self.institutes:
-        #         if institute and institute.id:
-        #             tg.start_soon(_render_institute,
-        #                           capacity_limiter, institute)
-
     async def render_doi_per_institute(self) -> None:
         """ """
 
@@ -542,38 +433,6 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                                   doi_per_institute_capacity_limiter,
                                   institute)
 
-        # logger.info(f'render_doi_per_institute - {len(self.institutes)}')
-#
-        # await Path(self.src_doi_per_institute_dir, '_index.html').write_text(
-        #     await self.template.render_doi_per_institute_list(self.institutes)
-        # )
-#
-        # async def _render_contribution(capacity_limiter: CapacityLimiter, institute: AffiliationData) -> None:
-        #     async with capacity_limiter:
-#
-        #         curr_dir = Path(self.src_doi_per_institute_dir,
-        #                         institute.id.lower())
-        #         await curr_dir.mkdir(parents=True, exist_ok=True)
-#
-        #         contributions = [
-        #             c for c in self.contributions
-        #             if len(c.institutes) > 0 and institute in c.institutes
-        #         ]
-#
-        #         # logger.info(f"{institute} -> {len(contributions)}")
-#
-        #         await Path(curr_dir, '_index.html').write_text(
-        #             await self.template.render_doi_per_institute_page(
-        #                 self.event, institute, contributions)
-        #         )
-#
-        # capacity_limiter = CapacityLimiter(4)
-        # async with create_task_group() as tg:
-        #     for institute in self.institutes:
-        #         if institute and institute.id:
-        #             tg.start_soon(_render_contribution,
-        #                           capacity_limiter, institute)
-
     async def render_keyword(self) -> None:
         """ """
 
@@ -607,32 +466,6 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                     tg.start_soon(_render_contribution,
                                   capacity_limiter, keyword)
 
-        # await Path(self.src_keyword_dir, '_index.html').write_text(
-        #     await self.template.render_keyword_list(self.keywords)
-        # )
-#
-        # async def _render_contribution(capacity_limiter: CapacityLimiter, keyword: KeywordData) -> None:
-        #     async with capacity_limiter:
-        #         curr_dir = Path(self.src_keyword_dir, keyword.code.lower())
-        #         await curr_dir.mkdir(parents=True, exist_ok=True)
-#
-        #         contributions = [
-        #             c for c in self.contributions
-        #             if len(c.keywords) > 0 and keyword in c.keywords
-        #         ]
-#
-        #         # logger.info(f"{keyword} -> {len(contributions)}")
-#
-        #         await Path(curr_dir, '_index.html').write_text(
-        #             await self.template.render_keyword_page(
-        #                 self.event, keyword, contributions)
-        #         )
-#
-        # capacity_limiter = CapacityLimiter(4)
-        # async with create_task_group() as tg:
-        #     for keyword in self.keywords:
-        #         tg.start_soon(_render_contribution, capacity_limiter, keyword)
-
     async def render_doi_contributions(self) -> None:
         """"""
 
@@ -642,7 +475,8 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
             await self.template.render_doi_list(self.event, self.contributions)
         )
 
-        async def _render_doi_contribution(capacity_limiter: CapacityLimiter, code: str, doi_contribution: ContributionDOI) -> None:
+        async def _render_doi_contribution(capacity_limiter: CapacityLimiter,
+                                           doi_contribution: ContributionDOI) -> None:
             async with capacity_limiter:
 
                 # logger.info(f"{code} - {doi_contribution.title}")
@@ -656,7 +490,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
             for contribution in self.contributions:
                 if contribution.is_included_in_proceedings and contribution.code and contribution.doi_data:
                     tg.start_soon(_render_doi_contribution, capacity_limiter,
-                                  contribution.code, contribution.doi_data)
+                                  contribution.doi_data)
 
     async def render_references(self) -> None:
         """"""
@@ -716,5 +550,5 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
             else:
                 logger.info(result.stderr.decode())
 
-        except BaseException as e:
-            logger.error("hugo:generate", e, exc_info=True)
+        except BaseException:
+            logger.error("hugo:generate", exc_info=True)

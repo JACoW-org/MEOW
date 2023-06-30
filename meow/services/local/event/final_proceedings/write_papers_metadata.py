@@ -12,7 +12,10 @@ from meow.models.local.event.final_proceedings.proceedings_data_utils import ext
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.models.local.event.final_proceedings.session_model import SessionData
-from meow.services.local.event.event_pdf_utils import draw_frame_anyio, pdf_separate
+from meow.services.local.event.event_pdf_utils import draw_frame_anyio
+
+from concurrent.futures import as_completed
+from anyio.from_thread import start_blocking_portal
 
 from datetime import datetime
 from meow.utils.datetime import format_datetime_pdf
@@ -38,7 +41,7 @@ async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict
     await file_cache_dir.mkdir(exist_ok=True, parents=True)
 
     send_stream, receive_stream = create_memory_object_stream()
-    capacity_limiter = CapacityLimiter(16)
+    capacity_limiter = CapacityLimiter(32)
 
     timezone = tz.timezone(settings.get('timezone', 'UTC'))
     current_dt: datetime = datetime.now(tz=timezone)
@@ -52,10 +55,10 @@ async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict
     async with create_task_group() as tg:
         async with send_stream:
             for current_index, current_paper in enumerate(papers_data):
-                tg.start_soon(write_metadata_task, capacity_limiter, total_files,
-                              current_index, current_paper, sessions_dict,
-                              current_dt_pdf, settings, file_cache_dir,
-                              send_stream.clone())
+                tg.start_soon(write_metadata_task, capacity_limiter,
+                              total_files, current_index, current_paper,
+                              sessions_dict, current_dt_pdf, settings,
+                              file_cache_dir, send_stream.clone())
 
         try:
             async with receive_stream:
@@ -107,7 +110,8 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
         pre_print: str = settings.get('pre_print', 'This is a preprint') \
             if contribution.peer_reviewing_accepted else ''
 
-        await draw_frame_anyio(str(original_pdf_file), str(jacow_pdf_file), contribution.page, pre_print, header_data, footer_data, metadata)
+        await draw_frame_anyio(str(original_pdf_file), str(jacow_pdf_file), 
+                               contribution.page, pre_print, header_data, footer_data, metadata)
 
         await stream.send({
             "index": current_index,

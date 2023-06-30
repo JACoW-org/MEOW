@@ -5,27 +5,8 @@ from starlette.requests import Request
 from starlette.responses import JSONResponse
 from starlette.routing import Route
 
-from meow.services.local.credential.find_credential import find_credential_by_secret
-
-# from meow.services.local.abstract_booklet.create_abstract_booklet \
-#     import create_abstract_booklet_from_event
-
-# from meow.services.local.abstract_booklet.export_abstract_booklet \
-#     import export_abstract_booklet_to_odt
-
-# from meow.services.local.abstract_booklet.extract_abstract_booklet \
-#     import create_abstract_booklet_from_entities
-
-# from meow.services.local.conference.event_pdf_check import event_pdf_check
-
-# from meow.services.local.conference.delete_conference import del_conference_entity
-# from meow.services.local.conference.find_conference import get_conference_entity
-# from meow.services.local.conference.save_conference import put_conference_entity
-
-# from meow.services.local.credential.find_credential import find_credential_by_secret
-
-# from meow.utils.response import create_json_response, create_json_error_response
-# from meow.utils.serialization import json_decode
+from meow.services.local.credential.find_credential import (
+    find_credential_by_secret)
 
 logger = lg.getLogger(__name__)
 

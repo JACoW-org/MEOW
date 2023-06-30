@@ -1,6 +1,6 @@
 
 from dataclasses import dataclass
-from ulid import ULID
+from ulid import ulid as ULID
 
 from os import environ
 
@@ -25,7 +25,7 @@ class __Config:
     def REDIS_EVENT_LOCK_KEY(self, key: str) -> str:
         return f"meow:lock:event:{key}"
 
-    REDIS_GLOBAL_LOCK_KEY: str = f"meow:lock:global"
+    REDIS_GLOBAL_LOCK_KEY: str = "meow:lock:global"
     REDIS_LOCK_TIMEOUT_SECONDS: int = 3600  # 1 hour
     REDIS_LOCK_BLOCKING_TIMEOUT_SECONDS: int = 3600  # 1 hour
 
