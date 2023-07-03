@@ -49,7 +49,7 @@ async def __publish_key() -> str:
     workers: list[str] = await __workers()
 
     if len(workers) == 0:
-        raise Exception("No Workers")
+        raise Exception("No PURR worker available.")
 
     topic_name: str = workers[counter % len(workers)]
 
