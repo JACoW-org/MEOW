@@ -33,4 +33,4 @@ htop -u fabio.meneghetti -F "python main"
 
 
 
-./venv/bin/pip install starlette uvicorn websockets uvloop anyio redis minify_html odfpy lxml orjson nltk ulid pymupdf jinja2 aiohttp unidecode pylance autopep8 flake8      
+./venv/bin/pip install starlette uvicorn websockets uvloop anyio redis minify_html odfpy lxml orjson nltk ulid pymupdf jinja2 aiohttp unidecode pytz pylance autopep8 flake8      
