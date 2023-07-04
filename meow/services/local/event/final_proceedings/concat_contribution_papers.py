@@ -158,7 +158,7 @@ async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, vol_pre_pdf_pa
             if callback(contribution) is False or contribution.track is None:
                 continue
 
-            track_group = contribution.track.track_group or TrackGroupData(code='conference', title='conference', description='description', position=0)
+            track_group = contribution.track.track_group or TrackGroupData(code='default', title='Default', description='description', position=0)
             if track_group.code not in track_groups:
                 track_groups[track_group.code] = dict(
                     title=track_group.title,
