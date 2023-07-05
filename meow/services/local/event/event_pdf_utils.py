@@ -327,8 +327,11 @@ async def pdf_separate(input: str, output: str, first: int, last: int) -> int:
     return 1
 
 
-async def pdf_unite(write_path: str, files: list[str],
-                    first: bool = False) -> int:
+async def pdf_unite(write_path: str, files: list[str], first: bool) -> int:
+    return await pdf_unite_qpdf(write_path, files, first)
+
+
+async def pdf_unite_qpdf(write_path: str, files: list[str], first: bool) -> int:
 
     # cmd = ['pdfunite'] + files + [write_path]
     # cmd = ['pdftk'] + files + ['cat', 'output'] + [write_path]
@@ -344,6 +347,35 @@ async def pdf_unite(write_path: str, files: list[str],
             items.append('1-1')
 
     cmd = ['qpdf', '--empty', '--pages'] + items + ['--', write_path]
+
+    # print(" ".join(cmd))
+
+    res = await run_cmd(cmd)
+
+    if res is not None and res.returncode == 0:
+
+        # print(res.returncode)
+        # print(res.stdout.decode())
+        # print(res.stderr.decode())
+
+        return res.returncode
+
+    return 1
+
+
+async def pdf_unite_mutool(write_path: str, files: list[str], first: bool) -> int:
+
+    # mutool merge -o out.pdf -O compress=yes ../../src/meow/var/run/18_tmp/
+    #   18_proceedings_toc.pdf 1-N ../../src/meow/var/run/18_tmp/FRAI1.pdf 1-N
+    #   ../../src/meow/var/run/18_tmp/FRAI2.pdf 1-N
+
+    items: list[str] = []
+
+    for f in files:
+        items.append(f)
+        items.append('1-1' if first else '1-N')
+
+    cmd = ['bin/mutool', 'merge', '-o', write_path] + items
 
     # print(" ".join(cmd))
 
@@ -412,7 +444,7 @@ async def vol_toc(write_path: str, conf_path: str) -> int:
     cmd.append("-o")
     cmd.append(write_path)
 
-    print(" ".join(cmd))
+    # print(" ".join(cmd))
 
     res = await run_cmd(cmd)
 

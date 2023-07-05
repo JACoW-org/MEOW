@@ -439,7 +439,7 @@ def doc_toc(args) -> None:
         link: dict = {'kind': LINK_GOTOR, 'from': link_rect,
                       "file": "", "page": to_page, "to": (0, 0)}
 
-        sys.stdout.write(f"{item.get('code')} --> {to_page}\n")
+        # sys.stdout.write(f"{item.get('code')} --> {to_page}\n")
 
         # link: dict = {'kind': LINK_URI, 'from': link_rect,
         #               'uri': f"#page={to_page}"}

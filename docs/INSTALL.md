@@ -13,6 +13,7 @@ python3 -m venv venv
 . ./venv/bin/activate
 ./venv/bin/pip install --upgrade pip
 ./venv/bin/pip install -r requirements-dev.txt
+./venv/bin/pip install -r requirements.txt
 ```
 
 
@@ -29,8 +30,10 @@ rm -rfv venv ; python3 -m venv venv ; . ./venv/bin/activate ; ./venv/bin/pip ins
 ```
 
 
-htop -u fabio.meneghetti -F "python main"
+htop -u fabio.meneghetti -F "venv/bin/python3 worker"
 
 
+rm -rfv venv ; python3 -m venv venv ; . ./venv/bin/activate ; ./venv/bin/pip install --upgrade pip
 
-./venv/bin/pip install starlette uvicorn websockets uvloop anyio redis minify_html odfpy lxml orjson nltk ulid pymupdf jinja2 aiohttp unidecode pytz pylance autopep8 flake8      
+./venv/bin/pip install starlette uvicorn websockets uvloop anyio redis minify_html odfpy lxml orjson nltk ulid pymupdf jinja2 aiohttp unidecode pytz 
+./venv/bin/pip install pylance autopep8 flake8      

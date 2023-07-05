@@ -1,7 +1,7 @@
 import io
-import ulid
 import logging as lg
 
+from ulid import ulid as ULID
 from operator import itemgetter
 
 from odf.opendocument import OpenDocumentText, OpenDocument
@@ -179,7 +179,7 @@ def _abstract_booklet_idx(ab: dict):
         #       session.get('start'), ' - ', session.get('end'))
 
         idx[session.get('code')] = dict(
-            uuid=str(ulid.ULID()),
+            uuid=str(ULID()),
             code=session.get('code'),
             title=session.get('title')
         )
@@ -187,7 +187,7 @@ def _abstract_booklet_idx(ab: dict):
         for contribution in session.get('contributions'):
 
             idx[contribution.get('code')] = dict(
-                uuid=str(ulid.ULID()),
+                uuid=str(ULID()),
                 code=contribution.get('code'),
                 title=contribution.get('title')
             )

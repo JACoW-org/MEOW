@@ -12,7 +12,7 @@
   {% for institute in group %}
   {% if institute.id %}
   <li class="institute">
-    <b>{{ institute.name|e|capitalize }}</b>
+    <b>{{ institute.name|e }}</b>
 
     <ul class="authors">
       {% if institute.name in authorsGroups %}

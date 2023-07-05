@@ -243,7 +243,7 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
         trapped=None,
     )
 
-    await pdf_unite(str(brief_pdf_path), pdf_parts)
+    await pdf_unite(str(brief_pdf_path), pdf_parts, True)
     await write_metadata(metadata, str(brief_pdf_path))
     await brief_links(str(brief_pdf_path), brief_pdf_links)
 
