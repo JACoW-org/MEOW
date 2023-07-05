@@ -316,6 +316,7 @@ def doc_toc(args) -> None:
     PAGE_VERTICAL_SPACE = 30
     ANNOTATION_HEIGHT = 10
     LINE_SPACING = 4
+    LINE_LENGTH = 82
 
     ITEM_CODE_RECT_WIDTH = 40
 
@@ -324,12 +325,22 @@ def doc_toc(args) -> None:
     event: dict = toc_data.get('event', None)
     pre_pdf: str = toc_data.get('pre_pdf', None)
 
-    pre_doc: Document = Document(filename=pre_pdf)
-    start_page = int(pre_doc.page_count)
-    pre_doc.close()
-    del pre_doc
+    if pre_pdf is None:
+        start_page = 0
+    else:
+        pre_doc: Document = Document(filename=pre_pdf)
+        start_page = int(pre_doc.page_count)
+        pre_doc.close()
+        del pre_doc
 
     items = [{}, {}] + toc_data.get('toc_items', [])
+    settings = toc_data.get('toc_settings', {})
+
+    # track_group_indent is added just as a reference, if it's left at 0, it's not really necessary
+    track_group_indent = 0
+    track_indent = track_group_indent + (2 if settings.get('include_track_group') else 0)
+    contribution_indent = track_indent + (2 if settings.get('include_tracks') else 0)
+
 
     total_pages = math.ceil(len(items) / ITEMS_PER_PAGE)
 
@@ -384,44 +395,71 @@ def doc_toc(args) -> None:
 
         space = (item_index * (LINE_SPACING + ANNOTATION_HEIGHT)) + \
             (PAGE_VERTICAL_SPACE)
+        
+        if item.get('type') == 'contribution':
 
-        item_code_point = Point(PAGE_HORIZONTAL_MARGIN,
-                                PAGE_VERTICAL_MARGIN + space)
+            contribution_text_point = Point(PAGE_HORIZONTAL_MARGIN,
+                                    PAGE_VERTICAL_MARGIN + space)
+            
+            contribution_code = item.get('code', '')
+            contribution_title = item.get('title', '')
 
-        insert_text(page, item_code_point,
-                    item.get('code', ''),
-                    fontname="Cour",
-                    fontsize=9
-                    )
+            contribution_text = contribution_code + ' - ' + contribution_title
 
-        item_title_original = item.get('title', '')
-        item_title_parts = item_title_original.split()
+            words = contribution_text.split()
 
-        item_title: str = ''
+            truncated_text = ''
 
-        for title_part in item_title_parts:
-            if (len(item_title) + len(title_part) + 1) <= 70:
-                item_title = item_title + ' ' + title_part
+            for word in words:
+                if len(truncated_text) + len(word) < LINE_LENGTH - contribution_indent - 5:
+                    truncated_text += ' ' + word
+                else:
+                    break
 
-        item_title = item_title + '[...]' if len(item_title) < \
-            len(item_title_original) else item_title
+            if len(truncated_text) < len(contribution_text):
+                truncated_text += '[...]'
 
-        item_title = f"{item_title:.<75}"
+            contribution_text = ' ' * contribution_indent + truncated_text
 
-        item_title_point = Point(PAGE_HORIZONTAL_MARGIN +
-                                 ITEM_CODE_RECT_WIDTH,
-                                 PAGE_VERTICAL_MARGIN
-                                 + space)
+            contribution_text = f"{contribution_text:.<{LINE_LENGTH}}"
 
-        insert_text(page,
-                    item_title_point,
-                    f"{item_title}",
-                    fontname="Cour",
-                    fontsize=9
-                    )
+            insert_text(page, contribution_text_point,
+                        contribution_text,
+                        fontname="Cour",
+                        fontsize=9
+                        )
 
+        elif item.get('type') == 'track':
+            track_title_point = Point(PAGE_HORIZONTAL_MARGIN,
+                                    PAGE_VERTICAL_MARGIN + space)
+            
+            track_title = (' ' * track_indent) + item.get('title', '').upper()
+
+            track_title = f"{track_title:.<{LINE_LENGTH}}"
+            
+            insert_text(page, track_title_point,
+                        track_title,
+                        fontname="CoBo",
+                        fontsize=9
+                        )
+
+        elif item.get('type') == 'track_group':
+            track_group_title_point = Point(PAGE_HORIZONTAL_MARGIN,
+                                    PAGE_VERTICAL_MARGIN + space)
+
+            track_group_title = (' ' * track_group_indent) + item.get('title', '').upper()
+
+            track_group_title = f"{track_group_title:.<{LINE_LENGTH}}"
+
+            insert_text(page, track_group_title_point,
+                        track_group_title,
+                        fontname="CoBo",
+                        fontsize=9
+                        )
+        
+        # link
         link_point = Point(PAGE_HORIZONTAL_MARGIN + RECT_WIDTH - 24,
-                           PAGE_VERTICAL_MARGIN + space)
+                        PAGE_VERTICAL_MARGIN + space)
 
         insert_text(page,
                     link_point,
@@ -432,12 +470,12 @@ def doc_toc(args) -> None:
         to_page = item.get('page', 0) + start_page + total_pages - 2
         # to_file = toc_data.get('vol_file', None)
         link_rect = Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN
-                         + space - 10, PAGE_HORIZONTAL_MARGIN +
-                         RECT_WIDTH, PAGE_VERTICAL_MARGIN +
-                         space + ANNOTATION_HEIGHT - 5)
+                        + space - 10, PAGE_HORIZONTAL_MARGIN +
+                        RECT_WIDTH, PAGE_VERTICAL_MARGIN +
+                        space + ANNOTATION_HEIGHT - 5)
 
         link: dict = {'kind': LINK_GOTOR, 'from': link_rect,
-                      "file": "", "page": to_page, "to": (0, 0)}
+                    "file": "", "page": to_page, "to": (0, 0)}
 
         # sys.stdout.write(f"{item.get('code')} --> {to_page}\n")
 

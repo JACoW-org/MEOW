@@ -13,6 +13,7 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import Pro
 from meow.services.local.event.event_pdf_utils import brief_links, vol_toc, pdf_separate, pdf_unite, write_metadata
 from meow.utils.list import split_list
 from meow.utils.serialization import json_encode
+from meow.models.local.event.final_proceedings.track_model import TrackGroupData
 
 
 logger = lg.getLogger(__name__)
@@ -33,9 +34,11 @@ async def concat_contribution_papers(proceedings_data: ProceedingsData, cookies:
 
     if len(files_data) > 0:
 
+        toc_grouping = settings.get('toc_grouping', [])
+
         # await first_pdf_task(proceedings_data, files_data, cache_dir)
         await brief_pdf_task(proceedings_data, files_data, cache_dir, settings.get('doi_conference', 'CONF-YY'), config.absolute_pdf_link)
-        await vol_pdf_task(proceedings_data, files_data, cache_dir, callback)
+        await vol_pdf_task(proceedings_data, files_data, cache_dir, callback, toc_grouping)
 
     return proceedings_data
 
@@ -59,7 +62,7 @@ async def first_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
             tg.start_soon(_task, current_file, capacity_limiter)
 
 
-async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileData], cache_dir: Path, callback: Callable):
+async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileData], cache_dir: Path, callback: Callable, toc_grouping: list[str]):
 
     event_id = proceedings_data.event.id
     event_title = proceedings_data.event.title
@@ -69,7 +72,7 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
     vol_pdf_path = Path(cache_dir, f"{event_id}_proceedings_volume.pdf")
 
     vol_pre_pdf_path = await get_vol_pre_pdf_path(proceedings_data, cache_dir, callback)
-    vol_toc_pdf_path = await get_vol_toc_pdf_path(proceedings_data, vol_pre_pdf_path, cache_dir, callback)
+    vol_toc_pdf_path = await get_vol_toc_pdf_path(proceedings_data, vol_pre_pdf_path, cache_dir, callback, toc_grouping)
 
     vol_pdf_files = [
         str(Path(cache_dir, f"{f.filename}_jacow"))
@@ -133,10 +136,12 @@ async def get_vol_pre_pdf_path(proceedings_data: ProceedingsData, cache_dir: Pat
     return vol_pre_pdf_path
 
 
-async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, vol_pre_pdf_path: Path | None, cache_dir: Path, callback: Callable):
+async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, vol_pre_pdf_path: Path | None, cache_dir: Path, callback: Callable, toc_grouping: list[str]):
 
     vol_toc_pdf_path: Path | None = None
     vol_toc_conf_path: Path | None = None
+
+    logger.info(toc_grouping)
 
     try:
         vol_toc_name = f'{proceedings_data.event.id}_proceedings_toc'
@@ -144,15 +149,61 @@ async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, vol_pre_pdf_pa
         vol_toc_pdf_path = Path(cache_dir, f"{vol_toc_name}.pdf")
         vol_toc_conf_path = Path(cache_dir, f"{vol_toc_name}.json")
 
+        track_groups = dict()
+
+        logger.info(f'get_vol_toc_pdf_path - number of contributions: {len(proceedings_data.contributions)}')
+
+        for contribution in proceedings_data.contributions:
+
+            if callback(contribution) is False or contribution.track is None:
+                continue
+
+            track_group = contribution.track.track_group or TrackGroupData(code='default', title='Default', description='description', position=0)
+            if track_group.code not in track_groups:
+                track_groups[track_group.code] = dict(
+                    title=track_group.title,
+                    page=contribution.page,
+                    tracks=dict()
+                )
+
+            track = contribution.track
+            
+            if track.code not in track_groups[track_group.code]['tracks']:
+                track_groups[track_group.code]['tracks'][track.code] = dict(
+                    title=track.title,
+                    page=contribution.page,
+                    contributions=dict()
+                )
+            track_groups[track_group.code]['tracks'][track.code]['contributions'][contribution.code] = dict(
+                title=contribution.title,
+                page=contribution.page
+            )
+
+        toc_items = list()
+        toc_settings = dict(
+            include_track_group='track_group' in toc_grouping,
+            include_tracks='track' in toc_grouping,
+            include_contributions='contribution' in toc_grouping
+        )
+
+        for group_code, track_group in track_groups.items():
+            if toc_settings.get('include_track_group'):
+                toc_items.append({'type': 'track_group', 'code': group_code, 'title': track_group.get('title'), 'page': track_group.get('page')})
+
+            for track_code, track in track_group.get('tracks').items():
+                if toc_settings.get('include_tracks'):
+                    toc_items.append({'type': 'track', 'code': track_code, 'title': track.get('title'), 'page': track.get('page')})
+
+                if toc_settings.get('include_contributions'):
+                    for contrib_code, contrib_data in track.get('contributions').items():
+                        toc_items.append({'type': 'contribution', 'code': contrib_code, 'title': contrib_data.get('title'), 'page': contrib_data.get('page')})
+        
         toc_data: dict = {
             "toc_title": "Table of Contents",
-            "pre_pdf": str(vol_pre_pdf_path),
+            "pre_pdf": str(vol_pre_pdf_path) if vol_pre_pdf_path else None,
             "vol_file": f"{proceedings_data.event.id}_proceedings_volume.pdf",
-            "toc_items": [
-                {"code": c.code, "title": c.title, "page": c.page}
-                for c in proceedings_data.contributions
-                if callback(c) is True
-            ],
+            "toc_items": toc_items,
+            "toc_settings": toc_settings,
             "event": dict(
                 name=proceedings_data.event.name,
                 title=proceedings_data.event.title,
