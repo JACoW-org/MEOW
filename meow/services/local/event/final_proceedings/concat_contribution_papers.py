@@ -34,7 +34,7 @@ async def concat_contribution_papers(proceedings_data: ProceedingsData, cookies:
 
     if len(files_data) > 0:
 
-        toc_grouping = settings.get('toc_grouping', [])
+        toc_grouping = settings.get('toc_grouping', ['contribution', 'session'])
 
         # await first_pdf_task(proceedings_data, files_data, cache_dir)
         await brief_pdf_task(proceedings_data, files_data, cache_dir, settings.get('doi_conference', 'CONF-YY'), config.absolute_pdf_link)
@@ -149,54 +149,38 @@ async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, vol_pre_pdf_pa
         vol_toc_pdf_path = Path(cache_dir, f"{vol_toc_name}.pdf")
         vol_toc_conf_path = Path(cache_dir, f"{vol_toc_name}.json")
 
-        track_groups = dict()
+        sessions = dict()
 
-        logger.info(f'get_vol_toc_pdf_path - number of contributions: {len(proceedings_data.contributions)}')
+        for session in proceedings_data.sessions:
+            sessions[session.code] = dict(
+                session_data=session,
+                contributions=[]
+            )
 
         for contribution in proceedings_data.contributions:
-
-            if callback(contribution) is False or contribution.track is None:
+            if callback(contribution) is False or contribution.session_code is None:
                 continue
 
-            track_group = contribution.track.track_group or TrackGroupData(code='default', title='Default', description='description', position=0)
-            if track_group.code not in track_groups:
-                track_groups[track_group.code] = dict(
-                    title=track_group.title,
-                    page=contribution.page,
-                    tracks=dict()
-                )
-
-            track = contribution.track
-            
-            if track.code not in track_groups[track_group.code]['tracks']:
-                track_groups[track_group.code]['tracks'][track.code] = dict(
-                    title=track.title,
-                    page=contribution.page,
-                    contributions=dict()
-                )
-            track_groups[track_group.code]['tracks'][track.code]['contributions'][contribution.code] = dict(
-                title=contribution.title,
-                page=contribution.page
-            )
+            if contribution.session_code in sessions:
+                if len(sessions[contribution.session_code]['contributions']) == 0:
+                    sessions[contribution.session_code]['page'] = contribution.page
+                sessions[contribution.session_code]['contributions'].append(contribution)
 
         toc_items = list()
         toc_settings = dict(
-            include_track_group='track_group' in toc_grouping,
-            include_tracks='track' in toc_grouping,
+            include_sessions='session' in toc_grouping,
             include_contributions='contribution' in toc_grouping
         )
 
-        for group_code, track_group in track_groups.items():
-            if toc_settings.get('include_track_group'):
-                toc_items.append({'type': 'track_group', 'code': group_code, 'title': track_group.get('title'), 'page': track_group.get('page')})
+        for session_code, session in sessions.items():
+            if toc_settings.get('include_sessions') and session.get('page', False):
+                toc_items.append({'type': 'session', 'code': session_code, 'title': session.get('session_data').title, 'page': session.get('page')})
 
-            for track_code, track in track_group.get('tracks').items():
-                if toc_settings.get('include_tracks'):
-                    toc_items.append({'type': 'track', 'code': track_code, 'title': track.get('title'), 'page': track.get('page')})
-
-                if toc_settings.get('include_contributions'):
-                    for contrib_code, contrib_data in track.get('contributions').items():
-                        toc_items.append({'type': 'contribution', 'code': contrib_code, 'title': contrib_data.get('title'), 'page': contrib_data.get('page')})
+            if toc_settings.get('include_contributions'):
+                for contribution in session.get('contributions'):
+                    toc_items.append({'type': 'contribution', 'code': contribution.code, 'title': contribution.title, 'page': contribution.page})
+ 
+        logger.info(toc_items)
         
         toc_data: dict = {
             "toc_title": "Table of Contents",

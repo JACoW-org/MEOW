@@ -339,8 +339,9 @@ def doc_toc(args) -> None:
     # track_group_indent is added just as a reference, if it's left at 0, it's not really necessary
     track_group_indent = 0
     track_indent = track_group_indent + (2 if settings.get('include_track_group') else 0)
-    contribution_indent = track_indent + (2 if settings.get('include_tracks') else 0)
 
+    session_indent = 0
+    contribution_indent = session_indent + (2 if settings.get('include_sessions') else 0)
 
     total_pages = math.ceil(len(items) / ITEMS_PER_PAGE)
 
@@ -429,6 +430,21 @@ def doc_toc(args) -> None:
                         fontsize=9
                         )
 
+        elif item.get('type') == 'session':
+            session_title_point = Point(PAGE_HORIZONTAL_MARGIN,
+                                    PAGE_VERTICAL_MARGIN + space)
+            
+            session_title = (' ' * session_indent) + item.get('title', '').upper()
+
+            session_title = f"{session_title:.<{LINE_LENGTH}}"
+
+            insert_text(page, session_title_point,
+                        session_title,
+                        fontname="CoBo",
+                        fontsize=9
+                        )
+        
+        
         elif item.get('type') == 'track':
             track_title_point = Point(PAGE_HORIZONTAL_MARGIN,
                                     PAGE_VERTICAL_MARGIN + space)
