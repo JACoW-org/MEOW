@@ -318,8 +318,6 @@ def doc_toc(args) -> None:
     LINE_SPACING = 4
     LINE_LENGTH = 82
 
-    ITEM_CODE_RECT_WIDTH = 40
-
     RECT_WIDTH = PAGE_WIDTH - 2 * PAGE_HORIZONTAL_MARGIN
 
     event: dict = toc_data.get('event', None)
@@ -396,12 +394,12 @@ def doc_toc(args) -> None:
 
         space = (item_index * (LINE_SPACING + ANNOTATION_HEIGHT)) + \
             (PAGE_VERTICAL_SPACE)
-        
+
         if item.get('type') == 'contribution':
 
             contribution_text_point = Point(PAGE_HORIZONTAL_MARGIN,
-                                    PAGE_VERTICAL_MARGIN + space)
-            
+                                            PAGE_VERTICAL_MARGIN + space)
+
             contribution_code = item.get('code', '')
             contribution_title = item.get('title', '')
 
@@ -447,12 +445,12 @@ def doc_toc(args) -> None:
         
         elif item.get('type') == 'track':
             track_title_point = Point(PAGE_HORIZONTAL_MARGIN,
-                                    PAGE_VERTICAL_MARGIN + space)
-            
+                                      PAGE_VERTICAL_MARGIN + space)
+
             track_title = (' ' * track_indent) + item.get('title', '').upper()
 
             track_title = f"{track_title:.<{LINE_LENGTH}}"
-            
+
             insert_text(page, track_title_point,
                         track_title,
                         fontname="CoBo",
@@ -461,9 +459,10 @@ def doc_toc(args) -> None:
 
         elif item.get('type') == 'track_group':
             track_group_title_point = Point(PAGE_HORIZONTAL_MARGIN,
-                                    PAGE_VERTICAL_MARGIN + space)
+                                            PAGE_VERTICAL_MARGIN + space)
 
-            track_group_title = (' ' * track_group_indent) + item.get('title', '').upper()
+            track_group_title = (' ' * track_group_indent) + \
+                item.get('title', '').upper()
 
             track_group_title = f"{track_group_title:.<{LINE_LENGTH}}"
 
@@ -472,10 +471,10 @@ def doc_toc(args) -> None:
                         fontname="CoBo",
                         fontsize=9
                         )
-        
+
         # link
         link_point = Point(PAGE_HORIZONTAL_MARGIN + RECT_WIDTH - 24,
-                        PAGE_VERTICAL_MARGIN + space)
+                           PAGE_VERTICAL_MARGIN + space)
 
         insert_text(page,
                     link_point,
@@ -486,14 +485,14 @@ def doc_toc(args) -> None:
         to_page = item.get('page', 0) + start_page + total_pages - 2
         # to_file = toc_data.get('vol_file', None)
         link_rect = Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN
-                        + space - 10, PAGE_HORIZONTAL_MARGIN +
-                        RECT_WIDTH, PAGE_VERTICAL_MARGIN +
-                        space + ANNOTATION_HEIGHT - 5)
+                         + space - 10, PAGE_HORIZONTAL_MARGIN +
+                         RECT_WIDTH, PAGE_VERTICAL_MARGIN +
+                         space + ANNOTATION_HEIGHT - 5)
 
         link: dict = {'kind': LINK_GOTOR, 'from': link_rect,
-                    "file": "", "page": to_page, "to": (0, 0)}
+                      "file": "", "page": to_page, "to": (0, 0)}
 
-        sys.stdout.write(f"{item.get('code')} --> {to_page}\n")
+        # sys.stdout.write(f"{item.get('code')} --> {to_page}\n")
 
         # link: dict = {'kind': LINK_URI, 'from': link_rect,
         #               'uri': f"#page={to_page}"}
@@ -537,7 +536,7 @@ def doc_metadata(args) -> None:
 def gzip_compress_file(p):
     print('gzip_compress_file', p, p + '.gz')
     with open(p, 'rb') as f:
-        with gzip.open(p + '.gz',  'wb', compresslevel=1) as gz:
+        with gzip.open(p + '.gz', 'wb', compresslevel=1) as gz:
             shutil.copyfileobj(f, gz)  # type: ignore
     # os.remove(p)
 

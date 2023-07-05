@@ -14,9 +14,6 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import Pro
 from meow.models.local.event.final_proceedings.session_model import SessionData
 from meow.services.local.event.event_pdf_utils import draw_frame_anyio
 
-from concurrent.futures import as_completed
-from anyio.from_thread import start_blocking_portal
-
 from datetime import datetime
 from meow.utils.datetime import format_datetime_pdf
 
@@ -24,7 +21,8 @@ from meow.utils.datetime import format_datetime_pdf
 logger = lg.getLogger(__name__)
 
 
-async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict, settings: dict, callback: Callable) -> ProceedingsData:
+async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict,
+                                settings: dict, callback: Callable) -> ProceedingsData:
     """ """
 
     logger.info('event_final_proceedings - write_papers_metadata')
@@ -110,8 +108,9 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
         pre_print: str = settings.get('pre_print', 'This is a preprint') \
             if contribution.peer_reviewing_accepted else ''
 
-        await draw_frame_anyio(str(original_pdf_file), str(jacow_pdf_file), 
-                               contribution.page, pre_print, header_data, footer_data, metadata)
+        await draw_frame_anyio(str(original_pdf_file), str(jacow_pdf_file),
+                               contribution.page, pre_print, header_data,
+                               footer_data, metadata)
 
         await stream.send({
             "index": current_index,
@@ -196,7 +195,8 @@ def refill_contribution_metadata(proceedings_data: ProceedingsData, results: dic
                     if report and 'page_count' in report:
                         current_page += report.get('page_count', 0)
 
-                # logger.info('contribution_data pages = %s - %s', contribution_data.page, contribution_data.page + result.get('report').get('page_count'))
+                # logger.info('contribution_data pages = %s - %s', contribution_data.page, contribution_data.page
+                #   + result.get('report').get('page_count'))
 
         except IndexError as e:
             logger.warning(f'No keyword for contribution {code}')

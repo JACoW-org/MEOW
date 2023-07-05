@@ -20,6 +20,6 @@ async def async_gen():
     # It is meant to show syntax only
     g = [i async for i in my_gen()]
     print(g)
-    
+
     f = [j async for j in my_gen() if not (j // 3 % 5)]
     print(f)

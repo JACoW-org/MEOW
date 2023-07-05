@@ -72,14 +72,14 @@ def get_keywords_from_text_greedy(text: str, stemmer: SnowballStemmer, stem_keyw
 
 
 def get_keywords_from_text(text: str, stemmer: SnowballStemmer, stem_keywords_tree: dict[str, list[str]]) -> list[str]:
-    
+
     try:
-    
+
         text_tokens: list[str] = wordpunct_tokenize(text)
 
         # init keywords counts
         text_keywords_counts: dict[str, int] = {}
-        
+
         # O(n)
         # for i in range(len(text_tokens)):
         for i, token in enumerate(text_tokens):
@@ -92,7 +92,7 @@ def get_keywords_from_text(text: str, stemmer: SnowballStemmer, stem_keywords_tr
 
                     # TODO use different tokenization method to improve
                     keyword_tokens: list[str] = wordpunct_tokenize(keyword)
-                    
+
                     j: int = 1
                     isMatch: bool = True
                     # O(k), where k is usually ~1/2
@@ -110,7 +110,7 @@ def get_keywords_from_text(text: str, stemmer: SnowballStemmer, stem_keywords_tr
 
     except BaseException as ex:
         logger.error(ex, exc_info=True)
-                  
+
     return []
 
 
@@ -121,7 +121,8 @@ def get_top_keywords(candidates: dict[str, int]) -> list[str]:
 
     top_keywords = []
     index = 0
-    while (index < len(sorted_candidates) and (index < 5 or sorted_candidates[index][1] == sorted_candidates[index - 1][1])):
+    while (index < len(sorted_candidates) and (
+            index < 5 or sorted_candidates[index][1] == sorted_candidates[index - 1][1])):
         top_keywords.append(sorted_candidates[index][0])
         index += 1
 

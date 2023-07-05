@@ -3,7 +3,8 @@ import logging as lg
 
 from typing import AsyncGenerator
 
-from meow.services.local.event.abstract_booklet.collect_sessions_and_contributions import collect_sessions_and_contributions
+from meow.services.local.event.abstract_booklet.collect_sessions_and_contributions import (
+    collect_sessions_and_contributions)
 from meow.services.local.event.abstract_booklet.create_abstract_booklet import create_abstract_booklet_from_event
 from meow.services.local.event.abstract_booklet.export_abstract_booklet import export_abstract_booklet_to_odt
 

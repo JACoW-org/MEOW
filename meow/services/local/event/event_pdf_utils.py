@@ -2,7 +2,7 @@
 import io
 import pathlib
 import logging as lg
-from anyio import Path, to_process
+from anyio import Path, to_thread
 
 from meow.utils.hash import file_md5
 from meow.utils.keywords import KEYWORDS
@@ -89,7 +89,7 @@ async def read_report(read_path: str, keywords: bool) -> dict | None:
 
 def _read_report_thread(input: str, keywords: bool):
 
-    doc: Document | None
+    doc: Document | None = None
 
     try:
 
@@ -153,13 +153,13 @@ def _read_report_thread(input: str, keywords: bool):
         logger.error('Error draw frame')
         raise be
     finally:
-        if doc is None:
+        if doc is not None:
             doc.close()
             del doc
 
 
 async def read_report_anyio(read_path: str, keywords: bool) -> dict | None:
-    return await to_process.run_sync(_read_report_thread, read_path, keywords)
+    return await to_thread.run_sync(_read_report_thread, read_path, keywords)
 
 
 async def pdf_to_text(read_path: str) -> str:
@@ -229,7 +229,7 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
                               pre_print: str | None, header: dict | None,
                               footer: dict | None, metadata: dict | None):
 
-    doc: Document | None
+    doc: Document | None = None
 
     try:
 
@@ -265,7 +265,7 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
         logger.error('', exc_info=True)
         raise be
     finally:
-        if doc:
+        if doc is not None:
             doc.close()
             del doc
 
@@ -273,8 +273,8 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
 async def draw_frame_anyio(input: str, output: str, page: int,
                            pre_print: str | None, header: dict | None,
                            footer: dict | None, metadata: dict | None):
-    return await to_process.run_sync(_draw_frame_thread_thread, input, output,
-                                     page, pre_print, header, footer, metadata)
+    return await to_thread.run_sync(_draw_frame_thread_thread, input, output,
+                                    page, pre_print, header, footer, metadata)
 
 
 async def write_metadata(metadata: dict, read_path: str,
@@ -327,8 +327,11 @@ async def pdf_separate(input: str, output: str, first: int, last: int) -> int:
     return 1
 
 
-async def pdf_unite(write_path: str, files: list[str],
-                    first: bool = False) -> int:
+async def pdf_unite(write_path: str, files: list[str], first: bool) -> int:
+    return await pdf_unite_qpdf(write_path, files, first)
+
+
+async def pdf_unite_qpdf(write_path: str, files: list[str], first: bool) -> int:
 
     # cmd = ['pdfunite'] + files + [write_path]
     # cmd = ['pdftk'] + files + ['cat', 'output'] + [write_path]
@@ -345,7 +348,36 @@ async def pdf_unite(write_path: str, files: list[str],
 
     cmd = ['qpdf', '--empty', '--pages'] + items + ['--', write_path]
 
-    # print(" ".join(cmd))
+    print(" ".join(cmd))
+
+    res = await run_cmd(cmd)
+
+    if res is not None and res.returncode == 0:
+
+        # print(res.returncode)
+        # print(res.stdout.decode())
+        # print(res.stderr.decode())
+
+        return res.returncode
+
+    return 1
+
+
+async def pdf_unite_mutool(write_path: str, files: list[str], first: bool) -> int:
+
+    # mutool merge -o out.pdf -O compress=yes ../../src/meow/var/run/18_tmp/
+    #   18_proceedings_toc.pdf 1-N ../../src/meow/var/run/18_tmp/FRAI1.pdf 1-N
+    #   ../../src/meow/var/run/18_tmp/FRAI2.pdf 1-N
+
+    items: list[str] = []
+
+    for f in files:
+        items.append(f)
+        items.append('1-1' if first else '1-N')
+
+    cmd = ['bin/mutool', 'merge', '-o', write_path] + items
+
+    print(" ".join(cmd))
 
     res = await run_cmd(cmd)
 
@@ -412,7 +444,7 @@ async def vol_toc(write_path: str, conf_path: str) -> int:
     cmd.append("-o")
     cmd.append(write_path)
 
-    print(" ".join(cmd))
+    # print(" ".join(cmd))
 
     res = await run_cmd(cmd)
 
