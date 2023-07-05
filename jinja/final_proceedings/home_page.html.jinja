@@ -50,16 +50,18 @@
 
                 <ul>
                     <li>
-                        <a href="./pdf/{{ event.id }}_proceedings_volume.pdf">
-                            <b>{% raw %}{{.Site.Params.name}}{% endraw %} Proceedings Volume</b>
-                        </a> ({{ volume_size | filesizeformat }})
+                        <a href="./pdf/{{ event.id }}_proceedings_volume.pdf"><b>{% raw %}
+                        {{.Site.Params.name}}
+                        {% endraw %} Proceedings Volume</b></a>
+                        ({{ volume_size | filesizeformat }})
                         <div><i>The complete volume of papers</i></div>
                     </li>
 
                     <li>
-                        <a href="./pdf/{{ event.id }}_proceedings_brief.pdf">
-                            <b>{% raw %}{{.Site.Params.name}}{% endraw %} Proceedings at a glance</b>
-                        </a> ({{ brief_size | filesizeformat }})
+                        <a href="./pdf/{{ event.id }}_proceedings_brief.pdf"><b>{% raw %}
+                            {{.Site.Params.name}}
+                        {% endraw %} Proceedings at a glance</b></a>
+                        ({{ brief_size | filesizeformat }})
                         <div><i>First page only of all papers with hyperlinks to complete versions</i></div>
                     </li>
 
@@ -68,10 +70,8 @@
                     {% if not 'volumes-at-a-glance-cover' in attachment.filename: %}
                     {% if not 'volumes-proceedings-cover' in attachment.filename: %}
                     <li>
-                        <a href="./pdf/{{ attachment.filename }}">
-                            <b>{{ attachment.title }}</b>
-                        </a> ({{ attachment.size | filesizeformat }})
-                        <div><i>{{ attachment.description }}</i></div>
+                        <a href="./pdf/{{ attachment.filename }}"><b>{{ attachment.title }}</b></a>
+                        ({{ attachment.size | filesizeformat }})<div><i>{{ attachment.description }}</i></div>
                     </li>
                     {% endif %}
                     {% endif %}
