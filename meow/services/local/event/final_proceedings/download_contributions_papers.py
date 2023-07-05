@@ -5,7 +5,7 @@ from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
 
-from meow.models.local.event.final_proceedings.contribution_model import ContributionData, FileData
+from meow.models.local.event.final_proceedings.contribution_model import FileData
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_proceedings_papers
 
 from meow.utils.http import download_file
@@ -16,11 +16,12 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import Pro
 logger = lg.getLogger(__name__)
 
 
-async def download_contributions_papers(proceedings_data: ProceedingsData, cookies: dict, settings: dict, callback: Callable):
+async def download_contributions_papers(proceedings_data: ProceedingsData, cookies: dict,
+                                        settings: dict, callback: Callable):
     """ """
 
     logger.info('event_final_proceedings - download_contributions_papers')
-    
+
     files_data: list[FileData] = await extract_proceedings_papers(proceedings_data, callback)
 
     total_files: int = len(files_data)
@@ -63,7 +64,9 @@ async def download_contributions_papers(proceedings_data: ProceedingsData, cooki
     return [proceedings_data, files_data]
 
 
-async def file_download_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int, current_file: FileData, cookies: dict, pdf_cache_dir: Path, res: MemoryObjectSendStream) -> None:
+async def file_download_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int,
+                             current_file: FileData, cookies: dict, pdf_cache_dir: Path,
+                             res: MemoryObjectSendStream) -> None:
     """ """
 
     async with capacity_limiter:

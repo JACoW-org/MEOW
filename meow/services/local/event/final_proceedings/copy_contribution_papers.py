@@ -1,7 +1,7 @@
 import logging as lg
 from typing import Callable
 
-from meow.utils.filesystem import rmtree, move
+from meow.utils.filesystem import move
 
 from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
@@ -16,7 +16,8 @@ from meow.models.local.event.final_proceedings.proceedings_data_utils import ext
 logger = lg.getLogger(__name__)
 
 
-async def copy_contribution_papers(proceedings_data: ProceedingsData, cookies: dict, settings: dict, callback: Callable) -> ProceedingsData:
+async def copy_contribution_papers(proceedings_data: ProceedingsData, cookies: dict, settings: dict,
+                                   callback: Callable) -> ProceedingsData:
     """ """
 
     files_data: list[FileData] = await extract_proceedings_papers(proceedings_data, callback)
@@ -29,15 +30,15 @@ async def copy_contribution_papers(proceedings_data: ProceedingsData, cookies: d
     file_cache_name = f"{proceedings_data.event.id}_tmp"
     file_cache_dir: Path = Path('var', 'run', file_cache_name)
     await file_cache_dir.mkdir(exist_ok=True, parents=True)
-    
+
     logger.info(f'{file_cache_dir} created!')
-    
+
     pdf_dest_name = f"{proceedings_data.event.id}_src"
     pdf_dest_dir: Path = Path('var', 'run', pdf_dest_name, 'static', 'pdf')
     await pdf_dest_dir.mkdir(exist_ok=True, parents=True)
-    
+
     logger.info(f'{pdf_dest_dir} created!')
-    
+
     send_stream, receive_stream = create_memory_object_stream()
     capacity_limiter = CapacityLimiter(16)
 
@@ -45,8 +46,8 @@ async def copy_contribution_papers(proceedings_data: ProceedingsData, cookies: d
         async with send_stream:
             for current_index, current_file in enumerate(files_data):
                 tg.start_soon(file_copy_task, capacity_limiter, total_files,
-                              current_index, current_file, cookies, 
-                              file_cache_dir, pdf_dest_dir, 
+                              current_index, current_file, cookies,
+                              file_cache_dir, pdf_dest_dir,
                               send_stream.clone())
 
         try:
@@ -67,28 +68,29 @@ async def copy_contribution_papers(proceedings_data: ProceedingsData, cookies: d
     return proceedings_data
 
 
-async def file_copy_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int, current_file: FileData, 
-                         cookies: dict, cache_dir: Path, dest_dir: Path, res: MemoryObjectSendStream) -> None:
+async def file_copy_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int,
+                         current_file: FileData, cookies: dict, cache_dir: Path, dest_dir: Path,
+                         res: MemoryObjectSendStream) -> None:
     """ """
 
     async with capacity_limiter:
-        
+
         file_exists = None
-        
+
         try:
-               
+
             file_name = f"{current_file.filename}_jacow"
             file_path = Path(cache_dir, file_name)
-            
+
             dest_name = f"{current_file.filename}"
             dest_path = Path(dest_dir, dest_name)
 
             dest_exists = await dest_path.exists()
             file_exists = await file_path.exists()
-            
+
             if dest_exists:
                 await dest_path.unlink()
-            
+
             # logger.info(f"{pdf_file} ({'exists!' if pdf_exists else 'not exists!!!'}) -> {pdf_dest}")
 
             if file_exists:
@@ -96,7 +98,7 @@ async def file_copy_task(capacity_limiter: CapacityLimiter, total_files: int, cu
                 await move(str(file_path), str(dest_path))
             else:
                 logger.warning(f"{file_path} not exists")
-            
+
         except Exception as ex:
             logger.error(ex, exc_info=True)
 

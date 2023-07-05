@@ -8,7 +8,7 @@ from anyio import CapacityLimiter, Path, create_task_group
 from meow.models.local.event.final_proceedings.contribution_model import FileData
 from meow.models.local.event.final_proceedings.event_model import AttachmentData
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_proceedings_papers
-from meow.models.local.event.final_proceedings.proceedings_data_model import FinalProceedingsConfig, ProceedingsData
+from meow.models.local.event.final_proceedings.proceedings_data_model import FinalProceedingsConfig
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.services.local.event.event_pdf_utils import brief_links, vol_toc, pdf_separate, pdf_unite, write_metadata
 from meow.utils.list import split_list
@@ -19,7 +19,8 @@ from meow.models.local.event.final_proceedings.track_model import TrackGroupData
 logger = lg.getLogger(__name__)
 
 
-async def concat_contribution_papers(proceedings_data: ProceedingsData, cookies: dict, settings: dict, config: FinalProceedingsConfig, callback: Callable) -> ProceedingsData:
+async def concat_contribution_papers(proceedings_data: ProceedingsData, cookies: dict, settings: dict,
+                                     config: FinalProceedingsConfig, callback: Callable) -> ProceedingsData:
     """ """
 
     logger.info('event_final_proceedings - concat_contribution_papers')
@@ -37,7 +38,8 @@ async def concat_contribution_papers(proceedings_data: ProceedingsData, cookies:
         toc_grouping = settings.get('toc_grouping', [])
 
         # await first_pdf_task(proceedings_data, files_data, cache_dir)
-        await brief_pdf_task(proceedings_data, files_data, cache_dir, settings.get('doi_conference', 'CONF-YY'), config.absolute_pdf_link)
+        await brief_pdf_task(proceedings_data, files_data, cache_dir,
+                             settings.get('doi_conference', 'CONF-YY'), config.absolute_pdf_link)
         await vol_pdf_task(proceedings_data, files_data, cache_dir, callback, toc_grouping)
 
     return proceedings_data
@@ -62,7 +64,8 @@ async def first_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
             tg.start_soon(_task, current_file, capacity_limiter)
 
 
-async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileData], cache_dir: Path, callback: Callable, toc_grouping: list[str]):
+async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileData],
+                       cache_dir: Path, callback: Callable, toc_grouping: list[str]):
 
     event_id = proceedings_data.event.id
     event_title = proceedings_data.event.title
@@ -136,7 +139,8 @@ async def get_vol_pre_pdf_path(proceedings_data: ProceedingsData, cache_dir: Pat
     return vol_pre_pdf_path
 
 
-async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, vol_pre_pdf_path: Path | None, cache_dir: Path, callback: Callable, toc_grouping: list[str]):
+async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, vol_pre_pdf_path: Path | None,
+                               cache_dir: Path, callback: Callable, toc_grouping: list[str]):
 
     vol_toc_pdf_path: Path | None = None
     vol_toc_conf_path: Path | None = None
@@ -232,7 +236,8 @@ async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, vol_pre_pdf_pa
     return vol_toc_pdf_path
 
 
-async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileData], cache_dir: Path, doi_conference: str, absolute_pdf_link: bool):
+async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileData], cache_dir: Path,
+                         doi_conference: str, absolute_pdf_link: bool):
 
     event_id = proceedings_data.event.id
     event_title = proceedings_data.event.title
@@ -307,7 +312,8 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
     proceedings_data.proceedings_brief_size = (await brief_pdf_path.stat()).st_size
 
 
-async def concat_chunks(write_path: str, pdf_files: list[str], results: list[str], first: bool, limiter: CapacityLimiter) -> None:
+async def concat_chunks(write_path: str, pdf_files: list[str], results: list[str], first: bool,
+                        limiter: CapacityLimiter) -> None:
     async with limiter:
         results.append(write_path)
         await pdf_unite(write_path, pdf_files, first)

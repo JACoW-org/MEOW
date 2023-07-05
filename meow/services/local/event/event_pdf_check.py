@@ -13,8 +13,10 @@ from meow.models.local.event.final_proceedings.client_log import ClientLog, Clie
 
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
 
-from meow.services.local.event.final_proceedings.collecting_contributions_and_files import collecting_contributions_and_files
-from meow.services.local.event.final_proceedings.collecting_sessions_and_attachments import collecting_sessions_and_attachments
+from meow.services.local.event.final_proceedings.collecting_contributions_and_files import (
+    collecting_contributions_and_files)
+from meow.services.local.event.final_proceedings.collecting_sessions_and_attachments import (
+    collecting_sessions_and_attachments)
 from meow.services.local.event.final_proceedings.download_contributions_papers import download_contributions_papers
 from meow.services.local.event.common.validate_proceedings_data import validate_proceedings_data
 from meow.services.local.event.common.adapting_final_proceedings import adapting_final_proceedings
@@ -124,9 +126,10 @@ async def _event_pdf_check(event: dict, cookies: dict, settings: dict, lock: Red
         text="Download Contributions Papers"
     ))
 
-    [final_proceedings, papers_data] = await download_contributions_papers(final_proceedings, cookies, settings, callback)
-    
-    # log number of files 
+    [final_proceedings, papers_data] = await download_contributions_papers(final_proceedings, cookies,
+                                                                           settings, callback)
+
+    # log number of files
     yield dict(type='log', value=ClientLog(
         severity=ClientLogSeverity.INFO,
         message=f'Downloaded {len(papers_data)} papers.'

@@ -8,5 +8,5 @@ logger = lg.getLogger(__name__)
 
 async def clean_final_proceedings(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
     """ """
-    
+
     return proceedings_data

@@ -11,10 +11,11 @@ from meow.models.infra.locks import RedisLock
 
 from redis.exceptions import LockError
 
-from meow.models.infra.locks import RedisLock
 from meow.services.local.event.common.adapting_final_proceedings import adapting_final_proceedings
-from meow.services.local.event.final_proceedings.collecting_contributions_and_files import collecting_contributions_and_files
-from meow.services.local.event.final_proceedings.collecting_sessions_and_attachments import collecting_sessions_and_attachments
+from meow.services.local.event.final_proceedings.collecting_contributions_and_files import (
+    collecting_contributions_and_files)
+from meow.services.local.event.final_proceedings.collecting_sessions_and_attachments import (
+    collecting_sessions_and_attachments)
 from meow.services.local.event.doi.event_doi_info import get_contribution_doi
 
 
@@ -122,7 +123,7 @@ async def _event_doi_info(event: dict, cookies: dict, settings: dict, lock: Redi
     ))
 
     # results = await get_contribution_doi(final_proceedings, cookies, settings)
-    
+
     async for result in get_contribution_doi(final_proceedings, cookies, settings):
         yield dict(type='progress', value=dict(phase='doi_result', result=result))
 

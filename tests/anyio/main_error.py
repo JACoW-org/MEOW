@@ -3,7 +3,7 @@
 Gestione degli errori all'interno di un task group
 
 """
-    
+
 import anyio
 
 

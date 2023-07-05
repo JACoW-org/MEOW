@@ -11,7 +11,8 @@ from meow.models.local.event.final_proceedings.track_model import TrackData
 logger = lg.getLogger(__name__)
 
 
-async def generate_contributions_groups(proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
+async def generate_contributions_groups(proceedings_data: ProceedingsData,
+                                        cookies: dict, settings: dict) -> ProceedingsData:
     """ """
 
     logger.info('event_final_proceedings - generate_contributions_groups')
@@ -47,7 +48,8 @@ async def generate_contributions_groups(proceedings_data: ProceedingsData, cooki
     return proceedings_data
 
 
-async def contributions_group_by_session(capacity_limiter: CapacityLimiter, proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
+async def contributions_group_by_session(capacity_limiter: CapacityLimiter, proceedings_data: ProceedingsData,
+                                         cookies: dict, settings: dict) -> ProceedingsData:
     """ """
 
     async with capacity_limiter:
@@ -56,7 +58,8 @@ async def contributions_group_by_session(capacity_limiter: CapacityLimiter, proc
     return proceedings_data
 
 
-async def contributions_group_by_classification(capacity_limiter: CapacityLimiter, proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
+async def contributions_group_by_classification(capacity_limiter: CapacityLimiter, proceedings_data: ProceedingsData,
+                                                cookies: dict, settings: dict) -> ProceedingsData:
     """ """
 
     async with capacity_limiter:
@@ -80,7 +83,8 @@ async def contributions_group_by_classification(capacity_limiter: CapacityLimite
     return proceedings_data
 
 
-async def contributions_group_by_author(capacity_limiter: CapacityLimiter, proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
+async def contributions_group_by_author(capacity_limiter: CapacityLimiter, proceedings_data: ProceedingsData,
+                                        cookies: dict, settings: dict) -> ProceedingsData:
     """ """
 
     async with capacity_limiter:
@@ -102,7 +106,8 @@ async def contributions_group_by_author(capacity_limiter: CapacityLimiter, proce
     return proceedings_data
 
 
-async def contributions_group_by_institute(capacity_limiter: CapacityLimiter, proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
+async def contributions_group_by_institute(capacity_limiter: CapacityLimiter, proceedings_data: ProceedingsData,
+                                           cookies: dict, settings: dict) -> ProceedingsData:
     """ """
 
     async with capacity_limiter:
@@ -123,13 +128,15 @@ async def contributions_group_by_institute(capacity_limiter: CapacityLimiter, pr
     return proceedings_data
 
 
-async def contributions_group_by_doi_per_institute(capacity_limiter: CapacityLimiter, proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
+async def contributions_group_by_doi_per_institute(capacity_limiter: CapacityLimiter, proceedings_data: ProceedingsData,
+                                                   cookies: dict, settings: dict) -> ProceedingsData:
     """ """
 
     return proceedings_data
 
 
-async def contributions_group_by_keyword(capacity_limiter: CapacityLimiter, proceedings_data: ProceedingsData, cookies: dict, settings: dict) -> ProceedingsData:
+async def contributions_group_by_keyword(capacity_limiter: CapacityLimiter, proceedings_data: ProceedingsData,
+                                         cookies: dict, settings: dict) -> ProceedingsData:
     """ """
 
     async with capacity_limiter:

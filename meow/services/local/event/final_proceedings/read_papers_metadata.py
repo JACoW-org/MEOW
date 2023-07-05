@@ -3,9 +3,6 @@ from typing import Callable
 
 from nltk import download
 
-from concurrent.futures import as_completed
-
-from anyio.from_thread import start_blocking_portal
 from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 
@@ -21,7 +18,8 @@ from meow.services.local.event.event_pdf_utils import read_report_anyio
 logger = lg.getLogger(__name__)
 
 
-async def read_papers_metadata(proceedings_data: ProceedingsData, cookies: dict, settings: dict, callback: Callable) -> ProceedingsData:
+async def read_papers_metadata(proceedings_data: ProceedingsData, cookies: dict,
+                               settings: dict, callback: Callable) -> ProceedingsData:
     """ """
 
     logger.info('event_final_proceedings - read_papers_metadata')
@@ -103,7 +101,8 @@ async def read_metadata_task(capacity_limiter: CapacityLimiter, total_files: int
         })
 
 
-async def refill_contribution_metadata(proceedings_data: ProceedingsData, results: dict, pdf_cache_dir: Path) -> ProceedingsData:
+async def refill_contribution_metadata(proceedings_data: ProceedingsData,
+                                       results: dict, pdf_cache_dir: Path) -> ProceedingsData:
 
     current_page = 1
 
@@ -130,11 +129,11 @@ async def refill_contribution_metadata(proceedings_data: ProceedingsData, result
 
                         if await pdf_path.exists():
                             contribution_data.paper_size = (await pdf_path.stat()).st_size
-                            
+
                         contribution_data.page = current_page
 
                         report: dict | None = results.get(file_data.uuid, None)
-                        
+
                         if report:
                             contribution_data.keywords = [
                                 event_keyword_factory(keyword)
@@ -152,7 +151,8 @@ async def refill_contribution_metadata(proceedings_data: ProceedingsData, result
                 else:
                     logger.error(f"SKIPPED: {code}")
 
-                    # logger.info('contribution_data pages = %s - %s', contribution_data.page, contribution_data.page + result.get('report').get('page_count'))
+                    # logger.info('contribution_data pages = %s - %s', contribution_data.page,
+                    # contribution_data.page + result.get('report').get('page_count'))
 
         except IndexError as e:
             logger.warning(f'No keyword for contribution {code}')

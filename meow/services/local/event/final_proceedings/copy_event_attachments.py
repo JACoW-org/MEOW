@@ -6,8 +6,7 @@ from anyio.streams.memory import MemoryObjectSendStream
 
 from meow.models.local.event.final_proceedings.event_model import AttachmentData
 from meow.models.local.event.final_proceedings.proceedings_data_model import (
-    ProceedingsData,
-)
+    ProceedingsData)
 from meow.utils.filesystem import move
 
 
@@ -44,9 +43,9 @@ async def copy_event_attachments(
     vol_name = f"{proceedings_data.event.id}_proceedings_volume.pdf"
     vol_pdf: Path = Path(file_cache_dir, vol_name)
     vol_dest: Path = Path(pdf_dest_dir, vol_name)
-    
+
     if await vol_dest.exists():
-        await vol_dest.unlink();
+        await vol_dest.unlink()
 
     if await vol_pdf.exists():
         # await vol_dest.hardlink_to(vol_pdf)
@@ -55,10 +54,10 @@ async def copy_event_attachments(
     brief_name = f"{proceedings_data.event.id}_proceedings_brief.pdf"
     brief_pdf: Path = Path(file_cache_dir, brief_name)
     brief_dest: Path = Path(pdf_dest_dir, brief_name)
-    
+
     if await brief_dest.exists():
-        await brief_dest.unlink();
-        
+        await brief_dest.unlink()
+
     if await brief_pdf.exists():
         # await brief_dest.hardlink_to(brief_pdf)
         await move(str(brief_pdf), str(brief_dest))

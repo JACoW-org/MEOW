@@ -58,8 +58,8 @@ async def group_by_author(contributions: list):
 
     for contribution in contributions:
 
-        group_codes: list[str] = contribution.get('authors', [])        
-        
+        group_codes: list[str] = contribution.get('authors', [])
+
         for group_code in group_codes:
             group_key: str = repr([group_code])
 
@@ -73,9 +73,6 @@ async def group_by_author(contributions: list):
                 await contribution_to_item(contribution))
 
     print(dumps(groups, indent=2))
-
-
-
 
 
 async def main():

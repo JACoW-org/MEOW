@@ -62,7 +62,9 @@ async def download_contributions_slides(proceedings_data: ProceedingsData, cooki
     return [proceedings_data, files_data]
 
 
-async def file_download_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int, current_file: FileData, cookies: dict, pdf_cache_dir: Path, res: MemoryObjectSendStream) -> None:
+async def file_download_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int,
+                             current_file: FileData, cookies: dict, pdf_cache_dir: Path,
+                             res: MemoryObjectSendStream) -> None:
     """ """
 
     async with capacity_limiter:

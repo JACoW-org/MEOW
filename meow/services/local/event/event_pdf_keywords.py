@@ -6,7 +6,7 @@ from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError
 from anyio.streams.memory import MemoryObjectSendStream
 
-from meow.services.local.event.event_pdf_utils import is_to_download, pdf_to_text
+from meow.services.local.event.event_pdf_utils import is_to_download
 from meow.services.local.papers_metadata.pdf_keywords import stem_keywords_as_tree
 from meow.utils.http import download_file
 
@@ -77,7 +77,9 @@ async def event_pdf_keywords(event: dict, cookies: dict, settings: dict) -> Asyn
             logger.error(e)
 
 
-async def pdf_keywords_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int, current_file: dict, cookies: dict, pdf_cache_dir: Path, stemmer: SnowballStemmer, stem_keywords_dict: dict[str, list[str]], res: MemoryObjectSendStream) -> None:
+async def pdf_keywords_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int,
+                            current_file: dict, cookies: dict, pdf_cache_dir: Path, stemmer: SnowballStemmer,
+                            stem_keywords_dict: dict[str, list[str]], res: MemoryObjectSendStream) -> None:
     """ """
 
     async with capacity_limiter:
@@ -117,15 +119,18 @@ async def internal_pdf_keywords_task(current_file: dict, cookies: dict, pdf_cach
 
     paper_keywords = []
 
-    text = await pdf_to_text(str(await pdf_file.absolute()))
+    # text = await pdf_to_text(str(await pdf_file.absolute()))
 
     # IN PROCESS
-    # paper_keywords = get_keywords_from_text(str(await pdf_file.absolute()), stemmer, stem_keywords_dict)
+    # paper_keywords = get_keywords_from_text(str(await pdf_file.absolute()),
+    #   stemmer, stem_keywords_dict)
 
     # EXTERNAL THREAD
-    # paper_keywords = await to_thread.run_sync(get_keywords_from_pdf, str(await pdf_file.absolute()), stemmer, stem_keywords_dict)
+    # paper_keywords = await to_thread.run_sync(get_keywords_from_pdf,
+    #   str(await pdf_file.absolute()), stemmer, stem_keywords_dict)
 
     # EXTERNAL PROCESS
-    # paper_keywords = await to_process.run_sync(get_pdf_keywords, str(await pdf_file.absolute()), stemmer, stem_keywords_dict)
+    # paper_keywords = await to_process.run_sync(get_pdf_keywords,
+    #   str(await pdf_file.absolute()), stemmer, stem_keywords_dict)
 
     return paper_keywords

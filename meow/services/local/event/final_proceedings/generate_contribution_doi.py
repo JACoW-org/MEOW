@@ -10,8 +10,10 @@ from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
 
 from meow.tasks.local.doi.models import AuthorDOI, ContributionDOI, EditorDOI
-from meow.tasks.local.doi.utils import (generate_doi_external_label, generate_doi_external_url, generate_doi_identifier,
-                                        generate_doi_internal_url, generate_doi_landing_page_url, generate_doi_name, generate_doi_path)
+from meow.tasks.local.doi.utils import (generate_doi_external_label, generate_doi_external_url,
+                                        generate_doi_identifier, generate_doi_internal_url,
+                                        generate_doi_landing_page_url, generate_doi_name,
+                                        generate_doi_path)
 
 from meow.utils.datetime import format_datetime_full, format_datetime_range_doi, format_datetime_doi
 
@@ -66,7 +68,8 @@ async def generate_contribution_doi(proceedings_data: ProceedingsData, cookies: 
         except Exception as ex:
             logger.error(ex, exc_info=True)
 
-    proceedings_data = refill_contribution_doi(proceedings_data, results, callable)
+    proceedings_data = refill_contribution_doi(
+        proceedings_data, results, callable)
 
     return proceedings_data
 
@@ -120,7 +123,7 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         conference=settings.get('doi_conference', 'CONF-YY'),
         contribution=contribution.code
     )
-    
+
     doi_name: str = generate_doi_name(
         context=settings.get('doi_context', '10.18429'),
         organization=settings.get('doi_organization', 'JACoW'),
@@ -206,7 +209,7 @@ def refill_contribution_doi(proceedings_data: ProceedingsData, results: dict, ca
     start_page: int = 0
 
     for contribution_data in proceedings_data.contributions:
-        
+
         if callable(contribution_data):
             code: str = contribution_data.code
 

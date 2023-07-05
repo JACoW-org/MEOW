@@ -327,16 +327,15 @@ def annot_page_side(page: Page, pre_print: str | None, page_number: int | None, 
 
 def intToRoman(num: int) -> str:
 
-
     # Storing roman values of digits from 0-9
     # when placed at different places
     m = ["", "M", "MM", "MMM"]
     c = ["", "C", "CC", "CCC", "CD", "D",
-        "DC", "DCC", "DCCC", "CM "]
+         "DC", "DCC", "DCCC", "CM "]
     x = ["", "X", "XX", "XXX", "XL", "L",
-        "LX", "LXX", "LXXX", "XC"]
+         "LX", "LXX", "LXXX", "XC"]
     i = ["", "I", "II", "III", "IV", "V",
-        "VI", "VII", "VIII", "IX"]
+         "VI", "VII", "VIII", "IX"]
 
     # Converting to roman
     thousands = m[num // 1000]
@@ -345,6 +344,6 @@ def intToRoman(num: int) -> str:
     ones = i[num % 10]
 
     ans = (thousands + hundreds +
-        tens + ones)
+           tens + ones)
 
     return ans

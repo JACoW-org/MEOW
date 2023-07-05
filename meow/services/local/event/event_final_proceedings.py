@@ -12,8 +12,10 @@ from redis.exceptions import LockError
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
 from meow.models.local.event.final_proceedings.proceedings_data_model import FinalProceedingsConfig, ProceedingsData
 
-from meow.services.local.event.final_proceedings.collecting_contributions_and_files import collecting_contributions_and_files
-from meow.services.local.event.final_proceedings.collecting_sessions_and_attachments import collecting_sessions_and_attachments
+from meow.services.local.event.final_proceedings.collecting_contributions_and_files import (
+    collecting_contributions_and_files)
+from meow.services.local.event.final_proceedings.collecting_sessions_and_attachments import (
+    collecting_sessions_and_attachments)
 
 from meow.services.local.event.common.adapting_final_proceedings import adapting_final_proceedings
 from meow.services.local.event.common.validate_proceedings_data import validate_proceedings_data
@@ -27,7 +29,8 @@ from meow.services.local.event.final_proceedings.download_contributions_slides i
 from meow.services.local.event.final_proceedings.download_event_attachments import download_event_attachments
 from meow.services.local.event.final_proceedings.download_contributions_papers import download_contributions_papers
 
-from meow.services.local.event.final_proceedings.generate_contribution_references import generate_contribution_references
+from meow.services.local.event.final_proceedings.generate_contribution_references import (
+    generate_contribution_references)
 from meow.services.local.event.final_proceedings.generate_contributions_groups import generate_contributions_groups
 from meow.services.local.event.final_proceedings.generate_contribution_doi import generate_contribution_doi
 from meow.services.local.event.final_proceedings.build_doi_payloads import build_doi_payloads
@@ -37,7 +40,8 @@ from meow.services.local.event.final_proceedings.link_static_site import link_st
 from meow.services.local.event.final_proceedings.read_papers_metadata import read_papers_metadata
 from meow.services.local.event.final_proceedings.write_papers_metadata import write_papers_metadata
 
-from meow.services.local.event.final_proceedings.hugo_plugin.hugo_final_proceedings_plugin import HugoFinalProceedingsPlugin
+from meow.services.local.event.final_proceedings.hugo_plugin.hugo_final_proceedings_plugin import (
+    HugoFinalProceedingsPlugin)
 from meow.models.local.event.final_proceedings.client_log import ClientLog, ClientLogSeverity
 from meow.app.errors.service_error import ProceedingsError
 
@@ -45,7 +49,8 @@ from meow.app.errors.service_error import ProceedingsError
 logger = lg.getLogger(__name__)
 
 
-async def event_final_proceedings(event: dict, cookies: dict, settings: dict, config: FinalProceedingsConfig) -> AsyncGenerator:
+async def event_final_proceedings(event: dict, cookies: dict, settings: dict,
+                                  config: FinalProceedingsConfig) -> AsyncGenerator:
     """ """
 
     try:
@@ -101,7 +106,8 @@ async def extend_lock(lock: RedisLock) -> RedisLock:
     return lock
 
 
-async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, config: FinalProceedingsConfig, lock: RedisLock) -> AsyncGenerator:
+async def _event_final_proceedings(event: dict, cookies: dict, settings: dict,
+                                   config: FinalProceedingsConfig, lock: RedisLock) -> AsyncGenerator:
     """ """
 
     logger.info('event_final_proceedings - create_final_proceedings')
@@ -209,7 +215,8 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, c
 
     # Bloccante
 
-    [final_proceedings, papers_data] = await download_contributions_papers(final_proceedings, cookies, settings, filter_contributions_pubblicated)
+    [final_proceedings, papers_data] = await download_contributions_papers(final_proceedings, cookies, settings,
+                                                                           filter_contributions_pubblicated)
 
     # log number of files
     yield dict(type='log', value=ClientLog(
@@ -249,7 +256,8 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, c
 
     # Bloccante
 
-    await read_papers_metadata(final_proceedings, cookies, settings, filter_contributions_pubblicated)
+    await read_papers_metadata(final_proceedings, cookies, settings,
+                               filter_contributions_pubblicated)
 
     """ """
 
@@ -264,7 +272,8 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict, c
     # Mentre il risultato della validazione
     # è bloccante se strict_pdf_check
 
-    [metadata, errors] = await validate_proceedings_data(final_proceedings, cookies, settings, filter_contributions_pubblicated)
+    [metadata, errors] = await validate_proceedings_data(final_proceedings, cookies, settings,
+                                                         filter_contributions_pubblicated)
 
     if len(errors) > 0:
         if config.strict_pdf_check:

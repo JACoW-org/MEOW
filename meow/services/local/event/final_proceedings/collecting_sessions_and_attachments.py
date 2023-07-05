@@ -35,7 +35,7 @@ async def download_sessions(event_url: str, cookies: dict, settings: dict, sessi
 
     response = await download_json(url=download_url, cookies=cookies)
 
-    if 'error' not in response and response.get('error') != True:
+    if 'error' not in response and response.get('error') is not True:
         sessions.extend(response.get('sessions'))
 
 
@@ -47,5 +47,5 @@ async def download_attachments(event_url: str, cookies: dict, settings: dict, at
 
     response = await download_json(url=download_url, cookies=cookies)
 
-    if 'error' not in response and response.get('error') != True:
+    if 'error' not in response and response.get('error') is not True:
         attachments.extend(response.get('attachments'))
