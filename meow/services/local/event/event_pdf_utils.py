@@ -348,7 +348,7 @@ async def pdf_unite_qpdf(write_path: str, files: list[str], first: bool) -> int:
 
     cmd = ['qpdf', '--empty', '--pages'] + items + ['--', write_path]
 
-    # print(" ".join(cmd))
+    print(" ".join(cmd))
 
     res = await run_cmd(cmd)
 
@@ -377,7 +377,7 @@ async def pdf_unite_mutool(write_path: str, files: list[str], first: bool) -> in
 
     cmd = ['bin/mutool', 'merge', '-o', write_path] + items
 
-    # print(" ".join(cmd))
+    print(" ".join(cmd))
 
     res = await run_cmd(cmd)
 

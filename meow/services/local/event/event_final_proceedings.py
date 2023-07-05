@@ -12,8 +12,8 @@ from redis.exceptions import LockError
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
 from meow.models.local.event.final_proceedings.proceedings_data_model import FinalProceedingsConfig, ProceedingsData
 
-from meow.services.local.event.common.collecting_contributions_and_files import collecting_contributions_and_files
-from meow.services.local.event.common.collecting_sessions_and_attachments import collecting_sessions_and_attachments
+from meow.services.local.event.final_proceedings.collecting_contributions_and_files import collecting_contributions_and_files
+from meow.services.local.event.final_proceedings.collecting_sessions_and_attachments import collecting_sessions_and_attachments
 
 from meow.services.local.event.common.adapting_final_proceedings import adapting_final_proceedings
 from meow.services.local.event.common.validate_proceedings_data import validate_proceedings_data
@@ -25,7 +25,7 @@ from meow.services.local.event.final_proceedings.copy_event_attachments import c
 
 from meow.services.local.event.final_proceedings.download_contributions_slides import download_contributions_slides
 from meow.services.local.event.final_proceedings.download_event_attachments import download_event_attachments
-from meow.services.local.event.common.download_contributions_papers import download_contributions_papers
+from meow.services.local.event.final_proceedings.download_contributions_papers import download_contributions_papers
 
 from meow.services.local.event.final_proceedings.generate_contribution_references import generate_contribution_references
 from meow.services.local.event.final_proceedings.generate_contributions_groups import generate_contributions_groups

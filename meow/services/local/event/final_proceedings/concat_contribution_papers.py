@@ -94,15 +94,15 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
     pdf_parts = pdf_parts + vol_pdf_results
 
     metadata = dict(
-        author=f"JACoW - Joint Accelerator Conferences Website",
+        author="JACoW - Joint Accelerator Conferences Website",
         producer=None,
-        creator=f"cat--purr_meow",
+        creator="cat--purr_meow",
         title=f"{event_title} - Proceedings Volume",
         format=None,
         encryption=None,
         creationDate=None,
         modDate=None,
-        subject=f"The complete volume of papers",
+        subject="The complete volume of papers",
         keywords=None,
         trapped=None,
     )
@@ -145,20 +145,22 @@ async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, vol_pre_pdf_pa
 
     try:
         vol_toc_name = f'{proceedings_data.event.id}_proceedings_toc'
-        
+
         vol_toc_pdf_path = Path(cache_dir, f"{vol_toc_name}.pdf")
         vol_toc_conf_path = Path(cache_dir, f"{vol_toc_name}.json")
 
         track_groups = dict()
 
-        logger.info(f'get_vol_toc_pdf_path - number of contributions: {len(proceedings_data.contributions)}')
+        logger.info(
+            f'get_vol_toc_pdf_path - number of contributions: {len(proceedings_data.contributions)}')
 
         for contribution in proceedings_data.contributions:
 
             if callback(contribution) is False or contribution.track is None:
                 continue
 
-            track_group = contribution.track.track_group or TrackGroupData(code='default', title='Default', description='description', position=0)
+            track_group = contribution.track.track_group or TrackGroupData(
+                code='default', title='Default', description='description', position=0)
             if track_group.code not in track_groups:
                 track_groups[track_group.code] = dict(
                     title=track_group.title,
@@ -167,7 +169,7 @@ async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, vol_pre_pdf_pa
                 )
 
             track = contribution.track
-            
+
             if track.code not in track_groups[track_group.code]['tracks']:
                 track_groups[track_group.code]['tracks'][track.code] = dict(
                     title=track.title,
@@ -188,16 +190,19 @@ async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, vol_pre_pdf_pa
 
         for group_code, track_group in track_groups.items():
             if toc_settings.get('include_track_group'):
-                toc_items.append({'type': 'track_group', 'code': group_code, 'title': track_group.get('title'), 'page': track_group.get('page')})
+                toc_items.append({'type': 'track_group', 'code': group_code, 'title': track_group.get(
+                    'title'), 'page': track_group.get('page')})
 
             for track_code, track in track_group.get('tracks').items():
                 if toc_settings.get('include_tracks'):
-                    toc_items.append({'type': 'track', 'code': track_code, 'title': track.get('title'), 'page': track.get('page')})
+                    toc_items.append({'type': 'track', 'code': track_code, 'title': track.get(
+                        'title'), 'page': track.get('page')})
 
                 if toc_settings.get('include_contributions'):
                     for contrib_code, contrib_data in track.get('contributions').items():
-                        toc_items.append({'type': 'contribution', 'code': contrib_code, 'title': contrib_data.get('title'), 'page': contrib_data.get('page')})
-        
+                        toc_items.append({'type': 'contribution', 'code': contrib_code, 'title': contrib_data.get(
+                            'title'), 'page': contrib_data.get('page')})
+
         toc_data: dict = {
             "toc_title": "Table of Contents",
             "pre_pdf": str(vol_pre_pdf_path) if vol_pre_pdf_path else None,
@@ -281,20 +286,20 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
         vol_pdf_results if brief_pre_pdf_path else vol_pdf_results
 
     metadata = dict(
-        author=f"JACoW - Joint Accelerator Conferences Website",
+        author="JACoW - Joint Accelerator Conferences Website",
         producer=None,
-        creator=f"cat--purr_meow",
+        creator="cat--purr_meow",
         title=f"{event_title} - Proceedings at a Glance",
         format=None,
         encryption=None,
         creationDate=None,
         modDate=None,
-        subject=f"First page only of all papers with hyperlinks to complete versions",
+        subject="First page only of all papers with hyperlinks to complete versions",
         keywords=None,
         trapped=None,
     )
 
-    await pdf_unite(str(brief_pdf_path), pdf_parts, True)
+    await pdf_unite(str(brief_pdf_path), pdf_parts, False)
     await write_metadata(metadata, str(brief_pdf_path))
     await brief_links(str(brief_pdf_path), brief_pdf_links)
 

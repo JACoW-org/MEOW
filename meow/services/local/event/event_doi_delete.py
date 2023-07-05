@@ -13,8 +13,8 @@ from redis.exceptions import LockError
 
 from meow.models.infra.locks import RedisLock
 from meow.services.local.event.common.adapting_final_proceedings import adapting_final_proceedings
-from meow.services.local.event.common.collecting_contributions_and_files import collecting_contributions_and_files
-from meow.services.local.event.common.collecting_sessions_and_attachments import collecting_sessions_and_attachments
+from meow.services.local.event.final_proceedings.collecting_contributions_and_files import collecting_contributions_and_files
+from meow.services.local.event.final_proceedings.collecting_sessions_and_attachments import collecting_sessions_and_attachments
 from meow.services.local.event.doi.event_doi_delete import delete_contribution_doi
 
 

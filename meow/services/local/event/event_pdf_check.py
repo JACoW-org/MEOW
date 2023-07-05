@@ -13,9 +13,9 @@ from meow.models.local.event.final_proceedings.client_log import ClientLog, Clie
 
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
 
-from meow.services.local.event.common.collecting_contributions_and_files import collecting_contributions_and_files
-from meow.services.local.event.common.collecting_sessions_and_attachments import collecting_sessions_and_attachments
-from meow.services.local.event.common.download_contributions_papers import download_contributions_papers
+from meow.services.local.event.final_proceedings.collecting_contributions_and_files import collecting_contributions_and_files
+from meow.services.local.event.final_proceedings.collecting_sessions_and_attachments import collecting_sessions_and_attachments
+from meow.services.local.event.final_proceedings.download_contributions_papers import download_contributions_papers
 from meow.services.local.event.common.validate_proceedings_data import validate_proceedings_data
 from meow.services.local.event.common.adapting_final_proceedings import adapting_final_proceedings
 

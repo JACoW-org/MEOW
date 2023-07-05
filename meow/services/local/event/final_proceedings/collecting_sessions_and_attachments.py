@@ -29,7 +29,7 @@ async def collecting_sessions_and_attachments(event: dict, cookies: dict, settin
 
 async def download_sessions(event_url: str, cookies: dict, settings: dict, sessions: list) -> None:
 
-    download_url = f"{event_url}manage/purr/abstract-booklet-sessions-data"
+    download_url = f"{event_url}manage/purr/final-proceedings-sessions-data"
 
     logger.info(download_url)
 
