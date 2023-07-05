@@ -2,11 +2,12 @@ import logging as lg
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.models.local.event.final_proceedings.contribution_model import (ContributionData,
-    DuplicateContributionData)
+                                                                          DuplicateContributionData)
 from meow.utils.list import find
 from typing import Callable
 
 logger = lg.getLogger(__name__)
+
 
 async def manage_duplicates(proceedings_data: ProceedingsData) -> ProceedingsData:
     """"""
@@ -17,9 +18,10 @@ async def manage_duplicates(proceedings_data: ProceedingsData) -> ProceedingsDat
 
     return proceedings_data
 
+
 def resolve_duplicate_contributions(proceedings_data: ProceedingsData) -> ProceedingsData:
-    """"""
-    
+    """ """
+
     for contribution in proceedings_data.contributions:
         duplicate_of_code: str | None = contribution.duplicate_of_code
         if duplicate_of_code:
@@ -42,6 +44,7 @@ def resolve_duplicate_contributions(proceedings_data: ProceedingsData) -> Procee
             ) if duplicate_contribution else None
 
     return proceedings_data
+
 
 def find_predicate(code: str) -> Callable[..., bool]:
 

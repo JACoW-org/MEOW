@@ -23,7 +23,7 @@ class EventFinalProceedingsTask(AbstractTask):
         indico_session: str = cookies.get("indico_session_http", None)
         cookies["indico_session_http"] = indico_session
         cookies["indico_session"] = indico_session
-        
+
         config = FinalProceedingsConfig(
             strict_pdf_check=False,
             include_event_slides=True,
