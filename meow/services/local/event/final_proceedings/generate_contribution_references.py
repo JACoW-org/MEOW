@@ -189,7 +189,7 @@ async def contribution_data_factory(event: EventData, contribution: Contribution
         organization=settings.get('doi_organization', 'JACoW'),
         conference=settings.get('doi_conference', 'CONF-YY'),
         contribution=contribution.code
-    )
+    ) if contribution.page > 0 else ''
 
     isbn: str = settings.get('isbn', '978-3-95450-227-1')
     issn: str = settings.get('issn', '2673-5490')

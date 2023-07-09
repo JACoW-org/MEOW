@@ -21,14 +21,13 @@ from meow.utils.datetime import format_datetime_full, format_datetime_range_doi,
 logger = lg.getLogger(__name__)
 
 
-# TODO REMOVE
 async def generate_contribution_doi(proceedings_data: ProceedingsData, cookies: dict, settings: dict,
                                     config: FinalProceedingsConfig, callable: Callable) -> ProceedingsData:
     """ """
 
     logger.info('event_final_proceedings - generate_contribution_doi')
 
-    contributions = [c for c in proceedings_data.contributions if callable(c)]
+    contributions = [c for c in proceedings_data.contributions if callable(c) and c.page > 0]
 
     total_files: int = len(contributions)
     processed_files: int = 0

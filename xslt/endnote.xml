@@ -30,11 +30,13 @@
                     <electronic-resource-num><xsl:value-of select="contribution/doi"/></electronic-resource-num>
                 </xsl:if>
                 <language><xsl:value-of select="language"/></language>
+                <xsl:if test="contribution/pages/start-page != 0">
                 <pages>
                     <xsl:value-of select="contribution/pages/start-page"/>
                     <xsl:text>-</xsl:text>
                     <xsl:value-of select="contribution/pages/start-page + contribution/pages/number -1"/>
                 </pages>
+                </xsl:if>
                 <keywords>
                     <xsl:for-each select="contribution/keywords/keyword">
                         <keyword><xsl:value-of select="."/></keyword>

@@ -48,8 +48,10 @@ J2 - Proc. of </xsl:text>
 <xsl:value-of select="substring($dateString, 1, 4)"/>
 <xsl:text>
 CY - </xsl:text><xsl:value-of select="conference/venue"/>
-<xsl:if test="conference/series"><xsl:text>T2 - </xsl:text><xsl:value-of select="conference/series"/></xsl:if>
-<xsl:if test="conference/series-number"><xsl:text>T3 - </xsl:text><xsl:value-of select="conference/series-number"/></xsl:if>
+<xsl:if test="conference/series"><xsl:text>
+T2 - </xsl:text><xsl:value-of select="conference/series"/></xsl:if>
+<xsl:if test="conference/series-number"><xsl:text>
+T3 - </xsl:text><xsl:value-of select="conference/series-number"/></xsl:if>
 <xsl:text>
 LA - </xsl:text><xsl:value-of select="language"/>
 <xsl:text>
@@ -58,18 +60,21 @@ AB - </xsl:text><xsl:value-of select="contribution/abstract"/>
 PB - </xsl:text><xsl:value-of select="publisher"/>
 <xsl:text>
 CP - </xsl:text><xsl:value-of select="publisher-venue"/>
+<xsl:if test="contribution/start-page != 0">
 <xsl:text>
 SP - </xsl:text><xsl:value-of select="contribution/pages/start-page"/>
 <xsl:text>
-EP - </xsl:text><xsl:value-of select="contribution/pages/start-page + contribution/pages/number -1"/>
+EP - </xsl:text><xsl:value-of select="contribution/pages/start-page + contribution/pages/number -1"/></xsl:if>
 <xsl:text>
 KW - </xsl:text><xsl:comment>KEYWORDS</xsl:comment>
 <xsl:text>
 DA - </xsl:text><xsl:value-of select="substring($dateString, 1, 4)"/><xsl:text>/</xsl:text><xsl:value-of select="substring($dateString, 6, 2)"/>
 <xsl:text>
 PY - </xsl:text><xsl:value-of select="substring($dateString, 1, 4)"/>
-<xsl:if test="conference/issn != ''"><xsl:text>SN - </xsl:text><xsl:value-of select="conference/issn"/></xsl:if>
-<xsl:if test="contribution/doi"><xsl:text>DO - </xsl:text><xsl:value-of select="contribution/doi"/></xsl:if>
+<xsl:if test="conference/issn != ''"><xsl:text>
+SN - </xsl:text><xsl:value-of select="conference/issn"/></xsl:if>
+<xsl:if test="contribution/doi != ''"><xsl:text>
+DO - </xsl:text><xsl:value-of select="contribution/doi"/></xsl:if>
 <xsl:text>
 UR - </xsl:text><xsl:value-of select="contribution/url"/>
 <xsl:text>
