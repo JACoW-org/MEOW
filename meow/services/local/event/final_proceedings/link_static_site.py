@@ -15,17 +15,23 @@ async def link_static_site(proceedings_data: ProceedingsData, cookies: dict,
 
     static_site_name = f"{proceedings_data.event.id}_src"
     static_site_src = Path('var', 'run', static_site_name)
-    static_site_dir = Path(static_site_src, 'out')
+    static_site_path = Path(static_site_src, 'out')
 
     site_preview_name = f"{proceedings_data.event.id}"
-    site_preview_dir = Path('var', 'html', site_preview_name)
+    site_preview_path = Path('var', 'html', site_preview_name)
 
-    logger.info(f"{static_site_dir} --> {site_preview_dir}")
+    site_archive_name = f"{proceedings_data.event.id}.7z"
+    site_archive_path = Path('var', 'html', site_archive_name)
 
-    await rmtree(str(site_preview_dir))
-    await move(str(static_site_dir), str(site_preview_dir))
+    logger.info(f"{static_site_path} --> {site_preview_path}")
+
+    if await site_archive_path.exists():
+        await site_archive_path.unlink()
+
+    await rmtree(str(site_preview_path))
+    await move(str(static_site_path), str(site_preview_path))
     await rmtree(str(static_site_src))
 
-    await Path(site_preview_dir, config.static_site_type).write_text('')
+    await Path(site_preview_path, config.static_site_type).write_text('')
 
     return proceedings_data
