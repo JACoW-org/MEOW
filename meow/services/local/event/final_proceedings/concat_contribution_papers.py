@@ -190,7 +190,7 @@ async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, vol_pre_pdf_pa
                     toc_items.append({'type': 'contribution', 'code': contribution.code,
                                      'title': contribution.title, 'page': contribution.page})
 
-        logger.info(toc_items)
+        # logger.info(toc_items)
 
         toc_data: dict = {
             "toc_title": "Table of Contents",
