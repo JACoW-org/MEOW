@@ -191,7 +191,6 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
     # logger.warning(f"is_included_in_prepress: {is_included_in_prepress}")
     # logger.warning(f"is_included_in_proceedings: {is_included_in_proceedings}")
     # logger.warning(f"is_included_in_pdf_check: {is_included_in_pdf_check}")
-
     #
     #
     # if is_included_in_proceedings != editable_is_included_in_proceedings:
@@ -208,7 +207,6 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
     #     if r.is_black
     # ]) > 0
     #
-    #
     # if not is_not_included:
     #     is_included_in_proceedings = len([
     #         r for r in revisions
@@ -222,9 +220,9 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
     #         r for r in revisions
     #         if r.is_yellow
     #     ] if paper_data else []) > 0
-
+    #
     # logger.info(f"is_qa_approved: {is_qa_approved}")
-
+    #
     # logger.info("\n\n")
 
     contribution_url = contribution.get('url', '')

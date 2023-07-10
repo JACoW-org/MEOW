@@ -49,15 +49,15 @@ async def run_cmd(command: list[str]) -> CompletedProcess[bytes] | None:
         # print(result.returncode)
         # print(result.stdout.decode())
         # print(result.stderr.decode())
-        
+
         return result
 
     except CalledProcessError as err:
-        
+
         if err:
             print(" ".join(command))
             print(err.returncode)
             print(err.stdout.decode())
             print(err.stderr.decode())
-        
+
         logger.error(err, exc_info=True)

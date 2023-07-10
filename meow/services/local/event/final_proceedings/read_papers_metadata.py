@@ -53,6 +53,7 @@ async def read_papers_metadata(proceedings_data: ProceedingsData, cookies: dict,
         try:
             async with receive_stream:
                 async for result in receive_stream:
+
                     processed_files = processed_files + 1
 
                     # logger.info(result)
@@ -62,6 +63,9 @@ async def read_papers_metadata(proceedings_data: ProceedingsData, cookies: dict,
                     if file_data is not None:
                         results[file_data.uuid] = result.get('report', None)
 
+                        if not results[file_data.uuid]:
+                            raise BaseException('Error reading papers metadata')
+
                     if processed_files >= total_files:
                         receive_stream.close()
 
@@ -69,8 +73,9 @@ async def read_papers_metadata(proceedings_data: ProceedingsData, cookies: dict,
             logger.debug(crs, exc_info=False)
         except EndOfStream as eos:
             logger.debug(eos, exc_info=False)
-        except Exception as ex:
-            logger.error(ex, exc_info=True)
+        except BaseException as be:
+            logger.error(be, exc_info=True)
+            raise BaseException('Error reading papers metadata')
 
     proceedings_data = await refill_contribution_metadata(proceedings_data, results, file_cache_dir)
 
@@ -79,26 +84,35 @@ async def read_papers_metadata(proceedings_data: ProceedingsData, cookies: dict,
 
 async def read_metadata_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int,
                              current_paper: ContributionPaperData, cookies: dict, pdf_cache_dir: Path,
-                             res: MemoryObjectSendStream) -> None:
+                             stream: MemoryObjectSendStream) -> None:
     """ """
 
     async with capacity_limiter:
 
-        current_file = current_paper.paper
-        pdf_name = current_file.filename
+        current_file = None
 
-        pdf_path = str(Path(pdf_cache_dir, pdf_name))
+        try:
 
-        # logger.debug(f"{pdf_file} {pdf_name}")
+            current_file = current_paper.paper
+            pdf_name = current_file.filename
 
-        report = await read_report_anyio(pdf_path, True)
+            pdf_path = str(Path(pdf_cache_dir, pdf_name))
 
-        await res.send({
-            "index": current_index,
-            "total": total_files,
-            "file": current_file,
-            "report": report
-        })
+            # logger.debug(f"{pdf_file} {pdf_name}")
+
+            report = await read_report_anyio(pdf_path, True)
+
+            return await stream.send({
+                "index": current_index,
+                "total": total_files,
+                "file": current_file,
+                "report": report
+            })
+
+        except BaseException as be:
+            logger.error(be, exc_info=True)
+
+        return await stream.send(None)
 
 
 async def refill_contribution_metadata(proceedings_data: ProceedingsData,
@@ -157,7 +171,7 @@ async def refill_contribution_metadata(proceedings_data: ProceedingsData,
         except IndexError as e:
             logger.warning(f'No keyword for contribution {code}')
             logger.error(e, exc_info=True)
-        except Exception as e:
-            logger.error(e, exc_info=True)
+        except BaseException as be:
+            logger.error(be, exc_info=True)
 
     return proceedings_data

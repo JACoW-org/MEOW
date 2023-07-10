@@ -60,8 +60,7 @@ async def extract_event_pdf_files(event: dict) -> list:
         latest_revision = contribution.get('latest_revision', None)
 
         revisions_files = latest_revision.get('files', []) \
-            if latest_revision is not None \
-            else []
+            if latest_revision is not None else []
 
         event_files.extend(revisions_files)
 
@@ -150,7 +149,7 @@ def _read_report_thread(input: str, keywords: bool):
         return report
 
     except BaseException as be:
-        logger.error('Error draw frame')
+        logger.error(be, exc_info=True)
         raise be
     finally:
         if doc is not None:
@@ -262,7 +261,7 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
         doc.save(filename=output, garbage=1, clean=1, deflate=1)
 
     except BaseException as be:
-        logger.error('', exc_info=True)
+        logger.error(be, exc_info=True)
         raise be
     finally:
         if doc is not None:
@@ -316,15 +315,12 @@ async def pdf_separate(input: str, output: str, first: int, last: int) -> int:
 
     res = await run_cmd(cmd)
 
-    if res is not None and res.returncode == 0:
+    # if res:
+    #     print(res.returncode)
+    #     print(res.stdout.decode())
+    #     print(res.stderr.decode())
 
-        # print(res.returncode)
-        # print(res.stdout.decode())
-        # print(res.stderr.decode())
-
-        return res.returncode
-
-    return 1
+    return 0 if res and res.returncode == 0 else 1
 
 
 async def pdf_unite(write_path: str, files: list[str], first: bool) -> int:
@@ -348,19 +344,16 @@ async def pdf_unite_qpdf(write_path: str, files: list[str], first: bool) -> int:
 
     cmd = ['qpdf', '--empty', '--pages'] + items + ['--', write_path]
 
-    print(" ".join(cmd))
+    # print(" ".join(cmd))
 
     res = await run_cmd(cmd)
 
-    if res is not None and res.returncode == 0:
+    # if res:
+    #     print(res.returncode)
+    #     print(res.stdout.decode())
+    #     print(res.stderr.decode())
 
-        # print(res.returncode)
-        # print(res.stdout.decode())
-        # print(res.stderr.decode())
-
-        return res.returncode
-
-    return 1
+    return 0 if res and res.returncode == 0 else 1
 
 
 async def pdf_unite_mutool(write_path: str, files: list[str], first: bool) -> int:
@@ -377,19 +370,16 @@ async def pdf_unite_mutool(write_path: str, files: list[str], first: bool) -> in
 
     cmd = ['bin/mutool', 'merge', '-o', write_path] + items
 
-    print(" ".join(cmd))
+    # print(" ".join(cmd))
 
     res = await run_cmd(cmd)
 
-    if res is not None and res.returncode == 0:
+    # if res:
+    #     print(res.returncode)
+    #     print(res.stdout.decode())
+    #     print(res.stderr.decode())
 
-        # print(res.returncode)
-        # print(res.stdout.decode())
-        # print(res.stderr.decode())
-
-        return res.returncode
-
-    return 1
+    return 0 if res and res.returncode == 0 else 1
 
 
 async def concat_pdf(write_path: str, files: list[str]) -> int:
@@ -402,15 +392,12 @@ async def concat_pdf(write_path: str, files: list[str]) -> int:
 
     res = await run_cmd(cmd)
 
-    if res is not None and res.returncode == 0:
+    # if res:
+    #     print(res.returncode)
+    #     print(res.stdout.decode())
+    #     print(res.stderr.decode())
 
-        # print(res.returncode)
-        # print(res.stdout.decode())
-        # print(res.stderr.decode())
-
-        return res.returncode
-
-    return 1
+    return 0 if res and res.returncode == 0 else 1
 
 
 async def brief_links(write_path: str, files: list[str]) -> int:
@@ -423,15 +410,12 @@ async def brief_links(write_path: str, files: list[str]) -> int:
 
     res = await run_cmd(cmd)
 
-    if res is not None and res.returncode == 0:
+    # if res:
+    #     print(res.returncode)
+    #     print(res.stdout.decode())
+    #     print(res.stderr.decode())
 
-        # print(res.returncode)
-        # print(res.stdout.decode())
-        # print(res.stderr.decode())
-
-        return res.returncode
-
-    return 1
+    return 0 if res and res.returncode == 0 else 1
 
 
 async def vol_toc(write_path: str, conf_path: str) -> int:
@@ -448,12 +432,9 @@ async def vol_toc(write_path: str, conf_path: str) -> int:
 
     res = await run_cmd(cmd)
 
-    if res is not None and res.returncode == 0:
+    # if res:
+    #     print(res.returncode)
+    #     print(res.stdout.decode())
+    #     print(res.stderr.decode())
 
-        # print(res.returncode)
-        print(res.stdout.decode())
-        print(res.stderr.decode())
-
-        return res.returncode
-
-    return 1
+    return 0 if res and res.returncode == 0 else 1

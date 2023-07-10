@@ -11,6 +11,6 @@ def exception_to_string(ex: Optional[BaseException]) -> dict | None:
 
     return dict(
         message='{}'.format(ex),
-        class_name='{}'.format(ex.__class__),
+        class_name=type(ex).__name__,
         stack_trace=''.join(pretty)
     )

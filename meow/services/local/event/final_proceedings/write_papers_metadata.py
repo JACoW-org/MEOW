@@ -60,7 +60,11 @@ async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict
 
         try:
             async with receive_stream:
-                async for _ in receive_stream:
+                async for result in receive_stream:
+
+                    if not result:
+                        raise BaseException('Error writing papers metadata')
+
                     processed_files = processed_files + 1
 
                     # logger.info(result)
@@ -72,8 +76,9 @@ async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict
             logger.debug(crs, exc_info=False)
         except EndOfStream as eos:
             logger.debug(eos, exc_info=False)
-        except Exception as ex:
-            logger.error(ex, exc_info=True)
+        except BaseException as be:
+            logger.error(be, exc_info=True)
+            raise BaseException('Error writing papers metadata')
 
     return proceedings_data
 
@@ -86,37 +91,46 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
 
     async with capacity_limiter:
 
-        contribution = current_paper.contribution
-        session = sessions.get(contribution.session_code)
-        current_file = current_paper.paper
+        try:
 
-        original_pdf_name = f"{current_file.filename}"
-        original_pdf_file = Path(pdf_cache_dir, original_pdf_name)
+            contribution = current_paper.contribution
+            session = sessions.get(contribution.session_code)
+            current_file = current_paper.paper
 
-        jacow_pdf_name = f"{current_file.filename}_jacow"
-        jacow_pdf_file = Path(pdf_cache_dir, jacow_pdf_name)
+            original_pdf_name = f"{current_file.filename}"
+            original_pdf_file = Path(pdf_cache_dir, original_pdf_name)
 
-        if await jacow_pdf_file.exists():
-            await jacow_pdf_file.unlink()
+            jacow_pdf_name = f"{current_file.filename}_jacow"
+            jacow_pdf_file = Path(pdf_cache_dir, jacow_pdf_name)
 
-        # logger.debug(f"{pdf_file} {pdf_name}")
+            if await jacow_pdf_file.exists():
+                await jacow_pdf_file.unlink()
 
-        header_data: Optional[dict] = get_header_data(contribution)
-        footer_data: Optional[dict] = get_footer_data(contribution, session)
-        metadata: Optional[dict] = get_metadata(current_dt_pdf, contribution)
+            # logger.debug(f"{pdf_file} {pdf_name}")
 
-        pre_print: str = settings.get('pre_print', 'This is a preprint') \
-            if contribution.peer_reviewing_accepted else ''
+            header_data: Optional[dict] = get_header_data(contribution)
+            footer_data: Optional[dict] = get_footer_data(
+                contribution, session)
+            metadata: Optional[dict] = get_metadata(
+                current_dt_pdf, contribution)
 
-        await draw_frame_anyio(str(original_pdf_file), str(jacow_pdf_file),
-                               contribution.page, pre_print, header_data,
-                               footer_data, metadata)
+            pre_print: str = settings.get('pre_print', 'This is a preprint') \
+                if contribution.peer_reviewing_accepted else ''
 
-        await stream.send({
-            "index": current_index,
-            "total": total_files,
-            "file": current_file
-        })
+            await draw_frame_anyio(str(original_pdf_file), str(jacow_pdf_file),
+                                   contribution.page, pre_print, header_data,
+                                   footer_data, metadata)
+
+            return await stream.send({
+                "index": current_index,
+                "total": total_files,
+                "file": current_file
+            })
+
+        except BaseException as be:
+            logger.error(be, exc_info=True)
+
+        return await stream.send(None)
 
 
 def get_metadata(current_dt_pdf, contribution) -> dict[str, Any] | None:

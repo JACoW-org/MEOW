@@ -15,7 +15,8 @@ from meow.models.local.event.final_proceedings.session_model import SessionData
 from meow.services.local.event.final_proceedings.hugo_plugin.hugo_jinja_template_renderer import JinjaTemplateRenderer
 from meow.tasks.local.doi.models import ContributionDOI
 
-from meow.services.local.event.final_proceedings.abstract_plugin.abstract_final_proceedings_plugin import AbstractFinalProceedingsPlugin
+from meow.services.local.event.final_proceedings.abstract_plugin.abstract_final_proceedings_plugin import (
+    AbstractFinalProceedingsPlugin)
 from meow.utils.filesystem import cptree, rmtree
 
 
@@ -25,7 +26,8 @@ logger = lg.getLogger(__name__)
 class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
     """ HugoFinalProceedingsPlugin """
 
-    def __init__(self, proceedings_data: ProceedingsData, cookies: dict, settings: dict, config: FinalProceedingsConfig) -> None:
+    def __init__(self, proceedings_data: ProceedingsData, cookies: dict, settings: dict,
+                 config: FinalProceedingsConfig) -> None:
         """ """
 
         self.cookies = cookies
@@ -320,7 +322,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         authorsGroups: dict[str, list[dict]] = {}
 
         for author in self.authors:
-            if not author.affiliation in authorsGroups:
+            if not (author.affiliation in authorsGroups):
                 authorsGroups[author.affiliation] = []
             authorsGroups[author.affiliation].append(dict(
                 code=author.code,
@@ -331,7 +333,8 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
             await self.template.render_institute_partial(self.institutes, authorsGroups)
         )
 
-        async def _render_contribution(contribution_capacity_limiter: CapacityLimiter, institute: AffiliationData, author: PersonData) -> None:
+        async def _render_contribution(contribution_capacity_limiter: CapacityLimiter,
+                                       institute: AffiliationData, author: PersonData) -> None:
             async with contribution_capacity_limiter:
 
                 contributions = [
@@ -408,7 +411,8 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                     await self.template.render_doi_per_institute_page(self.event, institute, contribution)
                 )
 
-        async def _render_doi_per_institute(doi_per_institute_capacity_limiter: CapacityLimiter, institute: AffiliationData) -> None:
+        async def _render_doi_per_institute(doi_per_institute_capacity_limiter: CapacityLimiter,
+                                            institute: AffiliationData) -> None:
             async with doi_per_institute_capacity_limiter:
 
                 contributions = [
@@ -469,7 +473,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
     async def render_doi_contributions(self) -> None:
         """"""
 
-        logger.info(f"render_doi_contributions")
+        logger.info("render_doi_contributions")
 
         await Path(self.src_doi_dir, '_index.html').write_text(
             await self.template.render_doi_list(self.event, self.contributions)
@@ -495,14 +499,15 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
     async def render_references(self) -> None:
         """"""
 
-        logger.info(f"render_references")
+        logger.info("render_references")
 
         async def _render_reference_contribution(capacity_limiter: CapacityLimiter, contribution_code: str,
                                                  contribution_title: str, reference_type: str,
                                                  reference: str) -> None:
             async with capacity_limiter:
                 await Path(self.src_ref_dir, f"{contribution_code.lower()}-{reference_type}.html").write_text(
-                    await self.template.render_reference(contribution_code, contribution_title, reference_type, reference)
+                    await self.template.render_reference(contribution_code, contribution_title,
+                                                         reference_type, reference)
                 )
 
         capacity_limiter = CapacityLimiter(4)
@@ -552,3 +557,4 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
         except BaseException:
             logger.error("hugo:generate", exc_info=True)
+            raise BaseException('Static Site Generator (hugo) in error')

@@ -13,7 +13,6 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import Pro
 from meow.services.local.event.event_pdf_utils import brief_links, vol_toc, pdf_separate, pdf_unite, write_metadata
 from meow.utils.list import split_list
 from meow.utils.serialization import json_encode
-from meow.models.local.event.final_proceedings.track_model import TrackGroupData
 
 
 logger = lg.getLogger(__name__)
@@ -35,7 +34,8 @@ async def concat_contribution_papers(proceedings_data: ProceedingsData, cookies:
 
     if len(files_data) > 0:
 
-        toc_grouping = settings.get('toc_grouping', ['contribution', 'session'])
+        toc_grouping = settings.get(
+            'toc_grouping', ['contribution', 'session'])
 
         # await first_pdf_task(proceedings_data, files_data, cache_dir)
         await brief_pdf_task(proceedings_data, files_data, cache_dir,
@@ -110,8 +110,11 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
         trapped=None,
     )
 
-    await pdf_unite(str(vol_pdf_path), pdf_parts, False)
-    await write_metadata(metadata, str(vol_pdf_path))
+    if await pdf_unite(str(vol_pdf_path), pdf_parts, False) != 0:
+        raise BaseException('Error in Proceedings Volume generation')
+
+    if await write_metadata(metadata, str(vol_pdf_path)) != 0:
+        raise BaseException('Error in Proceedings Volume generation')
 
     proceedings_data.proceedings_volume_size = (await vol_pdf_path.stat()).st_size
 
@@ -168,7 +171,8 @@ async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, vol_pre_pdf_pa
             if contribution.session_code in sessions:
                 if len(sessions[contribution.session_code]['contributions']) == 0:
                     sessions[contribution.session_code]['page'] = contribution.page
-                sessions[contribution.session_code]['contributions'].append(contribution)
+                sessions[contribution.session_code]['contributions'].append(
+                    contribution)
 
         toc_items = list()
         toc_settings = dict(
@@ -178,14 +182,16 @@ async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, vol_pre_pdf_pa
 
         for session_code, session in sessions.items():
             if toc_settings.get('include_sessions') and session.get('page', False):
-                toc_items.append({'type': 'session', 'code': session_code, 'title': session.get('session_data').title, 'page': session.get('page')})
+                toc_items.append({'type': 'session', 'code': session_code, 'title': session.get(
+                    'session_data').title, 'page': session.get('page')})
 
             if toc_settings.get('include_contributions'):
                 for contribution in session.get('contributions'):
-                    toc_items.append({'type': 'contribution', 'code': contribution.code, 'title': contribution.title, 'page': contribution.page})
- 
+                    toc_items.append({'type': 'contribution', 'code': contribution.code,
+                                     'title': contribution.title, 'page': contribution.page})
+
         logger.info(toc_items)
-        
+
         toc_data: dict = {
             "toc_title": "Table of Contents",
             "pre_pdf": str(vol_pre_pdf_path) if vol_pre_pdf_path else None,
@@ -204,7 +210,8 @@ async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, vol_pre_pdf_pa
 
         await vol_toc_conf_path.write_text(json_encode(toc_data).decode('utf-8'))
 
-        await vol_toc(str(vol_toc_pdf_path), str(vol_toc_conf_path))
+        if await vol_toc(str(vol_toc_pdf_path), str(vol_toc_conf_path)) != 0:
+            raise BaseException('Error in TOC generation')
 
     except Exception as e:
         logger.error(e, exc_info=True)
@@ -284,9 +291,14 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
         trapped=None,
     )
 
-    await pdf_unite(str(brief_pdf_path), pdf_parts, False)
-    await write_metadata(metadata, str(brief_pdf_path))
-    await brief_links(str(brief_pdf_path), brief_pdf_links)
+    if await pdf_unite(str(brief_pdf_path), pdf_parts, False) != 0:
+        raise BaseException('Error in Proceedings at a Glance generation')
+
+    if await write_metadata(metadata, str(brief_pdf_path)) != 0:
+        raise BaseException('Error in Proceedings at a Glance generation')
+
+    if await brief_links(str(brief_pdf_path), brief_pdf_links) != 0:
+        raise BaseException('Error in Proceedings at a Glance generation')
 
     proceedings_data.proceedings_brief_size = (await brief_pdf_path.stat()).st_size
 
@@ -295,5 +307,6 @@ async def concat_chunks(write_path: str, pdf_files: list[str], results: list[str
                         limiter: CapacityLimiter) -> None:
     async with limiter:
         results.append(write_path)
-        await pdf_unite(write_path, pdf_files, first)
+        if await pdf_unite(write_path, pdf_files, first) != 0:
+            raise BaseException('Error in Proceedings Volume generation')
         # await concat_pdf(write_path, pdf_files, None)
