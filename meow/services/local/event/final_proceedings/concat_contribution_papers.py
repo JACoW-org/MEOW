@@ -148,7 +148,7 @@ async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, vol_pre_pdf_pa
     vol_toc_pdf_path: Path | None = None
     vol_toc_conf_path: Path | None = None
 
-    logger.info(toc_grouping)
+    # logger.info(toc_grouping)
 
     try:
         vol_toc_name = f'{proceedings_data.event.id}_proceedings_toc'
