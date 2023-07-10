@@ -158,13 +158,13 @@ async def create_abstract_booklet_from_event(event: dict, sessions: list, contri
                         contribution_data_coauthors.append(coauthor_data)
 
                 contributions_data.append(contribution_data)
-        
+
         contributions_data.sort(key=lambda x: (
             x.get('code', '')
         ))
 
         sessions_data.append(session_slot_data)
-    
+
     sessions_data.sort(key=lambda x: (
         format_datetime_sec(x.get('start', '')),
         x.get('code', '')

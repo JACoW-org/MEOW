@@ -237,7 +237,8 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict,
 
         # Bloccante
 
-        [final_proceedings, slides_data] = await download_contributions_slides(final_proceedings, cookies, settings)
+        [final_proceedings, slides_data] = await download_contributions_slides(final_proceedings,
+                                                                               cookies, settings)
 
         # log number of files
         yield dict(type='log', value=ClientLog(
@@ -307,7 +308,8 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict,
 
     # Bloccante
 
-    await generate_contribution_references(final_proceedings, cookies, settings, config, filter_contributions_pubblicated)
+    await generate_contribution_references(final_proceedings, cookies, settings, config,
+                                           filter_contributions_pubblicated)
 
     """ """
 
@@ -320,7 +322,8 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict,
 
     # Bloccante
 
-    await generate_contribution_doi(final_proceedings, cookies, settings, config, filter_contributions_pubblicated)
+    await generate_contribution_doi(final_proceedings, cookies, settings, config,
+                                    filter_contributions_pubblicated)
 
     """ """
 
@@ -438,7 +441,7 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict,
         text='Link Static site'
     ))
 
-    await link_static_site(final_proceedings, cookies, settings)
+    await link_static_site(final_proceedings, cookies, settings, config)
 
     """ """
 

@@ -37,7 +37,7 @@ async def delete_contribution_doi(proceedings_data: ProceedingsData, cookies: di
 
     total_contributions: int = len(contributions_data)
 
-    logger.info(f'delete_contribution_doi - '
+    logger.info('delete_contribution_doi - '
                 + 'contributions: {total_contributions}')
 
     send_stream, receive_stream = create_memory_object_stream()

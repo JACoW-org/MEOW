@@ -37,7 +37,7 @@ async def draft_contribution_doi(proceedings_data: ProceedingsData, cookies: dic
 
     total_contributions: int = len(contributions_data)
 
-    logger.info(f'draft_contribution_doi - ' +
+    logger.info('draft_contribution_doi - ' +
                 f'contributions: {total_contributions}')
 
     send_stream, receive_stream = create_memory_object_stream()

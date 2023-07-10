@@ -7,6 +7,8 @@ from starlette.routing import Route
 
 from meow.services.local.credential.find_credential import (
     find_credential_by_secret)
+from meow.services.local.event.event_api_info import (
+    event_api_info)
 
 logger = lg.getLogger(__name__)
 
@@ -40,13 +42,7 @@ async def api_info_endpoint(req: Request) -> JSONResponse:
     if credential is not None:
         return JSONResponse({
             'method': 'info',
-            'params': {
-                'event_id': event_id,
-                'pre_press': True,
-                'datacite_json': True,
-                'final_proceedings': True,
-                'proceedings_archive': True,
-            }
+            'params': await event_api_info(event_id)
         })
 
     raise HTTPException(status_code=401, detail="Invalid API Key")

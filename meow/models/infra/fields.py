@@ -16,7 +16,7 @@ class IndexField(ABC):
         self.field_name: str = field_name
         self.is_sortable: bool = is_sortable
 
-    def get_redis_field(self) -> Field:
+    def get_redis_field(self) -> Field | None:
         pass
 
 

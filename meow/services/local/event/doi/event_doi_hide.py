@@ -38,7 +38,7 @@ async def hide_contribution_doi(proceedings_data: ProceedingsData, cookies: dict
 
     total_contributions: int = len(contributions_data)
 
-    logger.info(f'hide_contribution_doi - ' +
+    logger.info('hide_contribution_doi - ' +
                 f'contributions: {total_contributions}')
 
     send_stream, receive_stream = create_memory_object_stream()

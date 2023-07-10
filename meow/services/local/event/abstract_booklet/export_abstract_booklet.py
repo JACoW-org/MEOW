@@ -307,13 +307,15 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
 
     ab_session_h1 = settings.get('ab_session_h1', '')  # {code} - {title}
     ab_session_h2 = settings.get('ab_session_h2', '')  # {start} / {end}
-    
+
     ab_session_h1 = ab_session_h1 if ab_session_h1.strip() else ''
     ab_session_h2 = ab_session_h2 if ab_session_h2.strip() else ''
 
-    ab_contribution_h1 = settings.get('ab_contribution_h1', '')  # | {code} | / | {start} |
-    ab_contribution_h2 = settings.get('ab_contribution_h2', '')  # {code} / {start}
-    
+    ab_contribution_h1 = settings.get(
+        'ab_contribution_h1', '')  # | {code} | / | {start} |
+    ab_contribution_h2 = settings.get(
+        'ab_contribution_h2', '')  # {code} / {start}
+
     ab_contribution_h1 = ab_contribution_h1 if ab_contribution_h1.strip() else ''
     ab_contribution_h2 = ab_contribution_h2 if ab_contribution_h2.strip() else ''
 
@@ -382,7 +384,7 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
         odt.text.addElement(P())  # type: ignore
 
         for contribution in session.get('contributions', []):
-           
+
             # print("")
             # print(">>> " + contribution.get('code'), ' - ', contribution.get('title'), ' - ',
             #        contribution.get('start'), ' - ', contribution.get('end'))
@@ -395,38 +397,34 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
 
             contribution_start = format_datetime_time(
                 contribution.get('start'))
-            
+
             contribution_end = format_datetime_time(
                 contribution.get('end'))
-            
-            
+
             ab_contribution_header = ab_contribution_h1 if not \
-                    session.get('is_poster') else ab_contribution_h2
-            
-            
+                session.get('is_poster') else ab_contribution_h2
+
             if ab_contribution_header and ab_contribution_header.startswith('|') \
-                and ab_contribution_header.endswith('|'):  # | {code} | / | {start} |
-                    
-                   
+                    and ab_contribution_header.endswith('|'):  # | {code} | / | {start} |
+
                 ab_contribution_cols: list[str] = [
-                    c 
+                    c
                     for c in f" {ab_contribution_header} ".split(' | ')
                     if len(c) > 0
                 ]
-                
-                print(ab_contribution_cols)
 
+                print(ab_contribution_cols)
 
                 contribution_dt = Table(
                     stylename=styles.get('tbl'),
                     name=f"AB_Contribution_Code_{contribution_code}")
 
                 tcs = TableColumns()
-                
+
                 # tcs.addElement(TableColumn())
                 # tcs.addElement(TableColumn())
                 # tcs.addElement(TableColumn())
-                
+
                 for _ in ab_contribution_cols:
                     tcs.addElement(TableColumn())
 
@@ -435,72 +433,69 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
                 trs = TableRows()
 
                 tr = TableRow()
-                
-                
-                
+
                 for ab_contribution_idx, ab_contribution_col in enumerate(ab_contribution_cols):
-                    
+
                     contribution_col_val = ab_contribution_col \
                         .replace("{code}", contribution_code) \
                         .replace("{title}", contribution_title) \
                         .replace("{start}", contribution_start) \
                         .replace("{end}", contribution_end)
-                    
+
                     tc = TableCell(valuetype="string", value=contribution_code)
                     contribution_col1 = H(outlinelevel=2, stylename=styles.get('h3')) \
                         if ab_contribution_idx == 0 else P(stylename=styles.get('h3'))
-                    contribution_col1.addElement(Span(text=contribution_col_val))
+                    contribution_col1.addElement(
+                        Span(text=contribution_col_val))
                     tc.addElement(contribution_col1)
 
                     tr.addElement(tc)
-                
-                
 
                 # tc = TableCell(valuetype="string", value=contribution_code)
                 # contribution_col1 = H(outlinelevel=2, stylename=styles.get('h3'))
                 # contribution_col1.addElement(Span(text=contribution_code + " "))
                 # tc.addElement(contribution_col1)
-                # 
+                #
                 # tr.addElement(tc)
-                # 
-                # 
-                # 
+                #
+                #
+                #
                 # tc = TableCell(valuetype="string", value=" / ")
                 # contribution_col2 = P(stylename=styles.get('h3'))
-                # contribution_col2.addText(text="/ ")                
+                # contribution_col2.addText(text="/ ")
                 # tc.addElement(contribution_col2)
-                # 
+                #
                 # tr.addElement(tc)
-                # 
-                # 
-                # 
-                # 
+                #
+                #
+                #
+                #
                 # tc = TableCell(valuetype="string", value=contribution_start)
                 # contribution_col3 = P(stylename=styles.get('h3'))
                 # contribution_col3.addText(text=contribution_start)
                 # tc.addElement(contribution_col3)
-                # 
+                #
                 # tr.addElement(tc)
-                
+
                 trs.addElement(tr)
                 contribution_dt.addElement(trs)
 
                 odt.text.addElement(  # type: ignore
                     contribution_dt
                 )
-            
+
             else:
-                
+
                 contribution_header = ab_contribution_header \
                     .replace("{code}", contribution_code) \
                     .replace("{title}", contribution_title) \
                     .replace("{start}", contribution_start) \
                     .replace("{end}", contribution_end)
-                    
+
                 odt.text.addElement(  # type: ignore
-                    H(outlinelevel=2, stylename=styles.get('h3'), text=contribution_header)
+                    H(outlinelevel=2, stylename=styles.get(
+                        'h3'), text=contribution_header)
                 )
-                
 
             contribution_bookmark = H(
                 outlinelevel=3, stylename=styles.get('h4'))
@@ -549,37 +544,33 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
 
                 contribution_primary_authors_groups.append(
                     {'key': key, 'items': sorted_items})
-                
-            
+
             # odt.text.addElement(  # type: ignore
             #     P(stylename=styles.get('h5'), text='speakers')
             # )
-            # 
+            #
             # if len(contribution_speakers_ids) > 0:
             #     contribution_speakers_para = P(stylename=styles.get('h5'))
-            #     
+            #
             #     for index, item in enumerate(contribution.get('speakers', [])):
-            #         
+            #
             #         affiliation = f" ({item.get('affiliation')})" if item.get('affiliation') != '' else ''
-            #         
+            #
             #         speaker = f"{item.get('first')} {item.get('last')}"
-            #         
+            #
             #         text = f"{speaker}{affiliation}"
-            #         
+            #
             #         contribution_speakers_para.addElement(  # type: ignore
             #             Span(stylename=styles.get('h6'), text=text)
             #         )
-            #         
+            #
             #         contribution_speakers_para.addElement(  # type: ignore
             #             Span(text="." if index == len(contribution.get('speakers', [])) - 1 else ", ")
             #         )
-            #     
+            #
             #     odt.text.addElement(  # type: ignore
             #         contribution_speakers_para
             #     )
-            
-
-
 
             if len(contribution_primary_authors_groups) > 0:
 
@@ -622,8 +613,6 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
                     contribution_primary_authors_para
                 )
 
-
-
             contribution_coauthors_dict: dict[str, list] = {}
 
             for item in contribution.get('coauthors', []):
@@ -640,7 +629,6 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
                 contribution_coauthors_groups.append(
                     {'key': key, 'items': sorted(
                         items, key=itemgetter('first', 'last'))})
-
 
             if len(contribution_coauthors_groups) > 0:
 
@@ -679,10 +667,6 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
                 odt.text.addElement(  # type: ignore
                     contribution_coauthors_para
                 )
-                
-
-
-
 
             contribution_speakers_dict: dict[str, list] = {}
 
@@ -701,10 +685,9 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
                     {'key': key, 'items': sorted(
                         items, key=itemgetter('first', 'last'))})
 
-
             if len(contribution_speakers_groups) > 0 and \
-                len(contribution_primary_authors_groups) == 0 and \
-                len(contribution_coauthors_groups) == 0:
+                    len(contribution_primary_authors_groups) == 0 and \
+                    len(contribution_coauthors_groups) == 0:
 
                 contribution_speakers_para = P(stylename=styles.get('h7'))
 
@@ -740,12 +723,6 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
                 odt.text.addElement(  # type: ignore
                     contribution_speakers_para
                 )
-                
-                
-                                
-                
-            
-
 
             # Black line
             odt.text.addElement(P())  # type: ignore

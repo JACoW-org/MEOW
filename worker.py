@@ -29,6 +29,10 @@ async def app_wrap(scope: CancelScope):
 async def app_pre():
 
     # from anyio import to_thread, to_process
+    #
+    # logger.info(f'thread limit {to_thread.current_default_thread_limiter().total_tokens}')
+    # logger.info(f'process limit {to_process.current_default_process_limiter().total_tokens}')
+    #
     # to_thread.current_default_thread_limiter().total_tokens = 8
     # to_process.current_default_process_limiter().total_tokens = 8
 

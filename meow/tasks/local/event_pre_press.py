@@ -20,16 +20,17 @@ class EventPrePressTask(AbstractTask):
         indico_session: str = cookies.get("indico_session_http", None)
         cookies["indico_session_http"] = indico_session
         cookies["indico_session"] = indico_session
-        
+
         config = FinalProceedingsConfig(
             strict_pdf_check=False,
             generate_doi_payload=False,
             include_event_slides=False,
             generate_external_doi_url=False,
             include_only_qa_green_contributions=False,
-            absolute_pdf_link=False
+            absolute_pdf_link=False,
+            static_site_type='prepress'
         )
-        
+
         async for r in event_final_proceedings(event, cookies, settings, config):
             self.assert_is_running()
             yield r

@@ -30,11 +30,11 @@ async def download_contributions(event_url: str, session_id: int, cookies: dict,
                                  contributions: list, limiter: CapacityLimiter) -> None:
     async with limiter:
 
-        download_url = f"{event_url}manage/purr/final-proceedings-contributions-data/{session_id}"
+        url = f"{event_url}manage/purr/final-proceedings-contributions-data/{session_id}"
 
-        logger.info(download_url)
+        logger.info(url)
 
-        response = await download_json(url=download_url, cookies=cookies)
+        response = await download_json(url=url, cookies=cookies)
 
         if 'error' not in response and response.get('error') is not True:
             contributions.extend(response.get('contributions'))

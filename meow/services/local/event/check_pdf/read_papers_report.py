@@ -15,7 +15,8 @@ from meow.services.local.event.event_pdf_utils import read_report_anyio
 logger = lg.getLogger(__name__)
 
 
-async def read_papers_report(proceedings_data: ProceedingsData, cookies: dict, settings: dict, callback: Callable) -> ProceedingsData:
+async def read_papers_report(proceedings_data: ProceedingsData, cookies: dict,
+                             settings: dict, callback: Callable) -> ProceedingsData:
     """ """
 
     logger.info('event_final_proceedings - read_papers_report')
@@ -121,7 +122,8 @@ def refill_contribution_report(proceedings_data: ProceedingsData, results: dict)
                     if report and 'page_count' in report:
                         current_page += report.get('page_count', 0)
 
-                # logger.info('contribution_data pages = %s - %s', contribution_data.page, contribution_data.page + result.get('report').get('page_count'))
+                # logger.info('contribution_data pages = %s - %s', contribution_data.page,
+                #   contribution_data.page + result.get('report').get('page_count'))
 
         except IndexError as e:
             logger.warning(f'No report for contribution {code}')
