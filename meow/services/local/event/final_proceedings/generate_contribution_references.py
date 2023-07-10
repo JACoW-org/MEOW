@@ -16,6 +16,7 @@ from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
 
 from meow.utils.datetime import format_datetime_dashed
+from typing import Callable
 
 
 logger = lg.getLogger(__name__)
@@ -58,7 +59,7 @@ class JinjaXMLBuilder:
 
 
 async def generate_contribution_references(proceedings_data: ProceedingsData, cookies: dict,
-                                           settings: dict, config: FinalProceedingsConfig) -> ProceedingsData:
+                                           settings: dict, config: FinalProceedingsConfig, callable: Callable) -> ProceedingsData:
     """ """
 
     logger.info('event_final_proceedings - extract_contribution_references')
@@ -66,7 +67,7 @@ async def generate_contribution_references(proceedings_data: ProceedingsData, co
     total_files: int = len(proceedings_data.contributions)
     processed_files: int = 0
 
-    xml_builder = JinjaXMLBuilder()
+    xml_builder: JinjaXMLBuilder = JinjaXMLBuilder()
 
     xslt_functions: dict[str, XSLT] = await get_xslt_functions()
 
@@ -80,7 +81,7 @@ async def generate_contribution_references(proceedings_data: ProceedingsData, co
             for contribution_data in proceedings_data.contributions:
                 tg.start_soon(reference_task, capacity_limiter, proceedings_data.event,
                               contribution_data, xml_builder, xslt_functions, settings,
-                              config, send_stream.clone())
+                              config, callable, send_stream.clone())
 
         try:
             async with receive_stream:
@@ -129,14 +130,14 @@ async def get_xslt_functions() -> dict[str, XSLT]:
 
 async def reference_task(capacity_limiter: CapacityLimiter, event: EventData,
                          contribution: ContributionData, xml_builder, xslt_functions: dict,
-                         settings: dict, config: FinalProceedingsConfig, res: MemoryObjectSendStream) -> None:
+                         settings: dict, config: FinalProceedingsConfig, callable: Callable, res: MemoryObjectSendStream) -> None:
     """ """
 
     async with capacity_limiter:
         await res.send({
             "code": contribution.code,
             "value": await build_contribution_reference(event, contribution, xml_builder,
-                                                        xslt_functions, settings, config)
+                                                        xslt_functions, settings, config, callable)
         })
 
 
@@ -148,13 +149,13 @@ async def get_xslt(xslt_path: str) -> XSLT:
 
 async def build_contribution_reference(event: EventData, contribution: ContributionData,
                                        xml_builder, xslt_functions: dict, settings: dict,
-                                       config: FinalProceedingsConfig) -> Reference | None:
+                                       config: FinalProceedingsConfig, callable: Callable) -> Reference | None:
 
     xml_val: str = ''
 
     try:
 
-        contribution_ref = await contribution_data_factory(event, contribution, settings, config)
+        contribution_ref = await contribution_data_factory(event, contribution, settings, config, callable)
 
         if contribution_ref.is_citable():
 
@@ -179,7 +180,7 @@ async def build_contribution_reference(event: EventData, contribution: Contribut
 
 
 async def contribution_data_factory(event: EventData, contribution: ContributionData, settings: dict,
-                                    config: FinalProceedingsConfig) -> ContributionRef:
+                                    config: FinalProceedingsConfig, callable: Callable) -> ContributionRef:
 
     reference_status: str = ReferenceStatus.IN_PROCEEDINGS.value if contribution.has_paper(
     ) else ReferenceStatus.UNPUBLISHED.value
@@ -189,7 +190,7 @@ async def contribution_data_factory(event: EventData, contribution: Contribution
         organization=settings.get('doi_organization', 'JACoW'),
         conference=settings.get('doi_conference', 'CONF-YY'),
         contribution=contribution.code
-    ) if contribution.page > 0 else ''
+    ) if callable(contribution) > 0 else ''
 
     isbn: str = settings.get('isbn', '978-3-95450-227-1')
     issn: str = settings.get('issn', '2673-5490')
