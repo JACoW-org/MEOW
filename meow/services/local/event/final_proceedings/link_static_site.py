@@ -2,6 +2,8 @@ import logging as lg
 
 from anyio import Path
 
+from datetime import datetime
+
 from meow.models.local.event.final_proceedings.proceedings_data_model import FinalProceedingsConfig, ProceedingsData
 from meow.utils.filesystem import rmtree, move
 
@@ -32,6 +34,12 @@ async def link_static_site(proceedings_data: ProceedingsData, cookies: dict,
     await move(str(static_site_path), str(site_preview_path))
     await rmtree(str(static_site_src))
 
-    await Path(site_preview_path, config.static_site_type).write_text('')
+    github_url = 'https://github.com/JACoW-org/CAT'
+    timestamp = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+
+    # """ final proceedings created by CAT <github URL> on <timestamp> """
+
+    await Path(site_preview_path, config.static_site_type).write_text(
+        f'final proceedings created by CAT <{github_url}> on <{timestamp}>')
 
     return proceedings_data
