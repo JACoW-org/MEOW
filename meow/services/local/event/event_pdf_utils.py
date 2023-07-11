@@ -100,7 +100,7 @@ def _read_report_thread(input: str, keywords: bool):
         fonts_report = []
         xref_list = []
 
-        stemmer = SnowballStemmer("english") if keywords else None
+        stemmer = SnowballStemmer(language="english") if keywords else None
         stem_keywords = stem_keywords_as_tree(
             KEYWORDS, stemmer) if keywords and stemmer else None
 

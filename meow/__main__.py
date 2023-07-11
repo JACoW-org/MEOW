@@ -336,10 +336,12 @@ def doc_toc(args) -> None:
 
     # track_group_indent is added just as a reference, if it's left at 0, it's not really necessary
     track_group_indent = 0
-    track_indent = track_group_indent + (2 if settings.get('include_track_group') else 0)
+    track_indent = track_group_indent + \
+        (2 if settings.get('include_track_group') else 0)
 
     session_indent = 0
-    contribution_indent = session_indent + (2 if settings.get('include_sessions') else 0)
+    contribution_indent = session_indent + \
+        (2 if settings.get('include_sessions') else 0)
 
     total_pages = math.ceil(len(items) / ITEMS_PER_PAGE)
 
@@ -367,8 +369,7 @@ def doc_toc(args) -> None:
                 toc_title_point,
                 f"{toc_title}",
                 fontname="CoBo",
-                fontsize=11
-                )
+                fontsize=11)
 
     item_index = 0
     for i, item in enumerate(items):
@@ -430,9 +431,10 @@ def doc_toc(args) -> None:
 
         elif item.get('type') == 'session':
             session_title_point = Point(PAGE_HORIZONTAL_MARGIN,
-                                    PAGE_VERTICAL_MARGIN + space)
-            
-            session_title = (' ' * session_indent) + item.get('title', '').upper()
+                                        PAGE_VERTICAL_MARGIN + space)
+
+            session_title = (' ' * session_indent) + \
+                item.get('title', '').upper()
 
             session_title = f"{session_title:.<{LINE_LENGTH}}"
 
@@ -441,8 +443,7 @@ def doc_toc(args) -> None:
                         fontname="CoBo",
                         fontsize=9
                         )
-        
-        
+
         elif item.get('type') == 'track':
             track_title_point = Point(PAGE_HORIZONTAL_MARGIN,
                                       PAGE_VERTICAL_MARGIN + space)
@@ -483,14 +484,14 @@ def doc_toc(args) -> None:
                     fontsize=9)
 
         to_page = item.get('page', 0) + start_page + total_pages - 2
-        # to_file = toc_data.get('vol_file', None)
+        to_file = toc_data.get('vol_file', None)
         link_rect = Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN
                          + space - 10, PAGE_HORIZONTAL_MARGIN +
                          RECT_WIDTH, PAGE_VERTICAL_MARGIN +
                          space + ANNOTATION_HEIGHT - 5)
 
         link: dict = {'kind': LINK_GOTOR, 'from': link_rect,
-                      "file": "", "page": to_page, "to": (0, 0)}
+                      "file": to_file, "page": to_page, "to": (0, 0)}
 
         # sys.stdout.write(f"{item.get('code')} --> {to_page}\n")
 

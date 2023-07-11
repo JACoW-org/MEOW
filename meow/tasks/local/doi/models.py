@@ -5,6 +5,7 @@ from meow.tasks.local.reference.models import Reference
 import json
 import datetime
 
+
 @dataclass
 class AuthorsGroup:
     affiliation: str = field(default='')
@@ -12,6 +13,7 @@ class AuthorsGroup:
 
     def as_dict(self) -> dict:
         return asdict(self)
+
 
 @dataclass
 class AuthorDOI:
@@ -23,6 +25,7 @@ class AuthorDOI:
     def as_dict(self) -> dict:
         return asdict(self)
 
+
 @dataclass
 class EditorDOI:
     first_name: str = field(default='')
@@ -31,9 +34,10 @@ class EditorDOI:
 
     def format(self):
         return f'{self.first_name} {self.last_name} ({self.affiliation})'
-    
+
     def as_dict(self) -> dict:
         return asdict(self)
+
 
 @dataclass
 class ContributionDOI:
@@ -47,7 +51,8 @@ class ContributionDOI:
     references: list = field(default_factory=list)
     paper_url: str = field(default='')
     slides_url: str = field(default='')
-    reference: Optional[Reference] = field(default=None)  #  BibTeX, LaTeX, Text/Word, RIS, EndNote
+    # BibTeX, LaTeX, Text/Word, RIS, EndNote
+    reference: Optional[Reference] = field(default=None)
     conference_code: str = field(default='')
     series: str = field(default='')
     venue: str = field(default='')
@@ -80,11 +85,12 @@ class ContributionDOI:
     @property
     def paper_size_mb(self) -> float:
         paper_size_mb_full = self.paper_size / (1024*1024)
-        return float('{:.2g}'.format(paper_size_mb_full)) if paper_size_mb_full < 100 else float('{:.3g}'.format(paper_size_mb_full))
+        return float('{:.2g}'.format(paper_size_mb_full)) \
+            if paper_size_mb_full < 100 else float('{:.3g}'.format(paper_size_mb_full))
 
     def as_dict(self) -> dict:
         return asdict(self)
-    
+
     def as_json(self) -> str:
 
         data = dict()
@@ -95,7 +101,7 @@ class ContributionDOI:
         data['attributes'] = self._build_doi_attributes()
 
         return json.dumps(dict(data=data))
-    
+
     def _build_doi_attributes(self) -> dict:
 
         attributes = dict()
