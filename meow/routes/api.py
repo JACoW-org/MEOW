@@ -40,9 +40,13 @@ async def api_info_endpoint(req: Request) -> JSONResponse:
     credential = await find_credential_by_secret(api_key)
 
     if credential is not None:
+
+        result = await event_api_info(event_id)
+        params = result.get('value') if result else None
+
         return JSONResponse({
             'method': 'info',
-            'params': await event_api_info(event_id)
+            'params': params
         })
 
     raise HTTPException(status_code=401, detail="Invalid API Key")
