@@ -210,7 +210,7 @@ class ContributionDOI:
             lang='en-us'
         )]
 
-        attributes['url'] = self.doi_landing_page
+        attributes['url'] = self.doi_landing_page.lower()
 
         attributes['schemaVersion'] = 'http://datacite.org/schema/kernel-4'
 
