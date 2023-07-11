@@ -21,10 +21,10 @@ class RedisLockList:
         cls.__locks.append(lock)
 
     @classmethod
-    def del_lock_to_static_list(cls, lock: Lock):
+    def del_lock_from_static_list(cls, lock: Lock):
         """ """
 
-        logger.error(f'>>>>>>>>>>> del_lock_to_static_list - {lock.name}')
+        logger.error(f'>>>>>>>>>>> del_lock_from_static_list - {lock.name}')
         cls.__locks.remove(lock)
 
     @classmethod
@@ -66,4 +66,4 @@ class RedisLock(Lock):
 
     async def __aexit__(self, exc_type, exc_value, traceback):
         await self.release()
-        RedisLockList.del_lock_to_static_list(self)
+        RedisLockList.del_lock_from_static_list(self)
