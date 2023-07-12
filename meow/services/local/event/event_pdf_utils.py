@@ -433,7 +433,7 @@ async def vol_toc_pdf(write_path: str, links_path: str, conf_path: str) -> int:
     cmd.append("-l")
     cmd.append(links_path)
 
-    print(" ".join(cmd))
+    logger.info(" ".join(cmd))
 
     res = await run_cmd(cmd)
 
@@ -458,7 +458,7 @@ async def vol_toc_links(read_path: str, write_path: str, links_path: str) -> int
     cmd.append("-l")
     cmd.append(links_path)
 
-    print(" ".join(cmd))
+    logger.info(" ".join(cmd))
 
     res = await run_cmd(cmd)
 
