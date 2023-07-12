@@ -10,7 +10,8 @@ from meow.models.local.event.final_proceedings.event_model import AttachmentData
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_proceedings_papers
 from meow.models.local.event.final_proceedings.proceedings_data_model import FinalProceedingsConfig
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
-from meow.services.local.event.event_pdf_utils import brief_links, vol_toc, pdf_separate, pdf_unite, write_metadata
+from meow.services.local.event.event_pdf_utils import (
+    brief_links, vol_toc_links, vol_toc_pdf, pdf_separate, pdf_unite, write_metadata)
 from meow.utils.list import split_list
 from meow.utils.serialization import json_encode
 
@@ -72,10 +73,12 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
 
     chunk_size = int(sqrt(len(files_data))) + 1
 
-    vol_pdf_path = Path(cache_dir, f"{event_id}_proceedings_volume.pdf")
+    vol_pdf_temp_path = Path(cache_dir, f"{event_id}_proceedings_volume_temp.pdf")
+    vol_pdf_links_path = Path(cache_dir, f"{event_id}_proceedings_volume.pdf")
 
     vol_pre_pdf_path = await get_vol_pre_pdf_path(proceedings_data, cache_dir, callback)
-    vol_toc_pdf_path = await get_vol_toc_pdf_path(proceedings_data, vol_pre_pdf_path, cache_dir, callback, toc_grouping)
+    [vol_toc_pdf_path, vol_toc_links_path] = await get_vol_toc_pdf_path(proceedings_data, vol_pre_pdf_path, 
+                                                                        cache_dir, callback, toc_grouping)
 
     vol_pdf_files = [
         str(Path(cache_dir, f"{f.filename}_jacow"))
@@ -87,7 +90,7 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
     capacity_limiter = CapacityLimiter(4)
     async with create_task_group() as tg:
         for index, vol_pdf_files_chunk in enumerate(split_list(vol_pdf_files, chunk_size)):
-            tg.start_soon(concat_chunks, f"{vol_pdf_path}." + "{:010d}".format(index),
+            tg.start_soon(concat_chunks, f"{vol_pdf_temp_path}." + "{:010d}".format(index),
                           vol_pdf_files_chunk, vol_pdf_results, False, capacity_limiter)
 
     vol_pdf_results.sort()
@@ -110,13 +113,16 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
         trapped=None,
     )
 
-    if await pdf_unite(str(vol_pdf_path), pdf_parts, False) != 0:
+    if await pdf_unite(str(vol_pdf_temp_path), pdf_parts, False) != 0:
         raise BaseException('Error in Proceedings Volume generation')
 
-    if await write_metadata(metadata, str(vol_pdf_path)) != 0:
-        raise BaseException('Error in Proceedings Volume generation')
+    if await vol_toc_links(str(vol_pdf_temp_path), str(vol_pdf_links_path), str(vol_toc_links_path)) != 0:
+        raise BaseException('Error in Proceedings Volume links')
 
-    proceedings_data.proceedings_volume_size = (await vol_pdf_path.stat()).st_size
+    if await write_metadata(metadata, str(vol_pdf_links_path)) != 0:
+        raise BaseException('Error in Proceedings Volume metadata')
+
+    proceedings_data.proceedings_volume_size = (await vol_pdf_links_path.stat()).st_size
 
 
 async def get_vol_pre_pdf_path(proceedings_data: ProceedingsData, cache_dir: Path, callback: Callable):
@@ -146,6 +152,7 @@ async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, vol_pre_pdf_pa
                                cache_dir: Path, callback: Callable, toc_grouping: list[str]):
 
     vol_toc_pdf_path: Path | None = None
+    vol_toc_links_path: Path | None = None
     vol_toc_conf_path: Path | None = None
 
     # logger.info(toc_grouping)
@@ -154,7 +161,8 @@ async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, vol_pre_pdf_pa
         vol_toc_name = f'{proceedings_data.event.id}_proceedings_toc'
 
         vol_toc_pdf_path = Path(cache_dir, f"{vol_toc_name}.pdf")
-        vol_toc_conf_path = Path(cache_dir, f"{vol_toc_name}.json")
+        vol_toc_links_path = Path(cache_dir, f"{vol_toc_name}.meta.json")
+        vol_toc_conf_path = Path(cache_dir, f"{vol_toc_name}.conf.json")
 
         sessions = dict()
 
@@ -210,7 +218,7 @@ async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, vol_pre_pdf_pa
 
         await vol_toc_conf_path.write_text(json_encode(toc_data).decode('utf-8'))
 
-        if await vol_toc(str(vol_toc_pdf_path), str(vol_toc_conf_path)) != 0:
+        if await vol_toc_pdf(str(vol_toc_pdf_path), str(vol_toc_links_path), str(vol_toc_conf_path)) != 0:
             raise BaseException('Error in TOC generation')
 
     except Exception as e:
@@ -219,7 +227,7 @@ async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, vol_pre_pdf_pa
         if vol_toc_conf_path and await vol_toc_conf_path.exists():
             await vol_toc_conf_path.unlink()
 
-    return vol_toc_pdf_path
+    return [vol_toc_pdf_path, vol_toc_links_path]
 
 
 async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileData], cache_dir: Path,

@@ -1,6 +1,5 @@
 import io
 import sys
-import math
 import json
 import pathlib
 import argparse
@@ -11,7 +10,7 @@ import tarfile
 import shutil
 import multiprocessing as mp
 
-from fitz import Document, Page, Rect, Point, LINK_GOTOR, LINK_URI
+from fitz import Document, Page, Rect, Point, LINK_GOTO, LINK_URI
 
 from fitz.utils import set_metadata, insert_link, insert_text, new_page
 
@@ -292,7 +291,7 @@ def doc_report(args) -> None:
     del doc
 
 
-def doc_toc(args) -> None:
+def doc_toc_vol(args) -> None:
 
     toc_data: dict | None = None
 
@@ -343,7 +342,9 @@ def doc_toc(args) -> None:
     contribution_indent = session_indent + \
         (2 if settings.get('include_sessions') else 0)
 
-    total_pages = math.ceil(len(items) / ITEMS_PER_PAGE)
+    # total_pages = math.ceil(len(items) / ITEMS_PER_PAGE)
+
+    json_links: list = []
 
     doc: Document = Document()
 
@@ -372,6 +373,8 @@ def doc_toc(args) -> None:
                 fontsize=11)
 
     item_index = 0
+    page_number = start_page + (page.number or 0)
+
     for i, item in enumerate(items):
 
         if i < 2:
@@ -382,6 +385,8 @@ def doc_toc(args) -> None:
         if item_index == 0:
             page = new_page(doc, width=PAGE_WIDTH, height=PAGE_HEIGHT)
 
+            page_number = start_page + (page.number or 0)
+
             annot_toc_header(
                 page=page,
                 data=event
@@ -390,7 +395,7 @@ def doc_toc(args) -> None:
             annot_toc_footer(
                 page=page,
                 data=event,
-                page_number=start_page + (page.number or 0) + 1,
+                page_number=page_number + 1,
             )
 
         space = (item_index * (LINE_SPACING + ANNOTATION_HEIGHT)) + \
@@ -483,24 +488,102 @@ def doc_toc(args) -> None:
                     fontname="CoBo",
                     fontsize=9)
 
-        to_page = item.get('page', 0) + start_page + total_pages - 2
+        # to_page = item.get('page', 0) + start_page + total_pages - 2
         to_file = toc_data.get('vol_file', None)
+        to_page = item.get('page', 0)
+
         link_rect = Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN
                          + space - 10, PAGE_HORIZONTAL_MARGIN +
                          RECT_WIDTH, PAGE_VERTICAL_MARGIN +
                          space + ANNOTATION_HEIGHT - 5)
 
-        link: dict = {'kind': LINK_GOTOR, 'from': link_rect,
-                      "file": to_file, "page": to_page, "to": (0, 0)}
+        link_rect_json = dict(
+            x0=link_rect.x0,
+            y0=link_rect.y0,
+            x1=link_rect.x1,
+            y1=link_rect.y1,
+        )
+
+        # link: dict = {'kind': LINK_GOTOR, 'from': link_rect,
+        #               "file": to_file, "page": to_page, "to": (0, 0)}
 
         # sys.stdout.write(f"{item.get('code')} --> {to_page}\n")
+
+        json_link = {'kind': LINK_GOTO, 'from_rect': link_rect_json,
+                     "from_page": page_number, "to_page": to_page,
+                     "to_file": to_file, "to_point": (0, 0),
+                     "code": item.get('title', '')}
+
+        # sys.stdout.write(f"{json.dumps(json_link)}\n")
 
         # link: dict = {'kind': LINK_URI, 'from': link_rect,
         #               'uri': f"#page={to_page}"}
 
-        insert_link(page, link, mark=True)
+        # insert_link(page, link, mark=True)
+
+        json_links.append(json_link)
 
     doc.save(args.output, garbage=1, clean=1, deflate=1)
+
+    meta = {
+        "start_page": start_page,
+        "total_pages": doc.page_count,
+        "json_links": json_links,
+    }
+
+    with open(args.links, 'w') as f:
+        f.write(json.dumps(meta))
+
+
+def doc_toc_links(args) -> None:
+
+    toc_data: dict | None = None
+
+    # print(args.config)
+
+    with open(args.links) as f:
+        contents = f.read()
+        # print(contents)
+        toc_data = json.loads(contents)
+
+    if not toc_data:
+        exit(1)
+
+    doc: Document = Document(filename=args.input)
+
+    start_page = toc_data.get('start_page', 1) - 1
+    total_pages = toc_data.get('total_pages', 0)
+    json_links = toc_data.get('json_links', [])
+
+    for json_link in json_links:
+
+        # json_link = {'kind': LINK_GOTO, 'from_rect': link_rect_json,
+        #              "from_page": page_number, "to_page": to_page,
+        #              "to_file": to_file, "to_point": (0, 0),
+        #              "code": item.get('title', '')}
+
+        # print(json_link)
+
+        link_kind = json_link.get('kind', 1)
+        link_from = json_link.get('from_rect', {})
+
+        from_page = json_link.get('from_page', 0) + start_page
+        to_page = json_link.get('to_page', 0) + start_page + total_pages
+
+        link_rect = Rect(link_from.get('x0'), link_from.get('y0'),
+                         link_from.get('x1'), link_from.get('y1'))
+
+        link: dict = {'kind': link_kind, 'from': link_rect, "page": to_page}
+
+        page = doc.load_page(from_page)
+
+        print(page, link)
+
+        insert_link(page, link, mark=True)
+
+    doc.save(filename=args.output, garbage=1, clean=1, deflate=1)
+    doc.close()
+    del doc
 
 
 def doc_metadata(args) -> None:
@@ -524,7 +607,7 @@ def doc_metadata(args) -> None:
     set_metadata(doc, meta)
 
     if args.output:
-        doc.save(filename=args.output, garbage=1, clean=1, deflate=1)
+        doc.save(filename=args.output, garbage=1, clean=1, deflate=1, linear=1)
     else:
         doc.save(filename=args.input, incremental=1, encryption=0)
 
@@ -615,16 +698,30 @@ def main():
     ps_report.set_defaults(func=doc_report)
 
     # -------------------------------------------------------------------------
-    # 'toc' command
+    # 'toc_vol' command
     # -------------------------------------------------------------------------
-    ps_toc = subps.add_parser(
-        "toc",
-        description="write TOC ti pdf",
-        epilog="specify output file",
+    ps_toc_vol = subps.add_parser(
+        "toc_vol",
+        description="write TOC to pdf",
+        epilog="specify output file, config and links",
     )
-    ps_toc.add_argument("-output", required=True, help="output filename")
-    ps_toc.add_argument("-config", required=False, help="toc config data")
-    ps_toc.set_defaults(func=doc_toc)
+    ps_toc_vol.add_argument("-output", required=True, help="output filename")
+    ps_toc_vol.add_argument("-config", required=False, help="toc config data")
+    ps_toc_vol.add_argument("-links", required=False, help="toc metadata data")
+    ps_toc_vol.set_defaults(func=doc_toc_vol)
+
+    # -------------------------------------------------------------------------
+    # 'toc_links' command
+    # -------------------------------------------------------------------------
+    ps_toc_links = subps.add_parser(
+        "toc_links",
+        description="write TOC links",
+        epilog="specify input/output files and links",
+    )
+    ps_toc_links.add_argument("-input", required=True, help="input filename")
+    ps_toc_links.add_argument("-output", required=True, help="output filename")
+    ps_toc_links.add_argument("-links", required=True, help="toc links data")
+    ps_toc_links.set_defaults(func=doc_toc_links)
 
     # -------------------------------------------------------------------------
     # 'frame' command

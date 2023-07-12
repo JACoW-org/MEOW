@@ -344,7 +344,7 @@ async def pdf_unite_qpdf(write_path: str, files: list[str], first: bool) -> int:
 
     cmd = ['qpdf', '--empty', '--pages'] + items + ['--', write_path]
 
-    # print(" ".join(cmd))
+    print(" ".join(cmd))
 
     res = await run_cmd(cmd)
 
@@ -368,9 +368,11 @@ async def pdf_unite_mutool(write_path: str, files: list[str], first: bool) -> in
         items.append(f)
         items.append('1-1' if first else '1-N')
 
-    cmd = ['bin/mutool', 'merge', '-o', write_path] + items
+    # garbage[=compact|deduplicate],compress=yes,linearize=yes,sanitize=yes
+    # '-O', 'garbage=yes,compress=yes,linearize=yes,sanitize=yes'
+    cmd = ['bin/mutool', 'merge', '-o', write_path, '-O', 'linearize=yes'] + items
 
-    # print(" ".join(cmd))
+    print(" ".join(cmd))
 
     res = await run_cmd(cmd)
 
@@ -418,9 +420,9 @@ async def brief_links(write_path: str, files: list[str]) -> int:
     return 0 if res and res.returncode == 0 else 1
 
 
-async def vol_toc(write_path: str, conf_path: str) -> int:
+async def vol_toc_pdf(write_path: str, links_path: str, conf_path: str) -> int:
 
-    cmd = [get_python_cmd(), '-m', 'meow', 'toc']
+    cmd = [get_python_cmd(), '-m', 'meow', 'toc_vol']
 
     cmd.append("-c")
     cmd.append(conf_path)
@@ -428,7 +430,35 @@ async def vol_toc(write_path: str, conf_path: str) -> int:
     cmd.append("-o")
     cmd.append(write_path)
 
-    # print(" ".join(cmd))
+    cmd.append("-l")
+    cmd.append(links_path)
+
+    print(" ".join(cmd))
+
+    res = await run_cmd(cmd)
+
+    # if res:
+    #     print(res.returncode)
+    #     print(res.stdout.decode())
+    #     print(res.stderr.decode())
+
+    return 0 if res and res.returncode == 0 else 1
+
+
+async def vol_toc_links(read_path: str, write_path: str, links_path: str) -> int:
+
+    cmd = [get_python_cmd(), '-m', 'meow', 'toc_links']
+
+    cmd.append("-i")
+    cmd.append(read_path)
+
+    cmd.append("-o")
+    cmd.append(write_path)
+
+    cmd.append("-l")
+    cmd.append(links_path)
+
+    print(" ".join(cmd))
 
     res = await run_cmd(cmd)
 
