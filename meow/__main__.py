@@ -567,7 +567,7 @@ def doc_toc_links(args) -> None:
         link_kind = json_link.get('kind', 1)
         link_from = json_link.get('from_rect', {})
 
-        from_page = json_link.get('from_page', 0) + start_page
+        from_page = json_link.get('from_page', 0)
         to_page = json_link.get('to_page', 0) + start_page + total_pages
 
         link_rect = Rect(link_from.get('x0'), link_from.get('y0'),
@@ -581,7 +581,7 @@ def doc_toc_links(args) -> None:
 
         insert_link(page, link, mark=True)
 
-    doc.save(filename=args.output, garbage=1, clean=1, deflate=1)
+    doc.save(filename=args.output, linear=1)
     doc.close()
     del doc
 
