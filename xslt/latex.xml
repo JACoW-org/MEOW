@@ -84,8 +84,11 @@
 <xsl:value-of select="$endPage"/>
 <xsl:text>.</xsl:text>
 <xsl:if test="contribution/doi != ''">
-<xsl:text>doi:</xsl:text>
+<xsl:text>
+    \url{doi:</xsl:text>
 <xsl:value-of select="contribution/doi"/>
+<xsl:text>}
+</xsl:text>
 </xsl:if>
 </xsl:when>
 <xsl:when test="contribution/status = 'conference'">

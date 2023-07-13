@@ -51,12 +51,15 @@
             <xsl:text> </xsl:text>
             <xsl:value-of select="substring($dateString, 1, 4)"/>
         </xsl:if>
-        <xsl:text>.</xsl:text>
+        <!-- xsl:text>.</xsl:text -->
         <xsl:if test="contribution/doi != ''">
-            <span style="font-family: 'Liberation Mono';">
-                <xsl:text>doi:</xsl:text>
+            <span style="font-family: 'Liberation Mono'; font-size: 8pt;">
+                <xsl:text>. doi:</xsl:text>
                 <xsl:value-of select="contribution/doi"/>
             </span>
+        </xsl:if>
+        <xsl:if test="contribution/doi = ''">
+        <xsl:text>, unpublished.</xsl:text>
         </xsl:if>
     </p>
 </xsl:template>

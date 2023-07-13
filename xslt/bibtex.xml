@@ -84,7 +84,7 @@
 <xsl:if test="conference/isbn != ''"><xsl:text>
     isbn = {</xsl:text><xsl:value-of select="conference/isbn"/><xsl:text>},</xsl:text></xsl:if>
 <xsl:if test="contribution/doi != ''"><xsl:text>
-    doi = {</xsl:text>doi:<xsl:value-of select="contribution/doi"/><xsl:text>},</xsl:text></xsl:if>
+    doi = {</xsl:text><xsl:value-of select="contribution/doi"/><xsl:text>},</xsl:text></xsl:if>
 <xsl:text>
     url = {</xsl:text><xsl:value-of select="contribution/url"/><xsl:text>},</xsl:text>
 <xsl:if test="contribution/status != 'in_proceedings'">
