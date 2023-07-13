@@ -47,7 +47,6 @@
             </div>
 
             <div class="event-volumes">
-
                 <ul>
                     <li>
                         <a href="./pdf/{{ event.name }}_proceedings_volume.pdf"><b>{% raw %}
@@ -71,13 +70,17 @@
                     {% if not 'volumes-proceedings-cover' in attachment.filename: %}
                     <li>
                         <a href="./pdf/{{ attachment.filename }}"><b>{{ attachment.title }}</b></a>
-                        ({{ attachment.size | filesizeformat }})<div><i>{{ attachment.description }}</i></div>
+                        ({{ attachment.size | filesizeformat }})
+                        <div>
+                        {% if attachment.description: %}
+                        <i>{{ attachment.description }}</i>
+                        {% endif %}    
+                        </div>
                     </li>
                     {% endif %}
                     {% endif %}
                     {% endif %}
                     {% endfor %}
-
                 </ul>
 
             </div>
@@ -87,10 +90,13 @@
                     {% for attachment in attachments %}
                     {% if '-attachments-' in attachment.filename: %}
                     <li>
-                        <a href="./pdf/{{ attachment.filename }}">
-                            <b>{{ attachment.title }}</b>
-                        </a> ({{ attachment.size | filesizeformat }})
-                        <div><i>{{ attachment.description }}</i></div>
+                        <a href="./pdf/{{ attachment.filename }}"><b>{{ attachment.title }}</b></a>
+                        ({{ attachment.size | filesizeformat }})
+                        <div>
+                        {% if attachment.description: %}
+                        <i>{{ attachment.description }}</i>
+                        {% endif %}    
+                        </div>
                     </li>
                     {% endif %}
                     {% endfor %}
