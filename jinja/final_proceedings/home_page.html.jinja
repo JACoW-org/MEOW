@@ -50,7 +50,7 @@
 
                 <ul>
                     <li>
-                        <a href="./pdf/{{ event.id }}_proceedings_volume.pdf"><b>{% raw %}
+                        <a href="./pdf/{{ event.name }}_proceedings_volume.pdf"><b>{% raw %}
                         {{.Site.Params.name}}
                         {% endraw %} Proceedings Volume</b></a>
                         ({{ volume_size | filesizeformat }})
@@ -58,7 +58,7 @@
                     </li>
 
                     <li>
-                        <a href="./pdf/{{ event.id }}_proceedings_brief.pdf"><b>{% raw %}
+                        <a href="./pdf/{{ event.name }}_proceedings_brief.pdf"><b>{% raw %}
                             {{.Site.Params.name}}
                         {% endraw %} Proceedings at a glance</b></a>
                         ({{ brief_size | filesizeformat }})

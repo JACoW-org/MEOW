@@ -119,10 +119,10 @@ class EventData:
     isbn: str
     issn: str
     color: str
-    
+
     series: str
     series_number: str
-    
+
     doi_url: str
     doi_label: str
 
@@ -132,7 +132,7 @@ class EventData:
     @property
     def path(self) -> str:
         return slugify(self.name)
-    
+
     @property
     def doi_code(self) -> str:
         return slugify(self.name).upper()

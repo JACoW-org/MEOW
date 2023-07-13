@@ -47,16 +47,18 @@ def event_data_factory(event: Any, settings: dict) -> EventData:
     editorial = settings.get("editorial_board", "")
     isbn = settings.get("isbn", "")
     issn = settings.get("issn", "")
-       
+
     doi_proto = settings.get("doi_proto", "https")
     doi_domain = settings.get("doi_domain", "doi.org")
     doi_context = settings.get("doi_context", "10.18429")
     doi_organization = settings.get("doi_organization", "JACoW")
     doi_conference = settings.get("doi_conference", "FEL2022")
-       
-    doi_url = f'{doi_proto}://{doi_domain}/{doi_context}/{doi_organization}-{doi_conference}' # https://doi.org/10.18429/JACoW-PCaPAC2022	
-    doi_label = f'{doi_context}/{doi_organization}-{doi_conference}' # DOI:10.18429/JACoW-PCaPAC2022
-    
+
+    # https://doi.org/10.18429/JACoW-PCaPAC2022
+    doi_url = f'{doi_proto}://{doi_domain}/{doi_context}/{doi_organization}-{doi_conference}'
+    # DOI:10.18429/JACoW-PCaPAC2022
+    doi_label = f'{doi_context}/{doi_organization}-{doi_conference}'
+
     series = settings.get("series", "")
     series_number = settings.get("series_number", "")
 

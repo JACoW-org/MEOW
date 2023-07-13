@@ -40,9 +40,11 @@ async def copy_event_attachments(
 
     logger.info(f"{pdf_dest_dir} created!")
 
-    vol_name = f"{proceedings_data.event.id}_proceedings_volume.pdf"
-    vol_pdf: Path = Path(file_cache_dir, vol_name)
-    vol_dest: Path = Path(pdf_dest_dir, vol_name)
+    vol_pdf_name = f"{proceedings_data.event.id}_proceedings_volume.pdf"
+    vol_dest_name = f"{proceedings_data.event.name}_proceedings_volume.pdf"
+
+    vol_pdf: Path = Path(file_cache_dir, vol_pdf_name)
+    vol_dest: Path = Path(pdf_dest_dir, vol_dest_name)
 
     if await vol_dest.exists():
         await vol_dest.unlink()
@@ -51,9 +53,11 @@ async def copy_event_attachments(
         # await vol_dest.hardlink_to(vol_pdf)
         await move(str(vol_pdf), str(vol_dest))
 
-    brief_name = f"{proceedings_data.event.id}_proceedings_brief.pdf"
-    brief_pdf: Path = Path(file_cache_dir, brief_name)
-    brief_dest: Path = Path(pdf_dest_dir, brief_name)
+    brief_pdf_name = f"{proceedings_data.event.id}_proceedings_brief.pdf"
+    brief_dest_name = f"{proceedings_data.event.name}_proceedings_brief.pdf"
+
+    brief_pdf: Path = Path(file_cache_dir, brief_pdf_name)
+    brief_dest: Path = Path(pdf_dest_dir, brief_dest_name)
 
     if await brief_dest.exists():
         await brief_dest.unlink()
