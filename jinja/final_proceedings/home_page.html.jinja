@@ -71,11 +71,9 @@
                     <li>
                         <a href="./pdf/{{ attachment.filename }}"><b>{{ attachment.title }}</b></a>
                         ({{ attachment.size | filesizeformat }})
-                        <div>
                         {% if attachment.description: %}
-                        <i>{{ attachment.description }}</i>
+                        <div><i>{{ attachment.description }}</i></div>
                         {% endif %}    
-                        </div>
                     </li>
                     {% endif %}
                     {% endif %}
@@ -92,11 +90,9 @@
                     <li>
                         <a href="./pdf/{{ attachment.filename }}"><b>{{ attachment.title }}</b></a>
                         ({{ attachment.size | filesizeformat }})
-                        <div>
                         {% if attachment.description: %}
-                        <i>{{ attachment.description }}</i>
+                        <div><i>{{ attachment.description }}</i></div>
                         {% endif %}    
-                        </div>
                     </li>
                     {% endif %}
                     {% endfor %}
