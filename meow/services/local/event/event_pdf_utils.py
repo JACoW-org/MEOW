@@ -332,8 +332,11 @@ async def pdf_unite_qpdf(write_path: str, files: list[str], first: bool) -> int:
     # cmd = ['pdfunite'] + files + [write_path]
     # cmd = ['pdftk'] + files + ['cat', 'output'] + [write_path]
 
-    # qpdf --empty --pages var/run/18_tmp/MOA03.pdf 1-1
+    # qpdf --linearize --remove-page-labels --empty --pages var/run/18_tmp/MOA03.pdf 1-1
     # var/run/18_tmp/MOA08.pdf 1-1 -- out.pdf
+
+    # --linearize : ottimizza il pdf per la visualizzazione web
+    # --remove-page-labels: serve per le pagine logiche
 
     items: list[str] = []
 
@@ -342,7 +345,8 @@ async def pdf_unite_qpdf(write_path: str, files: list[str], first: bool) -> int:
         if first:
             items.append('1-1')
 
-    cmd = ['qpdf', '--empty', '--pages'] + items + ['--', write_path]
+    cmd = ['qpdf', '--linearize', '--remove-page-labels',
+           '--empty', '--pages'] + items + ['--', write_path]
 
     print(" ".join(cmd))
 
@@ -370,7 +374,8 @@ async def pdf_unite_mutool(write_path: str, files: list[str], first: bool) -> in
 
     # garbage[=compact|deduplicate],compress=yes,linearize=yes,sanitize=yes
     # '-O', 'garbage=yes,compress=yes,linearize=yes,sanitize=yes'
-    cmd = ['bin/mutool', 'merge', '-o', write_path, '-O', 'linearize=yes'] + items
+    cmd = ['bin/mutool', 'merge', '-o',
+           write_path, '-O', 'linearize=yes'] + items
 
     print(" ".join(cmd))
 
