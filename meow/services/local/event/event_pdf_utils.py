@@ -320,7 +320,7 @@ async def pdf_separate(input: str, output: str, first: int, last: int) -> int:
 
 
 async def pdf_unite(write_path: str, files: list[str], first: bool) -> int:
-    return await pdf_unite_qpdf(write_path, files, first)
+    return await pdf_unite_mutool(write_path, files, first)
 
 
 async def pdf_unite_qpdf(write_path: str, files: list[str], first: bool) -> int:
@@ -355,8 +355,37 @@ async def pdf_unite_qpdf(write_path: str, files: list[str], first: bool) -> int:
     return 0 if res and res.returncode == 0 else 1
 
 
+async def pdf_unite_mutool(write_path: str, files: list[str], first: bool) -> int:
+
+    # mutool merge -o out.pdf -O compress=yes ../../src/meow/var/run/18_tmp/
+    #   18_proceedings_toc.pdf 1-N ../../src/meow/var/run/18_tmp/FRAI1.pdf 1-N
+    #   ../../src/meow/var/run/18_tmp/FRAI2.pdf 1-N
+
+    items: list[str] = []
+
+    for f in files:
+        items.append(f)
+        items.append('1-1' if first else '1-N')
+
+    # garbage[=compact|deduplicate],compress=yes,linearize=yes,sanitize=yes
+    # '-O', 'garbage=yes,compress=yes,linearize=yes,sanitize=yes'
+    cmd = ['bin/mutool', 'merge', '-o',
+           write_path] + items
+
+    print(" ".join(cmd))
+
+    res = await run_cmd(cmd)
+
+    # if res:
+    #     print(res.returncode)
+    #     print(res.stdout.decode())
+    #     print(res.stderr.decode())
+
+    return 0 if res and res.returncode == 0 else 1
+
+
 async def pdf_clean(read_path: str, write_path: str) -> int:
-    return await pdf_clean_mupdf(read_path, write_path)
+    return await pdf_clean_mutool(read_path, write_path)
 
 
 async def pdf_clean_qpdf(read_path: str, write_path: str) -> int:
@@ -382,9 +411,9 @@ async def pdf_clean_qpdf(read_path: str, write_path: str) -> int:
     return 0 if res and res.returncode == 0 else 1
 
 
-async def pdf_clean_mupdf(read_path: str, write_path: str) -> int:
+async def pdf_clean_mutool(read_path: str, write_path: str) -> int:
 
-    # ./bin/mutool clean -l var/run/18_tmp/18_proceedings_volume_clean.pdf 
+    # ./bin/mutool clean -l var/run/18_tmp/18_proceedings_volume_clean.pdf
     #   var/run/18_tmp/18_proceedings_volume_mupdf.pdf 1-N
 
     # -l : ottimizza il pdf per la visualizzazione web
@@ -392,35 +421,6 @@ async def pdf_clean_mupdf(read_path: str, write_path: str) -> int:
 
     cmd = ['bin/mutool', 'clean', '-l',
            read_path, write_path, '1-N']
-
-    print(" ".join(cmd))
-
-    res = await run_cmd(cmd)
-
-    # if res:
-    #     print(res.returncode)
-    #     print(res.stdout.decode())
-    #     print(res.stderr.decode())
-
-    return 0 if res and res.returncode == 0 else 1
-
-
-async def pdf_unite_mutool(write_path: str, files: list[str], first: bool) -> int:
-
-    # mutool merge -o out.pdf -O compress=yes ../../src/meow/var/run/18_tmp/
-    #   18_proceedings_toc.pdf 1-N ../../src/meow/var/run/18_tmp/FRAI1.pdf 1-N
-    #   ../../src/meow/var/run/18_tmp/FRAI2.pdf 1-N
-
-    items: list[str] = []
-
-    for f in files:
-        items.append(f)
-        items.append('1-1' if first else '1-N')
-
-    # garbage[=compact|deduplicate],compress=yes,linearize=yes,sanitize=yes
-    # '-O', 'garbage=yes,compress=yes,linearize=yes,sanitize=yes'
-    cmd = ['bin/mutool', 'merge', '-o',
-           write_path, '-O', 'linearize=yes'] + items
 
     print(" ".join(cmd))
 
