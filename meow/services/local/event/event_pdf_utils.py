@@ -276,15 +276,11 @@ async def draw_frame_anyio(input: str, output: str, page: int,
                                     page, pre_print, header, footer, metadata)
 
 
-async def write_metadata(metadata: dict, read_path: str,
-                         write_path: str | None = None) -> int:
+async def write_metadata(read_path: str, write_path: str, metadata: dict) -> int:
     """ """
 
-    cmd = [get_python_cmd(), '-m', 'meow', 'metadata', '-input', read_path]
-
-    if write_path:
-        cmd.append("-output")
-        cmd.append(write_path)
+    cmd = [get_python_cmd(), '-m', 'meow', 'metadata', '-input',
+           read_path, "-output", write_path]
 
     for key in metadata.keys():
         val = metadata.get(key, None)
@@ -407,11 +403,11 @@ async def concat_pdf(write_path: str, files: list[str]) -> int:
     return 0 if res and res.returncode == 0 else 1
 
 
-async def brief_links(write_path: str, files: list[str]) -> int:
+async def brief_links(read_path: str, write_path: str, files: list[str]) -> int:
     """ https://github.com/pymupdf/PyMuPDF/issues/283 """
 
     cmd = [get_python_cmd(), '-m', 'meow', 'links',
-           '-input', write_path] + files
+           '-input', read_path, '-output', write_path] + files
 
     # print(" ".join(cmd))
 

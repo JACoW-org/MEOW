@@ -11,7 +11,7 @@ from meow.models.local.event.final_proceedings.proceedings_data_utils import ext
 from meow.models.local.event.final_proceedings.proceedings_data_model import FinalProceedingsConfig
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.services.local.event.event_pdf_utils import (
-    brief_links, vol_toc_links, vol_toc_pdf, pdf_separate, pdf_unite, write_metadata)
+    brief_links, vol_toc_links, vol_toc_pdf, pdf_unite, write_metadata)
 from meow.utils.list import split_list
 from meow.utils.serialization import json_encode
 
@@ -35,34 +35,17 @@ async def concat_contribution_papers(proceedings_data: ProceedingsData, cookies:
 
     if len(files_data) > 0:
 
-        toc_grouping = settings.get(
-            'toc_grouping', ['contribution', 'session'])
+        toc_grouping = settings.get('toc_grouping',
+                                    ['contribution', 'session'])
 
-        # await first_pdf_task(proceedings_data, files_data, cache_dir)
         await brief_pdf_task(proceedings_data, files_data, cache_dir,
-                             settings.get('doi_conference', 'CONF-YY'), config.absolute_pdf_link)
-        await vol_pdf_task(proceedings_data, files_data, cache_dir, callback, toc_grouping)
+                             settings.get('doi_conference', 'CONF-YY'),
+                             config.absolute_pdf_link)
+
+        await vol_pdf_task(proceedings_data, files_data, cache_dir,
+                           callback, toc_grouping)
 
     return proceedings_data
-
-
-async def first_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileData], cache_dir: Path):
-
-    async def _task(current_file: FileData, capacity_limiter: CapacityLimiter):
-        async with capacity_limiter:
-            jacow_pdf_file = Path(cache_dir, f"{current_file.filename}_jacow")
-            first_pdf_file = Path(cache_dir, f"{current_file.filename}_first")
-
-            if await first_pdf_file.exists():
-                await first_pdf_file.unlink()
-
-            tg.start_soon(pdf_separate, str(jacow_pdf_file),
-                          str(first_pdf_file), 1, 1)
-
-    capacity_limiter = CapacityLimiter(8)
-    async with create_task_group() as tg:
-        for current_file in files_data:
-            tg.start_soon(_task, current_file, capacity_limiter)
 
 
 async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileData],
@@ -73,11 +56,17 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
 
     chunk_size = int(sqrt(len(files_data))) + 1
 
-    vol_pdf_temp_path = Path(cache_dir, f"{event_id}_proceedings_volume_temp.pdf")
-    vol_pdf_links_path = Path(cache_dir, f"{event_id}_proceedings_volume.pdf")
+    vol_pdf_temp_name = f"{event_id}_proceedings_volume_temp.pdf"
+    vol_pdf_temp_path = Path(cache_dir, vol_pdf_temp_name)
+
+    vol_pdf_links_name = f"{event_id}_proceedings_volume_links.pdf"
+    vol_pdf_links_path = Path(cache_dir, vol_pdf_links_name)
+
+    vol_pdf_final_name = f"{event_id}_proceedings_volume.pdf"
+    vol_pdf_final_path = Path(cache_dir, vol_pdf_final_name)
 
     vol_pre_pdf_path = await get_vol_pre_pdf_path(proceedings_data, cache_dir, callback)
-    [vol_toc_pdf_path, vol_toc_links_path] = await get_vol_toc_pdf_path(proceedings_data, vol_pre_pdf_path, 
+    [vol_toc_pdf_path, vol_toc_links_path] = await get_vol_toc_pdf_path(proceedings_data, vol_pre_pdf_path,
                                                                         cache_dir, callback, toc_grouping)
 
     vol_pdf_files = [
@@ -119,10 +108,10 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
     if await vol_toc_links(str(vol_pdf_temp_path), str(vol_pdf_links_path), str(vol_toc_links_path)) != 0:
         raise BaseException('Error in Proceedings Volume links')
 
-    if await write_metadata(metadata, str(vol_pdf_links_path)) != 0:
+    if await write_metadata(str(vol_pdf_links_path), str(vol_pdf_final_path), metadata) != 0:
         raise BaseException('Error in Proceedings Volume metadata')
 
-    proceedings_data.proceedings_volume_size = (await vol_pdf_links_path.stat()).st_size
+    proceedings_data.proceedings_volume_size = (await vol_pdf_final_path.stat()).st_size
 
 
 async def get_vol_pre_pdf_path(proceedings_data: ProceedingsData, cache_dir: Path, callback: Callable):
@@ -256,7 +245,14 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
     except Exception as e:
         logger.error(e, exc_info=True)
 
-    brief_pdf_path = Path(cache_dir, f"{event_id}_proceedings_brief.pdf")
+    brief_pdf_temp_name = f"{event_id}_proceedings_brief_temp.pdf"
+    brief_pdf_temp_path = Path(cache_dir, brief_pdf_temp_name)
+
+    brief_pdf_links_name = f"{event_id}_proceedings_brief_links.pdf"
+    brief_pdf_links_path = Path(cache_dir, brief_pdf_links_name)
+
+    brief_pdf_final_name = f"{event_id}_proceedings_brief.pdf"
+    brief_pdf_final_path = Path(cache_dir, brief_pdf_final_name)
 
     brief_pdf_files = [
         (str(Path(cache_dir, f"{f.filename}_jacow")))
@@ -277,7 +273,7 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
 
     async with create_task_group() as tg:
         for index, vol_pdf_files_chunk in enumerate(split_list(brief_pdf_files, chunk_size)):
-            tg.start_soon(concat_chunks, f"{brief_pdf_path}." + "{:010d}".format(index),
+            tg.start_soon(concat_chunks, f"{brief_pdf_temp_path}." + "{:010d}".format(index),
                           vol_pdf_files_chunk, vol_pdf_results, True, capacity_limiter)
 
     brief_pdf_files.sort()
@@ -299,16 +295,16 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
         trapped=None,
     )
 
-    if await pdf_unite(str(brief_pdf_path), pdf_parts, False) != 0:
+    if await pdf_unite(str(brief_pdf_temp_path), pdf_parts, False) != 0:
         raise BaseException('Error in Proceedings at a Glance generation')
 
-    if await write_metadata(metadata, str(brief_pdf_path)) != 0:
+    if await brief_links(str(brief_pdf_temp_path), str(brief_pdf_links_path), brief_pdf_links) != 0:
         raise BaseException('Error in Proceedings at a Glance generation')
 
-    if await brief_links(str(brief_pdf_path), brief_pdf_links) != 0:
+    if await write_metadata(str(brief_pdf_links_path), str(brief_pdf_final_path), metadata) != 0:
         raise BaseException('Error in Proceedings at a Glance generation')
 
-    proceedings_data.proceedings_brief_size = (await brief_pdf_path.stat()).st_size
+    proceedings_data.proceedings_brief_size = (await brief_pdf_final_path.stat()).st_size
 
 
 async def concat_chunks(write_path: str, pdf_files: list[str], results: list[str], first: bool,
@@ -317,4 +313,3 @@ async def concat_chunks(write_path: str, pdf_files: list[str], results: list[str
         results.append(write_path)
         if await pdf_unite(write_path, pdf_files, first) != 0:
             raise BaseException('Error in Proceedings Volume generation')
-        # await concat_pdf(write_path, pdf_files, None)

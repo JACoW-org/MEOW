@@ -152,7 +152,7 @@ def doc_links(args) -> None:
         rect = Rect(0, 0, page.mediabox_size.x, page.mediabox_size.y)
         insert_link(page, {'kind': LINK_URI, 'from': rect, 'uri': f"{link}"})
 
-    doc.save(filename=args.input, incremental=1, encryption=0)
+    doc.save(args.output, garbage=1, clean=1, deflate=1, linear=1)
 
     doc.close()
     del doc
@@ -606,10 +606,7 @@ def doc_metadata(args) -> None:
 
     set_metadata(doc, meta)
 
-    if args.output:
-        doc.save(filename=args.output, garbage=1, clean=1, deflate=1, linear=1)
-    else:
-        doc.save(filename=args.input, incremental=1, encryption=0)
+    doc.save(filename=args.output, garbage=1, clean=1, deflate=1, linear=1)
 
     doc.close()
     del doc
@@ -749,18 +746,17 @@ def main():
         description="metadata PDF documents",
         epilog="specify each metadata field",
     )
-    ps_metadata.add_argument("-author", help="author metadata field")
-    ps_metadata.add_argument("-producer", help="producer metadata field")
-    ps_metadata.add_argument("-creator", help="creator metadata field")
-    ps_metadata.add_argument("-title", help="title metadata field")
-    ps_metadata.add_argument("-format", help="format metadata field")
-    ps_metadata.add_argument("-encryption", help="encryption metadata field")
-    ps_metadata.add_argument(
-        "-creationDate", help="creationDate metadata field")
-    ps_metadata.add_argument("-modDate", help="modDate metadata field")
-    ps_metadata.add_argument("-subject", help="subject metadata field")
-    ps_metadata.add_argument("-keywords", help="keywords metadata field")
-    ps_metadata.add_argument("-trapped", help="trapped metadata field")
+    ps_metadata.add_argument("-author", help="author field")
+    ps_metadata.add_argument("-producer", help="producer field")
+    ps_metadata.add_argument("-creator", help="creator field")
+    ps_metadata.add_argument("-title", help="title field")
+    ps_metadata.add_argument("-format", help="format field")
+    ps_metadata.add_argument("-encryption", help="encryption field")
+    ps_metadata.add_argument("-creationDate", help="creationDate field")
+    ps_metadata.add_argument("-modDate", help="modDate field")
+    ps_metadata.add_argument("-subject", help="subject field")
+    ps_metadata.add_argument("-keywords", help="keywords field")
+    ps_metadata.add_argument("-trapped", help="trapped field")
     ps_metadata.add_argument("-input", required=True, help="input filename")
     ps_metadata.add_argument("-output", help="output filename")
     ps_metadata.set_defaults(func=doc_metadata)
@@ -788,6 +784,7 @@ def main():
     )
     ps_links.add_argument("links", nargs="*", help="input links")
     ps_links.add_argument("-input", required=True, help="input filename")
+    ps_links.add_argument("-output", required=True, help="output filename")
     ps_links.set_defaults(func=doc_links)
 
     # -------------------------------------------------------------------------
