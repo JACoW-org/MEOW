@@ -11,7 +11,7 @@ from meow.models.local.event.final_proceedings.proceedings_data_utils import ext
 from meow.models.local.event.final_proceedings.proceedings_data_model import FinalProceedingsConfig
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.services.local.event.event_pdf_utils import (
-    brief_links, vol_toc_links, vol_toc_pdf, pdf_unite, write_metadata)
+    brief_links, pdf_clean, vol_toc_links, vol_toc_pdf, pdf_unite, write_metadata)
 from meow.utils.list import split_list
 from meow.utils.serialization import json_encode
 
@@ -62,6 +62,9 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
     vol_pdf_links_name = f"{event_id}_proceedings_volume_links.pdf"
     vol_pdf_links_path = Path(cache_dir, vol_pdf_links_name)
 
+    vol_pdf_clean_name = f"{event_id}_proceedings_volume_clean.pdf"
+    vol_pdf_clean_path = Path(cache_dir, vol_pdf_clean_name)
+
     vol_pdf_final_name = f"{event_id}_proceedings_volume.pdf"
     vol_pdf_final_path = Path(cache_dir, vol_pdf_final_name)
 
@@ -108,8 +111,11 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
     if await vol_toc_links(str(vol_pdf_temp_path), str(vol_pdf_links_path), str(vol_toc_links_path)) != 0:
         raise BaseException('Error in Proceedings Volume links')
 
-    if await write_metadata(str(vol_pdf_links_path), str(vol_pdf_final_path), metadata) != 0:
+    if await write_metadata(str(vol_pdf_links_path), str(vol_pdf_clean_path), metadata) != 0:
         raise BaseException('Error in Proceedings Volume metadata')
+    
+    if await pdf_clean(str(vol_pdf_clean_path), str(vol_pdf_final_path)) != 0:
+        raise BaseException('Error in Proceedings Volume clean')
 
     proceedings_data.proceedings_volume_size = (await vol_pdf_final_path.stat()).st_size
 
@@ -251,6 +257,9 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
     brief_pdf_links_name = f"{event_id}_proceedings_brief_links.pdf"
     brief_pdf_links_path = Path(cache_dir, brief_pdf_links_name)
 
+    brief_pdf_clean_name = f"{event_id}_proceedings_brief_clean.pdf"
+    brief_pdf_clean_path = Path(cache_dir, brief_pdf_clean_name)
+
     brief_pdf_final_name = f"{event_id}_proceedings_brief.pdf"
     brief_pdf_final_path = Path(cache_dir, brief_pdf_final_name)
 
@@ -299,10 +308,13 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
         raise BaseException('Error in Proceedings at a Glance generation')
 
     if await brief_links(str(brief_pdf_temp_path), str(brief_pdf_links_path), brief_pdf_links) != 0:
-        raise BaseException('Error in Proceedings at a Glance generation')
+        raise BaseException('Error in Proceedings at a Glance links')
 
-    if await write_metadata(str(brief_pdf_links_path), str(brief_pdf_final_path), metadata) != 0:
-        raise BaseException('Error in Proceedings at a Glance generation')
+    if await write_metadata(str(brief_pdf_links_path), str(brief_pdf_clean_path), metadata) != 0:
+        raise BaseException('Error in Proceedings at a Glance metadata')
+
+    if await pdf_clean(str(brief_pdf_clean_path), str(brief_pdf_final_path)) != 0:
+        raise BaseException('Error in Proceedings at a Glance clean')
 
     proceedings_data.proceedings_brief_size = (await brief_pdf_final_path.stat()).st_size
 
