@@ -82,7 +82,7 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
     capacity_limiter = CapacityLimiter(4)
     async with create_task_group() as tg:
         for index, vol_pdf_files_chunk in enumerate(split_list(vol_pdf_files, chunk_size)):
-            tg.start_soon(concat_chunks, f"{vol_pdf_temp_path}." + "{:010d}".format(index),
+            tg.start_soon(concat_chunks, f"{vol_pdf_temp_path}." + "{:04d}".format(index),
                           vol_pdf_files_chunk, vol_pdf_results, False, capacity_limiter)
 
     vol_pdf_results.sort()
@@ -105,17 +105,48 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
         trapped=None,
     )
 
-    if await pdf_unite(str(vol_pdf_temp_path), pdf_parts, False) != 0:
-        raise BaseException('Error in Proceedings Volume generation')
+    try:
+        if await pdf_unite(str(vol_pdf_temp_path), pdf_parts, False) != 0:
+            raise BaseException('Error in Proceedings Volume generation')
+    except BaseException as be:
+        logger.error(be, exc_info=True)
+        raise be
+    finally:
+        for pdf_part in [Path(p) for p in pdf_parts]:
+            if await pdf_part.exists():
+                await pdf_part.unlink()
 
-    if await vol_toc_links(str(vol_pdf_temp_path), str(vol_pdf_links_path), str(vol_toc_links_path)) != 0:
-        raise BaseException('Error in Proceedings Volume links')
+    try:
+        if await vol_toc_links(str(vol_pdf_temp_path), str(vol_pdf_links_path), str(vol_toc_links_path)) != 0:
+            raise BaseException('Error in Proceedings Volume links')
+    except BaseException as be:
+        logger.error(be, exc_info=True)
+        raise be
+    finally:
+        if await vol_pdf_temp_path.exists():
+            await vol_pdf_temp_path.unlink()
+        if vol_toc_links_path and await vol_toc_links_path.exists():
+            await vol_toc_links_path.unlink()
 
-    if await write_metadata(str(vol_pdf_links_path), str(vol_pdf_clean_path), metadata) != 0:
-        raise BaseException('Error in Proceedings Volume metadata')
-    
-    if await pdf_clean(str(vol_pdf_clean_path), str(vol_pdf_final_path)) != 0:
-        raise BaseException('Error in Proceedings Volume clean')
+    try:
+        if await write_metadata(str(vol_pdf_links_path), str(vol_pdf_clean_path), metadata) != 0:
+            raise BaseException('Error in Proceedings Volume metadata')
+    except BaseException as be:
+        logger.error(be, exc_info=True)
+        raise be
+    finally:
+        if await vol_pdf_links_path.exists():
+            await vol_pdf_links_path.unlink()
+
+    try:
+        if await pdf_clean(str(vol_pdf_clean_path), str(vol_pdf_final_path)) != 0:
+            raise BaseException('Error in Proceedings Volume clean')
+    except BaseException as be:
+        logger.error(be, exc_info=True)
+        raise be
+    finally:
+        if await vol_pdf_clean_path.exists():
+            await vol_pdf_clean_path.unlink()
 
     proceedings_data.proceedings_volume_size = (await vol_pdf_final_path.stat()).st_size
 
@@ -304,17 +335,46 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
         trapped=None,
     )
 
-    if await pdf_unite(str(brief_pdf_temp_path), pdf_parts, False) != 0:
-        raise BaseException('Error in Proceedings at a Glance generation')
+    try:
+        if await pdf_unite(str(brief_pdf_temp_path), pdf_parts, False) != 0:
+            raise BaseException('Error in Proceedings at a Glance generation')
+    except BaseException as be:
+        logger.error(be, exc_info=True)
+        raise be
+    finally:
+        for pdf_part in [Path(p) for p in pdf_parts]:
+            if await pdf_part.exists():
+                await pdf_part.unlink()
 
-    if await brief_links(str(brief_pdf_temp_path), str(brief_pdf_links_path), brief_pdf_links) != 0:
-        raise BaseException('Error in Proceedings at a Glance links')
+    try:
+        if await brief_links(str(brief_pdf_temp_path), str(brief_pdf_links_path), brief_pdf_links) != 0:
+            raise BaseException('Error in Proceedings at a Glance links')
+    except BaseException as be:
+        logger.error(be, exc_info=True)
+        raise be
+    finally:
+        if await brief_pdf_temp_path.exists():
+            await brief_pdf_temp_path.unlink()
 
-    if await write_metadata(str(brief_pdf_links_path), str(brief_pdf_clean_path), metadata) != 0:
-        raise BaseException('Error in Proceedings at a Glance metadata')
+    try:
+        if await write_metadata(str(brief_pdf_links_path), str(brief_pdf_clean_path), metadata) != 0:
+            raise BaseException('Error in Proceedings at a Glance metadata')
+    except BaseException as be:
+        logger.error(be, exc_info=True)
+        raise be
+    finally:
+        if await brief_pdf_links_path.exists():
+            await brief_pdf_links_path.unlink()
 
-    if await pdf_clean(str(brief_pdf_clean_path), str(brief_pdf_final_path)) != 0:
-        raise BaseException('Error in Proceedings at a Glance clean')
+    try:
+        if await pdf_clean(str(brief_pdf_clean_path), str(brief_pdf_final_path)) != 0:
+            raise BaseException('Error in Proceedings at a Glance clean')
+    except BaseException as be:
+        logger.error(be, exc_info=True)
+        raise be
+    finally:
+        if await brief_pdf_clean_path.exists():
+            await brief_pdf_clean_path.unlink()
 
     proceedings_data.proceedings_brief_size = (await brief_pdf_final_path.stat()).st_size
 
