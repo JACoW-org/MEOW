@@ -152,7 +152,7 @@ async def __websocket_task(ws: WebSocket, id: str) -> None:
         try:
             connected = False
             monitor_task.cancel()
-            # await kill(worker, id)
+            await kill(worker, id)
         except BaseException as e:
             logger.error("__websocket_task", e, exc_info=True)
 
