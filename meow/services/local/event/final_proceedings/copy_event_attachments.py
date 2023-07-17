@@ -41,7 +41,7 @@ async def copy_event_attachments(
     logger.info(f"{pdf_dest_dir} created!")
 
     vol_pdf_name = f"{proceedings_data.event.id}_proceedings_volume.pdf"
-    vol_dest_name = f"{proceedings_data.event.name}_proceedings_volume.pdf"
+    vol_dest_name = f"{proceedings_data.event.path}_proceedings_volume.pdf"
 
     vol_pdf: Path = Path(file_cache_dir, vol_pdf_name)
     vol_dest: Path = Path(pdf_dest_dir, vol_dest_name)
@@ -54,7 +54,7 @@ async def copy_event_attachments(
         await move(str(vol_pdf), str(vol_dest))
 
     brief_pdf_name = f"{proceedings_data.event.id}_proceedings_brief.pdf"
-    brief_dest_name = f"{proceedings_data.event.name}_proceedings_brief.pdf"
+    brief_dest_name = f"{proceedings_data.event.path}_proceedings_brief.pdf"
 
     brief_pdf: Path = Path(file_cache_dir, brief_pdf_name)
     brief_dest: Path = Path(pdf_dest_dir, brief_dest_name)
@@ -67,7 +67,7 @@ async def copy_event_attachments(
         await move(str(brief_pdf), str(brief_dest))
 
     send_stream, receive_stream = create_memory_object_stream()
-    capacity_limiter = CapacityLimiter(4)
+    capacity_limiter = CapacityLimiter(8)
 
     async with create_task_group() as tg:
         async with send_stream:

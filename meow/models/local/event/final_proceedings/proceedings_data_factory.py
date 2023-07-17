@@ -22,14 +22,15 @@ from meow.models.local.event.final_proceedings.event_model import PersonData
 logger = lg.getLogger(__name__)
 
 
-def proceedings_data_factory(event: Any, sessions: list, contributions: list, attachments: list, settings: dict) -> ProceedingsData:
+def proceedings_data_factory(event: Any, sessions: list, contributions: list,
+                             attachments: list, settings: dict) -> ProceedingsData:
 
     logger.info('proceedings_data_factory')
 
     """ build editors """
     editors_dict_list = json_decode(settings.get(
         'editorial_json', '{}'))
-    
+
     editors: list[PersonData] = [
         event_person_factory(person)
         for person in editors_dict_list
