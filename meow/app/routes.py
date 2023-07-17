@@ -2,7 +2,7 @@ import logging
 
 from starlette.requests import Request
 from starlette.responses import RedirectResponse
-from starlette.routing import Route, Mount
+from starlette.routing import Mount
 
 from meow.routes.api import routes as api_routes
 from meow.routes.sse import routes as sse_routes

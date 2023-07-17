@@ -1,5 +1,6 @@
 from starlette.middleware import Middleware
 from starlette.middleware.cors import CORSMiddleware
+from starlette.middleware.gzip import GZipMiddleware
 # from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 origins = [
@@ -18,6 +19,7 @@ middleware: list[Middleware] = [
     # Middleware(TrustedHostMiddleware,
     #            allowed_hosts=['*.jacow.org']),
     # Middleware(CORSMiddleware, allow_origins=['*'])
+    Middleware(GZipMiddleware, minimum_size=512, compresslevel=1),
     Middleware(CORSMiddleware, allow_origins=origins,
                allow_methods=methods, allow_headers=headers,
                allow_credentials=credentials)
