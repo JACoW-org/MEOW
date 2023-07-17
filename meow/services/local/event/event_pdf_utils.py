@@ -367,7 +367,31 @@ async def pdf_clean_qpdf(read_path: str, write_path: str) -> int:
     # --remove-page-labels: serve per le pagine logiche
 
     cmd = ['bin/qpdf', '--linearize',
-           '--remove-page-labels', read_path, '--', write_path]
+           '--remove-page-labels',
+           read_path, '--', write_path]
+
+    print(" ".join(cmd))
+
+    res = await run_cmd(cmd)
+
+    # if res:
+    #     print(res.returncode)
+    #     print(res.stdout.decode())
+    #     print(res.stderr.decode())
+
+    return 0 if res and res.returncode == 0 else 1
+
+
+async def pdf_clean_mupdf(read_path: str, write_path: str) -> int:
+
+    # ./bin/mutool clean -l var/run/18_tmp/18_proceedings_volume_clean.pdf 
+    #   var/run/18_tmp/18_proceedings_volume_mupdf.pdf 1-N
+
+    # -l : ottimizza il pdf per la visualizzazione web
+    # 1-N: serve per le pagine logiche
+
+    cmd = ['bin/mutool', 'clean', '-l',
+           read_path, write_path, '1-N']
 
     print(" ".join(cmd))
 
