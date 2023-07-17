@@ -122,7 +122,7 @@ def doc_join(args) -> None:
     if args.metadata:
         set_metadata(doc, json.loads(args.metadata))
 
-    doc.save(args.output, garbage=1, clean=1, deflate=1, linear=1)
+    doc.save(args.output)
 
     doc.close()
     del doc
@@ -152,7 +152,7 @@ def doc_links(args) -> None:
         rect = Rect(0, 0, page.mediabox_size.x, page.mediabox_size.y)
         insert_link(page, {'kind': LINK_URI, 'from': rect, 'uri': f"{link}"})
 
-    doc.save(args.output, garbage=1, clean=1, deflate=1, linear=1)
+    doc.save(args.output)
 
     doc.close()
     del doc
@@ -198,7 +198,7 @@ def doc_frame(args) -> None:
 
         page_number += 1
 
-    doc.save(filename=args.output, garbage=1, clean=1, deflate=1, linear=1)
+    doc.save(filename=args.output)
 
     doc.close()
     del doc
@@ -523,7 +523,7 @@ def doc_toc_vol(args) -> None:
 
         json_links.append(json_link)
 
-    doc.save(args.output, garbage=1, clean=1, deflate=1, linear=1)
+    doc.save(args.output)
 
     meta = {
         "start_page": start_page,
@@ -581,7 +581,7 @@ def doc_toc_links(args) -> None:
 
         insert_link(page, link, mark=True)
 
-    doc.save(filename=args.output, linear=1)
+    doc.save(filename=args.output)
     doc.close()
     del doc
 
@@ -606,7 +606,7 @@ def doc_metadata(args) -> None:
 
     set_metadata(doc, meta)
 
-    doc.save(filename=args.output, garbage=1, clean=1, deflate=1, linear=1)
+    doc.save(filename=args.output)
 
     doc.close()
     del doc
