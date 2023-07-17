@@ -356,6 +356,31 @@ async def pdf_unite_qpdf(write_path: str, files: list[str], first: bool) -> int:
     return 0 if res and res.returncode == 0 else 1
 
 
+async def pdf_clean(read_path: str, write_path: str) -> int:
+    return await pdf_clean_qpdf(read_path, write_path)
+
+
+async def pdf_clean_qpdf(read_path: str, write_path: str) -> int:
+
+    # qpdf --linearize --remove-page-labels in.pdf -- out.pdf
+
+    # --linearize : ottimizza il pdf per la visualizzazione web
+    # --remove-page-labels: serve per le pagine logiche
+
+    cmd = ['qpdf', '--linearize', '--remove-page-labels', read_path, '--', write_path]
+
+    print(" ".join(cmd))
+
+    res = await run_cmd(cmd)
+
+    # if res:
+    #     print(res.returncode)
+    #     print(res.stdout.decode())
+    #     print(res.stderr.decode())
+
+    return 0 if res and res.returncode == 0 else 1
+
+
 async def pdf_unite_mutool(write_path: str, files: list[str], first: bool) -> int:
 
     # mutool merge -o out.pdf -O compress=yes ../../src/meow/var/run/18_tmp/
