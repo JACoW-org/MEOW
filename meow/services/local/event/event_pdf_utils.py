@@ -341,7 +341,7 @@ async def pdf_unite_qpdf(write_path: str, files: list[str], first: bool) -> int:
         if first:
             items.append('1-1')
 
-    cmd = ['qpdf', '--linearize', '--remove-page-labels',
+    cmd = ['bin/qpdf', '--linearize', '--remove-page-labels',
            '--empty', '--pages'] + items + ['--', write_path]
 
     print(" ".join(cmd))
@@ -367,7 +367,7 @@ async def pdf_clean_qpdf(read_path: str, write_path: str) -> int:
     # --linearize : ottimizza il pdf per la visualizzazione web
     # --remove-page-labels: serve per le pagine logiche
 
-    cmd = ['qpdf', '--linearize', '--remove-page-labels', read_path, '--', write_path]
+    cmd = ['bin/qpdf', '--linearize', '--remove-page-labels', read_path, '--', write_path]
 
     print(" ".join(cmd))
 
