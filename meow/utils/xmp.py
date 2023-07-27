@@ -1,18 +1,10 @@
-from typing import IO
-from rdflib import RDF, URIRef, Literal, Namespace, Graph, plugin
-from rdflib.exceptions import Error
-from rdflib.parser import Parser
+from rdflib import RDF, URIRef, Namespace, Graph, plugin
 from rdflib.serializer import Serializer
-from rdflib.plugins.parsers.rdfxml import RDFXMLHandler
-from rdflib.plugins.serializers.rdfxml import PrettyXMLSerializer, XMLSerializer
-from xml.sax import ErrorHandler, make_parser, handler, SAXParseException
+from rdflib.plugins.serializers.rdfxml import XMLSerializer
 import io
 import re
 from datetime import date, datetime, tzinfo, timedelta
-import os.path
-import pathlib
-from urllib.parse import urlparse, unquote_plus
-import rdfhelpers
+# import rdfhelpers
 
 
 class XMPSerializer(XMLSerializer):
@@ -42,10 +34,10 @@ class XMPSerializer(XMLSerializer):
             stream.write(line)
         stream.write(self.XMP_TAG_CLOSE)
 
-    def predicate(self, pred, obj, depth=1):
-        # Replace actual container item predicates with <rdf:li> as per the XMP spec
-        super().predicate(self.RDFLI if rdfhelpers.isContainerItemPredicate(pred) else pred,
-                          obj, depth)
+    # def predicate(self, pred, obj, depth=1):
+    #     # Replace actual container item predicates with <rdf:li> as per the XMP spec
+    #     super().predicate(self.RDFLI if rdfhelpers.isContainerItemPredicate(pred) else pred,
+    #                       obj, depth)
 
 
 plugin.register("xmp", Serializer, "meow.utils.xmp", "XMPSerializer")

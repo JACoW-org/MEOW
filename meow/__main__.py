@@ -593,6 +593,8 @@ def doc_metadata(args) -> None:
         trapped=args.trapped
     )
 
+    doc.del_xml_metadata()
+
     set_metadata(doc, meta)
 
     doc.save(filename=args.output)

@@ -107,7 +107,8 @@ class RevisionData:
 
     @property
     def is_yellow(self) -> bool:
-        yellow_status = not self.is_green and self.final_state == RevisionData.FinalRevisionState.needs_submitter_confirmation
+        yellow_status = not self.is_green and self.final_state == \
+            RevisionData.FinalRevisionState.needs_submitter_confirmation
         return yellow_status
 
     @property
