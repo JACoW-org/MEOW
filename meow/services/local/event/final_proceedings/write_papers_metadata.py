@@ -6,6 +6,8 @@ from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 
 from anyio.streams.memory import MemoryObjectSendStream
+from rdflib import URIRef
+from rdflib.term import Literal
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData, ContributionPaperData
 from meow.models.local.event.final_proceedings.event_factory import event_keyword_factory
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_contributions_papers
@@ -16,6 +18,7 @@ from meow.services.local.event.event_pdf_utils import draw_frame_anyio
 
 from datetime import datetime
 from meow.utils.datetime import format_datetime_pdf
+from meow.utils.xmp import DC, PDF, XMP, XMPMetadata
 
 
 logger = lg.getLogger(__name__)
@@ -111,15 +114,15 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
             header_data: Optional[dict] = get_header_data(contribution)
             footer_data: Optional[dict] = get_footer_data(
                 contribution, session)
-            metadata: Optional[dict] = get_metadata(
-                current_dt_pdf, contribution)
+            metadata: Optional[dict] = get_metadata(contribution)
+            xml_metadata: Optional[str] = get_xml_metatdata(contribution)
 
             pre_print: str = settings.get('pre_print', 'This is a preprint') \
                 if contribution.peer_reviewing_accepted else ''
 
             await draw_frame_anyio(str(original_pdf_file), str(jacow_pdf_file),
                                    contribution.page, pre_print, header_data,
-                                   footer_data, metadata)
+                                   footer_data, metadata, xml_metadata)
 
             return await stream.send({
                 "index": current_index,
@@ -133,23 +136,50 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
         return await stream.send(None)
 
 
-def get_metadata(current_dt_pdf, contribution) -> dict[str, Any] | None:
+def get_metadata(contribution: ContributionData) -> dict[str, Any] | None:
+
+    if not contribution.doi_data:
+        return None
 
     metadata = dict(
         author=contribution.authors_meta,
         producer=contribution.producer_meta,
         creator=contribution.creator_meta,
         title=contribution.title_meta,
-        format=None,
+        format='application/pdf',
         encryption=None,
-        creationDate=current_dt_pdf,
-        modDate=current_dt_pdf,
+        creationDate=contribution.doi_data.reception_date,
+        modDate=contribution.doi_data.acceptance_date,
         subject=contribution.track_meta,
         keywords=contribution.keywords_meta,
         trapped=None,
     )
 
     return metadata
+
+
+def get_xml_metatdata(contribution: ContributionData) -> str | None:
+
+    if not contribution.doi_data:
+        return None
+
+    meta = XMPMetadata(contribution.doi_data.doi_url)
+
+    meta.set(DC.title, Literal(contribution.title_meta))
+    meta.set(DC.subject, Literal(contribution.track_meta))
+    meta.set(DC.description, Literal(contribution.doi_data.abstract))
+    meta.set(DC.language, Literal("en-us"))
+    meta.set(URIRef('http://purl.org/dc/terms/format'), Literal("application/pdf"))
+    meta.set(DC.creator, Literal(contribution.authors_meta))
+    meta.set(PDF.Keywords, Literal(contribution.keywords_meta))
+    meta.set(PDF.Producer, Literal(contribution.producer_meta))
+    meta.set(XMP.CreatorTool, Literal(contribution.creator_tool_meta))
+    meta.set(XMP.Identifier, Literal(contribution.doi_data.doi_identifier))
+    meta.set(XMP.ModifyDate, Literal(contribution.doi_data.acceptance_date))
+    meta.set(XMP.MetadataDate, Literal(contribution.doi_data.acceptance_date))
+    meta.set(XMP.CreateDate, Literal(contribution.doi_data.reception_date))
+
+    return meta.to_xml()
 
 
 def get_footer_data(contribution, session) -> dict[str, str] | None:

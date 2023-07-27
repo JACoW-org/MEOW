@@ -237,7 +237,7 @@ class ContributionData:
     is_included_in_pdf_check: bool = field(default=False)
     is_included_in_proceedings: bool = field(default=False)
     is_included_in_prepress: bool = field(default=False)
-    
+
     peer_reviewing_accepted: bool = field(default=False)
 
     reception: datetime | None = field(default=None)
@@ -283,20 +283,20 @@ class ContributionData:
         authors_groups: list[AuthorsGroup] = list()
 
         for author in self.authors_list:
-            
+
             is_new_author = True
             for group in authors_groups:
                 if author.affiliation == group.affiliation:
                     group.authors.append(author.short)
                     is_new_author = False
                     break
-                
+
             if is_new_author:
                 authors_groups.append(AuthorsGroup(
                     affiliation=author.affiliation,
                     authors=[author.short]
                 ))
-        
+
         return authors_groups
 
     @property
@@ -313,7 +313,11 @@ class ContributionData:
 
     @property
     def creator_meta(self) -> str:
-        return "cat--purr_meow"
+        return "Journals of Accelerator Conferences Website (JACoW)"
+
+    @property
+    def creator_tool_meta(self) -> str:
+        return "JACoW Conference Assembly Tool (CAT)"
 
     @property
     def producer_meta(self) -> str:

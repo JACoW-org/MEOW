@@ -339,7 +339,7 @@ def doc_toc_vol(args) -> None:
         (2 if settings.get('include_track_group') else 0)
 
     session_indent = 0
-    contribution_indent = session_indent + \
+    contribution_indent: int = session_indent + \
         (2 if settings.get('include_sessions') else 0)
 
     # total_pages = math.ceil(len(items) / ITEMS_PER_PAGE)
@@ -401,67 +401,71 @@ def doc_toc_vol(args) -> None:
         space = (item_index * (LINE_SPACING + ANNOTATION_HEIGHT)) + \
             (PAGE_VERTICAL_SPACE)
 
+        def truncate_text(initial_text: str, text_indent: int) -> str:
+            truncated_sign = ' [...]'
+            truncated_text = ''
+
+            for word in initial_text.split():
+                if len(truncated_text) + len(word) < LINE_LENGTH - text_indent - len(truncated_sign):
+                    truncated_text += ' ' + word
+                else:
+                    break
+
+            if len(truncated_text) < len(initial_text):
+                truncated_text += truncated_sign
+
+            truncated_text = ' ' * text_indent + truncated_text
+
+            return truncated_text
+
         if item.get('type') == 'contribution':
 
             contribution_text_point = Point(PAGE_HORIZONTAL_MARGIN,
                                             PAGE_VERTICAL_MARGIN + space)
 
-            contribution_code = item.get('code', '')
-            contribution_title = item.get('title', '')
+            contribution_title = item.get(
+                'code', '') + ' - ' + item.get('title', '')
 
-            contribution_text = contribution_code + ' - ' + contribution_title
-
-            words = contribution_text.split()
-
-            truncated_text = ''
-
-            for word in words:
-                if len(truncated_text) + len(word) < LINE_LENGTH - contribution_indent - 5:
-                    truncated_text += ' ' + word
-                else:
-                    break
-
-            if len(truncated_text) < len(contribution_text):
-                truncated_text += '[...]'
-
-            contribution_text = ' ' * contribution_indent + truncated_text
+            contribution_text = truncate_text(
+                contribution_title, contribution_indent)
 
             contribution_text = f"{contribution_text:.<{LINE_LENGTH}}"
 
             insert_text(page, contribution_text_point,
                         contribution_text,
                         fontname="Cour",
-                        fontsize=9
-                        )
+                        fontsize=9)
 
         elif item.get('type') == 'session':
-            session_title_point = Point(PAGE_HORIZONTAL_MARGIN,
-                                        PAGE_VERTICAL_MARGIN + space)
+            session_text_point = Point(PAGE_HORIZONTAL_MARGIN,
+                                       PAGE_VERTICAL_MARGIN + space)
 
             session_title = (' ' * session_indent) + \
                 item.get('title', '').upper()
 
-            session_title = f"{session_title:.<{LINE_LENGTH}}"
+            session_text = truncate_text(
+                session_title, session_indent)
 
-            insert_text(page, session_title_point,
-                        session_title,
+            session_text = f"{session_text:.<{LINE_LENGTH}}"
+
+            insert_text(page, session_text_point,
+                        session_text,
                         fontname="CoBo",
-                        fontsize=9
-                        )
+                        fontsize=9)
 
         elif item.get('type') == 'track':
-            track_title_point = Point(PAGE_HORIZONTAL_MARGIN,
-                                      PAGE_VERTICAL_MARGIN + space)
+            track_text_point = Point(PAGE_HORIZONTAL_MARGIN,
+                                     PAGE_VERTICAL_MARGIN + space)
 
             track_title = (' ' * track_indent) + item.get('title', '').upper()
 
-            track_title = f"{track_title:.<{LINE_LENGTH}}"
+            track_text = truncate_text(
+                track_title, track_indent)
 
-            insert_text(page, track_title_point,
-                        track_title,
+            insert_text(page, track_text_point,
+                        track_text,
                         fontname="CoBo",
-                        fontsize=9
-                        )
+                        fontsize=9)
 
         elif item.get('type') == 'track_group':
             track_group_title_point = Point(PAGE_HORIZONTAL_MARGIN,
@@ -475,10 +479,8 @@ def doc_toc_vol(args) -> None:
             insert_text(page, track_group_title_point,
                         track_group_title,
                         fontname="CoBo",
-                        fontsize=9
-                        )
+                        fontsize=9)
 
-        # link
         link_point = Point(PAGE_HORIZONTAL_MARGIN + RECT_WIDTH - 24,
                            PAGE_VERTICAL_MARGIN + space)
 
@@ -488,7 +490,6 @@ def doc_toc_vol(args) -> None:
                     fontname="CoBo",
                     fontsize=9)
 
-        # to_page = item.get('page', 0) + start_page + total_pages - 2
         to_file = toc_data.get('vol_file', None)
         to_page = item.get('page', 0)
 
@@ -504,22 +505,10 @@ def doc_toc_vol(args) -> None:
             y1=link_rect.y1,
         )
 
-        # link: dict = {'kind': LINK_GOTOR, 'from': link_rect,
-        #               "file": to_file, "page": to_page, "to": (0, 0)}
-
-        # sys.stdout.write(f"{item.get('code')} --> {to_page}\n")
-
         json_link = {'kind': LINK_GOTO, 'from_rect': link_rect_json,
                      "from_page": page_number, "to_page": to_page,
                      "to_file": to_file, "to_point": (0, 0),
                      "code": item.get('title', '')}
-
-        # sys.stdout.write(f"{json.dumps(json_link)}\n")
-
-        # link: dict = {'kind': LINK_URI, 'from': link_rect,
-        #               'uri': f"#page={to_page}"}
-
-        # insert_link(page, link, mark=True)
 
         json_links.append(json_link)
 

@@ -226,13 +226,34 @@ async def draw_frame(read_path: str, write_path: str, page: int,
 
 def _draw_frame_thread_thread(input: str, output: str, page_number: int,
                               pre_print: str | None, header: dict | None,
-                              footer: dict | None, metadata: dict | None):
+                              footer: dict | None, metadata: dict | None,
+                              xml_metadata: str | None):
 
     doc: Document | None = None
 
     try:
 
         doc = Document(filename=input)
+
+        # scrub(doc,
+        #       attached_files=False,
+        #       clean_pages=False,
+        #       embedded_files=False,
+        #       hidden_text=True,
+        #       javascript=True,
+        #       metadata=True,
+        #       redactions=False,
+        #       redact_images=0,
+        #       remove_links=False,
+        #       reset_fields=False,
+        #       reset_responses=True,
+        #       thumbnails=False,
+        #       xml_metadata=True)
+
+        doc.del_xml_metadata()
+
+        if xml_metadata:
+            doc.set_xml_metadata(xml_metadata)
 
         if metadata:
             set_metadata(doc, metadata)
@@ -258,7 +279,7 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
 
             page_number += 1
 
-        doc.save(filename=output, garbage=1, clean=1, deflate=1)
+        doc.save(filename=output, garbage=1, clean=1, deflate=1, linear=1)
 
     except BaseException as be:
         logger.error(be, exc_info=True)
@@ -271,9 +292,11 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
 
 async def draw_frame_anyio(input: str, output: str, page: int,
                            pre_print: str | None, header: dict | None,
-                           footer: dict | None, metadata: dict | None):
+                           footer: dict | None, metadata: dict | None,
+                           xml_metadata: str | None):
     return await to_thread.run_sync(_draw_frame_thread_thread, input, output,
-                                    page, pre_print, header, footer, metadata)
+                                    page, pre_print, header, footer, metadata,
+                                    xml_metadata)
 
 
 async def write_metadata(read_path: str, write_path: str, metadata: dict) -> int:

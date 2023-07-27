@@ -94,7 +94,7 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
     metadata = dict(
         author="JACoW - Joint Accelerator Conferences Website",
         producer=None,
-        creator="cat--purr_meow",
+        creator="JACoW Conference Assembly Tool (CAT)",
         title=f"{event_title} - Proceedings Volume",
         format=None,
         encryption=None,
@@ -324,7 +324,7 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
     metadata = dict(
         author="JACoW - Joint Accelerator Conferences Website",
         producer=None,
-        creator="cat--purr_meow",
+        creator="JACoW Conference Assembly Tool (CAT)",
         title=f"{event_title} - Proceedings at a Glance",
         format=None,
         encryption=None,
