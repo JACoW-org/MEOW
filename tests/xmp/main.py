@@ -8,7 +8,6 @@ from rdflib.term import Literal
 from rdflib import FOAF, Graph, RDF, URIRef, Seq
 
 from fitz import Document
-from fitz.utils import set_metadata, scrub
 
 
 async def main() -> None:

@@ -251,7 +251,7 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
         #       xml_metadata=True)
 
         doc.del_xml_metadata()
-
+        
         if xml_metadata:
             doc.set_xml_metadata(xml_metadata)
 
@@ -392,8 +392,7 @@ async def pdf_unite_mutool(write_path: str, files: list[str], first: bool) -> in
 
     # garbage[=compact|deduplicate],compress=yes,linearize=yes,sanitize=yes
     # '-O', 'garbage=yes,compress=yes,linearize=yes,sanitize=yes'
-    cmd = ['bin/mutool', 'merge', '-o',
-           write_path] + items
+    cmd = ['bin/mutool', 'merge', '-o', write_path] + items
 
     print(" ".join(cmd))
 
@@ -442,8 +441,7 @@ async def pdf_clean_mutool(read_path: str, write_path: str) -> int:
     # -l : ottimizza il pdf per la visualizzazione web
     # 1-N: serve per le pagine logiche
 
-    cmd = ['bin/mutool', 'clean', '-l',
-           read_path, write_path, '1-N']
+    cmd = ['bin/mutool', 'clean', read_path, write_path, '1-N']
 
     print(" ".join(cmd))
 
