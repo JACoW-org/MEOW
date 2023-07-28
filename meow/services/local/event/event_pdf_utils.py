@@ -280,7 +280,7 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
 
             page_number += 1
 
-        doc.save(filename=output, garbage=1, clean=1, deflate=1, linear=1)
+        doc.save(filename=output, garbage=1, clean=1, deflate=1)
 
     except BaseException as be:
         logger.error(be, exc_info=True)
@@ -408,7 +408,7 @@ async def pdf_unite_mutool(write_path: str, files: list[str], first: bool) -> in
 
 
 async def pdf_clean(read_path: str, write_path: str) -> int:
-    return await pdf_clean_qpdf(read_path, write_path)
+    return await pdf_clean_mutool(read_path, write_path)
 
 
 async def pdf_clean_qpdf(read_path: str, write_path: str) -> int:
