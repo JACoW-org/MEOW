@@ -10,7 +10,7 @@ from meow.utils.process import run_cmd
 from meow.utils.serialization import json_decode, json_encode
 
 from fitz import Document
-from fitz.utils import set_metadata
+from fitz.utils import set_metadata, scrub
 
 
 from nltk.stem.snowball import SnowballStemmer
@@ -18,6 +18,7 @@ from meow.services.local.papers_metadata.pdf_keywords import (
     get_keywords_from_text, stem_keywords_as_tree)
 from meow.services.local.papers_metadata.pdf_annotations import (
     annot_page_footer, annot_page_header, annot_page_side)
+
 
 logger = lg.getLogger(__name__)
 
@@ -210,7 +211,7 @@ async def draw_frame(read_path: str, write_path: str, page: int,
     cmd.append("-output")
     cmd.append(write_path)
 
-    # logger.info(cmd)
+    # logger.info(" ".join(cmd))
 
     # print(" ".join(cmd))
 
@@ -251,7 +252,7 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
         #       xml_metadata=True)
 
         doc.del_xml_metadata()
-        
+
         if xml_metadata:
             doc.set_xml_metadata(xml_metadata)
 
@@ -366,7 +367,7 @@ async def pdf_unite_qpdf(write_path: str, files: list[str], first: bool) -> int:
 
     cmd = ['bin/qpdf', '--empty', '--pages'] + items + ['--', write_path]
 
-    print(" ".join(cmd))
+    logger.info(" ".join(cmd))
 
     res = await run_cmd(cmd)
 
@@ -394,7 +395,7 @@ async def pdf_unite_mutool(write_path: str, files: list[str], first: bool) -> in
     # '-O', 'garbage=yes,compress=yes,linearize=yes,sanitize=yes'
     cmd = ['bin/mutool', 'merge', '-o', write_path] + items
 
-    print(" ".join(cmd))
+    logger.info(" ".join(cmd))
 
     res = await run_cmd(cmd)
 
@@ -407,7 +408,7 @@ async def pdf_unite_mutool(write_path: str, files: list[str], first: bool) -> in
 
 
 async def pdf_clean(read_path: str, write_path: str) -> int:
-    return await pdf_clean_mutool(read_path, write_path)
+    return await pdf_clean_qpdf(read_path, write_path)
 
 
 async def pdf_clean_qpdf(read_path: str, write_path: str) -> int:
@@ -421,7 +422,7 @@ async def pdf_clean_qpdf(read_path: str, write_path: str) -> int:
            '--remove-page-labels',
            read_path, '--', write_path]
 
-    print(" ".join(cmd))
+    logger.info(" ".join(cmd))
 
     res = await run_cmd(cmd)
 
@@ -441,9 +442,9 @@ async def pdf_clean_mutool(read_path: str, write_path: str) -> int:
     # -l : ottimizza il pdf per la visualizzazione web
     # 1-N: serve per le pagine logiche
 
-    cmd = ['bin/mutool', 'clean', read_path, write_path, '1-N']
+    cmd = ['bin/mutool', 'clean', '-l', read_path, write_path, '1-N']
 
-    print(" ".join(cmd))
+    logger.info(" ".join(cmd))
 
     res = await run_cmd(cmd)
 
@@ -461,7 +462,7 @@ async def concat_pdf(write_path: str, files: list[str]) -> int:
 
     cmd = [get_python_cmd(), '-m', 'meow', 'join', '-o', write_path] + files
 
-    # print(" ".join(cmd))
+    logger.info(" ".join(cmd))
 
     res = await run_cmd(cmd)
 
@@ -479,7 +480,7 @@ async def brief_links(read_path: str, write_path: str, files: list[str]) -> int:
     cmd = [get_python_cmd(), '-m', 'meow', 'links',
            '-input', read_path, '-output', write_path] + files
 
-    # print(" ".join(cmd))
+    logger.info(" ".join(cmd))
 
     res = await run_cmd(cmd)
 
