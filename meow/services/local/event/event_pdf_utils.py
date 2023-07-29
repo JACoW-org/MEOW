@@ -344,7 +344,7 @@ async def pdf_separate(input: str, output: str, first: int, last: int) -> int:
 
 
 async def pdf_unite(write_path: str, files: list[str], first: bool) -> int:
-    return await pdf_unite_mutool(write_path, files, first)
+    return await pdf_unite_qpdf(write_path, files, first)
 
 
 async def pdf_unite_qpdf(write_path: str, files: list[str], first: bool) -> int:
@@ -408,7 +408,7 @@ async def pdf_unite_mutool(write_path: str, files: list[str], first: bool) -> in
 
 
 async def pdf_clean(read_path: str, write_path: str) -> int:
-    return await pdf_clean_mutool(read_path, write_path)
+    return await pdf_clean_qpdf(read_path, write_path)
 
 
 async def pdf_clean_qpdf(read_path: str, write_path: str) -> int:
