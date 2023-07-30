@@ -10,7 +10,7 @@ from meow.utils.process import run_cmd
 from meow.utils.serialization import json_decode, json_encode
 
 from fitz import Document
-from fitz.utils import set_metadata, scrub
+from fitz.utils import set_metadata
 
 
 from nltk.stem.snowball import SnowballStemmer

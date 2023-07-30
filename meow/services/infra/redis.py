@@ -2,8 +2,6 @@ import logging as lg
 
 from redis.exceptions import LockError
 
-from meow.models.models import meow_models
-
 from meow.app.config import conf
 from meow.app.instances.databases import dbs
 
@@ -12,8 +10,6 @@ from meow.factory.schema.redis_schema_factory import (
 from meow.models.infra.base import BaseModel
 from meow.models.infra.locks import RedisLock, RedisLockList
 from meow.models.infra.schema import RedisIndexMeta
-from meow.services.local.credential.save_credential import (
-    create_default_credentials)
 from meow.utils.http import HttpClientSessions
 
 logger = lg.getLogger(__name__)
@@ -23,7 +19,7 @@ class RedisManager:
     """ """
 
     def __init__(self):
-        self.models: list[type[BaseModel]] = meow_models
+        self.models: list[type[BaseModel]] = []
 
     async def prepare(self):
         """ """
@@ -74,7 +70,7 @@ class RedisManager:
         """ """
 
         try:
-            await create_default_credentials()
+            pass
         except LockError as e:
             logger.error(e, exc_info=True)
         except BaseException as e:

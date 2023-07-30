@@ -1,11 +1,6 @@
-
-from io import BytesIO
-
-from anyio import Path
-
 from meow.utils.xmp import DC, XMP, PDF, XMPMetadata
 from rdflib.term import Literal
-from rdflib import FOAF, Graph, RDF, URIRef, Seq
+from rdflib import URIRef
 
 from fitz import Document
 
@@ -21,7 +16,8 @@ async def main() -> None:
     meta.set(DC.description, Literal("CAT description"))
     meta.set(DC.language, Literal("CAT language"))
     meta.set(DC.creator, Literal("CAT creator"))
-    meta.set(URIRef('http://purl.org/dc/terms/format'), Literal("application/pdf"))
+    meta.set(URIRef('http://purl.org/dc/terms/format'),
+             Literal("application/pdf"))
     meta.set(PDF.Keywords, Literal("CAT keywords"))
     meta.set(XMP.CreatorTool, Literal("CAT creator tool"))
     meta.set(XMP.Identifier, Literal("CAT dentifier"))

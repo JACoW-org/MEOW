@@ -26,7 +26,9 @@ async def api_ping_endpoint(req: Request) -> JSONResponse:
         return JSONResponse({
             'method': 'ping',
             'params': {
-                'id': credential.id
+                'user': credential.user,
+                'host': credential.host,
+                'date': credential.date
             }
         })
 

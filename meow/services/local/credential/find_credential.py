@@ -1,48 +1,37 @@
 import logging as lg
 
-from redis.commands.json.path import Path
 from redis.exceptions import RedisError
-from redis.commands.search.query import Query
 
 from meow.app.errors.service_error import ServiceError
 from meow.models.application import Credential
+from meow.app.instances.databases import dbs
+
 
 logger = lg.getLogger(__name__)
 
 
-async def find_credential_by_secret(secret: str | None) -> Credential | None:
+async def find_credential_by_secret(key: str | None) -> Credential | None:
     """ """
 
     try:
 
-        if secret is None:
+        if key is None:
             raise ServiceError('Invalid secret')
 
-        credential = await Credential.find_one(
-            Query(f"@secret:({secret})")
-        )
+        res = await dbs.redis_client.hgetall(f'meow:credential:{key}')
 
-        return credential
+        if res:
 
-    except RedisError as e:
-        logger.error(e, exc_info=True)
-        raise ServiceError('Database error')
+            user: bytes = res.get(b'user', None)
+            host: bytes = res.get(b'host', None)
+            date: bytes = res.get(b'date', None)
 
-    except Exception as e:
-        logger.error(e, exc_info=True)
-        raise ServiceError('Generic error')
+            print(user.decode('utf-8'), host.decode('utf-8'))
 
-
-async def get_local_credential() -> Credential:
-    """ """
-
-    try:
-        data = await Credential.r().get(Credential.key(
-            'meow.indico.plugin.dev'), Path('.'))
-
-        settings = Credential(**data)
-
-        return settings
+            return Credential(key=key,
+                              user=user.decode('utf-8'),
+                              host=host.decode('utf-8'),
+                              date=date.decode('utf-8'))
 
     except RedisError as e:
         logger.error(e, exc_info=True)
@@ -51,3 +40,5 @@ async def get_local_credential() -> Credential:
     except Exception as e:
         logger.error(e, exc_info=True)
         raise ServiceError('Generic error')
+
+    return None

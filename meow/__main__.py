@@ -10,17 +10,72 @@ import tarfile
 import shutil
 import multiprocessing as mp
 
+from datetime import datetime
+
 from fitz import Document, Page, Rect, Point, LINK_GOTO, LINK_URI
 
 from fitz.utils import set_metadata, insert_link, insert_text, new_page
 
-from meow.utils.keywords import KEYWORDS
+
 from meow.services.local.papers_metadata.pdf_annotations import (
     annot_page_footer, annot_page_header, annot_page_side
 )
 from meow.services.local.papers_metadata.pdf_annotations import (
     annot_toc_footer, annot_toc_header
 )
+
+from anyio import run
+
+
+def meow_auth(args) -> None:
+
+    async def _run():
+        # from meow.app.instances.application import app
+        from meow.app.instances.databases import dbs
+        from ulid import ulid as ULID
+
+        if args.list:
+
+            res = await dbs.redis_client.keys('meow:credential:*')
+            print(res)
+
+        elif args.login:
+
+            [user, host] = args.login.split('@')
+
+            key = ULID()
+
+            res = await dbs.redis_client.hset(f'meow:credential:{key}', 'user', user)
+            res = await dbs.redis_client.hset(f'meow:credential:{key}', 'host', host)
+            res = await dbs.redis_client.hset(f'meow:credential:{key}', 'date', datetime.now().isoformat())
+
+            print(user, host, key)
+
+        elif args.logout:
+
+            key = str(args.logout)
+
+            res = await dbs.redis_client.delete(f'meow:credential:{key}')
+            print(res)
+
+        elif args.check:
+
+            key = str(args.check)
+
+            res = await dbs.redis_client.hgetall(f'meow:credential:{key}')
+
+            if res:
+
+                user: bytes = res.get(b'user', None)
+                host: bytes = res.get(b'host', None)
+
+                print(user.decode('utf-8'), host.decode('utf-8'))
+
+            else:
+
+                print('invalid')
+
+    run(_run)
 
 
 def open_file(filename, password, show=False, pdf=True):
@@ -224,6 +279,7 @@ def doc_text(args) -> None:
 
 def doc_report(args) -> None:
 
+    from meow.utils.keywords import KEYWORDS
     from nltk.stem.snowball import SnowballStemmer
     from meow.services.local.papers_metadata.pdf_keywords import (
         get_keywords_from_text, stem_keywords_as_tree
@@ -777,6 +833,24 @@ def main():
     ps_links.add_argument("-input", required=True, help="input filename")
     ps_links.add_argument("-output", required=True, help="output filename")
     ps_links.set_defaults(func=doc_links)
+
+    # -------------------------------------------------------------------------
+    # 'auth' command
+    # -------------------------------------------------------------------------
+    ps_auth = subps.add_parser(
+        "auth",
+        description="manage meow auth",
+        epilog="manage meow auth",
+    )
+    ps_auth.add_argument("-list", required=False, help="list credentials",
+                         action=argparse.BooleanOptionalAction)
+    ps_auth.add_argument("-login", required=False, type=str,
+                         help="login")
+    ps_auth.add_argument("-logout", required=False, type=str,
+                         help="logout")
+    ps_auth.add_argument("-check", required=False, type=str,
+                         help="check")
+    ps_auth.set_defaults(func=meow_auth)
 
     # -------------------------------------------------------------------------
     # 'compress' command
