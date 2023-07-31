@@ -1,0 +1,67 @@
+{
+    "is_valid": true,
+    "method": "GET",
+    "settings": {
+        "ab_contribution_h1": "{code}  /  {start}",
+        "ab_contribution_h2": "{code}",
+        "ab_session_h1": "{code} - {title}",
+        "ab_session_h2": "{start} / {end}",
+        "api_key": "01GDWDBTHHJNZ0KAVKZ1YP320S",
+        "api_url": "https://jpsp.akera.net",
+        "booktitle_long": "14th International Particle Accelerator Conference",
+        "booktitle_short": "IPAC'23",
+        "connected": true,
+        "contribution_fields": [
+            {
+                "id": 23,
+                "title": "Footnotes"
+            },
+            {
+                "id": 24,
+                "title": "Funding Agency"
+            },
+            {
+                "id": 25,
+                "title": "I have read and accept the Privacy Policy Statement"
+            },
+            {
+                "id": 20,
+                "title": "Abstract QA"
+            },
+            {
+                "id": 28,
+                "title": "RU/BY presenters"
+            },
+            {
+                "id": 32,
+                "title": "duplicate_of"
+            },
+            {
+                "id": 34,
+                "title": "CAT_publish"
+            }
+        ],
+        "custom_fields": [],
+        "date": "7 - 12 May 2023",
+        "doi_conference": "IPAC2023",
+        "doi_context": "10.18429",
+        "doi_domain": "doi.org",
+        "doi_env": "test",
+        "doi_organization": "JACoW",
+        "doi_password": "basf1985",
+        "doi_proto": "https",
+        "doi_user": "doi.user",
+        "editorial_board": "Ralph Assmann - Deutsches Elektronen-Synchrotron DESY\nPeter McIntosh - Science and Technology Facilities Council (STFC/DL/ASTeC)\nGiovanni Bisoffi - Istituto Nazionale di Fisica Nucleare (INFN/LNL)\nAlessandro Fabris - Elettra-Sincrotrone Trieste S.C.p.A.\nIvan Andrian - Elettra-Sincrotrone Trieste S.C.p.A.\nGiulia Vinicola - Istituto Nazionale di Fisica Nucleare (INFN/LNF)",
+        "editorial_json": "[\n  {\n    \"first_name\": \"Ralph\",\n    \"last_name\": \"Assmann\",\n    \"affiliation\": \"Deutsches Elektronen-Synchrotron DESY\"\n  },\n  {\n    \"first_name\": \"Peter\",\n    \"last_name\": \"McIntosh\",\n    \"affiliation\": \"Science and Technology Facilities Council (STFC/DL/ASTeC)\"\n  },\n  {\n    \"first_name\": \"Alessandro\",\n    \"last_name\": \"Fabris\",\n    \"affiliation\": \"Elettra-Sincrotrone Trieste S.C.p.A.\"\n  },\n  {\n    \"first_name\": \"Giovanni\",\n    \"last_name\": \"Bisoffi\",\n    \"affiliation\": \"Istituto Nazionale di Fisica Nucleare (INFN/LNL)\"\n  },\n  {\n    \"first_name\": \"Ivan\",\n    \"last_name\": \"Andrian\",\n    \"affiliation\": \"Elettra-Sincrotrone Trieste S.C.p.A.\"\n  },\n  {\n    \"first_name\": \"Giulia\",\n    \"last_name\": \"Vinicola\",\n    \"affiliation\": \"Istituto Nazionale di Fisica Nucleare (INFN/LNF)\"\n  }\n]\n",
+        "host_info": "**IPAC\u201923** was jointly organised by **Istituto Nazionale di Fisica Nucleare** and **Elettra Sincrotrone Trieste** in **Venice, Italy** from **7 to 12 May 2023** at the Venice Convention Centre.",
+        "isbn": "978-3-95450-231-8",
+        "issn": "2673-5490",
+        "location": "Venezia",
+        "pdf_page_height": "792.0",
+        "pdf_page_width": "595.0",
+        "pre_print": "This is a preprint \u2014 the final version is published with IOP",
+        "primary_color": "#F39433",
+        "series": "IPAC'23 - 14th International Particle Accelerator Conference",
+        "series_number": "14"
+    }
+}

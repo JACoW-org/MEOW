@@ -1,0 +1,47 @@
+{
+    "is_valid": true,
+    "method": "GET",
+    "settings": {
+        "ab_contribution_h1": "| {code} | / | {start} |",
+        "ab_contribution_h2": "| {code} | / | {start} |",
+        "ab_session_h1": "{code} - {title}",
+        "ab_session_h2": "{start} / {end}",
+        "api_key": "01GDWDBTHHJNZ0KAVKZ1YP320S",
+        "api_url": "https://jpsp.akera.net",
+        "booktitle_long": "40th International Free Electron Laser Conference",
+        "booktitle_short": "FEL2022",
+        "connected": true,
+        "contribution_fields": [
+            {
+                "id": 19,
+                "title": "I have read and accept the Privacy Policy Statement"
+            },
+            {
+                "id": 22,
+                "title": "Paper expected from author"
+            }
+        ],
+        "custom_fields": [],
+        "date": "May, 2022",
+        "doi_conference": "FEL2022",
+        "doi_context": "10.18429",
+        "doi_domain": "doi.org",
+        "doi_env": "prod",
+        "doi_organization": "JACoW",
+        "doi_password": "Overdrawn2Moonlike$congrats",
+        "doi_proto": "https",
+        "doi_user": "CERN.JACOW",
+        "editorial_board": "*Luca Giannessi, Michele Svandrlik, Giovanni De Ninno, Simone Di Mitri, Ivan Andrian\n(Elettra-Sincrotrone Trieste S.C.p.A.)*",
+        "editorial_json": "[\n  {\n    \"first_name\": \"Luca\",\n    \"last_name\": \"Giannessi\",\n    \"affiliation\": \"Elettra-Sincrotrone Trieste S.C.p.A.\"\n  },\n  {\n    \"first_name\": \"Michele\",\n    \"last_name\": \"Svandrlik\",\n    \"affiliation\": \"Elettra-Sincrotrone Trieste S.C.p.A.\"\n  },\n  {\n    \"first_name\": \"Giovanni\",\n    \"last_name\": \"De Ninno\",\n    \"affiliation\": \"Elettra-Sincrotrone Trieste S.C.p.A.\"\n  },\n  {\n    \"first_name\": \"Simone\",\n    \"last_name\": \"Di Mitri\",\n    \"affiliation\": \"Elettra-Sincrotrone Trieste S.C.p.A.\"\n  },\n  {\n    \"first_name\": \"Ivan\",\n    \"last_name\": \"Andrian\",\n    \"affiliation\": \"Elettra-Sincrotrone Trieste S.C.p.A.\"\n  }\n]",
+        "host_info": "**FEL2022** was hosted by **Elettra-Sincrotrone Trieste S.C.p.A.**\nand held at the **Trieste Convention Center** in Trieste, Italy 22-26 Aug 2022\n\nhttps<nolink/>://www.fel2022.org",
+        "isbn": "978-3-95450-220-2",
+        "issn": "2673-5474",
+        "location": "Trieste",
+        "pdf_page_height": 792,
+        "pdf_page_width": 595,
+        "pre_print": "Pre print",
+        "primary_color": "#c1210d",
+        "series": "International Free Electron Laser Conference",
+        "series_number": "40"
+    }
+}

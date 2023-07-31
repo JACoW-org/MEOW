@@ -36,7 +36,8 @@ from meow.services.local.event.final_proceedings.generate_contribution_doi impor
 from meow.services.local.event.final_proceedings.build_doi_payloads import build_doi_payloads
 from meow.services.local.event.final_proceedings.manage_duplicates import manage_duplicates
 
-from meow.services.local.event.final_proceedings.link_static_site import link_static_site
+from meow.services.local.event.final_proceedings.link_static_site import (
+    clean_static_site, link_static_site, clean_pdf_cache)
 from meow.services.local.event.final_proceedings.read_papers_metadata import read_papers_metadata
 from meow.services.local.event.final_proceedings.write_papers_metadata import write_papers_metadata
 
@@ -174,6 +175,17 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict,
     # Bloccante
 
     final_proceedings = await adapting_final_proceedings(event, sessions, contributions, attachments, cookies, settings)
+
+    """ """
+
+    await extend_lock(lock)
+
+    yield dict(type='progress', value=dict(
+        phase='clean_static_site',
+        text='Clean Static site'
+    ))
+
+    await clean_static_site(final_proceedings, cookies, settings, config)
 
     """ """
 
@@ -420,6 +432,17 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict,
 
     if config.include_event_slides:
         await copy_contribution_slides(final_proceedings, cookies, settings)
+
+    """ """
+
+    await extend_lock(lock)
+
+    yield dict(type='progress', value=dict(
+        phase='clean_static_site',
+        text='Clean Static site'
+    ))
+
+    await clean_pdf_cache(final_proceedings, cookies, settings, config)
 
     """ """
 

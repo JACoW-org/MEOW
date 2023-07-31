@@ -79,10 +79,10 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
 
     vol_pdf_results: list[str] = []
 
-    capacity_limiter = CapacityLimiter(4)
+    capacity_limiter = CapacityLimiter(8)
     async with create_task_group() as tg:
         for index, vol_pdf_files_chunk in enumerate(split_list(vol_pdf_files, chunk_size)):
-            tg.start_soon(concat_chunks, f"{vol_pdf_temp_path}." + "{:04d}".format(index),
+            tg.start_soon(concat_chunks, f"{vol_pdf_temp_path}." + "{:06d}".format(index),
                           vol_pdf_files_chunk, vol_pdf_results, False, capacity_limiter)
 
     vol_pdf_results.sort()
@@ -309,11 +309,11 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
     vol_pdf_results: list[str] = []
 
     chunk_size = int(sqrt(len(files_data))) + 1
-    capacity_limiter = CapacityLimiter(4)
+    capacity_limiter = CapacityLimiter(8)
 
     async with create_task_group() as tg:
         for index, vol_pdf_files_chunk in enumerate(split_list(brief_pdf_files, chunk_size)):
-            tg.start_soon(concat_chunks, f"{brief_pdf_temp_path}." + "{:010d}".format(index),
+            tg.start_soon(concat_chunks, f"{brief_pdf_temp_path}." + "{:06d}".format(index),
                           vol_pdf_files_chunk, vol_pdf_results, True, capacity_limiter)
 
     brief_pdf_files.sort()
