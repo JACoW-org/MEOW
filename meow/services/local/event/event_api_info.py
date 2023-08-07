@@ -29,9 +29,7 @@ async def event_api_info(event_id: int) -> dict | None:
 async def _event_api_info(event_id: int) -> dict:
     """ """
 
-    logger.info('event_api_info - event_api_info - begin')
-
-    """ """
+    logger.info('event_api_info - start')
 
     result: dict = {
         'event_id': event_id,
@@ -49,7 +47,7 @@ async def _event_api_info(event_id: int) -> dict:
         tg.start_soon(event_final_proceedings_info_task, event_id, result)
         tg.start_soon(event_proceedings_archive_info_task, event_id, result)
 
-    logger.info('event_api_info - event_api_info - end')
+    logger.info('event_api_info - end')
 
     return dict(type='result', value=result)
 

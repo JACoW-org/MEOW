@@ -7,8 +7,8 @@ from starlette.routing import Route
 
 from meow.services.local.credential.find_credential import (
     find_credential_by_secret)
-from meow.services.local.event.event_api_info import (
-    event_api_info)
+from meow.services.local.event.event_api_info import event_api_info
+from meow.services.local.event.event_api_clear import event_api_clear
 
 logger = lg.getLogger(__name__)
 
@@ -53,6 +53,23 @@ async def api_info_endpoint(req: Request) -> JSONResponse:
 
     raise HTTPException(status_code=401, detail="Invalid API Key")
 
+async def api_clear_endpoint(req: Request) -> JSONResponse:
+    """ This function clears the subfolders related to the given event id """
+
+    event_id: int = int(req.path_params['event_id'])
+    api_key: str = str(req.path_params['api_key'])
+    credential = await find_credential_by_secret(api_key)
+
+    if credential:
+
+        await event_api_clear(event_id)
+
+        return JSONResponse({
+            'method': 'clear',
+            'status': 'success'
+        })
+    
+    raise HTTPException(status_code=401, detail="Invalid API Key")
 
 # async def api_del_conference(req: Request) -> JSONResponse:
 #     """ """
@@ -242,6 +259,10 @@ routes = [
 
     Route('/info/{event_id}/{api_key}', api_info_endpoint,
           methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']),
+
+    Route('/clear/{event_id}/{api_key}', api_clear_endpoint,
+        methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'])
+
 
     # Obsolete
     # Route('/conference/{id}/del', api_del_conference,
