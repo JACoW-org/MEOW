@@ -9,21 +9,21 @@ from typing import Callable
 logger = lg.getLogger(__name__)
 
 
-async def manage_duplicates(proceedings_data: ProceedingsData) -> ProceedingsData:
+async def manage_duplicates(proceedings_data: ProceedingsData, settings: dict) -> ProceedingsData:
     """"""
 
     logger.info('event_final_proceedings - manage_duplicates')
 
-    proceedings_data = resolve_duplicate_contributions(proceedings_data)
+    proceedings_data = resolve_duplicate_contributions(proceedings_data, settings.get('duplicate_of_alias', 'duplicate_of'))
 
     return proceedings_data
 
 
-def resolve_duplicate_contributions(proceedings_data: ProceedingsData) -> ProceedingsData:
+def resolve_duplicate_contributions(proceedings_data: ProceedingsData, duplicate_of_alias: str) -> ProceedingsData:
     """ """
 
     for contribution in proceedings_data.contributions:
-        duplicate_of_code: str | None = contribution.duplicate_of_code
+        duplicate_of_code: str | None = contribution.duplicate_of_code(duplicate_of_alias)
         if duplicate_of_code:
             predicate = find_predicate(duplicate_of_code)
             duplicate: ContributionData | None = find(

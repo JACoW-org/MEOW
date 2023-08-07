@@ -364,7 +364,7 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict,
 
     # Bloccante
 
-    await manage_duplicates(final_proceedings)
+    await manage_duplicates(final_proceedings, settings)
 
     """ """
 

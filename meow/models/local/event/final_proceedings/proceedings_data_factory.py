@@ -48,7 +48,7 @@ def proceedings_data_factory(event: Any, sessions: list, contributions: list,
     contributions_data: list[ContributionData] = [
         c for c in [
             contribution_data_factory(c, editors) for c in contributions
-        ] if c and c.cat_publish
+        ] if c and c.cat_publish(settings.get('cat_publish_alias', 'CAT_publish'))
     ]
 
     """ sort sessions data """

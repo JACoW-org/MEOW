@@ -332,26 +332,24 @@ class ContributionData:
     def track_meta(self) -> str:
         return self.track.full_name if self.track else ""
 
-    @property
-    def cat_publish(self) -> bool:
+    def cat_publish(self, cat_publish_alias: str) -> bool:
         field_value: str = ''
 
-        for field in self.field_values:
-            if field.name == 'CAT_publish' and field.value is not None:
-                field_value = field.value.lower()
+        for _field in self.field_values:
+            if _field.name == cat_publish_alias and _field.value is not None:
+                field_value = _field.value.lower()
                 break
 
         return field_value in ['', 'yes', 'true', '1']
 
-    @property
-    def duplicate_of_code(self) -> str | None:
+    def duplicate_of_code(self, duplicate_of_alias: str) -> str | None:
         # after duplicate of is initialized, use this condition
         if self.duplicate_of is not None:
             return self.duplicate_of.code
 
-        for field in self.field_values:
-            if field.name == 'duplicate_of' and field.value is not None:
-                return field.value
+        for _field in self.field_values:
+            if _field.name == duplicate_of_alias and _field.value is not None:
+                return _field.value
 
         return None
 
