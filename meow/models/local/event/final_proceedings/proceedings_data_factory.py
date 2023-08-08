@@ -113,7 +113,7 @@ def resolve_duplicates_of(contributions: list[ContributionData], settings: dict)
                 contributions, predicate)
             if duplicate_contribution and duplicate_contribution.metadata:
                 logger.info(
-                    f"Contribution {contribution.code} has duplicate {contribution.duplicate_of_code} with metadata")
+                    f"Contribution {contribution.code} has duplicate {contribution.duplicate_of_code(settings.get('duplicate_of_alias', 'duplicate_of'))} with metadata")
             contribution.duplicate_of = DuplicateContributionData(
                 code=duplicate_contribution.code,
                 session_code=duplicate_contribution.session_code,
