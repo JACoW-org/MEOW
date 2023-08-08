@@ -104,9 +104,9 @@ def proceedings_data_factory(event: Any, sessions: list, contributions: list,
     )
 
 
-def resolve_duplicates_of(contributions: list[ContributionData]) -> list[ContributionData]:
+def resolve_duplicates_of(contributions: list[ContributionData], settings: dict) -> list[ContributionData]:
     for contribution in contributions:
-        duplicate_of_code: str | None = contribution.duplicate_of_code
+        duplicate_of_code: str | None = contribution.duplicate_of_code(settings.get('duplicate_of_alias', 'duplicate_of'))
         if duplicate_of_code:
             predicate = find_predicate(duplicate_of_code)
             duplicate_contribution: ContributionData | None = find(
