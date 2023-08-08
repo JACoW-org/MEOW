@@ -6,6 +6,12 @@ from meow.models.local.event.final_proceedings.track_model import TrackData
 from meow.models.local.event.final_proceedings.event_model import (
     AffiliationData, AttachmentData, EventData, KeywordData, PersonData)
 
+@dataclass(kw_only=True, slots=True)
+class FinalProceedingsTask:
+    """"""
+
+    code: str = field()
+    text: str = field()
 
 @dataclass(kw_only=True, slots=True)
 class FinalProceedingsConfig:

@@ -438,7 +438,7 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict,
     await extend_lock(lock)
 
     yield dict(type='progress', value=dict(
-        phase='clean_static_site',
+        phase='clean_static_site_2',
         text='Clean Static site'
     ))
 

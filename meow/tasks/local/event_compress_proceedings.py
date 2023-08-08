@@ -6,6 +6,7 @@ from typing import AsyncGenerator
 from meow.services.local.event.event_compress_proceedings import event_compress_proceedings
 
 from meow.tasks.infra.abstract_task import AbstractTask
+from meow.models.local.event.final_proceedings.proceedings_data_model import FinalProceedingsTask
 
 
 logger = lg.getLogger(__name__)
@@ -22,6 +23,18 @@ class EventCompressProceedingsTask(AbstractTask):
         indico_session: str = cookies.get("indico_session_http", None)
         cookies["indico_session_http"] = indico_session
         cookies["indico_session"] = indico_session
+
+        tasks = [
+            FinalProceedingsTask(code='adapting_final_proceedings',
+                                 text='Adapting final proceedings'),
+            FinalProceedingsTask(code='compress_static_site',
+                                 text='Compress Static site')
+        ]
+
+        yield dict(type='progress', value=dict(
+            phase='init_tasks_list',
+            tasks=tasks
+        ))
         
         async for r in event_compress_proceedings(event, cookies, settings):
             self.assert_is_running()
