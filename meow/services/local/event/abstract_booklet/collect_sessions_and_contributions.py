@@ -39,7 +39,9 @@ async def download_sessions(event_url: str, cookies: dict, settings: dict, sessi
 
     response = await download_json(url=url, cookies=cookies)
 
-    if 'error' not in response and response.get('error') is True:
+    # logger.info(response.get('sessions'))
+
+    if 'error' not in response and response.get('error') is not True:
         sessions.extend(response.get('sessions'))
 
 
@@ -53,5 +55,5 @@ async def download_contributions(event_url: str, session_id: int, cookies: dict,
 
         response = await download_json(url=url, cookies=cookies)
 
-        if 'error' not in response and response.get('error') is True:
+        if 'error' not in response and response.get('error') is not True:
             contributions.extend(response.get('contributions'))

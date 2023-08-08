@@ -20,7 +20,7 @@ export ARGS="$ARGS --appendfsync everysec"  # appendfsync
 export ARGS="$ARGS --aof-use-rdb-preamble yes"  # aof-use-rdb-preamble
 
 podman run --name it.akera.jpsp.redis \
-	-v jpsp-redis-vol:/data \
+    -v jpsp-redis-vol:/data \
     -e REDIS_ARGS="$ARGS" \
     -p 6379:6379 \
     -p 8001:8001 \

@@ -24,8 +24,8 @@ async def event_abstract_booklet(event: dict, cookies: dict, settings: dict) -> 
 
     [sessions, contributions] = await collect_sessions_and_contributions(event, cookies, settings)
 
-    # logger.info(f'event_abstract_booklet - sessions_len: {len(sessions)}' +
-    #             f' - contributions_len: { len(contributions)}')
+    logger.info(f'event_abstract_booklet - sessions_len: {len(sessions)}' +
+                f' - contributions_len: { len(contributions)}')
 
     """ """
 

@@ -82,7 +82,10 @@ class RevisionData:
 
     @property
     def is_included_in_pdf_check(self) -> bool:
-        """ qa_approved, sui qa_pending (sono i verdi non ancora in QA) e sui gialli (che non sono sicuramente qa_pending)... """
+        """
+        qa_approved, sui qa_pending (sono i verdi non ancora in QA)
+        e sui gialli (che non sono sicuramente qa_pending)...
+        """
         return self.is_green or self.is_yellow
 
     @property
@@ -150,7 +153,8 @@ class RevisionData:
         needs_submitter_confirmation = 3
 
     class FinalRevisionState:
-        # __titles__ = [None, _('Replaced'), _('Needs Confirmation'), _('Needs Changes'), _('Accepted'), _('Rejected'), _('Undone')]
+        # __titles__ = [None, _('Replaced'), _('Needs Confirmation'),
+        # _('Needs Changes'), _('Accepted'), _('Rejected'), _('Undone')]
 
         #: A revision that is awaiting some action
         none = 0
