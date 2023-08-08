@@ -5,12 +5,14 @@ from datetime import datetime
 
 from meow.models.local.event.final_proceedings.track_factory import track_data_factory
 
-from meow.models.local.event.final_proceedings.event_factory import event_affiliation_factory, event_person_factory
-from meow.models.local.event.final_proceedings.contribution_model import ContributionData, ContributionFieldData, EditableData, FileData, RevisionData, TagData
+from meow.models.local.event.final_proceedings.event_factory import (
+    event_affiliation_factory, event_person_factory)
+from meow.models.local.event.final_proceedings.contribution_model import (
+    ContributionData, ContributionFieldData, EditableData, FileData, RevisionData, TagData)
+from meow.models.local.event.final_proceedings.event_model import (PersonData)
 
 from meow.utils.datetime import datedict_to_tz_datetime, format_datetime_sec
 from meow.utils.list import find
-from meow.models.local.event.final_proceedings.event_model import PersonData
 
 
 logger = lg.getLogger(__name__)
@@ -257,7 +259,7 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
         if paper else None
     peer_reviewing_accepted = state == 2 \
         if state else False
-        
+
     # logger.warning(f"code: {contribution.get('code')}")
     # logger.warning(f"peer_reviewing_accepted: {peer_reviewing_accepted}")
 
