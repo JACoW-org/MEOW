@@ -344,7 +344,46 @@ async def pdf_separate(input: str, output: str, first: int, last: int) -> int:
 
 
 async def pdf_unite(write_path: str, files: list[str], first: bool) -> int:
-    return await pdf_unite_qpdf(write_path, files, first)
+    return await pdf_unite_pdftk(write_path, files, first)
+
+
+async def pdf_unite_pdftk(write_path: str, files: list[str], first: bool) -> int:
+
+    if first is True:
+
+        import string
+        ascii = list(string.ascii_uppercase)
+
+        labeled_files = []
+        labeled_pages = []
+
+        for index, file in enumerate(files):
+            labeled_files.append(
+                "".join([ascii[int(char)] for char in "{:06d}".format(index)])
+                + "=" + file
+            )
+            labeled_pages.append(
+                "".join([ascii[int(char)] for char in "{:06d}".format(index)])
+                + "1"
+            )
+
+        cmd = ['pdftk'] + labeled_files + ['cat'] + \
+            labeled_pages + ['output'] + [write_path]
+
+    else:
+
+        cmd = ['pdftk'] + files + ['cat'] + ['output'] + [write_path]
+
+    logger.info(" ".join(cmd))
+
+    res = await run_cmd(cmd)
+
+    # if res:
+    #     print(res.returncode)
+    #     print(res.stdout.decode())
+    #     print(res.stderr.decode())
+
+    return 0 if res and res.returncode == 0 else 1
 
 
 async def pdf_unite_qpdf(write_path: str, files: list[str], first: bool) -> int:
