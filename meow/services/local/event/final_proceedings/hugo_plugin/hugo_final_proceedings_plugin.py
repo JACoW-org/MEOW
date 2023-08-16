@@ -530,7 +530,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         pass
 
     async def ssg_cmd(self):
-        return await Path('bin', 'hugo').absolute()
+        return str(Path('bin', 'hugo'))
 
     async def generate(self) -> None:
         """ """

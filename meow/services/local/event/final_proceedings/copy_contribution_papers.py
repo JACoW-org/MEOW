@@ -95,6 +95,7 @@ async def file_copy_task(capacity_limiter: CapacityLimiter, total_files: int, cu
 
             if file_exists:
                 # await dest_path.hardlink_to(file_path)
+                # await copy(str(file_path), str(dest_path))
                 await move(str(file_path), str(dest_path))
             else:
                 logger.warning(f"{file_path} not exists")

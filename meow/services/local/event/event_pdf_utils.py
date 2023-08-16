@@ -344,7 +344,23 @@ async def pdf_separate(input: str, output: str, first: int, last: int) -> int:
 
 
 async def pdf_unite(write_path: str, files: list[str], first: bool) -> int:
-    return await pdf_unite_pdftk(write_path, files, first)
+    return await pdf_unite_poppler(write_path, files, first)
+
+
+async def pdf_unite_poppler(write_path: str, files: list[str], first: bool) -> int:
+
+    cmd = ['bin/pdfunite'] + files + [write_path]
+
+    logger.info(" ".join(cmd))
+
+    res = await run_cmd(cmd)
+
+    if res:
+        logger.info(res.returncode)
+        logger.info(res.stdout.decode())
+        logger.info(res.stderr.decode())
+
+    return 0 if res and res.returncode == 0 else 1
 
 
 async def pdf_unite_pdftk(write_path: str, files: list[str], first: bool) -> int:
@@ -378,17 +394,16 @@ async def pdf_unite_pdftk(write_path: str, files: list[str], first: bool) -> int
 
     res = await run_cmd(cmd)
 
-    # if res:
-    #     print(res.returncode)
-    #     print(res.stdout.decode())
-    #     print(res.stderr.decode())
+    if res:
+        print(res.returncode)
+        print(res.stdout.decode())
+        print(res.stderr.decode())
 
     return 0 if res and res.returncode == 0 else 1
 
 
 async def pdf_unite_qpdf(write_path: str, files: list[str], first: bool) -> int:
 
-    # cmd = ['pdfunite'] + files + [write_path]
     # cmd = ['pdftk'] + files + ['cat', 'output'] + [write_path]
 
     # qpdf --linearize --remove-page-labels --empty --pages var/run/18_tmp/MOA03.pdf 1-1
@@ -410,10 +425,10 @@ async def pdf_unite_qpdf(write_path: str, files: list[str], first: bool) -> int:
 
     res = await run_cmd(cmd)
 
-    # if res:
-    #     print(res.returncode)
-    #     print(res.stdout.decode())
-    #     print(res.stderr.decode())
+    if res:
+        print(res.returncode)
+        print(res.stdout.decode())
+        print(res.stderr.decode())
 
     return 0 if res and res.returncode == 0 else 1
 
@@ -438,10 +453,10 @@ async def pdf_unite_mutool(write_path: str, files: list[str], first: bool) -> in
 
     res = await run_cmd(cmd)
 
-    # if res:
-    #     print(res.returncode)
-    #     print(res.stdout.decode())
-    #     print(res.stderr.decode())
+    if res:
+        print(res.returncode)
+        print(res.stdout.decode())
+        print(res.stderr.decode())
 
     return 0 if res and res.returncode == 0 else 1
 
@@ -465,10 +480,10 @@ async def pdf_clean_qpdf(read_path: str, write_path: str) -> int:
 
     res = await run_cmd(cmd)
 
-    # if res:
-    #     print(res.returncode)
-    #     print(res.stdout.decode())
-    #     print(res.stderr.decode())
+    if res:
+        print(res.returncode)
+        print(res.stdout.decode())
+        print(res.stderr.decode())
 
     return 0 if res and res.returncode == 0 else 1
 
@@ -487,10 +502,10 @@ async def pdf_clean_mutool(read_path: str, write_path: str) -> int:
 
     res = await run_cmd(cmd)
 
-    # if res:
-    #     print(res.returncode)
-    #     print(res.stdout.decode())
-    #     print(res.stderr.decode())
+    if res:
+        print(res.returncode)
+        print(res.stdout.decode())
+        print(res.stderr.decode())
 
     return 0 if res and res.returncode == 0 else 1
 
@@ -505,10 +520,10 @@ async def concat_pdf(write_path: str, files: list[str]) -> int:
 
     res = await run_cmd(cmd)
 
-    # if res:
-    #     print(res.returncode)
-    #     print(res.stdout.decode())
-    #     print(res.stderr.decode())
+    if res:
+        print(res.returncode)
+        print(res.stdout.decode())
+        print(res.stderr.decode())
 
     return 0 if res and res.returncode == 0 else 1
 
@@ -523,10 +538,10 @@ async def brief_links(read_path: str, write_path: str, files: list[str]) -> int:
 
     res = await run_cmd(cmd)
 
-    # if res:
-    #     print(res.returncode)
-    #     print(res.stdout.decode())
-    #     print(res.stderr.decode())
+    if res:
+        print(res.returncode)
+        print(res.stdout.decode())
+        print(res.stderr.decode())
 
     return 0 if res and res.returncode == 0 else 1
 
@@ -548,10 +563,10 @@ async def vol_toc_pdf(write_path: str, links_path: str, conf_path: str) -> int:
 
     res = await run_cmd(cmd)
 
-    # if res:
-    #     print(res.returncode)
-    #     print(res.stdout.decode())
-    #     print(res.stderr.decode())
+    if res:
+        print(res.returncode)
+        print(res.stdout.decode())
+        print(res.stderr.decode())
 
     return 0 if res and res.returncode == 0 else 1
 
@@ -573,9 +588,9 @@ async def vol_toc_links(read_path: str, write_path: str, links_path: str) -> int
 
     res = await run_cmd(cmd)
 
-    # if res:
-    #     print(res.returncode)
-    #     print(res.stdout.decode())
-    #     print(res.stderr.decode())
+    if res:
+        print(res.returncode)
+        print(res.stdout.decode())
+        print(res.stderr.decode())
 
     return 0 if res and res.returncode == 0 else 1

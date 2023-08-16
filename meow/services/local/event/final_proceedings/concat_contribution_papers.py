@@ -54,8 +54,6 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
     event_id = proceedings_data.event.id
     event_title = proceedings_data.event.title
 
-    chunk_size = int(sqrt(len(files_data))) + 1
-
     vol_pdf_temp_name = f"{event_id}_proceedings_volume_temp.pdf"
     vol_pdf_temp_path = Path(cache_dir, vol_pdf_temp_name)
 
@@ -72,20 +70,28 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
     [vol_toc_pdf_path, vol_toc_links_path] = await get_vol_toc_pdf_path(proceedings_data, vol_pre_pdf_path,
                                                                         cache_dir, callback, toc_grouping)
 
-    vol_pdf_files = [
+    vol_pdf_files: list[str] = [
         str(Path(cache_dir, f"{f.filename}_jacow"))
         for f in files_data
     ]
 
-    vol_pdf_results: list[str] = []
+    vol_pdf_results: list[str] = vol_pdf_files
 
-    capacity_limiter = CapacityLimiter(8)
-    async with create_task_group() as tg:
-        for index, vol_pdf_files_chunk in enumerate(split_list(vol_pdf_files, chunk_size)):
-            tg.start_soon(concat_chunks, f"{vol_pdf_temp_path}." + "{:06d}".format(index),
-                          vol_pdf_files_chunk, vol_pdf_results, False, capacity_limiter)
+    # vol_pdf_results: list[str] = []
 
-    vol_pdf_results.sort()
+    # capacity_limiter = CapacityLimiter(8)
+    #
+    # await concat_chunks(f"{vol_pdf_temp_path}." + "{:06d}".format(1),
+    #                     vol_pdf_files, vol_pdf_results, False, capacity_limiter)
+
+    # chunk_size = int(sqrt(len(files_data))) + 1
+    #
+    # async with create_task_group() as tg:
+    #     for index, vol_pdf_files_chunk in enumerate(split_list(vol_pdf_files, chunk_size)):
+    #         tg.start_soon(concat_chunks, f"{vol_pdf_temp_path}." + "{:06d}".format(index),
+    #                       vol_pdf_files_chunk, vol_pdf_results, False, capacity_limiter)
+    #
+    # vol_pdf_results.sort()
 
     pdf_parts = [str(vol_pre_pdf_path)] if vol_pre_pdf_path else []
     pdf_parts = pdf_parts + [str(vol_toc_pdf_path)] if vol_toc_pdf_path else []
@@ -295,9 +301,11 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
     brief_pdf_final_path = Path(cache_dir, brief_pdf_final_name)
 
     brief_pdf_files = [
-        (str(Path(cache_dir, f"{f.filename}_jacow")))
+        (str(Path(cache_dir, f"{f.filename}_jacow")) + '[0]')
         for f in files_data
     ]
+
+    brief_pdf_results: list[str] = brief_pdf_files
 
     brief_pdf_links = [
         f"https://jacow.org/{doi_conference}/pdf/{f.filename}"
@@ -306,20 +314,22 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
         f.filename for f in files_data
     ]
 
-    vol_pdf_results: list[str] = []
+    # capacity_limiter = CapacityLimiter(8)
+    #
+    # await concat_chunks(f"{brief_pdf_temp_path}." + "{:06d}".format(1),
+    #                     brief_pdf_files, brief_pdf_results, True, capacity_limiter)
 
-    chunk_size = int(sqrt(len(files_data))) + 1
-    capacity_limiter = CapacityLimiter(8)
+    # chunk_size = int(sqrt(len(files_data))) + 1
 
-    async with create_task_group() as tg:
-        for index, vol_pdf_files_chunk in enumerate(split_list(brief_pdf_files, chunk_size)):
-            tg.start_soon(concat_chunks, f"{brief_pdf_temp_path}." + "{:06d}".format(index),
-                          vol_pdf_files_chunk, vol_pdf_results, True, capacity_limiter)
+    # async with create_task_group() as tg:
+    #     for index, vol_pdf_files_chunk in enumerate(split_list(brief_pdf_files, chunk_size)):
+    #         tg.start_soon(concat_chunks, f"{brief_pdf_temp_path}." + "{:06d}".format(index),
+    #                       vol_pdf_files_chunk, brief_pdf_results, True, capacity_limiter)
+#
+    # brief_pdf_files.sort()
 
-    brief_pdf_files.sort()
-
-    pdf_parts = [str(brief_pre_pdf_path)] + \
-        vol_pdf_results if brief_pre_pdf_path else vol_pdf_results
+    pdf_parts = [str(brief_pre_pdf_path)] + brief_pdf_results \
+        if brief_pre_pdf_path else brief_pdf_results
 
     metadata = dict(
         author="JACoW - Joint Accelerator Conferences Website",
