@@ -1,0 +1,1837 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineSystem.cmake:211 (message)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      The system is: Linux - 6.4.9-1-default - x86_64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCCompiler.cmake:123 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+      Compiler: /usr/bin/cc 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+      
+      The C compiler identification is GNU, found in:
+        /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/3.27.1/CompilerIdC/a.out
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "/usr/share/cmake/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: /usr/bin/c++ 
+      Build flags: 
+      Id flags:  
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+      
+      The CXX compiler identification is GNU, found in:
+        /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/3.27.1/CompilerIdCXX/a.out
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "/usr/share/cmake/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    checks:
+      - "Detecting C compiler ABI info"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-iWgy8x"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-iWgy8x"
+    cmakeVariables:
+      CMAKE_C_FLAGS: ""
+      CMAKE_C_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_C_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-iWgy8x'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_4ac9e/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_4ac9e.dir/build.make CMakeFiles/cmTC_4ac9e.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-iWgy8x'
+        Building C object CMakeFiles/cmTC_4ac9e.dir/CMakeCCompilerABI.c.o
+        /usr/bin/cc   -v -o CMakeFiles/cmTC_4ac9e.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake/Modules/CMakeCCompilerABI.c
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/cc
+        OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-suse-linux
+        Configured with: ../configure CFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' CXXFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' XCFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' TCFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' GDCFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -g' --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,ada,go,d,jit,m2 --enable-offload-targets=nvptx-none,amdgcn-amdhsa, --enable-offload-defaulted --without-cuda-driver --enable-host-shared --enable-checking=release --disable-werror --with-gxx-include-dir=/usr/include/c++/13 --with-libstdcxx-zoneinfo=/usr/share/zoneinfo --enable-ssp --disable-libssp --disable-libvtv --enable-cet=auto --disable-libcc1 --enable-plugin --with-bugurl=https://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --with-slibdir=/lib64 --with-system-zlib --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-libphobos --enable-version-specific-runtime-libs --with-gcc-major-version-only --enable-linker-build-id --enable-linux-futex --enable-gnu-indirect-function --program-suffix=-13 --without-system-libunwind --enable-multilib --with-arch-32=x86-64 --with-tune=generic --with-build-config=bootstrap-lto-lean --enable-link-serialization --build=x86_64-suse-linux --host=x86_64-suse-linux
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 13.2.1 20230803 [revision cc279d6c64562f05019e1d12d0d825f9391b5553] (SUSE Linux) 
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_4ac9e.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_4ac9e.dir/'
+         /usr/lib64/gcc/x86_64-suse-linux/13/cc1 -quiet -v /usr/share/cmake/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_4ac9e.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -o /tmp/cc72oUmh.s
+        GNU C17 (SUSE Linux) version 13.2.1 20230803 [revision cc279d6c64562f05019e1d12d0d825f9391b5553] (x86_64-suse-linux)
+        	compiled by GNU C version 13.2.1 20230803 [revision cc279d6c64562f05019e1d12d0d825f9391b5553], GMP version 6.3.0, MPFR version 4.2.0-p9, MPC version 1.3.1, isl version isl-0.26-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /usr/lib64/gcc/x86_64-suse-linux/13/include
+         /usr/local/include
+         /usr/lib64/gcc/x86_64-suse-linux/13/include-fixed
+         /usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/include
+         /usr/include
+        End of search list.
+        Compiler executable checksum: 00000000000000000000000000000000
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_4ac9e.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_4ac9e.dir/'
+         /usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/bin/as -v --64 -o CMakeFiles/cmTC_4ac9e.dir/CMakeCCompilerABI.c.o /tmp/cc72oUmh.s
+        GNU assembler version 2.40.0 (x86_64-suse-linux) using BFD version (GNU Binutils; openSUSE Tumbleweed) 2.40.0.20230412-5
+        COMPILER_PATH=/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/bin/
+        LIBRARY_PATH=/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/lib/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_4ac9e.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_4ac9e.dir/CMakeCCompilerABI.c.'
+        Linking C executable cmTC_4ac9e
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4ac9e.dir/link.txt --verbose=1
+        /usr/bin/cc  -v CMakeFiles/cmTC_4ac9e.dir/CMakeCCompilerABI.c.o -o cmTC_4ac9e 
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/cc
+        COLLECT_LTO_WRAPPER=/usr/lib64/gcc/x86_64-suse-linux/13/lto-wrapper
+        OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-suse-linux
+        Configured with: ../configure CFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' CXXFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' XCFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' TCFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' GDCFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -g' --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,ada,go,d,jit,m2 --enable-offload-targets=nvptx-none,amdgcn-amdhsa, --enable-offload-defaulted --without-cuda-driver --enable-host-shared --enable-checking=release --disable-werror --with-gxx-include-dir=/usr/include/c++/13 --with-libstdcxx-zoneinfo=/usr/share/zoneinfo --enable-ssp --disable-libssp --disable-libvtv --enable-cet=auto --disable-libcc1 --enable-plugin --with-bugurl=https://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --with-slibdir=/lib64 --with-system-zlib --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-libphobos --enable-version-specific-runtime-libs --with-gcc-major-version-only --enable-linker-build-id --enable-linux-futex --enable-gnu-indirect-function --program-suffix=-13 --without-system-libunwind --enable-multilib --with-arch-32=x86-64 --with-tune=generic --with-build-config=bootstrap-lto-lean --enable-link-serialization --build=x86_64-suse-linux --host=x86_64-suse-linux
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 13.2.1 20230803 [revision cc279d6c64562f05019e1d12d0d825f9391b5553] (SUSE Linux) 
+        COMPILER_PATH=/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/bin/
+        LIBRARY_PATH=/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/lib/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_4ac9e' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_4ac9e.'
+         /usr/lib64/gcc/x86_64-suse-linux/13/collect2 -plugin /usr/lib64/gcc/x86_64-suse-linux/13/liblto_plugin.so -plugin-opt=/usr/lib64/gcc/x86_64-suse-linux/13/lto-wrapper -plugin-opt=-fresolution=/tmp/ccYpBIGE.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_4ac9e /usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crt1.o /usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crti.o /usr/lib64/gcc/x86_64-suse-linux/13/crtbegin.o -L/usr/lib64/gcc/x86_64-suse-linux/13 -L/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/lib -L/usr/lib64/gcc/x86_64-suse-linux/13/../../.. CMakeFiles/cmTC_4ac9e.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib64/gcc/x86_64-suse-linux/13/crtend.o /usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crtn.o
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_4ac9e' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_4ac9e.'
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-iWgy8x'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:127 (message)"
+      - "/usr/share/cmake/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Parsed C implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/usr/lib64/gcc/x86_64-suse-linux/13/include]
+          add: [/usr/local/include]
+          add: [/usr/lib64/gcc/x86_64-suse-linux/13/include-fixed]
+          add: [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/include]
+          add: [/usr/include]
+        end of search list found
+        collapse include dir [/usr/lib64/gcc/x86_64-suse-linux/13/include] ==> [/usr/lib64/gcc/x86_64-suse-linux/13/include]
+        collapse include dir [/usr/local/include] ==> [/usr/local/include]
+        collapse include dir [/usr/lib64/gcc/x86_64-suse-linux/13/include-fixed] ==> [/usr/lib64/gcc/x86_64-suse-linux/13/include-fixed]
+        collapse include dir [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/include] ==> [/usr/x86_64-suse-linux/include]
+        collapse include dir [/usr/include] ==> [/usr/include]
+        implicit include dirs: [/usr/lib64/gcc/x86_64-suse-linux/13/include;/usr/local/include;/usr/lib64/gcc/x86_64-suse-linux/13/include-fixed;/usr/x86_64-suse-linux/include;/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:152 (message)"
+      - "/usr/share/cmake/Modules/CMakeTestCCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Parsed C implicit link information:
+        link line regex: [^( *|.*[/\\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        ignore line: [Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-iWgy8x']
+        ignore line: []
+        ignore line: [Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_4ac9e/fast]
+        ignore line: [/usr/bin/gmake  -f CMakeFiles/cmTC_4ac9e.dir/build.make CMakeFiles/cmTC_4ac9e.dir/build]
+        ignore line: [gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-iWgy8x']
+        ignore line: [Building C object CMakeFiles/cmTC_4ac9e.dir/CMakeCCompilerABI.c.o]
+        ignore line: [/usr/bin/cc   -v -o CMakeFiles/cmTC_4ac9e.dir/CMakeCCompilerABI.c.o -c /usr/share/cmake/Modules/CMakeCCompilerABI.c]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/cc]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-suse-linux]
+        ignore line: [Configured with: ../configure CFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' CXXFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' XCFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' TCFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' GDCFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -g' --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c c++ objc fortran obj-c++ ada go d jit m2 --enable-offload-targets=nvptx-none amdgcn-amdhsa  --enable-offload-defaulted --without-cuda-driver --enable-host-shared --enable-checking=release --disable-werror --with-gxx-include-dir=/usr/include/c++/13 --with-libstdcxx-zoneinfo=/usr/share/zoneinfo --enable-ssp --disable-libssp --disable-libvtv --enable-cet=auto --disable-libcc1 --enable-plugin --with-bugurl=https://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --with-slibdir=/lib64 --with-system-zlib --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-libphobos --enable-version-specific-runtime-libs --with-gcc-major-version-only --enable-linker-build-id --enable-linux-futex --enable-gnu-indirect-function --program-suffix=-13 --without-system-libunwind --enable-multilib --with-arch-32=x86-64 --with-tune=generic --with-build-config=bootstrap-lto-lean --enable-link-serialization --build=x86_64-suse-linux --host=x86_64-suse-linux]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 13.2.1 20230803 [revision cc279d6c64562f05019e1d12d0d825f9391b5553] (SUSE Linux) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_4ac9e.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_4ac9e.dir/']
+        ignore line: [ /usr/lib64/gcc/x86_64-suse-linux/13/cc1 -quiet -v /usr/share/cmake/Modules/CMakeCCompilerABI.c -quiet -dumpdir CMakeFiles/cmTC_4ac9e.dir/ -dumpbase CMakeCCompilerABI.c.c -dumpbase-ext .c -mtune=generic -march=x86-64 -version -o /tmp/cc72oUmh.s]
+        ignore line: [GNU C17 (SUSE Linux) version 13.2.1 20230803 [revision cc279d6c64562f05019e1d12d0d825f9391b5553] (x86_64-suse-linux)]
+        ignore line: [	compiled by GNU C version 13.2.1 20230803 [revision cc279d6c64562f05019e1d12d0d825f9391b5553]  GMP version 6.3.0  MPFR version 4.2.0-p9  MPC version 1.3.1  isl version isl-0.26-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /usr/lib64/gcc/x86_64-suse-linux/13/include]
+        ignore line: [ /usr/local/include]
+        ignore line: [ /usr/lib64/gcc/x86_64-suse-linux/13/include-fixed]
+        ignore line: [ /usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/include]
+        ignore line: [ /usr/include]
+        ignore line: [End of search list.]
+        ignore line: [Compiler executable checksum: 00000000000000000000000000000000]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_4ac9e.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_4ac9e.dir/']
+        ignore line: [ /usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/bin/as -v --64 -o CMakeFiles/cmTC_4ac9e.dir/CMakeCCompilerABI.c.o /tmp/cc72oUmh.s]
+        ignore line: [GNU assembler version 2.40.0 (x86_64-suse-linux) using BFD version (GNU Binutils]
+        ignore line: [ openSUSE Tumbleweed) 2.40.0.20230412-5]
+        ignore line: [COMPILER_PATH=/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/bin/]
+        ignore line: [LIBRARY_PATH=/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/lib/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_4ac9e.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_4ac9e.dir/CMakeCCompilerABI.c.']
+        ignore line: [Linking C executable cmTC_4ac9e]
+        ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4ac9e.dir/link.txt --verbose=1]
+        ignore line: [/usr/bin/cc  -v CMakeFiles/cmTC_4ac9e.dir/CMakeCCompilerABI.c.o -o cmTC_4ac9e ]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/cc]
+        ignore line: [COLLECT_LTO_WRAPPER=/usr/lib64/gcc/x86_64-suse-linux/13/lto-wrapper]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-suse-linux]
+        ignore line: [Configured with: ../configure CFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' CXXFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' XCFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' TCFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' GDCFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -g' --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c c++ objc fortran obj-c++ ada go d jit m2 --enable-offload-targets=nvptx-none amdgcn-amdhsa  --enable-offload-defaulted --without-cuda-driver --enable-host-shared --enable-checking=release --disable-werror --with-gxx-include-dir=/usr/include/c++/13 --with-libstdcxx-zoneinfo=/usr/share/zoneinfo --enable-ssp --disable-libssp --disable-libvtv --enable-cet=auto --disable-libcc1 --enable-plugin --with-bugurl=https://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --with-slibdir=/lib64 --with-system-zlib --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-libphobos --enable-version-specific-runtime-libs --with-gcc-major-version-only --enable-linker-build-id --enable-linux-futex --enable-gnu-indirect-function --program-suffix=-13 --without-system-libunwind --enable-multilib --with-arch-32=x86-64 --with-tune=generic --with-build-config=bootstrap-lto-lean --enable-link-serialization --build=x86_64-suse-linux --host=x86_64-suse-linux]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 13.2.1 20230803 [revision cc279d6c64562f05019e1d12d0d825f9391b5553] (SUSE Linux) ]
+        ignore line: [COMPILER_PATH=/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/bin/]
+        ignore line: [LIBRARY_PATH=/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/lib/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_4ac9e' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_4ac9e.']
+        link line: [ /usr/lib64/gcc/x86_64-suse-linux/13/collect2 -plugin /usr/lib64/gcc/x86_64-suse-linux/13/liblto_plugin.so -plugin-opt=/usr/lib64/gcc/x86_64-suse-linux/13/lto-wrapper -plugin-opt=-fresolution=/tmp/ccYpBIGE.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --build-id --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_4ac9e /usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crt1.o /usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crti.o /usr/lib64/gcc/x86_64-suse-linux/13/crtbegin.o -L/usr/lib64/gcc/x86_64-suse-linux/13 -L/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/lib -L/usr/lib64/gcc/x86_64-suse-linux/13/../../.. CMakeFiles/cmTC_4ac9e.dir/CMakeCCompilerABI.c.o -lgcc --push-state --as-needed -lgcc_s --pop-state -lc -lgcc --push-state --as-needed -lgcc_s --pop-state /usr/lib64/gcc/x86_64-suse-linux/13/crtend.o /usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crtn.o]
+          arg [/usr/lib64/gcc/x86_64-suse-linux/13/collect2] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/usr/lib64/gcc/x86_64-suse-linux/13/liblto_plugin.so] ==> ignore
+          arg [-plugin-opt=/usr/lib64/gcc/x86_64-suse-linux/13/lto-wrapper] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccYpBIGE.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [--build-id] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_4ac9e] ==> ignore
+          arg [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crt1.o] ==> obj [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crt1.o]
+          arg [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crti.o] ==> obj [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crti.o]
+          arg [/usr/lib64/gcc/x86_64-suse-linux/13/crtbegin.o] ==> obj [/usr/lib64/gcc/x86_64-suse-linux/13/crtbegin.o]
+          arg [-L/usr/lib64/gcc/x86_64-suse-linux/13] ==> dir [/usr/lib64/gcc/x86_64-suse-linux/13]
+          arg [-L/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64] ==> dir [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64]
+          arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
+          arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
+          arg [-L/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/lib] ==> dir [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/lib]
+          arg [-L/usr/lib64/gcc/x86_64-suse-linux/13/../../..] ==> dir [/usr/lib64/gcc/x86_64-suse-linux/13/../../..]
+          arg [CMakeFiles/cmTC_4ac9e.dir/CMakeCCompilerABI.c.o] ==> ignore
+          arg [-lgcc] ==> lib [gcc]
+          arg [--push-state] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [--pop-state] ==> ignore
+          arg [-lc] ==> lib [c]
+          arg [-lgcc] ==> lib [gcc]
+          arg [--push-state] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [--pop-state] ==> ignore
+          arg [/usr/lib64/gcc/x86_64-suse-linux/13/crtend.o] ==> obj [/usr/lib64/gcc/x86_64-suse-linux/13/crtend.o]
+          arg [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crtn.o] ==> obj [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crtn.o]
+        collapse obj [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crt1.o] ==> [/usr/lib64/crt1.o]
+        collapse obj [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crti.o] ==> [/usr/lib64/crti.o]
+        collapse obj [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crtn.o] ==> [/usr/lib64/crtn.o]
+        collapse library dir [/usr/lib64/gcc/x86_64-suse-linux/13] ==> [/usr/lib64/gcc/x86_64-suse-linux/13]
+        collapse library dir [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64] ==> [/usr/lib64]
+        collapse library dir [/lib/../lib64] ==> [/lib64]
+        collapse library dir [/usr/lib/../lib64] ==> [/usr/lib64]
+        collapse library dir [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/lib] ==> [/usr/x86_64-suse-linux/lib]
+        collapse library dir [/usr/lib64/gcc/x86_64-suse-linux/13/../../..] ==> [/usr/lib64]
+        implicit libs: [gcc;gcc_s;c;gcc;gcc_s]
+        implicit objs: [/usr/lib64/crt1.o;/usr/lib64/crti.o;/usr/lib64/gcc/x86_64-suse-linux/13/crtbegin.o;/usr/lib64/gcc/x86_64-suse-linux/13/crtend.o;/usr/lib64/crtn.o]
+        implicit dirs: [/usr/lib64/gcc/x86_64-suse-linux/13;/usr/lib64;/lib64;/usr/x86_64-suse-linux/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "/usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-l5fvhl"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-l5fvhl"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: ""
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_EXE_LINKER_FLAGS: ""
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-l5fvhl'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_b1e36/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_b1e36.dir/build.make CMakeFiles/cmTC_b1e36.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-l5fvhl'
+        Building CXX object CMakeFiles/cmTC_b1e36.dir/CMakeCXXCompilerABI.cpp.o
+        /usr/bin/c++   -v -o CMakeFiles/cmTC_b1e36.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/c++
+        OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-suse-linux
+        Configured with: ../configure CFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' CXXFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' XCFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' TCFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' GDCFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -g' --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,ada,go,d,jit,m2 --enable-offload-targets=nvptx-none,amdgcn-amdhsa, --enable-offload-defaulted --without-cuda-driver --enable-host-shared --enable-checking=release --disable-werror --with-gxx-include-dir=/usr/include/c++/13 --with-libstdcxx-zoneinfo=/usr/share/zoneinfo --enable-ssp --disable-libssp --disable-libvtv --enable-cet=auto --disable-libcc1 --enable-plugin --with-bugurl=https://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --with-slibdir=/lib64 --with-system-zlib --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-libphobos --enable-version-specific-runtime-libs --with-gcc-major-version-only --enable-linker-build-id --enable-linux-futex --enable-gnu-indirect-function --program-suffix=-13 --without-system-libunwind --enable-multilib --with-arch-32=x86-64 --with-tune=generic --with-build-config=bootstrap-lto-lean --enable-link-serialization --build=x86_64-suse-linux --host=x86_64-suse-linux
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 13.2.1 20230803 [revision cc279d6c64562f05019e1d12d0d825f9391b5553] (SUSE Linux) 
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b1e36.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_b1e36.dir/'
+         /usr/lib64/gcc/x86_64-suse-linux/13/cc1plus -quiet -v -D_GNU_SOURCE /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_b1e36.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -o /tmp/cc0iKe1u.s
+        GNU C++17 (SUSE Linux) version 13.2.1 20230803 [revision cc279d6c64562f05019e1d12d0d825f9391b5553] (x86_64-suse-linux)
+        	compiled by GNU C version 13.2.1 20230803 [revision cc279d6c64562f05019e1d12d0d825f9391b5553], GMP version 6.3.0, MPFR version 4.2.0-p9, MPC version 1.3.1, isl version isl-0.26-GMP
+        
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        #include "..." search starts here:
+        #include <...> search starts here:
+         /usr/include/c++/13
+         /usr/include/c++/13/x86_64-suse-linux
+         /usr/include/c++/13/backward
+         /usr/lib64/gcc/x86_64-suse-linux/13/include
+         /usr/local/include
+         /usr/lib64/gcc/x86_64-suse-linux/13/include-fixed
+         /usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/include
+         /usr/include
+        End of search list.
+        Compiler executable checksum: 00000000000000000000000000000000
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b1e36.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_b1e36.dir/'
+         /usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/bin/as -v --64 -o CMakeFiles/cmTC_b1e36.dir/CMakeCXXCompilerABI.cpp.o /tmp/cc0iKe1u.s
+        GNU assembler version 2.40.0 (x86_64-suse-linux) using BFD version (GNU Binutils; openSUSE Tumbleweed) 2.40.0.20230412-5
+        COMPILER_PATH=/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/bin/
+        LIBRARY_PATH=/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/lib/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b1e36.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_b1e36.dir/CMakeCXXCompilerABI.cpp.'
+        Linking CXX executable cmTC_b1e36
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b1e36.dir/link.txt --verbose=1
+        /usr/bin/c++  -v CMakeFiles/cmTC_b1e36.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_b1e36 
+        Using built-in specs.
+        COLLECT_GCC=/usr/bin/c++
+        COLLECT_LTO_WRAPPER=/usr/lib64/gcc/x86_64-suse-linux/13/lto-wrapper
+        OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa
+        OFFLOAD_TARGET_DEFAULT=1
+        Target: x86_64-suse-linux
+        Configured with: ../configure CFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' CXXFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' XCFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' TCFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' GDCFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -g' --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,ada,go,d,jit,m2 --enable-offload-targets=nvptx-none,amdgcn-amdhsa, --enable-offload-defaulted --without-cuda-driver --enable-host-shared --enable-checking=release --disable-werror --with-gxx-include-dir=/usr/include/c++/13 --with-libstdcxx-zoneinfo=/usr/share/zoneinfo --enable-ssp --disable-libssp --disable-libvtv --enable-cet=auto --disable-libcc1 --enable-plugin --with-bugurl=https://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --with-slibdir=/lib64 --with-system-zlib --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-libphobos --enable-version-specific-runtime-libs --with-gcc-major-version-only --enable-linker-build-id --enable-linux-futex --enable-gnu-indirect-function --program-suffix=-13 --without-system-libunwind --enable-multilib --with-arch-32=x86-64 --with-tune=generic --with-build-config=bootstrap-lto-lean --enable-link-serialization --build=x86_64-suse-linux --host=x86_64-suse-linux
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 13.2.1 20230803 [revision cc279d6c64562f05019e1d12d0d825f9391b5553] (SUSE Linux) 
+        COMPILER_PATH=/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/bin/
+        LIBRARY_PATH=/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/lib/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../:/lib/:/usr/lib/
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_b1e36' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_b1e36.'
+         /usr/lib64/gcc/x86_64-suse-linux/13/collect2 -plugin /usr/lib64/gcc/x86_64-suse-linux/13/liblto_plugin.so -plugin-opt=/usr/lib64/gcc/x86_64-suse-linux/13/lto-wrapper -plugin-opt=-fresolution=/tmp/ccyC80gi.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_b1e36 /usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crt1.o /usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crti.o /usr/lib64/gcc/x86_64-suse-linux/13/crtbegin.o -L/usr/lib64/gcc/x86_64-suse-linux/13 -L/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/lib -L/usr/lib64/gcc/x86_64-suse-linux/13/../../.. CMakeFiles/cmTC_b1e36.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib64/gcc/x86_64-suse-linux/13/crtend.o /usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crtn.o
+        COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_b1e36' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_b1e36.'
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-l5fvhl'
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:127 (message)"
+      - "/usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Parsed CXX implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [/usr/include/c++/13]
+          add: [/usr/include/c++/13/x86_64-suse-linux]
+          add: [/usr/include/c++/13/backward]
+          add: [/usr/lib64/gcc/x86_64-suse-linux/13/include]
+          add: [/usr/local/include]
+          add: [/usr/lib64/gcc/x86_64-suse-linux/13/include-fixed]
+          add: [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/include]
+          add: [/usr/include]
+        end of search list found
+        collapse include dir [/usr/include/c++/13] ==> [/usr/include/c++/13]
+        collapse include dir [/usr/include/c++/13/x86_64-suse-linux] ==> [/usr/include/c++/13/x86_64-suse-linux]
+        collapse include dir [/usr/include/c++/13/backward] ==> [/usr/include/c++/13/backward]
+        collapse include dir [/usr/lib64/gcc/x86_64-suse-linux/13/include] ==> [/usr/lib64/gcc/x86_64-suse-linux/13/include]
+        collapse include dir [/usr/local/include] ==> [/usr/local/include]
+        collapse include dir [/usr/lib64/gcc/x86_64-suse-linux/13/include-fixed] ==> [/usr/lib64/gcc/x86_64-suse-linux/13/include-fixed]
+        collapse include dir [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/include] ==> [/usr/x86_64-suse-linux/include]
+        collapse include dir [/usr/include] ==> [/usr/include]
+        implicit include dirs: [/usr/include/c++/13;/usr/include/c++/13/x86_64-suse-linux;/usr/include/c++/13/backward;/usr/lib64/gcc/x86_64-suse-linux/13/include;/usr/local/include;/usr/lib64/gcc/x86_64-suse-linux/13/include-fixed;/usr/x86_64-suse-linux/include;/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CMakeDetermineCompilerABI.cmake:152 (message)"
+      - "/usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        ignore line: [Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-l5fvhl']
+        ignore line: []
+        ignore line: [Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_b1e36/fast]
+        ignore line: [/usr/bin/gmake  -f CMakeFiles/cmTC_b1e36.dir/build.make CMakeFiles/cmTC_b1e36.dir/build]
+        ignore line: [gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-l5fvhl']
+        ignore line: [Building CXX object CMakeFiles/cmTC_b1e36.dir/CMakeCXXCompilerABI.cpp.o]
+        ignore line: [/usr/bin/c++   -v -o CMakeFiles/cmTC_b1e36.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/c++]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-suse-linux]
+        ignore line: [Configured with: ../configure CFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' CXXFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' XCFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' TCFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' GDCFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -g' --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c c++ objc fortran obj-c++ ada go d jit m2 --enable-offload-targets=nvptx-none amdgcn-amdhsa  --enable-offload-defaulted --without-cuda-driver --enable-host-shared --enable-checking=release --disable-werror --with-gxx-include-dir=/usr/include/c++/13 --with-libstdcxx-zoneinfo=/usr/share/zoneinfo --enable-ssp --disable-libssp --disable-libvtv --enable-cet=auto --disable-libcc1 --enable-plugin --with-bugurl=https://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --with-slibdir=/lib64 --with-system-zlib --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-libphobos --enable-version-specific-runtime-libs --with-gcc-major-version-only --enable-linker-build-id --enable-linux-futex --enable-gnu-indirect-function --program-suffix=-13 --without-system-libunwind --enable-multilib --with-arch-32=x86-64 --with-tune=generic --with-build-config=bootstrap-lto-lean --enable-link-serialization --build=x86_64-suse-linux --host=x86_64-suse-linux]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 13.2.1 20230803 [revision cc279d6c64562f05019e1d12d0d825f9391b5553] (SUSE Linux) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b1e36.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_b1e36.dir/']
+        ignore line: [ /usr/lib64/gcc/x86_64-suse-linux/13/cc1plus -quiet -v -D_GNU_SOURCE /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_b1e36.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mtune=generic -march=x86-64 -version -o /tmp/cc0iKe1u.s]
+        ignore line: [GNU C++17 (SUSE Linux) version 13.2.1 20230803 [revision cc279d6c64562f05019e1d12d0d825f9391b5553] (x86_64-suse-linux)]
+        ignore line: [	compiled by GNU C version 13.2.1 20230803 [revision cc279d6c64562f05019e1d12d0d825f9391b5553]  GMP version 6.3.0  MPFR version 4.2.0-p9  MPC version 1.3.1  isl version isl-0.26-GMP]
+        ignore line: []
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ /usr/include/c++/13]
+        ignore line: [ /usr/include/c++/13/x86_64-suse-linux]
+        ignore line: [ /usr/include/c++/13/backward]
+        ignore line: [ /usr/lib64/gcc/x86_64-suse-linux/13/include]
+        ignore line: [ /usr/local/include]
+        ignore line: [ /usr/lib64/gcc/x86_64-suse-linux/13/include-fixed]
+        ignore line: [ /usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/include]
+        ignore line: [ /usr/include]
+        ignore line: [End of search list.]
+        ignore line: [Compiler executable checksum: 00000000000000000000000000000000]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b1e36.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_b1e36.dir/']
+        ignore line: [ /usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/bin/as -v --64 -o CMakeFiles/cmTC_b1e36.dir/CMakeCXXCompilerABI.cpp.o /tmp/cc0iKe1u.s]
+        ignore line: [GNU assembler version 2.40.0 (x86_64-suse-linux) using BFD version (GNU Binutils]
+        ignore line: [ openSUSE Tumbleweed) 2.40.0.20230412-5]
+        ignore line: [COMPILER_PATH=/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/bin/]
+        ignore line: [LIBRARY_PATH=/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/lib/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_b1e36.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'CMakeFiles/cmTC_b1e36.dir/CMakeCXXCompilerABI.cpp.']
+        ignore line: [Linking CXX executable cmTC_b1e36]
+        ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b1e36.dir/link.txt --verbose=1]
+        ignore line: [/usr/bin/c++  -v CMakeFiles/cmTC_b1e36.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_b1e36 ]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=/usr/bin/c++]
+        ignore line: [COLLECT_LTO_WRAPPER=/usr/lib64/gcc/x86_64-suse-linux/13/lto-wrapper]
+        ignore line: [OFFLOAD_TARGET_NAMES=nvptx-none:amdgcn-amdhsa]
+        ignore line: [OFFLOAD_TARGET_DEFAULT=1]
+        ignore line: [Target: x86_64-suse-linux]
+        ignore line: [Configured with: ../configure CFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' CXXFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' XCFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' TCFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -Werror=return-type -g' GDCFLAGS=' -O2 -funwind-tables -fasynchronous-unwind-tables -fstack-clash-protection -g' --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c c++ objc fortran obj-c++ ada go d jit m2 --enable-offload-targets=nvptx-none amdgcn-amdhsa  --enable-offload-defaulted --without-cuda-driver --enable-host-shared --enable-checking=release --disable-werror --with-gxx-include-dir=/usr/include/c++/13 --with-libstdcxx-zoneinfo=/usr/share/zoneinfo --enable-ssp --disable-libssp --disable-libvtv --enable-cet=auto --disable-libcc1 --enable-plugin --with-bugurl=https://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --with-slibdir=/lib64 --with-system-zlib --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-libphobos --enable-version-specific-runtime-libs --with-gcc-major-version-only --enable-linker-build-id --enable-linux-futex --enable-gnu-indirect-function --program-suffix=-13 --without-system-libunwind --enable-multilib --with-arch-32=x86-64 --with-tune=generic --with-build-config=bootstrap-lto-lean --enable-link-serialization --build=x86_64-suse-linux --host=x86_64-suse-linux]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 13.2.1 20230803 [revision cc279d6c64562f05019e1d12d0d825f9391b5553] (SUSE Linux) ]
+        ignore line: [COMPILER_PATH=/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/bin/]
+        ignore line: [LIBRARY_PATH=/usr/lib64/gcc/x86_64-suse-linux/13/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/lib/:/usr/lib64/gcc/x86_64-suse-linux/13/../../../:/lib/:/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_b1e36' '-shared-libgcc' '-mtune=generic' '-march=x86-64' '-dumpdir' 'cmTC_b1e36.']
+        link line: [ /usr/lib64/gcc/x86_64-suse-linux/13/collect2 -plugin /usr/lib64/gcc/x86_64-suse-linux/13/liblto_plugin.so -plugin-opt=/usr/lib64/gcc/x86_64-suse-linux/13/lto-wrapper -plugin-opt=-fresolution=/tmp/ccyC80gi.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --build-id --eh-frame-hdr -m elf_x86_64 -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_b1e36 /usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crt1.o /usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crti.o /usr/lib64/gcc/x86_64-suse-linux/13/crtbegin.o -L/usr/lib64/gcc/x86_64-suse-linux/13 -L/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/lib -L/usr/lib64/gcc/x86_64-suse-linux/13/../../.. CMakeFiles/cmTC_b1e36.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /usr/lib64/gcc/x86_64-suse-linux/13/crtend.o /usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crtn.o]
+          arg [/usr/lib64/gcc/x86_64-suse-linux/13/collect2] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [/usr/lib64/gcc/x86_64-suse-linux/13/liblto_plugin.so] ==> ignore
+          arg [-plugin-opt=/usr/lib64/gcc/x86_64-suse-linux/13/lto-wrapper] ==> ignore
+          arg [-plugin-opt=-fresolution=/tmp/ccyC80gi.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [--build-id] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [-m] ==> ignore
+          arg [elf_x86_64] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_b1e36] ==> ignore
+          arg [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crt1.o] ==> obj [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crt1.o]
+          arg [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crti.o] ==> obj [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crti.o]
+          arg [/usr/lib64/gcc/x86_64-suse-linux/13/crtbegin.o] ==> obj [/usr/lib64/gcc/x86_64-suse-linux/13/crtbegin.o]
+          arg [-L/usr/lib64/gcc/x86_64-suse-linux/13] ==> dir [/usr/lib64/gcc/x86_64-suse-linux/13]
+          arg [-L/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64] ==> dir [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64]
+          arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
+          arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
+          arg [-L/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/lib] ==> dir [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/lib]
+          arg [-L/usr/lib64/gcc/x86_64-suse-linux/13/../../..] ==> dir [/usr/lib64/gcc/x86_64-suse-linux/13/../../..]
+          arg [CMakeFiles/cmTC_b1e36.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [-lstdc++] ==> lib [stdc++]
+          arg [-lm] ==> lib [m]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lc] ==> lib [c]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [/usr/lib64/gcc/x86_64-suse-linux/13/crtend.o] ==> obj [/usr/lib64/gcc/x86_64-suse-linux/13/crtend.o]
+          arg [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crtn.o] ==> obj [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crtn.o]
+        collapse obj [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crt1.o] ==> [/usr/lib64/crt1.o]
+        collapse obj [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crti.o] ==> [/usr/lib64/crti.o]
+        collapse obj [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64/crtn.o] ==> [/usr/lib64/crtn.o]
+        collapse library dir [/usr/lib64/gcc/x86_64-suse-linux/13] ==> [/usr/lib64/gcc/x86_64-suse-linux/13]
+        collapse library dir [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../lib64] ==> [/usr/lib64]
+        collapse library dir [/lib/../lib64] ==> [/lib64]
+        collapse library dir [/usr/lib/../lib64] ==> [/usr/lib64]
+        collapse library dir [/usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/lib] ==> [/usr/x86_64-suse-linux/lib]
+        collapse library dir [/usr/lib64/gcc/x86_64-suse-linux/13/../../..] ==> [/usr/lib64]
+        implicit libs: [stdc++;m;gcc_s;gcc;c;gcc_s;gcc]
+        implicit objs: [/usr/lib64/crt1.o;/usr/lib64/crti.o;/usr/lib64/gcc/x86_64-suse-linux/13/crtbegin.o;/usr/lib64/gcc/x86_64-suse-linux/13/crtend.o;/usr/lib64/crtn.o]
+        implicit dirs: [/usr/lib64/gcc/x86_64-suse-linux/13;/usr/lib64;/lib64;/usr/x86_64-suse-linux/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake/Modules/CheckCXXSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "cmake/modules/PopplerMacros.cmake:58 (check_cxx_source_compiles)"
+      - "cmake/modules/PopplerMacros.cmake:133 (poppler_check_link_flag)"
+      - "CMakeLists.txt:8 (include)"
+    checks:
+      - "Performing Test GCC_HAS_AS_NEEDED"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-6wjRjP"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-6wjRjP"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE"
+      CMAKE_CXX_FLAGS_DEBUG: "-g -O2 -fno-reorder-blocks -fno-schedule-insns -fno-inline"
+      CMAKE_EXE_LINKER_FLAGS: ""
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules"
+    buildResult:
+      variable: "GCC_HAS_AS_NEEDED"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-6wjRjP'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_fe925/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_fe925.dir/build.make CMakeFiles/cmTC_fe925.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-6wjRjP'
+        Building CXX object CMakeFiles/cmTC_fe925.dir/src.cxx.o
+        /usr/bin/c++ -DGCC_HAS_AS_NEEDED  -fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE  -o CMakeFiles/cmTC_fe925.dir/src.cxx.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-6wjRjP/src.cxx
+        Linking CXX executable cmTC_fe925
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fe925.dir/link.txt --verbose=1
+        /usr/bin/c++ -fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE  CMakeFiles/cmTC_fe925.dir/src.cxx.o -o cmTC_fe925  -Wl,--as-needed 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-6wjRjP'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "cmake/modules/CheckFileOffsetBits.cmake:23 (TRY_COMPILE)"
+      - "CMakeLists.txt:25 (CHECK_FILE_OFFSET_BITS)"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeTmp"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeTmp"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-std=c99 -D_DEFAULT_SOURCE"
+      CMAKE_C_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules"
+    buildResult:
+      variable: "__WITHOUT_FILE_OFFSET_BITS_64"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeTmp'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_56eba/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_56eba.dir/build.make CMakeFiles/cmTC_56eba.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeTmp'
+        Building C object CMakeFiles/cmTC_56eba.dir/CheckFileOffsetBits.c.o
+        /usr/bin/cc   -std=c99 -D_DEFAULT_SOURCE  -O2 -g  -o CMakeFiles/cmTC_56eba.dir/CheckFileOffsetBits.c.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules/CheckFileOffsetBits.c
+        Linking C executable cmTC_56eba
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_56eba.dir/link.txt --verbose=1
+        /usr/bin/cc -std=c99 -D_DEFAULT_SOURCE  -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_56eba.dir/CheckFileOffsetBits.c.o -o cmTC_56eba 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeTmp'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "CMakeLists.txt:160 (check_c_source_compiles)"
+    checks:
+      - "Performing Test HAVE_JPEG_MEM_SRC"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-eOYSY6"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-eOYSY6"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-std=c99 -D_DEFAULT_SOURCE"
+      CMAKE_C_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules"
+    buildResult:
+      variable: "HAVE_JPEG_MEM_SRC"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-eOYSY6'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_5dcb1/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_5dcb1.dir/build.make CMakeFiles/cmTC_5dcb1.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-eOYSY6'
+        Building C object CMakeFiles/cmTC_5dcb1.dir/src.c.o
+        /usr/bin/cc -DHAVE_JPEG_MEM_SRC  -std=c99 -D_DEFAULT_SOURCE  -O2 -g  -std=c11 -o CMakeFiles/cmTC_5dcb1.dir/src.c.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-eOYSY6/src.c
+        Linking C executable cmTC_5dcb1
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5dcb1.dir/link.txt --verbose=1
+        /usr/bin/cc -std=c99 -D_DEFAULT_SOURCE  -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_5dcb1.dir/src.c.o -o cmTC_5dcb1  /usr/lib64/libjpeg.so 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-eOYSY6'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "/usr/share/cmake/Modules/FindThreads.cmake:97 (CHECK_C_SOURCE_COMPILES)"
+      - "/usr/share/cmake/Modules/FindThreads.cmake:163 (_threads_check_libc)"
+      - "/usr/share/cmake/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "/usr/lib64/cmake/Qt6/QtPublicDependencyHelpers.cmake:36 (find_dependency)"
+      - "/usr/lib64/cmake/Qt6/Qt6Dependencies.cmake:24 (_qt_internal_find_third_party_dependencies)"
+      - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:122 (include)"
+      - "CMakeLists.txt:207 (find_package)"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-gyACO0"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-gyACO0"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-std=c99 -D_DEFAULT_SOURCE"
+      CMAKE_C_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-gyACO0'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_6a51d/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_6a51d.dir/build.make CMakeFiles/cmTC_6a51d.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-gyACO0'
+        Building C object CMakeFiles/cmTC_6a51d.dir/src.c.o
+        /usr/bin/cc -DCMAKE_HAVE_LIBC_PTHREAD  -std=c99 -D_DEFAULT_SOURCE  -O2 -g  -std=c11 -o CMakeFiles/cmTC_6a51d.dir/src.c.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-gyACO0/src.c
+        Linking C executable cmTC_6a51d
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6a51d.dir/link.txt --verbose=1
+        /usr/bin/cc -std=c99 -D_DEFAULT_SOURCE  -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_6a51d.dir/src.c.o -o cmTC_6a51d 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-gyACO0'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake/Modules/CheckCXXSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "/usr/lib64/cmake/Qt6/FindWrapAtomic.cmake:36 (check_cxx_source_compiles)"
+      - "/usr/share/cmake/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "/usr/lib64/cmake/Qt6/QtPublicDependencyHelpers.cmake:36 (find_dependency)"
+      - "/usr/lib64/cmake/Qt6Core/Qt6CoreDependencies.cmake:30 (_qt_internal_find_third_party_dependencies)"
+      - "/usr/lib64/cmake/Qt6Core/Qt6CoreConfig.cmake:50 (include)"
+      - "/usr/lib64/cmake/Qt6/Qt6Config.cmake:167 (find_package)"
+      - "CMakeLists.txt:207 (find_package)"
+    checks:
+      - "Performing Test HAVE_STDATOMIC"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Twdn0v"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Twdn0v"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE"
+      CMAKE_CXX_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_STDATOMIC"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Twdn0v'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_e5c2e/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_e5c2e.dir/build.make CMakeFiles/cmTC_e5c2e.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Twdn0v'
+        Building CXX object CMakeFiles/cmTC_e5c2e.dir/src.cxx.o
+        /usr/bin/c++ -DHAVE_STDATOMIC  -fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE  -O2 -g  -std=c++17 -o CMakeFiles/cmTC_e5c2e.dir/src.cxx.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Twdn0v/src.cxx
+        Linking CXX executable cmTC_e5c2e
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e5c2e.dir/link.txt --verbose=1
+        /usr/bin/c++ -fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE  -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_e5c2e.dir/src.cxx.o -o cmTC_e5c2e 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Twdn0v'
+        
+      exitCode: 0
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "/usr/share/cmake/Modules/FindIconv.cmake:115 (check_c_source_compiles)"
+      - "CMakeLists.txt:268 (find_package)"
+    checks:
+      - "Performing Test Iconv_IS_BUILT_IN"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Lqq0Rl"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Lqq0Rl"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-std=c99 -D_DEFAULT_SOURCE"
+      CMAKE_C_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "Iconv_IS_BUILT_IN"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Lqq0Rl'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_4de12/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_4de12.dir/build.make CMakeFiles/cmTC_4de12.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Lqq0Rl'
+        Building C object CMakeFiles/cmTC_4de12.dir/src.c.o
+        /usr/bin/cc -DIconv_IS_BUILT_IN  -std=c99 -D_DEFAULT_SOURCE  -O2 -g  -std=c11 -o CMakeFiles/cmTC_4de12.dir/src.c.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Lqq0Rl/src.c
+        Linking C executable cmTC_4de12
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4de12.dir/link.txt --verbose=1
+        /usr/bin/cc -std=c99 -D_DEFAULT_SOURCE  -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_4de12.dir/src.c.o -o cmTC_4de12 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Lqq0Rl'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake/Modules/CheckCXXSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "CMakeLists.txt:270 (check_cxx_source_compiles)"
+    checks:
+      - "Performing Test ICONV_SECOND_ARGUMENT_IS_CONST"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-m2eqyr"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-m2eqyr"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE"
+      CMAKE_CXX_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "ICONV_SECOND_ARGUMENT_IS_CONST"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-m2eqyr'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_8ceea/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_8ceea.dir/build.make CMakeFiles/cmTC_8ceea.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-m2eqyr'
+        Building CXX object CMakeFiles/cmTC_8ceea.dir/src.cxx.o
+        /usr/bin/c++ -DICONV_SECOND_ARGUMENT_IS_CONST  -fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE  -O2 -g  -std=c++17 -o CMakeFiles/cmTC_8ceea.dir/src.cxx.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-m2eqyr/src.cxx
+        /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-m2eqyr/src.cxx: In function ‘int main()’:
+        /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-m2eqyr/src.cxx:9:19: error: invalid conversion from ‘const char**’ to ‘char**’ [-fpermissive]
+            9 |       iconv(conv, &in, &ilen, &out, &olen);
+              |                   ^~~
+              |                   |
+              |                   const char**
+        In file included from /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-m2eqyr/src.cxx:2:
+        /usr/include/iconv.h:49:54: note:   initializing argument 2 of ‘size_t iconv(iconv_t, char**, size_t*, char**, size_t*)’
+           49 | extern size_t iconv (iconv_t __cd, char **__restrict __inbuf,
+              |                                    ~~~~~~~~~~~~~~~~~~^~~~~~~
+        gmake[1]: *** [CMakeFiles/cmTC_8ceea.dir/build.make:78: CMakeFiles/cmTC_8ceea.dir/src.cxx.o] Error 1
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-m2eqyr'
+        gmake: *** [Makefile:127: cmTC_8ceea/fast] Error 2
+        
+      exitCode: 2
+...
+
+---
+events:
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CheckIncludeFiles.cmake:132 (try_compile)"
+      - "ConfigureChecks.cmake:22 (check_include_files)"
+      - "CMakeLists.txt:403 (include)"
+    checks:
+      - "Looking for include file dlfcn.h"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-2pB7dD"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-2pB7dD"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -std=c99 -D_DEFAULT_SOURCE"
+      CMAKE_C_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_DLFCN_H"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-2pB7dD'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_d95b1/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_d95b1.dir/build.make CMakeFiles/cmTC_d95b1.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-2pB7dD'
+        Building C object CMakeFiles/cmTC_d95b1.dir/HAVE_DLFCN_H.c.o
+        /usr/bin/cc   -Wall -std=c99 -D_DEFAULT_SOURCE  -O2 -g  -std=c11 -o CMakeFiles/cmTC_d95b1.dir/HAVE_DLFCN_H.c.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-2pB7dD/HAVE_DLFCN_H.c
+        Linking C executable cmTC_d95b1
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d95b1.dir/link.txt --verbose=1
+        /usr/bin/cc -Wall -std=c99 -D_DEFAULT_SOURCE  -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_d95b1.dir/HAVE_DLFCN_H.c.o -o cmTC_d95b1 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-2pB7dD'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CheckIncludeFiles.cmake:132 (try_compile)"
+      - "ConfigureChecks.cmake:23 (check_include_files)"
+      - "CMakeLists.txt:403 (include)"
+    checks:
+      - "Looking for include file fcntl.h"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-QhvQ1N"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-QhvQ1N"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -std=c99 -D_DEFAULT_SOURCE"
+      CMAKE_C_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_FCNTL_H"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-QhvQ1N'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_9c244/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_9c244.dir/build.make CMakeFiles/cmTC_9c244.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-QhvQ1N'
+        Building C object CMakeFiles/cmTC_9c244.dir/HAVE_FCNTL_H.c.o
+        /usr/bin/cc   -Wall -std=c99 -D_DEFAULT_SOURCE  -O2 -g  -std=c11 -o CMakeFiles/cmTC_9c244.dir/HAVE_FCNTL_H.c.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-QhvQ1N/HAVE_FCNTL_H.c
+        Linking C executable cmTC_9c244
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9c244.dir/link.txt --verbose=1
+        /usr/bin/cc -Wall -std=c99 -D_DEFAULT_SOURCE  -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_9c244.dir/HAVE_FCNTL_H.c.o -o cmTC_9c244 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-QhvQ1N'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CheckIncludeFiles.cmake:132 (try_compile)"
+      - "ConfigureChecks.cmake:24 (check_include_files)"
+      - "CMakeLists.txt:403 (include)"
+    checks:
+      - "Looking for include file stdlib.h"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-fohkVj"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-fohkVj"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -std=c99 -D_DEFAULT_SOURCE"
+      CMAKE_C_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_STDLIB_H"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-fohkVj'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_542ef/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_542ef.dir/build.make CMakeFiles/cmTC_542ef.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-fohkVj'
+        Building C object CMakeFiles/cmTC_542ef.dir/HAVE_STDLIB_H.c.o
+        /usr/bin/cc   -Wall -std=c99 -D_DEFAULT_SOURCE  -O2 -g  -std=c11 -o CMakeFiles/cmTC_542ef.dir/HAVE_STDLIB_H.c.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-fohkVj/HAVE_STDLIB_H.c
+        Linking C executable cmTC_542ef
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_542ef.dir/link.txt --verbose=1
+        /usr/bin/cc -Wall -std=c99 -D_DEFAULT_SOURCE  -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_542ef.dir/HAVE_STDLIB_H.c.o -o cmTC_542ef 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-fohkVj'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CheckIncludeFiles.cmake:132 (try_compile)"
+      - "ConfigureChecks.cmake:25 (check_include_files)"
+      - "CMakeLists.txt:403 (include)"
+    checks:
+      - "Looking for include file sys/mman.h"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-HiyqID"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-HiyqID"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -std=c99 -D_DEFAULT_SOURCE"
+      CMAKE_C_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_SYS_MMAN_H"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-HiyqID'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_de8f5/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_de8f5.dir/build.make CMakeFiles/cmTC_de8f5.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-HiyqID'
+        Building C object CMakeFiles/cmTC_de8f5.dir/HAVE_SYS_MMAN_H.c.o
+        /usr/bin/cc   -Wall -std=c99 -D_DEFAULT_SOURCE  -O2 -g  -std=c11 -o CMakeFiles/cmTC_de8f5.dir/HAVE_SYS_MMAN_H.c.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-HiyqID/HAVE_SYS_MMAN_H.c
+        Linking C executable cmTC_de8f5
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_de8f5.dir/link.txt --verbose=1
+        /usr/bin/cc -Wall -std=c99 -D_DEFAULT_SOURCE  -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_de8f5.dir/HAVE_SYS_MMAN_H.c.o -o cmTC_de8f5 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-HiyqID'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CheckIncludeFiles.cmake:132 (try_compile)"
+      - "ConfigureChecks.cmake:26 (check_include_files)"
+      - "CMakeLists.txt:403 (include)"
+    checks:
+      - "Looking for include file sys/stat.h"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-EiOSA2"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-EiOSA2"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -std=c99 -D_DEFAULT_SOURCE"
+      CMAKE_C_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_SYS_STAT_H"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-EiOSA2'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_4f8c9/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_4f8c9.dir/build.make CMakeFiles/cmTC_4f8c9.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-EiOSA2'
+        Building C object CMakeFiles/cmTC_4f8c9.dir/HAVE_SYS_STAT_H.c.o
+        /usr/bin/cc   -Wall -std=c99 -D_DEFAULT_SOURCE  -O2 -g  -std=c11 -o CMakeFiles/cmTC_4f8c9.dir/HAVE_SYS_STAT_H.c.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-EiOSA2/HAVE_SYS_STAT_H.c
+        Linking C executable cmTC_4f8c9
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4f8c9.dir/link.txt --verbose=1
+        /usr/bin/cc -Wall -std=c99 -D_DEFAULT_SOURCE  -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_4f8c9.dir/HAVE_SYS_STAT_H.c.o -o cmTC_4f8c9 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-EiOSA2'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CheckIncludeFiles.cmake:132 (try_compile)"
+      - "ConfigureChecks.cmake:27 (check_include_files)"
+      - "CMakeLists.txt:403 (include)"
+    checks:
+      - "Looking for include file unistd.h"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-HXu3hZ"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-HXu3hZ"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -std=c99 -D_DEFAULT_SOURCE"
+      CMAKE_C_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_UNISTD_H"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-HXu3hZ'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_e48e0/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_e48e0.dir/build.make CMakeFiles/cmTC_e48e0.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-HXu3hZ'
+        Building C object CMakeFiles/cmTC_e48e0.dir/HAVE_UNISTD_H.c.o
+        /usr/bin/cc   -Wall -std=c99 -D_DEFAULT_SOURCE  -O2 -g  -std=c11 -o CMakeFiles/cmTC_e48e0.dir/HAVE_UNISTD_H.c.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-HXu3hZ/HAVE_UNISTD_H.c
+        Linking C executable cmTC_e48e0
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e48e0.dir/link.txt --verbose=1
+        /usr/bin/cc -Wall -std=c99 -D_DEFAULT_SOURCE  -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_e48e0.dir/HAVE_UNISTD_H.c.o -o cmTC_e48e0 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-HXu3hZ'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "ConfigureChecks.cmake:29 (check_function_exists)"
+      - "CMakeLists.txt:403 (include)"
+    checks:
+      - "Looking for fseek64"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-sjNyYi"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-sjNyYi"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -std=c99 -D_DEFAULT_SOURCE"
+      CMAKE_C_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_FSEEK64"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-sjNyYi'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_23c41/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_23c41.dir/build.make CMakeFiles/cmTC_23c41.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-sjNyYi'
+        Building C object CMakeFiles/cmTC_23c41.dir/CheckFunctionExists.c.o
+        /usr/bin/cc   -Wall -std=c99 -D_DEFAULT_SOURCE -DCHECK_FUNCTION_EXISTS=fseek64 -O2 -g  -std=c11 -o CMakeFiles/cmTC_23c41.dir/CheckFunctionExists.c.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-sjNyYi/CheckFunctionExists.c
+        Linking C executable cmTC_23c41
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_23c41.dir/link.txt --verbose=1
+        /usr/bin/cc -Wall -std=c99 -D_DEFAULT_SOURCE -DCHECK_FUNCTION_EXISTS=fseek64 -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_23c41.dir/CheckFunctionExists.c.o -o cmTC_23c41 
+        /usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/bin/ld: CMakeFiles/cmTC_23c41.dir/CheckFunctionExists.c.o: in function `main':
+        /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-sjNyYi/CheckFunctionExists.c:17: undefined reference to `fseek64'
+        collect2: error: ld returned 1 exit status
+        gmake[1]: *** [CMakeFiles/cmTC_23c41.dir/build.make:99: cmTC_23c41] Error 1
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-sjNyYi'
+        gmake: *** [Makefile:127: cmTC_23c41/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CheckSymbolExists.cmake:140 (try_compile)"
+      - "/usr/share/cmake/Modules/CheckSymbolExists.cmake:66 (__CHECK_SYMBOL_EXISTS_IMPL)"
+      - "ConfigureChecks.cmake:30 (check_symbol_exists)"
+      - "CMakeLists.txt:403 (include)"
+    checks:
+      - "Looking for fseeko"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-TRJQCP"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-TRJQCP"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -std=c99 -D_DEFAULT_SOURCE"
+      CMAKE_C_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_FSEEKO"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-TRJQCP'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_84cad/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_84cad.dir/build.make CMakeFiles/cmTC_84cad.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-TRJQCP'
+        Building C object CMakeFiles/cmTC_84cad.dir/CheckSymbolExists.c.o
+        /usr/bin/cc   -Wall -std=c99 -D_DEFAULT_SOURCE  -O2 -g  -std=c11 -o CMakeFiles/cmTC_84cad.dir/CheckSymbolExists.c.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-TRJQCP/CheckSymbolExists.c
+        Linking C executable cmTC_84cad
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_84cad.dir/link.txt --verbose=1
+        /usr/bin/cc -Wall -std=c99 -D_DEFAULT_SOURCE  -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_84cad.dir/CheckSymbolExists.c.o -o cmTC_84cad 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-TRJQCP'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "ConfigureChecks.cmake:31 (check_function_exists)"
+      - "CMakeLists.txt:403 (include)"
+    checks:
+      - "Looking for ftell64"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Q3NG7O"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Q3NG7O"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -std=c99 -D_DEFAULT_SOURCE"
+      CMAKE_C_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_FTELL64"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Q3NG7O'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_161b4/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_161b4.dir/build.make CMakeFiles/cmTC_161b4.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Q3NG7O'
+        Building C object CMakeFiles/cmTC_161b4.dir/CheckFunctionExists.c.o
+        /usr/bin/cc   -Wall -std=c99 -D_DEFAULT_SOURCE -DCHECK_FUNCTION_EXISTS=ftell64 -O2 -g  -std=c11 -o CMakeFiles/cmTC_161b4.dir/CheckFunctionExists.c.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Q3NG7O/CheckFunctionExists.c
+        Linking C executable cmTC_161b4
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_161b4.dir/link.txt --verbose=1
+        /usr/bin/cc -Wall -std=c99 -D_DEFAULT_SOURCE -DCHECK_FUNCTION_EXISTS=ftell64 -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_161b4.dir/CheckFunctionExists.c.o -o cmTC_161b4 
+        /usr/lib64/gcc/x86_64-suse-linux/13/../../../../x86_64-suse-linux/bin/ld: CMakeFiles/cmTC_161b4.dir/CheckFunctionExists.c.o: in function `main':
+        /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Q3NG7O/CheckFunctionExists.c:17: undefined reference to `ftell64'
+        collect2: error: ld returned 1 exit status
+        gmake[1]: *** [CMakeFiles/cmTC_161b4.dir/build.make:99: cmTC_161b4] Error 1
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Q3NG7O'
+        gmake: *** [Makefile:127: cmTC_161b4/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "ConfigureChecks.cmake:32 (check_function_exists)"
+      - "CMakeLists.txt:403 (include)"
+    checks:
+      - "Looking for pread64"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-lemomB"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-lemomB"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -std=c99 -D_DEFAULT_SOURCE"
+      CMAKE_C_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_PREAD64"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-lemomB'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_530bc/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_530bc.dir/build.make CMakeFiles/cmTC_530bc.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-lemomB'
+        Building C object CMakeFiles/cmTC_530bc.dir/CheckFunctionExists.c.o
+        /usr/bin/cc   -Wall -std=c99 -D_DEFAULT_SOURCE -DCHECK_FUNCTION_EXISTS=pread64 -O2 -g  -std=c11 -o CMakeFiles/cmTC_530bc.dir/CheckFunctionExists.c.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-lemomB/CheckFunctionExists.c
+        Linking C executable cmTC_530bc
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_530bc.dir/link.txt --verbose=1
+        /usr/bin/cc -Wall -std=c99 -D_DEFAULT_SOURCE -DCHECK_FUNCTION_EXISTS=pread64 -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_530bc.dir/CheckFunctionExists.c.o -o cmTC_530bc 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-lemomB'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "ConfigureChecks.cmake:33 (check_function_exists)"
+      - "CMakeLists.txt:403 (include)"
+    checks:
+      - "Looking for lseek64"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-EQo0Rf"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-EQo0Rf"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -std=c99 -D_DEFAULT_SOURCE"
+      CMAKE_C_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_LSEEK64"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-EQo0Rf'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_7a0a9/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_7a0a9.dir/build.make CMakeFiles/cmTC_7a0a9.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-EQo0Rf'
+        Building C object CMakeFiles/cmTC_7a0a9.dir/CheckFunctionExists.c.o
+        /usr/bin/cc   -Wall -std=c99 -D_DEFAULT_SOURCE -DCHECK_FUNCTION_EXISTS=lseek64 -O2 -g  -std=c11 -o CMakeFiles/cmTC_7a0a9.dir/CheckFunctionExists.c.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-EQo0Rf/CheckFunctionExists.c
+        Linking C executable cmTC_7a0a9
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7a0a9.dir/link.txt --verbose=1
+        /usr/bin/cc -Wall -std=c99 -D_DEFAULT_SOURCE -DCHECK_FUNCTION_EXISTS=lseek64 -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_7a0a9.dir/CheckFunctionExists.c.o -o cmTC_7a0a9 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-EQo0Rf'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "ConfigureChecks.cmake:34 (check_function_exists)"
+      - "CMakeLists.txt:403 (include)"
+    checks:
+      - "Looking for gmtime_r"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Qbywgs"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Qbywgs"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -std=c99 -D_DEFAULT_SOURCE"
+      CMAKE_C_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_GMTIME_R"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Qbywgs'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_24e85/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_24e85.dir/build.make CMakeFiles/cmTC_24e85.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Qbywgs'
+        Building C object CMakeFiles/cmTC_24e85.dir/CheckFunctionExists.c.o
+        /usr/bin/cc   -Wall -std=c99 -D_DEFAULT_SOURCE -DCHECK_FUNCTION_EXISTS=gmtime_r -O2 -g  -std=c11 -o CMakeFiles/cmTC_24e85.dir/CheckFunctionExists.c.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Qbywgs/CheckFunctionExists.c
+        Linking C executable cmTC_24e85
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_24e85.dir/link.txt --verbose=1
+        /usr/bin/cc -Wall -std=c99 -D_DEFAULT_SOURCE -DCHECK_FUNCTION_EXISTS=gmtime_r -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_24e85.dir/CheckFunctionExists.c.o -o cmTC_24e85 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Qbywgs'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "ConfigureChecks.cmake:35 (check_function_exists)"
+      - "CMakeLists.txt:403 (include)"
+    checks:
+      - "Looking for timegm"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-hSmLPF"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-hSmLPF"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -std=c99 -D_DEFAULT_SOURCE"
+      CMAKE_C_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_TIMEGM"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-hSmLPF'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_12ade/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_12ade.dir/build.make CMakeFiles/cmTC_12ade.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-hSmLPF'
+        Building C object CMakeFiles/cmTC_12ade.dir/CheckFunctionExists.c.o
+        /usr/bin/cc   -Wall -std=c99 -D_DEFAULT_SOURCE -DCHECK_FUNCTION_EXISTS=timegm -O2 -g  -std=c11 -o CMakeFiles/cmTC_12ade.dir/CheckFunctionExists.c.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-hSmLPF/CheckFunctionExists.c
+        Linking C executable cmTC_12ade
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_12ade.dir/link.txt --verbose=1
+        /usr/bin/cc -Wall -std=c99 -D_DEFAULT_SOURCE -DCHECK_FUNCTION_EXISTS=timegm -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_12ade.dir/CheckFunctionExists.c.o -o cmTC_12ade 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-hSmLPF'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "ConfigureChecks.cmake:36 (check_function_exists)"
+      - "CMakeLists.txt:403 (include)"
+    checks:
+      - "Looking for gettimeofday"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-hxY5d3"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-hxY5d3"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -std=c99 -D_DEFAULT_SOURCE"
+      CMAKE_C_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_GETTIMEOFDAY"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-hxY5d3'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_edb6b/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_edb6b.dir/build.make CMakeFiles/cmTC_edb6b.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-hxY5d3'
+        Building C object CMakeFiles/cmTC_edb6b.dir/CheckFunctionExists.c.o
+        /usr/bin/cc   -Wall -std=c99 -D_DEFAULT_SOURCE -DCHECK_FUNCTION_EXISTS=gettimeofday -O2 -g  -std=c11 -o CMakeFiles/cmTC_edb6b.dir/CheckFunctionExists.c.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-hxY5d3/CheckFunctionExists.c
+        Linking C executable cmTC_edb6b
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_edb6b.dir/link.txt --verbose=1
+        /usr/bin/cc -Wall -std=c99 -D_DEFAULT_SOURCE -DCHECK_FUNCTION_EXISTS=gettimeofday -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_edb6b.dir/CheckFunctionExists.c.o -o cmTC_edb6b 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-hxY5d3'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "ConfigureChecks.cmake:37 (check_function_exists)"
+      - "CMakeLists.txt:403 (include)"
+    checks:
+      - "Looking for localtime_r"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-2hK4zT"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-2hK4zT"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -std=c99 -D_DEFAULT_SOURCE"
+      CMAKE_C_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_LOCALTIME_R"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-2hK4zT'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_8c044/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_8c044.dir/build.make CMakeFiles/cmTC_8c044.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-2hK4zT'
+        Building C object CMakeFiles/cmTC_8c044.dir/CheckFunctionExists.c.o
+        /usr/bin/cc   -Wall -std=c99 -D_DEFAULT_SOURCE -DCHECK_FUNCTION_EXISTS=localtime_r -O2 -g  -std=c11 -o CMakeFiles/cmTC_8c044.dir/CheckFunctionExists.c.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-2hK4zT/CheckFunctionExists.c
+        Linking C executable cmTC_8c044
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8c044.dir/link.txt --verbose=1
+        /usr/bin/cc -Wall -std=c99 -D_DEFAULT_SOURCE -DCHECK_FUNCTION_EXISTS=localtime_r -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_8c044.dir/CheckFunctionExists.c.o -o cmTC_8c044 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-2hK4zT'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "ConfigureChecks.cmake:38 (check_function_exists)"
+      - "CMakeLists.txt:403 (include)"
+    checks:
+      - "Looking for popen"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-5SKO40"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-5SKO40"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -std=c99 -D_DEFAULT_SOURCE"
+      CMAKE_C_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_POPEN"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-5SKO40'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_07aca/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_07aca.dir/build.make CMakeFiles/cmTC_07aca.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-5SKO40'
+        Building C object CMakeFiles/cmTC_07aca.dir/CheckFunctionExists.c.o
+        /usr/bin/cc   -Wall -std=c99 -D_DEFAULT_SOURCE -DCHECK_FUNCTION_EXISTS=popen -O2 -g  -std=c11 -o CMakeFiles/cmTC_07aca.dir/CheckFunctionExists.c.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-5SKO40/CheckFunctionExists.c
+        Linking C executable cmTC_07aca
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_07aca.dir/link.txt --verbose=1
+        /usr/bin/cc -Wall -std=c99 -D_DEFAULT_SOURCE -DCHECK_FUNCTION_EXISTS=popen -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_07aca.dir/CheckFunctionExists.c.o -o cmTC_07aca 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-5SKO40'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "ConfigureChecks.cmake:39 (check_function_exists)"
+      - "CMakeLists.txt:403 (include)"
+    checks:
+      - "Looking for mkstemp"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-oz50if"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-oz50if"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -std=c99 -D_DEFAULT_SOURCE"
+      CMAKE_C_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_MKSTEMP"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-oz50if'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_325c9/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_325c9.dir/build.make CMakeFiles/cmTC_325c9.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-oz50if'
+        Building C object CMakeFiles/cmTC_325c9.dir/CheckFunctionExists.c.o
+        /usr/bin/cc   -Wall -std=c99 -D_DEFAULT_SOURCE -DCHECK_FUNCTION_EXISTS=mkstemp -O2 -g  -std=c11 -o CMakeFiles/cmTC_325c9.dir/CheckFunctionExists.c.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-oz50if/CheckFunctionExists.c
+        Linking C executable cmTC_325c9
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_325c9.dir/link.txt --verbose=1
+        /usr/bin/cc -Wall -std=c99 -D_DEFAULT_SOURCE -DCHECK_FUNCTION_EXISTS=mkstemp -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_325c9.dir/CheckFunctionExists.c.o -o cmTC_325c9 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-oz50if'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "ConfigureChecks.cmake:40 (check_function_exists)"
+      - "CMakeLists.txt:403 (include)"
+    checks:
+      - "Looking for strtok_r"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-7Ji8lV"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-7Ji8lV"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -std=c99 -D_DEFAULT_SOURCE"
+      CMAKE_C_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_STRTOK_R"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-7Ji8lV'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_1d9a3/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_1d9a3.dir/build.make CMakeFiles/cmTC_1d9a3.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-7Ji8lV'
+        Building C object CMakeFiles/cmTC_1d9a3.dir/CheckFunctionExists.c.o
+        /usr/bin/cc   -Wall -std=c99 -D_DEFAULT_SOURCE -DCHECK_FUNCTION_EXISTS=strtok_r -O2 -g  -std=c11 -o CMakeFiles/cmTC_1d9a3.dir/CheckFunctionExists.c.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-7Ji8lV/CheckFunctionExists.c
+        Linking C executable cmTC_1d9a3
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1d9a3.dir/link.txt --verbose=1
+        /usr/bin/cc -Wall -std=c99 -D_DEFAULT_SOURCE -DCHECK_FUNCTION_EXISTS=strtok_r -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_1d9a3.dir/CheckFunctionExists.c.o -o cmTC_1d9a3 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-7Ji8lV'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "ConfigureChecks.cmake:43 (check_c_source_compiles)"
+      - "ConfigureChecks.cmake:53 (check_for_dir)"
+      - "CMakeLists.txt:403 (include)"
+    checks:
+      - "Performing Test HAVE_DIRENT_H"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-FoeBov"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-FoeBov"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -std=c99 -D_DEFAULT_SOURCE"
+      CMAKE_C_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_DIRENT_H"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-FoeBov'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_268ae/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_268ae.dir/build.make CMakeFiles/cmTC_268ae.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-FoeBov'
+        Building C object CMakeFiles/cmTC_268ae.dir/src.c.o
+        /usr/bin/cc -DHAVE_DIRENT_H  -Wall -std=c99 -D_DEFAULT_SOURCE  -O2 -g  -std=c11 -o CMakeFiles/cmTC_268ae.dir/src.c.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-FoeBov/src.c
+        /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-FoeBov/src.c: In function ‘main’:
+        /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-FoeBov/src.c:5:8: warning: unused variable ‘d’ [-Wunused-variable]
+            5 |   DIR* d = 0;
+              |        ^
+        Linking C executable cmTC_268ae
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_268ae.dir/link.txt --verbose=1
+        /usr/bin/cc -Wall -std=c99 -D_DEFAULT_SOURCE  -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_268ae.dir/src.c.o -o cmTC_268ae 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-FoeBov'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "ConfigureChecks.cmake:43 (check_c_source_compiles)"
+      - "ConfigureChecks.cmake:54 (check_for_dir)"
+      - "CMakeLists.txt:403 (include)"
+    checks:
+      - "Performing Test HAVE_NDIR_H"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-McpTB9"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-McpTB9"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -std=c99 -D_DEFAULT_SOURCE"
+      CMAKE_C_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_NDIR_H"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-McpTB9'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_a7085/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_a7085.dir/build.make CMakeFiles/cmTC_a7085.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-McpTB9'
+        Building C object CMakeFiles/cmTC_a7085.dir/src.c.o
+        /usr/bin/cc -DHAVE_NDIR_H  -Wall -std=c99 -D_DEFAULT_SOURCE  -O2 -g  -std=c11 -o CMakeFiles/cmTC_a7085.dir/src.c.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-McpTB9/src.c
+        /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-McpTB9/src.c:1:10: fatal error: ndir.h: No such file or directory
+            1 | #include <ndir.h>
+              |          ^~~~~~~~
+        compilation terminated.
+        gmake[1]: *** [CMakeFiles/cmTC_a7085.dir/build.make:78: CMakeFiles/cmTC_a7085.dir/src.c.o] Error 1
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-McpTB9'
+        gmake: *** [Makefile:127: cmTC_a7085/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "ConfigureChecks.cmake:43 (check_c_source_compiles)"
+      - "ConfigureChecks.cmake:55 (check_for_dir)"
+      - "CMakeLists.txt:403 (include)"
+    checks:
+      - "Performing Test HAVE_SYS_DIR_H"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-YgV5fD"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-YgV5fD"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -std=c99 -D_DEFAULT_SOURCE"
+      CMAKE_C_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_SYS_DIR_H"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-YgV5fD'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_a5e32/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_a5e32.dir/build.make CMakeFiles/cmTC_a5e32.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-YgV5fD'
+        Building C object CMakeFiles/cmTC_a5e32.dir/src.c.o
+        /usr/bin/cc -DHAVE_SYS_DIR_H  -Wall -std=c99 -D_DEFAULT_SOURCE  -O2 -g  -std=c11 -o CMakeFiles/cmTC_a5e32.dir/src.c.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-YgV5fD/src.c
+        /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-YgV5fD/src.c: In function ‘main’:
+        /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-YgV5fD/src.c:5:8: warning: unused variable ‘d’ [-Wunused-variable]
+            5 |   DIR* d = 0;
+              |        ^
+        Linking C executable cmTC_a5e32
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a5e32.dir/link.txt --verbose=1
+        /usr/bin/cc -Wall -std=c99 -D_DEFAULT_SOURCE  -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_a5e32.dir/src.c.o -o cmTC_a5e32 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-YgV5fD'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake/Modules/CheckCSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "ConfigureChecks.cmake:43 (check_c_source_compiles)"
+      - "ConfigureChecks.cmake:56 (check_for_dir)"
+      - "CMakeLists.txt:403 (include)"
+    checks:
+      - "Performing Test HAVE_SYS_NDIR_H"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Uhd7VP"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Uhd7VP"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -std=c99 -D_DEFAULT_SOURCE"
+      CMAKE_C_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_SYS_NDIR_H"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Uhd7VP'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_1d5f4/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_1d5f4.dir/build.make CMakeFiles/cmTC_1d5f4.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Uhd7VP'
+        Building C object CMakeFiles/cmTC_1d5f4.dir/src.c.o
+        /usr/bin/cc -DHAVE_SYS_NDIR_H  -Wall -std=c99 -D_DEFAULT_SOURCE  -O2 -g  -std=c11 -o CMakeFiles/cmTC_1d5f4.dir/src.c.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Uhd7VP/src.c
+        /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Uhd7VP/src.c:1:10: fatal error: sys/ndir.h: No such file or directory
+            1 | #include <sys/ndir.h>
+              |          ^~~~~~~~~~~~
+        compilation terminated.
+        gmake[1]: *** [CMakeFiles/cmTC_1d5f4.dir/build.make:78: CMakeFiles/cmTC_1d5f4.dir/src.c.o] Error 1
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-Uhd7VP'
+        gmake: *** [Makefile:127: cmTC_1d5f4/fast] Error 2
+        
+      exitCode: 2
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "ConfigureChecks.cmake:58 (check_function_exists)"
+      - "CMakeLists.txt:403 (include)"
+    checks:
+      - "Looking for nanosleep"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-cTQhdp"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-cTQhdp"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -std=c99 -D_DEFAULT_SOURCE"
+      CMAKE_C_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_NANOSLEEP"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-cTQhdp'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_7ff8f/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_7ff8f.dir/build.make CMakeFiles/cmTC_7ff8f.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-cTQhdp'
+        Building C object CMakeFiles/cmTC_7ff8f.dir/CheckFunctionExists.c.o
+        /usr/bin/cc   -Wall -std=c99 -D_DEFAULT_SOURCE -DCHECK_FUNCTION_EXISTS=nanosleep -O2 -g  -std=c11 -o CMakeFiles/cmTC_7ff8f.dir/CheckFunctionExists.c.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-cTQhdp/CheckFunctionExists.c
+        Linking C executable cmTC_7ff8f
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7ff8f.dir/link.txt --verbose=1
+        /usr/bin/cc -Wall -std=c99 -D_DEFAULT_SOURCE -DCHECK_FUNCTION_EXISTS=nanosleep -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_7ff8f.dir/CheckFunctionExists.c.o -o cmTC_7ff8f 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-cTQhdp'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/usr/share/cmake/Modules/CheckCompilerFlag.cmake:52 (cmake_check_compiler_flag)"
+      - "/usr/share/cmake/Modules/GenerateExportHeader.cmake:238 (check_compiler_flag)"
+      - "/usr/share/cmake/Modules/GenerateExportHeader.cmake:419 (_test_compiler_hidden_visibility)"
+      - "CMakeLists.txt:638 (generate_export_header)"
+    checks:
+      - "Performing Test COMPILER_HAS_HIDDEN_VISIBILITY"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-KXLMwn"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-KXLMwn"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-Wall -Wextra -Wpedantic -Wno-unused-parameter -Wcast-align -Wformat-security -Wframe-larger-than=65536 -Wlogical-op -Wmissing-format-attribute -Wnon-virtual-dtor -Woverloaded-virtual -Wmissing-declarations -Wundef -Wzero-as-null-pointer-constant -Wshadow -Wsuggest-override -fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE"
+      CMAKE_CXX_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "COMPILER_HAS_HIDDEN_VISIBILITY"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-KXLMwn'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_03c7b/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_03c7b.dir/build.make CMakeFiles/cmTC_03c7b.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-KXLMwn'
+        Building CXX object CMakeFiles/cmTC_03c7b.dir/src.cxx.o
+        /usr/bin/c++ -DCOMPILER_HAS_HIDDEN_VISIBILITY  -Wall -Wextra -Wpedantic -Wno-unused-parameter -Wcast-align -Wformat-security -Wframe-larger-than=65536 -Wlogical-op -Wmissing-format-attribute -Wnon-virtual-dtor -Woverloaded-virtual -Wmissing-declarations -Wundef -Wzero-as-null-pointer-constant -Wshadow -Wsuggest-override -fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE  -O2 -g  -std=c++17   -fvisibility=hidden -o CMakeFiles/cmTC_03c7b.dir/src.cxx.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-KXLMwn/src.cxx
+        Linking CXX executable cmTC_03c7b
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_03c7b.dir/link.txt --verbose=1
+        /usr/bin/c++ -Wall -Wextra -Wpedantic -Wno-unused-parameter -Wcast-align -Wformat-security -Wframe-larger-than=65536 -Wlogical-op -Wmissing-format-attribute -Wnon-virtual-dtor -Woverloaded-virtual -Wmissing-declarations -Wundef -Wzero-as-null-pointer-constant -Wshadow -Wsuggest-override -fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE  -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_03c7b.dir/src.cxx.o -o cmTC_03c7b 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-KXLMwn'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake/Modules/Internal/CheckCompilerFlag.cmake:18 (cmake_check_source_compiles)"
+      - "/usr/share/cmake/Modules/CheckCompilerFlag.cmake:52 (cmake_check_compiler_flag)"
+      - "/usr/share/cmake/Modules/GenerateExportHeader.cmake:239 (check_compiler_flag)"
+      - "/usr/share/cmake/Modules/GenerateExportHeader.cmake:419 (_test_compiler_hidden_visibility)"
+      - "CMakeLists.txt:638 (generate_export_header)"
+    checks:
+      - "Performing Test COMPILER_HAS_HIDDEN_INLINE_VISIBILITY"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-LmKMal"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-LmKMal"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-Wall -Wextra -Wpedantic -Wno-unused-parameter -Wcast-align -Wformat-security -Wframe-larger-than=65536 -Wlogical-op -Wmissing-format-attribute -Wnon-virtual-dtor -Woverloaded-virtual -Wmissing-declarations -Wundef -Wzero-as-null-pointer-constant -Wshadow -Wsuggest-override -fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE"
+      CMAKE_CXX_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "COMPILER_HAS_HIDDEN_INLINE_VISIBILITY"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-LmKMal'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_530a0/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_530a0.dir/build.make CMakeFiles/cmTC_530a0.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-LmKMal'
+        Building CXX object CMakeFiles/cmTC_530a0.dir/src.cxx.o
+        /usr/bin/c++ -DCOMPILER_HAS_HIDDEN_INLINE_VISIBILITY  -Wall -Wextra -Wpedantic -Wno-unused-parameter -Wcast-align -Wformat-security -Wframe-larger-than=65536 -Wlogical-op -Wmissing-format-attribute -Wnon-virtual-dtor -Woverloaded-virtual -Wmissing-declarations -Wundef -Wzero-as-null-pointer-constant -Wshadow -Wsuggest-override -fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE  -O2 -g  -std=c++17   -fvisibility-inlines-hidden -o CMakeFiles/cmTC_530a0.dir/src.cxx.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-LmKMal/src.cxx
+        Linking CXX executable cmTC_530a0
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_530a0.dir/link.txt --verbose=1
+        /usr/bin/c++ -Wall -Wextra -Wpedantic -Wno-unused-parameter -Wcast-align -Wformat-security -Wframe-larger-than=65536 -Wlogical-op -Wmissing-format-attribute -Wnon-virtual-dtor -Woverloaded-virtual -Wmissing-declarations -Wundef -Wzero-as-null-pointer-constant -Wshadow -Wsuggest-override -fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE  -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_530a0.dir/src.cxx.o -o cmTC_530a0 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-LmKMal'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "/usr/share/cmake/Modules/CheckSourceCompiles.cmake:77 (cmake_check_source_compiles)"
+      - "/usr/share/cmake/Modules/GenerateExportHeader.cmake:206 (check_source_compiles)"
+      - "/usr/share/cmake/Modules/GenerateExportHeader.cmake:263 (_check_cxx_compiler_attribute)"
+      - "/usr/share/cmake/Modules/GenerateExportHeader.cmake:420 (_test_compiler_has_deprecated)"
+      - "CMakeLists.txt:638 (generate_export_header)"
+    checks:
+      - "Performing Test COMPILER_HAS_DEPRECATED_ATTR"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-b3zagJ"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-b3zagJ"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-Wall -Wextra -Wpedantic -Wno-unused-parameter -Wcast-align -Wformat-security -Wframe-larger-than=65536 -Wlogical-op -Wmissing-format-attribute -Wnon-virtual-dtor -Woverloaded-virtual -Wmissing-declarations -Wundef -Wzero-as-null-pointer-constant -Wshadow -Wsuggest-override -fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE"
+      CMAKE_CXX_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "COMPILER_HAS_DEPRECATED_ATTR"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-b3zagJ'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_fcb80/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_fcb80.dir/build.make CMakeFiles/cmTC_fcb80.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-b3zagJ'
+        Building CXX object CMakeFiles/cmTC_fcb80.dir/src.cxx.o
+        /usr/bin/c++ -DCOMPILER_HAS_DEPRECATED_ATTR  -Wall -Wextra -Wpedantic -Wno-unused-parameter -Wcast-align -Wformat-security -Wframe-larger-than=65536 -Wlogical-op -Wmissing-format-attribute -Wnon-virtual-dtor -Woverloaded-virtual -Wmissing-declarations -Wundef -Wzero-as-null-pointer-constant -Wshadow -Wsuggest-override -fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE  -O2 -g  -std=c++17 -o CMakeFiles/cmTC_fcb80.dir/src.cxx.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-b3zagJ/src.cxx
+        /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-b3zagJ/src.cxx:1:37: warning: no previous declaration for ‘int somefunc()’ [-Wmissing-declarations]
+            1 | __attribute__((__deprecated__)) int somefunc() { return 0; }
+              |                                     ^~~~~~~~
+        /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-b3zagJ/src.cxx: In function ‘int main()’:
+        /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-b3zagJ/src.cxx:2:33: warning: ‘int somefunc()’ is deprecated [-Wdeprecated-declarations]
+            2 |     int main() { return somefunc();}
+              |                         ~~~~~~~~^~
+        /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-b3zagJ/src.cxx:1:37: note: declared here
+            1 | __attribute__((__deprecated__)) int somefunc() { return 0; }
+              |                                     ^~~~~~~~
+        Linking CXX executable cmTC_fcb80
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fcb80.dir/link.txt --verbose=1
+        /usr/bin/c++ -Wall -Wextra -Wpedantic -Wno-unused-parameter -Wcast-align -Wformat-security -Wframe-larger-than=65536 -Wlogical-op -Wmissing-format-attribute -Wnon-virtual-dtor -Woverloaded-virtual -Wmissing-declarations -Wundef -Wzero-as-null-pointer-constant -Wshadow -Wsuggest-override -fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE  -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_fcb80.dir/src.cxx.o -o cmTC_fcb80 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-b3zagJ'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CheckFunctionExists.cmake:86 (try_compile)"
+      - "glib/CMakeLists.txt:158 (check_function_exists)"
+    checks:
+      - "Looking for explicit_bzero"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-mquMnn"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-mquMnn"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "-Wall -std=c99 -D_DEFAULT_SOURCE"
+      CMAKE_C_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_EXPLICIT_BZERO"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-mquMnn'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_2238b/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_2238b.dir/build.make CMakeFiles/cmTC_2238b.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-mquMnn'
+        Building C object CMakeFiles/cmTC_2238b.dir/CheckFunctionExists.c.o
+        /usr/bin/cc   -Wall -std=c99 -D_DEFAULT_SOURCE -DCHECK_FUNCTION_EXISTS=explicit_bzero -O2 -g  -std=c11 -o CMakeFiles/cmTC_2238b.dir/CheckFunctionExists.c.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-mquMnn/CheckFunctionExists.c
+        Linking C executable cmTC_2238b
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2238b.dir/link.txt --verbose=1
+        /usr/bin/cc -Wall -std=c99 -D_DEFAULT_SOURCE -DCHECK_FUNCTION_EXISTS=explicit_bzero -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_2238b.dir/CheckFunctionExists.c.o -o cmTC_2238b 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-mquMnn'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CheckSymbolExists.cmake:140 (try_compile)"
+      - "/usr/share/cmake/Modules/CheckCXXSymbolExists.cmake:72 (__CHECK_SYMBOL_EXISTS_IMPL)"
+      - "test/CMakeLists.txt:47 (check_cxx_symbol_exists)"
+    checks:
+      - "Looking for CAIRO_HAS_PNG_FUNCTIONS"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-RMk5SF"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-RMk5SF"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-Wall -Wextra -Wpedantic -Wno-unused-parameter -Wcast-align -Wformat-security -Wframe-larger-than=65536 -Wlogical-op -Wmissing-format-attribute -Wnon-virtual-dtor -Woverloaded-virtual -Wmissing-declarations -Wundef -Wzero-as-null-pointer-constant -Wshadow -Wsuggest-override -fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE"
+      CMAKE_CXX_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_CAIRO_PNG"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-RMk5SF'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_ebc86/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_ebc86.dir/build.make CMakeFiles/cmTC_ebc86.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-RMk5SF'
+        Building CXX object CMakeFiles/cmTC_ebc86.dir/CheckSymbolExists.cxx.o
+        /usr/bin/c++  -I/usr/include/cairo -I/usr/include/libpng16 -I/usr/include/freetype2 -I/usr/include/pixman-1 -Wall -Wextra -Wpedantic -Wno-unused-parameter -Wcast-align -Wformat-security -Wframe-larger-than=65536 -Wlogical-op -Wmissing-format-attribute -Wnon-virtual-dtor -Woverloaded-virtual -Wmissing-declarations -Wundef -Wzero-as-null-pointer-constant -Wshadow -Wsuggest-override -fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE  -O2 -g  -std=c++17 -o CMakeFiles/cmTC_ebc86.dir/CheckSymbolExists.cxx.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-RMk5SF/CheckSymbolExists.cxx
+        Linking CXX executable cmTC_ebc86
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ebc86.dir/link.txt --verbose=1
+        /usr/bin/c++ -Wall -Wextra -Wpedantic -Wno-unused-parameter -Wcast-align -Wformat-security -Wframe-larger-than=65536 -Wlogical-op -Wmissing-format-attribute -Wnon-virtual-dtor -Woverloaded-virtual -Wmissing-declarations -Wundef -Wzero-as-null-pointer-constant -Wshadow -Wsuggest-override -fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE  -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_ebc86.dir/CheckSymbolExists.cxx.o -o cmTC_ebc86 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-RMk5SF'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CheckSymbolExists.cmake:140 (try_compile)"
+      - "/usr/share/cmake/Modules/CheckCXXSymbolExists.cmake:72 (__CHECK_SYMBOL_EXISTS_IMPL)"
+      - "test/CMakeLists.txt:48 (check_cxx_symbol_exists)"
+    checks:
+      - "Looking for CAIRO_HAS_PDF_SURFACE"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-lSQ7Pn"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-lSQ7Pn"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-Wall -Wextra -Wpedantic -Wno-unused-parameter -Wcast-align -Wformat-security -Wframe-larger-than=65536 -Wlogical-op -Wmissing-format-attribute -Wnon-virtual-dtor -Woverloaded-virtual -Wmissing-declarations -Wundef -Wzero-as-null-pointer-constant -Wshadow -Wsuggest-override -fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE"
+      CMAKE_CXX_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_CAIRO_PDF"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-lSQ7Pn'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_8364a/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_8364a.dir/build.make CMakeFiles/cmTC_8364a.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-lSQ7Pn'
+        Building CXX object CMakeFiles/cmTC_8364a.dir/CheckSymbolExists.cxx.o
+        /usr/bin/c++  -I/usr/include/cairo -I/usr/include/libpng16 -I/usr/include/freetype2 -I/usr/include/pixman-1 -Wall -Wextra -Wpedantic -Wno-unused-parameter -Wcast-align -Wformat-security -Wframe-larger-than=65536 -Wlogical-op -Wmissing-format-attribute -Wnon-virtual-dtor -Woverloaded-virtual -Wmissing-declarations -Wundef -Wzero-as-null-pointer-constant -Wshadow -Wsuggest-override -fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE  -O2 -g  -std=c++17 -o CMakeFiles/cmTC_8364a.dir/CheckSymbolExists.cxx.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-lSQ7Pn/CheckSymbolExists.cxx
+        Linking CXX executable cmTC_8364a
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8364a.dir/link.txt --verbose=1
+        /usr/bin/c++ -Wall -Wextra -Wpedantic -Wno-unused-parameter -Wcast-align -Wformat-security -Wframe-larger-than=65536 -Wlogical-op -Wmissing-format-attribute -Wnon-virtual-dtor -Woverloaded-virtual -Wmissing-declarations -Wundef -Wzero-as-null-pointer-constant -Wshadow -Wsuggest-override -fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE  -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_8364a.dir/CheckSymbolExists.cxx.o -o cmTC_8364a 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-lSQ7Pn'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CheckSymbolExists.cmake:140 (try_compile)"
+      - "/usr/share/cmake/Modules/CheckCXXSymbolExists.cmake:72 (__CHECK_SYMBOL_EXISTS_IMPL)"
+      - "test/CMakeLists.txt:49 (check_cxx_symbol_exists)"
+    checks:
+      - "Looking for CAIRO_HAS_PS_SURFACE"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-IIWkrC"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-IIWkrC"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-Wall -Wextra -Wpedantic -Wno-unused-parameter -Wcast-align -Wformat-security -Wframe-larger-than=65536 -Wlogical-op -Wmissing-format-attribute -Wnon-virtual-dtor -Woverloaded-virtual -Wmissing-declarations -Wundef -Wzero-as-null-pointer-constant -Wshadow -Wsuggest-override -fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE"
+      CMAKE_CXX_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_CAIRO_PS"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-IIWkrC'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_05223/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_05223.dir/build.make CMakeFiles/cmTC_05223.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-IIWkrC'
+        Building CXX object CMakeFiles/cmTC_05223.dir/CheckSymbolExists.cxx.o
+        /usr/bin/c++  -I/usr/include/cairo -I/usr/include/libpng16 -I/usr/include/freetype2 -I/usr/include/pixman-1 -Wall -Wextra -Wpedantic -Wno-unused-parameter -Wcast-align -Wformat-security -Wframe-larger-than=65536 -Wlogical-op -Wmissing-format-attribute -Wnon-virtual-dtor -Woverloaded-virtual -Wmissing-declarations -Wundef -Wzero-as-null-pointer-constant -Wshadow -Wsuggest-override -fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE  -O2 -g  -std=c++17 -o CMakeFiles/cmTC_05223.dir/CheckSymbolExists.cxx.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-IIWkrC/CheckSymbolExists.cxx
+        Linking CXX executable cmTC_05223
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_05223.dir/link.txt --verbose=1
+        /usr/bin/c++ -Wall -Wextra -Wpedantic -Wno-unused-parameter -Wcast-align -Wformat-security -Wframe-larger-than=65536 -Wlogical-op -Wmissing-format-attribute -Wnon-virtual-dtor -Woverloaded-virtual -Wmissing-declarations -Wundef -Wzero-as-null-pointer-constant -Wshadow -Wsuggest-override -fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE  -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_05223.dir/CheckSymbolExists.cxx.o -o cmTC_05223 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-IIWkrC'
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "/usr/share/cmake/Modules/CheckSymbolExists.cmake:140 (try_compile)"
+      - "/usr/share/cmake/Modules/CheckCXXSymbolExists.cmake:72 (__CHECK_SYMBOL_EXISTS_IMPL)"
+      - "test/CMakeLists.txt:50 (check_cxx_symbol_exists)"
+    checks:
+      - "Looking for CAIRO_HAS_SVG_SURFACE"
+    directories:
+      source: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-7aLFhu"
+      binary: "/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-7aLFhu"
+    cmakeVariables:
+      CMAKE_CXX_FLAGS: "-Wall -Wextra -Wpedantic -Wno-unused-parameter -Wcast-align -Wformat-security -Wframe-larger-than=65536 -Wlogical-op -Wmissing-format-attribute -Wnon-virtual-dtor -Woverloaded-virtual -Wmissing-declarations -Wundef -Wzero-as-null-pointer-constant -Wshadow -Wsuggest-override -fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE"
+      CMAKE_CXX_FLAGS_RELWITHDEBINFO: "-O2 -g "
+      CMAKE_EXE_LINKER_FLAGS: " -Wl,--as-needed"
+      CMAKE_MODULE_PATH: "/home/fmeneghetti/Projects/elettra/opt/poppler/cmake/modules;/usr/lib64/cmake/Qt6;/usr/lib64/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;/usr/lib64/cmake/Qt6/3rdparty/kwin"
+    buildResult:
+      variable: "HAVE_CAIRO_SVG"
+      cached: true
+      stdout: |
+        Change Dir: '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-7aLFhu'
+        
+        Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile cmTC_9650d/fast
+        /usr/bin/gmake  -f CMakeFiles/cmTC_9650d.dir/build.make CMakeFiles/cmTC_9650d.dir/build
+        gmake[1]: Entering directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-7aLFhu'
+        Building CXX object CMakeFiles/cmTC_9650d.dir/CheckSymbolExists.cxx.o
+        /usr/bin/c++  -I/usr/include/cairo -I/usr/include/libpng16 -I/usr/include/freetype2 -I/usr/include/pixman-1 -Wall -Wextra -Wpedantic -Wno-unused-parameter -Wcast-align -Wformat-security -Wframe-larger-than=65536 -Wlogical-op -Wmissing-format-attribute -Wnon-virtual-dtor -Woverloaded-virtual -Wmissing-declarations -Wundef -Wzero-as-null-pointer-constant -Wshadow -Wsuggest-override -fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE  -O2 -g  -std=c++17 -o CMakeFiles/cmTC_9650d.dir/CheckSymbolExists.cxx.o -c /home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-7aLFhu/CheckSymbolExists.cxx
+        Linking CXX executable cmTC_9650d
+        /usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9650d.dir/link.txt --verbose=1
+        /usr/bin/c++ -Wall -Wextra -Wpedantic -Wno-unused-parameter -Wcast-align -Wformat-security -Wframe-larger-than=65536 -Wlogical-op -Wmissing-format-attribute -Wnon-virtual-dtor -Woverloaded-virtual -Wmissing-declarations -Wundef -Wzero-as-null-pointer-constant -Wshadow -Wsuggest-override -fno-exceptions -fno-check-new -fno-common -fno-operator-names -D_DEFAULT_SOURCE  -O2 -g   -Wl,--as-needed  CMakeFiles/cmTC_9650d.dir/CheckSymbolExists.cxx.o -o cmTC_9650d 
+        gmake[1]: Leaving directory '/home/fmeneghetti/Projects/elettra/opt/poppler/build/CMakeFiles/CMakeScratch/TryCompile-7aLFhu'
+        
+      exitCode: 0
+...
