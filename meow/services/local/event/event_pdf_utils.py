@@ -251,13 +251,13 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
         #       thumbnails=False,
         #       xml_metadata=True)
 
-        doc.del_xml_metadata()
-
-        if xml_metadata:
-            doc.set_xml_metadata(xml_metadata)
-
-        if metadata:
-            set_metadata(doc, metadata)
+        # doc.del_xml_metadata()
+        #
+        # if xml_metadata:
+        #     doc.set_xml_metadata(xml_metadata)
+        #
+        # if metadata:
+        #     set_metadata(doc, metadata)
 
         cc_logo = pathlib.Path('cc_by.png').read_bytes()
 
@@ -403,8 +403,6 @@ async def pdf_unite_pdftk(write_path: str, files: list[str], first: bool) -> int
 
 
 async def pdf_unite_qpdf(write_path: str, files: list[str], first: bool) -> int:
-
-    # cmd = ['pdftk'] + files + ['cat', 'output'] + [write_path]
 
     # qpdf --linearize --remove-page-labels --empty --pages var/run/18_tmp/MOA03.pdf 1-1
     # var/run/18_tmp/MOA08.pdf 1-1 -- out.pdf
