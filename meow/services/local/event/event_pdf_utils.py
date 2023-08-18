@@ -3,6 +3,7 @@ import io
 import pathlib
 import logging as lg
 from anyio import Path, to_thread
+from meow.utils.filesystem import copy
 
 from meow.utils.hash import file_md5
 from meow.utils.keywords import KEYWORDS
@@ -234,7 +235,11 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
 
     try:
 
-        doc = Document(filename=input)
+        import shutil
+
+        shutil.copy(input, output)
+
+        # doc = Document(filename=input)
 
         # scrub(doc,
         #       attached_files=False,
@@ -280,7 +285,7 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
 #
         #     page_number += 1
 
-        doc.save(filename=output, garbage=1, clean=1, deflate=1)
+        # doc.save(filename=output, garbage=1, clean=1, deflate=1)
 
     except BaseException as be:
         logger.error(be, exc_info=True)
