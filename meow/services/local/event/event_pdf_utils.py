@@ -474,8 +474,12 @@ async def pdf_clean_qpdf(read_path: str, write_path: str) -> int:
 
     # --linearize : ottimizza il pdf per la visualizzazione web
     # --remove-page-labels: serve per le pagine logiche
+    # --flatten-annotations: Push page annotations into the content streams
 
-    cmd = ['qpdf', '--remove-page-labels', read_path, '--', write_path]
+    cmd = ['qpdf', '--remove-page-labels',
+           '--remove-unreferenced-resources=auto',
+           '--flatten-annotations=all',
+           read_path, '--', write_path]
 
     logger.info(" ".join(cmd))
 

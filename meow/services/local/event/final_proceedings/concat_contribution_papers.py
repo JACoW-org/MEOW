@@ -12,7 +12,7 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import Fin
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.services.local.event.event_pdf_utils import (
     brief_links, pdf_clean, vol_toc_links, vol_toc_pdf, pdf_unite_pdftk, write_metadata)
-from meow.utils.filesystem import copy
+# from meow.utils.filesystem import copy
 from meow.utils.list import split_list
 from meow.utils.serialization import json_encode
 
@@ -174,9 +174,9 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
         #     await brief_pdf_links_path.unlink()
 
     try:
-        await copy(str(brief_pdf_meta_path), str(brief_pdf_final_path))
-        # if await pdf_clean(str(brief_pdf_meta_path), str(brief_pdf_final_path)) != 0:
-        #     raise BaseException('Error in Proceedings at a Glance clean')
+        # await copy(str(brief_pdf_meta_path), str(brief_pdf_final_path))
+        if await pdf_clean(str(brief_pdf_meta_path), str(brief_pdf_final_path)) != 0:
+            raise BaseException('Error in Proceedings at a Glance clean')
     except BaseException as be:
         logger.error(be, exc_info=True)
         raise be
@@ -284,9 +284,9 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
         #     await vol_pdf_links_path.unlink()
 
     try:
-        await copy(str(vol_pdf_meta_path), str(vol_pdf_final_path))
-        # if await pdf_clean(str(vol_pdf_meta_path), str(vol_pdf_final_path)) != 0:
-        #     raise BaseException('Error in Proceedings Volume clean')
+        # await copy(str(vol_pdf_meta_path), str(vol_pdf_final_path))
+        if await pdf_clean(str(vol_pdf_meta_path), str(vol_pdf_final_path)) != 0:
+            raise BaseException('Error in Proceedings Volume clean')
     except BaseException as be:
         logger.error(be, exc_info=True)
         raise be
