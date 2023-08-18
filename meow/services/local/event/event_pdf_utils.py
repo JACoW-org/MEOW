@@ -259,26 +259,26 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
         # if metadata:
         #     set_metadata(doc, metadata)
 
-        cc_logo = pathlib.Path('cc_by.png').read_bytes()
+        # cc_logo = pathlib.Path('cc_by.png').read_bytes()
 
         # print([args.input, page_number, pre_print])
 
-        for page in doc:
-
-            if header:
-                annot_page_header(page, header)
-
-            if footer:
-                annot_page_footer(page, page_number, footer)
-
-            annot_page_side(
-                page=page,
-                pre_print=pre_print,
-                page_number=page_number,
-                cc_logo=cc_logo
-            )
-
-            page_number += 1
+        # for page in doc:
+#
+        #     if header:
+        #         annot_page_header(page, header)
+#
+        #     if footer:
+        #         annot_page_footer(page, page_number, footer)
+#
+        #     annot_page_side(
+        #         page=page,
+        #         pre_print=pre_print,
+        #         page_number=page_number,
+        #         cc_logo=cc_logo
+        #     )
+#
+        #     page_number += 1
 
         doc.save(filename=output, garbage=1, clean=1, deflate=1)
 
