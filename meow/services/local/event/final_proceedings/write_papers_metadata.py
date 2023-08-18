@@ -112,20 +112,20 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
 
             # logger.debug(f"{pdf_file} {pdf_name}")
 
-            await copy(str(original_pdf_file), str(jacow_pdf_file))
+            # await copy(str(original_pdf_file), str(jacow_pdf_file))
 
-            # header_data: Optional[dict] = get_header_data(contribution)
-            # footer_data: Optional[dict] = get_footer_data(
-            #     contribution, session)
-            # metadata: Optional[dict] = get_metadata(contribution)
-            # xml_metadata: Optional[str] = get_xml_metatdata(contribution)
-#
-            # pre_print: str = settings.get('pre_print', 'This is a preprint') \
-            #     if contribution.peer_reviewing_accepted else ''
+            header_data: Optional[dict] = get_header_data(contribution)
+            footer_data: Optional[dict] = get_footer_data(
+                contribution, session)
+            metadata: Optional[dict] = get_metadata(contribution)
+            xml_metadata: Optional[str] = get_xml_metatdata(contribution)
 
-            # await draw_frame_anyio(str(original_pdf_file), str(jacow_pdf_file),
-            #                        contribution.page, pre_print, header_data,
-            #                        footer_data, metadata, xml_metadata)
+            pre_print: str = settings.get('pre_print', 'This is a preprint') \
+                if contribution.peer_reviewing_accepted else ''
+
+            await draw_frame_anyio(str(original_pdf_file), str(jacow_pdf_file),
+                                   contribution.page, pre_print, header_data,
+                                   footer_data, metadata, xml_metadata)
 
             return await stream.send({
                 "index": current_index,

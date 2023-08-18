@@ -217,7 +217,6 @@ def doc_frame(args) -> None:
 
     doc = Document(filename=args.input)
 
-    # logger.info(metadata)
     page_number = int(args.page)
     pre_print = args.preprint
 
@@ -622,7 +621,7 @@ def doc_toc_links(args) -> None:
 
         page = doc.load_page(from_page)
 
-        print(page, link)
+        # print(page, link)
 
         insert_link(page, link, mark=True)
 

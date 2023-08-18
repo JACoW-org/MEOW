@@ -236,6 +236,10 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
 
         doc = Document(filename=input)
 
+        doc.save(filename=output, linear=1)
+
+        return
+
         # scrub(doc,
         #       attached_files=False,
         #       clean_pages=False,
@@ -303,7 +307,8 @@ async def draw_frame_anyio(input: str, output: str, page: int,
 async def write_metadata(read_path: str, write_path: str, metadata: dict) -> int:
     """ """
 
-    cmd = [get_python_cmd(), '-m', 'meow', 'metadata', '-input',
+    cmd = [get_python_cmd(), '-m',
+           'meow', 'metadata', '-input',
            read_path, "-output", write_path]
 
     for key in metadata.keys():
