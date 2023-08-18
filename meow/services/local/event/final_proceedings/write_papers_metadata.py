@@ -192,9 +192,10 @@ def get_footer_data(contribution, session) -> dict[str, str] | None:
     sessionHeader = unidecode(
         f'{session.code}: {session.title}' if session else '')
 
+    # FIXME
     footer_data = dict(
-        classificationHeader=classificationHeader,
-        sessionHeader=sessionHeader,
+        # classificationHeader=classificationHeader,
+        # sessionHeader=sessionHeader,
         contributionCode=contribution.code
     )
 

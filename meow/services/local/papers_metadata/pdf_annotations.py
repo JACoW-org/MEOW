@@ -301,15 +301,18 @@ def annot_page_side(page: Page, pre_print: str | None, page_number: int | None, 
     )
 
     # add copyright text
-    page.add_freetext_annot(
-        rect=rect_even_text if page_number and page_number % 2 == 0 else rect_odd_text,
-        align=TEXT_ALIGN_JUSTIFY,
-        rotate=90,
-        text='Content from this work may be used under the terms of the CC BY 4.0 licence (© 2022). Any distribution of this work must maintain attribution to the author(s), title of the work, publisher, and DOI.',
-        fontname=options.get('fontName', FONT_NAME),
-        fontsize=options.get('fontSize', FONT_SIZE),
-        text_color=options.get('textColor', TEXT_COLOR),
-    )
+    # FIXME
+    # page.add_freetext_annot(
+    #     rect=rect_even_text if page_number and page_number % 2 == 0 else rect_odd_text,
+    #     align=TEXT_ALIGN_JUSTIFY,
+    #     rotate=90,
+    #     text='Content from this work may be used under the terms of the CC BY 4.0 licence (© 2022). ' +
+    #          'Any distribution of this work must maintain attribution to the author(s), ' +
+    #          'title of the work, publisher, and DOI.',
+    #     fontname=options.get('fontName', FONT_NAME),
+    #     fontsize=options.get('fontSize', FONT_SIZE),
+    #     text_color=options.get('textColor', TEXT_COLOR),
+    # )
 
     if pre_print:
 

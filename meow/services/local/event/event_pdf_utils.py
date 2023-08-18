@@ -271,8 +271,8 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
             if header:
                 annot_page_header(page, header)
 
-            # if footer:
-            #     annot_page_footer(page, page_number, footer)
+            if footer:
+                annot_page_footer(page, page_number, footer)
 
             annot_page_side(
                 page=page,
