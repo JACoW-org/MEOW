@@ -475,9 +475,7 @@ async def pdf_clean_qpdf(read_path: str, write_path: str) -> int:
     # --linearize : ottimizza il pdf per la visualizzazione web
     # --remove-page-labels: serve per le pagine logiche
 
-    cmd = ['qpdf', '--linearize',
-           '--remove-page-labels',
-           read_path, '--', write_path]
+    cmd = ['qpdf', '--remove-page-labels', read_path, '--', write_path]
 
     logger.info(" ".join(cmd))
 

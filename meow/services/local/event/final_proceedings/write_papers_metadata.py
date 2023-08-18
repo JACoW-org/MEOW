@@ -97,8 +97,10 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
 
         try:
 
-            contribution = current_paper.contribution
-            session = sessions.get(contribution.session_code)
+            contribution: ContributionData = current_paper.contribution
+
+            session: SessionData = sessions.get(
+                contribution.session_code)  # type: ignore
             current_file = current_paper.paper
 
             original_pdf_name = f"{current_file.filename}"
@@ -185,17 +187,16 @@ def get_xml_metatdata(contribution: ContributionData) -> str | None:
     return meta.to_xml()
 
 
-def get_footer_data(contribution, session) -> dict[str, str] | None:
+def get_footer_data(contribution: ContributionData, session: SessionData) -> dict[str, str] | None:
 
     classificationHeader = unidecode(
         f'{contribution.track.title}' if contribution.track else '')
     sessionHeader = unidecode(
-        f'{session.code}: {session.title}' if session else '')
+        f'{session.code}: {session.title}')
 
-    # FIXME
     footer_data = dict(
-        # classificationHeader=classificationHeader,
-        # sessionHeader=sessionHeader,
+        classificationHeader=classificationHeader,
+        sessionHeader=sessionHeader,
         contributionCode=contribution.code
     )
 
