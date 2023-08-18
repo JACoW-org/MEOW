@@ -18,6 +18,7 @@ from meow.services.local.event.event_pdf_utils import draw_frame_anyio
 
 from datetime import datetime
 from meow.utils.datetime import format_datetime_pdf
+from meow.utils.filesystem import copy
 from meow.utils.xmp import DC, PDF, XMP, XMPMetadata
 
 
@@ -111,18 +112,20 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
 
             # logger.debug(f"{pdf_file} {pdf_name}")
 
-            header_data: Optional[dict] = get_header_data(contribution)
-            footer_data: Optional[dict] = get_footer_data(
-                contribution, session)
-            metadata: Optional[dict] = get_metadata(contribution)
-            xml_metadata: Optional[str] = get_xml_metatdata(contribution)
+            await copy(str(original_pdf_file), str(jacow_pdf_file))
 
-            pre_print: str = settings.get('pre_print', 'This is a preprint') \
-                if contribution.peer_reviewing_accepted else ''
+            # header_data: Optional[dict] = get_header_data(contribution)
+            # footer_data: Optional[dict] = get_footer_data(
+            #     contribution, session)
+            # metadata: Optional[dict] = get_metadata(contribution)
+            # xml_metadata: Optional[str] = get_xml_metatdata(contribution)
+#
+            # pre_print: str = settings.get('pre_print', 'This is a preprint') \
+            #     if contribution.peer_reviewing_accepted else ''
 
-            await draw_frame_anyio(str(original_pdf_file), str(jacow_pdf_file),
-                                   contribution.page, pre_print, header_data,
-                                   footer_data, metadata, xml_metadata)
+            # await draw_frame_anyio(str(original_pdf_file), str(jacow_pdf_file),
+            #                        contribution.page, pre_print, header_data,
+            #                        footer_data, metadata, xml_metadata)
 
             return await stream.send({
                 "index": current_index,
@@ -169,7 +172,8 @@ def get_xml_metatdata(contribution: ContributionData) -> str | None:
     meta.set(DC.subject, Literal(contribution.track_meta))
     meta.set(DC.description, Literal(contribution.doi_data.abstract))
     meta.set(DC.language, Literal("en-us"))
-    meta.set(URIRef('http://purl.org/dc/terms/format'), Literal("application/pdf"))
+    meta.set(URIRef('http://purl.org/dc/terms/format'),
+             Literal("application/pdf"))
     meta.set(DC.creator, Literal(contribution.authors_meta))
     meta.set(PDF.Keywords, Literal(contribution.keywords_meta))
     meta.set(PDF.Producer, Literal(contribution.producer_meta))

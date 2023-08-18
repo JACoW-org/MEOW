@@ -3,7 +3,6 @@ import io
 import pathlib
 import logging as lg
 from anyio import Path, to_thread
-from meow.utils.filesystem import copy
 
 from meow.utils.hash import file_md5
 from meow.utils.keywords import KEYWORDS
@@ -235,11 +234,7 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
 
     try:
 
-        import shutil
-
-        shutil.copy(input, output)
-
-        # doc = Document(filename=input)
+        doc = Document(filename=input)
 
         # scrub(doc,
         #       attached_files=False,
@@ -256,36 +251,36 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
         #       thumbnails=False,
         #       xml_metadata=True)
 
-        # doc.del_xml_metadata()
-        #
-        # if xml_metadata:
-        #     doc.set_xml_metadata(xml_metadata)
-        #
-        # if metadata:
-        #     set_metadata(doc, metadata)
+        doc.del_xml_metadata()
 
-        # cc_logo = pathlib.Path('cc_by.png').read_bytes()
+        if xml_metadata:
+            doc.set_xml_metadata(xml_metadata)
+
+        if metadata:
+            set_metadata(doc, metadata)
+
+        cc_logo = pathlib.Path('cc_by.png').read_bytes()
 
         # print([args.input, page_number, pre_print])
 
-        # for page in doc:
-#
-        #     if header:
-        #         annot_page_header(page, header)
-#
-        #     if footer:
-        #         annot_page_footer(page, page_number, footer)
-#
-        #     annot_page_side(
-        #         page=page,
-        #         pre_print=pre_print,
-        #         page_number=page_number,
-        #         cc_logo=cc_logo
-        #     )
-#
-        #     page_number += 1
+        for page in doc:
 
-        # doc.save(filename=output, garbage=1, clean=1, deflate=1)
+            if header:
+                annot_page_header(page, header)
+
+            if footer:
+                annot_page_footer(page, page_number, footer)
+
+            annot_page_side(
+                page=page,
+                pre_print=pre_print,
+                page_number=page_number,
+                cc_logo=cc_logo
+            )
+
+            page_number += 1
+
+        doc.save(filename=output, garbage=1, clean=1, deflate=1)
 
     except BaseException as be:
         logger.error(be, exc_info=True)
