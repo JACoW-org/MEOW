@@ -23,6 +23,9 @@ from meow.services.local.papers_metadata.pdf_annotations import (
 logger = lg.getLogger(__name__)
 
 
+cc_logo = pathlib.Path('cc_by.png').read_bytes()
+
+
 def get_python_cmd():
     return str(Path("venv", "bin", "python3"))
 
@@ -251,6 +254,8 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
         #       thumbnails=False,
         #       xml_metadata=True)
 
+        # set_page_labels(doc, [])
+
         doc.del_xml_metadata()
 
         if xml_metadata:
@@ -258,8 +263,6 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
 
         if metadata:
             set_metadata(doc, metadata)
-
-        cc_logo = pathlib.Path('cc_by.png').read_bytes()
 
         # print([input, output, page_number, pre_print])
 
@@ -271,12 +274,12 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
             # if footer:
             #     annot_page_footer(page, page_number, footer)
 
-            # annot_page_side(
-            #     page=page,
-            #     pre_print=pre_print,
-            #     page_number=page_number,
-            #     cc_logo=cc_logo
-            # )
+            annot_page_side(
+                page=page,
+                pre_print=pre_print,
+                page_number=page_number,
+                cc_logo=cc_logo
+            )
 
             page_number += 1
 
