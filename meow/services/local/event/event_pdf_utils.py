@@ -236,10 +236,6 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
 
         doc = Document(filename=input)
 
-        doc.save(filename=output, linear=1)
-
-        return
-
         # scrub(doc,
         #       attached_files=False,
         #       clean_pages=False,
@@ -255,13 +251,13 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
         #       thumbnails=False,
         #       xml_metadata=True)
 
-        doc.del_xml_metadata()
+        # doc.del_xml_metadata()
 
-        if xml_metadata:
-            doc.set_xml_metadata(xml_metadata)
+        # if xml_metadata:
+        #     doc.set_xml_metadata(xml_metadata)
 
-        if metadata:
-            set_metadata(doc, metadata)
+        # if metadata:
+        #     set_metadata(doc, metadata)
 
         cc_logo = pathlib.Path('cc_by.png').read_bytes()
 
@@ -284,7 +280,8 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
 
             page_number += 1
 
-        doc.save(filename=output, garbage=1, clean=1, deflate=1)
+        # doc.save(filename=output, garbage=1, clean=1, deflate=1)
+        doc.save(filename=output, linear=1)
 
     except BaseException as be:
         logger.error(be, exc_info=True)
