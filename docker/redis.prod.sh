@@ -23,9 +23,9 @@ export ARGS="$ARGS --appendfsync everysec"  # appendfsync
 export ARGS="$ARGS --aof-use-rdb-preamble yes"  # aof-use-rdb-preamble
 
 
-podman run -rm \
-        --name cat--meow_redis \
-        -v jpsp-redis-vol:/data \
-        -e REDIS_ARGS="$ARGS" \
-        -p 6379:6379 \
-        redis/redis-stack-server:latest
+exec podman run -rm \
+    --name cat--meow_redis \
+    -v jpsp-redis-vol:/data \
+    -e REDIS_ARGS="$ARGS" \
+    -p 6379:6379 \
+    redis/redis-stack-server:latest

@@ -19,7 +19,8 @@ export ARGS="$ARGS --appendonly yes"  # appendonly
 export ARGS="$ARGS --appendfsync everysec"  # appendfsync
 export ARGS="$ARGS --aof-use-rdb-preamble yes"  # aof-use-rdb-preamble
 
-podman run --name cat--meow_redis \
+exec podman run --rm \
+    --name cat--meow_redis \
     -v jpsp-redis-vol:/data \
     -e REDIS_ARGS="$ARGS" \
     -p 6379:6379 \
