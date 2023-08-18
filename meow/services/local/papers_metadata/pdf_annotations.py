@@ -1,6 +1,6 @@
 from typing import Any
 from fitz import Page, Rect, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER, TEXT_ALIGN_RIGHT, TEXT_ALIGN_JUSTIFY
-from fitz.utils import getColor, insert_image
+from fitz.utils import getColor, insert_image, insert_text
 
 PAGE_HORIZONTAL_MARGIN = 57
 PAGE_VERTICAL_MARGIN = 15

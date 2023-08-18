@@ -261,7 +261,7 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
 
         cc_logo = pathlib.Path('cc_by.png').read_bytes()
 
-        print([input, output, page_number, pre_print])
+        # print([input, output, page_number, pre_print])
 
         for page in doc:
 
@@ -271,12 +271,12 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
             if footer:
                 annot_page_footer(page, page_number, footer)
 
-            annot_page_side(
-                page=page,
-                pre_print=pre_print,
-                page_number=page_number,
-                cc_logo=cc_logo
-            )
+            # annot_page_side(
+            #     page=page,
+            #     pre_print=pre_print,
+            #     page_number=page_number,
+            #     cc_logo=cc_logo
+            # )
 
             page_number += 1
 
