@@ -1,7 +1,9 @@
 import logging as lg
+import datetime
+
 from typing import Callable
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
-from meow.models.local.event.final_proceedings.event_model import EventData
+from meow.models.local.event.final_proceedings.event_model import EventData, PersonData
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import FinalProceedingsConfig, ProceedingsData
 
@@ -16,6 +18,9 @@ from meow.tasks.local.doi.utils import (generate_doi_external_label, generate_do
                                         generate_doi_path)
 
 from meow.utils.datetime import format_datetime_full, format_datetime_range_doi, format_datetime_doi
+from meow.utils.serialization import json_decode
+from meow.models.local.event.final_proceedings.event_factory import event_person_factory
+from meow.callbacks.tasks import get
 
 
 logger = lg.getLogger(__name__)
@@ -27,7 +32,8 @@ async def generate_contribution_doi(proceedings_data: ProceedingsData, cookies: 
 
     logger.info('event_final_proceedings - generate_contribution_doi')
 
-    contributions = [c for c in proceedings_data.contributions if callable(c) and c.page > 0]
+    contributions = [
+        c for c in proceedings_data.contributions if callable(c) and c.page > 0]
 
     total_files: int = len(contributions)
     processed_files: int = 0
@@ -35,10 +41,15 @@ async def generate_contribution_doi(proceedings_data: ProceedingsData, cookies: 
     send_stream, receive_stream = create_memory_object_stream()
     capacity_limiter = CapacityLimiter(8)
 
+    conference_doi = dict()
     results: dict[str, ContributionDOI] = dict()
 
     async with create_task_group() as tg:
         async with send_stream:
+
+            tg.start_soon(generate_conference_doi_task, capacity_limiter, proceedings_data,
+                          settings, config, send_stream.clone())
+
             for contribution_data in contributions:
                 tg.start_soon(generate_doi_task, capacity_limiter, proceedings_data.event,
                               contribution_data, settings, config, send_stream.clone())
@@ -46,19 +57,27 @@ async def generate_contribution_doi(proceedings_data: ProceedingsData, cookies: 
         try:
             async with receive_stream:
                 async for result in receive_stream:
-                    processed_files = processed_files + 1
 
-                    # logger.info(result)
+                    result_type: str = result.get('type', None)
 
-                    result_code: str = result.get('code', None)
-                    result_value: ContributionDOI | None = result.get(
-                        'value', None)
+                    if result_type == 'conference':
+                        conference_doi = result.get('value')
+                    elif result_type == 'contribution':
+                        processed_files = processed_files + 1
 
-                    if result_value is not None:
-                        results[result_code] = result_value
+                        result_code: str = result.get('code', None)
+                        result_value: ContributionDOI | None = result.get(
+                            'value', None)
 
-                    if processed_files >= total_files:
-                        receive_stream.close()
+                        if result_value is not None:
+                            results[result_code] = result_value
+
+                        if processed_files >= total_files:
+                            # close stream only when all contributions have been processed
+                            receive_stream.close()
+                    else:
+                        logger.error(
+                            f'Received unexpected result type: {result_type}')
 
         except ClosedResourceError as crs:
             logger.debug(crs, exc_info=False)
@@ -67,10 +86,128 @@ async def generate_contribution_doi(proceedings_data: ProceedingsData, cookies: 
         except Exception as ex:
             logger.error(ex, exc_info=True)
 
+    proceedings_data.conference_doi = conference_doi
+
     proceedings_data = refill_contribution_doi(
         proceedings_data, results, callable)
 
     return proceedings_data
+
+
+async def generate_conference_doi_task(capacity_limiter: CapacityLimiter,
+                                       proceedings_data: ProceedingsData,
+                                       settings: dict,
+                                       config: FinalProceedingsConfig,
+                                       res: MemoryObjectSendStream) -> None:
+    """ """
+
+    async with capacity_limiter:
+        await res.send({
+            'type': 'conference',
+            'value': await build_conference_doi(proceedings_data, settings, config)
+        })
+
+
+async def build_conference_doi(proceedings_data: ProceedingsData, settings: dict, config: FinalProceedingsConfig):
+    """ """
+
+    doi_identifier: str = generate_doi_identifier(
+        context=settings.get('doi_context', '10.18429'),
+        organization=settings.get('doi_organization', 'JACoW'),
+        conference=settings.get('doi_conference', 'CONF-YY')
+    )
+
+    doi_url: str = generate_doi_external_url(
+        protocol=settings.get('doi_proto', 'https'),
+        domain=settings.get('doi_domain', 'doi.org'),
+        context=settings.get('doi_context', 'CONF-CTX'),
+        organization=settings.get('doi_organization', 'JACoW'),
+        conference=settings.get('doi_conference', 'CONF-YY')
+    ) if config.generate_external_doi_url else generate_doi_internal_url(
+        organization=settings.get('doi_organization', 'JACoW'),
+        conference=settings.get('doi_conference', 'CONF-YY')
+    )
+
+    doi_landing_page: str = generate_doi_landing_page_url(
+        organization=settings.get('doi_organization', 'JACoW'),
+        conference=settings.get('doi_conference', 'CONF-YY')
+    )
+
+    editors_dict_list = json_decode(settings.get(
+        'editorial_json', '{}'))
+
+    editors: list[PersonData] = [
+        event_person_factory(person)
+        for person in editors_dict_list
+    ]
+
+    conference_doi = {
+        'id': doi_identifier,
+        'type': 'dois',
+        'doi': doi_identifier,
+        'identifiers': [{
+            'identifier': doi_url,
+            'identifierType': 'DOI'
+        }],
+        'creators': [],
+        'titles': [{
+            'title': settings.get('booktitle_long', ''),
+            'lang': 'en-us'
+        }],
+        'publisher': 'JACoW Publishing',
+        'publicationYear': datetime.date.today().year,
+        'subjects': [{
+            'subject': 'Accelerator Physics',
+            'lang': 'en-us'
+        }],
+        'contributors': [{
+            'name': f'{editor.last},{editor.first}',
+            'nameType': 'Personal',
+            'affiliation': [{
+                'name': editor.affiliation
+            }],
+            'contributorType': 'Editor',
+            'nameIdentifiers': [{
+                'nameIdentifier': index,
+                'schemeUri': 'https://jacow.org',
+                'nameIdentifierScheme': 'JACoW-ID'
+            }]
+        } for index, editor in enumerate(editors)],
+        'dates': [],
+        'language': 'en-us',
+        'types': {
+            'resourceTypeGeneral': 'ConferenceProceeding',
+            'resourceType': '',
+            'ris': 'CONF',
+            'bibtex': 'misc',
+            'citeproc': 'article',
+            'schemeOrg': 'Periodical'
+        },
+        'relatedIdentifiers': [{
+            'relatedIdentifier': settings.get('isbn', ''),
+            'relatedIdentifierType': 'ISBN',
+            'relationType': 'IsPartOf'
+        }, {
+            'relatedIdentifier': settings.get('issn', ''),
+            'relatedIdentifierType': 'ISSN',
+            'relationType': 'IsPartOf'
+        }],
+        'sizes': [],
+        'formats': [],
+        'rightsList': [{
+            'rights': 'Creative Commons Attribution 4.0 International',
+            'rightsUri': 'https://creativecommons.org/licenses/by/4.0/legalcode',
+            'lang': 'en-us',
+            'schemeUri': 'https://spdx.org/licenses/',
+            'rightsIdentifier': 'cc-by-4.0',
+            'rightsIdentifierScheme': 'SPDX'
+        }],
+        'descriptions': [],
+        'url': doi_landing_page,
+        'schemaVersion': 'http://datacite.org/schema/kernel-4'
+    }
+
+    return conference_doi
 
 
 async def generate_doi_task(capacity_limiter: CapacityLimiter, event: EventData, contribution: ContributionData,
@@ -79,8 +216,9 @@ async def generate_doi_task(capacity_limiter: CapacityLimiter, event: EventData,
 
     async with capacity_limiter:
         await res.send({
-            "code": contribution.code,
-            "value": await build_contribution_doi(
+            'type': 'contribution',
+            'code': contribution.code,
+            'value': await build_contribution_doi(
                 event, contribution, settings, config)
         })
 

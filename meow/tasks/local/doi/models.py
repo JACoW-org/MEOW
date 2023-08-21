@@ -205,9 +205,12 @@ class ContributionDOI:
         attributes['formats'] = ['PDF']
 
         attributes['rightsList'] = [dict(
-            rights='CC 3.0',
-            rightsUri='https://creativecommons.org/licenses/by/3.0',
-            lang='en-us'
+            rights='Creative Commons Attribution 4.0 International',
+            rightsUri='https://creativecommons.org/licenses/by/4.0/legalcode',
+            lang='en-us',
+            schemeUri='https://spdx.org/licenses/',
+            rightsIdentifier='cc-by-4.0',
+            rightsIdentifierScheme='SPDX'
         )]
 
         attributes['descriptions'] = [dict(
