@@ -1,5 +1,5 @@
 import logging as lg
-from typing import Any, Callable, Optional
+from typing import Any, Callable
 import pytz as tz
 
 from anyio import Path, create_task_group, CapacityLimiter
@@ -8,6 +8,7 @@ from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
 from rdflib import URIRef
 from rdflib.term import Literal
+from unidecode import unidecode
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData, ContributionPaperData
 from meow.models.local.event.final_proceedings.event_factory import event_keyword_factory
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_contributions_papers
@@ -96,8 +97,10 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
 
         try:
 
-            contribution = current_paper.contribution
-            session = sessions.get(contribution.session_code)
+            contribution: ContributionData = current_paper.contribution
+
+            session: SessionData = sessions.get(
+                contribution.session_code)  # type: ignore
             current_file = current_paper.paper
 
             original_pdf_name = f"{current_file.filename}"
@@ -111,14 +114,15 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
 
             # logger.debug(f"{pdf_file} {pdf_name}")
 
-            header_data: Optional[dict] = get_header_data(contribution)
-            footer_data: Optional[dict] = get_footer_data(
-                contribution, session)
-            metadata: Optional[dict] = get_metadata(contribution)
-            xml_metadata: Optional[str] = get_xml_metatdata(contribution)
+            # await copy(str(original_pdf_file), str(jacow_pdf_file))
 
-            pre_print: str = settings.get('pre_print', 'This is a preprint') \
-                if contribution.peer_reviewing_accepted else ''
+            header_data: dict | None = get_header_data(contribution)
+            footer_data: dict | None = get_footer_data(contribution, session)
+            metadata: dict | None = get_metadata(contribution)
+            xml_metadata: str | None = get_xml_metatdata(contribution)
+
+            pre_print: str = unidecode(settings.get('pre_print', 'This is a preprint')
+                                       if contribution.peer_reviewing_accepted else '')
 
             await draw_frame_anyio(str(original_pdf_file), str(jacow_pdf_file),
                                    contribution.page, pre_print, header_data,
@@ -169,7 +173,8 @@ def get_xml_metatdata(contribution: ContributionData) -> str | None:
     meta.set(DC.subject, Literal(contribution.track_meta))
     meta.set(DC.description, Literal(contribution.doi_data.abstract))
     meta.set(DC.language, Literal("en-us"))
-    meta.set(URIRef('http://purl.org/dc/terms/format'), Literal("application/pdf"))
+    meta.set(URIRef('http://purl.org/dc/terms/format'),
+             Literal("application/pdf"))
     meta.set(DC.creator, Literal(contribution.authors_meta))
     meta.set(PDF.Keywords, Literal(contribution.keywords_meta))
     meta.set(PDF.Producer, Literal(contribution.producer_meta))
@@ -182,10 +187,12 @@ def get_xml_metatdata(contribution: ContributionData) -> str | None:
     return meta.to_xml()
 
 
-def get_footer_data(contribution, session) -> dict[str, str] | None:
+def get_footer_data(contribution: ContributionData, session: SessionData) -> dict[str, str] | None:
 
-    classificationHeader = f'{contribution.track.title}' if contribution.track else ''
-    sessionHeader = f'{session.code}: {session.title}' if session else ''
+    classificationHeader = unidecode(
+        f'{contribution.track.title}' if contribution.track else '')
+    sessionHeader = unidecode(
+        f'{session.code}: {session.title}')
 
     footer_data = dict(
         classificationHeader=classificationHeader,
@@ -199,8 +206,9 @@ def get_footer_data(contribution, session) -> dict[str, str] | None:
 def get_header_data(contribution: ContributionData) -> dict[str, str] | None:
 
     header_data = dict(
-        series=contribution.doi_data.series,
-        venue=f'{contribution.doi_data.conference_code},{contribution.doi_data.venue}',
+        series=unidecode(contribution.doi_data.series),
+        venue=unidecode(
+            f'{contribution.doi_data.conference_code},{contribution.doi_data.venue}'),
         isbn=contribution.doi_data.isbn,
         issn=contribution.doi_data.issn,
         doi=contribution.doi_data.doi_name

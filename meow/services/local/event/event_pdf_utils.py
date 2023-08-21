@@ -23,6 +23,9 @@ from meow.services.local.papers_metadata.pdf_annotations import (
 logger = lg.getLogger(__name__)
 
 
+cc_logo = pathlib.Path('cc_by.png').read_bytes()
+
+
 def get_python_cmd():
     return str(Path("venv", "bin", "python3"))
 
@@ -251,6 +254,8 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
         #       thumbnails=False,
         #       xml_metadata=True)
 
+        # set_page_labels(doc, [])
+
         doc.del_xml_metadata()
 
         if xml_metadata:
@@ -259,9 +264,7 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
         if metadata:
             set_metadata(doc, metadata)
 
-        cc_logo = pathlib.Path('cc_by.png').read_bytes()
-
-        # print([args.input, page_number, pre_print])
+        # print([input, output, page_number, pre_print])
 
         for page in doc:
 
@@ -280,7 +283,8 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
 
             page_number += 1
 
-        doc.save(filename=output, garbage=1, clean=1, deflate=1)
+        # doc.save(filename=output, garbage=1, clean=1, deflate=1)
+        doc.save(filename=output, linear=1)
 
     except BaseException as be:
         logger.error(be, exc_info=True)
@@ -303,7 +307,8 @@ async def draw_frame_anyio(input: str, output: str, page: int,
 async def write_metadata(read_path: str, write_path: str, metadata: dict) -> int:
     """ """
 
-    cmd = [get_python_cmd(), '-m', 'meow', 'metadata', '-input',
+    cmd = [get_python_cmd(), '-m',
+           'meow', 'metadata', '-input',
            read_path, "-output", write_path]
 
     for key in metadata.keys():
@@ -344,13 +349,65 @@ async def pdf_separate(input: str, output: str, first: int, last: int) -> int:
 
 
 async def pdf_unite(write_path: str, files: list[str], first: bool) -> int:
-    return await pdf_unite_qpdf(write_path, files, first)
+    return await pdf_unite_poppler(write_path, files, first)
+
+
+async def pdf_unite_poppler(write_path: str, files: list[str], first: bool) -> int:
+
+    cmd = ['bin/pdfunite'] + files + [write_path]
+
+    logger.info(" ".join(cmd))
+
+    res = await run_cmd(cmd)
+
+    if res:
+        logger.info(res.returncode)
+        logger.info(res.stdout.decode())
+        logger.info(res.stderr.decode())
+
+    return 0 if res and res.returncode == 0 else 1
+
+
+async def pdf_unite_pdftk(write_path: str, files: list[str], first: bool) -> int:
+
+    if first is True:
+
+        import string
+        ascii = list(string.ascii_uppercase)
+
+        labeled_files = []
+        labeled_pages = []
+
+        for index, file in enumerate(files):
+            labeled_files.append(
+                "".join([ascii[int(char)] for char in "{:06d}".format(index)])
+                + "=" + file
+            )
+            labeled_pages.append(
+                "".join([ascii[int(char)] for char in "{:06d}".format(index)])
+                + "1"
+            )
+
+        cmd = ['pdftk'] + labeled_files + ['cat'] + \
+            labeled_pages + ['output'] + [write_path]
+
+    else:
+
+        cmd = ['pdftk'] + files + ['cat'] + ['output'] + [write_path]
+
+    logger.info(" ".join(cmd))
+
+    res = await run_cmd(cmd)
+
+    if res:
+        print(res.returncode)
+        print(res.stdout.decode())
+        print(res.stderr.decode())
+
+    return 0 if res and res.returncode == 0 else 1
 
 
 async def pdf_unite_qpdf(write_path: str, files: list[str], first: bool) -> int:
-
-    # cmd = ['pdfunite'] + files + [write_path]
-    # cmd = ['pdftk'] + files + ['cat', 'output'] + [write_path]
 
     # qpdf --linearize --remove-page-labels --empty --pages var/run/18_tmp/MOA03.pdf 1-1
     # var/run/18_tmp/MOA08.pdf 1-1 -- out.pdf
@@ -365,16 +422,16 @@ async def pdf_unite_qpdf(write_path: str, files: list[str], first: bool) -> int:
         if first:
             items.append('1-1')
 
-    cmd = ['bin/qpdf', '--empty', '--pages'] + items + ['--', write_path]
+    cmd = ['qpdf', '--empty', '--pages'] + items + ['--', write_path]
 
     logger.info(" ".join(cmd))
 
     res = await run_cmd(cmd)
 
-    # if res:
-    #     print(res.returncode)
-    #     print(res.stdout.decode())
-    #     print(res.stderr.decode())
+    if res:
+        print(res.returncode)
+        print(res.stdout.decode())
+        print(res.stderr.decode())
 
     return 0 if res and res.returncode == 0 else 1
 
@@ -399,10 +456,10 @@ async def pdf_unite_mutool(write_path: str, files: list[str], first: bool) -> in
 
     res = await run_cmd(cmd)
 
-    # if res:
-    #     print(res.returncode)
-    #     print(res.stdout.decode())
-    #     print(res.stderr.decode())
+    if res:
+        print(res.returncode)
+        print(res.stdout.decode())
+        print(res.stderr.decode())
 
     return 0 if res and res.returncode == 0 else 1
 
@@ -417,19 +474,22 @@ async def pdf_clean_qpdf(read_path: str, write_path: str) -> int:
 
     # --linearize : ottimizza il pdf per la visualizzazione web
     # --remove-page-labels: serve per le pagine logiche
+    # --flatten-annotations: Push page annotations into the content streams
 
-    cmd = ['bin/qpdf', '--linearize',
+    cmd = ['qpdf',
            '--remove-page-labels',
+           '--remove-unreferenced-resources=yes',
+           # '--flatten-annotations=all',
            read_path, '--', write_path]
 
     logger.info(" ".join(cmd))
 
     res = await run_cmd(cmd)
 
-    # if res:
-    #     print(res.returncode)
-    #     print(res.stdout.decode())
-    #     print(res.stderr.decode())
+    if res:
+        print(res.returncode)
+        print(res.stdout.decode())
+        print(res.stderr.decode())
 
     return 0 if res and res.returncode == 0 else 1
 
@@ -448,10 +508,10 @@ async def pdf_clean_mutool(read_path: str, write_path: str) -> int:
 
     res = await run_cmd(cmd)
 
-    # if res:
-    #     print(res.returncode)
-    #     print(res.stdout.decode())
-    #     print(res.stderr.decode())
+    if res:
+        print(res.returncode)
+        print(res.stdout.decode())
+        print(res.stderr.decode())
 
     return 0 if res and res.returncode == 0 else 1
 
@@ -466,10 +526,10 @@ async def concat_pdf(write_path: str, files: list[str]) -> int:
 
     res = await run_cmd(cmd)
 
-    # if res:
-    #     print(res.returncode)
-    #     print(res.stdout.decode())
-    #     print(res.stderr.decode())
+    if res:
+        print(res.returncode)
+        print(res.stdout.decode())
+        print(res.stderr.decode())
 
     return 0 if res and res.returncode == 0 else 1
 
@@ -484,10 +544,10 @@ async def brief_links(read_path: str, write_path: str, files: list[str]) -> int:
 
     res = await run_cmd(cmd)
 
-    # if res:
-    #     print(res.returncode)
-    #     print(res.stdout.decode())
-    #     print(res.stderr.decode())
+    if res:
+        print(res.returncode)
+        print(res.stdout.decode())
+        print(res.stderr.decode())
 
     return 0 if res and res.returncode == 0 else 1
 
@@ -509,10 +569,10 @@ async def vol_toc_pdf(write_path: str, links_path: str, conf_path: str) -> int:
 
     res = await run_cmd(cmd)
 
-    # if res:
-    #     print(res.returncode)
-    #     print(res.stdout.decode())
-    #     print(res.stderr.decode())
+    if res:
+        print(res.returncode)
+        print(res.stdout.decode())
+        print(res.stderr.decode())
 
     return 0 if res and res.returncode == 0 else 1
 
@@ -534,9 +594,9 @@ async def vol_toc_links(read_path: str, write_path: str, links_path: str) -> int
 
     res = await run_cmd(cmd)
 
-    # if res:
-    #     print(res.returncode)
-    #     print(res.stdout.decode())
-    #     print(res.stderr.decode())
+    if res:
+        print(res.returncode)
+        print(res.stdout.decode())
+        print(res.stderr.decode())
 
     return 0 if res and res.returncode == 0 else 1

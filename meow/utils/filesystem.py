@@ -7,6 +7,14 @@ from anyio import to_thread as to
 logger = logging.getLogger(__name__)
 
 
+async def copy(src_file: str, dst_file: str):
+
+    def _copy(src: str, dst: str):
+        shutil.copy(src, dst)
+
+    await to.run_sync(_copy, src_file, dst_file)
+
+
 async def cptree(src_dir: str, dst_dir: str):
 
     def _cptree(src: str, dst: str):

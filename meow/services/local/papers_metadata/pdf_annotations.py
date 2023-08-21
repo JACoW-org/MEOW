@@ -1,6 +1,6 @@
 from typing import Any
 from fitz import Page, Rect, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER, TEXT_ALIGN_RIGHT, TEXT_ALIGN_JUSTIFY
-from fitz.utils import getColor, insert_image
+from fitz.utils import getColor, insert_image, insert_text
 
 PAGE_HORIZONTAL_MARGIN = 57
 PAGE_VERTICAL_MARGIN = 15
@@ -305,7 +305,9 @@ def annot_page_side(page: Page, pre_print: str | None, page_number: int | None, 
         rect=rect_even_text if page_number and page_number % 2 == 0 else rect_odd_text,
         align=TEXT_ALIGN_JUSTIFY,
         rotate=90,
-        text='Content from this work may be used under the terms of the CC BY 4.0 licence (© 2022). Any distribution of this work must maintain attribution to the author(s), title of the work, publisher, and DOI.',
+        text='Content from this work may be used under the terms of the CC BY 4.0 licence (© 2022). ' +
+             'Any distribution of this work must maintain attribution to the author(s), ' +
+             'title of the work, publisher, and DOI.',
         fontname=options.get('fontName', FONT_NAME),
         fontsize=options.get('fontSize', FONT_SIZE),
         text_color=options.get('textColor', TEXT_COLOR),

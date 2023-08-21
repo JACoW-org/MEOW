@@ -61,3 +61,6 @@ async def run_cmd(command: list[str]) -> CompletedProcess[bytes] | None:
             print(err.stderr.decode())
 
         logger.error(err, exc_info=True)
+
+    except BaseException as be:
+        logger.error(be, exc_info=True)

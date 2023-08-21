@@ -1,0 +1,262 @@
+{
+	"BUILD_DIR" : "/home/fmeneghetti/Projects/elettra/opt/poppler/build/qt5/src/poppler-qt5_autogen",
+	"CMAKE_BINARY_DIR" : "/home/fmeneghetti/Projects/elettra/opt/poppler/build",
+	"CMAKE_CURRENT_BINARY_DIR" : "/home/fmeneghetti/Projects/elettra/opt/poppler/build/qt5/src",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src",
+	"CMAKE_EXECUTABLE" : "/usr/bin/cmake",
+	"CMAKE_LIST_FILES" : 
+	[
+		"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/CMakeLists.txt",
+		"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-version.h.in",
+		"/usr/share/cmake/Modules/exportheader.cmake.in"
+	],
+	"CMAKE_SOURCE_DIR" : "/home/fmeneghetti/Projects/elettra/opt/poppler",
+	"DEP_FILE" : "",
+	"DEP_FILE_RULE_NAME" : "",
+	"HEADERS" : 
+	[
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/QPainterOutputDev.h",
+			"Mu",
+			"EWIEGA46WW/moc_QPainterOutputDev.cpp",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-annotation.h",
+			"Mu",
+			"EWIEGA46WW/moc_poppler-annotation.cpp",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-form.h",
+			"Mu",
+			"EWIEGA46WW/moc_poppler-form.cpp",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-link.h",
+			"Mu",
+			"EWIEGA46WW/moc_poppler-link.cpp",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-media.h",
+			"Mu",
+			"EWIEGA46WW/moc_poppler-media.cpp",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-optcontent.h",
+			"Mu",
+			"EWIEGA46WW/moc_poppler-optcontent.cpp",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-page-transition.h",
+			"Mu",
+			"EWIEGA46WW/moc_poppler-page-transition.cpp",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-private.h",
+			"Mu",
+			"EWIEGA46WW/moc_poppler-private.cpp",
+			null
+		]
+	],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "/home/fmeneghetti/Projects/elettra/opt/poppler/build/qt5/src/poppler-qt5_autogen/include",
+	"MOC_COMPILATION_FILE" : "/home/fmeneghetti/Projects/elettra/opt/poppler/build/qt5/src/poppler-qt5_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : 
+	[
+		"QT_CORE_LIB",
+		"QT_DISABLE_DEPRECATED_BEFORE=0x050C00",
+		"QT_GUI_LIB",
+		"QT_NO_DEBUG",
+		"QT_NO_DEPRECATED_WARNINGS",
+		"QT_NO_SIGNALS_SLOTS_KEYWORDS",
+		"QT_STRICT_ITERATORS",
+		"QT_XML_LIB"
+	],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"/home/fmeneghetti/Projects/elettra/opt/poppler",
+		"/home/fmeneghetti/Projects/elettra/opt/poppler/fofi",
+		"/home/fmeneghetti/Projects/elettra/opt/poppler/goo",
+		"/home/fmeneghetti/Projects/elettra/opt/poppler/poppler",
+		"/home/fmeneghetti/Projects/elettra/opt/poppler/build",
+		"/home/fmeneghetti/Projects/elettra/opt/poppler/build/poppler",
+		"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src",
+		"/home/fmeneghetti/Projects/elettra/opt/poppler/build/qt5/src",
+		"/usr/include/qt5",
+		"/usr/include/qt5/QtCore",
+		"/usr/lib64/qt5/mkspecs/linux-g++",
+		"/usr/include/qt5/QtGui",
+		"/usr/include/qt5/QtXml",
+		"/usr/include/freetype2",
+		"/usr/include/c++/13",
+		"/usr/include/c++/13/x86_64-suse-linux",
+		"/usr/include/c++/13/backward",
+		"/usr/lib64/gcc/x86_64-suse-linux/13/include",
+		"/usr/local/include",
+		"/usr/lib64/gcc/x86_64-suse-linux/13/include-fixed",
+		"/usr/x86_64-suse-linux/include",
+		"/usr/include"
+	],
+	"MOC_MACRO_NAMES" : 
+	[
+		"Q_OBJECT",
+		"Q_GADGET",
+		"Q_NAMESPACE",
+		"Q_NAMESPACE_EXPORT",
+		"Q_GADGET_EXPORT"
+	],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : false,
+	"MOC_PREDEFS_CMD" : 
+	[
+		"/usr/bin/c++",
+		"-std=c++17",
+		"-dM",
+		"-E",
+		"-c",
+		"/usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp"
+	],
+	"MOC_PREDEFS_FILE" : "/home/fmeneghetti/Projects/elettra/opt/poppler/build/qt5/src/poppler-qt5_autogen/moc_predefs.h",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : [],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 4,
+	"PARSE_CACHE_FILE" : "/home/fmeneghetti/Projects/elettra/opt/poppler/build/qt5/src/CMakeFiles/poppler-qt5_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "/usr/lib64/qt5/bin/moc",
+	"QT_UIC_EXECUTABLE" : "",
+	"QT_VERSION_MAJOR" : 5,
+	"QT_VERSION_MINOR" : 15,
+	"SETTINGS_FILE" : "/home/fmeneghetti/Projects/elettra/opt/poppler/build/qt5/src/CMakeFiles/poppler-qt5_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/QPainterOutputDev.cc",
+			"Mu",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-annotation.cc",
+			"Mu",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-base-converter.cc",
+			"Mu",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-document.cc",
+			"Mu",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-embeddedfile.cc",
+			"Mu",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-fontinfo.cc",
+			"Mu",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-form.cc",
+			"Mu",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-link-extractor.cc",
+			"Mu",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-link.cc",
+			"Mu",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-media.cc",
+			"Mu",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-movie.cc",
+			"Mu",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-optcontent.cc",
+			"Mu",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-outline.cc",
+			"Mu",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-page-transition.cc",
+			"Mu",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-page.cc",
+			"Mu",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-pdf-converter.cc",
+			"Mu",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-private.cc",
+			"Mu",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-ps-converter.cc",
+			"Mu",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-qiodeviceinstream.cc",
+			"Mu",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-qiodeviceoutstream.cc",
+			"Mu",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-sound.cc",
+			"Mu",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-textbox.cc",
+			"Mu",
+			null
+		],
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src/poppler-version.cpp",
+			"Mu",
+			null
+		]
+	],
+	"VERBOSITY" : 0
+}

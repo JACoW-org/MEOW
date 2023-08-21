@@ -1,0 +1,110 @@
+{
+	"BUILD_DIR" : "/home/fmeneghetti/Projects/elettra/opt/poppler/build/qt5/tests/poppler-qt5-fonts_autogen",
+	"CMAKE_BINARY_DIR" : "/home/fmeneghetti/Projects/elettra/opt/poppler/build",
+	"CMAKE_CURRENT_BINARY_DIR" : "/home/fmeneghetti/Projects/elettra/opt/poppler/build/qt5/tests",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/tests",
+	"CMAKE_EXECUTABLE" : "/usr/bin/cmake",
+	"CMAKE_LIST_FILES" : 
+	[
+		"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/tests/CMakeLists.txt"
+	],
+	"CMAKE_SOURCE_DIR" : "/home/fmeneghetti/Projects/elettra/opt/poppler",
+	"DEP_FILE" : "",
+	"DEP_FILE_RULE_NAME" : "",
+	"HEADERS" : [],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "/home/fmeneghetti/Projects/elettra/opt/poppler/build/qt5/tests/poppler-qt5-fonts_autogen/include",
+	"MOC_COMPILATION_FILE" : "/home/fmeneghetti/Projects/elettra/opt/poppler/build/qt5/tests/poppler-qt5-fonts_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : 
+	[
+		"QT_CORE_LIB",
+		"QT_DISABLE_DEPRECATED_BEFORE=0x050C00",
+		"QT_GUI_LIB",
+		"QT_NO_DEBUG",
+		"QT_NO_DEPRECATED_WARNINGS",
+		"QT_STRICT_ITERATORS",
+		"QT_WIDGETS_LIB",
+		"QT_XML_LIB",
+		"TESTDATADIR=\"/home/fmeneghetti/Projects/elettra/opt/poppler/../test\""
+	],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"/home/fmeneghetti/Projects/elettra/opt/poppler",
+		"/home/fmeneghetti/Projects/elettra/opt/poppler/fofi",
+		"/home/fmeneghetti/Projects/elettra/opt/poppler/goo",
+		"/home/fmeneghetti/Projects/elettra/opt/poppler/poppler",
+		"/home/fmeneghetti/Projects/elettra/opt/poppler/build",
+		"/home/fmeneghetti/Projects/elettra/opt/poppler/build/poppler",
+		"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/tests",
+		"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/src",
+		"/home/fmeneghetti/Projects/elettra/opt/poppler/build/qt5/tests",
+		"/home/fmeneghetti/Projects/elettra/opt/poppler/build/qt5/src",
+		"/usr/include/qt5",
+		"/usr/include/qt5/QtCore",
+		"/usr/lib64/qt5/mkspecs/linux-g++",
+		"/usr/include/qt5/QtGui",
+		"/usr/include/qt5/QtXml",
+		"/usr/include/freetype2",
+		"/usr/include/qt5/QtWidgets",
+		"/usr/include/c++/13",
+		"/usr/include/c++/13/x86_64-suse-linux",
+		"/usr/include/c++/13/backward",
+		"/usr/lib64/gcc/x86_64-suse-linux/13/include",
+		"/usr/local/include",
+		"/usr/lib64/gcc/x86_64-suse-linux/13/include-fixed",
+		"/usr/x86_64-suse-linux/include",
+		"/usr/include"
+	],
+	"MOC_MACRO_NAMES" : 
+	[
+		"Q_OBJECT",
+		"Q_GADGET",
+		"Q_NAMESPACE",
+		"Q_NAMESPACE_EXPORT",
+		"Q_GADGET_EXPORT"
+	],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : false,
+	"MOC_PREDEFS_CMD" : 
+	[
+		"/usr/bin/c++",
+		"-std=c++17",
+		"-dM",
+		"-E",
+		"-c",
+		"/usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp"
+	],
+	"MOC_PREDEFS_FILE" : "/home/fmeneghetti/Projects/elettra/opt/poppler/build/qt5/tests/poppler-qt5-fonts_autogen/moc_predefs.h",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : 
+	[
+		"/home/fmeneghetti/Projects/elettra/opt/poppler/build/qt5/tests/poppler-qt5-forms_autogen/mocs_compilation.cpp",
+		"/home/fmeneghetti/Projects/elettra/opt/poppler/build/qt5/tests/test-password-qt5_autogen/mocs_compilation.cpp",
+		"/home/fmeneghetti/Projects/elettra/opt/poppler/build/qt5/tests/test-poppler-qt5_autogen/mocs_compilation.cpp",
+		"/home/fmeneghetti/Projects/elettra/opt/poppler/build/qt5/tests/test-render-to-file-qt5_autogen/mocs_compilation.cpp"
+	],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 4,
+	"PARSE_CACHE_FILE" : "/home/fmeneghetti/Projects/elettra/opt/poppler/build/qt5/tests/CMakeFiles/poppler-qt5-fonts_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "/usr/lib64/qt5/bin/moc",
+	"QT_UIC_EXECUTABLE" : "",
+	"QT_VERSION_MAJOR" : 5,
+	"QT_VERSION_MINOR" : 15,
+	"SETTINGS_FILE" : "/home/fmeneghetti/Projects/elettra/opt/poppler/build/qt5/tests/CMakeFiles/poppler-qt5-fonts_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[
+			"/home/fmeneghetti/Projects/elettra/opt/poppler/qt5/tests/poppler-fonts.cpp",
+			"Mu",
+			null
+		]
+	],
+	"VERBOSITY" : 0
+}
