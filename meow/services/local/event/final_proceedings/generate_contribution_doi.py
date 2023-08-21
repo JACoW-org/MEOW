@@ -26,7 +26,7 @@ from meow.callbacks.tasks import get
 logger = lg.getLogger(__name__)
 
 
-async def generate_contribution_doi(proceedings_data: ProceedingsData, cookies: dict, settings: dict,
+async def generate_dois(proceedings_data: ProceedingsData, cookies: dict, settings: dict,
                                     config: FinalProceedingsConfig, callable: Callable) -> ProceedingsData:
     """ """
 
@@ -51,7 +51,7 @@ async def generate_contribution_doi(proceedings_data: ProceedingsData, cookies: 
                           settings, config, send_stream.clone())
 
             for contribution_data in contributions:
-                tg.start_soon(generate_doi_task, capacity_limiter, proceedings_data.event,
+                tg.start_soon(generate_contribution_doi_task, capacity_limiter, proceedings_data.event,
                               contribution_data, settings, config, send_stream.clone())
 
         try:
@@ -210,7 +210,7 @@ async def build_conference_doi(proceedings_data: ProceedingsData, settings: dict
     return conference_doi
 
 
-async def generate_doi_task(capacity_limiter: CapacityLimiter, event: EventData, contribution: ContributionData,
+async def generate_contribution_doi_task(capacity_limiter: CapacityLimiter, event: EventData, contribution: ContributionData,
                             settings: dict, config: FinalProceedingsConfig, res: MemoryObjectSendStream) -> None:
     """ """
 

@@ -32,7 +32,7 @@ from meow.services.local.event.final_proceedings.download_contributions_papers i
 from meow.services.local.event.final_proceedings.generate_contribution_references import (
     generate_contribution_references)
 from meow.services.local.event.final_proceedings.generate_contributions_groups import generate_contributions_groups
-from meow.services.local.event.final_proceedings.generate_contribution_doi import generate_contribution_doi
+from meow.services.local.event.final_proceedings.generate_contribution_doi import generate_dois
 from meow.services.local.event.final_proceedings.build_doi_payloads import build_doi_payloads
 from meow.services.local.event.final_proceedings.manage_duplicates import manage_duplicates
 
@@ -328,13 +328,13 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict,
     await extend_lock(lock)
 
     yield dict(type='progress', value=dict(
-        phase='generate_contribution_doi',
-        text='Generate Contribution DOI'
+        phase='generate_dois',
+        text='Generate DOIs'
     ))
 
     # Bloccante
 
-    await generate_contribution_doi(final_proceedings, cookies, settings, config,
+    await generate_dois(final_proceedings, cookies, settings, config,
                                     filter_contributions_pubblicated)
 
     """ """
