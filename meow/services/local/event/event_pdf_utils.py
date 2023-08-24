@@ -302,7 +302,7 @@ def _draw_frame_anyio(input: str, output: str, page_number: int,
             page_number += 1
 
         # doc.save(filename=output, garbage=1, clean=1, deflate=1)
-        doc.save(filename=output)
+        doc.save(filename=output, garbage=1, clean=1, deflate=1)
 
     except BaseException as be:
         logger.error(be, exc_info=True)
@@ -488,7 +488,7 @@ async def pdf_clean_qpdf(read_path: str, write_path: str) -> int:
     cmd = ['qpdf',
            '--linearize',
            '--remove-page-labels',
-           '--remove-unreferenced-resources=yes',
+           # '--remove-unreferenced-resources=yes',
            # '--flatten-annotations=all',
            read_path, '--', write_path]
 
