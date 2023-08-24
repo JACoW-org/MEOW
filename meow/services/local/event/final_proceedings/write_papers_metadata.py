@@ -111,6 +111,12 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
 
             if await jacow_pdf_file.exists():
                 await jacow_pdf_file.unlink()
+                
+            join_pdf_name = f"{current_file.filename}_join"
+            join_pdf_file = Path(pdf_cache_dir, join_pdf_name)
+
+            if await join_pdf_file.exists():
+                await join_pdf_file.unlink()
 
             # logger.debug(f"{pdf_file} {pdf_name}")
 
@@ -126,7 +132,11 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
 
             await draw_frame_anyio(str(original_pdf_file), str(jacow_pdf_file),
                                    contribution.page, pre_print, header_data,
-                                   footer_data, metadata, xml_metadata)
+                                   footer_data, metadata, xml_metadata, True)
+
+            await draw_frame_anyio(str(original_pdf_file), str(join_pdf_file),
+                                   contribution.page, pre_print, header_data,
+                                   footer_data, None, None, False)
 
             return await stream.send({
                 "index": current_index,

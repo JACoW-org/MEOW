@@ -88,12 +88,12 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
     brief_pdf_final_path = Path(cache_dir, brief_pdf_final_name)
 
     # brief_pdf_files = [
-    #     (str(Path(cache_dir, f"{f.filename}_jacow")) + '[0]')
+    #     (str(Path(cache_dir, f"{f.filename}_join")) + '[0]')
     #     for f in files_data
     # ]
 
     brief_pdf_files = [
-        (str(Path(cache_dir, f"{f.filename}_jacow")))
+        (str(Path(cache_dir, f"{f.filename}_join")))
         for f in files_data
     ]
 
@@ -211,7 +211,7 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
                                                                         cache_dir, callback, toc_grouping)
 
     vol_pdf_files: list[str] = [
-        str(Path(cache_dir, f"{f.filename}_jacow"))
+        str(Path(cache_dir, f"{f.filename}_join"))
         for f in files_data
     ]
 

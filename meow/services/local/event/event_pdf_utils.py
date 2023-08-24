@@ -3,6 +3,7 @@ import io
 import pathlib
 import logging as lg
 from anyio import Path, to_thread
+from meow.services.local.papers_metadata.pdf_text import write_page_footer, write_page_header, write_page_side
 
 from meow.utils.hash import file_md5
 from meow.utils.keywords import KEYWORDS
@@ -16,7 +17,7 @@ from fitz.utils import set_metadata
 from nltk.stem.snowball import SnowballStemmer
 from meow.services.local.papers_metadata.pdf_keywords import (
     get_keywords_from_text, stem_keywords_as_tree)
-from meow.services.local.papers_metadata.pdf_annotations import (
+from meow.services.local.papers_metadata.pdf_annots import (
     annot_page_footer, annot_page_header, annot_page_side)
 
 
@@ -228,10 +229,19 @@ async def draw_frame(read_path: str, write_path: str, page: int,
     return 0 if res and res.returncode == 0 else 1
 
 
-def _draw_frame_thread_thread(input: str, output: str, page_number: int,
-                              pre_print: str | None, header: dict | None,
-                              footer: dict | None, metadata: dict | None,
-                              xml_metadata: str | None):
+async def draw_frame_anyio(input: str, output: str, page: int,
+                           pre_print: str | None, header: dict | None,
+                           footer: dict | None, metadata: dict | None,
+                           xml_metadata: str | None, annotations: bool = True):
+    return await to_thread.run_sync(_draw_frame_anyio, input, output,
+                                    page, pre_print, header, footer, metadata,
+                                    xml_metadata, annotations)
+
+
+def _draw_frame_anyio(input: str, output: str, page_number: int,
+                      pre_print: str | None, header: dict | None,
+                      footer: dict | None, metadata: dict | None,
+                      xml_metadata: str | None, annotations: bool = True):
 
     doc: Document | None = None
 
@@ -269,12 +279,20 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
         for page in doc:
 
             if header:
-                annot_page_header(page, header)
+                annot_page_header(page, header) if annotations \
+                    else write_page_header(page, header)
 
             if footer:
-                annot_page_footer(page, page_number, footer)
+                annot_page_footer(page, page_number, footer) if annotations \
+                    else write_page_footer(page, page_number, footer)
 
             annot_page_side(
+                page=page,
+                pre_print=pre_print,
+                page_number=page_number,
+                cc_logo=cc_logo
+            ) if annotations \
+                else write_page_side(
                 page=page,
                 pre_print=pre_print,
                 page_number=page_number,
@@ -284,7 +302,7 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
             page_number += 1
 
         # doc.save(filename=output, garbage=1, clean=1, deflate=1)
-        doc.save(filename=output, linear=1)
+        doc.save(filename=output)
 
     except BaseException as be:
         logger.error(be, exc_info=True)
@@ -293,15 +311,6 @@ def _draw_frame_thread_thread(input: str, output: str, page_number: int,
         if doc is not None:
             doc.close()
             del doc
-
-
-async def draw_frame_anyio(input: str, output: str, page: int,
-                           pre_print: str | None, header: dict | None,
-                           footer: dict | None, metadata: dict | None,
-                           xml_metadata: str | None):
-    return await to_thread.run_sync(_draw_frame_thread_thread, input, output,
-                                    page, pre_print, header, footer, metadata,
-                                    xml_metadata)
 
 
 async def write_metadata(read_path: str, write_path: str, metadata: dict) -> int:
@@ -477,6 +486,7 @@ async def pdf_clean_qpdf(read_path: str, write_path: str) -> int:
     # --flatten-annotations: Push page annotations into the content streams
 
     cmd = ['qpdf',
+           '--linearize',
            '--remove-page-labels',
            '--remove-unreferenced-resources=yes',
            # '--flatten-annotations=all',

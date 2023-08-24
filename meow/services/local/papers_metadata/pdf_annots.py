@@ -1,6 +1,8 @@
 from typing import Any
-from fitz import Page, Rect, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER, TEXT_ALIGN_RIGHT, TEXT_ALIGN_JUSTIFY
-from fitz.utils import getColor, insert_image, insert_text
+from fitz import (Page, Rect, TEXT_ALIGN_LEFT, TEXT_ALIGN_CENTER,
+                  TEXT_ALIGN_RIGHT, TEXT_ALIGN_JUSTIFY)
+from fitz.utils import getColor, insert_image
+
 
 PAGE_HORIZONTAL_MARGIN = 57
 PAGE_VERTICAL_MARGIN = 15
@@ -213,8 +215,10 @@ def annot_page_footer(page: Page, page_number: int, data: dict, options: dict = 
 
     # left
     page.add_freetext_annot(
-        rect=Rect(PAGE_HORIZONTAL_MARGIN, page_height - PAGE_VERTICAL_MARGIN - ANNOTATION_HEIGHT,
-                  PAGE_HORIZONTAL_MARGIN + rect_width, page_height - PAGE_VERTICAL_MARGIN),
+        rect=Rect(PAGE_HORIZONTAL_MARGIN,
+                  page_height - PAGE_VERTICAL_MARGIN - ANNOTATION_HEIGHT,
+                  PAGE_HORIZONTAL_MARGIN + rect_width,
+                  page_height - PAGE_VERTICAL_MARGIN),
         align=TEXT_ALIGN_LEFT,
         text=f"{page_number if page_number % 2 != 1 else data.get('classificationHeader', 'Classification Header')}",
         fontname=options.get('fontName', FONT_NAME),
@@ -224,8 +228,10 @@ def annot_page_footer(page: Page, page_number: int, data: dict, options: dict = 
 
     # right
     page.add_freetext_annot(
-        rect=Rect(PAGE_HORIZONTAL_MARGIN, page_height - PAGE_VERTICAL_MARGIN - ANNOTATION_HEIGHT,
-                  PAGE_HORIZONTAL_MARGIN + rect_width, page_height - PAGE_VERTICAL_MARGIN),
+        rect=Rect(PAGE_HORIZONTAL_MARGIN,
+                  page_height - PAGE_VERTICAL_MARGIN - ANNOTATION_HEIGHT,
+                  PAGE_HORIZONTAL_MARGIN + rect_width,
+                  page_height - PAGE_VERTICAL_MARGIN),
         align=TEXT_ALIGN_RIGHT,
         text=f"{data.get('classificationHeader', 'Classification Header') if page_number % 2 != 1 else page_number}",
         fontname=options.get('fontName', FONT_NAME),
@@ -237,8 +243,10 @@ def annot_page_footer(page: Page, page_number: int, data: dict, options: dict = 
 
     # left
     page.add_freetext_annot(
-        rect=Rect(PAGE_HORIZONTAL_MARGIN, page_height - PAGE_VERTICAL_MARGIN - 2 * ANNOTATION_HEIGHT - LINE_SPACING,
-                  PAGE_HORIZONTAL_MARGIN + rect_width, page_height - PAGE_VERTICAL_MARGIN - ANNOTATION_HEIGHT - LINE_SPACING),
+        rect=Rect(PAGE_HORIZONTAL_MARGIN,
+                  page_height - PAGE_VERTICAL_MARGIN - 2 * ANNOTATION_HEIGHT - LINE_SPACING,
+                  PAGE_HORIZONTAL_MARGIN + rect_width,
+                  page_height - PAGE_VERTICAL_MARGIN - ANNOTATION_HEIGHT - LINE_SPACING),
         align=TEXT_ALIGN_LEFT,
         text=f"{data.get('contributionCode', 'Contribution Code') if page_number % 2 != 1 else data.get('sessionHeader', 'Session Header')}",
         fontname=options.get('fontName', FONT_NAME),
@@ -248,8 +256,10 @@ def annot_page_footer(page: Page, page_number: int, data: dict, options: dict = 
 
     # right
     page.add_freetext_annot(
-        rect=Rect(PAGE_HORIZONTAL_MARGIN, page_height - PAGE_VERTICAL_MARGIN - 2 * ANNOTATION_HEIGHT - LINE_SPACING,
-                  PAGE_HORIZONTAL_MARGIN + rect_width, page_height - PAGE_VERTICAL_MARGIN - ANNOTATION_HEIGHT - LINE_SPACING),
+        rect=Rect(PAGE_HORIZONTAL_MARGIN,
+                  page_height - PAGE_VERTICAL_MARGIN - 2 * ANNOTATION_HEIGHT - LINE_SPACING,
+                  PAGE_HORIZONTAL_MARGIN + rect_width,
+                  page_height - PAGE_VERTICAL_MARGIN - ANNOTATION_HEIGHT - LINE_SPACING),
         align=TEXT_ALIGN_RIGHT,
         text=f"{data.get('sessionHeader', 'Session Header') if page_number % 2 != 1 else data.get('contributionCode', 'Contribution Code')}",
         fontname=options.get('fontName', FONT_NAME),
@@ -258,7 +268,10 @@ def annot_page_footer(page: Page, page_number: int, data: dict, options: dict = 
     )
 
 
-def annot_page_side(page: Page, pre_print: str | None, page_number: int | None, cc_logo: Any | None, options: dict = dict()):
+def annot_page_side(page: Page, pre_print: str | None,
+                    page_number: int | None,
+                    cc_logo: Any | None,
+                    options: dict = dict()):
 
     page_width = page.rect.width
     page_height = page.rect.height
