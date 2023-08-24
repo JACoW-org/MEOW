@@ -1,10 +1,12 @@
 from dataclasses import dataclass, asdict, field
 
+import json
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
 from meow.models.local.event.final_proceedings.session_model import SessionData
 from meow.models.local.event.final_proceedings.track_model import TrackData
 from meow.models.local.event.final_proceedings.event_model import (
     AffiliationData, AttachmentData, EventData, KeywordData, PersonData)
+
 
 @dataclass(kw_only=True, slots=True)
 class FinalProceedingsTask:
@@ -12,6 +14,7 @@ class FinalProceedingsTask:
 
     code: str = field()
     text: str = field()
+
 
 @dataclass(kw_only=True, slots=True)
 class FinalProceedingsConfig:
@@ -60,8 +63,46 @@ class ProceedingsData:
     institute: list[AffiliationData] = field(default_factory=list)
     doi_per_institute: list[AffiliationData] = field(default_factory=list)
 
+    conference_doi: dict = field(default_factory=dict)
+
     proceedings_volume_size: int = field(default=0)
     proceedings_brief_size: int = field(default=0)
+
+    @property
+    def conference_doi_payload(self) -> str:
+
+        if not self.conference_doi:
+            return '{}'
+
+        data = dict(
+            id=self.conference_doi.get('id'),
+            type=self.conference_doi.get('type'),
+            attributes=dict(
+                doi=self.conference_doi.get('doi'),
+                identifiers=self.conference_doi.get('identifiers'),
+                creators=self.conference_doi.get('creators'),
+                titles=self.conference_doi.get('titles'),
+                publisher=self.conference_doi.get('publisher'),
+                publicationYear=self.conference_doi.get('publicationYear'),
+                subjects=self.conference_doi.get('subjects'),
+                contributors=self.conference_doi.get('contributors'),
+                dates=self.conference_doi.get('dates'),
+                language=self.conference_doi.get('language'),
+                types=self.conference_doi.get('types'),
+                relatedIdentifiers=self.conference_doi.get(
+                    'relatedIdentifiers'),
+                sizes=self.conference_doi.get('sizes'),
+                formats=self.conference_doi.get('formats'),
+                rightsList=self.conference_doi.get('rightsList'),
+                descriptions=self.conference_doi.get('descriptions'),
+                url=self.conference_doi.get('url'),
+                schemaVersion=self.conference_doi.get('schemaVersion')
+            )
+        )
+
+        return json.dumps(dict(
+            data=data
+        ))
 
     def as_dict(self) -> dict:
         return asdict(self)

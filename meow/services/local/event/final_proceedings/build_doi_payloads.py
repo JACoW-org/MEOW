@@ -22,12 +22,37 @@ async def build_doi_payloads(proceedings_data: ProceedingsData) -> ProceedingsDa
 
     capacity_limiter = CapacityLimiter(8)
     async with create_task_group() as tg:
+
+        # conference DOI
+        tg.start_soon(generate_conference_doi_payload_task,
+                      capacity_limiter, proceedings_data, doi_dir)
+
+        # contributions DOIs
         for contribution in proceedings_data.contributions:
             if contribution.doi_data is not None:
                 tg.start_soon(generate_doi_payload_task,
                               capacity_limiter, contribution.doi_data, doi_dir)
 
     return proceedings_data
+
+
+async def generate_conference_doi_payload_task(capacity_limiter: CapacityLimiter,
+                                               proceedings_data: ProceedingsData,
+                                               doi_dir: Path) -> None:
+
+    """ """
+
+    async with capacity_limiter:
+        doi_file = Path(doi_dir, f'{proceedings_data.event.id}.json')
+
+        if await doi_file.exists():
+            await doi_file.unlink()
+
+        # JSON string
+        payload = proceedings_data.conference_doi_payload
+
+        # write to file
+        await doi_file.write_text(payload)
 
 
 async def generate_doi_payload_task(capacity_limiter: CapacityLimiter,
