@@ -17,17 +17,17 @@ from meow.tasks.local.doi.utils import (generate_doi_external_label, generate_do
                                         generate_doi_landing_page_url, generate_doi_name,
                                         generate_doi_path)
 
-from meow.utils.datetime import format_datetime_full, format_datetime_range_doi, format_datetime_doi
+from meow.utils.datetime import (
+    format_datetime_doi_iso, format_datetime_full, format_datetime_range_doi, format_datetime_doi)
 from meow.utils.serialization import json_decode
 from meow.models.local.event.final_proceedings.event_factory import event_person_factory
-from meow.callbacks.tasks import get
 
 
 logger = lg.getLogger(__name__)
 
 
 async def generate_dois(proceedings_data: ProceedingsData, cookies: dict, settings: dict,
-                                    config: FinalProceedingsConfig, callable: Callable) -> ProceedingsData:
+                        config: FinalProceedingsConfig, callable: Callable) -> ProceedingsData:
     """ """
 
     logger.info('event_final_proceedings - generate_contribution_doi')
@@ -210,8 +210,10 @@ async def build_conference_doi(proceedings_data: ProceedingsData, settings: dict
     return conference_doi
 
 
-async def generate_contribution_doi_task(capacity_limiter: CapacityLimiter, event: EventData, contribution: ContributionData,
-                            settings: dict, config: FinalProceedingsConfig, res: MemoryObjectSendStream) -> None:
+async def generate_contribution_doi_task(capacity_limiter: CapacityLimiter, event: EventData,
+                                         contribution: ContributionData, settings: dict,
+                                         config: FinalProceedingsConfig,
+                                         res: MemoryObjectSendStream) -> None:
     """ """
 
     async with capacity_limiter:
@@ -314,6 +316,7 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         ],
         isbn=event_isbn,
         issn=event_issn,
+
         reception_date=format_datetime_doi(
             contribution.reception) if contribution.reception else '',
         revisitation_date=format_datetime_doi(
@@ -322,6 +325,16 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
             contribution.acceptance) if contribution.acceptance else '',
         issuance_date=format_datetime_doi(
             contribution.issuance) if contribution.issuance else '',
+
+        reception_date_iso=format_datetime_doi_iso(
+            contribution.reception) if contribution.reception else '',
+        revisitation_date_iso=format_datetime_doi_iso(
+            contribution.revisitation) if contribution.revisitation else '',
+        acceptance_date_iso=format_datetime_doi_iso(
+            contribution.acceptance) if contribution.acceptance else '',
+        issuance_date_iso=format_datetime_doi_iso(
+            contribution.issuance) if contribution.issuance else '',
+
         doi_label=doi_label,
         doi_url=doi_url,
         doi_path=doi_path,

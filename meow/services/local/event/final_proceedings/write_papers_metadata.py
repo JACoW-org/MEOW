@@ -15,7 +15,7 @@ from meow.models.local.event.final_proceedings.proceedings_data_utils import ext
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.models.local.event.final_proceedings.session_model import SessionData
-from meow.services.local.event.event_pdf_utils import draw_frame_anyio
+from meow.services.local.event.event_pdf_utils import draw_frame_anyio, pdf_metadata_qpdf
 
 from datetime import datetime
 from meow.utils.datetime import format_datetime_pdf
@@ -111,7 +111,7 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
 
             if await jacow_pdf_file.exists():
                 await jacow_pdf_file.unlink()
-                
+
             join_pdf_name = f"{current_file.filename}_join"
             join_pdf_file = Path(pdf_cache_dir, join_pdf_name)
 
@@ -124,19 +124,31 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
 
             header_data: dict | None = get_header_data(contribution)
             footer_data: dict | None = get_footer_data(contribution, session)
-            metadata: dict | None = get_metadata(contribution)
-            xml_metadata: str | None = get_xml_metatdata(contribution)
+
+            # metadata_mutool = get_metadata_mutool(contribution)
+            metadata_pikepdf = get_metadata_pikepdf(contribution)
+
+            # xml_metadata_mutool = get_xml_metatdata_mutool(contribution)
+            xml_metadata_pikepdf = get_xml_metatdata_pikepdf(contribution)
 
             pre_print: str = unidecode(settings.get('pre_print', 'This is a preprint')
                                        if contribution.peer_reviewing_accepted else '')
 
-            await draw_frame_anyio(str(original_pdf_file), str(jacow_pdf_file),
-                                   contribution.page, pre_print, header_data,
-                                   footer_data, metadata, xml_metadata, True)
+            async def _task_one():
+                await draw_frame_anyio(str(original_pdf_file), str(jacow_pdf_file),
+                                       contribution.page, pre_print, header_data,
+                                       footer_data, None, None, True)
 
-            await draw_frame_anyio(str(original_pdf_file), str(join_pdf_file),
-                                   contribution.page, pre_print, header_data,
-                                   footer_data, None, None, False)
+                await pdf_metadata_qpdf(str(jacow_pdf_file), metadata_pikepdf, xml_metadata_pikepdf)
+
+            async def _task_two():
+                await draw_frame_anyio(str(original_pdf_file), str(join_pdf_file),
+                                       contribution.page, pre_print, header_data,
+                                       footer_data, None, None, False)
+
+            async with create_task_group() as tg:
+                tg.start_soon(_task_one)
+                tg.start_soon(_task_two)
 
             return await stream.send({
                 "index": current_index,
@@ -150,10 +162,22 @@ async def write_metadata_task(capacity_limiter: CapacityLimiter, total_files: in
         return await stream.send(None)
 
 
-def get_metadata(contribution: ContributionData) -> dict[str, Any] | None:
+def get_metadata_mutool(contribution: ContributionData) -> dict[str, Any] | None:
 
     if not contribution.doi_data:
         return None
+
+    # "author": "Author",
+    # "producer": "Producer",
+    # "creator": "Creator",
+    # "title": "Title",
+    # "format": None,
+    # "encryption": None,
+    # "creationDate": "CreationDate",
+    # "modDate": "ModDate",
+    # "subject": "Subject",
+    # "keywords": "Keywords",
+    # "trapped": "Trapped",
 
     metadata = dict(
         author=contribution.authors_meta,
@@ -162,8 +186,8 @@ def get_metadata(contribution: ContributionData) -> dict[str, Any] | None:
         title=contribution.title_meta,
         format='application/pdf',
         encryption=None,
-        creationDate=contribution.doi_data.reception_date,
-        modDate=contribution.doi_data.acceptance_date,
+        creationDate=contribution.doi_data.reception_date_iso,
+        modDate=contribution.doi_data.acceptance_date_iso,
         subject=contribution.track_meta,
         keywords=contribution.keywords_meta,
         trapped=None,
@@ -172,7 +196,35 @@ def get_metadata(contribution: ContributionData) -> dict[str, Any] | None:
     return metadata
 
 
-def get_xml_metatdata(contribution: ContributionData) -> str | None:
+def get_metadata_pikepdf(contribution: ContributionData) -> dict[str, Any] | None:
+
+    if not contribution.doi_data:
+        return None
+
+    metadata = {
+        '/Author': contribution.authors_meta,
+        '/Producer': contribution.producer_meta,
+        '/Creator': contribution.creator_meta,
+        '/Title': contribution.title_meta,
+        '/CreationDate': contribution.doi_data.reception_date_iso,
+        '/ModDate': contribution.doi_data.acceptance_date_iso,
+        '/Subject': contribution.track_meta,
+        '/Keywords': contribution.keywords_meta,
+    }
+
+    # "/Author": "F. Pannek, S. Ackermann, E. Ferrari, L. Schaper, W. Hillert",
+    # "/CreationDate": "17 August 22",
+    # "/Creator": "Journals of Accelerator Conferences Website (JACoW)",
+    # "/Keywords": "bunching, laser, radiation, electron, electronics",
+    # "/ModDate": "25 August 22",
+    # "/PTEX.Fullbanner": "This is pdfTeX, Version 3.14159265-2.6-1.40.20 ",
+    # "/Subject": "PRIMO / Seeded FEL",
+    # "/Title": "Sensitivity of Echo-Enabled Harmonic Generation to Seed Power Variations"
+
+    return metadata
+
+
+def get_xml_metatdata_mutool(contribution: ContributionData) -> str | None:
 
     if not contribution.doi_data:
         return None
@@ -190,11 +242,36 @@ def get_xml_metatdata(contribution: ContributionData) -> str | None:
     meta.set(PDF.Producer, Literal(contribution.producer_meta))
     meta.set(XMP.CreatorTool, Literal(contribution.creator_tool_meta))
     meta.set(XMP.Identifier, Literal(contribution.doi_data.doi_identifier))
-    meta.set(XMP.ModifyDate, Literal(contribution.doi_data.acceptance_date))
-    meta.set(XMP.MetadataDate, Literal(contribution.doi_data.acceptance_date))
-    meta.set(XMP.CreateDate, Literal(contribution.doi_data.reception_date))
+    meta.set(XMP.ModifyDate, Literal(contribution.doi_data.acceptance_date_iso))
+    meta.set(XMP.MetadataDate, Literal(contribution.doi_data.acceptance_date_iso))
+    meta.set(XMP.CreateDate, Literal(contribution.doi_data.reception_date_iso))
 
     return meta.to_xml()
+
+
+def get_xml_metatdata_pikepdf(contribution: ContributionData) -> dict | None:
+
+    if not contribution.doi_data:
+        return None
+
+    meta: dict = {
+        'dc:title': contribution.title_meta,
+        'dc:subject': contribution.track_meta,
+        'dc:description': contribution.doi_data.abstract,
+        'dc:language': 'en-us',
+        'dc:creator': [contribution.authors_meta],
+        'pdf:keywords': contribution.keywords_meta,
+        'pdf:producer': contribution.producer_meta,
+        'xmp:CreatorTool': contribution.creator_tool_meta,
+        'xmp:Identifier': contribution.doi_data.doi_identifier,
+        'xmp:ModifyDate': contribution.doi_data.acceptance_date_iso,
+        'xmp:MetadataDate': contribution.doi_data.acceptance_date_iso,
+        'xmp:CreateDate': contribution.doi_data.reception_date_iso,
+    }
+
+    # print(meta)
+
+    return meta
 
 
 def get_footer_data(contribution: ContributionData, session: SessionData) -> dict[str, str] | None:

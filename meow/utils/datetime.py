@@ -9,32 +9,44 @@ datedict -> dict(
     tz="Europe/Zurich"
 )
 """
+
+
 def format_datetime_sec(d: dt.datetime | None) -> str:
-    return str(d.timestamp()) if d else '' 
+    return str(d.timestamp()) if d else ''
+
 
 def format_datetime_day(d: dt.datetime | None) -> str:
     return d.strftime('%-j') if d else ''
 
+
 def format_datetime_full(d: dt.datetime | None) -> str:
     return d.strftime('%d %B %Y %H:%M') if d else ''
+
 
 def format_datetime_time(d: dt.datetime | None) -> str:
     return d.strftime('%H:%M') if d else ''
 
+
 def format_datetime_dashed(d: dt.datetime | None) -> str:
     return d.strftime('%Y-%m-%d') if d else ''
+
 
 def format_datetime_pdf(d: dt.datetime) -> str:
     # D:YYYYMMDDHHmmSSOHH'mm'
     utc_offset = d.strftime('%z')
     return d.strftime(f"D:%Y%m%d%H%M%S{utc_offset[0:3]}'{utc_offset[3:]}'")
 
+
 def format_datetime_doi(d: dt.datetime | None) -> str:
-    return d.strftime(f"%d %B %y") if d else ''
+    return d.strftime("%d %B %y") if d else ''
+
+
+def format_datetime_doi_iso(d: dt.datetime | None) -> str:
+    return d.strftime("%Y%m%d%H%M%S") if d else ''
 
 
 def format_datetime_range(start: dt.datetime, end: dt.datetime) -> str:
-    
+
     if start is None or end is None:
         return ''
 
@@ -48,16 +60,17 @@ def format_datetime_range(start: dt.datetime, end: dt.datetime) -> str:
         if format_datetime_day(start) == format_datetime_day(end) \
         else _format_datetime_range_different_day(start, end)
 
+
 def format_datetime_range_doi(start: dt.datetime, end: dt.datetime) -> str:
     """"""
-    
+
     if start is None or end is None:
         return ''
-    
+
     # same day
     if start == end:
         return start.strftime('%d %b %Y')
-    
+
     # same year
     if start.year == end.year:
         # same month
@@ -66,7 +79,7 @@ def format_datetime_range_doi(start: dt.datetime, end: dt.datetime) -> str:
         # different month
         else:
             return f'{start.strftime("%d %b")}-{end.strftime("%d %b %Y")}'
-    
+
     return f'{start.strftime("%d %b %Y")}-{end.strftime("%d %b %Y")}'
 
 
@@ -92,7 +105,6 @@ def datedict_to_tz_datetime(date: dict | None) -> dt.datetime:
         tz_date_time_obj: dt.datetime = timezone.localize(date_time_obj)
 
         return tz_date_time_obj
-
 
     print('datedict_to_tz_datetime -->')
     print(date)

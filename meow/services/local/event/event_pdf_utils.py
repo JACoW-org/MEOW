@@ -14,6 +14,8 @@ from fitz import Document
 from fitz.utils import set_metadata
 
 
+from pikepdf import open
+
 from nltk.stem.snowball import SnowballStemmer
 from meow.services.local.papers_metadata.pdf_keywords import (
     get_keywords_from_text, stem_keywords_as_tree)
@@ -29,6 +31,62 @@ cc_logo = pathlib.Path('cc_by.png').read_bytes()
 
 def get_python_cmd():
     return str(Path("venv", "bin", "python3"))
+
+
+async def pdf_linearize_qpdf(in_path: str, out_path: str, docinfo: dict | None, metadata: dict | None):
+    """ """
+
+    with open(in_path) as pdf_doc:
+
+        if docinfo:
+            for key in docinfo:
+                pdf_doc.docinfo[key] = docinfo[key]
+
+        with pdf_doc.open_metadata(set_pikepdf_as_editor=True) as pdf_meta:
+
+            pdf_meta.clear()
+
+            # print(pdf_meta)
+
+            # if docinfo:
+            #     pdf_meta.load_from_docinfo(
+            #         docinfo, delete_missing=True, raise_failure=True)
+
+            if metadata:
+                for key in metadata:
+                    pdf_meta[key] = metadata[key]
+
+        pdf_doc.save(out_path, linearize=True, fix_metadata_version=True)
+
+    return 0
+
+
+async def pdf_metadata_qpdf(file_path: str, docinfo: dict | None, metadata: dict | None):
+    """ """
+
+    with open(file_path, allow_overwriting_input=True) as pdf_doc:
+
+        # print(pdf_doc.docinfo)
+
+        if docinfo:
+            for key in docinfo:
+                pdf_doc.docinfo[key] = docinfo[key]
+
+        with pdf_doc.open_metadata(set_pikepdf_as_editor=True) as pdf_meta:
+
+            pdf_meta.clear()
+
+            # print(pdf_meta)
+
+            # if docinfo:
+            #     pdf_meta.load_from_docinfo(
+            #         docinfo, delete_missing=True, raise_failure=True)
+
+            if metadata:
+                for key in metadata:
+                    pdf_meta[key] = metadata[key]
+
+        pdf_doc.save(linearize=True, fix_metadata_version=True)
 
 
 async def is_to_download(file: Path, md5: str) -> bool:
