@@ -33,7 +33,7 @@ async def read_papers_report(proceedings_data: ProceedingsData, cookies: dict,
     await file_cache_dir.mkdir(exist_ok=True, parents=True)
 
     send_stream, receive_stream = create_memory_object_stream()
-    capacity_limiter = CapacityLimiter(8)
+    capacity_limiter = CapacityLimiter(16)
 
     results = dict()
 

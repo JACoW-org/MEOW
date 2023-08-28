@@ -17,7 +17,7 @@ async def generate_contributions_groups(proceedings_data: ProceedingsData,
 
     logger.info('event_final_proceedings - generate_contributions_groups')
 
-    capacity_limiter = CapacityLimiter(8)
+    capacity_limiter = CapacityLimiter(16)
 
     async with create_task_group() as tg:
         tg.start_soon(contributions_group_by_session,

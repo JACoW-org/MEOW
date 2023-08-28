@@ -4,9 +4,17 @@ Documentation=http://supervisord.org
 After=network.target
 
 [Service]
+User=cat
+Group=cat
+
+# Uncomment the 2 lines below if you want to run it as a daemon (nodaemon = false)
+Type=forking
+PIDFile=/opt/cat/meow/var/pid/supervisord.pid
+
 ExecStart=/usr/bin/supervisord -n -c /etc/supervisor/supervisord.conf
 ExecStop=/usr/bin/supervisorctl $OPTIONS shutdown
 ExecReload=/usr/bin/supervisorctl -c /etc/supervisor/supervisord.conf $OPTIONS reload
+
 KillMode=process
 Restart=on-failure
 RestartSec=50s

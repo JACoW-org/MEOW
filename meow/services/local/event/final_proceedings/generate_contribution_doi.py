@@ -32,80 +32,73 @@ async def generate_dois(proceedings_data: ProceedingsData, cookies: dict, settin
 
     logger.info('event_final_proceedings - generate_contribution_doi')
 
+    proceedings_data.conference_doi = await generate_conference_doi_task(proceedings_data, settings, config)
+
     contributions = [
         c for c in proceedings_data.contributions if callable(c) and c.page > 0]
 
     total_files: int = len(contributions)
-    processed_files: int = 0
 
-    send_stream, receive_stream = create_memory_object_stream()
-    capacity_limiter = CapacityLimiter(8)
+    if total_files > 0:
 
-    conference_doi = dict()
-    results: dict[str, ContributionDOI] = dict()
+        processed_files: int = 0
 
-    async with create_task_group() as tg:
-        async with send_stream:
+        send_stream, receive_stream = create_memory_object_stream()
+        capacity_limiter = CapacityLimiter(16)
 
-            tg.start_soon(generate_conference_doi_task, capacity_limiter, proceedings_data,
-                          settings, config, send_stream.clone())
+        results: dict[str, ContributionDOI] = dict()
 
-            for contribution_data in contributions:
-                tg.start_soon(generate_contribution_doi_task, capacity_limiter, proceedings_data.event,
-                              contribution_data, settings, config, send_stream.clone())
+        async with create_task_group() as tg:
+            async with send_stream:
+                for contribution_data in contributions:
+                    tg.start_soon(generate_contribution_doi_task, capacity_limiter, proceedings_data.event,
+                                  contribution_data, settings, config, send_stream.clone())
 
-        try:
-            async with receive_stream:
-                async for result in receive_stream:
+            try:
+                async with receive_stream:
+                    async for result in receive_stream:
 
-                    result_type: str = result.get('type', None)
+                        result_type: str = result.get('type', None)
 
-                    if result_type == 'conference':
-                        conference_doi = result.get('value')
-                    elif result_type == 'contribution':
-                        processed_files = processed_files + 1
+                        logger.info(
+                            f'doi: {processed_files} -{total_files} - {result_type}')
 
-                        result_code: str = result.get('code', None)
-                        result_value: ContributionDOI | None = result.get(
-                            'value', None)
+                        if result_type == 'contribution':
+                            processed_files = processed_files + 1
 
-                        if result_value is not None:
-                            results[result_code] = result_value
+                            result_code: str = result.get('code', None)
+                            result_value: ContributionDOI | None = result.get(
+                                'value', None)
 
-                        if processed_files >= total_files:
-                            # close stream only when all contributions have been processed
-                            receive_stream.close()
-                    else:
-                        logger.error(
-                            f'Received unexpected result type: {result_type}')
+                            if result_value is not None:
+                                results[result_code] = result_value
 
-        except ClosedResourceError as crs:
-            logger.debug(crs, exc_info=False)
-        except EndOfStream as eos:
-            logger.debug(eos, exc_info=False)
-        except Exception as ex:
-            logger.error(ex, exc_info=True)
+                            if processed_files >= total_files:
+                                # close stream only when all contributions have been processed
+                                receive_stream.close()
+                        else:
+                            logger.error(
+                                f'Received unexpected result type: {result_type}')
 
-    proceedings_data.conference_doi = conference_doi
+            except ClosedResourceError as crs:
+                logger.debug(crs, exc_info=False)
+            except EndOfStream as eos:
+                logger.debug(eos, exc_info=False)
+            except Exception as ex:
+                logger.error(ex, exc_info=True)
 
-    proceedings_data = refill_contribution_doi(
-        proceedings_data, results, callable)
+        proceedings_data = refill_contribution_doi(
+            proceedings_data, results, callable)
 
     return proceedings_data
 
 
-async def generate_conference_doi_task(capacity_limiter: CapacityLimiter,
-                                       proceedings_data: ProceedingsData,
+async def generate_conference_doi_task(proceedings_data: ProceedingsData,
                                        settings: dict,
-                                       config: FinalProceedingsConfig,
-                                       res: MemoryObjectSendStream) -> None:
+                                       config: FinalProceedingsConfig):
     """ """
 
-    async with capacity_limiter:
-        await res.send({
-            'type': 'conference',
-            'value': await build_conference_doi(proceedings_data, settings, config)
-        })
+    return await build_conference_doi(proceedings_data, settings, config)
 
 
 async def build_conference_doi(proceedings_data: ProceedingsData, settings: dict, config: FinalProceedingsConfig):
