@@ -202,6 +202,8 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
     async def render_contributions(self) -> None:
 
+        logger.info(f"render_contributions -> {len(self.contributions)}")
+
         async def _render_contribution(capacity_limiter: CapacityLimiter, contribution: ContributionData) -> None:
             async with capacity_limiter:
 
@@ -222,7 +224,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                         await self.template.render_doi_partial(self.event, contribution.doi_data)
                     )
 
-        capacity_limiter = CapacityLimiter(4)
+        capacity_limiter = CapacityLimiter(16)
         async with create_task_group() as tg:
             for contribution in self.contributions:
                 if contribution and contribution.code:
@@ -255,7 +257,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                     await self.template.render_session_page(self.event, session, contributions)
                 )
 
-        capacity_limiter = CapacityLimiter(4)
+        capacity_limiter = CapacityLimiter(16)
         async with create_task_group() as tg:
             for session in self.sessions:
                 if session and session.code:
@@ -288,7 +290,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                     await self.template.render_classification_page(self.event, classification, contributions)
                 )
 
-        capacity_limiter = CapacityLimiter(4)
+        capacity_limiter = CapacityLimiter(16)
         async with create_task_group() as tg:
             for classification in self.classifications:
                 if classification and classification.code:
@@ -321,7 +323,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                     await self.template.render_author_page(self.event, author, contributions)
                 )
 
-        capacity_limiter = CapacityLimiter(4)
+        capacity_limiter = CapacityLimiter(16)
         async with create_task_group() as tg:
             for author in self.authors:
                 if author and author.id:
@@ -383,7 +385,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                                           contribution_capacity_limiter,
                                           institute, author)
 
-        institute_capacity_limiter = CapacityLimiter(4)
+        institute_capacity_limiter = CapacityLimiter(16)
         async with create_task_group() as tg:
             for institute in self.institutes:
                 if institute and institute.id:
@@ -446,7 +448,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                                       contribution_capacity_limiter,
                                       contribution)
 
-        doi_per_institute_capacity_limiter = CapacityLimiter(4)
+        doi_per_institute_capacity_limiter = CapacityLimiter(16)
         async with create_task_group() as tg:
             for institute in self.institutes:
                 if institute and institute.id:
@@ -480,7 +482,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                     await self.template.render_keyword_page(self.event, keyword, contributions)
                 )
 
-        capacity_limiter = CapacityLimiter(4)
+        capacity_limiter = CapacityLimiter(16)
         async with create_task_group() as tg:
             for keyword in self.keywords:
                 if keyword and keyword.code:
@@ -490,7 +492,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
     async def render_doi_contributions(self) -> None:
         """"""
 
-        logger.info("render_doi_contributions")
+        logger.info(f'render_doi_contributions - {len(self.contributions)}')
 
         await Path(self.src_doi_dir, '_index.html').write_text(
             await self.template.render_doi_list(self.event, self.contributions)
@@ -506,7 +508,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                     await self.template.render_doi_contribution(doi_contribution)
                 )
 
-        capacity_limiter = CapacityLimiter(4)
+        capacity_limiter = CapacityLimiter(16)
         async with create_task_group() as tg:
             for contribution in self.contributions:
                 if contribution.is_included_in_proceedings and contribution.code and contribution.doi_data:
@@ -516,7 +518,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
     async def render_references(self) -> None:
         """"""
 
-        logger.info("render_references")
+        logger.info(f"render_references - {len(self.contributions)}")
 
         async def _render_reference_contribution(capacity_limiter: CapacityLimiter, contribution_code: str,
                                                  contribution_title: str, reference_type: str,
@@ -527,7 +529,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
                                                          reference_type, reference)
                 )
 
-        capacity_limiter = CapacityLimiter(4)
+        capacity_limiter = CapacityLimiter(16)
         async with create_task_group() as tg:
 
             # generate all references for every contribution

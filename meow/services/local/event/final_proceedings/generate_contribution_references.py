@@ -59,7 +59,8 @@ class JinjaXMLBuilder:
 
 
 async def generate_contribution_references(proceedings_data: ProceedingsData, cookies: dict,
-                                           settings: dict, config: FinalProceedingsConfig, callable: Callable) -> ProceedingsData:
+                                           settings: dict, config: FinalProceedingsConfig,
+                                           callable: Callable) -> ProceedingsData:
     """ """
 
     logger.info('event_final_proceedings - extract_contribution_references')
@@ -72,7 +73,7 @@ async def generate_contribution_references(proceedings_data: ProceedingsData, co
     xslt_functions: dict[str, XSLT] = await get_xslt_functions()
 
     send_stream, receive_stream = create_memory_object_stream()
-    capacity_limiter = CapacityLimiter(8)
+    capacity_limiter = CapacityLimiter(16)
 
     results: dict[str, Reference] = dict()
 
@@ -130,7 +131,8 @@ async def get_xslt_functions() -> dict[str, XSLT]:
 
 async def reference_task(capacity_limiter: CapacityLimiter, event: EventData,
                          contribution: ContributionData, xml_builder, xslt_functions: dict,
-                         settings: dict, config: FinalProceedingsConfig, callable: Callable, res: MemoryObjectSendStream) -> None:
+                         settings: dict, config: FinalProceedingsConfig, callable: Callable,
+                         res: MemoryObjectSendStream) -> None:
     """ """
 
     async with capacity_limiter:

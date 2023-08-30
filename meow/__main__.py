@@ -17,10 +17,10 @@ from fitz import Document, Page, Rect, Point, LINK_GOTO, LINK_URI
 from fitz.utils import set_metadata, insert_link, insert_text, new_page
 
 
-from meow.services.local.papers_metadata.pdf_annotations import (
+from meow.services.local.papers_metadata.pdf_annots import (
     annot_page_footer, annot_page_header, annot_page_side
 )
-from meow.services.local.papers_metadata.pdf_annotations import (
+from meow.services.local.papers_metadata.pdf_annots import (
     annot_toc_footer, annot_toc_header
 )
 

@@ -23,11 +23,6 @@ async def copy_event_attachments(
     total_files: int = len(files_data)
     elaborated_files: int = 0
 
-    # logger.debug(f'copy_event_attachments - files: {total_files}')
-
-    # if total_files == 0:
-    #     raise Exception('no file extracted')
-
     file_cache_name = f"{proceedings_data.event.id}_tmp"
     file_cache_dir: Path = Path("var", "run", file_cache_name)
     await file_cache_dir.mkdir(exist_ok=True, parents=True)
@@ -67,7 +62,7 @@ async def copy_event_attachments(
         await move(str(brief_pdf), str(brief_dest))
 
     send_stream, receive_stream = create_memory_object_stream()
-    capacity_limiter = CapacityLimiter(8)
+    capacity_limiter = CapacityLimiter(16)
 
     async with create_task_group() as tg:
         async with send_stream:

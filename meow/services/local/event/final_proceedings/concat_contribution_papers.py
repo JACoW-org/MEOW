@@ -1,3 +1,4 @@
+from datetime import datetime
 import logging as lg
 
 from math import sqrt
@@ -11,7 +12,8 @@ from meow.models.local.event.final_proceedings.proceedings_data_utils import ext
 from meow.models.local.event.final_proceedings.proceedings_data_model import FinalProceedingsConfig
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.services.local.event.event_pdf_utils import (
-    brief_links, pdf_clean, vol_toc_links, vol_toc_pdf, pdf_unite_pdftk, write_metadata)
+    brief_links, pdf_linearize_qpdf, vol_toc_links, vol_toc_pdf, pdf_unite_pdftk)
+from meow.utils.datetime import format_datetime_doi_iso
 # from meow.utils.filesystem import copy
 from meow.utils.list import split_list
 from meow.utils.serialization import json_encode
@@ -36,15 +38,18 @@ async def concat_contribution_papers(proceedings_data: ProceedingsData, cookies:
 
     if len(files_data) > 0:
 
-        toc_grouping = settings.get('toc_grouping',
-                                    ['contribution', 'session'])
+        async def _brief_task():
+            await brief_pdf_task(proceedings_data, files_data, cache_dir,
+                                 settings.get('doi_conference', 'CONF-YY'),
+                                 config.absolute_pdf_link)
 
-        await brief_pdf_task(proceedings_data, files_data, cache_dir,
-                             settings.get('doi_conference', 'CONF-YY'),
-                             config.absolute_pdf_link)
+        async def _vol_task():
+            await vol_pdf_task(proceedings_data, files_data, cache_dir, callback,
+                               settings.get('toc_grouping', ['contribution', 'session']))
 
-        await vol_pdf_task(proceedings_data, files_data, cache_dir,
-                           callback, toc_grouping)
+        async with create_task_group() as tg:
+            tg.start_soon(_brief_task)
+            tg.start_soon(_vol_task)
 
     return proceedings_data
 
@@ -82,31 +87,19 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
     except Exception as e:
         logger.error(e, exc_info=True)
 
-    brief_pdf_temp_name = f"{event_id}_proceedings_brief_temp.pdf"
-    brief_pdf_temp_path = Path(cache_dir, brief_pdf_temp_name)
+    brief_pdf_chunk_name = f"{event_id}_proceedings_brief_chunk.pdf"
+    brief_pdf_chunk_path = Path(cache_dir, brief_pdf_chunk_name)
 
     brief_pdf_links_name = f"{event_id}_proceedings_brief_links.pdf"
     brief_pdf_links_path = Path(cache_dir, brief_pdf_links_name)
 
-    brief_pdf_meta_name = f"{event_id}_proceedings_brief_meta.pdf"
+    brief_pdf_meta_name = f"{event_id}_proceedings_brief.pdf"
     brief_pdf_meta_path = Path(cache_dir, brief_pdf_meta_name)
 
-    brief_pdf_final_name = f"{event_id}_proceedings_brief.pdf"
-    brief_pdf_final_path = Path(cache_dir, brief_pdf_final_name)
-
-    # brief_pdf_files = [
-    #     (str(Path(cache_dir, f"{f.filename}_jacow")) + '[0]')
-    #     for f in files_data
-    # ]
-
     brief_pdf_files = [
-        (str(Path(cache_dir, f"{f.filename}_jacow")))
+        (str(Path(cache_dir, f"{f.filename}_join")))
         for f in files_data
     ]
-
-    brief_pdf_results: list[str] = []
-
-    # brief_pdf_results: list[str] = brief_pdf_files
 
     brief_pdf_links = [
         f"https://jacow.org/{doi_conference}/pdf/{f.filename}"
@@ -115,16 +108,15 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
         f.filename for f in files_data
     ]
 
-    capacity_limiter = CapacityLimiter(8)
+    brief_pdf_results: list[str] = []
 
-    # await concat_chunks(f"{brief_pdf_temp_path}." + "{:06d}".format(1),
-    #                     brief_pdf_files, brief_pdf_results, True, capacity_limiter)
+    capacity_limiter = CapacityLimiter(8)
 
     chunk_size = int(sqrt(len(files_data))) + 1
 
     async with create_task_group() as tg:
         for index, vol_pdf_files_chunk in enumerate(split_list(brief_pdf_files, chunk_size)):
-            tg.start_soon(concat_chunks, f"{brief_pdf_temp_path}." + "{:06d}".format(index),
+            tg.start_soon(concat_chunks, f"{brief_pdf_chunk_path}." + "{:06d}".format(index),
                           vol_pdf_files_chunk, brief_pdf_results, True, capacity_limiter)
 
     brief_pdf_files.sort()
@@ -132,67 +124,41 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
     pdf_parts = [str(brief_pre_pdf_path)] + brief_pdf_results \
         if brief_pre_pdf_path else brief_pdf_results
 
-    metadata = dict(
-        author="JACoW - Joint Accelerator Conferences Website",
-        producer=None,
-        creator="JACoW Conference Assembly Tool (CAT)",
-        title=f"{event_title} - Proceedings at a Glance",
-        format=None,
-        encryption=None,
-        creationDate=None,
-        modDate=None,
-        subject="First page only of all papers with hyperlinks to complete versions",
-        keywords=None,
-        trapped=None,
-    )
+    docinfo = get_brief_metadata(event_title)
+    metadata = get_brief_xmp_metadata(event_title)
 
     try:
-        if await pdf_unite_pdftk(str(brief_pdf_temp_path), pdf_parts, False) != 0:
+        if await pdf_unite_pdftk(str(brief_pdf_chunk_path), pdf_parts, False) != 0:
             raise BaseException('Error in Proceedings at a Glance generation')
     except BaseException as be:
         logger.error(be, exc_info=True)
         raise be
     finally:
-        pass
-        # for pdf_part in [Path(p) for p in pdf_parts]:
-        #     if await pdf_part.exists():
-        #         await pdf_part.unlink()
+        for pdf_part in [Path(p) for p in pdf_parts]:
+            if await pdf_part.exists():
+                await pdf_part.unlink()
 
     try:
-        if await brief_links(str(brief_pdf_temp_path), str(brief_pdf_links_path), brief_pdf_links) != 0:
+        if await brief_links(str(brief_pdf_chunk_path), str(brief_pdf_links_path), brief_pdf_links) != 0:
             raise BaseException('Error in Proceedings at a Glance links')
     except BaseException as be:
         logger.error(be, exc_info=True)
         raise be
     finally:
-        pass
-        # if await brief_pdf_temp_path.exists():
-        #     await brief_pdf_temp_path.unlink()
+        if await brief_pdf_chunk_path.exists():
+            await brief_pdf_chunk_path.unlink()
 
     try:
-        if await write_metadata(str(brief_pdf_links_path), str(brief_pdf_meta_path), metadata) != 0:
-            raise BaseException('Error in Proceedings at a Glance metadata')
-    except BaseException as be:
-        logger.error(be, exc_info=True)
-        raise be
-    finally:
-        pass
-        # if await brief_pdf_links_path.exists():
-        #     await brief_pdf_links_path.unlink()
-
-    try:
-        # await copy(str(brief_pdf_meta_path), str(brief_pdf_final_path))
-        if await pdf_clean(str(brief_pdf_meta_path), str(brief_pdf_final_path)) != 0:
+        if await pdf_linearize_qpdf(str(brief_pdf_links_path), str(brief_pdf_meta_path), docinfo, metadata) != 0:
             raise BaseException('Error in Proceedings at a Glance clean')
     except BaseException as be:
         logger.error(be, exc_info=True)
         raise be
     finally:
-        pass
-        # if await brief_pdf_meta_path.exists():
-        #     await brief_pdf_meta_path.unlink()
+        if await brief_pdf_links_path.exists():
+            await brief_pdf_links_path.unlink()
 
-    proceedings_data.proceedings_brief_size = (await brief_pdf_final_path.stat()).st_size
+    proceedings_data.proceedings_brief_size = (await brief_pdf_meta_path.stat()).st_size
 
 
 async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileData],
@@ -201,28 +167,23 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
     event_id = proceedings_data.event.id
     event_title = proceedings_data.event.title
 
-    vol_pdf_temp_name = f"{event_id}_proceedings_volume_temp.pdf"
-    vol_pdf_temp_path = Path(cache_dir, vol_pdf_temp_name)
+    vol_pdf_chunk_name = f"{event_id}_proceedings_volume_chunk.pdf"
+    vol_pdf_chunk_path = Path(cache_dir, vol_pdf_chunk_name)
 
     vol_pdf_links_name = f"{event_id}_proceedings_volume_links.pdf"
     vol_pdf_links_path = Path(cache_dir, vol_pdf_links_name)
 
-    vol_pdf_meta_name = f"{event_id}_proceedings_volume_meta.pdf"
+    vol_pdf_meta_name = f"{event_id}_proceedings_volume.pdf"
     vol_pdf_meta_path = Path(cache_dir, vol_pdf_meta_name)
-
-    vol_pdf_final_name = f"{event_id}_proceedings_volume.pdf"
-    vol_pdf_final_path = Path(cache_dir, vol_pdf_final_name)
 
     vol_pre_pdf_path = await get_vol_pre_pdf_path(proceedings_data, cache_dir, callback)
     [vol_toc_pdf_path, vol_toc_links_path] = await get_vol_toc_pdf_path(proceedings_data, vol_pre_pdf_path,
                                                                         cache_dir, callback, toc_grouping)
 
     vol_pdf_files: list[str] = [
-        str(Path(cache_dir, f"{f.filename}_jacow"))
+        str(Path(cache_dir, f"{f.filename}_join"))
         for f in files_data
     ]
-
-    # vol_pdf_results: list[str] = vol_pdf_files
 
     vol_pdf_results: list[str] = []
 
@@ -232,7 +193,7 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
 
     async with create_task_group() as tg:
         for index, vol_pdf_files_chunk in enumerate(split_list(vol_pdf_files, chunk_size)):
-            tg.start_soon(concat_chunks, f"{vol_pdf_temp_path}." + "{:06d}".format(index),
+            tg.start_soon(concat_chunks, f"{vol_pdf_chunk_path}." + "{:06d}".format(index),
                           vol_pdf_files_chunk, vol_pdf_results, False, capacity_limiter)
         vol_pdf_results.sort()
 
@@ -240,69 +201,43 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
     pdf_parts = pdf_parts + [str(vol_toc_pdf_path)] if vol_toc_pdf_path else []
     pdf_parts = pdf_parts + vol_pdf_results
 
-    metadata = dict(
-        author="JACoW - Joint Accelerator Conferences Website",
-        producer=None,
-        creator="JACoW Conference Assembly Tool (CAT)",
-        title=f"{event_title} - Proceedings Volume",
-        format=None,
-        encryption=None,
-        creationDate=None,
-        modDate=None,
-        subject="The complete volume of papers",
-        keywords=None,
-        trapped=None,
-    )
+    docinfo = get_vol_metadata(event_title)
+    metadata = get_vol_xmp_metadata(event_title)
 
     try:
-        if await pdf_unite_pdftk(str(vol_pdf_temp_path), pdf_parts, False) != 0:
+        if await pdf_unite_pdftk(str(vol_pdf_chunk_path), pdf_parts, False) != 0:
             raise BaseException('Error in Proceedings Volume generation')
     except BaseException as be:
         logger.error(be, exc_info=True)
         raise be
     finally:
-        pass
-        # for pdf_part in [Path(p) for p in pdf_parts]:
-        #     if await pdf_part.exists():
-        #         await pdf_part.unlink()
+        for pdf_part in [Path(p) for p in pdf_parts]:
+            if await pdf_part.exists():
+                await pdf_part.unlink()
 
     try:
-        if await vol_toc_links(str(vol_pdf_temp_path), str(vol_pdf_links_path), str(vol_toc_links_path)) != 0:
+        if await vol_toc_links(str(vol_pdf_chunk_path), str(vol_pdf_links_path), str(vol_toc_links_path)) != 0:
             raise BaseException('Error in Proceedings Volume links')
     except BaseException as be:
         logger.error(be, exc_info=True)
         raise be
     finally:
-        pass
-        # if await vol_pdf_temp_path.exists():
-        #     await vol_pdf_temp_path.unlink()
-        # if vol_toc_links_path and await vol_toc_links_path.exists():
-        #     await vol_toc_links_path.unlink()
+        if await vol_pdf_chunk_path.exists():
+            await vol_pdf_chunk_path.unlink()
+        if vol_toc_links_path and await vol_toc_links_path.exists():
+            await vol_toc_links_path.unlink()
 
     try:
-        if await write_metadata(str(vol_pdf_links_path), str(vol_pdf_meta_path), metadata) != 0:
-            raise BaseException('Error in Proceedings Volume metadata')
-    except BaseException as be:
-        logger.error(be, exc_info=True)
-        raise be
-    finally:
-        pass
-        # if await vol_pdf_links_path.exists():
-        #     await vol_pdf_links_path.unlink()
-
-    try:
-        # await copy(str(vol_pdf_meta_path), str(vol_pdf_final_path))
-        if await pdf_clean(str(vol_pdf_meta_path), str(vol_pdf_final_path)) != 0:
+        if await pdf_linearize_qpdf(str(vol_pdf_links_path), str(vol_pdf_meta_path), docinfo, metadata) != 0:
             raise BaseException('Error in Proceedings Volume clean')
     except BaseException as be:
         logger.error(be, exc_info=True)
         raise be
     finally:
-        pass
-        # if await vol_pdf_meta_path.exists():
-        #     await vol_pdf_meta_path.unlink()
+        if await vol_pdf_links_path.exists():
+            await vol_pdf_links_path.unlink()
 
-    proceedings_data.proceedings_volume_size = (await vol_pdf_final_path.stat()).st_size
+    proceedings_data.proceedings_volume_size = (await vol_pdf_meta_path.stat()).st_size
 
 
 async def get_vol_pre_pdf_path(proceedings_data: ProceedingsData, cache_dir: Path, callback: Callable):
@@ -423,3 +358,101 @@ async def concat_chunks(write_path: str, pdf_files: list[str], results: list[str
         results.append(write_path)
         if await pdf_unite_pdftk(write_path, pdf_files, first) != 0:
             raise BaseException('Error in Proceedings Volume generation')
+
+
+def get_vol_xmp_metadata(event_title):
+
+    meta: dict = {
+        'dc:title': f"{event_title} - Proceedings Volume",
+        # 'dc:subject': contribution.track_meta,
+        # 'dc:description': contribution.doi_data.abstract,
+        'dc:language': 'en-us',
+        'dc:creator': ["JACoW Conference Assembly Tool (CAT)"],
+        # 'pdf:keywords': contribution.keywords_meta,
+        'pdf:producer': "",
+        'xmp:CreatorTool': "JACoW Conference Assembly Tool (CAT)",
+        # 'xmp:Identifier': contribution.doi_data.doi_identifier,
+        'xmp:ModifyDate': format_datetime_doi_iso(datetime.now()),
+        'xmp:MetadataDate': format_datetime_doi_iso(datetime.now()),
+        'xmp:CreateDate': format_datetime_doi_iso(datetime.now()),
+    }
+
+    return meta
+
+
+def get_vol_metadata(event_title):
+    # metadata = dict(
+    #     author="JACoW - Joint Accelerator Conferences Website",
+    #     producer=None,
+    #     creator="JACoW Conference Assembly Tool (CAT)",
+    #     title=f"{event_title} - Proceedings Volume",
+    #     format=None,
+    #     encryption=None,
+    #     creationDate=None,
+    #     modDate=None,
+    #     subject="The complete volume of papers",
+    #     keywords=None,
+    #     trapped=None,
+    # )
+
+    metadata = {
+        '/Author': "JACoW - Joint Accelerator Conferences Website",
+        '/Producer': "",
+        '/Creator': "JACoW Conference Assembly Tool (CAT)",
+        '/Title': f"{event_title} - Proceedings Volume",
+        '/CreationDate': format_datetime_doi_iso(datetime.now()),
+        '/ModDate': format_datetime_doi_iso(datetime.now()),
+        '/Subject': "The complete volume of papers",
+        # '/Keywords': None
+    }
+
+    return metadata
+
+
+def get_brief_xmp_metadata(event_title):
+
+    meta: dict = {
+        'dc:title': f"{event_title} - Proceedings at a Glance",
+        # 'dc:subject': contribution.track_meta,
+        # 'dc:description': contribution.doi_data.abstract,
+        'dc:language': 'en-us',
+        'dc:creator': ["JACoW Conference Assembly Tool (CAT)"],
+        # 'pdf:keywords': contribution.keywords_meta,
+        'pdf:producer': "",
+        'xmp:CreatorTool': "JACoW Conference Assembly Tool (CAT)",
+        # 'xmp:Identifier': contribution.doi_data.doi_identifier,
+        'xmp:ModifyDate': format_datetime_doi_iso(datetime.now()),
+        'xmp:MetadataDate': format_datetime_doi_iso(datetime.now()),
+        'xmp:CreateDate': format_datetime_doi_iso(datetime.now()),
+    }
+
+    return meta
+
+
+def get_brief_metadata(event_title):
+    # metadata = dict(
+    #     author="JACoW - Joint Accelerator Conferences Website",
+    #     producer=None,
+    #     creator="JACoW Conference Assembly Tool (CAT)",
+    #     title=f"{event_title} - Proceedings at a Glance",
+    #     format=None,
+    #     encryption=None,
+    #     creationDate=None,
+    #     modDate=None,
+    #     subject="First page only of all papers with hyperlinks to complete versions",
+    #     keywords=None,
+    #     trapped=None,
+    # )
+
+    metadata = {
+        '/Author': "JACoW - Joint Accelerator Conferences Website",
+        '/Producer': "",
+        '/Creator': "JACoW Conference Assembly Tool (CAT)",
+        '/Title': f"{event_title} - Proceedings at a Glance",
+        '/CreationDate': format_datetime_doi_iso(datetime.now()),
+        '/ModDate': format_datetime_doi_iso(datetime.now()),
+        '/Subject': "The complete volume of papers",
+        # '/Keywords': None
+    }
+
+    return metadata

@@ -43,7 +43,7 @@ async def event_pdf_keywords(event: dict, cookies: dict, settings: dict) -> Asyn
 
     send_stream, receive_stream = create_memory_object_stream()
 
-    capacity_limiter = CapacityLimiter(4)
+    capacity_limiter = CapacityLimiter(16)
 
     async with create_task_group() as tg:
         async with send_stream:

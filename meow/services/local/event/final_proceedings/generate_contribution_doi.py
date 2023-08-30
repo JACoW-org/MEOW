@@ -17,95 +17,88 @@ from meow.tasks.local.doi.utils import (generate_doi_external_label, generate_do
                                         generate_doi_landing_page_url, generate_doi_name,
                                         generate_doi_path)
 
-from meow.utils.datetime import format_datetime_full, format_datetime_range_doi, format_datetime_doi
+from meow.utils.datetime import (
+    format_datetime_doi_iso, format_datetime_full, format_datetime_range_doi, format_datetime_doi)
 from meow.utils.serialization import json_decode
 from meow.models.local.event.final_proceedings.event_factory import event_person_factory
-from meow.callbacks.tasks import get
 
 
 logger = lg.getLogger(__name__)
 
 
 async def generate_dois(proceedings_data: ProceedingsData, cookies: dict, settings: dict,
-                                    config: FinalProceedingsConfig, callable: Callable) -> ProceedingsData:
+                        config: FinalProceedingsConfig, callable: Callable) -> ProceedingsData:
     """ """
 
     logger.info('event_final_proceedings - generate_contribution_doi')
+
+    proceedings_data.conference_doi = await generate_conference_doi_task(proceedings_data, settings, config)
 
     contributions = [
         c for c in proceedings_data.contributions if callable(c) and c.page > 0]
 
     total_files: int = len(contributions)
-    processed_files: int = 0
 
-    send_stream, receive_stream = create_memory_object_stream()
-    capacity_limiter = CapacityLimiter(8)
+    if total_files > 0:
 
-    conference_doi = dict()
-    results: dict[str, ContributionDOI] = dict()
+        processed_files: int = 0
 
-    async with create_task_group() as tg:
-        async with send_stream:
+        send_stream, receive_stream = create_memory_object_stream()
+        capacity_limiter = CapacityLimiter(16)
 
-            tg.start_soon(generate_conference_doi_task, capacity_limiter, proceedings_data,
-                          settings, config, send_stream.clone())
+        results: dict[str, ContributionDOI] = dict()
 
-            for contribution_data in contributions:
-                tg.start_soon(generate_contribution_doi_task, capacity_limiter, proceedings_data.event,
-                              contribution_data, settings, config, send_stream.clone())
+        async with create_task_group() as tg:
+            async with send_stream:
+                for contribution_data in contributions:
+                    tg.start_soon(generate_contribution_doi_task, capacity_limiter, proceedings_data.event,
+                                  contribution_data, settings, config, send_stream.clone())
 
-        try:
-            async with receive_stream:
-                async for result in receive_stream:
+            try:
+                async with receive_stream:
+                    async for result in receive_stream:
 
-                    result_type: str = result.get('type', None)
+                        result_type: str = result.get('type', None)
 
-                    if result_type == 'conference':
-                        conference_doi = result.get('value')
-                    elif result_type == 'contribution':
-                        processed_files = processed_files + 1
+                        logger.info(
+                            f'doi: {processed_files} -{total_files} - {result_type}')
 
-                        result_code: str = result.get('code', None)
-                        result_value: ContributionDOI | None = result.get(
-                            'value', None)
+                        if result_type == 'contribution':
+                            processed_files = processed_files + 1
 
-                        if result_value is not None:
-                            results[result_code] = result_value
+                            result_code: str = result.get('code', None)
+                            result_value: ContributionDOI | None = result.get(
+                                'value', None)
 
-                        if processed_files >= total_files:
-                            # close stream only when all contributions have been processed
-                            receive_stream.close()
-                    else:
-                        logger.error(
-                            f'Received unexpected result type: {result_type}')
+                            if result_value is not None:
+                                results[result_code] = result_value
 
-        except ClosedResourceError as crs:
-            logger.debug(crs, exc_info=False)
-        except EndOfStream as eos:
-            logger.debug(eos, exc_info=False)
-        except Exception as ex:
-            logger.error(ex, exc_info=True)
+                            if processed_files >= total_files:
+                                # close stream only when all contributions have been processed
+                                receive_stream.close()
+                        else:
+                            logger.error(
+                                f'Received unexpected result type: {result_type}')
 
-    proceedings_data.conference_doi = conference_doi
+            except ClosedResourceError as crs:
+                logger.debug(crs, exc_info=False)
+            except EndOfStream as eos:
+                logger.debug(eos, exc_info=False)
+            except Exception as ex:
+                logger.error(ex, exc_info=True)
 
-    proceedings_data = refill_contribution_doi(
-        proceedings_data, results, callable)
+        proceedings_data = refill_contribution_doi(
+            proceedings_data, results, callable)
 
     return proceedings_data
 
 
-async def generate_conference_doi_task(capacity_limiter: CapacityLimiter,
-                                       proceedings_data: ProceedingsData,
+async def generate_conference_doi_task(proceedings_data: ProceedingsData,
                                        settings: dict,
-                                       config: FinalProceedingsConfig,
-                                       res: MemoryObjectSendStream) -> None:
+                                       config: FinalProceedingsConfig):
     """ """
 
-    async with capacity_limiter:
-        await res.send({
-            'type': 'conference',
-            'value': await build_conference_doi(proceedings_data, settings, config)
-        })
+    return await build_conference_doi(proceedings_data, settings, config)
 
 
 async def build_conference_doi(proceedings_data: ProceedingsData, settings: dict, config: FinalProceedingsConfig):
@@ -210,8 +203,10 @@ async def build_conference_doi(proceedings_data: ProceedingsData, settings: dict
     return conference_doi
 
 
-async def generate_contribution_doi_task(capacity_limiter: CapacityLimiter, event: EventData, contribution: ContributionData,
-                            settings: dict, config: FinalProceedingsConfig, res: MemoryObjectSendStream) -> None:
+async def generate_contribution_doi_task(capacity_limiter: CapacityLimiter, event: EventData,
+                                         contribution: ContributionData, settings: dict,
+                                         config: FinalProceedingsConfig,
+                                         res: MemoryObjectSendStream) -> None:
     """ """
 
     async with capacity_limiter:
@@ -314,6 +309,7 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         ],
         isbn=event_isbn,
         issn=event_issn,
+
         reception_date=format_datetime_doi(
             contribution.reception) if contribution.reception else '',
         revisitation_date=format_datetime_doi(
@@ -322,6 +318,16 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
             contribution.acceptance) if contribution.acceptance else '',
         issuance_date=format_datetime_doi(
             contribution.issuance) if contribution.issuance else '',
+
+        reception_date_iso=format_datetime_doi_iso(
+            contribution.reception) if contribution.reception else '',
+        revisitation_date_iso=format_datetime_doi_iso(
+            contribution.revisitation) if contribution.revisitation else '',
+        acceptance_date_iso=format_datetime_doi_iso(
+            contribution.acceptance) if contribution.acceptance else '',
+        issuance_date_iso=format_datetime_doi_iso(
+            contribution.issuance) if contribution.issuance else '',
+
         doi_label=doi_label,
         doi_url=doi_url,
         doi_path=doi_path,
