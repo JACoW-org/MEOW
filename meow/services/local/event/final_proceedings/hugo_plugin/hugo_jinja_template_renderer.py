@@ -65,16 +65,23 @@ class JinjaTemplateRenderer:
         return html if minify is False else minify_html.minify(
             html, remove_processing_instructions=True)
 
-    async def render_config_toml(self, event: EventData, attachments: list[AttachmentData], settings: dict) -> str:
+    async def render_config_toml(self, event: EventData, logo: AttachmentData, poster: AttachmentData, volumes: list[AttachmentData], attachments: list[AttachmentData], settings: dict) -> str:
+
         return await self.render("config.toml.jinja", dict(
             event=event.as_dict(),
             settings=settings,
+            logo_data=logo.as_dict() if logo else None,
+            poster_data=poster.as_dict() if poster else None,
+            volumes=[v.as_dict() for v in volumes],
             attachments=[a.as_dict() for a in attachments],
         ))
 
-    async def render_home_page(self, event: EventData, attachments: list[AttachmentData], volume_size: int, brief_size: int) -> str:
+    async def render_home_page(self, event: EventData, logo: AttachmentData, poster: AttachmentData, volumes: list[AttachmentData], attachments: list[AttachmentData], volume_size: int, brief_size: int) -> str:
         return await self.render("home_page.html.jinja", minify=True, args=dict(
             event=event.as_dict(),
+            logo_data=logo.as_dict() if logo else None,
+            poster_data=poster.as_dict() if poster else None,
+            volumes=[v.as_dict() for v in volumes],
             attachments=[a.as_dict() for a in attachments],
             volume_size=volume_size,
             brief_size=brief_size,

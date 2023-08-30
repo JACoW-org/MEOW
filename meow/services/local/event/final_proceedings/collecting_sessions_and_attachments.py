@@ -48,4 +48,10 @@ async def download_attachments(event_url: str, cookies: dict, settings: dict, at
     response = await download_json(url=url, cookies=cookies)
 
     if 'error' not in response and response.get('error') is not True:
-        attachments.extend(response.get('attachments'))
+        downloaded_attachments = response.get('attachments', [])
+        for material in settings.get('materials'):
+            for attachment in downloaded_attachments:
+                if attachment.get('id') == material.get('id'):
+                    attachment['section'] = material.get('section')
+                    attachment['index'] = material.get('index')
+                    attachments.append(attachment)

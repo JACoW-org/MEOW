@@ -26,6 +26,8 @@ def attachment_data_factory(attachment: Any) -> AttachmentData:
         title=attachment.get("title"),
         description=attachment.get("description"),
         external_download_url=attachment.get("external_download_url"),
+        section=attachment.get('section'),
+        index=attachment.get('index')
     )
 
     # logger.info(attachment_data.as_dict())

@@ -61,16 +61,23 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
 
         attachments_data: list[AttachmentData] = proceedings_data.attachments
         for attachment_data in attachments_data:
-            # {event_code}-{section_index}-{section_code}-{file_name}
-            attachment_name: str = attachment_data.filename.split('.')[0]
-            event_code, section_index, section_code, * \
-                file_name = attachment_name.split('-')
 
-            if section_code == 'volumes' and '-'.join(file_name) == 'at-a-glance-cover':
+            if attachment_data.section == 'at-a-glance-cover':
                 brief_pre_pdf_path = Path(cache_dir, attachment_data.filename)
 
                 if not await brief_pre_pdf_path.exists():
                     brief_pre_pdf_path = None
+
+            # {event_code}-{section_index}-{section_code}-{file_name}
+            # attachment_name: str = attachment_data.filename.split('.')[0]
+            # event_code, section_index, section_code, * \
+            #     file_name = attachment_name.split('-')
+
+            # if section_code == 'volumes' and '-'.join(file_name) == 'at-a-glance-cover':
+            #     brief_pre_pdf_path = Path(cache_dir, attachment_data.filename)
+
+            #     if not await brief_pre_pdf_path.exists():
+            #         brief_pre_pdf_path = None
 
     except Exception as e:
         logger.error(e, exc_info=True)
@@ -304,16 +311,23 @@ async def get_vol_pre_pdf_path(proceedings_data: ProceedingsData, cache_dir: Pat
     try:
         attachments_data: list[AttachmentData] = proceedings_data.attachments
         for attachment_data in attachments_data:
-            # {event_code}-{section_index}-{section_code}-{file_name}
-            attachment_name: str = attachment_data.filename.split('.')[0]
-            event_code, section_index, section_code, * \
-                file_name = attachment_name.split('-')
 
-            if section_code == 'volumes' and '-'.join(file_name) == 'proceedings-cover':
+            if attachment_data.section == 'final-proceedings-cover':
                 vol_pre_pdf_path = Path(cache_dir, attachment_data.filename)
 
                 if not await vol_pre_pdf_path.exists():
                     vol_pre_pdf_path = None
+
+            # {event_code}-{section_index}-{section_code}-{file_name}
+            # attachment_name: str = attachment_data.filename.split('.')[0]
+            # event_code, section_index, section_code, * \
+            #     file_name = attachment_name.split('-')
+
+            # if section_code == 'volumes' and '-'.join(file_name) == 'proceedings-cover':
+            #     vol_pre_pdf_path = Path(cache_dir, attachment_data.filename)
+
+            #     if not await vol_pre_pdf_path.exists():
+            #         vol_pre_pdf_path = None
 
     except Exception as e:
         logger.error(e, exc_info=True)

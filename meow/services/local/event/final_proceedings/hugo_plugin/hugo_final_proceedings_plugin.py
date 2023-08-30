@@ -36,7 +36,21 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
         self.proceedings = proceedings_data
         self.event = proceedings_data.event
-        self.attachments = proceedings_data.attachments
+
+        self.logo = None
+        self.poster = None
+        self.volumes = []
+        self.attachments = []
+        for attachment in proceedings_data.attachments:
+            if attachment.section == 'logo':
+                self.logo = attachment
+            elif attachment.section == 'poster':
+                self.poster = attachment
+            elif attachment.section == 'volumes':
+                self.volumes.append(attachment)
+            elif attachment.section == 'attachments':
+                self.attachments.append(attachment)
+
         self.contributions = proceedings_data.contributions
         self.sessions = proceedings_data.sessions
         self.classifications = proceedings_data.classification
@@ -172,12 +186,15 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         self.template = JinjaTemplateRenderer()
 
         await Path(self.src_dir, 'config.toml').write_text(
-            await self.template.render_config_toml(self.event, self.attachments, self.settings)
+            await self.template.render_config_toml(self.event, self.logo, self.poster, self.volumes, self.attachments, self.settings)
         )
 
     async def render_home(self) -> None:
         await Path(self.src_dir, 'layouts', 'index.html').write_text(
             await self.template.render_home_page(self.event,
+                                                 self.logo,
+                                                 self.poster,
+                                                 self.volumes,
                                                  self.attachments,
                                                  self.proceedings.proceedings_volume_size,
                                                  self.proceedings.proceedings_brief_size)

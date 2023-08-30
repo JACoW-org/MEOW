@@ -18,18 +18,22 @@ issn = """{{event.issn}}"""
 doi_url = """{{event.doi_url}}"""
 doi_label = """{{event.doi_label}}"""
 
-{% for attachment in attachments %}
-{% if 'logo' in attachment.filename: %}
-logo = """pdf/{{attachment.filename}}"""
+{% if logo_data: %}
+logo = """pdf/{{logo_data.filename}}"""
 {% endif %}
-{% if 'poster' in attachment.filename: %}
-poster = """pdf/{{attachment.filename}}"""
+{% if poster_data: %}
+poster = """pdf/{{poster_data.filename}}"""
 {% endif %}
+
+{% for volume in volumes %}
+[[params.volumes]]
+title = """{{ volume.title }}"""
+filename = """pdf/{{volume.filename}}"""
 {% endfor %}
 
 {% for attachment in attachments %}
 [[params.attachments]]
-title = """{ attachment.title }}"""
+title = """{{ attachment.title }}"""
 filename = """pdf/{{attachment.filename}}"""
 {% endfor %}   
 
