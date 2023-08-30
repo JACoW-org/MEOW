@@ -362,19 +362,18 @@ def _draw_frame_anyio(input: str, output: str, page_number: int,
                 annot_page_footer(page, page_number, footer) if annotations \
                     else write_page_footer(page, page_number, footer)
 
-            if pre_print:
-                annot_page_side(
-                    page=page,
-                    pre_print=pre_print,
-                    page_number=page_number,
-                    cc_logo=cc_logo
-                ) if annotations \
-                    else write_page_side(
-                    page=page,
-                    pre_print=pre_print,
-                    page_number=page_number,
-                    cc_logo=cc_logo
-                )
+            annot_page_side(
+                page=page,
+                pre_print=pre_print,
+                page_number=page_number,
+                cc_logo=cc_logo
+            ) if annotations \
+                else write_page_side(
+                page=page,
+                pre_print=pre_print,
+                page_number=page_number,
+                cc_logo=cc_logo
+            )
 
             page_number += 1
 

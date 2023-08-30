@@ -25,7 +25,7 @@ def contribution_editable_factory(editable: Any) -> EditableData | None:
 
     all_revisions = [
         contribution_revision_factory(revision)
-        for revision in editable.get('valid_revisions', [])
+        for revision in editable.get('all_revisions', [])
         if revision is not None
     ]
 
@@ -36,21 +36,16 @@ def contribution_editable_factory(editable: Any) -> EditableData | None:
         x.id
     ))
 
-    # latest_revision = contribution_revision_factory(
-    #     editable.get('latest_revision', None)
-    # ) if editable.get('latest_revision', None) else None
-
     latest_revision = contribution_revision_factory(
-        editable.get('latest_revision_with_files', None)
-    ) if editable.get('latest_revision_with_files', None) else None
+        editable.get('latest_revision', None)
+    ) if editable.get('latest_revision', None) else None
 
     return EditableData(
         id=editable.get('id', None),
         type=editable.get('type', None),
         state=editable.get('state', None),
         all_revisions=all_revisions,
-        latest_revision=latest_revision,
-        # latest_revision_with_files=latest_revision_with_files
+        latest_revision=latest_revision
     )
 
 
@@ -79,7 +74,7 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
 
     revisitation_revisions = [
         r for r in paper_data.all_revisions
-        if r.type == RevisionData.RevisionType.acceptance
+        if r.final_state == RevisionData.FinalRevisionState.accepted
     ] if paper_data else []
 
     revisitation_revision = revisitation_revisions[0] \
@@ -151,13 +146,19 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
     # if paper_data and len(paper_data.valid_revisions) == 0:
     #     logger.error(f"code: {contribution.get('code')}")
 
+    """ """
+
     is_included_in_proceedings: bool = False
     is_included_in_prepress: bool = False
     is_included_in_pdf_check: bool = False
+    peer_reviewing_accepted: bool = False
 
     if paper_data and paper_data.state:
 
         # logger.info(f"paper_data state {paper_data.state}")
+
+        if paper_data.state == EditableData.EditableState.ready_for_review:
+            peer_reviewing_accepted = True
 
         if paper_data.state == EditableData.EditableState.accepted:
             is_included_in_prepress = True
@@ -202,12 +203,11 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
     """
 
     if paper_data:
-        logger.warning(
-            f"code: {contribution.get('code')} - state {paper_data.state}")
-        logger.warning(f"is_included_in_prepress: {is_included_in_prepress}")
-        logger.warning(
-            f"is_included_in_proceedings: {is_included_in_proceedings}")
-        logger.warning(f"is_included_in_pdf_check: {is_included_in_pdf_check}")
+        logger.debug(f"{contribution.get('code')} - {paper_data.state}")
+        logger.debug(f"is_prepress: {is_included_in_prepress}")
+        logger.debug(f"is_proceedings: {is_included_in_proceedings}")
+        logger.debug(f"is_pdf_check: {is_included_in_pdf_check}")
+        logger.debug(f"peer_reviewing: {peer_reviewing_accepted}")
 
     # if is_included_in_proceedings != editable_is_included_in_proceedings:
     #     logger.warning(f"{contribution.get('code')}: in_proceedings ERROR")
@@ -256,26 +256,6 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
             contribution.get('coauthors', [])
         )
     ]
-
-    """ """
-
-    # {
-    #     "last_revision": {
-    #       "judgment_comment": ""
-    #     },
-    #     "state": 2,
-    #     "title": "Upgrades on ultra-fast pulse generator for impact ionization",
-    #     "verbose_title": "#551 (Upgrades on ultra-fast pulse generator for impact ionization)"
-    # }
-
-    paper = contribution.get('paper', None)
-    state = paper.get('state', 0) \
-        if paper else None
-    peer_reviewing_accepted = state == 2 \
-        if state else False
-
-    # logger.warning(f"code: {contribution.get('code')}")
-    # logger.warning(f"peer_reviewing_accepted: {peer_reviewing_accepted}")
 
     """ """
 
@@ -365,7 +345,8 @@ def contribution_revision_factory(revision: Any) -> RevisionData:
     return RevisionData(
         id=revision.get('id'),
         comment=revision.get('comment'),
-        type=revision.get('type'),
+        initial_state=revision.get('initial_state'),
+        final_state=revision.get('final_state'),
         creation_date=datedict_to_tz_datetime(
             revision.get('created_dt')
         ),

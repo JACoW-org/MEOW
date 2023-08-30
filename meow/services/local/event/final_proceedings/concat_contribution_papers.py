@@ -179,6 +179,9 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
 
     proceedings_data.proceedings_brief_size = (await brief_pdf_meta_path.stat()).st_size
 
+    logger.info(
+        f"proceedings_brief_size: {proceedings_data.proceedings_brief_size}")
+
 
 async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileData],
                        cache_dir: Path, callback: Callable, toc_grouping: list[str],
@@ -253,6 +256,9 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
             await vol_pdf_links_path.unlink()
 
     proceedings_data.proceedings_volume_size = (await vol_pdf_meta_path.stat()).st_size
+
+    logger.info(
+        f"proceedings_volume_size: {proceedings_data.proceedings_volume_size}")
 
 
 async def unlink_files(pdf_files: list[str]):
