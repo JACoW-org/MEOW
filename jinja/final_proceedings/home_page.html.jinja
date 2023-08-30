@@ -50,34 +50,28 @@
                 <ul>
                     <li>
                         <a href="./pdf/{{ event.path }}_proceedings_volume.pdf"><b>{% raw %}
-                        {{.Site.Params.name}}
-                        {% endraw %} Proceedings Volume</b></a>
+                                {{.Site.Params.name}}
+                                {% endraw %} Proceedings Volume</b></a>
                         ({{ volume_size | filesizeformat }})
                         <div><i>The complete volume of papers</i></div>
                     </li>
 
                     <li>
                         <a href="./pdf/{{ event.path }}_proceedings_brief.pdf"><b>{% raw %}
-                            {{.Site.Params.name}}
-                        {% endraw %} Proceedings at a glance</b></a>
+                                {{.Site.Params.name}}
+                                {% endraw %} Proceedings at a glance</b></a>
                         ({{ brief_size | filesizeformat }})
                         <div><i>First page only of all papers with hyperlinks to complete versions</i></div>
                     </li>
 
-                    {% for attachment in attachments %}
-                    {% if '-volumes-' in attachment.filename: %}
-                    {% if not 'volumes-at-a-glance-cover' in attachment.filename: %}
-                    {% if not 'volumes-proceedings-cover' in attachment.filename: %}
+                    {% for volume in volumes | sort(attribute='index') %}
                     <li>
-                        <a href="./pdf/{{ attachment.filename }}"><b>{{ attachment.title }}</b></a>
-                        ({{ attachment.size | filesizeformat }})
-                        {% if attachment.description: %}
-                        <div><i>{{ attachment.description }}</i></div>
-                        {% endif %}    
+                        <a href="./pdf/{{ volume.filename }}"><b>{{ volume.title }}</b></a>
+                        ({{ volume.size | filesizeformat }})
+                        {% if volume.description: %}
+                        <div><i>{{ volume.description }}</i></div>
+                        {% endif %}
                     </li>
-                    {% endif %}
-                    {% endif %}
-                    {% endif %}
                     {% endfor %}
                 </ul>
 
@@ -85,16 +79,14 @@
 
             <div class="event-attachments">
                 <ul>
-                    {% for attachment in attachments %}
-                    {% if '-attachments-' in attachment.filename: %}
+                    {% for attachment in attachments | sort(attribute='index') %}
                     <li>
                         <a href="./pdf/{{ attachment.filename }}"><b>{{ attachment.title }}</b></a>
                         ({{ attachment.size | filesizeformat }})
                         {% if attachment.description: %}
                         <div><i>{{ attachment.description }}</i></div>
-                        {% endif %}    
+                        {% endif %}
                     </li>
-                    {% endif %}
                     {% endfor %}
                 </ul>
             </div>
@@ -114,7 +106,8 @@
             <div>DATE: {% raw %}{{.Site.Params.date}}{% endraw %}</div>
             <div>ISBN: {% raw %}{{.Site.Params.isbn}}{% endraw %}</div>
             <div>ISSN: {% raw %}{{.Site.Params.issn}}{% endraw %}</div>
-            <div>DOI: {% raw %}<a target="_blank" href="{{.Site.Params.doi_url}}">{{.Site.Params.doi_label}}</a>{% endraw %}</div>
+            <div>DOI: {% raw %}<a target="_blank" href="{{.Site.Params.doi_url}}">{{.Site.Params.doi_label}}</a>{%
+                endraw %}</div>
             </p>
         </div>
 

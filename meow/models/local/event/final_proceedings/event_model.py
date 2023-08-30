@@ -1,4 +1,4 @@
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass, field, asdict
 from datetime import datetime
 
 from meow.utils.slug import slugify
@@ -100,6 +100,8 @@ class AttachmentData:
     title: str
     description: str
     external_download_url: str
+    section: str = field(default=None)
+    index: int = field(default=None)
 
     def as_dict(self) -> dict:
         return asdict(self)
