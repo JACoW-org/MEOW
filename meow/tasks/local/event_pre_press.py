@@ -24,8 +24,8 @@ class EventPrePressTask(AbstractTask):
 
         config = FinalProceedingsConfig(
             strict_pdf_check=False,
-            generate_doi_payload=False,
             include_event_slides=False,
+            generate_doi_payload=False,
             generate_external_doi_url=False,
             include_only_qa_green_contributions=False,
             absolute_pdf_link=False,

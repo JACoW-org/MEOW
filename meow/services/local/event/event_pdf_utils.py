@@ -350,7 +350,7 @@ def _draw_frame_anyio(input: str, output: str, page_number: int,
         if metadata:
             set_metadata(doc, metadata)
 
-        # print([input, output, page_number, pre_print])
+        # logger.debug([input, output, page_number, pre_print])
 
         for page in doc:
 
@@ -362,18 +362,19 @@ def _draw_frame_anyio(input: str, output: str, page_number: int,
                 annot_page_footer(page, page_number, footer) if annotations \
                     else write_page_footer(page, page_number, footer)
 
-            annot_page_side(
-                page=page,
-                pre_print=pre_print,
-                page_number=page_number,
-                cc_logo=cc_logo
-            ) if annotations \
-                else write_page_side(
-                page=page,
-                pre_print=pre_print,
-                page_number=page_number,
-                cc_logo=cc_logo
-            )
+            if pre_print:
+                annot_page_side(
+                    page=page,
+                    pre_print=pre_print,
+                    page_number=page_number,
+                    cc_logo=cc_logo
+                ) if annotations \
+                    else write_page_side(
+                    page=page,
+                    pre_print=pre_print,
+                    page_number=page_number,
+                    cc_logo=cc_logo
+                )
 
             page_number += 1
 

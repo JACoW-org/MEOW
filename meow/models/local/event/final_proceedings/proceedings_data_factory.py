@@ -106,14 +106,15 @@ def proceedings_data_factory(event: Any, sessions: list, contributions: list,
 
 def resolve_duplicates_of(contributions: list[ContributionData], settings: dict) -> list[ContributionData]:
     for contribution in contributions:
-        duplicate_of_code: str | None = contribution.duplicate_of_code(settings.get('duplicate_of_alias', 'duplicate_of'))
+        duplicate_of_code: str | None = contribution.duplicate_of_code(
+            settings.get('duplicate_of_alias', 'duplicate_of'))
         if duplicate_of_code:
             predicate = find_predicate(duplicate_of_code)
             duplicate_contribution: ContributionData | None = find(
                 contributions, predicate)
             if duplicate_contribution and duplicate_contribution.metadata:
                 logger.info(
-                    f"Contribution {contribution.code} has duplicate {contribution.duplicate_of_code(settings.get('duplicate_of_alias', 'duplicate_of'))} with metadata")
+                    f"Contribution {contribution.code} has duplicate {duplicate_of_code} with metadata")
             contribution.duplicate_of = DuplicateContributionData(
                 code=duplicate_contribution.code,
                 session_code=duplicate_contribution.session_code,

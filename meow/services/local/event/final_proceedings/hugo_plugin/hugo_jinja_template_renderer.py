@@ -65,7 +65,9 @@ class JinjaTemplateRenderer:
         return html if minify is False else minify_html.minify(
             html, remove_processing_instructions=True)
 
-    async def render_config_toml(self, event: EventData, logo: AttachmentData, poster: AttachmentData, volumes: list[AttachmentData], attachments: list[AttachmentData], settings: dict) -> str:
+    async def render_config_toml(self, event: EventData, logo: AttachmentData | None,
+                                 poster: AttachmentData | None, volumes: list[AttachmentData],
+                                 attachments: list[AttachmentData], settings: dict) -> str:
 
         return await self.render("config.toml.jinja", dict(
             event=event.as_dict(),
@@ -76,7 +78,9 @@ class JinjaTemplateRenderer:
             attachments=[a.as_dict() for a in attachments],
         ))
 
-    async def render_home_page(self, event: EventData, logo: AttachmentData, poster: AttachmentData, volumes: list[AttachmentData], attachments: list[AttachmentData], volume_size: int, brief_size: int) -> str:
+    async def render_home_page(self, event: EventData, logo: AttachmentData | None,
+                               poster: AttachmentData | None, volumes: list[AttachmentData],
+                               attachments: list[AttachmentData], volume_size: int, brief_size: int) -> str:
         return await self.render("home_page.html.jinja", minify=True, args=dict(
             event=event.as_dict(),
             logo_data=logo.as_dict() if logo else None,
@@ -88,7 +92,8 @@ class JinjaTemplateRenderer:
             datetime_now=datetime.now()
         ))
 
-    async def render_contribution_partial(self, contribution: ContributionData, include_event_slides: bool) -> str:
+    async def render_contribution_partial(self, contribution: ContributionData,
+                                          include_event_slides: bool) -> str:
         return await self.render("contribution_partial.html.jinja", minify=True, args=dict(
             contribution=contribution.as_dict(),
             include_event_slides=include_event_slides
@@ -99,7 +104,8 @@ class JinjaTemplateRenderer:
             sessions=[s.as_dict() for s in sessions]
         ))
 
-    async def render_session_page(self, event: EventData, session: SessionData, contributions: list[ContributionData]) -> str:
+    async def render_session_page(self, event: EventData, session: SessionData,
+                                  contributions: list[ContributionData]) -> str:
         return await self.render("session_page.html.jinja", minify=False, args=dict(
             event=event.as_dict(),
             session=session.as_dict(),
@@ -111,7 +117,8 @@ class JinjaTemplateRenderer:
             classifications=[s.as_dict() for s in classifications]
         ))
 
-    async def render_classification_page(self, event: EventData, classification: TrackData, contributions: list[ContributionData]) -> str:
+    async def render_classification_page(self, event: EventData, classification: TrackData,
+                                         contributions: list[ContributionData]) -> str:
         return await self.render("classification_page.html.jinja", minify=False, args=dict(
             event=event.as_dict(),
             classification=classification.as_dict(),
@@ -124,21 +131,24 @@ class JinjaTemplateRenderer:
             authors_groups=group_authors_by_last_initial_for_render(authors)
         ))
 
-    async def render_author_page(self, event: EventData, author: PersonData, contributions: list[ContributionData]) -> str:
+    async def render_author_page(self, event: EventData, author: PersonData,
+                                 contributions: list[ContributionData]) -> str:
         return await self.render("author_page.html.jinja", minify=False, args=dict(
             event=event.as_dict(),
             author=author.as_dict(),
             contributions=[c.as_dict() for c in contributions]
         ))
 
-    async def render_institute_partial(self, institutes: list[AffiliationData], authorsGroups: dict[str, list[dict]]) -> str:
+    async def render_institute_partial(self, institutes: list[AffiliationData],
+                                       authorsGroups: dict[str, list[dict]]) -> str:
         return await self.render("institute_partial.html.jinja", minify=True, args=dict(
             authorsGroups=authorsGroups,
             institutes_groups=group_institutes_by_initial(institutes),
             initials=get_institutes_initials_dict(institutes)
         ))
 
-    async def render_institute_page(self, event: EventData, institute: AffiliationData, author: PersonData, contributions: list[ContributionData]) -> str:
+    async def render_institute_page(self, event: EventData, institute: AffiliationData,
+                                    author: PersonData, contributions: list[ContributionData]) -> str:
         return await self.render("institute_page.html.jinja", minify=False, args=dict(
             event=event.as_dict(),
             institute=institute.as_dict(),
@@ -152,7 +162,8 @@ class JinjaTemplateRenderer:
             keywords_groups=group_keywords_by_initial(keywords)
         ))
 
-    async def render_keyword_page(self, event: EventData, keyword: KeywordData, contributions: list[ContributionData]) -> str:
+    async def render_keyword_page(self, event: EventData, keyword: KeywordData,
+                                  contributions: list[ContributionData]) -> str:
         return await self.render("keyword_page.html.jinja", minify=False, args=dict(
             event=event.as_dict(),
             keyword=keyword.as_dict(),
@@ -164,13 +175,15 @@ class JinjaTemplateRenderer:
     #         institutes=[s.as_dict() for s in institutes]
     #     ))
 
-    async def render_doi_per_institute_partial(self, institutes: list[AffiliationData], contributionsGroups: dict[str, list[dict]]) -> str:
+    async def render_doi_per_institute_partial(self, institutes: list[AffiliationData],
+                                               contributionsGroups: dict[str, list[dict]]) -> str:
         return await self.render("doi_per_institute_partial.html.jinja", minify=True, args=dict(
             institutes=[s.as_dict() for s in institutes],
             contributionsGroups=contributionsGroups
         ))
 
-    async def render_doi_per_institute_page(self, event: EventData, institute: AffiliationData, contribution: ContributionData) -> str:
+    async def render_doi_per_institute_page(self, event: EventData, institute: AffiliationData,
+                                            contribution: ContributionData) -> str:
         return await self.render("doi_per_institute_page.html.jinja", minify=False, args=dict(
             event=event.as_dict(),
             institute=institute.as_dict(),

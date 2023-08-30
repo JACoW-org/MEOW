@@ -49,7 +49,7 @@ async def download_attachments(event_url: str, cookies: dict, settings: dict, at
 
     if 'error' not in response and response.get('error') is not True:
         downloaded_attachments = response.get('attachments', [])
-        for material in settings.get('materials'):
+        for material in settings.get('materials', []):
             for attachment in downloaded_attachments:
                 if attachment.get('id') == material.get('id'):
                     attachment['section'] = material.get('section')

@@ -91,8 +91,8 @@ async def write_metadata_task(current_paper, sessions, settings, pdf_cache_dir):
     # xml_metadata_mutool = get_xml_metatdata_mutool(contribution)
     xml_metadata_pikepdf = get_xml_metatdata_pikepdf(contribution)
 
-    pre_print: str = unidecode(settings.get('pre_print', 'This is a preprint')
-                               if contribution.peer_reviewing_accepted else '')
+    pre_print: str = settings.get('pre_print', 'This is a preprint') \
+        if contribution.peer_reviewing_accepted else ''
 
     async def _task_one():
         await draw_frame_anyio(str(original_pdf_file), str(jacow_pdf_file),

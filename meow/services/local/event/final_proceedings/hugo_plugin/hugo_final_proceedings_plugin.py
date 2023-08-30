@@ -186,7 +186,9 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         self.template = JinjaTemplateRenderer()
 
         await Path(self.src_dir, 'config.toml').write_text(
-            await self.template.render_config_toml(self.event, self.logo, self.poster, self.volumes, self.attachments, self.settings)
+            await self.template.render_config_toml(self.event, self.logo, 
+                                                   self.poster, self.volumes, 
+                                                   self.attachments, self.settings)
         )
 
     async def render_home(self) -> None:

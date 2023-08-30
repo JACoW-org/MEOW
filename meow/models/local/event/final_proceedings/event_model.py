@@ -100,8 +100,8 @@ class AttachmentData:
     title: str
     description: str
     external_download_url: str
-    section: str = field(default=None)
-    index: int = field(default=None)
+    section: str = field(default='')
+    index: int = field(default=0)
 
     def as_dict(self) -> dict:
         return asdict(self)
