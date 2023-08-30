@@ -19,7 +19,7 @@ class EventDoiDraftTask(AbstractTask):
         indico_session: str = cookies.get("indico_session_http", None)
         cookies["indico_session_http"] = indico_session
         cookies["indico_session"] = indico_session
-        
+
         async for r in event_doi_draft(event, cookies, settings):
             self.assert_is_running()
             yield r

@@ -41,9 +41,9 @@ class TaskRunner:
 
             # logger.debug(f"run_task - task result")
 
-        except ServiceError as se:
+        except ServiceError:
             logger.error(f"Task killed {task_id}")
-        except CancelledError as ce:
+        except CancelledError:
             logger.error(f"Task cancelled {task_id}")
         except BaseException as be:
             logger.error(be, exc_info=True)

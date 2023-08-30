@@ -60,8 +60,7 @@ async def generate_dois(proceedings_data: ProceedingsData, cookies: dict, settin
 
                         result_type: str = result.get('type', None)
 
-                        logger.info(
-                            f'doi: {processed_files} -{total_files} - {result_type}')
+                        # logger.info(f'doi: {processed_files} - {total_files}')
 
                         if result_type == 'contribution':
                             processed_files = processed_files + 1

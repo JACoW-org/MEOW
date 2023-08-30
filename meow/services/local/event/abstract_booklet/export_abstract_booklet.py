@@ -9,10 +9,11 @@ from odf.style import Style, TextProperties, ParagraphProperties, TablePropertie
 
 from odf.table import Table, TableColumns, TableColumn, TableRows, TableRow, TableCell
 
-from odf.text import IndexBody, IndexTitle, IndexEntryLinkStart, IndexEntryChapter, \
-    IndexEntryPageNumber, IndexEntryText, IndexEntryLinkEnd, IndexTitleTemplate, \
-    IndexEntryTabStop, IndexEntrySpan, BookmarkStart, BookmarkEnd, TableOfContent, \
-    TableOfContentSource, TableOfContentEntryTemplate, H, Span, P, SoftPageBreak
+from odf.text import (IndexBody, IndexTitle, IndexEntryLinkStart, IndexEntryPageNumber,
+                      IndexEntryText, IndexEntryLinkEnd, IndexTitleTemplate,
+                      IndexEntryTabStop, BookmarkStart, BookmarkEnd, TableOfContent,
+                      TableOfContentSource, TableOfContentEntryTemplate, H, Span, P,
+                      SoftPageBreak)
 
 from meow.utils.datetime import format_datetime_time, format_datetime_full
 
@@ -222,7 +223,7 @@ def _abstract_booklet_toc(odt: OpenDocument, ab: dict, styles: dict, idx: dict):
         outlinelevel=1, stylename=styles.get('il1'))
 
     idx_entry_link_start = IndexEntryLinkStart()
-    idx_entry_link_chapter = IndexEntryChapter()
+    # idx_entry_link_chapter = IndexEntryChapter()
     idx_entry_link_text = IndexEntryText()
     idx_entry_link_tab_stop = IndexEntryTabStop(type="right", leaderchar=".")
     idx_entry_link_page_num = IndexEntryPageNumber()
@@ -243,9 +244,9 @@ def _abstract_booklet_toc(odt: OpenDocument, ab: dict, styles: dict, idx: dict):
         outlinelevel=2, stylename=styles.get('il2'))
 
     idx_entry_link_start = IndexEntryLinkStart()
-    idx_entry_link_chapter = IndexEntryChapter()
+    # idx_entry_link_chapter = IndexEntryChapter()
     idx_entry_link_text = IndexEntryText()
-    idx_entry_link_span = IndexEntrySpan()
+    # idx_entry_link_span = IndexEntrySpan()
     idx_entry_link_tab_stop = IndexEntryTabStop(type="right", leaderchar=".")
     idx_entry_link_page_num = IndexEntryPageNumber()
     idx_entry_link_end = IndexEntryLinkEnd()
@@ -266,7 +267,7 @@ def _abstract_booklet_toc(odt: OpenDocument, ab: dict, styles: dict, idx: dict):
         outlinelevel=3, stylename=styles.get('il3'))
 
     idx_entry_link_start = IndexEntryLinkStart()
-    idx_entry_link_chapter = IndexEntryChapter()
+    # idx_entry_link_chapter = IndexEntryChapter()
     idx_entry_link_text = IndexEntryText()
     idx_entry_link_tab_stop = IndexEntryTabStop(type="right", leaderchar=".")
     idx_entry_link_page_num = IndexEntryPageNumber()
@@ -519,7 +520,7 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
             for item in contribution.get('primary_authors', []):
                 key = item.get('affiliation', '')
 
-                if not key in contribution_primary_authors_dict:
+                if key not in contribution_primary_authors_dict:
                     contribution_primary_authors_dict[key] = []
 
                 contribution_primary_authors_dict[key].append(item)
@@ -580,7 +581,8 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
                 for contribution_primary_authors_group_idx, group in enumerate(contribution_primary_authors_groups):
                     for contribution_primary_authors_item_idx, item in enumerate(group.get('items', [])):
 
-                        # print(item.get('id'), contribution_speakers_ids, (int(item.get('id')) in contribution_speakers_ids))
+                        # print(item.get('id'), contribution_speakers_ids, (int(item.get('id'))
+                        #   in contribution_speakers_ids))
 
                         stylename = styles.get('h6') if int(item.get('id')) \
                             in contribution_speakers_ids else None
@@ -618,7 +620,7 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
             for item in contribution.get('coauthors', []):
                 key = item.get('affiliation', '')
 
-                if not key in contribution_coauthors_dict:
+                if key not in contribution_coauthors_dict:
                     contribution_coauthors_dict[key] = []
 
                 contribution_coauthors_dict[key].append(item)
@@ -673,7 +675,7 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
             for item in contribution.get('speakers', []):
                 key = item.get('affiliation', '')
 
-                if not key in contribution_speakers_dict:
+                if key not in contribution_speakers_dict:
                     contribution_speakers_dict[key] = []
 
                 contribution_speakers_dict[key].append(item)

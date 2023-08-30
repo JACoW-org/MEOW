@@ -35,7 +35,7 @@ class EventCompressProceedingsTask(AbstractTask):
             phase='init_tasks_list',
             tasks=tasks
         ))
-        
+
         async for r in event_compress_proceedings(event, cookies, settings):
             self.assert_is_running()
             yield r

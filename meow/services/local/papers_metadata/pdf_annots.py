@@ -33,8 +33,11 @@ def annot_toc_header(page: Page, data: dict, options: dict = dict()):
 
     # left
     page.add_freetext_annot(
-        rect=Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN, PAGE_HORIZONTAL_MARGIN +
-                  rect_width, PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT),
+        rect=Rect(PAGE_HORIZONTAL_MARGIN,
+                  PAGE_VERTICAL_MARGIN,
+                  PAGE_HORIZONTAL_MARGIN +
+                  rect_width,
+                  PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT),
         align=TEXT_ALIGN_LEFT,
         text='',
         fontname=options.get('fontName', FONT_NAME),
@@ -44,8 +47,11 @@ def annot_toc_header(page: Page, data: dict, options: dict = dict()):
 
     # middle
     page.add_freetext_annot(
-        rect=Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN, PAGE_HORIZONTAL_MARGIN +
-                  rect_width, PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT),
+        rect=Rect(PAGE_HORIZONTAL_MARGIN,
+                  PAGE_VERTICAL_MARGIN,
+                  PAGE_HORIZONTAL_MARGIN +
+                  rect_width,
+                  PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT),
         align=TEXT_ALIGN_CENTER,
         text=data.get('title', 'Title'),
         fontname=options.get('fontName', FONT_NAME),
@@ -55,8 +61,11 @@ def annot_toc_header(page: Page, data: dict, options: dict = dict()):
 
     # right
     page.add_freetext_annot(
-        rect=Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN, PAGE_HORIZONTAL_MARGIN +
-                  rect_width, PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT),
+        rect=Rect(PAGE_HORIZONTAL_MARGIN,
+                  PAGE_VERTICAL_MARGIN,
+                  PAGE_HORIZONTAL_MARGIN +
+                  rect_width,
+                  PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT),
         align=TEXT_ALIGN_RIGHT,
         text=data.get('publisher', 'JACoW Publishing'),
         fontname=options.get('fontName', FONT_NAME),
@@ -68,8 +77,10 @@ def annot_toc_header(page: Page, data: dict, options: dict = dict()):
 
     # left
     page.add_freetext_annot(
-        rect=Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT + LINE_SPACING,
-                  PAGE_HORIZONTAL_MARGIN + rect_width, PAGE_VERTICAL_MARGIN + 2 * ANNOTATION_HEIGHT + LINE_SPACING),
+        rect=Rect(PAGE_HORIZONTAL_MARGIN,
+                  PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT + LINE_SPACING,
+                  PAGE_HORIZONTAL_MARGIN + rect_width,
+                  PAGE_VERTICAL_MARGIN + 2 * ANNOTATION_HEIGHT + LINE_SPACING),
         align=TEXT_ALIGN_LEFT,
         text=f"ISBN: {data.get('isbn', 'isbn')}",
         fontname=options.get('fontName', FONT_NAME),
@@ -79,8 +90,10 @@ def annot_toc_header(page: Page, data: dict, options: dict = dict()):
 
     # middle
     page.add_freetext_annot(
-        rect=Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT + LINE_SPACING,
-                  PAGE_HORIZONTAL_MARGIN + rect_width, PAGE_VERTICAL_MARGIN + 2 * ANNOTATION_HEIGHT + LINE_SPACING),
+        rect=Rect(PAGE_HORIZONTAL_MARGIN,
+                  PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT + LINE_SPACING,
+                  PAGE_HORIZONTAL_MARGIN + rect_width,
+                  PAGE_VERTICAL_MARGIN + 2 * ANNOTATION_HEIGHT + LINE_SPACING),
         align=TEXT_ALIGN_CENTER,
         text=f"ISSN: {data.get('issn', 'issn')}",
         fontname=options.get('fontName', FONT_NAME),
@@ -90,8 +103,10 @@ def annot_toc_header(page: Page, data: dict, options: dict = dict()):
 
     # right
     page.add_freetext_annot(
-        rect=Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT + LINE_SPACING,
-                  PAGE_HORIZONTAL_MARGIN + rect_width, PAGE_VERTICAL_MARGIN + 2 * ANNOTATION_HEIGHT + LINE_SPACING),
+        rect=Rect(PAGE_HORIZONTAL_MARGIN,
+                  PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT + LINE_SPACING,
+                  PAGE_HORIZONTAL_MARGIN + rect_width,
+                  PAGE_VERTICAL_MARGIN + 2 * ANNOTATION_HEIGHT + LINE_SPACING),
         align=TEXT_ALIGN_RIGHT,
         text=f"doi: {data.get('doi', 'doi')}",
         fontname=options.get('fontName', FONT_NAME),
@@ -109,8 +124,11 @@ def annot_page_header(page: Page, data: dict, options: dict = dict()):
 
     # left
     page.add_freetext_annot(
-        rect=Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN, PAGE_HORIZONTAL_MARGIN +
-                  rect_width, PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT),
+        rect=Rect(PAGE_HORIZONTAL_MARGIN,
+                  PAGE_VERTICAL_MARGIN,
+                  PAGE_HORIZONTAL_MARGIN +
+                  rect_width,
+                  PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT),
         align=TEXT_ALIGN_LEFT,
         text=data.get('series', 'Series'),
         fontname=options.get('fontName', FONT_NAME),
@@ -120,8 +138,10 @@ def annot_page_header(page: Page, data: dict, options: dict = dict()):
 
     # middle
     page.add_freetext_annot(
-        rect=Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN, PAGE_HORIZONTAL_MARGIN +
-                  rect_width, PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT),
+        rect=Rect(PAGE_HORIZONTAL_MARGIN,
+                  PAGE_VERTICAL_MARGIN, PAGE_HORIZONTAL_MARGIN +
+                  rect_width,
+                  PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT),
         align=TEXT_ALIGN_CENTER,
         text=data.get('venue', 'Code, Location'),
         fontname=options.get('fontName', FONT_NAME),
@@ -131,8 +151,11 @@ def annot_page_header(page: Page, data: dict, options: dict = dict()):
 
     # right
     page.add_freetext_annot(
-        rect=Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN, PAGE_HORIZONTAL_MARGIN +
-                  rect_width, PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT),
+        rect=Rect(PAGE_HORIZONTAL_MARGIN,
+                  PAGE_VERTICAL_MARGIN,
+                  PAGE_HORIZONTAL_MARGIN +
+                  rect_width,
+                  PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT),
         align=TEXT_ALIGN_RIGHT,
         text=data.get('publisher', 'JACoW Publishing'),
         fontname=options.get('fontName', FONT_NAME),
@@ -144,8 +167,10 @@ def annot_page_header(page: Page, data: dict, options: dict = dict()):
 
     # left
     page.add_freetext_annot(
-        rect=Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT + LINE_SPACING,
-                  PAGE_HORIZONTAL_MARGIN + rect_width, PAGE_VERTICAL_MARGIN + 2 * ANNOTATION_HEIGHT + LINE_SPACING),
+        rect=Rect(PAGE_HORIZONTAL_MARGIN,
+                  PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT + LINE_SPACING,
+                  PAGE_HORIZONTAL_MARGIN + rect_width,
+                  PAGE_VERTICAL_MARGIN + 2 * ANNOTATION_HEIGHT + LINE_SPACING),
         align=TEXT_ALIGN_LEFT,
         text=f"ISBN: {data.get('isbn', 'isbn')}",
         fontname=options.get('fontName', FONT_NAME),
@@ -155,8 +180,10 @@ def annot_page_header(page: Page, data: dict, options: dict = dict()):
 
     # middle
     page.add_freetext_annot(
-        rect=Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT + LINE_SPACING,
-                  PAGE_HORIZONTAL_MARGIN + rect_width, PAGE_VERTICAL_MARGIN + 2 * ANNOTATION_HEIGHT + LINE_SPACING),
+        rect=Rect(PAGE_HORIZONTAL_MARGIN,
+                  PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT + LINE_SPACING,
+                  PAGE_HORIZONTAL_MARGIN + rect_width,
+                  PAGE_VERTICAL_MARGIN + 2 * ANNOTATION_HEIGHT + LINE_SPACING),
         align=TEXT_ALIGN_CENTER,
         text=f"ISSN: {data.get('issn', 'issn')}",
         fontname=options.get('fontName', FONT_NAME),
@@ -166,8 +193,10 @@ def annot_page_header(page: Page, data: dict, options: dict = dict()):
 
     # right
     page.add_freetext_annot(
-        rect=Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT + LINE_SPACING,
-                  PAGE_HORIZONTAL_MARGIN + rect_width, PAGE_VERTICAL_MARGIN + 2 * ANNOTATION_HEIGHT + LINE_SPACING),
+        rect=Rect(PAGE_HORIZONTAL_MARGIN,
+                  PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT + LINE_SPACING,
+                  PAGE_HORIZONTAL_MARGIN + rect_width,
+                  PAGE_VERTICAL_MARGIN + 2 * ANNOTATION_HEIGHT + LINE_SPACING),
         align=TEXT_ALIGN_RIGHT,
         text=f"doi: {data.get('doi', 'doi')}",
         fontname=options.get('fontName', FONT_NAME),
@@ -184,8 +213,10 @@ def annot_toc_footer(page: Page, page_number: int, data: dict, options: dict = d
 
     # left
     page.add_freetext_annot(
-        rect=Rect(PAGE_HORIZONTAL_MARGIN, page_height - PAGE_VERTICAL_MARGIN - ANNOTATION_HEIGHT,
-                  PAGE_HORIZONTAL_MARGIN + rect_width, page_height - PAGE_VERTICAL_MARGIN),
+        rect=Rect(PAGE_HORIZONTAL_MARGIN,
+                  page_height - PAGE_VERTICAL_MARGIN - ANNOTATION_HEIGHT,
+                  PAGE_HORIZONTAL_MARGIN + rect_width,
+                  page_height - PAGE_VERTICAL_MARGIN),
         align=TEXT_ALIGN_LEFT,
         text=f"{intToRoman(page_number) if page_number % 2 != 1 else data.get('name', '')}",
         fontname=options.get('fontName', FONT_NAME),
@@ -195,8 +226,10 @@ def annot_toc_footer(page: Page, page_number: int, data: dict, options: dict = d
 
     # right
     page.add_freetext_annot(
-        rect=Rect(PAGE_HORIZONTAL_MARGIN, page_height - PAGE_VERTICAL_MARGIN - ANNOTATION_HEIGHT,
-                  PAGE_HORIZONTAL_MARGIN + rect_width, page_height - PAGE_VERTICAL_MARGIN),
+        rect=Rect(PAGE_HORIZONTAL_MARGIN,
+                  page_height - PAGE_VERTICAL_MARGIN - ANNOTATION_HEIGHT,
+                  PAGE_HORIZONTAL_MARGIN + rect_width,
+                  page_height - PAGE_VERTICAL_MARGIN),
         align=TEXT_ALIGN_RIGHT,
         text=f"{data.get('name', '') if page_number % 2 != 1 else intToRoman(page_number)}",
         fontname=options.get('fontName', FONT_NAME),
@@ -207,6 +240,10 @@ def annot_toc_footer(page: Page, page_number: int, data: dict, options: dict = d
 
 def annot_page_footer(page: Page, page_number: int, data: dict, options: dict = dict()):
     ''''''
+
+    sess_header = data.get('sessionHeader', 'Session Header')
+    contrib_code = data.get('contributionCode', 'Contribution Code')
+    track_header = data.get('classificationHeader', 'Classification Header')
 
     rect_width = page.rect.width - 2 * PAGE_HORIZONTAL_MARGIN
     page_height = page.rect.height
@@ -220,7 +257,7 @@ def annot_page_footer(page: Page, page_number: int, data: dict, options: dict = 
                   PAGE_HORIZONTAL_MARGIN + rect_width,
                   page_height - PAGE_VERTICAL_MARGIN),
         align=TEXT_ALIGN_LEFT,
-        text=f"{page_number if page_number % 2 != 1 else data.get('classificationHeader', 'Classification Header')}",
+        text=f"{page_number if page_number % 2 != 1 else track_header}",
         fontname=options.get('fontName', FONT_NAME),
         fontsize=options.get('fontSize', FONT_SIZE),
         text_color=options.get('textColor', TEXT_COLOR)
@@ -233,7 +270,7 @@ def annot_page_footer(page: Page, page_number: int, data: dict, options: dict = 
                   PAGE_HORIZONTAL_MARGIN + rect_width,
                   page_height - PAGE_VERTICAL_MARGIN),
         align=TEXT_ALIGN_RIGHT,
-        text=f"{data.get('classificationHeader', 'Classification Header') if page_number % 2 != 1 else page_number}",
+        text=f"{track_header if page_number % 2 != 1 else page_number}",
         fontname=options.get('fontName', FONT_NAME),
         fontsize=options.get('fontSize', FONT_SIZE),
         text_color=options.get('textColor', TEXT_COLOR)
@@ -248,7 +285,7 @@ def annot_page_footer(page: Page, page_number: int, data: dict, options: dict = 
                   PAGE_HORIZONTAL_MARGIN + rect_width,
                   page_height - PAGE_VERTICAL_MARGIN - ANNOTATION_HEIGHT - LINE_SPACING),
         align=TEXT_ALIGN_LEFT,
-        text=f"{data.get('contributionCode', 'Contribution Code') if page_number % 2 != 1 else data.get('sessionHeader', 'Session Header')}",
+        text=f"{contrib_code if page_number % 2 != 1 else sess_header}",
         fontname=options.get('fontName', FONT_NAME),
         fontsize=options.get('fontSize', FONT_SIZE),
         text_color=options.get('textColor', TEXT_COLOR)
@@ -261,7 +298,7 @@ def annot_page_footer(page: Page, page_number: int, data: dict, options: dict = 
                   PAGE_HORIZONTAL_MARGIN + rect_width,
                   page_height - PAGE_VERTICAL_MARGIN - ANNOTATION_HEIGHT - LINE_SPACING),
         align=TEXT_ALIGN_RIGHT,
-        text=f"{data.get('sessionHeader', 'Session Header') if page_number % 2 != 1 else data.get('contributionCode', 'Contribution Code')}",
+        text=f"{sess_header if page_number % 2 != 1 else contrib_code}",
         fontname=options.get('fontName', FONT_NAME),
         fontsize=options.get('fontSize', FONT_SIZE),
         text_color=options.get('textColor', TEXT_COLOR)

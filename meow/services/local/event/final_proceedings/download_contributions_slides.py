@@ -25,7 +25,7 @@ async def download_contributions_slides(proceedings_data: ProceedingsData, cooki
     total_files: int = len(files_data)
     downloaded_files: int = 0
 
-    # logger.debug(f'download_contributions_slides - files: {total_files}')
+    logger.info(f'download_contributions_slides - files: {total_files}')
 
     dir_name = f"{proceedings_data.event.id}_tmp"
     file_cache_dir: Path = Path('var', 'run', dir_name)

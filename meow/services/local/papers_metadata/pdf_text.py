@@ -274,7 +274,7 @@ def write_page_footer(page: Page, page_number: int, data: dict, options: dict = 
     #               PAGE_HORIZONTAL_MARGIN + rect_width,
     #               page_height - PAGE_VERTICAL_MARGIN - ANNOTATION_HEIGHT - LINE_SPACING),
     #     align=TEXT_ALIGN_RIGHT,
-    #     text=f"{data.get('sessionHeader', 'Session Header') if page_number % 2 != 1 
+    #     text=f"{data.get('sessionHeader', 'Session Header') if page_number % 2 != 1
     #          else data.get('contributionCode', 'Contribution Code')}",
     #     fontname=options.get('fontName', FONT_NAME),
     #     fontsize=options.get('fontSize', FONT_SIZE),

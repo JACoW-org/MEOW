@@ -20,18 +20,17 @@ class AbstractTask(ABC):
 
     def assert_is_running(self) -> None:
         """ """
-        
+
         # TaskStatus.print()
-        
+
         # is_running = TaskStatus.is_running(self.task_id)
-        
+
         # logger.warning(f"task_id: {self.task_id} - is_running: {is_running}")
-        
+
         if not TaskStatus.is_running(self.task_id):
             raise ServiceError(f"task_id {self.task_id} killed")
-        
+
         # logger.warning(f"task_id: {self.task_id} - is_running: {is_running}")
-        
 
     @abstractmethod
     async def run(self, params: dict, context: dict = {}) -> AsyncGenerator:

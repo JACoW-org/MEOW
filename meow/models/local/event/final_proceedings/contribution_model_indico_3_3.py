@@ -75,8 +75,7 @@ class RevisionData:
     files: list[FileData]
     tags: list[TagData]
     comment: str
-    initial_state: int
-    final_state: int
+    type: int
 
     creation_date: datetime
 
@@ -95,29 +94,45 @@ class RevisionData:
 
     @property
     def is_black(self) -> bool:
-        red_status = self.final_state == RevisionData.FinalRevisionState.rejected
+        # red_status = self.final_state == RevisionData.FinalRevisionState.rejected
+
+        red_status = self.type == RevisionData.RevisionType.rejection
+
         return red_status
 
     @property
     def is_red(self) -> bool:
-        red_status = self.final_state == RevisionData.FinalRevisionState.needs_submitter_changes
+        # red_status = self.final_state == RevisionData.FinalRevisionState.needs_submitter_changes
+
+        red_status = self.type == RevisionData.RevisionType.needs_submitter_changes
+
         return red_status
 
     @property
     def is_green(self) -> bool:
-        green_status = self.final_state == RevisionData.FinalRevisionState.accepted
+        # green_status = self.final_state == RevisionData.FinalRevisionState.accepted
+
+        green_status = self.type == RevisionData.RevisionType.acceptance
+
         return green_status
 
     @property
     def is_yellow(self) -> bool:
-        yellow_status = not self.is_green and self.final_state == \
-            RevisionData.FinalRevisionState.needs_submitter_confirmation
+        # yellow_status = not self.is_green and self.final_state == \
+        #     RevisionData.FinalRevisionState.needs_submitter_confirmation
+
+        yellow_status = not self.is_green and self.type == \
+            RevisionData.RevisionType.needs_submitter_confirmation
+
         return yellow_status
 
     @property
     def is_qa_approved(self) -> bool:
-        if self.final_state == RevisionData.FinalRevisionState.accepted:
+        if self.type == RevisionData.RevisionType.acceptance:
             return True
+
+        # if self.final_state == RevisionData.FinalRevisionState.accepted:
+        #     return True
 
         for tag in self.tags:
             if tag.is_qa_approved:
@@ -130,8 +145,11 @@ class RevisionData:
         if self.is_qa_approved:
             return False
 
-        if self.final_state == RevisionData.FinalRevisionState.needs_submitter_confirmation:
+        if self.type == RevisionData.RevisionType.needs_submitter_confirmation:
             return True
+
+        # if self.final_state == RevisionData.FinalRevisionState.needs_submitter_confirmation:
+        #     return True
 
         for tag in self.tags:
             if tag.is_qa_pending:
@@ -142,7 +160,7 @@ class RevisionData:
     def as_dict(self) -> dict:
         return asdict(self)
 
-    class InitialRevisionState:
+    class _InitialRevisionState:
         # __titles__ = [None, _('New'), _('Ready for Review'), _('Needs Confirmation')]
 
         #: A revision that has been submitted by the user but isn't exposed to editors yet
@@ -152,7 +170,7 @@ class RevisionData:
         #: A revision with changes the submitter needs to approve or reject
         needs_submitter_confirmation = 3
 
-    class FinalRevisionState:
+    class _FinalRevisionState:
         # __titles__ = [None, _('Replaced'), _('Needs Confirmation'),
         # _('Needs Changes'), _('Accepted'), _('Rejected'), _('Undone')]
 
@@ -171,6 +189,28 @@ class RevisionData:
         #: A revision that has been undone
         undone = 6
 
+    class RevisionType:
+        #: A submitter revision that hasn't been exposed to editors yet
+        new = 1
+        #: A submitter revision that can be reviewed by editors
+        ready_for_review = 2
+        #: An editor revision with changes the submitter needs to approve or reject
+        needs_submitter_confirmation = 3
+        #: A submitter revision that accepts the changes made by the editor
+        changes_acceptance = 4
+        #: A submitter revision that rejects the changes made by the editor
+        changes_rejection = 5
+        #: An editor revision that requires the submitter to submit a new revision
+        needs_submitter_changes = 6
+        #: An editor revision that accepts the editable
+        acceptance = 7
+        #: An editor revision that rejects the editable
+        rejection = 8
+        #: A system revision that replaces the current revision
+        replacement = 9
+        #: A system revision that resets the state of the editable to "ready for review"
+        reset = 10
+
 
 @dataclass(kw_only=True, slots=True)
 class EditableData:
@@ -180,8 +220,10 @@ class EditableData:
     type: int
     state: int
 
-    all_revisions: list[RevisionData] = field(default_factory=list)
+    # all_revisions: list[RevisionData] = field(default_factory=list)
+    valid_revisions: list[RevisionData] = field(default_factory=list)
     latest_revision: RevisionData | None = field(default=None)
+    # latest_revision_with_files: RevisionData | None = field(default=None)
 
     class EditableType:
         # __titles__ = [None, _('Paper'), _('Slides'), _('Poster')]

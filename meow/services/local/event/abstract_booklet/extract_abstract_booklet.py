@@ -12,18 +12,18 @@ logger = lg.getLogger(__name__)
 
 # async def create_abstract_booklet_from_entities(conference_id: str):
 #     """ """
-# 
+#
 #     abstract_booklet = dict(
 #         sessions=list()
 #     )
-# 
+#
 #     session_slots: list | None = await get_conference_session_slots_entities(conference_id)
-# 
+#
 #     if session_slots:
 #         for session_slot in session_slots:
-# 
+#
 #             session_event = await get_conference_session_event_entity(conference_id, session_slot.id)
-# 
+#
 #             session_slot_data = dict(
 #                 code=session_event.code,
 #                 title=session_slot.title,
@@ -36,24 +36,24 @@ logger = lg.getLogger(__name__)
 #                 conveners=list(),
 #                 contributions=list()
 #             )
-# 
+#
 #             session_slot_conveners = await get_conference_session_slots_conveners_entities(
 #                 conference_id, session_slot.id
 #             )
-# 
+#
 #             for session_slot_convener in session_slot_conveners:
 #                 session_slot_convener_data = dict(
 #                     first=session_slot_convener.first_name,
 #                     last=session_slot_convener.last_name,
 #                     affiliation=session_slot_convener.affiliation
 #                 )
-# 
+#
 #                 session_slot_data['conveners'].append(session_slot_convener_data)
-# 
+#
 #             session_slot_contributions = await get_conference_session_slot_contribution_entities(
 #                 conference_id, session_slot.id
 #             )
-# 
+#
 #             for session_slot_contribution in session_slot_contributions:
 #                 contribution_data = dict(
 #                     code=session_slot_contribution.code,
@@ -71,11 +71,11 @@ logger = lg.getLogger(__name__)
 #                     primary_authors=list(),
 #                     coauthors=list()
 #                 )
-# 
+#
 #                 speakers = await get_conference_session_slot_contribution_speakers_entities(
 #                     conference_id, session_slot.id, session_slot_contribution.id
 #                 )
-# 
+#
 #                 for speaker in speakers:
 #                     speaker_data = dict(
 #                         id=speaker.id,
@@ -84,13 +84,13 @@ logger = lg.getLogger(__name__)
 #                         affiliation=speaker.affiliation,
 #                         email=speaker.email,
 #                     )
-# 
+#
 #                     contribution_data['speakers'].append(speaker_data)
-# 
+#
 #                 primary_authors = await get_conference_session_slot_contribution_primary_authors_entities(
 #                     conference_id, session_slot.id, session_slot_contribution.id
 #                 )
-# 
+#
 #                 for primary_author in primary_authors:
 #                     primary_author_data = dict(
 #                         id=primary_author.id,
@@ -99,14 +99,14 @@ logger = lg.getLogger(__name__)
 #                         affiliation=primary_author.affiliation,
 #                         email=primary_author.email,
 #                     )
-# 
+#
 #                     contribution_data['primary_authors'].append(
 #                         primary_author_data)
-# 
+#
 #                 primary_authors = await get_conference_session_slot_contribution_primary_authors_entities(
 #                     conference_id, session_slot.id, session_slot_contribution.id
 #                 )
-# 
+#
 #                 for primary_author in primary_authors:
 #                     primary_author_data = dict(
 #                         id=primary_author.id,
@@ -115,14 +115,12 @@ logger = lg.getLogger(__name__)
 #                         affiliation=primary_author.affiliation,
 #                         email=primary_author.email,
 #                     )
-# 
+#
 #                     contribution_data['primary_authors'].append(
 #                         primary_author_data)
-# 
+#
 #                 session_slot_data['contributions'].append(contribution_data)
-# 
+#
 #             abstract_booklet['sessions'].append(session_slot_data)
-# 
+#
 #     return abstract_booklet
-
-

@@ -27,7 +27,7 @@ async def download_contributions_papers(proceedings_data: ProceedingsData, cooki
     total_files: int = len(files_data)
     downloaded_files: int = 0
 
-    # logger.debug(f'download_contributions_papers - files: {total_files}')
+    logger.info(f'download_contributions_papers - files: {total_files}')
 
     dir_name = f"{proceedings_data.event.id}_tmp"
     file_cache_dir: Path = Path('var', 'run', dir_name)
@@ -87,7 +87,7 @@ async def file_download_task(capacity_limiter: CapacityLimiter, total_files: int
             # logger.debug(f"{pdf_md5} {pdf_name}")
 
             if await is_to_download(pdf_file, pdf_md5):
-                # logger.info(f"download_file --> {pdf_url}")
+                logger.info(f"download_file --> {pdf_url}")
                 await download_file(url=pdf_url, file=pdf_file,
                                     cookies=indico_cookies)
             # else:

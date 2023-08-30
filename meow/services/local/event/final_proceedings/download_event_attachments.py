@@ -25,7 +25,7 @@ async def download_event_attachments(proceedings_data: ProceedingsData, cookies:
     total_files: int = len(files_data)
     downloaded_files: int = 0
 
-    # logger.debug(f'download_event_attachments - files: {total_files}')
+    logger.info(f'download_event_attachments - files: {total_files}')
 
     dir_name = f"{proceedings_data.event.id}_tmp"
     file_cache_dir: Path = Path('var', 'run', dir_name)

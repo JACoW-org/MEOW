@@ -1,6 +1,7 @@
 from dataclasses import dataclass, asdict, field
 from enum import Enum
 
+
 @dataclass
 class Reference:
     bibtex: str
@@ -12,10 +13,12 @@ class Reference:
     def as_dict(self) -> dict:
         return asdict(self)
 
+
 class ReferenceStatus(Enum):
     IN_PROCEEDINGS = 'in_proceedings'
     CONFERENCE = 'conference'   # not handled!
     UNPUBLISHED = 'unpublished'
+
 
 @dataclass
 class ContributionRef:

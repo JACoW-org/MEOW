@@ -23,29 +23,34 @@ def contribution_editable_factory(editable: Any) -> EditableData | None:
     if editable is None:
         return None
 
-    all_revisions = [
+    valid_revisions = [
         contribution_revision_factory(revision)
-        for revision in editable.get('all_revisions', [])
+        for revision in editable.get('valid_revisions', [])
         if revision is not None
     ]
 
-    # all_revisions.sort(key=sort_revision_list_by_date)
+    # valid_revisions.sort(key=sort_revision_list_by_date)
 
-    all_revisions.sort(key=lambda x: (
+    valid_revisions.sort(key=lambda x: (
         format_datetime_sec(x.creation_date),
         x.id
     ))
 
-    latest_revision = contribution_revision_factory(
-        editable.get('latest_revision', None)
-    ) if editable.get('latest_revision', None) else None
+    # latest_revision = contribution_revision_factory(
+    #     editable.get('latest_revision', None)
+    # ) if editable.get('latest_revision', None) else None
+
+    latest_revision_with_files = contribution_revision_factory(
+        editable.get('latest_revision_with_files', None)
+    ) if editable.get('latest_revision_with_files', None) else None
 
     return EditableData(
         id=editable.get('id', None),
         type=editable.get('type', None),
         state=editable.get('state', None),
-        all_revisions=all_revisions,
-        latest_revision=latest_revision
+        valid_revisions=valid_revisions,
+        latest_revision=latest_revision_with_files,
+        # latest_revision_with_files=latest_revision_with_files
     )
 
 
@@ -65,7 +70,7 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
     poster_data: EditableData | None = contribution_editable_factory(poster)
 
     reception_revisions = [
-        r for r in paper_data.all_revisions
+        r for r in paper_data.valid_revisions
         if len(r.files) > 0
     ] if paper_data else []
 
@@ -73,15 +78,15 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
         if len(reception_revisions) else None
 
     revisitation_revisions = [
-        r for r in paper_data.all_revisions
-        if r.final_state == RevisionData.FinalRevisionState.accepted
+        r for r in paper_data.valid_revisions
+        if r.type == RevisionData.RevisionType.acceptance
     ] if paper_data else []
 
     revisitation_revision = revisitation_revisions[0] \
         if len(revisitation_revisions) else None
 
     acceptance_revisions = [
-        r for r in paper_data.all_revisions
+        r for r in paper_data.valid_revisions
         if r.is_qa_approved
     ] if paper_data else []
 
@@ -143,7 +148,7 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
 
     # logger.info(paper_data.all_revisions if paper_data else [])
 
-    # if len(revisions) == 0:
+    # if paper_data and len(paper_data.valid_revisions) == 0:
     #     logger.error(f"code: {contribution.get('code')}")
 
     is_included_in_proceedings: bool = False
@@ -152,19 +157,25 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
 
     if paper_data and paper_data.state:
 
+        # logger.info(f"paper_data state {paper_data.state}")
+
         if paper_data.state == EditableData.EditableState.accepted:
             is_included_in_prepress = True
 
-            for r in paper_data.all_revisions:
+            for r in paper_data.valid_revisions:
                 if r.is_qa_approved:
                     is_included_in_proceedings = True
                     break
 
             is_included_in_pdf_check = True
+
         elif paper_data.state == EditableData.EditableState.needs_submitter_confirmation:
             is_included_in_pdf_check = True
 
+    """
     else:
+
+        logger.info("paper_data not state")
 
         revisions: list[RevisionData] = []
 
@@ -188,6 +199,15 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
             if r.is_yellow:
                 is_included_in_pdf_check = True
                 break
+    """
+
+    # if paper_data:
+    #     logger.warning(
+    #         f"code: {contribution.get('code')} - state {paper_data.state}")
+    #     logger.warning(f"is_included_in_prepress: {is_included_in_prepress}")
+    #     logger.warning(
+    #         f"is_included_in_proceedings: {is_included_in_proceedings}")
+    #     logger.warning(f"is_included_in_pdf_check: {is_included_in_pdf_check}")
 
     # if is_included_in_proceedings != editable_is_included_in_proceedings:
     #     logger.warning(f"{contribution.get('code')}: in_proceedings ERROR")
@@ -345,8 +365,7 @@ def contribution_revision_factory(revision: Any) -> RevisionData:
     return RevisionData(
         id=revision.get('id'),
         comment=revision.get('comment'),
-        initial_state=revision.get('initial_state'),
-        final_state=revision.get('final_state'),
+        type=revision.get('type'),
         creation_date=datedict_to_tz_datetime(
             revision.get('created_dt')
         ),

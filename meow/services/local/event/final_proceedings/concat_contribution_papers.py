@@ -30,6 +30,9 @@ async def concat_contribution_papers(proceedings_data: ProceedingsData, cookies:
 
     # logger.debug(f'concat_contribution_papers - files: {total_files}')
 
+    doi_conf = settings.get('doi_conference', 'CONF-YY')
+    toc_grouping = settings.get('toc_grouping', ['contribution', 'session'])
+
     dir_name: str = f"{proceedings_data.event.id}_tmp"
     cache_dir: Path = Path('var', 'run', dir_name)
     await cache_dir.mkdir(exist_ok=True, parents=True)
@@ -38,24 +41,45 @@ async def concat_contribution_papers(proceedings_data: ProceedingsData, cookies:
 
     if len(files_data) > 0:
 
-        async def _brief_task():
-            await brief_pdf_task(proceedings_data, files_data, cache_dir,
-                                 settings.get('doi_conference', 'CONF-YY'),
-                                 config.absolute_pdf_link)
+        # async def _brief_task():
+        #     await brief_pdf_task(proceedings_data, files_data, cache_dir,
+        #                          settings.get('doi_conference', 'CONF-YY'),
+        #                          config.absolute_pdf_link)
 
-        async def _vol_task():
-            await vol_pdf_task(proceedings_data, files_data, cache_dir, callback,
-                               settings.get('toc_grouping', ['contribution', 'session']))
+        # async def _vol_task():
+        #     await vol_pdf_task(proceedings_data, files_data, cache_dir, callback,
+        #                        settings.get('toc_grouping', ['contribution', 'session']))
 
-        async with create_task_group() as tg:
-            tg.start_soon(_brief_task)
-            tg.start_soon(_vol_task)
+        # async with create_task_group() as tg:
+        #     tg.start_soon(_brief_task)
+        #     tg.start_soon(_vol_task)
+
+        pdf_files: list[str] = await get_pdf_files(cache_dir, files_data)
+
+        await brief_pdf_task(proceedings_data, files_data, cache_dir,
+                             doi_conf, config.absolute_pdf_link, pdf_files)
+
+        await vol_pdf_task(proceedings_data, files_data, cache_dir,
+                           callback, toc_grouping, pdf_files)
+
+        await unlink_files(pdf_files)
 
     return proceedings_data
 
 
+async def get_pdf_files(cache_dir: Path, files_data: list[FileData]) -> list[str]:
+    pdf_files: list[str] = []
+
+    for f in files_data:
+        p = Path(cache_dir, f"{f.filename}_join")
+        if await p.exists():
+            pdf_files.append(str(p))
+
+    return pdf_files
+
+
 async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileData], cache_dir: Path,
-                         doi_conference: str, absolute_pdf_link: bool):
+                         doi_conference: str, absolute_pdf_link: bool, brief_pdf_files: list[str]):
 
     event_id = proceedings_data.event.id
     event_title = proceedings_data.event.title
@@ -89,11 +113,6 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
     brief_pdf_meta_name = f"{event_id}_proceedings_brief.pdf"
     brief_pdf_meta_path = Path(cache_dir, brief_pdf_meta_name)
 
-    brief_pdf_files = [
-        (str(Path(cache_dir, f"{f.filename}_join")))
-        for f in files_data
-    ]
-
     brief_pdf_links = [
         f"https://jacow.org/{doi_conference}/pdf/{f.filename}"
         for f in files_data
@@ -103,7 +122,7 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
 
     brief_pdf_results: list[str] = []
 
-    capacity_limiter = CapacityLimiter(8)
+    capacity_limiter = CapacityLimiter(12)
 
     chunk_size = int(sqrt(len(files_data))) + 1
 
@@ -155,7 +174,8 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
 
 
 async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileData],
-                       cache_dir: Path, callback: Callable, toc_grouping: list[str]):
+                       cache_dir: Path, callback: Callable, toc_grouping: list[str],
+                       vol_pdf_files: list[str]):
 
     event_id = proceedings_data.event.id
     event_title = proceedings_data.event.title
@@ -173,14 +193,9 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
     [vol_toc_pdf_path, vol_toc_links_path] = await get_vol_toc_pdf_path(proceedings_data, vol_pre_pdf_path,
                                                                         cache_dir, callback, toc_grouping)
 
-    vol_pdf_files: list[str] = [
-        str(Path(cache_dir, f"{f.filename}_join"))
-        for f in files_data
-    ]
-
     vol_pdf_results: list[str] = []
 
-    capacity_limiter = CapacityLimiter(8)
+    capacity_limiter = CapacityLimiter(12)
 
     chunk_size = int(sqrt(len(files_data))) + 1
 
@@ -231,6 +246,16 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
             await vol_pdf_links_path.unlink()
 
     proceedings_data.proceedings_volume_size = (await vol_pdf_meta_path.stat()).st_size
+
+
+async def unlink_files(pdf_files: list[str]):
+    async def _unlink_file(vol_pdf: Path):
+        if await vol_pdf.exists():
+            await vol_pdf.unlink()
+
+    async with create_task_group() as tg:
+        for vol_pdf in [Path(p) for p in pdf_files]:
+            tg.start_soon(_unlink_file, vol_pdf)
 
 
 async def get_vol_pre_pdf_path(proceedings_data: ProceedingsData, cache_dir: Path, callback: Callable):
@@ -347,19 +372,20 @@ async def concat_chunks(write_path: str, pdf_files: list[str], results: list[str
 
 
 def get_vol_xmp_metadata(event_title):
+    """ https://developer.adobe.com/xmp/docs/XMPNamespaces/dc/ """
 
     meta: dict = {
         'dc:title': f"{event_title} - Proceedings Volume",
-        # 'dc:subject': contribution.track_meta,
+        'dc:subject': "Proceedings Volume",
         # 'dc:description': contribution.doi_data.abstract,
         'dc:language': 'en-us',
-        'dc:creator': ["JACoW Conference Assembly Tool (CAT)"],
+        'dc:creator': ["JACoW - Joint Accelerator Conferences Website"],
         # 'pdf:keywords': contribution.keywords_meta,
-        'pdf:producer': "",
+        # 'pdf:producer': "JACoW Conference Assembly Tool (CAT)",
         'xmp:CreatorTool': "JACoW Conference Assembly Tool (CAT)",
         # 'xmp:Identifier': contribution.doi_data.doi_identifier,
         'xmp:ModifyDate': format_datetime_doi_iso(datetime.now()),
-        'xmp:MetadataDate': format_datetime_doi_iso(datetime.now()),
+        # 'xmp:MetadataDate': format_datetime_doi_iso(datetime.now()),
         'xmp:CreateDate': format_datetime_doi_iso(datetime.now()),
     }
 
@@ -383,32 +409,33 @@ def get_vol_metadata(event_title):
 
     metadata = {
         '/Author': "JACoW - Joint Accelerator Conferences Website",
-        '/Producer': "",
+        '/Producer': "JACoW Conference Assembly Tool (CAT)",
         '/Creator': "JACoW Conference Assembly Tool (CAT)",
         '/Title': f"{event_title} - Proceedings Volume",
         '/CreationDate': format_datetime_doi_iso(datetime.now()),
         '/ModDate': format_datetime_doi_iso(datetime.now()),
         '/Subject': "The complete volume of papers",
-        # '/Keywords': None
+        '/Keywords': f"JACoW, {event_title}, Proceedings"
     }
 
     return metadata
 
 
 def get_brief_xmp_metadata(event_title):
+    """ https://developer.adobe.com/xmp/docs/XMPNamespaces/dc/ """
 
     meta: dict = {
         'dc:title': f"{event_title} - Proceedings at a Glance",
-        # 'dc:subject': contribution.track_meta,
+        'dc:subject': "Proceedings at a Glance",
         # 'dc:description': contribution.doi_data.abstract,
         'dc:language': 'en-us',
-        'dc:creator': ["JACoW Conference Assembly Tool (CAT)"],
-        # 'pdf:keywords': contribution.keywords_meta,
-        'pdf:producer': "",
+        'dc:creator': ["JACoW - Joint Accelerator Conferences Website"],
+        'pdf:keywords': f"JACoW, {event_title}, Proceedings at a Glance",
+        # 'pdf:producer': "",
         'xmp:CreatorTool': "JACoW Conference Assembly Tool (CAT)",
         # 'xmp:Identifier': contribution.doi_data.doi_identifier,
         'xmp:ModifyDate': format_datetime_doi_iso(datetime.now()),
-        'xmp:MetadataDate': format_datetime_doi_iso(datetime.now()),
+        # 'xmp:MetadataDate': format_datetime_doi_iso(datetime.now()),
         'xmp:CreateDate': format_datetime_doi_iso(datetime.now()),
     }
 
@@ -432,13 +459,13 @@ def get_brief_metadata(event_title):
 
     metadata = {
         '/Author': "JACoW - Joint Accelerator Conferences Website",
-        '/Producer': "",
+        '/Producer': "JACoW Conference Assembly Tool (CAT)",
         '/Creator': "JACoW Conference Assembly Tool (CAT)",
         '/Title': f"{event_title} - Proceedings at a Glance",
         '/CreationDate': format_datetime_doi_iso(datetime.now()),
         '/ModDate': format_datetime_doi_iso(datetime.now()),
-        '/Subject': "The complete volume of papers",
-        # '/Keywords': None
+        '/Subject': "First page only of all papers with hyperlinks to complete versions",
+        '/Keywords': f"JACoW, {event_title}, Proceedings at a Glance"
     }
 
     return metadata
