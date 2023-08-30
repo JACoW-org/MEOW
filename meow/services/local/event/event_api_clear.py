@@ -40,7 +40,7 @@ async def _event_api_clear(event_id: int) -> None:
 
 async def _event_clean_pdf_files_task(event_id: str) -> None:
 
-    pdf_cache_name = f'{event_id}_pdf'
+    pdf_cache_name = f'{event_id}_tmp'
     pdf_cache_src = Path('var', 'run', pdf_cache_name)
 
     await rmtree(str(pdf_cache_src))

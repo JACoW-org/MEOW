@@ -53,6 +53,7 @@ async def api_info_endpoint(req: Request) -> JSONResponse:
 
     raise HTTPException(status_code=401, detail="Invalid API Key")
 
+
 async def api_clear_endpoint(req: Request) -> JSONResponse:
     """ This function clears the subfolders related to the given event id """
 
@@ -68,7 +69,7 @@ async def api_clear_endpoint(req: Request) -> JSONResponse:
             'method': 'clear',
             'status': 'success'
         })
-    
+
     raise HTTPException(status_code=401, detail="Invalid API Key")
 
 # async def api_del_conference(req: Request) -> JSONResponse:
@@ -261,7 +262,7 @@ routes = [
           methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']),
 
     Route('/clear/{event_id}/{api_key}', api_clear_endpoint,
-        methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'])
+          methods=['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'])
 
 
     # Obsolete
