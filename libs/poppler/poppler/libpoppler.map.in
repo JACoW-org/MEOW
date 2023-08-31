@@ -1,4 +1,0 @@
-POPPLER_@POPPLER_SOVERSION_NUMBER@ {
-  global:
-    *;
-};

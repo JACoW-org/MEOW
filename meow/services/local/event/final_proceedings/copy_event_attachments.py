@@ -18,7 +18,10 @@ async def copy_event_attachments(
 ) -> ProceedingsData:
     """ """
 
-    files_data: list[AttachmentData] = proceedings_data.attachments
+    files_data: list[AttachmentData] = [
+        i for i in proceedings_data.attachments
+        if i.section not in ['final-proceedings-cover', 'at-a-glance-cover']
+    ]
 
     total_files: int = len(files_data)
     elaborated_files: int = 0
