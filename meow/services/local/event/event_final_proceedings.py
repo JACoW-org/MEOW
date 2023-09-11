@@ -115,7 +115,7 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict,
 
     """ """
 
-    def filter_contributions_pubblicated(c: ContributionData) -> bool:
+    def filter_published_contributions(c: ContributionData) -> bool:
         if config.include_only_qa_green_contributions:
             return c.is_included_in_proceedings
         return c.is_included_in_prepress
@@ -228,7 +228,7 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict,
     # Bloccante
 
     [final_proceedings, papers_data] = await download_contributions_papers(final_proceedings, cookies, settings,
-                                                                           filter_contributions_pubblicated)
+                                                                           filter_published_contributions)
 
     # log number of files
     yield dict(type='log', value=ClientLog(
@@ -270,7 +270,7 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict,
     # Bloccante
 
     await read_papers_metadata(final_proceedings, cookies, settings,
-                               filter_contributions_pubblicated)
+                               filter_published_contributions)
 
     """ """
 
@@ -286,7 +286,7 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict,
     # è bloccante se strict_pdf_check
 
     [metadata, errors] = await validate_proceedings_data(final_proceedings, cookies, settings,
-                                                         filter_contributions_pubblicated)
+                                                         filter_published_contributions)
 
     if len(errors) > 0:
         if config.strict_pdf_check:
@@ -321,7 +321,7 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict,
     # Bloccante
 
     await generate_contribution_references(final_proceedings, cookies, settings, config,
-                                           filter_contributions_pubblicated)
+                                           filter_published_contributions)
 
     """ """
 
@@ -335,7 +335,7 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict,
     # Bloccante
 
     await generate_dois(final_proceedings, cookies, settings, config,
-                        filter_contributions_pubblicated)
+                        filter_published_contributions)
 
     """ """
 
@@ -377,7 +377,7 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict,
 
     # Bloccante
 
-    await write_papers_metadata(final_proceedings, cookies, settings, filter_contributions_pubblicated)
+    await write_papers_metadata(final_proceedings, cookies, settings, filter_published_contributions)
 
     """ """
 
@@ -399,7 +399,7 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict,
         text='Concat Contributions Papers'
     ))
 
-    await concat_contribution_papers(final_proceedings, cookies, settings, config, filter_contributions_pubblicated)
+    await concat_contribution_papers(final_proceedings, cookies, settings, config, filter_published_contributions)
 
     """ """
 
@@ -428,7 +428,7 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict,
     ))
 
     await copy_event_attachments(final_proceedings, cookies, settings)
-    await copy_contribution_papers(final_proceedings, cookies, settings, filter_contributions_pubblicated)
+    await copy_contribution_papers(final_proceedings, cookies, settings, filter_published_contributions)
 
     if config.include_event_slides:
         await copy_contribution_slides(final_proceedings, cookies, settings)
