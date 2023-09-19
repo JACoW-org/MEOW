@@ -7,7 +7,7 @@
             <record>
                 <contributors>
                     <authors>
-                        <xsl:for-each select="contribution/primary-authors/author">
+                        <xsl:for-each select="contribution/authors-list/author">
                             <author>
                                 <xsl:value-of select="last-name"/>
                                 <xsl:text>, </xsl:text>

@@ -220,7 +220,7 @@ async def contribution_data_factory(event: EventData, contribution: Contribution
         abstract=contribution.description,
         start_date=format_datetime_dashed(event.start),
         end_date=format_datetime_dashed(event.end),
-        primary_authors=contribution.primary_authors,
+        authors_list=contribution.authors_list,
         status=reference_status,
         start_page=contribution.page,
         number_of_pages=number_of_pages,

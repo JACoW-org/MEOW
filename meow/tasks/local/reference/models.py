@@ -30,7 +30,7 @@ class ContributionRef:
     start_date: str
     end_date: str
     paper_code: str
-    primary_authors: list
+    authors_list: list
     title: str
     abstract: str
     url: str
@@ -55,4 +55,4 @@ class ContributionRef:
         return dict_obj
 
     def is_citable(self) -> bool:
-        return self.primary_authors is not None and len(self.primary_authors) > 0
+        return self.authors_list is not None and len(self.authors_list) > 0

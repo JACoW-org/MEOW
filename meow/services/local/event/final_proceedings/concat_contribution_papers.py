@@ -54,15 +54,13 @@ async def concat_contribution_papers(proceedings_data: ProceedingsData, cookies:
         #     tg.start_soon(_brief_task)
         #     tg.start_soon(_vol_task)
 
-        pdf_files: list[str] = await get_pdf_files(cache_dir, files_data)
-
         await brief_pdf_task(proceedings_data, files_data, cache_dir,
-                             doi_conf, config.absolute_pdf_link, pdf_files)
+                             doi_conf, config.absolute_pdf_link)
 
         await vol_pdf_task(proceedings_data, files_data, cache_dir,
-                           callback, toc_grouping, pdf_files)
+                           callback, toc_grouping)
 
-        await unlink_files(pdf_files)
+        await unlink_files(files_data, cache_dir)
 
     return proceedings_data
 
@@ -79,7 +77,7 @@ async def get_pdf_files(cache_dir: Path, files_data: list[FileData]) -> list[str
 
 
 async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileData], cache_dir: Path,
-                         doi_conference: str, absolute_pdf_link: bool, brief_pdf_files: list[str]):
+                         doi_conference: str, absolute_pdf_link: bool):
 
     event_id = proceedings_data.event.id
     event_title = proceedings_data.event.title
@@ -133,12 +131,16 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
 
     chunk_size = int(sqrt(len(files_data))) + 1
 
+    pdf_files: list[str] = await get_pdf_files(cache_dir, files_data)
+
+    logger.info("BRIEF_PDF" + json_encode(pdf_files).decode('utf-8'))
+
     async with create_task_group() as tg:
-        for index, vol_pdf_files_chunk in enumerate(split_list(brief_pdf_files, chunk_size)):
+        for index, vol_pdf_files_chunk in enumerate(split_list(pdf_files, chunk_size)):
             tg.start_soon(concat_chunks, f"{brief_pdf_chunk_path}." + "{:06d}".format(index),
                           vol_pdf_files_chunk, brief_pdf_results, True, capacity_limiter)
 
-    brief_pdf_files.sort()
+    brief_pdf_results.sort()
 
     pdf_parts = [str(brief_pre_pdf_path)] + brief_pdf_results \
         if brief_pre_pdf_path else brief_pdf_results
@@ -184,8 +186,7 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
 
 
 async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileData],
-                       cache_dir: Path, callback: Callable, toc_grouping: list[str],
-                       vol_pdf_files: list[str]):
+                       cache_dir: Path, callback: Callable, toc_grouping: list[str]):
 
     event_id = proceedings_data.event.id
     event_title = proceedings_data.event.title
@@ -199,7 +200,7 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
     vol_pdf_meta_name = f"{event_id}_proceedings_volume.pdf"
     vol_pdf_meta_path = Path(cache_dir, vol_pdf_meta_name)
 
-    vol_pre_pdf_path = await get_vol_pre_pdf_path(proceedings_data, cache_dir, callback)
+    vol_pre_pdf_path = await get_vol_pre_pdf_path(proceedings_data, cache_dir)
     [vol_toc_pdf_path, vol_toc_links_path] = await get_vol_toc_pdf_path(proceedings_data, vol_pre_pdf_path,
                                                                         cache_dir, callback, toc_grouping)
 
@@ -209,11 +210,16 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
 
     chunk_size = int(sqrt(len(files_data))) + 1
 
+    pdf_files: list[str] = await get_pdf_files(cache_dir, files_data)
+
+    logger.info("VOL_PDF" + json_encode(pdf_files).decode('utf-8'))
+
     async with create_task_group() as tg:
-        for index, vol_pdf_files_chunk in enumerate(split_list(vol_pdf_files, chunk_size)):
+        for index, pdf_files_chunk in enumerate(split_list(pdf_files, chunk_size)):
             tg.start_soon(concat_chunks, f"{vol_pdf_chunk_path}." + "{:06d}".format(index),
-                          vol_pdf_files_chunk, vol_pdf_results, False, capacity_limiter)
-        vol_pdf_results.sort()
+                          pdf_files_chunk, vol_pdf_results, False, capacity_limiter)
+
+    vol_pdf_results.sort()
 
     pdf_parts = [str(vol_pre_pdf_path)] if vol_pre_pdf_path else []
     pdf_parts = pdf_parts + [str(vol_toc_pdf_path)] if vol_toc_pdf_path else []
@@ -261,7 +267,10 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
         f"proceedings_volume_size: {proceedings_data.proceedings_volume_size}")
 
 
-async def unlink_files(pdf_files: list[str]):
+async def unlink_files(files_data: list[FileData], cache_dir: Path):
+
+    pdf_files: list[str] = await get_pdf_files(cache_dir, files_data)
+
     async def _unlink_file(vol_pdf: Path):
         if await vol_pdf.exists():
             await vol_pdf.unlink()
@@ -271,7 +280,7 @@ async def unlink_files(pdf_files: list[str]):
             tg.start_soon(_unlink_file, vol_pdf)
 
 
-async def get_vol_pre_pdf_path(proceedings_data: ProceedingsData, cache_dir: Path, callback: Callable):
+async def get_vol_pre_pdf_path(proceedings_data: ProceedingsData, cache_dir: Path):
     vol_pre_pdf_path: Path | None = None
 
     try:

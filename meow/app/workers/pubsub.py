@@ -108,7 +108,7 @@ class PubsubRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
 
         return __task
 
-    def __log_payload(self, payload: dict):
+    def __log_payload(self, payload: dict | None):
         logger.debug(f"\n\nREDIS NAME: {conf.REDIS_CLIENT_NAME}", )
 
         if payload:

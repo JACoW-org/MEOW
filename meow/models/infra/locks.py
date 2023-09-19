@@ -17,27 +17,27 @@ class RedisLockList:
     def add_lock_to_static_list(cls, lock: Lock):
         """ """
 
-        logger.error(f'>>>>>>>>>>> add_lock_to_static_list - {lock.name}')
+        # logger.debug(f'>>>>>>>>>>> add_lock_to_static_list - {lock.name}')
         cls.__locks.append(lock)
 
     @classmethod
     def del_lock_from_static_list(cls, lock: Lock):
         """ """
 
-        logger.error(f'>>>>>>>>>>> del_lock_from_static_list - {lock.name}')
+        # logger.debug(f'>>>>>>>>>>> del_lock_from_static_list - {lock.name}')
         cls.__locks.remove(lock)
 
     @classmethod
     async def release_all_locks(cls):
         """ """
 
-        logger.error(f'>>>>>>>>>>> release_all_locks - {cls.__locks}')
+        # logger.debug(f'>>>>>>>>>>> release_all_locks - {cls.__locks}')
 
         for lock in cls.__locks:
             try:
                 if lock is not None:
                     await lock.release()
-                    logger.error(f'>>>>>>>>>>> release_all_locks - {lock.name} released')
+                    # logger.debug(f'>>>>>>>>>>> release_all_locks - {lock.name} released')
             except Exception as e:
                 logger.debug(e)
 

@@ -5,7 +5,7 @@
 <xsl:variable name="lowercase" select="'abcdefghijklmnopqrstuvwxyz'" />
 <xsl:variable name="uppercase" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'" />
 <xsl:text>%\cite{</xsl:text>
-<xsl:value-of select="contribution/primary-authors/author/last-name"/>
+<xsl:value-of select="contribution/authors-list/author/last-name"/>
 <xsl:text>:</xsl:text>
 <xsl:value-of select="translate(conference/code, $lowercase, $uppercase)"/>
 <xsl:text>-</xsl:text>
@@ -13,20 +13,20 @@
 <xsl:text>}
 </xsl:text>
 <xsl:text>bibitem{</xsl:text>
-<xsl:value-of select="contribution/primary-authors/author/last-name"/>
+<xsl:value-of select="contribution/authors-list/author/last-name"/>
 <xsl:text>:</xsl:text>
 <xsl:value-of select="translate(conference/code, $lowercase, $uppercase)"/>
 <xsl:text>-</xsl:text>
 <xsl:value-of select="translate(contribution/paper-code, $lowercase, $uppercase)"></xsl:value-of>
 <xsl:text>}
     </xsl:text>
-<xsl:variable name="set" select="contribution/primary-authors/author"/>
+<xsl:variable name="set" select="contribution/authors-list/author"/>
 <xsl:variable name="count" select="count($set)"/>
 <xsl:choose>
 <xsl:when test="$count > 3">
-<xsl:value-of select="substring(contribution/primary-authors/author/first-name, 1, 1)"/>
+<xsl:value-of select="substring(contribution/authors-list/author/first-name, 1, 1)"/>
 <xsl:text>. </xsl:text>
-<xsl:value-of select="contribution/primary-authors/author/last-name"/>
+<xsl:value-of select="contribution/authors-list/author/last-name"/>
 <xsl:text> \emph{et al.}</xsl:text>
 </xsl:when>
 <xsl:otherwise>

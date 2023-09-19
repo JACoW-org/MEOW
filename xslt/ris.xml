@@ -23,7 +23,7 @@
 </xsl:choose>
 </xsl:variable>
 <xsl:text>TY - </xsl:text><xsl:choose><xsl:when test="contribution/status = 'in_proceedings'"><xsl:text>CONF</xsl:text></xsl:when><xsl:otherwise><xsl:text>UNPB</xsl:text></xsl:otherwise></xsl:choose>
-<xsl:for-each select="contribution/primary-authors/author">
+<xsl:for-each select="contribution/authors-list/author">
 <xsl:text>
 AU - </xsl:text>
 <xsl:value-of select="last-name"/>

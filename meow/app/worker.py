@@ -95,21 +95,21 @@ class RedisWorkerManager():
 
                         if code == 'task:kill':
 
-                            logger.error(f'KILL {code} {uuid}')
+                            logger.debug(f'KILL {code} {uuid}')
 
                             try:
                                 # logger.info(f'kill {code} {uuid}')
 
                                 await TaskRunner.kill_task(task_id=uuid)
 
-                                logger.error(tasks_cancel_scopes.keys())
+                                logger.debug(tasks_cancel_scopes.keys())
 
                                 if uuid in tasks_cancel_scopes:
                                     cancel_scope = tasks_cancel_scopes[uuid]
                                     cancel_scope.cancel()
                                     del tasks_cancel_scopes[uuid]
                                 else:
-                                    logger.error('task_id noi in dictionary')
+                                    logger.debug('task_id noi in dictionary')
 
                             except BaseException as bex:
                                 logger.error(bex, exc_info=True)

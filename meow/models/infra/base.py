@@ -56,7 +56,7 @@ class BaseModel(AbstractModel):
 
     @classmethod
     def save(cls, model: AbstractModel, pipe: Pipeline):
-        pipe.json().set(cls.key(model.id), Path('.'), model.__dict__)
+        pipe.json().set(cls.key(model.id), str(Path('.')), model.__dict__)
 
     @classmethod
     def key(cls, model_id: str):

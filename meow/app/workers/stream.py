@@ -1,5 +1,5 @@
 import logging
-from typing import Callable
+from typing import Any, Callable
 
 import anyio
 
@@ -61,7 +61,7 @@ class StreamRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
 
     async def publish(self, message: dict) -> None:
         stream_key: str = await self.__publish_key()
-        fields = dict(data=json_encode(message))
+        fields: Any = dict(data=json_encode(message))
 
         message_id = await dbs.redis_client.xadd(
             name=stream_key,
