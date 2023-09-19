@@ -51,18 +51,19 @@ def contribution_editable_factory(editable: Any) -> EditableData | None:
 
 def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> ContributionData:
 
-    editables: list = contribution.get('editables', [])
+    contrib_editables: list = contribution.get('editables', [])
+    contrib_paper: dict = contribution.get('paper', None)
 
-    paper: Any = find(editables, lambda x: x.get('type', 0) ==
-                      EditableData.EditableType.paper)
-    slides: Any = find(editables, lambda x: x.get('type', 0) ==
-                       EditableData.EditableType.slides)
-    poster: Any = find(editables, lambda x: x.get('type', 0) ==
-                       EditableData.EditableType.poster)
+    paper_editable: Any = find(contrib_editables, lambda x: x.get('type', 0) ==
+                               EditableData.EditableType.paper)
+    slides_editable: Any = find(contrib_editables, lambda x: x.get('type', 0) ==
+                                EditableData.EditableType.slides)
+    poster_editable: Any = find(contrib_editables, lambda x: x.get('type', 0) ==
+                                EditableData.EditableType.poster)
 
-    paper_data: EditableData | None = contribution_editable_factory(paper)
-    slides_data: EditableData | None = contribution_editable_factory(slides)
-    poster_data: EditableData | None = contribution_editable_factory(poster)
+    paper_data = contribution_editable_factory(paper_editable)
+    slides_data = contribution_editable_factory(slides_editable)
+    poster_data = contribution_editable_factory(poster_editable)
 
     reception_revisions = [
         r for r in paper_data.all_revisions
@@ -153,12 +154,15 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
     is_included_in_pdf_check: bool = False
     peer_reviewing_accepted: bool = False
 
+    if contrib_paper:
+        peer_reviewing_accepted = contrib_paper.get('state', 0) == 2
+
     if paper_data and paper_data.state:
 
         # logger.info(f"paper_data state {paper_data.state}")
 
-        if paper_data.state == EditableData.EditableState.ready_for_review:
-            peer_reviewing_accepted = True
+        # if paper_data.state == EditableData.EditableState.ready_for_review:
+        #     peer_reviewing_accepted = True
 
         if paper_data.state == EditableData.EditableState.accepted:
             is_included_in_prepress = True
