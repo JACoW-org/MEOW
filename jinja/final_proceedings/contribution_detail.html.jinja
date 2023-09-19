@@ -9,7 +9,7 @@
 <div class="contrib-header">
     <div class="contrib-code">{{ contribution.code|e }}</div>
     <div class="contrib-title">{{ contribution.title|e }}</div>
-    <div class="contrib-pages">{{ contribution.metadata.page_count }}</div>
+    <div class="contrib-pages">{{ contribution.page }}</div>
 </div>
 
 {% else %}
@@ -56,28 +56,12 @@
 </div>
 {% endif %}
 
-{#
-<div class="contrib-peer">
-    <b>Peer review:</b>
-    <span>&nbsp;</span>
-    {% if contribution.peer_reviewing_accepted: %}
-        <span>[Accepted]</s>
-    {% else %}
-        <span>[Not Accepted]</s>
-    {% endif %}
-</div>
-#}
-
 {% if contribution.is_included_in_proceedings or contribution.is_included_in_prepress: %}
 <div class="contrib-paper">
     <b>Paper:</b>
     <span>&nbsp;</span>
     <a onclick="openUrl(`pdf/{{ contribution.paper_name }}`)" 
         href="javascript:void(0);">{{ contribution.code|upper }}</a>
-
-    {#{% if contribution.peer_reviewing_accepted: %}
-    <span>&nbsp;(Accepted)</span>
-    {% endif %}#}
 </div>
 
 {% if contribution.metadata: %}

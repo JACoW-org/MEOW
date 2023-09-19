@@ -414,7 +414,7 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
                     if len(c) > 0
                 ]
 
-                print(ab_contribution_cols)
+                # print(ab_contribution_cols)
 
                 contribution_dt = Table(
                     stylename=styles.get('tbl'),
