@@ -384,9 +384,9 @@ def write_page_side(page: Page,
         #     text_color=options.get('textColor', TEXT_COLOR),
         # )
 
-        font = Font('cjk')
+        # font = Font('cjk')
 
-        page.insert_font(fontname='cjk', fontbuffer=font.buffer)
+        # page.insert_font(fontname='cjk', fontbuffer=font.buffer)
 
         insert_textbox(
             page=page,
@@ -394,7 +394,7 @@ def write_page_side(page: Page,
             align=TEXT_ALIGN_JUSTIFY,
             rotate=90,
             buffer=pre_print,
-            fontname='cjk',
+            fontname=options.get('fontName', FONT_NAME),
             fontsize=options.get('fontSize', FONT_SIZE),
             color=options.get('textColor', TEXT_COLOR),
         )
