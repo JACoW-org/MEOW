@@ -1,5 +1,5 @@
 from typing import Any
-from fitz import (Page, Rect, TEXT_ALIGN_LEFT,
+from fitz import (Page, Rect, Font, TEXT_ALIGN_LEFT,
                   TEXT_ALIGN_CENTER, TEXT_ALIGN_RIGHT, TEXT_ALIGN_JUSTIFY)
 from fitz.utils import getColor, insert_image, insert_textbox
 
@@ -10,7 +10,8 @@ ANNOTATION_HEIGHT = 10
 SIDENOTE_LENGTH = 650
 TEXT_COLOR = getColor('GRAY10')
 FONT_SIZE = 7
-FONT_NAME = 'notos'
+# FONT_NAME = 'notos'
+FONT_NAME = 'helv'
 
 
 def write_page_header(page: Page, data: dict, options: dict = dict()):
@@ -383,13 +384,17 @@ def write_page_side(page: Page,
         #     text_color=options.get('textColor', TEXT_COLOR),
         # )
 
+        font = Font('cjk')
+
+        page.insert_font(fontname='cjk', fontbuffer=font.buffer)
+
         insert_textbox(
             page=page,
             rect=rect_even_text if page_number and page_number % 2 != 0 else rect_odd_text,
             align=TEXT_ALIGN_JUSTIFY,
             rotate=90,
             buffer=pre_print,
-            fontname=options.get('fontName', FONT_NAME),
+            fontname='cjk',
             fontsize=options.get('fontSize', FONT_SIZE),
             color=options.get('textColor', TEXT_COLOR),
         )

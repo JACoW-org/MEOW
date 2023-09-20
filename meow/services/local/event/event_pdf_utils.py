@@ -370,7 +370,7 @@ def _draw_frame_anyio(input: str, output: str, page_number: int,
 
         for page in doc:
 
-            insert_notos_font(doc, page)
+            # insert_notos_font(doc, page)
 
             if header:
                 annot_page_header(page, header) if annotations \

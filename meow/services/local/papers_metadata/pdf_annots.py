@@ -11,7 +11,8 @@ ANNOTATION_HEIGHT = 10
 SIDENOTE_LENGTH = 650
 TEXT_COLOR = getColor('GRAY10')
 FONT_SIZE = 7
-FONT_NAME = 'notos'
+# FONT_NAME = 'notos'
+FONT_NAME = None
 
 
 def annot_toc_header(page: Page, data: dict, options: dict = dict()):

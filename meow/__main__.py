@@ -12,9 +12,9 @@ import multiprocessing as mp
 
 from datetime import datetime
 
-from fitz import Document, Page, Rect, Point, LINK_GOTO, LINK_URI
+from fitz import Document, Page, Rect, Point, Font, LINK_GOTO, LINK_URI
 
-from fitz.utils import set_metadata, insert_link, insert_text, new_page
+from fitz.utils import set_metadata, insert_link, insert_text, insert_textbox, new_page
 
 
 from meow.services.local.papers_metadata.pdf_annots import (
@@ -255,6 +255,34 @@ def doc_frame(args) -> None:
     doc.save(filename=args.output)
 
     doc.close()
+    del doc
+
+
+def doc_test(args) -> None:
+
+    PAGE_WIDTH = 595
+    PAGE_HEIGHT = 792
+
+    doc = Document()
+    page = new_page(doc, width=PAGE_WIDTH, height=PAGE_HEIGHT)
+
+    text = "This is a preprint — the final version is € [published with IOP]"
+    
+    font = Font('cjk')
+    
+    page.insert_font(fontname='cjk', fontbuffer=font.buffer)
+
+    insert_textbox(page,
+                   rect=Rect(50,
+                             50,
+                             500,
+                             500),
+                   buffer=text,
+                   fontname="cjk",
+                   encoding=0,
+                   fontsize=11)
+
+    doc.save(filename=args.output)
     del doc
 
 
@@ -715,6 +743,17 @@ def main():
         title="Subcommands",
         help="Enter 'command -h' for subcommand specific help"
     )
+
+    # -------------------------------------------------------------------------
+    # 'test' command
+    # -------------------------------------------------------------------------
+    ps_test = subps.add_parser(
+        "test",
+        description="get PDF test",
+        epilog="specify output file",
+    )
+    ps_test.add_argument("-output", required=True, help="output filename")
+    ps_test.set_defaults(func=doc_test)
 
     # -------------------------------------------------------------------------
     # 'report' command

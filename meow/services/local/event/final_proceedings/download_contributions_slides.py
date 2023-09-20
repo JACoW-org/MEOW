@@ -107,8 +107,7 @@ async def file_download_task(capacity_limiter: CapacityLimiter, total_files: int
                                     cookies=indico_cookies)
                 valid = await is_file_valid(pdf_file, pdf_md5)
 
-                logger.info(f"{pdf_name} {pdf_md5}")
-
+                # logger.info(f"{pdf_name} {pdf_md5}")
             else:
                 valid = True
 
