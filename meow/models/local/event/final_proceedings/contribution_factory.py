@@ -149,20 +149,38 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
 
     """ """
 
-    is_included_in_proceedings: bool = False
-    is_included_in_prepress: bool = False
-    is_included_in_pdf_check: bool = False
+    logger.info(f"{contribution.get('code')}")
+
+    """ """
+
     peer_reviewing_accepted: bool = False
 
     if contrib_paper:
         peer_reviewing_accepted = contrib_paper.get('state', 0) == 2
 
+    logger.info(f"peer_reviewing: {peer_reviewing_accepted}")
+
+    """ """
+
+    is_slides_included: bool = False
+
+    if slides_data and slides_data.state:
+
+        if slides_data.state == EditableData.EditableState.accepted:
+            for r in slides_data.all_revisions:
+                if r.is_qa_approved:
+                    is_slides_included = True
+                    break
+
+    logger.info(f"is_slides_included: {is_slides_included}")
+
+    """ """
+
+    is_included_in_proceedings: bool = False
+    is_included_in_prepress: bool = False
+    is_included_in_pdf_check: bool = False
+
     if paper_data and paper_data.state:
-
-        # logger.info(f"paper_data state {paper_data.state}")
-
-        # if paper_data.state == EditableData.EditableState.ready_for_review:
-        #     peer_reviewing_accepted = True
 
         if paper_data.state == EditableData.EditableState.accepted:
             is_included_in_prepress = True
@@ -177,41 +195,11 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
         elif paper_data.state == EditableData.EditableState.needs_submitter_confirmation:
             is_included_in_pdf_check = True
 
-    """
-    else:
+    logger.info(f"is_prepress: {is_included_in_prepress}")
+    logger.info(f"is_proceedings: {is_included_in_proceedings}")
+    logger.info(f"is_pdf_check: {is_included_in_pdf_check}")
 
-        logger.info("paper_data not state")
-
-        revisions: list[RevisionData] = []
-
-        if paper_data and paper_data.all_revisions:
-            for r in paper_data.all_revisions:
-                revisions.append(r)
-
-        revisions.reverse()
-
-        for r in revisions:
-            if r.is_black or r.is_red:
-                break
-
-            if r.is_green:
-                is_included_in_prepress = True
-                is_included_in_proceedings = r.is_qa_approved
-
-                is_included_in_pdf_check = True
-                break
-
-            if r.is_yellow:
-                is_included_in_pdf_check = True
-                break
-    """
-
-    if paper_data:
-        logger.debug(f"{contribution.get('code')} - {paper_data.state}")
-        logger.debug(f"is_prepress: {is_included_in_prepress}")
-        logger.debug(f"is_proceedings: {is_included_in_proceedings}")
-        logger.debug(f"is_pdf_check: {is_included_in_pdf_check}")
-        logger.debug(f"peer_reviewing: {peer_reviewing_accepted}")
+    """ """
 
     # if is_included_in_proceedings != editable_is_included_in_proceedings:
     #     logger.warning(f"{contribution.get('code')}: in_proceedings ERROR")
@@ -244,6 +232,8 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
     # logger.info(f"is_qa_approved: {is_qa_approved}")
     #
     # logger.info("\n\n")
+
+    """ """
 
     contribution_url = contribution.get('url', '')
 
@@ -297,6 +287,7 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
         end=datedict_to_tz_datetime(
             contribution.get('end_dt')
         ),
+        is_slides_included=is_slides_included,
         is_included_in_proceedings=is_included_in_proceedings,
         is_included_in_prepress=is_included_in_prepress,
         is_included_in_pdf_check=is_included_in_pdf_check,

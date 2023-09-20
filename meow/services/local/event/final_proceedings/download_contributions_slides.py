@@ -1,4 +1,5 @@
 import logging as lg
+from typing import Callable
 
 from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
@@ -16,12 +17,13 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import Pro
 logger = lg.getLogger(__name__)
 
 
-async def download_contributions_slides(proceedings_data: ProceedingsData, cookies: dict, settings: dict):
+async def download_contributions_slides(proceedings_data: ProceedingsData, cookies: dict, 
+                                        settings: dict, callback: Callable):
     """ """
 
     logger.info('event_final_proceedings - download_contributions_slides')
 
-    files_data: list[FileData] = await extract_proceedings_slides(proceedings_data)
+    files_data: list[FileData] = await extract_proceedings_slides(proceedings_data, callback)
 
     total_files: int = len(files_data)
     downloaded_files: int = 0

@@ -408,6 +408,7 @@ class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
         for institute in self.institutes:
             contributionsGroups[institute.name] = [
                 dict(code=c.code, title=c.title,
+                     is_slides_included=c.is_slides_included,
                      is_included_in_proceedings=c.is_included_in_proceedings,
                      doi_data=c.doi_data)
                 for c in self.contributions

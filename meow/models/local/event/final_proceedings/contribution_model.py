@@ -239,6 +239,7 @@ class ContributionData:
     start: datetime
     end: datetime
 
+    is_slides_included: bool = field(default=False)
     is_included_in_pdf_check: bool = field(default=False)
     is_included_in_proceedings: bool = field(default=False)
     is_included_in_prepress: bool = field(default=False)

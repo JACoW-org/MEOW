@@ -35,7 +35,7 @@ def session_data_factory(session_slot: Any) -> SessionData:
             for person in session_slot.get('conveners', [])
         ]
     )
-    
+
     # logger.info(session_data.as_dict())
 
     return session_data

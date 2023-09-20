@@ -21,7 +21,8 @@ async def extract_proceedings_papers(proceedings_data: ProceedingsData,
         #
         # logger.debug(contribution_data.paper)
 
-        if callback(contribution_data) and contribution_data.paper and contribution_data.paper.latest_revision:
+        if callback(contribution_data) and contribution_data.paper \
+                and contribution_data.paper.latest_revision:
             for file_data in contribution_data.paper.latest_revision.files:
 
                 # logger.debug(f"""{file_data.uuid} -
@@ -34,12 +35,14 @@ async def extract_proceedings_papers(proceedings_data: ProceedingsData,
     return papers
 
 
-async def extract_proceedings_slides(proceedings_data: ProceedingsData) -> list[FileData]:
+async def extract_proceedings_slides(proceedings_data: ProceedingsData,
+                                     callback: Callable) -> list[FileData]:
 
     slides: list[FileData] = []
 
     for contribution_data in proceedings_data.contributions:
-        if contribution_data.slides and contribution_data.slides.latest_revision:
+        if callback(contribution_data) and contribution_data.slides \
+                and contribution_data.slides.latest_revision:
             revision_data = contribution_data.slides.latest_revision
             for file_data in revision_data.files:
 

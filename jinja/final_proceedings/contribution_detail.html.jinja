@@ -47,7 +47,7 @@
 </div>
 {% endif %}
 
-{% if include_event_slides and contribution.has_slides: %}
+{% if include_event_slides and contribution.is_slides_included and contribution.has_slides: %}
 <div class="contrib-slides">
     <b>Slides:</b>
     <span>&nbsp;</span>

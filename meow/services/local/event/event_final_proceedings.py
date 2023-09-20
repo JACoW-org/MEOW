@@ -121,6 +121,9 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict,
             return c.is_included_in_proceedings
         return c.is_included_in_prepress
 
+    def filter_contributions_with_slides(c: ContributionData) -> bool:
+        return c.is_slides_included
+
     """ """
 
     await extend_lock(lock)
@@ -250,8 +253,8 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict,
 
         # Bloccante
 
-        [final_proceedings, slides_data] = await download_contributions_slides(final_proceedings,
-                                                                               cookies, settings)
+        [final_proceedings, slides_data] = await download_contributions_slides(final_proceedings, cookies, settings,
+                                                                               filter_contributions_with_slides)
 
         # log number of files
         yield dict(type='log', value=ClientLog(
@@ -429,10 +432,12 @@ async def _event_final_proceedings(event: dict, cookies: dict, settings: dict,
     ))
 
     await copy_event_attachments(final_proceedings, cookies, settings)
-    await copy_contribution_papers(final_proceedings, cookies, settings, filter_published_contributions)
+    await copy_contribution_papers(final_proceedings, cookies, settings,
+                                   filter_published_contributions)
 
     if config.include_event_slides:
-        await copy_contribution_slides(final_proceedings, cookies, settings)
+        await copy_contribution_slides(final_proceedings, cookies, settings,
+                                       filter_contributions_with_slides)
 
     """ """
 
