@@ -11,7 +11,7 @@ ANNOTATION_HEIGHT = 10
 SIDENOTE_LENGTH = 650
 TEXT_COLOR = getColor('GRAY10')
 FONT_SIZE = 7
-FONT_NAME = None
+FONT_NAME = 'notos'
 
 
 def annot_toc_header(page: Page, data: dict, options: dict = dict()):
@@ -305,7 +305,8 @@ def annot_page_footer(page: Page, page_number: int, data: dict, options: dict = 
     )
 
 
-def annot_page_side(page: Page, pre_print: str | None,
+def annot_page_side(page: Page,
+                    pre_print: str | None,
                     page_number: int | None,
                     cc_logo: Any | None,
                     options: dict = dict()):
@@ -371,7 +372,7 @@ def annot_page_side(page: Page, pre_print: str | None,
             align=TEXT_ALIGN_JUSTIFY,
             rotate=90,
             text=pre_print,
-            fontname=options.get('fontName', FONT_NAME),
+            # fontname=options.get('fontName', FONT_NAME),
             fontsize=options.get('fontSize', FONT_SIZE),
             text_color=options.get('textColor', TEXT_COLOR),
         )

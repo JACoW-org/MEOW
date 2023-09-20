@@ -79,6 +79,7 @@ async def event_final_proceedings(event: dict, cookies: dict, settings: dict,
     except ProceedingsError as pe:
         async for r in handle_proceedings_error(pe):
             yield r
+        raise pe
     except BaseException as be:
         logger.error("Generic error", exc_info=True)
         raise be
@@ -505,6 +506,4 @@ async def handle_proceedings_error(error: ProceedingsError):
     ))
 
     # stop generation
-    yield dict(type='result', value=dict())
-
-    raise error
+    yield dict(type='error', value=error)

@@ -4,12 +4,13 @@ from typing import Callable
 from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
+from meow.app.errors.service_error import ProceedingsError
 
 from meow.models.local.event.final_proceedings.contribution_model import FileData
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_proceedings_papers
 
 from meow.utils.http import download_file
-from meow.services.local.event.event_pdf_utils import is_to_download
+from meow.services.local.event.event_pdf_utils import is_file_valid, is_to_download
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 
 
@@ -45,7 +46,16 @@ async def download_contributions_papers(proceedings_data: ProceedingsData, cooki
 
         try:
             async with receive_stream:
-                async for _ in receive_stream:
+                async for result in receive_stream:
+
+                    valid = result.get('valid', False)
+                    file = result.get('file', None)
+
+                    if valid is False:
+                        # receive_stream.close()
+                        raise ProceedingsError(
+                            f"Error downloading file {file.filename}")
+
                     downloaded_files = downloaded_files + 1
 
                     # logger.info(
@@ -58,8 +68,12 @@ async def download_contributions_papers(proceedings_data: ProceedingsData, cooki
             logger.debug(crs, exc_info=False)
         except EndOfStream as eos:
             logger.debug(eos, exc_info=False)
-        except BaseException as ex:
-            logger.error(ex, exc_info=True)
+        except ProceedingsError as pe:
+            logger.error(pe, exc_info=False)
+            raise pe
+        except BaseException as be:
+            logger.error(be, exc_info=True)
+            raise be
 
     return [proceedings_data, files_data]
 
@@ -70,6 +84,8 @@ async def file_download_task(capacity_limiter: CapacityLimiter, total_files: int
     """ """
 
     async with capacity_limiter:
+
+        valid: bool = False
 
         try:
             pdf_md5 = current_file.md5sum
@@ -90,6 +106,12 @@ async def file_download_task(capacity_limiter: CapacityLimiter, total_files: int
                 logger.info(f"download_file --> {pdf_url}")
                 await download_file(url=pdf_url, file=pdf_file,
                                     cookies=indico_cookies)
+                valid = await is_file_valid(pdf_file, pdf_md5)
+
+                logger.info(f"{pdf_name} {pdf_md5}")
+            else:
+                valid = True
+
             # else:
             #     logger.info(f"cached_file --> {pdf_url}")
 
@@ -99,5 +121,6 @@ async def file_download_task(capacity_limiter: CapacityLimiter, total_files: int
         await res.send({
             "index": current_index,
             "total": total_files,
-            "file": current_file
+            "file": current_file,
+            "valid": valid
         })

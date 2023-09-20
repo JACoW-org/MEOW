@@ -3,7 +3,9 @@ import io
 import pathlib
 import logging as lg
 from anyio import Path, to_thread
-from meow.services.local.papers_metadata.pdf_text import write_page_footer, write_page_header, write_page_side
+from meow.services.local.papers_metadata.pdf_font import insert_notos_font
+from meow.services.local.papers_metadata.pdf_text import (
+    write_page_footer, write_page_header, write_page_side)
 
 from meow.utils.hash import file_md5
 from meow.utils.keywords import KEYWORDS
@@ -130,6 +132,19 @@ async def is_to_download(file: Path, md5: str) -> bool:
     # return is_to_download
 
     return md5 != md5_hex
+
+
+async def is_file_valid(file: Path, md5: str) -> bool:
+    """ """
+
+    if md5 == '' or not await file.exists():
+        return False
+
+    file_path = str(await file.absolute())
+
+    md5_hex = await file_md5(file_path)
+
+    return md5 == md5_hex
 
 
 async def extract_event_pdf_files(event: dict) -> list:
@@ -317,7 +332,8 @@ async def draw_frame_anyio(input: str, output: str, page: int,
 def _draw_frame_anyio(input: str, output: str, page_number: int,
                       pre_print: str | None, header: dict | None,
                       footer: dict | None, metadata: dict | None,
-                      xml_metadata: str | None, annotations: bool = True):
+                      xml_metadata: str | None,
+                      annotations: bool = True):
 
     doc: Document | None = None
 
@@ -353,6 +369,8 @@ def _draw_frame_anyio(input: str, output: str, page_number: int,
         # logger.debug([input, output, page_number, pre_print])
 
         for page in doc:
+
+            insert_notos_font(doc, page)
 
             if header:
                 annot_page_header(page, header) if annotations \

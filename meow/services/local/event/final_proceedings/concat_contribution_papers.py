@@ -133,7 +133,7 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
 
     pdf_files: list[str] = await get_pdf_files(cache_dir, files_data)
 
-    logger.info("BRIEF_PDF" + json_encode(pdf_files).decode('utf-8'))
+    # logger.info("BRIEF_PDF" + json_encode(pdf_files).decode('utf-8'))
 
     async with create_task_group() as tg:
         for index, vol_pdf_files_chunk in enumerate(split_list(pdf_files, chunk_size)):
@@ -212,7 +212,7 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
 
     pdf_files: list[str] = await get_pdf_files(cache_dir, files_data)
 
-    logger.info("VOL_PDF" + json_encode(pdf_files).decode('utf-8'))
+    # logger.info("VOL_PDF" + json_encode(pdf_files).decode('utf-8'))
 
     async with create_task_group() as tg:
         for index, pdf_files_chunk in enumerate(split_list(pdf_files, chunk_size)):
