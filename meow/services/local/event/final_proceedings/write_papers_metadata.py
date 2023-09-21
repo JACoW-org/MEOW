@@ -94,6 +94,9 @@ async def write_metadata_task(current_paper, sessions, settings, pdf_cache_dir):
     pre_print: str = settings.get('pre_print', 'This is a preprint') \
         if contribution.peer_reviewing_accepted else ''
 
+    if pre_print != '':
+        logger.info(f"code: {contribution.code} - preprint: {pre_print}")
+
     async def _task_one():
         await draw_frame_anyio(str(original_pdf_file), str(jacow_pdf_file),
                                contribution.page, pre_print, header_data,

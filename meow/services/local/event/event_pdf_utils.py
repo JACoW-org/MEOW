@@ -3,7 +3,7 @@ import io
 import pathlib
 import logging as lg
 from anyio import Path, to_thread
-from meow.services.local.papers_metadata.pdf_font import insert_notos_font
+
 from meow.services.local.papers_metadata.pdf_text import (
     write_page_footer, write_page_header, write_page_side)
 
@@ -395,7 +395,6 @@ def _draw_frame_anyio(input: str, output: str, page_number: int,
 
             page_number += 1
 
-        # doc.save(filename=output, garbage=1, clean=1, deflate=1)
         doc.save(filename=output, garbage=1, clean=1, deflate=1)
 
     except BaseException as be:
