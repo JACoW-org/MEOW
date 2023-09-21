@@ -374,27 +374,27 @@ def write_page_side(page: Page,
     if pre_print:
 
         # add pre print
-        page.add_freetext_annot(
-            rect=rect_even_text if page_number and page_number % 2 != 0 else rect_odd_text,
-            align=TEXT_ALIGN_JUSTIFY,
-            rotate=90,
-            text=pre_print,
-            # fontname=options.get('fontName', FONT_NAME),
-            fontsize=options.get('fontSize', FONT_SIZE),
-            text_color=options.get('textColor', TEXT_COLOR),
-        )
+        # page.add_freetext_annot(
+        #     rect=rect_even_text if page_number and page_number % 2 != 0 else rect_odd_text,
+        #     align=TEXT_ALIGN_JUSTIFY,
+        #     rotate=90,
+        #     text=pre_print,
+        #     # fontname=options.get('fontName', FONT_NAME),
+        #     fontsize=options.get('fontSize', FONT_SIZE),
+        #     text_color=options.get('textColor', TEXT_COLOR),
+        # )
 
         # font = Font('cjk')
 
         # page.insert_font(fontname='cjk', fontbuffer=font.buffer)
 
-        # insert_textbox(
-        #     page=page,
-        #     rect=rect_even_text if page_number and page_number % 2 != 0 else rect_odd_text,
-        #     align=TEXT_ALIGN_JUSTIFY,
-        #     rotate=90,
-        #     buffer=pre_print,
-        #     fontname=options.get('fontName', FONT_NAME),
-        #     fontsize=options.get('fontSize', FONT_SIZE),
-        #     color=options.get('textColor', TEXT_COLOR),
-        # )
+        insert_textbox(
+            page=page,
+            rect=rect_even_text if page_number and page_number % 2 != 0 else rect_odd_text,
+            align=TEXT_ALIGN_JUSTIFY,
+            rotate=90,
+            buffer=pre_print,
+            fontname=options.get('fontName', FONT_NAME),
+            fontsize=options.get('fontSize', FONT_SIZE),
+            color=options.get('textColor', TEXT_COLOR),
+        )
