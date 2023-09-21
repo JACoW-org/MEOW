@@ -31,6 +31,14 @@ def format_datetime_dashed(d: dt.datetime | None) -> str:
     return d.strftime('%Y-%m-%d') if d else ''
 
 
+def format_datetime_year_num(d: dt.datetime | None) -> str:
+    return d.strftime('%Y') if d else ''
+
+
+def format_datetime_month_name(d: dt.datetime | None) -> str:
+    return d.strftime('%b') if d else ''
+
+
 def format_datetime_pdf(d: dt.datetime) -> str:
     # D:YYYYMMDDHHmmSSOHH'mm'
     utc_offset = d.strftime('%z')

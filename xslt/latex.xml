@@ -70,17 +70,17 @@
 <xsl:otherwise>
 <xsl:value-of select="conference/venue"/>
 <xsl:text>, </xsl:text>
-<xsl:value-of select="substring($dateString, 6, 2)"/>
-<xsl:text> </xsl:text>
-<xsl:value-of select="substring($dateString, 1, 4)"/>
+<xsl:value-of select="conference/month"/>
+<xsl:text>. </xsl:text>
+<xsl:value-of select="conference/year"/>
 </xsl:otherwise>
 </xsl:choose>
 <xsl:choose>
-<xsl:when test="contribution/status = 'in_proceedings'">
+<xsl:when test="contribution/pages/number > 0">
 <xsl:text>, pp. </xsl:text>
 <xsl:value-of select="contribution/pages/start-page"/>
 <xsl:text>-</xsl:text>
-<xsl:variable name="endPage" select="contribution/pages/start-page + contribution/pages/number -1"/>
+<xsl:variable name="endPage" select="contribution/pages/start-page + contribution/pages/number - 1"/>
 <xsl:value-of select="$endPage"/>
 <xsl:text>.</xsl:text>
 <xsl:if test="contribution/doi != ''">

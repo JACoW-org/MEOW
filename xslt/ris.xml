@@ -60,11 +60,12 @@ AB - </xsl:text><xsl:value-of select="contribution/abstract"/>
 PB - </xsl:text><xsl:value-of select="publisher"/>
 <xsl:text>
 CP - </xsl:text><xsl:value-of select="publisher-venue"/>
-<xsl:if test="contribution/start-page != 0">
+<xsl:if test="contribution/pages/number > 0">
 <xsl:text>
 SP - </xsl:text><xsl:value-of select="contribution/pages/start-page"/>
 <xsl:text>
-EP - </xsl:text><xsl:value-of select="contribution/pages/start-page + contribution/pages/number -1"/></xsl:if>
+EP - </xsl:text><xsl:value-of select="contribution/pages/start-page + contribution/pages/number - 1"/>
+</xsl:if>
 <xsl:text>
 KW - </xsl:text><xsl:comment>KEYWORDS</xsl:comment>
 <xsl:text>

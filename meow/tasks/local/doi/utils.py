@@ -23,7 +23,8 @@ def generate_doi_identifier(context: str, organization: str, conference: str,
 
 def generate_doi_name(context: str, organization: str, conference: str,
                       contribution: str | None) -> str:
-    return f"{context}/{organization}-{conference}-{contribution}"
+    return f"{context}/{organization}-{conference}-{contribution}" \
+        if contribution is not None else ''
 
 
 def generate_doi_path(organization: str, conference: str, contribution: str) -> str:

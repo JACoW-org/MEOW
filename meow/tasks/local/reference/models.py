@@ -23,6 +23,7 @@ class ReferenceStatus(Enum):
 @dataclass
 class ContributionRef:
     '''Model to build reference in different pattern.'''
+    
     # mandatory
     status: str
     conference_code: str
@@ -34,6 +35,8 @@ class ContributionRef:
     title: str
     abstract: str
     url: str
+    year: str
+    month: str
 
     # optional
     publisher: str = field(default='JACoW Publishing')

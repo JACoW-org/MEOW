@@ -45,13 +45,23 @@
         <xsl:text>, </xsl:text>
         <xsl:value-of select="conference/venue"/>
         <xsl:variable name="dateString" select="conference/start-date"/>
+
         <xsl:if test="dateString = ''">
             <xsl:text>, </xsl:text>
-            <xsl:value-of select="substring($dateString, 6, 2)"/>
-            <xsl:text> </xsl:text>
-            <xsl:value-of select="substring($dateString, 1, 4)"/>
+            <xsl:value-of select="conference/month"/>
+            <xsl:text>. </xsl:text>
+            <xsl:value-of select="conference/year"/>
         </xsl:if>
         <!-- xsl:text>.</xsl:text -->
+        
+        <xsl:if test="contribution/pages/number > 0">
+        <xsl:text>, pp. </xsl:text>
+        <xsl:value-of select="contribution/pages/start-page"/>
+        <xsl:text>-</xsl:text>
+        <xsl:variable name="endPage" select="contribution/pages/start-page + contribution/pages/number - 1"/>
+        <xsl:value-of select="$endPage"/>
+        </xsl:if>
+
         <xsl:if test="contribution/doi != ''">
             <span style="font-family: 'Liberation Mono'; font-size: 8pt;">
                 <xsl:text>. doi:</xsl:text>

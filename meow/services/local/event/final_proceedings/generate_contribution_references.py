@@ -4,10 +4,11 @@ from os import path
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
 from meow.models.local.event.final_proceedings.event_model import EventData
 
-from meow.models.local.event.final_proceedings.proceedings_data_model import FinalProceedingsConfig, ProceedingsData
+from meow.models.local.event.final_proceedings.proceedings_data_model import (
+    FinalProceedingsConfig, ProceedingsData)
 
 from meow.tasks.local.reference.models import ContributionRef, ReferenceStatus, Reference
-from meow.tasks.local.doi.utils import generate_doi_identifier
+from meow.tasks.local.doi.utils import  generate_doi_name
 from jinja2 import BytecodeCache, Environment, FileSystemLoader
 from lxml.etree import XML, XSLT, fromstring, XMLParser
 
@@ -15,7 +16,7 @@ from anyio import open_file, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
 
-from meow.utils.datetime import format_datetime_dashed
+from meow.utils.datetime import format_datetime_dashed, format_datetime_month_name, format_datetime_year_num
 from typing import Callable
 
 
@@ -187,7 +188,7 @@ async def contribution_data_factory(event: EventData, contribution: Contribution
     reference_status: str = ReferenceStatus.IN_PROCEEDINGS.value if contribution.has_paper(
     ) else ReferenceStatus.UNPUBLISHED.value
 
-    reference_doi: str = generate_doi_identifier(
+    reference_doi: str = generate_doi_name(
         context=settings.get('doi_context', '10.18429'),
         organization=settings.get('doi_organization', 'JACoW'),
         conference=settings.get('doi_conference', 'CONF-YY'),
@@ -218,6 +219,8 @@ async def contribution_data_factory(event: EventData, contribution: Contribution
         series_number=series_number,
         venue=location,
         abstract=contribution.description,
+        year=format_datetime_year_num(event.start),
+        month=format_datetime_month_name(event.start),
         start_date=format_datetime_dashed(event.start),
         end_date=format_datetime_dashed(event.end),
         authors_list=contribution.authors_list,
