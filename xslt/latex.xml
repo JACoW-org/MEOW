@@ -7,17 +7,17 @@
 <xsl:text>%\cite{</xsl:text>
 <xsl:value-of select="contribution/authors-list/author/last-name"/>
 <xsl:text>:</xsl:text>
-<xsl:value-of select="translate(conference/code, $lowercase, $uppercase)"/>
+<xsl:value-of select="translate(conference/code, $uppercase, $lowercase)"/>
 <xsl:text>-</xsl:text>
-<xsl:value-of select="translate(contribution/paper-code, $lowercase, $uppercase)"></xsl:value-of>
+<xsl:value-of select="translate(contribution/paper-code, $uppercase, $lowercase)"></xsl:value-of>
 <xsl:text>}
 </xsl:text>
-<xsl:text>bibitem{</xsl:text>
+<xsl:text>\bibitem{</xsl:text>
 <xsl:value-of select="contribution/authors-list/author/last-name"/>
 <xsl:text>:</xsl:text>
-<xsl:value-of select="translate(conference/code, $lowercase, $uppercase)"/>
+<xsl:value-of select="translate(conference/code, $uppercase, $lowercase)"/>
 <xsl:text>-</xsl:text>
-<xsl:value-of select="translate(contribution/paper-code, $lowercase, $uppercase)"></xsl:value-of>
+<xsl:value-of select="translate(contribution/paper-code, $uppercase, $lowercase)"></xsl:value-of>
 <xsl:text>}
     </xsl:text>
 <xsl:variable name="set" select="contribution/authors-list/author"/>
