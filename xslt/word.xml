@@ -46,7 +46,7 @@
         <xsl:value-of select="conference/venue"/>
         <xsl:variable name="dateString" select="conference/start-date"/>
 
-        <xsl:if test="dateString = ''">
+        <xsl:if test="$dateString != ''">
             <xsl:text>, </xsl:text>
             <xsl:value-of select="conference/month"/>
             <xsl:text>. </xsl:text>
