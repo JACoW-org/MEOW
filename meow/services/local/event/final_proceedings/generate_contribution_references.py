@@ -1,4 +1,5 @@
 import logging as lg
+import re
 from os import path
 
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
@@ -208,13 +209,15 @@ async def contribution_data_factory(event: EventData, contribution: Contribution
 
     location: str = settings.get('location', '')
 
+    conference_code = re.sub(r'[^a-zA-Z]', '', event.name).lower() + str(event.start.year)
+
     return ContributionRef(
         url=contribution.url,
         title=contribution.title,
         booktitle_short=booktitle_short,
         booktitle_long=booktitle_long,
         paper_code=contribution.code,
-        conference_code=event.title,
+        conference_code=conference_code,
         series=series,
         series_number=series_number,
         venue=location,
