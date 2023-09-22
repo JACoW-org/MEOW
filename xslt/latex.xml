@@ -50,6 +50,7 @@
 <xsl:value-of select="contribution/title"/>
 <xsl:text>}\textquotedblright,
     </xsl:text>
+
 <xsl:choose>
 <xsl:when test="contribution/status = 'in_proceedings'">
 <xsl:text>in emph{Proc. </xsl:text>
@@ -61,44 +62,45 @@
 <xsl:value-of select="conference/booktitle-short"/>
 </xsl:otherwise>
 </xsl:choose>
-<xsl:text> </xsl:text>
+
+<xsl:text>, </xsl:text>
+<xsl:value-of select="conference/venue"/>
+
 <xsl:variable name="dateString" select="conference/start-date"/>
-<xsl:choose>
-<xsl:when test="dateString = ''">
-<xsl:value-of select="conference/venue"/>
-</xsl:when>
-<xsl:otherwise>
-<xsl:value-of select="conference/venue"/>
+
+<xsl:if test="$dateString != ''">
 <xsl:text>, </xsl:text>
 <xsl:value-of select="conference/month"/>
 <xsl:variable name="monthShort" select="conference/month"/>
 <xsl:if test="$monthShort != 'May'"><xsl:text>.</xsl:text></xsl:if>
 <xsl:text> </xsl:text>
 <xsl:value-of select="conference/year"/>
-</xsl:otherwise>
-</xsl:choose>
-<xsl:choose>
-<xsl:when test="contribution/pages/number > 0">
-<xsl:text>, pp. </xsl:text>
-<xsl:value-of select="contribution/pages/start-page"/>
-<xsl:text>-</xsl:text>
-<xsl:variable name="endPage" select="contribution/pages/start-page + contribution/pages/number - 1"/>
-<xsl:value-of select="$endPage"/>
-<xsl:text>.</xsl:text>
-<xsl:if test="contribution/doi != ''">
-<xsl:text>
-    \url{doi:</xsl:text>
-<xsl:value-of select="contribution/doi"/>
-<xsl:text>}
-</xsl:text>
 </xsl:if>
-</xsl:when>
-<xsl:when test="contribution/status = 'conference'">
-<xsl:text>, this conference.</xsl:text>
-</xsl:when>
-<xsl:otherwise>
-<xsl:text>, unpublished.</xsl:text>
-</xsl:otherwise>
+
+<xsl:choose>
+    <xsl:when test="contribution/pages/number > 0">
+        <xsl:text>, pp. </xsl:text>
+        <xsl:value-of select="contribution/pages/start-page"/>
+        <xsl:text>-</xsl:text>
+        <xsl:variable name="endPage" select="contribution/pages/start-page + contribution/pages/number - 1"/>
+        <xsl:value-of select="$endPage"/>
+        <xsl:text>.</xsl:text>
+        <xsl:if test="contribution/doi != ''">
+            <xsl:text>
+    \url{doi:</xsl:text>
+            <xsl:value-of select="contribution/doi"/>
+            <xsl:text>}
+            </xsl:text>
+        </xsl:if>
+    </xsl:when>
+    <xsl:when test="contribution/status = 'conference'">
+        <xsl:text>, this conference.</xsl:text>
+    </xsl:when>
+    <xsl:otherwise>
+        <xsl:text>, paper </xsl:text>
+        <xsl:value-of select="contribution/paper-code"></xsl:value-of>
+        <xsl:text>, unpublished.</xsl:text>
+    </xsl:otherwise>
 </xsl:choose>
 
 </xsl:template>

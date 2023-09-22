@@ -69,6 +69,8 @@
             </span>
         </xsl:if>
         <xsl:if test="contribution/doi = ''">
+        <xsl:text>, paper </xsl:text>
+        <xsl:value-of select="contribution/paper-code"></xsl:value-of>
         <xsl:text>, unpublished.</xsl:text>
         </xsl:if>
     </p>
