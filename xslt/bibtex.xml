@@ -57,8 +57,8 @@
     venue = {</xsl:text><xsl:value-of select="conference/venue"/><xsl:text>},</xsl:text>
 <xsl:if test="contribution/status != 'in_proceedings'">
 <xsl:text>
-    intype = {presented at the</xsl:text>
-<xsl:value-of select="conference/code"/>
+    intype = {presented at </xsl:text>
+<xsl:value-of select="conference/booktitle-short"/>
 <xsl:text>},</xsl:text>
 </xsl:if>
 <xsl:if test="conference/series != ''">

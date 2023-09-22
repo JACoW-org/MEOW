@@ -2,7 +2,7 @@
 type: "session"
 name: "{{ session.code|e }}"
 title: "{{ session.title|e }}"
-start: "{{ session.start.strftime('%d %B %Y, %H:%M') }}"
+start: "{{ session.start.strftime('%d %b %Y, %H:%M') }}"
 end: "{{ session.end.strftime('%H:%M') }}"
 
 {% if session.conveners|length>0 %}

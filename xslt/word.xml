@@ -38,20 +38,20 @@
                 </em>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:text>presented at the </xsl:text>
-                <xsl:value-of select="conference/code"/>
+                <xsl:text>presented at </xsl:text>
+                <xsl:value-of select="conference/booktitle-short"/>
             </xsl:otherwise>
         </xsl:choose>
         <xsl:text>, </xsl:text>
         <xsl:value-of select="conference/venue"/>
-        <xsl:variable name="dateString" select="conference/start-date"/>
 
-        <xsl:if test="$dateString != ''">
-            <xsl:text>, </xsl:text>
-            <xsl:value-of select="conference/month"/>
-            <xsl:text>. </xsl:text>
-            <xsl:value-of select="conference/year"/>
-        </xsl:if>
+        <xsl:text>, </xsl:text>
+        <xsl:value-of select="conference/month"/>
+        <xsl:variable name="monthShort" select="conference/month"/>
+        <xsl:if test="$monthShort != 'May'"><xsl:text>.</xsl:text></xsl:if>
+        <xsl:text> </xsl:text>
+        <xsl:value-of select="conference/year"/>
+
         <!-- xsl:text>.</xsl:text -->
         
         <xsl:if test="contribution/pages/number > 0">

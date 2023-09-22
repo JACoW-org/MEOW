@@ -23,7 +23,7 @@ class ReferenceStatus(Enum):
 @dataclass
 class ContributionRef:
     '''Model to build reference in different pattern.'''
-    
+
     # mandatory
     status: str
     conference_code: str
@@ -41,7 +41,7 @@ class ContributionRef:
     # optional
     publisher: str = field(default='JACoW Publishing')
     publisher_venue: str = field(default='Geneva, Switzerland')
-    language: str = field(default='english')
+    language: str = field(default='English')
     series: str = field(default='')
     series_number: str = field(default='')
     issn: str = field(default='')

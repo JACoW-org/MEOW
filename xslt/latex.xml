@@ -57,8 +57,8 @@
 <xsl:text>}</xsl:text>
 </xsl:when>
 <xsl:otherwise>
-<xsl:text>presented at the </xsl:text>
-<xsl:value-of select="conference/code"/>
+<xsl:text>presented at </xsl:text>
+<xsl:value-of select="conference/booktitle-short"/>
 </xsl:otherwise>
 </xsl:choose>
 <xsl:text> </xsl:text>
@@ -71,7 +71,9 @@
 <xsl:value-of select="conference/venue"/>
 <xsl:text>, </xsl:text>
 <xsl:value-of select="conference/month"/>
-<xsl:text>. </xsl:text>
+<xsl:variable name="monthShort" select="conference/month"/>
+<xsl:if test="$monthShort != 'May'"><xsl:text>.</xsl:text></xsl:if>
+<xsl:text> </xsl:text>
 <xsl:value-of select="conference/year"/>
 </xsl:otherwise>
 </xsl:choose>
