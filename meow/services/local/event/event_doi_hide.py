@@ -14,8 +14,8 @@ from redis.exceptions import LockError
 from meow.services.local.event.common.adapting_final_proceedings import adapting_proceedings
 from meow.services.local.event.final_proceedings.collecting_contributions_and_files import (
     collecting_contributions_and_files)
-from meow.services.local.event.final_proceedings.collecting_sessions_and_attachments import (
-    collecting_sessions_and_attachments)
+from meow.services.local.event.final_proceedings.collecting_sessions_and_materials import (
+    collecting_sessions_and_materials)
 from meow.services.local.event.doi.event_doi_hide import hide_contribution_doi
 
 
@@ -85,11 +85,11 @@ async def _event_doi_hide(event: dict, cookies: dict, settings: dict, lock: Redi
     await extend_lock(lock)
 
     yield dict(type='progress', value=dict(
-        phase='collecting_sessions_and_attachments',
-        text="Collecting sessions and attachments"
+        phase='collecting_sessions_and_materials',
+        text="Collecting Sessions and Materials"
     ))
 
-    [sessions, attachments] = await collecting_sessions_and_attachments(event, cookies, settings)
+    [sessions, materials] = await collecting_sessions_and_materials(event, cookies, settings)
 
     """ """
 
@@ -111,7 +111,7 @@ async def _event_doi_hide(event: dict, cookies: dict, settings: dict, lock: Redi
         text="Adapting final proceedings"
     ))
 
-    final_proceedings = await adapting_proceedings(event, sessions, contributions, attachments, cookies, settings)
+    final_proceedings = await adapting_proceedings(event, sessions, contributions, materials, cookies, settings)
 
     logger.info('event_doi_hide - event_doi_hide - begin')
 

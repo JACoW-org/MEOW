@@ -4,7 +4,7 @@ from typing import Any
 
 from meow.models.local.event.final_proceedings.event_model import (
     AffiliationData,
-    AttachmentData,
+    MaterialData,
     EventData,
     KeywordData,
     PersonData,
@@ -16,23 +16,21 @@ from meow.utils.datetime import datedict_to_tz_datetime
 logger = lg.getLogger(__name__)
 
 
-def attachment_data_factory(attachment: Any) -> AttachmentData:
-    attachment_data = AttachmentData(
-        file_type=attachment.get("file_type"),
-        content_type=attachment.get("content_type"),
-        filename=attachment.get("filename"),
-        md5sum=attachment.get("md5sum"),
-        size=int(attachment.get("size")),
-        title=attachment.get("title"),
-        description=attachment.get("description"),
-        external_download_url=attachment.get("external_download_url"),
-        section=attachment.get('section'),
-        index=attachment.get('index')
+def material_data_factory(material: Any) -> MaterialData:
+    material_data = MaterialData(
+        file_type=material.get("file_type"),
+        content_type=material.get("content_type"),
+        filename=material.get("filename"),
+        md5sum=material.get("md5sum"),
+        size=int(material.get("size")),
+        title=material.get("title"),
+        description=material.get("description"),
+        external_download_url=material.get("external_download_url"),
+        section=material.get('section'),
+        index=material.get('index')
     )
 
-    # logger.info(attachment_data.as_dict())
-
-    return attachment_data
+    return material_data
 
 
 def event_data_factory(event: Any, settings: dict) -> EventData:

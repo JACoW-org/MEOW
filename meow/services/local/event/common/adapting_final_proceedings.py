@@ -6,14 +6,14 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import Pro
 logger = lg.getLogger(__name__)
 
 
-async def adapting_proceedings(event: dict, sessions: list, contributions: list, attachments: list,
+async def adapting_proceedings(event: dict, sessions: list, contributions: list, materials: list,
                                      cookies: dict, settings: dict) -> ProceedingsData:
     """ """
 
-    logger.info('event_final_proceedings - adapting_final_proceedings')
+    logger.info('event_proceedings - adapting_proceedings')
 
     proceedings_data = proceedings_data_factory(
-        event, sessions, contributions, attachments, settings)
+        event, sessions, contributions, materials, settings)
 
     # logger.info(proceedings_data.as_dict())
 

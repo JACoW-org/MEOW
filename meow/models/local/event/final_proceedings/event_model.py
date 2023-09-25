@@ -89,7 +89,7 @@ class KeywordData:
 
 
 @dataclass(kw_only=True, slots=True)
-class AttachmentData:
+class MaterialData:
 
     file_type: str
     content_type: str

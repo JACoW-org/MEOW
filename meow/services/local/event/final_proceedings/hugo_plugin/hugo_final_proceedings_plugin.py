@@ -41,15 +41,15 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
         self.poster = None
         self.volumes = []
         self.attachments = []
-        for attachment in proceedings_data.attachments:
-            if attachment.section == 'logo':
-                self.logo = attachment
-            elif attachment.section == 'poster':
-                self.poster = attachment
-            elif attachment.section == 'volumes':
-                self.volumes.append(attachment)
-            elif attachment.section == 'attachments':
-                self.attachments.append(attachment)
+        for material in proceedings_data.materials:
+            if material.section == 'logo':
+                self.logo = material
+            elif material.section == 'poster':
+                self.poster = material
+            elif material.section == 'volumes':
+                self.volumes.append(material)
+            elif material.section == 'attachments':
+                self.attachments.append(material)
 
         self.contributions = proceedings_data.contributions
         self.sessions = proceedings_data.sessions

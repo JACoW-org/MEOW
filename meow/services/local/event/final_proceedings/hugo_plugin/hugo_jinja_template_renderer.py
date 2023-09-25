@@ -1,7 +1,7 @@
 from meow.models.local.event.final_proceedings.contribution_model import (
     ContributionData)
 from meow.models.local.event.final_proceedings.event_model import (
-    AffiliationData, AttachmentData, EventData, KeywordData, PersonData)
+    AffiliationData, MaterialData, EventData, KeywordData, PersonData)
 from meow.models.local.event.final_proceedings.session_model import SessionData
 from meow.models.local.event.final_proceedings.track_model import TrackData
 
@@ -65,9 +65,9 @@ class JinjaTemplateRenderer:
         return html if minify is False else minify_html.minify(
             html, remove_processing_instructions=True)
 
-    async def render_config_toml(self, event: EventData, logo: AttachmentData | None,
-                                 poster: AttachmentData | None, volumes: list[AttachmentData],
-                                 attachments: list[AttachmentData], settings: dict) -> str:
+    async def render_config_toml(self, event: EventData, logo: MaterialData | None,
+                                 poster: MaterialData | None, volumes: list[MaterialData],
+                                 attachments: list[MaterialData], settings: dict) -> str:
 
         return await self.render("config.toml.jinja", dict(
             event=event.as_dict(),
@@ -78,9 +78,9 @@ class JinjaTemplateRenderer:
             attachments=[a.as_dict() for a in attachments],
         ))
 
-    async def render_home_page(self, event: EventData, logo: AttachmentData | None,
-                               poster: AttachmentData | None, volumes: list[AttachmentData],
-                               attachments: list[AttachmentData], volume_size: int, brief_size: int) -> str:
+    async def render_home_page(self, event: EventData, logo: MaterialData | None,
+                               poster: MaterialData | None, volumes: list[MaterialData],
+                               attachments: list[MaterialData], volume_size: int, brief_size: int) -> str:
         return await self.render("home_page.html.jinja", minify=True, args=dict(
             event=event.as_dict(),
             logo_data=logo.as_dict() if logo else None,

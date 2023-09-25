@@ -4,7 +4,7 @@ from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
 
-from meow.models.local.event.final_proceedings.event_model import AttachmentData
+from meow.models.local.event.final_proceedings.event_model import MaterialData
 
 from meow.utils.http import download_file
 from meow.services.local.event.event_pdf_utils import is_to_download
@@ -14,18 +14,18 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import Pro
 logger = lg.getLogger(__name__)
 
 
-async def download_event_attachments(proceedings_data: ProceedingsData, cookies: dict,
+async def download_event_materials(proceedings_data: ProceedingsData, cookies: dict,
                                      settings: dict) -> ProceedingsData:
     """ """
 
-    logger.info('event_final_proceedings - download_event_attachments')
+    logger.info('event_final_proceedings - download_event_materials')
 
-    files_data: list[AttachmentData] = proceedings_data.attachments
+    files_data: list[MaterialData] = proceedings_data.materials
 
     total_files: int = len(files_data)
     downloaded_files: int = 0
 
-    logger.info(f'download_event_attachments - files: {total_files}')
+    logger.info(f'download_event_materials - files: {total_files}')
 
     dir_name = f"{proceedings_data.event.id}_tmp"
     file_cache_dir: Path = Path('var', 'run', dir_name)
@@ -63,7 +63,7 @@ async def download_event_attachments(proceedings_data: ProceedingsData, cookies:
 
 
 async def file_download_task(capacity_limiter: CapacityLimiter, total_files: int, current_index: int,
-                             current_file: AttachmentData, cookies: dict, pdf_cache_dir: Path,
+                             current_file: MaterialData, cookies: dict, pdf_cache_dir: Path,
                              res: MemoryObjectSendStream) -> None:
     """ """
 

@@ -7,7 +7,7 @@ from typing import Callable
 from anyio import CapacityLimiter, Path, create_task_group
 
 from meow.models.local.event.final_proceedings.contribution_model import FileData
-from meow.models.local.event.final_proceedings.event_model import AttachmentData
+from meow.models.local.event.final_proceedings.event_model import MaterialData
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_proceedings_papers
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsConfig
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
@@ -86,25 +86,14 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
 
     try:
 
-        attachments_data: list[AttachmentData] = proceedings_data.attachments
-        for attachment_data in attachments_data:
+        materials_data: list[MaterialData] = proceedings_data.materials
+        for material_data in materials_data:
 
-            if attachment_data.section == 'at-a-glance-cover':
-                brief_pre_pdf_path = Path(cache_dir, attachment_data.filename)
+            if material_data.section == 'at-a-glance-cover':
+                brief_pre_pdf_path = Path(cache_dir, material_data.filename)
 
                 if not await brief_pre_pdf_path.exists():
                     brief_pre_pdf_path = None
-
-            # {event_code}-{section_index}-{section_code}-{file_name}
-            # attachment_name: str = attachment_data.filename.split('.')[0]
-            # event_code, section_index, section_code, * \
-            #     file_name = attachment_name.split('-')
-
-            # if section_code == 'volumes' and '-'.join(file_name) == 'at-a-glance-cover':
-            #     brief_pre_pdf_path = Path(cache_dir, attachment_data.filename)
-
-            #     if not await brief_pre_pdf_path.exists():
-            #         brief_pre_pdf_path = None
 
     except Exception as e:
         logger.error(e, exc_info=True)
@@ -284,25 +273,14 @@ async def get_vol_pre_pdf_path(proceedings_data: ProceedingsData, cache_dir: Pat
     vol_pre_pdf_path: Path | None = None
 
     try:
-        attachments_data: list[AttachmentData] = proceedings_data.attachments
-        for attachment_data in attachments_data:
+        materials_data: list[MaterialData] = proceedings_data.materials
+        for material_data in materials_data:
 
-            if attachment_data.section == 'final-proceedings-cover':
-                vol_pre_pdf_path = Path(cache_dir, attachment_data.filename)
+            if material_data.section == 'final-proceedings-cover':
+                vol_pre_pdf_path = Path(cache_dir, material_data.filename)
 
                 if not await vol_pre_pdf_path.exists():
                     vol_pre_pdf_path = None
-
-            # {event_code}-{section_index}-{section_code}-{file_name}
-            # attachment_name: str = attachment_data.filename.split('.')[0]
-            # event_code, section_index, section_code, * \
-            #     file_name = attachment_name.split('-')
-
-            # if section_code == 'volumes' and '-'.join(file_name) == 'proceedings-cover':
-            #     vol_pre_pdf_path = Path(cache_dir, attachment_data.filename)
-
-            #     if not await vol_pre_pdf_path.exists():
-            #         vol_pre_pdf_path = None
 
     except Exception as e:
         logger.error(e, exc_info=True)

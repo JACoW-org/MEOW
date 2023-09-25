@@ -4,7 +4,7 @@ from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
 
-from meow.models.local.event.final_proceedings.event_model import AttachmentData
+from meow.models.local.event.final_proceedings.event_model import MaterialData
 from meow.models.local.event.final_proceedings.proceedings_data_model import (
     ProceedingsData)
 from meow.utils.filesystem import move
@@ -13,13 +13,13 @@ from meow.utils.filesystem import move
 logger = lg.getLogger(__name__)
 
 
-async def copy_event_attachments(
+async def copy_event_materials(
     proceedings_data: ProceedingsData, cookies: dict, settings: dict
 ) -> ProceedingsData:
     """ """
 
-    files_data: list[AttachmentData] = [
-        i for i in proceedings_data.attachments
+    files_data: list[MaterialData] = [
+        i for i in proceedings_data.materials
         if i.section not in ['final-proceedings-cover', 'at-a-glance-cover']
     ]
 
@@ -104,7 +104,7 @@ async def file_copy_task(
     capacity_limiter: CapacityLimiter,
     total_files: int,
     current_index: int,
-    current_file: AttachmentData,
+    current_file: MaterialData,
     cookies: dict,
     cache_dir: Path,
     dest_dir: Path,

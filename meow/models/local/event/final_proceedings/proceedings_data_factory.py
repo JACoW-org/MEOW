@@ -5,7 +5,7 @@ from typing import Any, Callable
 from datetime import datetime
 
 from meow.models.local.event.final_proceedings.contribution_factory import contribution_data_factory
-from meow.models.local.event.final_proceedings.event_factory import (attachment_data_factory,
+from meow.models.local.event.final_proceedings.event_factory import (material_data_factory,
                                                                      event_data_factory, event_person_factory)
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.models.local.event.final_proceedings.session_factory import session_data_factory
@@ -23,7 +23,7 @@ logger = lg.getLogger(__name__)
 
 
 def proceedings_data_factory(event: Any, sessions: list, contributions: list,
-                             attachments: list, settings: dict) -> ProceedingsData:
+                             materials: list, settings: dict) -> ProceedingsData:
 
     logger.info('proceedings_data_factory')
 
@@ -91,16 +91,16 @@ def proceedings_data_factory(event: Any, sessions: list, contributions: list,
         x.code                                                      # contribution code
     ))
 
-    attachments_data = [
-        attachment_data_factory(attachment)
-        for attachment in attachments
+    materials_data = [
+        material_data_factory(material)
+        for material in materials
     ]
 
     return ProceedingsData(
         event=event_data_factory(event, settings),
         sessions=sessions_data,
         contributions=contributions_data,
-        attachments=attachments_data
+        materials=materials_data
     )
 
 

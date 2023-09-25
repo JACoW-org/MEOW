@@ -35,16 +35,16 @@ class EventPrePressProceedingsTask(AbstractTask):
         )
 
         tasks: list[ProceedingsTask] = [
-            ProceedingsTask(code='collecting_sessions_and_attachments',
-                                 text='Collecting Sessions and Attachments'),
+            ProceedingsTask(code='collecting_sessions_and_materials',
+                                 text='Collecting Sessions and Materials'),
             ProceedingsTask(code='collecting_contributions_and_files',
                                  text='Collecting Contributions and Files'),
             ProceedingsTask(code='adapting_proceedings',
                                  text='Adapting Pre-Press Proceedings'),
             ProceedingsTask(code='clean_static_site',
                                  text='Clean Static Site'),
-            ProceedingsTask(code='download_event_attachments',
-                                 text='Download Event Attachments'),
+            ProceedingsTask(code='download_event_materials',
+                                 text='Download Event Materials'),
             ProceedingsTask(code='download_contributions_papers',
                                  text='Download Contributions Papers'),
             ProceedingsTask(code='read_papers_metadata',

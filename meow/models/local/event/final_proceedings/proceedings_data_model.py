@@ -5,7 +5,7 @@ from meow.models.local.event.final_proceedings.contribution_model import Contrib
 from meow.models.local.event.final_proceedings.session_model import SessionData
 from meow.models.local.event.final_proceedings.track_model import TrackData
 from meow.models.local.event.final_proceedings.event_model import (
-    AffiliationData, AttachmentData, EventData, KeywordData, PersonData)
+    AffiliationData, MaterialData, EventData, KeywordData, PersonData)
 
 
 @dataclass(kw_only=True, slots=True)
@@ -54,7 +54,7 @@ class ProceedingsData:
 
     event: EventData
     contributions: list[ContributionData] = field(default_factory=list)
-    attachments: list[AttachmentData] = field(default_factory=list)
+    materials: list[MaterialData] = field(default_factory=list)
 
     sessions: list[SessionData] = field(default_factory=list)
     classification: list[TrackData] = field(default_factory=list)

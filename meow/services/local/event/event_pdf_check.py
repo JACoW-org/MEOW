@@ -15,8 +15,8 @@ from meow.models.local.event.final_proceedings.contribution_model import Contrib
 
 from meow.services.local.event.final_proceedings.collecting_contributions_and_files import (
     collecting_contributions_and_files)
-from meow.services.local.event.final_proceedings.collecting_sessions_and_attachments import (
-    collecting_sessions_and_attachments)
+from meow.services.local.event.final_proceedings.collecting_sessions_and_materials import (
+    collecting_sessions_and_materials)
 from meow.services.local.event.final_proceedings.download_contributions_papers import download_contributions_papers
 from meow.services.local.event.common.validate_proceedings_data import validate_proceedings_data
 from meow.services.local.event.common.adapting_final_proceedings import adapting_proceedings
@@ -89,11 +89,11 @@ async def _event_pdf_check(event: dict, cookies: dict, settings: dict, lock: Red
     await extend_lock(lock)
 
     yield dict(type='progress', value=dict(
-        phase='collecting_sessions_and_attachments',
-        text="Collecting sessions and attachments"
+        phase='collecting_sessions_and_materials',
+        text="Collecting Sessions and Materials"
     ))
 
-    [sessions, attachments] = await collecting_sessions_and_attachments(event, cookies, settings)
+    [sessions, materials] = await collecting_sessions_and_materials(event, cookies, settings)
 
     """ """
 
@@ -115,7 +115,7 @@ async def _event_pdf_check(event: dict, cookies: dict, settings: dict, lock: Red
         text="Adapting final proceedings"
     ))
 
-    final_proceedings = await adapting_proceedings(event, sessions, contributions, attachments, cookies, settings)
+    final_proceedings = await adapting_proceedings(event, sessions, contributions, materials, cookies, settings)
 
     """ """
 

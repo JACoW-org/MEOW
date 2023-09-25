@@ -79,7 +79,7 @@ async def _event_compress_proceedings(event: dict, cookies: dict, settings: dict
 
     sessions = []
     contributions = []
-    attachments = []
+    materials = []
 
     """ """
 
@@ -90,7 +90,7 @@ async def _event_compress_proceedings(event: dict, cookies: dict, settings: dict
         text="Adapting final proceedings"
     ))
 
-    final_proceedings = await adapting_proceedings(event, sessions, contributions, attachments, cookies, settings)
+    proceedings = await adapting_proceedings(event, sessions, contributions, materials, cookies, settings)
 
     """ """
 
@@ -101,9 +101,9 @@ async def _event_compress_proceedings(event: dict, cookies: dict, settings: dict
         text='Compress Static site'
     ))
 
-    await compress_final_proceedings(final_proceedings, cookies, settings)
+    await compress_final_proceedings(proceedings, cookies, settings)
 
-    result = await get_final_proceedings(final_proceedings)
+    result = await get_final_proceedings(proceedings)
 
     yield result
 

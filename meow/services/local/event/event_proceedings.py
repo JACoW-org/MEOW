@@ -17,8 +17,8 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import (
 
 from meow.services.local.event.final_proceedings.collecting_contributions_and_files import (
     collecting_contributions_and_files)
-from meow.services.local.event.final_proceedings.collecting_sessions_and_attachments import (
-    collecting_sessions_and_attachments)
+from meow.services.local.event.final_proceedings.collecting_sessions_and_materials import (
+    collecting_sessions_and_materials)
 
 from meow.services.local.event.common.adapting_final_proceedings import adapting_proceedings
 from meow.services.local.event.common.validate_proceedings_data import validate_proceedings_data
@@ -29,13 +29,13 @@ from meow.services.local.event.final_proceedings.copy_contribution_papers import
     copy_contribution_papers)
 from meow.services.local.event.final_proceedings.copy_contribution_slides import (
     copy_contribution_slides)
-from meow.services.local.event.final_proceedings.copy_event_attachments import (
-    copy_event_attachments)
+from meow.services.local.event.final_proceedings.copy_event_materials import (
+    copy_event_materials)
 
 from meow.services.local.event.final_proceedings.download_contributions_slides import (
     download_contributions_slides)
-from meow.services.local.event.final_proceedings.download_event_attachments import (
-    download_event_attachments)
+from meow.services.local.event.final_proceedings.download_event_materials import (
+    download_event_materials)
 from meow.services.local.event.final_proceedings.download_contributions_papers import (
     download_contributions_papers)
 
@@ -140,15 +140,15 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
     await extend_lock(lock)
 
     yield dict(type='progress', value=dict(
-        phase='collecting_sessions_and_attachments',
-        text="Collecting sessions and attachments"
+        phase='collecting_sessions_and_materials',
+        text="Collecting sessions and materials"
     ))
 
     # Blocking
 
-    [sessions, attachments] = await collecting_sessions_and_attachments(event, cookies, settings)
+    [sessions, materials] = await collecting_sessions_and_materials(event, cookies, settings)
 
-    # log number of sessions and attachments
+    # log number of sessions and materials
     yield dict(type='log', value=ClientLog(
         severity=ClientLogSeverity.INFO,
         message=f'Found {len(sessions)} sessions.'
@@ -156,7 +156,7 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
 
     yield dict(type='log', value=ClientLog(
         severity=ClientLogSeverity.INFO,
-        message=f'Found {len(attachments)} attachments.'
+        message=f'Found {len(materials)} materials.'
     ))
 
     """ """
@@ -190,7 +190,7 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
     # Blocking
 
     # Deserialization process that builds a proceedings object that includes all the data of the conference
-    proceedings = await adapting_proceedings(event, sessions, contributions, attachments, cookies, settings)
+    proceedings = await adapting_proceedings(event, sessions, contributions, materials, cookies, settings)
 
     """ """
 
@@ -210,13 +210,13 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
         await extend_lock(lock)
 
         yield dict(type='progress', value=dict(
-            phase='download_event_attachments',
-            text="Download event attachments"
+            phase='download_event_materials',
+            text="Download event materials"
         ))
 
         # Blocking
 
-        await download_event_attachments(proceedings, cookies, settings)
+        await download_event_materials(proceedings, cookies, settings)
 
     except Exception as ex:
         logger.error(ex, exc_info=True)
@@ -434,14 +434,14 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
 
     await extend_lock(lock)
 
-    logger.info('event_proceedings - copy_event_attachments')
+    logger.info('event_proceedings - copy_event_materials')
 
     yield dict(type='progress', value=dict(
         phase='copy_event_pdf',
         text='Copy event PDF'
     ))
 
-    await copy_event_attachments(proceedings, cookies, settings)
+    await copy_event_materials(proceedings, cookies, settings)
     await copy_contribution_papers(proceedings, cookies, settings,
                                    filter_published_contributions)
 
