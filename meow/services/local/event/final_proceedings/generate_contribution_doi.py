@@ -5,7 +5,7 @@ from typing import Callable
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
 from meow.models.local.event.final_proceedings.event_model import EventData, PersonData
 
-from meow.models.local.event.final_proceedings.proceedings_data_model import FinalProceedingsConfig, ProceedingsData
+from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsConfig, ProceedingsData
 
 from anyio import create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
@@ -27,7 +27,7 @@ logger = lg.getLogger(__name__)
 
 
 async def generate_dois(proceedings_data: ProceedingsData, cookies: dict, settings: dict,
-                        config: FinalProceedingsConfig, callable: Callable) -> ProceedingsData:
+                        config: ProceedingsConfig, callable: Callable) -> ProceedingsData:
     """ """
 
     logger.info('event_final_proceedings - generate_contribution_doi')
@@ -94,13 +94,13 @@ async def generate_dois(proceedings_data: ProceedingsData, cookies: dict, settin
 
 async def generate_conference_doi_task(proceedings_data: ProceedingsData,
                                        settings: dict,
-                                       config: FinalProceedingsConfig):
+                                       config: ProceedingsConfig):
     """ """
 
     return await build_conference_doi(proceedings_data, settings, config)
 
 
-async def build_conference_doi(proceedings_data: ProceedingsData, settings: dict, config: FinalProceedingsConfig):
+async def build_conference_doi(proceedings_data: ProceedingsData, settings: dict, config: ProceedingsConfig):
     """ """
 
     doi_identifier: str = generate_doi_identifier(
@@ -204,7 +204,7 @@ async def build_conference_doi(proceedings_data: ProceedingsData, settings: dict
 
 async def generate_contribution_doi_task(capacity_limiter: CapacityLimiter, event: EventData,
                                          contribution: ContributionData, settings: dict,
-                                         config: FinalProceedingsConfig,
+                                         config: ProceedingsConfig,
                                          res: MemoryObjectSendStream) -> None:
     """ """
 
@@ -218,7 +218,7 @@ async def generate_contribution_doi_task(capacity_limiter: CapacityLimiter, even
 
 
 async def build_contribution_doi(event: EventData, contribution: ContributionData,
-                                 settings: dict[str, str], config: FinalProceedingsConfig):
+                                 settings: dict[str, str], config: ProceedingsConfig):
 
     doi_label: str = generate_doi_external_label(
         protocol=settings.get('doi_proto', 'https'),

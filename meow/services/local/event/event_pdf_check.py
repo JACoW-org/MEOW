@@ -19,7 +19,7 @@ from meow.services.local.event.final_proceedings.collecting_sessions_and_attachm
     collecting_sessions_and_attachments)
 from meow.services.local.event.final_proceedings.download_contributions_papers import download_contributions_papers
 from meow.services.local.event.common.validate_proceedings_data import validate_proceedings_data
-from meow.services.local.event.common.adapting_final_proceedings import adapting_final_proceedings
+from meow.services.local.event.common.adapting_final_proceedings import adapting_proceedings
 
 from meow.services.local.event.check_pdf.read_papers_report import read_papers_report
 
@@ -115,7 +115,7 @@ async def _event_pdf_check(event: dict, cookies: dict, settings: dict, lock: Red
         text="Adapting final proceedings"
     ))
 
-    final_proceedings = await adapting_final_proceedings(event, sessions, contributions, attachments, cookies, settings)
+    final_proceedings = await adapting_proceedings(event, sessions, contributions, attachments, cookies, settings)
 
     """ """
 

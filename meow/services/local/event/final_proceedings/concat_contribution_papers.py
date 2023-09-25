@@ -9,7 +9,7 @@ from anyio import CapacityLimiter, Path, create_task_group
 from meow.models.local.event.final_proceedings.contribution_model import FileData
 from meow.models.local.event.final_proceedings.event_model import AttachmentData
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_proceedings_papers
-from meow.models.local.event.final_proceedings.proceedings_data_model import FinalProceedingsConfig
+from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsConfig
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.services.local.event.event_pdf_utils import (
     brief_links, pdf_linearize_qpdf, vol_toc_links, vol_toc_pdf, pdf_unite_pdftk)
@@ -23,7 +23,7 @@ logger = lg.getLogger(__name__)
 
 
 async def concat_contribution_papers(proceedings_data: ProceedingsData, cookies: dict, settings: dict,
-                                     config: FinalProceedingsConfig, callback: Callable) -> ProceedingsData:
+                                     config: ProceedingsConfig, callback: Callable) -> ProceedingsData:
     """ """
 
     logger.info('event_final_proceedings - concat_contribution_papers')

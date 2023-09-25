@@ -10,7 +10,7 @@ from meow.models.infra.locks import RedisLock
 from redis.exceptions import LockError
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
-from meow.services.local.event.common.adapting_final_proceedings import adapting_final_proceedings
+from meow.services.local.event.common.adapting_final_proceedings import adapting_proceedings
 from meow.services.local.event.final_proceedings.compress_final_proceedings import compress_final_proceedings
 
 
@@ -90,7 +90,7 @@ async def _event_compress_proceedings(event: dict, cookies: dict, settings: dict
         text="Adapting final proceedings"
     ))
 
-    final_proceedings = await adapting_final_proceedings(event, sessions, contributions, attachments, cookies, settings)
+    final_proceedings = await adapting_proceedings(event, sessions, contributions, attachments, cookies, settings)
 
     """ """
 

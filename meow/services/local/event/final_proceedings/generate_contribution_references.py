@@ -6,7 +6,7 @@ from meow.models.local.event.final_proceedings.contribution_model import Contrib
 from meow.models.local.event.final_proceedings.event_model import EventData
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import (
-    FinalProceedingsConfig, ProceedingsData)
+    ProceedingsConfig, ProceedingsData)
 
 from meow.tasks.local.reference.models import ContributionRef, ReferenceStatus, Reference
 from meow.tasks.local.doi.utils import  generate_doi_name
@@ -61,7 +61,7 @@ class JinjaXMLBuilder:
 
 
 async def generate_contribution_references(proceedings_data: ProceedingsData, cookies: dict,
-                                           settings: dict, config: FinalProceedingsConfig,
+                                           settings: dict, config: ProceedingsConfig,
                                            callable: Callable) -> ProceedingsData:
     """ """
 
@@ -133,7 +133,7 @@ async def get_xslt_functions() -> dict[str, XSLT]:
 
 async def reference_task(capacity_limiter: CapacityLimiter, event: EventData,
                          contribution: ContributionData, xml_builder, xslt_functions: dict,
-                         settings: dict, config: FinalProceedingsConfig, callable: Callable,
+                         settings: dict, config: ProceedingsConfig, callable: Callable,
                          res: MemoryObjectSendStream) -> None:
     """ """
 
@@ -153,7 +153,7 @@ async def get_xslt(xslt_path: str) -> XSLT:
 
 async def build_contribution_reference(event: EventData, contribution: ContributionData,
                                        xml_builder, xslt_functions: dict, settings: dict,
-                                       config: FinalProceedingsConfig, callable: Callable) -> Reference | None:
+                                       config: ProceedingsConfig, callable: Callable) -> Reference | None:
 
     xml_val: str = ''
 
@@ -184,7 +184,7 @@ async def build_contribution_reference(event: EventData, contribution: Contribut
 
 
 async def contribution_data_factory(event: EventData, contribution: ContributionData, settings: dict,
-                                    config: FinalProceedingsConfig, callable: Callable) -> ContributionRef:
+                                    config: ProceedingsConfig, callable: Callable) -> ContributionRef:
 
     reference_status: str = ReferenceStatus.IN_PROCEEDINGS.value if contribution.has_paper(
     ) else ReferenceStatus.UNPUBLISHED.value

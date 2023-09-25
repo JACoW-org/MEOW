@@ -10,7 +10,7 @@ from meow.tasks.local.event_doi_hide import EventDoiHideTask
 from meow.tasks.local.event_doi_info import EventDoiInfoTask
 from meow.tasks.local.event_doi_publish import EventDoiPublishTask
 from meow.tasks.local.event_papers_check import EventPapersCheckTask
-from meow.tasks.local.event_pre_press import EventPrePressTask
+from meow.tasks.local.event_pre_press_proceedings import EventPrePressProceedingsTask
 from meow.tasks.local.event_final_proceedings import EventFinalProceedingsTask
 
 
@@ -23,7 +23,7 @@ class TaskRepository:
     __tasks = dict(
         event_abstract_booklet=EventAbstractBookletTask,
         event_papers_check=EventPapersCheckTask,
-        event_pre_press=EventPrePressTask,
+        event_pre_press=EventPrePressProceedingsTask,
         event_final_proceedings=EventFinalProceedingsTask,
         event_compress_proceedings=EventCompressProceedingsTask,
         event_doi_draft=EventDoiDraftTask,

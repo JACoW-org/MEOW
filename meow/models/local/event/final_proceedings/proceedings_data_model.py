@@ -9,7 +9,7 @@ from meow.models.local.event.final_proceedings.event_model import (
 
 
 @dataclass(kw_only=True, slots=True)
-class FinalProceedingsTask:
+class ProceedingsTask:
     """"""
 
     code: str = field()
@@ -17,7 +17,7 @@ class FinalProceedingsTask:
 
 
 @dataclass(kw_only=True, slots=True)
-class FinalProceedingsConfig:
+class ProceedingsConfig:
     """ """
 
     # indica il nome del file d agenerare per sitinguere fp da pp

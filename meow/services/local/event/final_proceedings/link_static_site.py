@@ -4,7 +4,7 @@ from anyio import Path
 
 from datetime import datetime
 
-from meow.models.local.event.final_proceedings.proceedings_data_model import FinalProceedingsConfig, ProceedingsData
+from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsConfig, ProceedingsData
 from meow.utils.filesystem import rmtree, move
 
 
@@ -12,7 +12,7 @@ logger = lg.getLogger(__name__)
 
 
 async def clean_pdf_cache(proceedings_data: ProceedingsData, cookies: dict,
-                          settings: dict, config: FinalProceedingsConfig) -> ProceedingsData:
+                          settings: dict, config: ProceedingsConfig) -> ProceedingsData:
 
     pdf_cache_name = f"{proceedings_data.event.id}_tmp"
     pdf_cache_src = Path('var', 'run', pdf_cache_name)
@@ -23,7 +23,7 @@ async def clean_pdf_cache(proceedings_data: ProceedingsData, cookies: dict,
 
 
 async def clean_static_site(proceedings_data: ProceedingsData, cookies: dict,
-                            settings: dict, config: FinalProceedingsConfig) -> ProceedingsData:
+                            settings: dict, config: ProceedingsConfig) -> ProceedingsData:
 
     static_site_name = f"{proceedings_data.event.id}_src"
     static_site_src = Path('var', 'run', static_site_name)
@@ -44,7 +44,7 @@ async def clean_static_site(proceedings_data: ProceedingsData, cookies: dict,
 
 
 async def link_static_site(proceedings_data: ProceedingsData, cookies: dict,
-                           settings: dict, config: FinalProceedingsConfig) -> ProceedingsData:
+                           settings: dict, config: ProceedingsConfig) -> ProceedingsData:
     """ """
 
     static_site_name = f"{proceedings_data.event.id}_src"

@@ -1,20 +1,17 @@
 import logging as lg
-
-
 from typing import AsyncGenerator
 from meow.models.local.event.final_proceedings.proceedings_data_model import (
     ProceedingsConfig, ProceedingsTask)
 
 from meow.services.local.event.event_proceedings import event_proceedings
-
 from meow.tasks.infra.abstract_task import AbstractTask
 
 
 logger = lg.getLogger(__name__)
 
 
-class EventFinalProceedingsTask(AbstractTask):
-    """EventFinalProceedingsTask"""
+class EventPrePressProceedingsTask(AbstractTask):
+    """EventPrePressProceedingsTask"""
 
     async def run(self, params: dict, context: dict = {}) -> AsyncGenerator[dict, None]:
         event: dict = params.get("event", dict())
@@ -27,12 +24,12 @@ class EventFinalProceedingsTask(AbstractTask):
 
         config = ProceedingsConfig(
             strict_pdf_check=False,
-            include_event_slides=True,
-            generate_doi_payload=True,
-            generate_external_doi_url=True,
-            include_only_qa_green_contributions=True,
-            absolute_pdf_link=True,
-            static_site_type='proceedings'
+            include_event_slides=False,
+            generate_doi_payload=False,
+            generate_external_doi_url=False,
+            include_only_qa_green_contributions=False,
+            absolute_pdf_link=False,
+            static_site_type='prepress'
         )
 
         tasks: list[ProceedingsTask] = [
@@ -41,15 +38,13 @@ class EventFinalProceedingsTask(AbstractTask):
             ProceedingsTask(code='collecting_contributions_and_files',
                                  text='Collecting Contributions and Files'),
             ProceedingsTask(code='adapting_proceedings',
-                                 text='Adapting Final Proceedings'),
+                                 text='Adapting Pre-Press Proceedings'),
             ProceedingsTask(code='clean_static_site',
                                  text='Clean Static Site'),
             ProceedingsTask(code='download_event_attachments',
                                  text='Download Event Attachments'),
             ProceedingsTask(code='download_contributions_papers',
                                  text='Download Contributions Papers'),
-            ProceedingsTask(code='download_contributions_slides',
-                                 text='Download Contributions Slides'),
             ProceedingsTask(code='read_papers_metadata',
                                  text='Read Papers Metadata'),
             ProceedingsTask(code='validate_contributions_papers',
@@ -58,8 +53,6 @@ class EventFinalProceedingsTask(AbstractTask):
                                  text='Extract Contribution References'),
             ProceedingsTask(code='generate_dois',
                                  text='Generate DOIs'),
-            ProceedingsTask(code='generate_doi_payloads',
-                                 text='Generate DOI payloads'),
             ProceedingsTask(code='manage_duplicates',
                                  text='Managing Duplicates'),
             ProceedingsTask(code='write_papers_metadata',
@@ -73,9 +66,9 @@ class EventFinalProceedingsTask(AbstractTask):
             ProceedingsTask(code='copy_event_pdf',
                                  text='Copy Event PDF'),
             ProceedingsTask(code='generate_proceedings',
-                                 text='Generate Final Proceedings'),
+                                 text='Generate Pre-Press Proceedings'),
             ProceedingsTask(code='link_static_site',
-                                 text='Link Static site')
+                                 text='Link Static Site')
         ]
 
         yield dict(type='progress', value=dict(

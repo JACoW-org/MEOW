@@ -10,7 +10,7 @@ from anyio.from_thread import start_blocking_portal
 from meow.models.local.event.final_proceedings.track_model import TrackData
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
 from meow.models.local.event.final_proceedings.event_model import AffiliationData, KeywordData, PersonData
-from meow.models.local.event.final_proceedings.proceedings_data_model import FinalProceedingsConfig, ProceedingsData
+from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsConfig, ProceedingsData
 from meow.models.local.event.final_proceedings.session_model import SessionData
 from meow.services.local.event.final_proceedings.hugo_plugin.hugo_jinja_template_renderer import JinjaTemplateRenderer
 from meow.tasks.local.doi.models import ContributionDOI
@@ -23,11 +23,11 @@ from meow.utils.filesystem import cptree, rmtree
 logger = lg.getLogger(__name__)
 
 
-class HugoFinalProceedingsPlugin(AbstractFinalProceedingsPlugin):
+class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
     """ HugoFinalProceedingsPlugin """
 
     def __init__(self, proceedings_data: ProceedingsData, cookies: dict, settings: dict,
-                 config: FinalProceedingsConfig) -> None:
+                 config: ProceedingsConfig) -> None:
         """ """
 
         self.cookies = cookies

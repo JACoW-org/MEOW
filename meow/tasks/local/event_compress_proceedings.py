@@ -6,7 +6,7 @@ from typing import AsyncGenerator
 from meow.services.local.event.event_compress_proceedings import event_compress_proceedings
 
 from meow.tasks.infra.abstract_task import AbstractTask
-from meow.models.local.event.final_proceedings.proceedings_data_model import FinalProceedingsTask
+from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsTask
 
 
 logger = lg.getLogger(__name__)
@@ -25,9 +25,9 @@ class EventCompressProceedingsTask(AbstractTask):
         cookies["indico_session"] = indico_session
 
         tasks = [
-            FinalProceedingsTask(code='adapting_final_proceedings',
+            ProceedingsTask(code='adapting_final_proceedings',
                                  text='Adapting final proceedings'),
-            FinalProceedingsTask(code='compress_static_site',
+            ProceedingsTask(code='compress_static_site',
                                  text='Compress Static site')
         ]
 

@@ -11,7 +11,7 @@ from meow.models.infra.locks import RedisLock
 
 from redis.exceptions import LockError
 
-from meow.services.local.event.common.adapting_final_proceedings import adapting_final_proceedings
+from meow.services.local.event.common.adapting_final_proceedings import adapting_proceedings
 from meow.services.local.event.final_proceedings.collecting_contributions_and_files import (
     collecting_contributions_and_files)
 from meow.services.local.event.final_proceedings.collecting_sessions_and_attachments import (
@@ -111,7 +111,7 @@ async def _event_doi_draft(event: dict, cookies: dict, settings: dict, lock: Red
         text="Adapting final proceedings"
     ))
 
-    final_proceedings = await adapting_final_proceedings(event, sessions, contributions, attachments, cookies, settings)
+    final_proceedings = await adapting_proceedings(event, sessions, contributions, attachments, cookies, settings)
 
     logger.info('event_doi_draft - event_doi_draft - begin')
 
