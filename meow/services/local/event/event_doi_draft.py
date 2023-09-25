@@ -111,7 +111,7 @@ async def _event_doi_draft(event: dict, cookies: dict, settings: dict, lock: Red
         text="Adapting final proceedings"
     ))
 
-    final_proceedings = await adapting_proceedings(event, sessions, contributions, materials, cookies, settings)
+    proceedings = await adapting_proceedings(event, sessions, contributions, materials, cookies, settings)
 
     logger.info('event_doi_draft - event_doi_draft - begin')
 
@@ -122,7 +122,7 @@ async def _event_doi_draft(event: dict, cookies: dict, settings: dict, lock: Red
         text="Send contribution doi draft state"
     ))
 
-    async for result in draft_contribution_doi(final_proceedings, cookies, settings):
+    async for result in draft_contribution_doi(proceedings, cookies, settings):
         yield dict(type='progress', value=dict(phase='doi_result', result=result))
 
     # results = await draft_contribution_doi(final_proceedings, cookies, settings)

@@ -111,7 +111,7 @@ async def _event_doi_hide(event: dict, cookies: dict, settings: dict, lock: Redi
         text="Adapting final proceedings"
     ))
 
-    final_proceedings = await adapting_proceedings(event, sessions, contributions, materials, cookies, settings)
+    proceedings = await adapting_proceedings(event, sessions, contributions, materials, cookies, settings)
 
     logger.info('event_doi_hide - event_doi_hide - begin')
 
@@ -122,9 +122,7 @@ async def _event_doi_hide(event: dict, cookies: dict, settings: dict, lock: Redi
         text="Send contribution doi draft state"
     ))
 
-    # results = await hide_contribution_doi(final_proceedings, cookies, settings)
-
-    async for result in hide_contribution_doi(final_proceedings, cookies, settings):
+    async for result in hide_contribution_doi(proceedings, cookies, settings):
         yield dict(type='progress', value=dict(phase='doi_result', result=result))
 
     logger.info('event_doi_hide - event_doi_hide - end')

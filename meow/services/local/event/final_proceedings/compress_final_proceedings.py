@@ -8,10 +8,10 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import Pro
 logger = lg.getLogger(__name__)
 
 
-async def compress_final_proceedings(final_proceedings: ProceedingsData, cookies: dict, settings: dict):
+async def compress_proceedings(proceedings: ProceedingsData, cookies: dict, settings: dict):
     """ """
 
-    site_preview_ctx = f'{final_proceedings.event.id}'
+    site_preview_ctx = f'{proceedings.event.id}'
     site_preview_dir = Path(site_preview_ctx)
     site_preview_zip = Path(f"{site_preview_ctx}.7z")
     working_dir = Path('var', 'html')

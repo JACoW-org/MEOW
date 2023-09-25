@@ -107,11 +107,11 @@ async def _event_doi_delete(event: dict, cookies: dict, settings: dict, lock: Re
     await extend_lock(lock)
 
     yield dict(type='progress', value=dict(
-        phase='adapting_final_proceedings',
-        text="Adapting final proceedings"
+        phase='adapting_proceedings',
+        text="Adapting proceedings"
     ))
 
-    final_proceedings = await adapting_proceedings(event, sessions, contributions, materials, cookies, settings)
+    proceedings = await adapting_proceedings(event, sessions, contributions, materials, cookies, settings)
 
     logger.info('event_doi_delete - event_doi_delete - begin')
 
@@ -122,7 +122,7 @@ async def _event_doi_delete(event: dict, cookies: dict, settings: dict, lock: Re
         text="Delete contribution doi"
     ))
 
-    async for result in delete_contribution_doi(final_proceedings, cookies, settings):
+    async for result in delete_contribution_doi(proceedings, cookies, settings):
         yield dict(type='progress', value=dict(phase='doi_result', result=result))
 
     logger.info('event_doi_delete - event_doi_delete - end')

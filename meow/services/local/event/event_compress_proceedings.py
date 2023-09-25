@@ -11,7 +11,7 @@ from redis.exceptions import LockError
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.services.local.event.common.adapting_final_proceedings import adapting_proceedings
-from meow.services.local.event.final_proceedings.compress_final_proceedings import compress_final_proceedings
+from meow.services.local.event.final_proceedings.compress_final_proceedings import compress_proceedings
 
 
 logger = lg.getLogger(__name__)
@@ -86,8 +86,8 @@ async def _event_compress_proceedings(event: dict, cookies: dict, settings: dict
     await extend_lock(lock)
 
     yield dict(type='progress', value=dict(
-        phase='adapting_final_proceedings',
-        text="Adapting final proceedings"
+        phase='adapting_proceedings',
+        text="Adaptin proceedings"
     ))
 
     proceedings = await adapting_proceedings(event, sessions, contributions, materials, cookies, settings)
@@ -101,20 +101,20 @@ async def _event_compress_proceedings(event: dict, cookies: dict, settings: dict
         text='Compress Static site'
     ))
 
-    await compress_final_proceedings(proceedings, cookies, settings)
+    await compress_proceedings(proceedings, cookies, settings)
 
-    result = await get_final_proceedings(proceedings)
+    result = await get_proceedings(proceedings)
 
     yield result
 
 
-async def get_final_proceedings(final_proceedings: ProceedingsData) -> dict:
+async def get_proceedings(proceedings: ProceedingsData) -> dict:
     """ """
 
-    event_code = final_proceedings.event.id
-    event_name = final_proceedings.event.name
-    event_title = final_proceedings.event.title
-    event_path = final_proceedings.event.path
+    event_code = proceedings.event.id
+    event_name = proceedings.event.name
+    event_title = proceedings.event.title
+    event_path = proceedings.event.path
 
     return dict(
         type='result',

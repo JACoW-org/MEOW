@@ -115,7 +115,7 @@ async def _event_pdf_check(event: dict, cookies: dict, settings: dict, lock: Red
         text="Adapting final proceedings"
     ))
 
-    final_proceedings = await adapting_proceedings(event, sessions, contributions, materials, cookies, settings)
+    proceedings = await adapting_proceedings(event, sessions, contributions, materials, cookies, settings)
 
     """ """
 
@@ -126,7 +126,7 @@ async def _event_pdf_check(event: dict, cookies: dict, settings: dict, lock: Red
         text="Download Contributions Papers"
     ))
 
-    [final_proceedings, papers_data] = await download_contributions_papers(final_proceedings, cookies,
+    [proceedings, papers_data] = await download_contributions_papers(proceedings, cookies,
                                                                            settings, callback)
 
     # log number of files
@@ -144,7 +144,7 @@ async def _event_pdf_check(event: dict, cookies: dict, settings: dict, lock: Red
         text='Read Papers Report'
     ))
 
-    final_proceedings = await read_papers_report(final_proceedings, cookies, settings, callback)
+    proceedings = await read_papers_report(proceedings, cookies, settings, callback)
 
     """ """
 
@@ -155,7 +155,7 @@ async def _event_pdf_check(event: dict, cookies: dict, settings: dict, lock: Red
         text='Validate Contributions Papers'
     ))
 
-    [metadata, errors] = await validate_proceedings_data(final_proceedings, cookies, settings, callback)
+    [metadata, errors] = await validate_proceedings_data(proceedings, cookies, settings, callback)
 
     yield dict(type='result', value=dict(
         metadata=metadata,
