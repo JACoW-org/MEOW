@@ -1,6 +1,8 @@
-from asyncio import CancelledError
+""" Module responsible to generate the proceedings """
+
 import logging as lg
 
+from asyncio import CancelledError
 from typing import AsyncGenerator
 from redis.exceptions import LockError
 

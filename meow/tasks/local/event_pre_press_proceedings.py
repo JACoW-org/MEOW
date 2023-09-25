@@ -1,19 +1,21 @@
+""" Module responsible to configure the pre-press proceedings generation """
+
 import logging as lg
+
 from typing import AsyncGenerator
+
 from meow.models.local.event.final_proceedings.proceedings_data_model import (
     ProceedingsConfig, ProceedingsTask)
-
 from meow.services.local.event.event_proceedings import event_proceedings
 from meow.tasks.infra.abstract_task import AbstractTask
 
 
 logger = lg.getLogger(__name__)
 
-
 class EventPrePressProceedingsTask(AbstractTask):
     """EventPrePressProceedingsTask"""
 
-    async def run(self, params: dict, context: dict = {}) -> AsyncGenerator[dict, None]:
+    async def run(self, params: dict, context: dict = None) -> AsyncGenerator[dict, None]:
         event: dict = params.get("event", dict())
         cookies: dict = params.get("cookies", dict())
         settings: dict = params.get("settings", dict())
