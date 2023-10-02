@@ -1,8 +1,0 @@
-PageLabelBegin
-PageLabelNewIndex: 1
-PageLabelStart: 1
-PageLabelNumStyle: UppercaseRomanNumerals
-PageLabelBegin
-PageLabelNewIndex: 34
-PageLabelStart: 1
-PageLabelNumStyle: DecimalArabicNumerals
