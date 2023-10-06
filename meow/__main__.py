@@ -37,6 +37,7 @@ def meow_auth(args) -> None:
         if args.list:
 
             res = await dbs.redis_client.keys('meow:credential:*')
+
             print(res)
 
         elif args.login:
@@ -56,6 +57,7 @@ def meow_auth(args) -> None:
             key = str(args.logout)
 
             res = await dbs.redis_client.delete(f'meow:credential:{key}')
+
             print(res)
 
         elif args.check:
@@ -74,6 +76,8 @@ def meow_auth(args) -> None:
             else:
 
                 print('invalid')
+
+        await dbs.redis_client.close()
 
     run(_run)
 
@@ -267,9 +271,9 @@ def doc_test(args) -> None:
     page = new_page(doc, width=PAGE_WIDTH, height=PAGE_HEIGHT)
 
     text = "This is a preprint — the final version is € [published with IOP]"
-    
+
     font = Font('cjk')
-    
+
     page.insert_font(fontname='cjk', fontbuffer=font.buffer)
 
     insert_textbox(page,
