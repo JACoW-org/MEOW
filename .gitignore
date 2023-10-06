@@ -7,6 +7,6 @@ venv
 .idea
 .vscode
 
-.pyc
+*.pyc
 
 tests/dois-prod
