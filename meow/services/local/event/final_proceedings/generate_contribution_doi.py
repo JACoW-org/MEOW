@@ -197,7 +197,7 @@ async def generate_conference_doi_task(proceedings_data: ProceedingsData,
         }],
         'sizes': [
             f'{paper_size_mb(proceedings_data.proceedings_volume_size)} MB',
-            f'{proceedings_data.total_pages} pages'
+            # f'{proceedings_data.total_pages} pages'
         ],
         'formats': ["PDF"],
         'rightsList': [{
@@ -214,7 +214,6 @@ async def generate_conference_doi_task(proceedings_data: ProceedingsData,
             'lang': 'en-us'
         }],
         'url': doi_landing_page.lower(),
-        'xml': '',
         'schemaVersion': 'http://datacite.org/schema/kernel-4'
     }
 
