@@ -68,6 +68,8 @@ class ProceedingsData:
     proceedings_volume_size: int = field(default=0)
     proceedings_brief_size: int = field(default=0)
 
+    total_pages: int = field(default=0)
+
     @property
     def conference_doi_payload(self) -> str:
 
@@ -95,7 +97,7 @@ class ProceedingsData:
                 formats=self.conference_doi.get('formats'),
                 rightsList=self.conference_doi.get('rightsList'),
                 descriptions=self.conference_doi.get('descriptions'),
-                url=self.conference_doi.get('url'),
+                url=self.conference_doi.get('url', '').lower(),
                 schemaVersion=self.conference_doi.get('schemaVersion')
             )
         )

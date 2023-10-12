@@ -11,7 +11,7 @@ logger = lg.getLogger(__name__)
 class EventDoiHideTask(AbstractTask):
     """EventDoiHideTask"""
 
-    async def run(self, params: dict, context: dict = {}) -> AsyncGenerator[dict, None]:
+    async def run(self, params: dict, context: dict | None = None) -> AsyncGenerator[dict, None]:
         event: dict = params.get("event", dict())
         cookies: dict = params.get("cookies", dict())
         settings: dict = params.get("settings", dict())

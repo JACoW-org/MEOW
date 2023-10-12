@@ -100,6 +100,7 @@ async def read_report_task(capacity_limiter: CapacityLimiter, total_files: int, 
 def refill_contribution_report(proceedings_data: ProceedingsData, results: dict) -> ProceedingsData:
 
     current_page = 1
+    total_pages = 0
 
     for contribution_data in proceedings_data.contributions:
         code: str = contribution_data.code
@@ -121,14 +122,22 @@ def refill_contribution_report(proceedings_data: ProceedingsData, results: dict)
 
                     if report and 'page_count' in report:
                         current_page += report.get('page_count', 0)
+                        contribution_data.page_count = report.get(
+                            'page_count', 0)
+                        total_pages += report.get('page_count', 0)
 
-                # logger.info('contribution_data pages = %s - %s', contribution_data.page,
-                #   contribution_data.page + result.get('report').get('page_count'))
+                        logger.info(f'code {contribution_data.code}')
+                        logger.info(
+                            f'page_count {contribution_data.page_count}')
 
         except IndexError as e:
             logger.warning(f'No report for contribution {code}')
             logger.error(e, exc_info=True)
         except Exception as e:
             logger.error(e, exc_info=True)
+
+    proceedings_data.total_pages = total_pages
+
+    logger.info(f'proceedings_data.total_pages {total_pages}')
 
     return proceedings_data

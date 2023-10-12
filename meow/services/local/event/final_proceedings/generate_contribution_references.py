@@ -9,7 +9,7 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import (
     ProceedingsConfig, ProceedingsData)
 
 from meow.tasks.local.reference.models import ContributionRef, ReferenceStatus, Reference
-from meow.tasks.local.doi.utils import  generate_doi_name
+from meow.tasks.local.doi.utils import generate_doi_name
 from jinja2 import BytecodeCache, Environment, FileSystemLoader
 from lxml.etree import XML, XSLT, fromstring, XMLParser
 

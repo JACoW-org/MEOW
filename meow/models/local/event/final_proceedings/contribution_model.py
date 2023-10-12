@@ -273,6 +273,7 @@ class ContributionData:
     location: str | None = field(default=None)
 
     page: int = field(default=0)
+    page_count: int = field(default=0)
     paper_size: int = field(default=0)
     metadata: dict | None = field(default=None)
     reference: Reference | None = field(default=None)

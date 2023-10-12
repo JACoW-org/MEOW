@@ -12,10 +12,11 @@ from meow.tasks.infra.abstract_task import AbstractTask
 
 logger = lg.getLogger(__name__)
 
+
 class EventPrePressProceedingsTask(AbstractTask):
     """EventPrePressProceedingsTask"""
 
-    async def run(self, params: dict, context: dict = None) -> AsyncGenerator[dict, None]:
+    async def run(self, params: dict, context: dict | None = None) -> AsyncGenerator[dict, None]:
         event: dict = params.get("event", dict())
         cookies: dict = params.get("cookies", dict())
         settings: dict = params.get("settings", dict())
@@ -53,8 +54,6 @@ class EventPrePressProceedingsTask(AbstractTask):
                                  text='Validate Contributions Papers'),
             ProceedingsTask(code='extract_contribution_references',
                                  text='Extract Contribution References'),
-            ProceedingsTask(code='generate_dois',
-                                 text='Generate DOIs'),
             ProceedingsTask(code='manage_duplicates',
                                  text='Managing Duplicates'),
             ProceedingsTask(code='write_papers_metadata',
@@ -63,6 +62,8 @@ class EventPrePressProceedingsTask(AbstractTask):
                                  text='Generate Contributions Groups'),
             ProceedingsTask(code='concat_contribution_papers',
                                  text='Concat Contributions Papers'),
+            ProceedingsTask(code='generate_dois',
+                                 text='Generate DOIs'),
             ProceedingsTask(code='generate_site_pages',
                                  text='Generate Site Pages'),
             ProceedingsTask(code='copy_event_pdf',

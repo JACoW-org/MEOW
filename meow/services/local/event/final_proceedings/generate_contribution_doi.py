@@ -15,7 +15,7 @@ from meow.tasks.local.doi.models import AuthorDOI, ContributionDOI, EditorDOI
 from meow.tasks.local.doi.utils import (generate_doi_external_label, generate_doi_external_url,
                                         generate_doi_identifier, generate_doi_internal_url,
                                         generate_doi_landing_page_url, generate_doi_name,
-                                        generate_doi_path)
+                                        generate_doi_path, paper_size_mb)
 
 from meow.utils.datetime import (
     format_datetime_doi_iso, format_datetime_full, format_datetime_range_doi, format_datetime_doi)
@@ -35,7 +35,9 @@ async def generate_dois(proceedings_data: ProceedingsData, cookies: dict, settin
     proceedings_data.conference_doi = await generate_conference_doi_task(proceedings_data, settings, config)
 
     contributions = [
-        c for c in proceedings_data.contributions if callable(c) and c.page > 0]
+        c for c in proceedings_data.contributions
+        if callable(c) and c.page > 0
+    ]
 
     total_files: int = len(contributions)
 
@@ -65,9 +67,8 @@ async def generate_dois(proceedings_data: ProceedingsData, cookies: dict, settin
                         if result_type == 'contribution':
                             processed_files = processed_files + 1
 
-                            result_code: str = result.get('code', None)
-                            result_value: ContributionDOI | None = result.get(
-                                'value', None)
+                            result_code = result.get('code', None)
+                            result_value = result.get('value', None)
 
                             if result_value is not None:
                                 results[result_code] = result_value
@@ -95,12 +96,7 @@ async def generate_dois(proceedings_data: ProceedingsData, cookies: dict, settin
 async def generate_conference_doi_task(proceedings_data: ProceedingsData,
                                        settings: dict,
                                        config: ProceedingsConfig):
-    """ """
 
-    return await build_conference_doi(proceedings_data, settings, config)
-
-
-async def build_conference_doi(proceedings_data: ProceedingsData, settings: dict, config: ProceedingsConfig):
     """ """
 
     doi_identifier: str = generate_doi_identifier(
@@ -165,11 +161,14 @@ async def build_conference_doi(proceedings_data: ProceedingsData, settings: dict
                 'nameIdentifierScheme': 'JACoW-ID'
             }]
         } for index, editor in enumerate(editors)],
-        'dates': [],
+        'dates': [{
+            "date": format_datetime_range_doi(proceedings_data.event.start, proceedings_data.event.end),
+            "dateType": "Issued"
+        }],
         'language': 'en-us',
         'types': {
             'resourceTypeGeneral': 'ConferenceProceeding',
-            'resourceType': '',
+            'resourceType': 'Text',
             'ris': 'CONF',
             'bibtex': 'misc',
             'citeproc': 'article',
@@ -184,8 +183,11 @@ async def build_conference_doi(proceedings_data: ProceedingsData, settings: dict
             'relatedIdentifierType': 'ISSN',
             'relationType': 'IsPartOf'
         }],
-        'sizes': [],
-        'formats': [],
+        'sizes': [
+            f'{paper_size_mb(proceedings_data.proceedings_volume_size)} MB',
+            f'{proceedings_data.total_pages} pages'
+        ],
+        'formats': ["PDF"],
         'rightsList': [{
             'rights': 'Creative Commons Attribution 4.0 International',
             'rightsUri': 'https://creativecommons.org/licenses/by/4.0/legalcode',
@@ -194,8 +196,13 @@ async def build_conference_doi(proceedings_data: ProceedingsData, settings: dict
             'rightsIdentifier': 'cc-by-4.0',
             'rightsIdentifierScheme': 'SPDX'
         }],
-        'descriptions': [],
-        'url': doi_landing_page,
+        'descriptions': [{
+            'description': settings.get('booktitle_long', ''),
+            'descriptionType': 'Other',
+            'lang': 'en-us'
+        }],
+        'url': doi_landing_page.lower(),
+        'xml': '',
         'schemaVersion': 'http://datacite.org/schema/kernel-4'
     }
 

@@ -348,36 +348,6 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
     await extend_lock(lock)
 
     yield dict(type='progress', value=dict(
-        phase='generate_dois',
-        text='Generate DOIs'
-    ))
-
-    # Blocking
-
-    await generate_dois(proceedings, cookies, settings, config,
-                        filter_published_contributions)
-
-    """ """
-
-    if config.generate_doi_payload:
-
-        await extend_lock(lock)
-
-        yield dict(type='progress', value=dict(
-            phase='generate_doi_payloads',
-            text='Generate DOI payloads'
-        ))
-
-        # Blocking
-
-        # generation of payloads for DOIs
-        await build_doi_payloads(proceedings)
-
-    """ """
-
-    await extend_lock(lock)
-
-    yield dict(type='progress', value=dict(
         phase='manage_duplicates',
         text='Managing duplicates'
     ))
@@ -428,6 +398,36 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
     ))
 
     await concat_contribution_papers(proceedings, cookies, settings, config, filter_published_contributions)
+
+    """ """
+
+    await extend_lock(lock)
+
+    yield dict(type='progress', value=dict(
+        phase='generate_dois',
+        text='Generate DOIs'
+    ))
+
+    # Blocking
+
+    await generate_dois(proceedings, cookies, settings, config,
+                        filter_published_contributions)
+
+    """ """
+
+    if config.generate_doi_payload:
+
+        await extend_lock(lock)
+
+        yield dict(type='progress', value=dict(
+            phase='generate_doi_payloads',
+            text='Generate DOI payloads'
+        ))
+
+        # Blocking
+
+        # generation of payloads for DOIs
+        await build_doi_payloads(proceedings)
 
     """ """
 

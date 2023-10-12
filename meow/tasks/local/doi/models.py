@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field, asdict
 from typing import Optional
+from meow.tasks.local.doi.utils import paper_size_mb
 from meow.tasks.local.reference.models import Reference
 
 import json
@@ -88,9 +89,7 @@ class ContributionDOI:
 
     @property
     def paper_size_mb(self) -> float:
-        paper_size_mb_full = self.paper_size / (1024*1024)
-        return float('{:.2g}'.format(paper_size_mb_full)) \
-            if paper_size_mb_full < 100 else float('{:.3g}'.format(paper_size_mb_full))
+        return paper_size_mb(self.paper_size)
 
     def as_dict(self) -> dict:
         return asdict(self)
@@ -187,8 +186,8 @@ class ContributionDOI:
         attributes['language'] = 'en-us'
 
         attributes['types'] = dict(
-            resourceTypeGeneral='Text',
-            resourceType='ConferencePaper'
+            resourceTypeGeneral='ConferencePaper',
+            resourceType='Text'
         )
 
         attributes['relatedIdentifiers'] = [dict(

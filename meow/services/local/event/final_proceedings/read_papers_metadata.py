@@ -64,7 +64,8 @@ async def read_papers_metadata(proceedings_data: ProceedingsData, cookies: dict,
                         results[file_data.uuid] = result.get('report', None)
 
                         if not results[file_data.uuid]:
-                            raise BaseException('Error reading papers metadata')
+                            raise BaseException(
+                                'Error reading papers metadata')
 
                     if processed_files >= total_files:
                         receive_stream.close()
@@ -119,6 +120,7 @@ async def refill_contribution_metadata(proceedings_data: ProceedingsData,
                                        results: dict, pdf_cache_dir: Path) -> ProceedingsData:
 
     current_page = 1
+    total_pages = 0
 
     for contribution_data in proceedings_data.contributions:
         code: str = ''
@@ -157,7 +159,10 @@ async def refill_contribution_metadata(proceedings_data: ProceedingsData,
                             contribution_data.metadata = report
 
                             if 'page_count' in report:
-                                current_page += report.get('page_count', 0)
+                                page_count = report.get('page_count', 0)
+                                current_page += page_count
+                                contribution_data.page_count = page_count
+                                total_pages += page_count
 
                     else:
                         logger.error(f"SKIPPED - no file_data: {code}")
@@ -173,5 +178,7 @@ async def refill_contribution_metadata(proceedings_data: ProceedingsData,
             logger.error(e, exc_info=True)
         except BaseException as be:
             logger.error(be, exc_info=True)
+
+    proceedings_data.total_pages = total_pages
 
     return proceedings_data

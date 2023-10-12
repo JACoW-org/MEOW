@@ -24,29 +24,36 @@ async def get_contribution_doi(proceedings_data: ProceedingsData, cookies: dict,
     logger.info('get_contribution_doi - get_contribution_doi')
 
     doi_dir = Path('var', 'run', f'{proceedings_data.event.id}_doi')
-    dir_exists = await doi_dir.exists()
-    if not dir_exists:
+
+    if not await doi_dir.exists():
         raise ServiceError("doi_dir not exists")
 
     results: list[dict] = []
 
-    contributions_data: list[ContributionData] = [
+    doi_data: list[ContributionData] = [
         c for c in proceedings_data.contributions
         if await Path(doi_dir, f'{c.code}.json').exists()
     ]
 
-    total_contributions: int = len(contributions_data)
+    total_dois: int = len(doi_data) + 1
 
     logger.info('get_contribution_doi - ' +
-                f'contributions: {total_contributions}')
+                f'total_dois: {total_dois}')
 
     send_stream, receive_stream = create_memory_object_stream()
     capacity_limiter = CapacityLimiter(16)
 
     async with create_task_group() as tg:
         async with send_stream:
-            for current_index, current_contribution in enumerate(contributions_data):
-                tg.start_soon(_doi_task, capacity_limiter, total_contributions,
+
+            # conference DOI
+            tg.start_soon(_doi_conference_task, capacity_limiter, total_dois,
+                          0, proceedings_data, cookies, settings,
+                          doi_dir, send_stream.clone())
+
+            # contributions DOIs
+            for current_index, current_contribution in enumerate(doi_data):
+                tg.start_soon(_doi_contribution_task, capacity_limiter, total_dois,
                               current_index, current_contribution, cookies, settings,
                               doi_dir, send_stream.clone())
 
@@ -57,11 +64,11 @@ async def get_contribution_doi(proceedings_data: ProceedingsData, cookies: dict,
                     results.append(result)
 
                     logger.info(f"elaborated: {len(results)}" +
-                                f" - {total_contributions}")
+                                f" - {total_dois}")
 
                     yield result
 
-                    if len(results) >= total_contributions:
+                    if len(results) >= total_dois:
                         receive_stream.close()
 
         except ClosedResourceError as crs:
@@ -72,9 +79,9 @@ async def get_contribution_doi(proceedings_data: ProceedingsData, cookies: dict,
             logger.error(ex, exc_info=True)
 
 
-async def _doi_task(capacity_limiter: CapacityLimiter, total: int, index: int,
-                    contribution: ContributionData, cookies: dict, settings: dict,
-                    doi_dir: Path, stream: MemoryObjectSendStream) -> None:
+async def _doi_conference_task(capacity_limiter: CapacityLimiter, total: int, index: int,
+                               proceedings_data: ProceedingsData, cookies: dict, settings: dict,
+                               doi_dir: Path, stream: MemoryObjectSendStream) -> None:
     """ """
 
     async with capacity_limiter:
@@ -85,16 +92,17 @@ async def _doi_task(capacity_limiter: CapacityLimiter, total: int, index: int,
 
         try:
 
-            doi_file = Path(doi_dir, f'{contribution.code}.json')
+            doi_file = Path(doi_dir, f'{proceedings_data.event.id}.json')
 
-            # logger.info(str(doi_file))
+            logger.info(str(doi_file))
 
             doi_identifier: str | None = generate_doi_identifier(
                 context=settings.get('doi_context', '10.18429'),
                 organization=settings.get('doi_organization', 'JACoW'),
                 conference=settings.get('doi_conference', 'CONF-YY'),
-                contribution=contribution.code
             )
+
+            logger.info(str(doi_identifier))
 
             doi_user = get_doi_api_login(settings=settings)
             doi_password = get_doi_api_password(settings=settings)
@@ -102,9 +110,6 @@ async def _doi_task(capacity_limiter: CapacityLimiter, total: int, index: int,
                                           doi_id=doi_identifier)
 
             logger.info(f"{doi_file} -> {doi_api_url}")
-
-            # logger.info(doi_data)
-            # logger.info(doi_json)
 
             auth = BasicAuthData(login=doi_user, password=doi_password)
 
@@ -117,10 +122,59 @@ async def _doi_task(capacity_limiter: CapacityLimiter, total: int, index: int,
                 error = ex.args[0].get('code')
             logger.error(ex, exc_info=True)
 
-        await send_res(stream, total, index, contribution, doi_identifier, response=response, error=error)
+        await send_res(stream, total, index, settings.get('doi_conference', 'CONF-YY'),
+                       doi_identifier, response=response, error=error)
 
 
-async def send_res(stream: MemoryObjectSendStream, total: int, index: int, contribution: ContributionData,
+async def _doi_contribution_task(capacity_limiter: CapacityLimiter, total: int, index: int,
+                                 contribution: ContributionData, cookies: dict, settings: dict,
+                                 doi_dir: Path, stream: MemoryObjectSendStream) -> None:
+    """ """
+
+    async with capacity_limiter:
+
+        doi_identifier: str | None = None
+        response: str | None = None
+        error: str | None = None
+
+        try:
+
+            doi_file = Path(doi_dir, f'{contribution.code}.json')
+
+            logger.info(str(doi_file))
+
+            doi_identifier: str | None = generate_doi_identifier(
+                context=settings.get('doi_context', '10.18429'),
+                organization=settings.get('doi_organization', 'JACoW'),
+                conference=settings.get('doi_conference', 'CONF-YY'),
+                contribution=contribution.code
+            )
+
+            logger.info(str(doi_identifier))
+
+            doi_user = get_doi_api_login(settings=settings)
+            doi_password = get_doi_api_password(settings=settings)
+            doi_api_url = get_doi_api_url(settings=settings,
+                                          doi_id=doi_identifier)
+
+            logger.info(f"{doi_file} -> {doi_api_url}")
+
+            auth = BasicAuthData(login=doi_user, password=doi_password)
+
+            headers = {'accept': 'application/vnd.api+json'}
+
+            response = await fetch_json(url=doi_api_url, headers=headers, auth=auth)
+
+        except BaseException as ex:
+            if ex.args:
+                error = ex.args[0].get('code')
+            logger.error(ex, exc_info=True)
+
+        await send_res(stream, total, index, contribution.code, doi_identifier,
+                       response=response, error=error)
+
+
+async def send_res(stream: MemoryObjectSendStream, total: int, index: int, code: str,
                    doi_identifier: str | None, response: Any, error=None):
 
     doi = response.get('data', None) if response else None
@@ -128,7 +182,7 @@ async def send_res(stream: MemoryObjectSendStream, total: int, index: int, contr
     await stream.send({
         "total": total,
         "index": index,
-        "code": contribution.code,
+        "code": code,
         "id": doi_identifier,
         "doi": doi,
         "error": error

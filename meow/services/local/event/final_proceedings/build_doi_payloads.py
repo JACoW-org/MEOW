@@ -15,12 +15,19 @@ async def build_doi_payloads(proceedings_data: ProceedingsData) -> ProceedingsDa
     logger.info('event_final_proceedings - build_doi_payloads')
 
     doi_dir = Path('var', 'run', f'{proceedings_data.event.id}_doi')
+
     if await doi_dir.exists():
         await rmtree(str(doi_dir))
 
     await doi_dir.mkdir(exist_ok=True, parents=True)
 
+    total_contributions: int = len(proceedings_data.contributions)
+
+    logger.info('build_doi_payloads - '
+                + f'contributions: {total_contributions}')
+
     capacity_limiter = CapacityLimiter(16)
+
     async with create_task_group() as tg:
 
         # conference DOI

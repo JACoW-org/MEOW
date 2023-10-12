@@ -8,7 +8,6 @@ from rdflib.term import Literal
 from unidecode import unidecode
 
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData, ContributionPaperData
-from meow.models.local.event.final_proceedings.event_factory import event_keyword_factory
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_contributions_papers
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
@@ -257,44 +256,3 @@ def get_header_data(contribution: ContributionData) -> dict[str, str] | None:
 
     return header_data
 
-
-def refill_contribution_metadata(proceedings_data: ProceedingsData, results: dict) -> ProceedingsData:
-
-    current_page = 1
-
-    for contribution_data in proceedings_data.contributions:
-        code: str = contribution_data.code
-
-        try:
-            if contribution_data.paper and contribution_data.paper.latest_revision:
-                revision_data = contribution_data.paper.latest_revision
-                file_data = revision_data.files[-1] \
-                    if len(revision_data.files) > 0 \
-                    else None
-
-                if file_data is not None:
-
-                    result: dict = results.get(file_data.uuid, {})
-                    report: dict = result.get('report', {})
-
-                    contribution_data.keywords = [
-                        event_keyword_factory(keyword)
-                        for keyword in result.get('keywords', [])
-                    ]
-
-                    contribution_data.page = current_page
-                    contribution_data.metadata = report
-
-                    if report and 'page_count' in report:
-                        current_page += report.get('page_count', 0)
-
-                # logger.info('contribution_data pages = %s - %s', contribution_data.page, contribution_data.page
-                #   + result.get('report').get('page_count'))
-
-        except IndexError as e:
-            logger.warning(f'No keyword for contribution {code}')
-            logger.error(e, exc_info=True)
-        except Exception as e:
-            logger.error(e, exc_info=True)
-
-    return proceedings_data

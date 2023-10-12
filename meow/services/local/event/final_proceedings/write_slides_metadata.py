@@ -3,8 +3,6 @@ from typing import Callable
 
 from anyio import Path, start_blocking_portal
 
-from icecream import ic
-
 from meow.models.local.event.final_proceedings.contribution_model import FileData
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_proceedings_slides
 
@@ -64,6 +62,6 @@ async def write_metadata_task(current_slide: FileData, sessions, settings, pdf_c
     if await jacow_pdf_file.exists():
         await jacow_pdf_file.unlink()
 
-    ic(f"{original_pdf_file} --> {jacow_pdf_file}")
+    # print(f"{original_pdf_file} --> {jacow_pdf_file}")
 
     await pdf_linearize_qpdf(str(original_pdf_file), str(jacow_pdf_file), None, None)
