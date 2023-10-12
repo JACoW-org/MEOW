@@ -24,9 +24,9 @@
 
     {% if classification.code %}
       <li class="classification">
-        <a onclick="openUrl(`classification/{{ classification.code|lower }}/index.html`)" href="javascript:void(0);">
-          <b>{{ classification.title }}</b>
-        </a>
+        <a data-href="classification/{{ classification.code|lower }}/index.html" 
+          onclick="openUrl(`classification/{{ classification.code|lower }}/index.html`)" 
+          href="javascript:void(0);"><b>{{ classification.title }}</b></a>
       </li>
     {% endif %}
 

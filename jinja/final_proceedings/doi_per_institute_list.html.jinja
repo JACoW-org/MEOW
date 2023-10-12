@@ -7,9 +7,9 @@ title = "[{{institutes|length}}]"
     {% for institute in institutes %}
     {% if institute.id: %}
     <li>
-      <a onclick="openUrl(`doi_per_institute/{{ institute.id|lower }}/index.html`)" href="javascript:void(0);">
-        {{ institute.name }}
-      </a>
+      <a data-href="doi_per_institute/{{ institute.id|lower }}/index.html" 
+        onclick="openUrl(`doi_per_institute/{{ institute.id|lower }}/index.html`)" 
+        href="javascript:void(0);">{{ institute.name }}</a>
     </li>
     {% endif %}
     {% endfor %}

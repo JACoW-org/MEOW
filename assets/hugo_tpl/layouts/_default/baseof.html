@@ -10,19 +10,11 @@
     <meta name="author" content="fabio.meneghetti@akera.it">
 
     <title>
-        {{ block "title" . }}
-        {{ .Site.Title }}
-        {{ end }}
+        {{ block "title" . }}{{ .Site.Title }}{{ end }}
     </title>
 
     <style type="text/css">
-        body {
-            --primary-color: {{.Site.Params.color }};
-        }
-
-        .body {
-            opacity: 0;
-        }
+        body { --primary-color: {{.Site.Params.color}} } .body { opacity: 0 }
     </style>
 
     <script id="src-type" type="application/json">
@@ -48,40 +40,83 @@
 
         function openUrl(part) {
             try {
-                window.location = `${part}`.startsWith('http') ? `${part}` : `${getPrefix()}/${part}`;
+                window.location = getHref(part);
             } catch (err) {
                 console.error(err)
             }
             return false;
-        }       
+        }
+
+        function getHref(part) {
+            return `${part}`.startsWith('http') ? `${part}` : `${getPrefix()}/${part}`;
+        }
+
+        function trasformLinks() {
+            const links = document.querySelectorAll('a[data-href]');
+            if (links) {
+                links.forEach(link => {
+
+                    const part = link.getAttribute('data-href');
+                    const href = getHref(part);
+
+                    // console.log(part, getHref(part));
+
+                    link.href = href;
+                    link.removeAttribute('onclick');
+                    link.removeAttribute('data-href');
+
+                    link.onclick = () => console.log(href);
+
+                });
+            }
+        }
+
+        function loadHeaderLogo() {
+            const logoElement = document.getElementById('logo');
+            if (logoElement) {
+                logoElement.src = `${getPrefix()}/${getLogo()}`;
+            }
+        }
+
+        function loadLeftPartial(element, name) {
+            if (element) {
+                Promise.resolve().then(() => {
+                    return element.innerHTML = `<div class="title">Loading...</div>`;
+                }).then(() => {
+                    return fetch(`${getPrefix()}/html/${name}`);
+                }).then(res => {
+                    return res.text();
+                }).then(text => {
+                    return element.innerHTML = text;
+                }).then(() => {
+                    trasformLinks();
+                }).catch(err => {
+                    console.error(err);
+                    return element.innerHTML = '<div class="title">Error loading partial.</div>';
+                })
+            }
+        }
     </script>
 </head>
 
 <body class="body">
-    {{ block "menu" . }}
-    {{ if (.IsHome) }}
+    {{ block "menu" . }}{{ if (.IsHome) }}{{ else }}{{ partialCached "menu.html" . }}{{ end }}{{ end }}
 
-    {{ else }}
-    {{ partialCached "menu.html" . }}
-    {{ end }}
-    {{ end }}
-
-    {{ block "main" . }}
-    {{ .Content }}
-    {{ end }}
+    {{ block "main" . }}{{ .Content }}{{ end }}
 
     <script type="application/javascript">
-        document.head.appendChild(
-            Object.assign(document.createElement('link'), {
-                rel: `stylesheet`,
-                href: `${getPrefix()}/css/style.css`
-            })
-        );
+        document.addEventListener("DOMContentLoaded", function () {
+        
+            document.head.appendChild(
+                Object.assign(document.createElement('link'), {
+                    rel: `stylesheet`,
+                    href: `${getPrefix()}/css/style.css`
+                })
+            );
 
-        const logoElement = document.getElementById('logo');
-        if (logoElement) {
-            logoElement.src = `${getPrefix()}/${getLogo()}`;
-        }   
+            loadHeaderLogo();
+            trasformLinks();
+        });
     </script>
 
 </body>

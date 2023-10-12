@@ -1,15 +1,14 @@
-{{ define "title" }}
-{{ .Page.Title }}
-{{ end }}
+{{ define "title" }}{{ .Page.Title }}{{ end }}
 
-{{ define "type" }}
-"session"
-{{ end }}
+{{ define "type" }}"session"{{ end }}
 
 {{ define "main" }}
 <div class="content">
-    <div class="left">
-        {{ readFile "/layouts/partials/session/list.html" | safeHTML }}
+    <div class="left" id="session_list">
+        <script type="application/javascript">
+            // readFile "/layouts/partials/session/list.html" | safeHTML
+            loadLeftPartial(document.getElementById("session_list"), 'session_list.html')
+        </script>        
     </div>
 
     <div class="right">

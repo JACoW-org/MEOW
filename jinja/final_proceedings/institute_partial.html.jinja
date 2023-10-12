@@ -18,9 +18,9 @@
       {% if institute.name in authorsGroups %}
       {% for author in authorsGroups[institute.name] %}
       <li class="author">
-        <a onclick="openUrl(`institute/{{ author.code|lower }}/index.html`)" href="javascript:void(0);">
-          <b>{{ author.short }}</b>
-        </a>
+        <a data-href="institute/{{ author.code|lower }}/index.html" 
+          onclick="openUrl(`institute/{{ author.code|lower }}/index.html`)" 
+          href="javascript:void(0);"><b>{{ author.short }}</b></a>
       </li>
       {% endfor %}
       {% endif %}

@@ -64,7 +64,7 @@ async def link_static_site(proceedings_data: ProceedingsData, cookies: dict,
 
     await rmtree(str(site_preview_path))
     await move(str(static_site_path), str(site_preview_path))
-    await rmtree(str(static_site_src))
+    # await rmtree(str(static_site_src))
 
     github_url = 'https://github.com/JACoW-org/CAT'
     timestamp = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')

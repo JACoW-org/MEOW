@@ -1,7 +1,7 @@
 <div class="menu">
 
     <div class="logo">
-        <a onclick="openUrl('index.html')" href="javascript:void(0);">
+        <a data-href="index.html" onclick="openUrl('index.html')" href="javascript:void(0);">
             <img id="logo" alt="conference logo icon"
                 alt="{{ .Site.Params.name }} Proceedings &mdash; {{ .Site.Params.location }}" />
         </a>
@@ -12,13 +12,13 @@
     </div>
 
     <div class="nav">
-                <a onclick="openUrl('index.html')" href="javascript:void(0);">Home</a>
-        &mdash; <a onclick="openUrl('session/index.html')" href="javascript:void(0);">Session</a>
-        &mdash; <a onclick="openUrl('classification/index.html')" href="javascript:void(0);">Classification</a>
-        &mdash; <a onclick="openUrl('author/index.html')" href="javascript:void(0);">Authors</a>     <br>
-                <a onclick="openUrl('institute/index.html')" href="javascript:void(0);">Institutes</a>
-        &mdash; <a onclick="openUrl('doi_per_institute/index.html')" href="javascript:void(0);">DOI of Institutes</a>
-        &mdash; <a onclick="openUrl('keyword/index.html')" href="javascript:void(0);">Keywords</a>
+                <a data-href="index.html" onclick="openUrl('index.html')" href="javascript:void(0);">Home</a>
+        &mdash; <a data-href="session/index.html" onclick="openUrl('session/index.html')" href="javascript:void(0);">Session</a>
+        &mdash; <a data-href="classification/index.html" onclick="openUrl('classification/index.html')" href="javascript:void(0);">Classification</a>
+        &mdash; <a data-href="author/index.html" onclick="openUrl('author/index.html')" href="javascript:void(0);">Authors</a>     <br>
+                <a data-href="institute/index.html" onclick="openUrl('institute/index.html')" href="javascript:void(0);">Institutes</a>
+        &mdash; <a data-href="doi_per_institute/index.html" onclick="openUrl('doi_per_institute/index.html')" href="javascript:void(0);">DOI of Institutes</a>
+        &mdash; <a data-href="keyword/index.html" onclick="openUrl('keyword/index.html')" href="javascript:void(0);">Keywords</a>
     </div>
 
 </div>

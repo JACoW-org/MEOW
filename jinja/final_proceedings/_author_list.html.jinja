@@ -6,10 +6,9 @@ title = """[{{authors|length}}]"""
   <ul>
     {% for author in authors %}
     <li>
-      <a onclick="openUrl(`author/{{ author.id|lower }}/index.html`)" href="javascript:void(0);">
-        <b>{{ author.last }} {{ author.last }}</b>
-        ({{ author.affiliation }})
-      </a>
+      <a data-href="author/{{ author.id|lower }}/index.html" 
+        onclick="openUrl(`author/{{ author.id|lower }}/index.html`)" 
+        href="javascript:void(0);"><b>{{ author.last }} {{ author.last }}</b>({{ author.affiliation }})</a>
     </li>
     {% endfor %}
   </ul>

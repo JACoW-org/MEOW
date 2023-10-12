@@ -11,8 +11,9 @@
       {% for contribution in contributionsGroups[institute.name] %}
       {% if contribution.code and contribution.is_included_in_proceedings and contribution.doi_data %}
       <li class="contribution">
-        <a onclick="openUrl(`doi_per_institute/{{ contribution.code|lower }}/index.html`)" href="javascript:void(0);">
-          <b>{{ contribution.doi_data.doi_url|lower }}</b><br>
+        <a data-href="doi_per_institute/{{ contribution.code|lower }}/index.html" 
+          onclick="openUrl(`doi_per_institute/{{ contribution.code|lower }}/index.html`)" 
+          href="javascript:void(0);"><b>{{ contribution.doi_data.doi_url|lower }}</b><br>
           <span>{{ contribution.title|e }}</span>
         </a>
       </li>

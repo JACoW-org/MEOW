@@ -26,7 +26,7 @@ async def find_credential_by_secret(key: str | None) -> Credential | None:
             host: bytes = res.get(b'host', None)
             date: bytes = res.get(b'date', None)
 
-            print(user.decode('utf-8'), host.decode('utf-8'))
+            # print(user.decode('utf-8'), host.decode('utf-8'))
 
             return Credential(key=key,
                               user=user.decode('utf-8'),

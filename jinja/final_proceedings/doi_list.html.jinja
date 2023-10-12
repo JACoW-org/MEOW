@@ -7,10 +7,9 @@ title = """[{{contributions|length}}]"""
     {% for contribution in contributions %}
     {% if contribution.code and contribution.is_included_in_proceedings %}
     <li>
-      <a onclick="openUrl(`doi/{{ contribution.code|lower }}/index.html`)" href="javascript:void(0);">
-        <b>{{ contribution.code }}</b>
-        ({{ contribution.title }})
-      </a>
+      <a data-href="doi/{{ contribution.code|lower }}/index.html" 
+        onclick="openUrl(`doi/{{ contribution.code|lower }}/index.html`)" 
+        href="javascript:void(0);"><b>{{ contribution.code }}</b>({{ contribution.title }})</a>
     </li>
     {% endif %}
     {% endfor %}

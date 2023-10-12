@@ -9,7 +9,7 @@ from meow.models.local.event.final_proceedings.contribution_model import FileDat
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_proceedings_slides
-from meow.utils.filesystem import copy
+from meow.utils.filesystem import move
 
 
 logger = lg.getLogger(__name__)
@@ -78,7 +78,7 @@ async def file_copy_task(capacity_limiter: CapacityLimiter, total_files: int, cu
 
         try:
 
-            file_name = f"{current_file.filename}"
+            file_name = f"{current_file.filename}_jacow"
             file_path = Path(cache_dir, file_name)
 
             dest_name = f"{current_file.filename}"
@@ -94,7 +94,7 @@ async def file_copy_task(capacity_limiter: CapacityLimiter, total_files: int, cu
 
             if file_exists:
                 # await dest_path.hardlink_to(file_path)
-                await copy(str(file_path), str(dest_path))
+                await move(str(file_path), str(dest_path))
             else:
                 logger.warning(f"{file_path} not exists")
 

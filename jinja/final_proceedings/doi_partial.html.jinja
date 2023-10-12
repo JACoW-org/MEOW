@@ -21,18 +21,29 @@
         <tr class="doi-paper">
             <th>Paper</th>
             <td>
-                download: <a onclick="openUrl(`pdf/{{ contribution.code|upper }}.pdf`)" href="javascript:void(0);" download>
-                    {{ contribution.code|upper }}.pdf</a>
+                download: <a data-href="pdf/{{ contribution.code|upper }}.pdf" 
+                    onclick="openUrl(`pdf/{{ contribution.code|upper }}.pdf`)" 
+                    href="javascript:void(0);" download>{{ contribution.code|upper }}.pdf</a>
             </td>
         </tr>
         <tr class="doi-cite">
             <th>Cite</th>
             <td>
-                <a onclick="openUrl(`reference/{{ contribution.code|lower }}-bibtex/index.html`)" href="javascript:void(0);">BibTeX</a>,
-                <a onclick="openUrl(`reference/{{ contribution.code|lower }}-latex/index.html`)" href="javascript:void(0);">LaTeX</a>,
-                <a onclick="openUrl(`reference/{{ contribution.code|lower }}-word/index.html`)" href="javascript:void(0);">Text/Word</a>,
-                <a onclick="openUrl(`reference/{{ contribution.code|lower }}-ris/index.html`)" href="javascript:void(0);">RIS</a>,
-                <a onclick="openUrl(`reference/{{ contribution.code|lower }}-endnote/index.html`)" href="javascript:void(0);">EndNote</a>
+                <a data-href="reference/{{ contribution.code|lower }}-bibtex/index.html" 
+                    onclick="openUrl(`reference/{{ contribution.code|lower }}-bibtex/index.html`)" 
+                    href="javascript:void(0);">BibTeX</a>,
+                <a data-href="reference/{{ contribution.code|lower }}-latex/index.html" 
+                    onclick="openUrl(`reference/{{ contribution.code|lower }}-latex/index.html`)" 
+                    href="javascript:void(0);">LaTeX</a>,
+                <a data-href="reference/{{ contribution.code|lower }}-word/index.html" 
+                    onclick="openUrl(`reference/{{ contribution.code|lower }}-word/index.html`)" 
+                    href="javascript:void(0);">Text/Word</a>,
+                <a data-href="reference/{{ contribution.code|lower }}-ris/index.html" 
+                    onclick="openUrl(`reference/{{ contribution.code|lower }}-ris/index.html`)" 
+                    href="javascript:void(0);">RIS</a>,
+                <a data-href="reference/{{ contribution.code|lower }}-endnote/index.html" 
+                    onclick="openUrl(`reference/{{ contribution.code|lower }}-endnote/index.html`)" 
+                    href="javascript:void(0);">EndNote</a>
             </td>
         </tr>
         <tr class="doi-conference">

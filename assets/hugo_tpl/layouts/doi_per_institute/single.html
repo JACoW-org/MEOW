@@ -1,15 +1,14 @@
-{{ define "title" }}
-{{ .Page.Title }}
-{{ end }}
+{{ define "title" }}{{ .Page.Title }}{{ end }}
 
-{{ define "type" }}
-"doi_per_institute"
-{{ end }}
+{{ define "type" }}"doi_per_institute"{{ end }}
 
 {{ define "main" }}
 <div class="content">
-    <div class="left">
-        {{ readFile "/layouts/partials/doi_per_institute/list.html" | safeHTML }}
+    <div class="left" id="doi_per_institute_list">
+        <script type="application/javascript">
+            // readFile "/layouts/partials/doi_per_institute/list.html" | safeHTML
+            loadLeftPartial(document.getElementById("doi_per_institute_list"), 'doi_per_institute_list.html')
+        </script>        
     </div>
 
     <div class="right">

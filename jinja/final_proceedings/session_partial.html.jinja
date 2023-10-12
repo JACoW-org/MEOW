@@ -4,12 +4,9 @@
   {% for session in sessions %}
   {% if session.code %}
   <li class="session">
-    <a onclick="openUrl(`session/{{ session.code|lower }}/index.html`)" href="javascript:void(0);">
-      <b>{{ session.code }}</b> -
-      <span>
-        {{ session.title }}
-      </span>
-    </a>
+    <a data-href="session/{{ session.code|lower }}/index.html" 
+      onclick="openUrl(`session/{{ session.code|lower }}/index.html`)" 
+      href="javascript:void(0);"><b>{{ session.code }}</b> - <span>{{ session.title }}</span></a>
   </li>
   {% endif %}
   {% endfor %}

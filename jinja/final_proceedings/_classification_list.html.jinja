@@ -20,9 +20,9 @@ title = """[{{classifications|length}}]"""
     </div>
 
     <div class="classification-item">
-      <a onclick="openUrl(`classification/{{ classification.code|lower }}/index.html`)" href="javascript:void(0);">
-        <b>{{ classification.title }}</b>
-      </a>
+      <a data-href="classification/{{ classification.code|lower }}/index.html" 
+        onclick="openUrl(`classification/{{ classification.code|lower }}/index.html`)" 
+        href="javascript:void(0);"><b>{{ classification.title }}</b></a>
     </div>
 
     {% endfor %}

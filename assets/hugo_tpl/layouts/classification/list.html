@@ -1,18 +1,16 @@
-{{ define "title" }}
-{{ .Page.Title }}
-{{ end }}
+{{ define "title" }}{{ .Page.Title }}{{ end }}
 
-{{ define "type" }}
-"classification"
-{{ end }}
+{{ define "type" }}"classification"{{ end }}
 
 {{ define "main" }}
 <div class="content">
-    <div class="left">
-        {{ readFile "/layouts/partials/classification/list.html" | safeHTML }}
+    <div class="left" id="classification_list">
+        <script type="application/javascript">
+            // readFile "/layouts/partials/classification/list.html" | safeHTML
+            loadLeftPartial(document.getElementById("classification_list"), 'classification_list.html')
+        </script>        
     </div>
 
-    <div class="right">
-    </div>
+    <div class="right"></div>
 </div>
 {{ end }}

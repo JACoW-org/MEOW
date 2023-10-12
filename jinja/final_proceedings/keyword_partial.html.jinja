@@ -12,9 +12,9 @@
   {% for keyword in group %}
     {% if keyword.code %}
       <li class="keyword">
-        <a onclick="openUrl(`keyword/{{ keyword.code|lower }}/index.html`)" href="javascript:void(0);">
-          <b>{{ keyword.name }}</b>
-        </a>
+        <a data-href="keyword/{{ keyword.code|lower }}/index.html" 
+          onclick="openUrl(`keyword/{{ keyword.code|lower }}/index.html`)" 
+          href="javascript:void(0);"><b>{{ keyword.name }}</b></a>
       </li>
     {% endif %}
   {% endfor %}

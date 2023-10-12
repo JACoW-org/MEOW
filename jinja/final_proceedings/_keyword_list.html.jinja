@@ -7,9 +7,9 @@ date = "2023-01-02T12:06:30+01:00"
   <ul>
     {% for keyword in keywords %}
     <li>
-      <a onclick="openUrl(`keyword/{{ keyword.code|lower }}/index.html`)" href="javascript:void(0);">
-        <b>{{ keyword.name }}</b>
-      </a>
+      <a data-href="keyword/{{ keyword.code|lower }}/index.html" 
+          onclick="openUrl(`keyword/{{ keyword.code|lower }}/index.html`)" 
+          href="javascript:void(0);"><b>{{ keyword.name }}</b></a>
     </li>
     {% endfor %}
   </ul>

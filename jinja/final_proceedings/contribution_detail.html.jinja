@@ -28,7 +28,8 @@
 {% if contribution.duplicate_of %}
 <div class="contrib-subheader">
     <div class="contrib-code">
-        <a onclick="openUrl(`session/{{ contribution.duplicate_of.session_code|lower }}/index.html#{{ contribution.duplicate_of.code|lower }}`)" 
+        <a data-href="session/{{ contribution.duplicate_of.session_code|lower }}/index.html#{{ contribution.duplicate_of.code|lower }}" 
+            onclick="openUrl(`session/{{ contribution.duplicate_of.session_code|lower }}/index.html#{{ contribution.duplicate_of.code|lower }}`)" 
             href="javascript:void(0);">{{ contribution.duplicate_of.code|e }}</a>
     </div>
     <div class="description"><i>use link to access more material from this paper's primary code</i></div>
@@ -51,7 +52,8 @@
 <div class="contrib-slides">
     <b>Slides:</b>
     <span>&nbsp;</span>
-    <a onclick="openUrl(`pdf/{{ contribution.slides_name }}`)" 
+    <a data-href="pdf/{{ contribution.slides_name }}" 
+        onclick="openUrl(`pdf/{{ contribution.slides_name }}`)" 
         href="javascript:void(0);">{{ contribution.code|upper }}</a>
 </div>
 {% endif %}
@@ -60,7 +62,8 @@
 <div class="contrib-paper">
     <b>Paper:</b>
     <span>&nbsp;</span>
-    <a onclick="openUrl(`pdf/{{ contribution.paper_name }}`)" 
+    <a data-href="pdf/{{ contribution.paper_name }}" 
+        onclick="openUrl(`pdf/{{ contribution.paper_name }}`)" 
         href="javascript:void(0);">{{ contribution.code|upper }}</a>
 </div>
 
@@ -68,7 +71,8 @@
     <div class="contrib-doi">
         <b>DOI:</b>
         <span>&nbsp;reference for this paper:&nbsp;</span>
-        <a onclick="openUrl(`{{ contribution.doi_data.doi_url }}`)" 
+        <a data-href="{{ contribution.doi_data.doi_url }}" 
+            onclick="openUrl(`{{ contribution.doi_data.doi_url }}`)" 
             href="javascript:void(0);">{{ contribution.doi_data.doi_name }}</a>
     </div>
 
@@ -103,7 +107,8 @@
     <div class="contrib-doi">
         <b>DOI:</b>
         <span>&nbsp;reference for this paper:&nbsp;</span>
-        <a onclick="openUrl(`{{ contribution.duplicate_of.doi_url }}`)" 
+        <a data-href="{{ contribution.duplicate_of.doi_url }}" 
+            onclick="openUrl(`{{ contribution.duplicate_of.doi_url }}`)" 
             href="javascript:void(0);">{{ contribution.duplicate_of.doi_name }}</a>
     </div>
 
@@ -132,11 +137,21 @@
     <div class="contrib-cite">
         <b>Cite:</b>
         <span>&nbsp;reference for this paper using:&nbsp;</span>
-        <a onclick="openUrl(`reference/{{ contribution.duplicate_of.code|lower }}-bibtex/index.html`)" href="javascript:void(0);">BibTeX</a>,
-        <a onclick="openUrl(`reference/{{ contribution.duplicate_of.code|lower }}-latex/index.html`)" href="javascript:void(0);">LaTeX</a>,
-        <a onclick="openUrl(`reference/{{ contribution.duplicate_of.code|lower }}-word/index.html`)" href="javascript:void(0);">Text/Word</a>,
-        <a onclick="openUrl(`reference/{{ contribution.duplicate_of.code|lower }}-ris/index.html`)" href="javascript:void(0);">RIS</a>,
-        <a onclick="openUrl(`reference/{{ contribution.duplicate_of.code|lower }}-endnote/index.html`)" href="javascript:void(0);">EndNote</a>
+        <a data-href="reference/{{ contribution.duplicate_of.code|lower }}-bibtex/index.html" 
+            onclick="openUrl(`reference/{{ contribution.duplicate_of.code|lower }}-bibtex/index.html`)" 
+            href="javascript:void(0);">BibTeX</a>,
+        <a data-href="reference/{{ contribution.duplicate_of.code|lower }}-latex/index.html" 
+            onclick="openUrl(`reference/{{ contribution.duplicate_of.code|lower }}-latex/index.html`)" 
+            href="javascript:void(0);">LaTeX</a>,
+        <a data-href="reference/{{ contribution.duplicate_of.code|lower }}-word/index.html" 
+            onclick="openUrl(`reference/{{ contribution.duplicate_of.code|lower }}-word/index.html`)" 
+            href="javascript:void(0);">Text/Word</a>,
+        <a data-href="reference/{{ contribution.duplicate_of.code|lower }}-ris/index.html" 
+            onclick="openUrl(`reference/{{ contribution.duplicate_of.code|lower }}-ris/index.html`)" 
+            href="javascript:void(0);">RIS</a>,
+        <a data-href="reference/{{ contribution.duplicate_of.code|lower }}-endnote/index.html" 
+            onclick="openUrl(`reference/{{ contribution.duplicate_of.code|lower }}-endnote/index.html`)" 
+            href="javascript:void(0);">EndNote</a>
     </div>
 
 {% elif contribution.reference %}
@@ -144,11 +159,21 @@
     <div class="contrib-cite">
         <b>Cite:</b>
         <span>&nbsp;reference for this paper using:&nbsp;</span>
-        <a onclick="openUrl(`reference/{{ contribution.code|lower }}-bibtex/index.html`)" href="javascript:void(0);">BibTeX</a>,
-        <a onclick="openUrl(`reference/{{ contribution.code|lower }}-latex/index.html`)" href="javascript:void(0);">LaTeX</a>,
-        <a onclick="openUrl(`reference/{{ contribution.code|lower }}-word/index.html`)" href="javascript:void(0);">Text/Word</a>,
-        <a onclick="openUrl(`reference/{{ contribution.code|lower }}-ris/index.html`)" href="javascript:void(0);">RIS</a>,
-        <a onclick="openUrl(`reference/{{ contribution.code|lower }}-endnote/index.html`)" href="javascript:void(0);">EndNote</a>
+        <a data-href="reference/{{ contribution.code|lower }}-bibtex/index.html" 
+            onclick="openUrl(`reference/{{ contribution.code|lower }}-bibtex/index.html`)" 
+            href="javascript:void(0);">BibTeX</a>,
+        <a data-href="reference/{{ contribution.code|lower }}-latex/index.html" 
+            onclick="openUrl(`reference/{{ contribution.code|lower }}-latex/index.html`)" 
+            href="javascript:void(0);">LaTeX</a>,
+        <a data-href="reference/{{ contribution.code|lower }}-word/index.html" 
+            onclick="openUrl(`reference/{{ contribution.code|lower }}-word/index.html`)" 
+            href="javascript:void(0);">Text/Word</a>,
+        <a data-href="reference/{{ contribution.code|lower }}-ris/index.html" 
+            onclick="openUrl(`reference/{{ contribution.code|lower }}-ris/index.html`)" 
+            href="javascript:void(0);">RIS</a>,
+        <a data-href="reference/{{ contribution.code|lower }}-endnote/index.html" 
+            onclick="openUrl(`reference/{{ contribution.code|lower }}-endnote/index.html`)" 
+            href="javascript:void(0);">EndNote</a>
     </div
 
 {% endif %}

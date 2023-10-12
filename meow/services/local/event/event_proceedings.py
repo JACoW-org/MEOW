@@ -11,17 +11,22 @@ from meow.app.instances.databases import dbs
 from meow.models.infra.locks import RedisLock
 
 
-from meow.models.local.event.final_proceedings.contribution_model import ContributionData
+from meow.models.local.event.final_proceedings.contribution_model import (
+    ContributionData)
 from meow.models.local.event.final_proceedings.proceedings_data_model import (
     ProceedingsConfig, ProceedingsData)
+from meow.services.local.event.final_proceedings.copy_html_partials import (
+    copy_html_partials)
 
 from meow.services.local.event.final_proceedings.collecting_contributions_and_files import (
     collecting_contributions_and_files)
 from meow.services.local.event.final_proceedings.collecting_sessions_and_materials import (
     collecting_sessions_and_materials)
 
-from meow.services.local.event.common.adapting_final_proceedings import adapting_proceedings
-from meow.services.local.event.common.validate_proceedings_data import validate_proceedings_data
+from meow.services.local.event.common.adapting_final_proceedings import (
+    adapting_proceedings)
+from meow.services.local.event.common.validate_proceedings_data import (
+    validate_proceedings_data)
 
 from meow.services.local.event.final_proceedings.concat_contribution_papers import (
     concat_contribution_papers)
@@ -51,6 +56,7 @@ from meow.services.local.event.final_proceedings.link_static_site import (
     clean_static_site, link_static_site)
 from meow.services.local.event.final_proceedings.read_papers_metadata import read_papers_metadata
 from meow.services.local.event.final_proceedings.write_papers_metadata import write_papers_metadata
+from meow.services.local.event.final_proceedings.write_slides_metadata import write_slides_metadata
 
 from meow.services.local.event.final_proceedings.hugo_plugin.hugo_final_proceedings_plugin import (
     HugoProceedingsPlugin)
@@ -62,7 +68,7 @@ logger = lg.getLogger(__name__)
 
 
 async def event_proceedings(event: dict, cookies: dict, settings: dict,
-                                  config: ProceedingsConfig) -> AsyncGenerator:
+                            config: ProceedingsConfig) -> AsyncGenerator:
     """ event_proceedings """
 
     try:
@@ -120,7 +126,7 @@ async def extend_lock(lock: RedisLock) -> RedisLock:
 
 
 async def _event_proceedings(event: dict, cookies: dict, settings: dict,
-                                   config: ProceedingsConfig, lock: RedisLock) -> AsyncGenerator:
+                             config: ProceedingsConfig, lock: RedisLock) -> AsyncGenerator:
     """ """
 
     logger.info('event_proceedings - create_proceedings')
@@ -133,7 +139,7 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
         return c.is_included_in_prepress
 
     def filter_contributions_with_slides(c: ContributionData) -> bool:
-        return c.is_slides_included
+        return config.include_event_slides and c.is_slides_included
 
     """ """
 
@@ -244,7 +250,7 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
     # Blocking
 
     [proceedings, papers_data] = await download_contributions_papers(proceedings, cookies, settings,
-                                                                           filter_published_contributions)
+                                                                     filter_published_contributions)
 
     # log number of files
     yield dict(type='log', value=ClientLog(
@@ -266,7 +272,7 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
         # Blocking
 
         [proceedings, slides_data] = await download_contributions_slides(proceedings, cookies, settings,
-                                                                               filter_contributions_with_slides)
+                                                                         filter_contributions_with_slides)
 
         # log number of files
         yield dict(type='log', value=ClientLog(
@@ -391,7 +397,15 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
 
     # Blocking
 
-    await write_papers_metadata(proceedings, cookies, settings, filter_published_contributions)
+    await write_papers_metadata(proceedings, cookies, settings,
+                                filter_published_contributions)
+
+    """ """
+
+    await extend_lock(lock)
+
+    await write_slides_metadata(proceedings, cookies, settings,
+                                filter_contributions_with_slides)
 
     """ """
 
@@ -441,6 +455,7 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
         text='Copy event PDF'
     ))
 
+    await copy_html_partials(proceedings, cookies, settings)
     await copy_event_materials(proceedings, cookies, settings)
     await copy_contribution_papers(proceedings, cookies, settings,
                                    filter_published_contributions)
