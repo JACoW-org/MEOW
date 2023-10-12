@@ -137,7 +137,19 @@ async def generate_conference_doi_task(proceedings_data: ProceedingsData,
             'identifier': doi_url,
             'identifierType': 'DOI'
         }],
-        'creators': [],
+        'creators': [{
+            'name': f'{editor.last},{editor.first}',
+            'nameType': 'Personal',
+            'affiliation': [{
+                'name': editor.affiliation
+            }],
+            'contributorType': 'Editor',
+            'nameIdentifiers': [{
+                'nameIdentifier': index,
+                'schemeUri': 'https://jacow.org',
+                'nameIdentifierScheme': 'JACoW-ID'
+            }]
+        } for index, editor in enumerate(editors)],
         'titles': [{
             'title': settings.get('booktitle_long', ''),
             'lang': 'en-us'
