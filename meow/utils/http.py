@@ -96,6 +96,8 @@ async def fetch_json(url: str, headers: dict = {}, cookies: dict = {}, auth: Bas
                     )
                 except BaseException as ex:
                     logger.error(url)
+                    logger.error(resp.content_length)
+                    logger.error(resp.content_type)
                     logger.error(ex, exc_info=True)
                     raise ex
         except asyncio.TimeoutError as ex:
