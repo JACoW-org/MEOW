@@ -95,6 +95,7 @@ async def fetch_json(url: str, headers: dict = {}, cookies: dict = {}, auth: Bas
                              message=f"invalid response status {resp.status}")
                     )
                 except BaseException as ex:
+                    logger.error(url)
                     logger.error(ex, exc_info=True)
                     raise ex
         except asyncio.TimeoutError as ex:
