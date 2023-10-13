@@ -63,8 +63,7 @@ async def delete_contribution_doi(proceedings_data: ProceedingsData, cookies: di
 
                     results.append(result)
 
-                    logger.info(f"elaborated: {len(results)}" +
-                                f" - {total_dois}")
+                    # logger.info(f"elaborated: {len(results)} - {total_dois}")
 
                     yield result
 
@@ -91,9 +90,9 @@ async def _doi_conference_task(capacity_limiter: CapacityLimiter, total: int, in
 
         try:
 
-            doi_file = Path(doi_dir, f'{proceedings_data.event.id}.json')
+            # doi_file = Path(doi_dir, f'{proceedings_data.event.id}.json')
 
-            logger.info(str(doi_file))
+            # logger.info(str(doi_file))
 
             doi_identifier: str | None = generate_doi_identifier(
                 context=settings.get('doi_context', '10.18429'),
@@ -101,14 +100,14 @@ async def _doi_conference_task(capacity_limiter: CapacityLimiter, total: int, in
                 conference=settings.get('doi_conference', 'CONF-YY'),
             )
 
-            logger.info(str(doi_identifier))
+            # logger.info(str(doi_identifier))
 
             doi_user = get_doi_api_login(settings=settings)
             doi_password = get_doi_api_password(settings=settings)
             doi_api_url = get_doi_api_url(settings=settings,
                                           doi_id=doi_identifier)
 
-            logger.info(f"{doi_file} -> {doi_api_url}")
+            # logger.info(f"{doi_file} -> {doi_api_url}")
 
             auth = BasicAuthData(login=doi_user, password=doi_password)
 
@@ -138,9 +137,9 @@ async def _doi_contribution_task(capacity_limiter: CapacityLimiter, total: int, 
 
         try:
 
-            doi_file = Path(doi_dir, f'{contribution.code}.json')
+            # doi_file = Path(doi_dir, f'{contribution.code}.json')
 
-            logger.info(str(doi_file))
+            # logger.info(str(doi_file))
 
             doi_identifier: str | None = generate_doi_identifier(
                 context=settings.get('doi_context', '10.18429'),
@@ -149,14 +148,14 @@ async def _doi_contribution_task(capacity_limiter: CapacityLimiter, total: int, 
                 contribution=contribution.code
             )
 
-            logger.info(str(doi_identifier))
+            # logger.info(str(doi_identifier))
 
             doi_user = get_doi_api_login(settings=settings)
             doi_password = get_doi_api_password(settings=settings)
             doi_api_url = get_doi_api_url(settings=settings,
                                           doi_id=doi_identifier)
 
-            logger.info(f"{doi_file} -> {doi_api_url}")
+            # logger.info(f"{doi_file} -> {doi_api_url}")
 
             auth = BasicAuthData(login=doi_user, password=doi_password)
 
