@@ -10,7 +10,6 @@ import tarfile
 import shutil
 import multiprocessing as mp
 
-from icecream import ic
 from datetime import datetime
 
 from fitz import Document, Page, Rect, Point, Font, LINK_GOTO, LINK_URI
@@ -39,7 +38,7 @@ def meow_auth(args) -> None:
 
             res = await dbs.redis_client.keys('meow:credential:*')
 
-            ic(res)
+            print(res)
 
         elif args.login:
 
@@ -51,7 +50,7 @@ def meow_auth(args) -> None:
             res = await dbs.redis_client.hset(f'meow:credential:{key}', 'host', host)
             res = await dbs.redis_client.hset(f'meow:credential:{key}', 'date', datetime.now().isoformat())
 
-            ic(user, host, key)
+            print(user, host, key)
 
         elif args.logout:
 
@@ -59,7 +58,7 @@ def meow_auth(args) -> None:
 
             res = await dbs.redis_client.delete(f'meow:credential:{key}')
 
-            ic(res)
+            print(res)
 
         elif args.check:
 
@@ -73,11 +72,11 @@ def meow_auth(args) -> None:
                 host: bytes = res.get(b'host', None)
                 date: bytes = res.get(b'date', None)
 
-                ic(user.decode('utf-8'), host.decode('utf-8'), date.decode('utf-8'))
+                print(user.decode('utf-8'), host.decode('utf-8'), date.decode('utf-8'))
 
             else:
 
-                ic('invalid')
+                print('invalid')
 
         await dbs.redis_client.close()
 
@@ -155,11 +154,11 @@ def doc_join(args) -> None:
 
     doc = Document()  # output PDF
 
-    # ic(args.input)
+    # print(args.input)
 
     for src_item in args.input:  # process one input PDF
 
-        # ic(src_item)
+        # print(src_item)
 
         src_list = src_item.split(",")
         password = src_list[1] if len(src_list) > 1 else None
@@ -171,7 +170,7 @@ def doc_join(args) -> None:
         else:  # take all pages
             page_list = range(1, src.page_count + 1)
 
-        # ic(page_list)
+        # print(page_list)
 
         for i in page_list:
             # copy each source page
@@ -192,13 +191,13 @@ def doc_join(args) -> None:
 def doc_links(args) -> None:
     """ Add page links. """
 
-    # ic(args.input)
-    # ic(args.links)
+    # print(args.input)
+    # print(args.links)
 
     doc = Document(filename=args.input)
 
-    # ic("page_count", doc.page_count)
-    # ic("links_count", len(args.links))
+    # print("page_count", doc.page_count)
+    # print("links_count", len(args.links))
 
     reversed_links = [link for link in args.links]
     reversed_links.reverse()
@@ -208,7 +207,7 @@ def doc_links(args) -> None:
 
         page = doc.load_page(page_index)
 
-        # ic(page_index, link, page.mediabox_size.x, page.mediabox_size.y)
+        # print(page_index, link, page.mediabox_size.x, page.mediabox_size.y)
 
         rect = Rect(0, 0, page.mediabox_size.x, page.mediabox_size.y)
         insert_link(page, {'kind': LINK_URI, 'from': rect, 'uri': f"{link}"})
@@ -234,7 +233,7 @@ def doc_frame(args) -> None:
 
     cc_logo = pathlib.Path('cc_by.png').read_bytes()
 
-    # ic([args.input, page_number, pre_print])
+    # print([args.input, page_number, pre_print])
 
     for page in doc:
 
@@ -353,8 +352,8 @@ def doc_report(args) -> None:
         page_width = page.rect.width
         page_height = page.rect.height
 
-        # ic(page.rect)
-        # ic(page.mediabox_size)
+        # print(page.rect)
+        # print(page.mediabox_size)
 
         page_report = dict(sizes=dict(width=page_width,
                                       height=page_height))
@@ -384,11 +383,11 @@ def doc_toc_vol(args) -> None:
 
     toc_data: dict | None = None
 
-    # ic(args.config)
+    # print(args.config)
 
     with open(args.config) as f:
         contents = f.read()
-        # ic(contents)
+        # print(contents)
         toc_data = json.loads(contents)
 
     if not toc_data:
@@ -617,11 +616,11 @@ def doc_toc_links(args) -> None:
 
     toc_data: dict | None = None
 
-    # ic(args.config)
+    # print(args.config)
 
     with open(args.links) as f:
         contents = f.read()
-        # ic(contents)
+        # print(contents)
         toc_data = json.loads(contents)
 
     if not toc_data:
@@ -640,7 +639,7 @@ def doc_toc_links(args) -> None:
         #              "to_file": to_file, "to_point": (0, 0),
         #              "code": item.get('title', '')}
 
-        # ic(json_link)
+        # print(json_link)
 
         link_kind = json_link.get('kind', 1)
         link_from = json_link.get('from_rect', {})
@@ -655,7 +654,7 @@ def doc_toc_links(args) -> None:
 
         page = doc.load_page(from_page)
 
-        # ic(page, link)
+        # print(page, link)
 
         insert_link(page, link, mark=True)
 
@@ -695,7 +694,7 @@ def doc_metadata(args) -> None:
 # https://www.driftinginrecursion.com/post/parallel_archiving/
 # https://docs.python.org/3/library/tarfile.html#examples
 def gzip_compress_file(p):
-    ic('gzip_compress_file', p, p + '.gz')
+    print('gzip_compress_file', p, p + '.gz')
     with open(p, 'rb') as f:
         with gzip.open(p + '.gz', 'wb', compresslevel=1) as gz:
             shutil.copyfileobj(f, gz)  # type: ignore
@@ -730,7 +729,7 @@ def compress_dir(args):
         #
         #                   total=len(files), desc='Compressing Files'))
 
-    ic('Adding Compressed Files to TAR....')
+    print('Adding Compressed Files to TAR....')
     tar_dir(folder)
 
     # if rmbool == True:
