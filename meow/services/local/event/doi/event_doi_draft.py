@@ -54,7 +54,7 @@ async def draft_contribution_doi(proceedings_data: ProceedingsData, cookies: dic
             # contributions DOIs
             for current_index, current_contribution in enumerate(doi_data):
                 tg.start_soon(_doi_contribution_task, capacity_limiter, total_dois,
-                              current_index, current_contribution, cookies, settings,
+                              current_index + 1, current_contribution, cookies, settings,
                               doi_dir, send_stream.clone())
 
         try:

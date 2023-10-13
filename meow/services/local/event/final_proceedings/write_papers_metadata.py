@@ -255,4 +255,3 @@ def get_header_data(contribution: ContributionData) -> dict[str, str] | None:
     ) if contribution.doi_data else None
 
     return header_data
-
