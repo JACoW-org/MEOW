@@ -3,27 +3,31 @@ import string
 from unidecode import unidecode
 
 from meow.models.local.event.final_proceedings.event_model import (AffiliationData, KeywordData,
-    PersonData)
+                                                                   PersonData)
+
 
 def group_authors_by_last_initial_for_render(authors: list[PersonData]) -> dict:
-    """"""
+    """ """
 
     # set with letters from the alphabet
     alphabet = set(string.ascii_lowercase)
-    
+
     groups = {}
     for author in authors:
-        key = get_initial(author.last, alphabet) if author.last else get_initial(author.first, alphabet)
+        key = get_initial(author.last, alphabet) if author.last else get_initial(
+            author.first, alphabet)
         if key not in groups:
             groups[key] = []
         groups[key].append(author.as_dict())
     return groups
 
+
 def group_keywords_by_initial(keywords: list[KeywordData]) -> dict:
-    """"""
+    """ """
+
     # set with letters from the alphabet
     alphabet = set(string.ascii_lowercase)
-    
+
     groups = {}
     for keyword in keywords:
         key = get_initial(keyword.name, alphabet)
@@ -33,11 +37,13 @@ def group_keywords_by_initial(keywords: list[KeywordData]) -> dict:
 
     return groups
 
+
 def group_institutes_by_initial(institutes: list[AffiliationData]) -> dict:
     """"""
+
     # set with letters from the alphabet
     alphabet = set(string.ascii_lowercase)
-    
+
     groups = {}
     for institute in institutes:
         if institute.name:
@@ -47,9 +53,10 @@ def group_institutes_by_initial(institutes: list[AffiliationData]) -> dict:
             groups[key].append(institute.as_dict())
     return groups
 
+
 def get_authors_initials_dict(authors: list[PersonData]) -> dict[str, bool]:
-    """"""
-    
+    """ """
+
     initials = {}
 
     # set with letters from the alphabet
@@ -61,13 +68,15 @@ def get_authors_initials_dict(authors: list[PersonData]) -> dict[str, bool]:
 
     # iterate over authors to build map of initials
     for author in authors:
-        initial = get_initial(author.last, alphabet) if author.last else get_initial(author.first, alphabet)
+        initial = get_initial(author.last, alphabet) if author.last else get_initial(
+            author.first, alphabet)
         initials[initial] = True
 
     return initials
 
+
 def get_keywords_initials_dict(keywords: list[KeywordData]) -> dict[str, bool]:
-    """"""
+    """ """
 
     initials = {}
 
@@ -84,8 +93,9 @@ def get_keywords_initials_dict(keywords: list[KeywordData]) -> dict[str, bool]:
 
     return initials
 
+
 def get_institutes_initials_dict(institutes: list[AffiliationData]) -> dict[str, bool]:
-    """"""
+    """ """
 
     initials = {}
 
@@ -103,13 +113,14 @@ def get_institutes_initials_dict(institutes: list[AffiliationData]) -> dict[str,
 
     return initials
 
+
 def get_initial(name, alphabet):
     if not name:
         return None
-    
+
     initial = unidecode(name)[0].lower()
 
     if initial not in alphabet:
         return get_initial(name[1:], alphabet)
-    
+
     return initial

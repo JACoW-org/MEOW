@@ -46,17 +46,17 @@ class PickleSerializer(AbstractSerializer):
 
 # class MsgPackSerializer(AbstractSerializer):
 #     """ """
-# 
+#
 #     def __init__(self):
 #         try:
 #             from msgpack import dumps, loads
 #             super().__init__(dumps, loads)
 #         except ImportError:
 #             raise ImportError('Error: pip install msgpack')
-# 
+#
 #     def serialize(self, data: Any) -> str:
 #         return self._dumps(data)
-# 
+#
 #     def deserialize(self, data: str) -> Any:
 #         return self._loads(data)
 
@@ -71,4 +71,3 @@ def json_decode(data: str) -> Any:
 
 def pickle_encode(data: Any) -> bytes:
     return PickleSerializer().serialize(data)
-

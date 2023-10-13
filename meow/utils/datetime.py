@@ -2,7 +2,7 @@ import datetime as dt
 
 import pytz as tz
 
-""" 
+"""
 datedict -> dict(
     date="2022-08-21",
     time="17:00:00",

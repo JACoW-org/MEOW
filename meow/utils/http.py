@@ -1,7 +1,6 @@
 import asyncio
-from email import header
 import logging
-from typing import Any, AsyncIterable, Optional
+from typing import Any, AsyncIterable
 
 import io
 import aiohttp
@@ -33,7 +32,7 @@ class HttpClientSessions:
             try:
                 logging.info(f'close_client_session >>> {sess}')
                 await sess.close()
-            except Exception as e:
+            except Exception:
                 pass
 
 
@@ -100,7 +99,7 @@ async def fetch_json(url: str, headers: dict = {}, cookies: dict = {}, auth: Bas
                     raise ex
         except asyncio.TimeoutError as ex:
             logger.error(ex, exc_info=True)
-            raise BaseException(dict(code=504, message=f"timeout exception"))
+            raise BaseException(dict(code=504, message="timeout exception"))
         finally:
             HttpClientSessions.del_client_session(client)
 
@@ -140,12 +139,13 @@ async def delete_json(url: str, headers: dict = {}, cookies: dict = {}, auth: Ba
                     raise ex
         except asyncio.TimeoutError as ex:
             logger.error(ex, exc_info=True)
-            raise BaseException(dict(code=504, message=f"timeout exception"))
+            raise BaseException(dict(code=504, message="timeout exception"))
         finally:
             HttpClientSessions.del_client_session(client)
 
 
-async def put_json(url: str, data: Any, headers: dict = {}, cookies: dict = {}, auth: BasicAuthData | None = None) -> Any:
+async def put_json(url: str, data: Any, headers: dict = {}, cookies: dict = {},
+                   auth: BasicAuthData | None = None) -> Any:
     """ Send HTTP PUT json function """
 
     def json_serialize(val):
@@ -178,14 +178,14 @@ async def put_json(url: str, data: Any, headers: dict = {}, cookies: dict = {}, 
                     raise BaseException(
                         # f"invalid response status" + f" {resp.status} - {body}"
                         dict(
-                            code=resp.status, message=f"invalid response status" + f" {resp.status} - {body}")
+                            code=resp.status, message="invalid response status" + f" {resp.status} - {body}")
                     )
                 except BaseException as ex:
                     logger.error(ex, exc_info=True)
                     raise ex
         except asyncio.TimeoutError as ex:
             logger.error(ex, exc_info=True)
-            raise BaseException(dict(code=504, message=f"timeout exception"))
+            raise BaseException(dict(code=504, message="timeout exception"))
         except BaseException as ex:
             logger.error(ex, exc_info=True)
             raise ex

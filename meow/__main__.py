@@ -42,13 +42,18 @@ def meow_auth(args) -> None:
 
         elif args.login:
 
+            date = datetime.now().isoformat()  # type: ignore
+
             [user, host] = args.login.split('@')
 
             key = ULID()
 
-            res = await dbs.redis_client.hset(f'meow:credential:{key}', 'user', user)
-            res = await dbs.redis_client.hset(f'meow:credential:{key}', 'host', host)
-            res = await dbs.redis_client.hset(f'meow:credential:{key}', 'date', datetime.now().isoformat())
+            res = await dbs.redis_client.hset(
+                f'meow:credential:{key}', 'user', user)  # type: ignore
+            res = await dbs.redis_client.hset(
+                f'meow:credential:{key}', 'host', host)  # type: ignore
+            res = await dbs.redis_client.hset(
+                f'meow:credential:{key}', 'date', date)  # type: ignore
 
             print(user, host, key)
 
@@ -64,7 +69,8 @@ def meow_auth(args) -> None:
 
             key = str(args.check)
 
-            res = await dbs.redis_client.hgetall(f'meow:credential:{key}')
+            res = await dbs.redis_client.hgetall(
+                f'meow:credential:{key}')  # type: ignore
 
             if res:
 
@@ -72,7 +78,8 @@ def meow_auth(args) -> None:
                 host: bytes = res.get(b'host', None)
                 date: bytes = res.get(b'date', None)
 
-                print(user.decode('utf-8'), host.decode('utf-8'), date.decode('utf-8'))
+                print(user.decode('utf-8'),
+                      host.decode('utf-8'), date.decode('utf-8'))
 
             else:
 

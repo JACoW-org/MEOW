@@ -1,12 +1,13 @@
 import asyncio
 import functools
 import logging
-from typing import Any, Awaitable, Optional, TypeVar, Tuple
+
+from typing import Any, Optional, TypeVar, Tuple
 
 T = TypeVar('T')
 
 
-def cancel_task(task: asyncio.Task[T], logger: logging.Logger, ):
+def cancel_task(task: asyncio.Task, logger: logging.Logger, ):
     try:
         if task and isinstance(task, asyncio.Task):
             task.cancel()
@@ -25,7 +26,7 @@ def create_task(
         message: str,
         message_args: Tuple[Any, ...] = (),
         loop: Optional[asyncio.AbstractEventLoop] = None,
-) -> 'asyncio.Task[T]':
+) -> 'asyncio.Task':
     """
     This helper function wraps a ``loop.create_task(coroutine())`` call and ensures there is
     an exception handler added to the resulting task. If the task raises an exception it is logged
@@ -36,7 +37,8 @@ def create_task(
         loop = asyncio.get_running_loop()
     task = loop.create_task(name=name, coro=coro)
     task.add_done_callback(
-        functools.partial(_handle_task_result, logger=logger, message=message, message_args=message_args)
+        functools.partial(_handle_task_result, logger=logger,
+                          message=message, message_args=message_args)
     )
     return task
 

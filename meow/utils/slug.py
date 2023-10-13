@@ -6,8 +6,6 @@ import unicodedata
 from html.entities import name2codepoint
 
 
-
-
 CHAR_ENTITY_PATTERN = re.compile(r'&(%s);' % '|'.join(name2codepoint))
 DECIMAL_PATTERN = re.compile(r'&#(\d+);')
 HEX_PATTERN = re.compile(r'&#x([\da-fA-F]+);')
@@ -60,6 +58,7 @@ def smart_truncate(string, max_length=0, word_boundary=False, separator=' ', sav
         truncated = string[:max_length]
     return truncated.strip(separator)
 
+
 def slugify(text, entities=True, decimal=True, hexadecimal=True, max_length=0, word_boundary=False,
             separator=DEFAULT_SEPARATOR, save_order=False, stopwords=(), regex_pattern=None, lowercase=True,
             replacements=()) -> str:
@@ -98,7 +97,8 @@ def slugify(text, entities=True, decimal=True, hexadecimal=True, max_length=0, w
 
     # character entity reference
     if entities:
-        text = CHAR_ENTITY_PATTERN.sub(lambda m: chr(name2codepoint[m.group(1)]), text)
+        text = CHAR_ENTITY_PATTERN.sub(
+            lambda m: chr(name2codepoint[m.group(1)]), text)
 
     # decimal character reference
     if decimal:
@@ -135,15 +135,18 @@ def slugify(text, entities=True, decimal=True, hexadecimal=True, max_length=0, w
     text = re.sub(pattern, DEFAULT_SEPARATOR, text)
 
     # remove redundant
-    text = DUPLICATE_DASH_PATTERN.sub(DEFAULT_SEPARATOR, text).strip(DEFAULT_SEPARATOR)
+    text = DUPLICATE_DASH_PATTERN.sub(
+        DEFAULT_SEPARATOR, text).strip(DEFAULT_SEPARATOR)
 
     # remove stopwords
     if stopwords:
         if lowercase:
             stopwords_lower = [s.lower() for s in stopwords]
-            words = [w for w in text.split(DEFAULT_SEPARATOR) if w not in stopwords_lower]
+            words = [w for w in text.split(
+                DEFAULT_SEPARATOR) if w not in stopwords_lower]
         else:
-            words = [w for w in text.split(DEFAULT_SEPARATOR) if w not in stopwords]
+            words = [w for w in text.split(
+                DEFAULT_SEPARATOR) if w not in stopwords]
         text = DEFAULT_SEPARATOR.join(words)
 
     # finalize user-specific replacements
@@ -153,7 +156,8 @@ def slugify(text, entities=True, decimal=True, hexadecimal=True, max_length=0, w
 
     # smart truncate if requested
     if max_length > 0:
-        text = smart_truncate(text, max_length, word_boundary, DEFAULT_SEPARATOR, save_order)
+        text = smart_truncate(text, max_length, word_boundary,
+                              DEFAULT_SEPARATOR, save_order)
 
     if separator != DEFAULT_SEPARATOR:
         text = text.replace(DEFAULT_SEPARATOR, separator)
