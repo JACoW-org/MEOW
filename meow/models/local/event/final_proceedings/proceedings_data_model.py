@@ -44,6 +44,9 @@ class ProceedingsConfig:
     # indica se includere la generazione dei json relativi ai doi
     generate_doi_payload: bool = field()
 
+    # indica se includere la generazione dei json relativi a inspirehep
+    generate_hep_payload: bool = field()
+
     def as_dict(self) -> dict:
         return asdict(self)
 
@@ -64,11 +67,21 @@ class ProceedingsData:
     doi_per_institute: list[AffiliationData] = field(default_factory=list)
 
     conference_doi: dict = field(default_factory=dict)
+    conference_hep: dict = field(default_factory=dict)
 
     proceedings_volume_size: int = field(default=0)
     proceedings_brief_size: int = field(default=0)
 
     total_pages: int = field(default=0)
+
+    @property
+    def conference_hep_payload(self) -> str:
+
+        if not self.conference_hep:
+            return '{}'
+
+        return json.dumps(self.conference_hep) \
+            if self.conference_hep else '{}'
 
     @property
     def conference_doi_payload(self) -> str:

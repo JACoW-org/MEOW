@@ -28,7 +28,8 @@ async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict
 
     logger.info('event_final_proceedings - write_papers_metadata')
 
-    papers_data: list[ContributionPaperData] = await extract_contributions_papers(proceedings_data, callback)
+    papers_data: list[ContributionPaperData] = await extract_contributions_papers(
+        proceedings_data, callback)
 
     total_files: int = len(papers_data)
 
@@ -85,10 +86,10 @@ async def write_metadata_task(current_paper, sessions, settings, pdf_cache_dir):
     footer_data: dict | None = get_footer_data(contribution, session)
 
     # metadata_mutool = get_metadata_mutool(contribution)
-    metadata_pikepdf = get_metadata_pikepdf(contribution)
+    metadata_pikepdf: dict | None = get_metadata_pikepdf(contribution)
 
     # xml_metadata_mutool = get_xml_metatdata_mutool(contribution)
-    xml_metadata_pikepdf = get_xml_metatdata_pikepdf(contribution)
+    xml_metadata_pikepdf: dict | None = get_xml_metatdata_pikepdf(contribution)
 
     pre_print: str = settings.get('pre_print', 'This is a preprint') \
         if contribution.peer_reviewing_accepted else ''
@@ -96,21 +97,22 @@ async def write_metadata_task(current_paper, sessions, settings, pdf_cache_dir):
     if pre_print != '':
         logger.info(f"code: {contribution.code} - preprint: {pre_print}")
 
-    async def _task_one():
+    async def _task_jacow_files():
         await draw_frame_anyio(str(original_pdf_file), str(jacow_pdf_file),
                                contribution.page, pre_print, header_data,
                                footer_data, None, None, True)
 
-        await pdf_metadata_qpdf(str(jacow_pdf_file), metadata_pikepdf, xml_metadata_pikepdf)
+        await pdf_metadata_qpdf(str(jacow_pdf_file), metadata_pikepdf,
+                                xml_metadata_pikepdf)
 
-    async def _task_two():
+    async def _task_concat_files():
         await draw_frame_anyio(str(original_pdf_file), str(join_pdf_file),
                                contribution.page, pre_print, header_data,
                                footer_data, None, None, False)
 
     async with create_task_group() as tg:
-        tg.start_soon(_task_one)
-        tg.start_soon(_task_two)
+        tg.start_soon(_task_jacow_files)
+        tg.start_soon(_task_concat_files)
 
 
 def get_metadata_mutool(contribution: ContributionData) -> dict[str, Any] | None:

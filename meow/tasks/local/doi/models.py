@@ -55,6 +55,7 @@ class ContributionDOI:
     # BibTeX, LaTeX, Text/Word, RIS, EndNote
     reference: Optional[Reference] = field(default=None)
     conference_code: str = field(default='')
+    conference_doi_name: str = field(default='')
     series: str = field(default='')
     venue: str = field(default='')
     start_date: str = field(default='')
@@ -86,6 +87,7 @@ class ContributionDOI:
     paper_size: int = field(default=0)
     track: str = field(default='')
     subtrack: str = field(default='')
+    keywords: list[str] = field(default_factory=list)
 
     @property
     def paper_size_mb(self) -> float:
@@ -104,6 +106,96 @@ class ContributionDOI:
         data['attributes'] = self._build_doi_attributes()
 
         return json.dumps(dict(data=data))
+
+    def as_hep_json(self) -> str:
+
+        return json.dumps(self._build_hep_attributes())
+
+    def _build_hep_attributes(self) -> dict:
+
+        attributes = {
+            "titles": [
+                {
+                    "source": "JACOW",
+                    "title": self.title
+                }
+            ],
+            "abstracts": [
+                {
+                    "source": "JACOW",
+                    "value": self.abstract
+                }
+            ],
+            "imprints": [
+                {
+                    "date": self.start_date
+                }
+            ],
+            "keywords": [{
+                "value": k,
+                "source": "JACOW"
+            } for k in self.keywords],
+            "publication_info": [
+                {
+                    "artid": self.code,
+                    "conf_acronym": self.conference_doi_name,
+                    "journal_title": "JACoW",
+                    "journal_volume": self.conference_doi_name,
+                    "year": datetime.date.today().year
+                }
+            ],
+            "dois": [
+                {
+                    "source": "JACOW",
+                    "value": self.doi_name
+                }
+            ],
+            "number_of_pages": self.num_of_pages,
+            "document_type": [
+                "conference paper"
+            ],
+            "documents": [
+                {
+                    "key": "document",
+                    "fulltext": True,
+                    "url": f"https://jacow.org/{self.conference_doi_name.lower()}/pdf/{self.code}.pdf",
+                    "source": "JACOW"
+                }
+            ],
+            "license": [
+                {
+                    "imposing": "JACOW",
+                    "license": "CC-BY-4.0",
+                    "url": "https://creativecommons.org/licenses/by/4.0"
+                }
+            ],
+            "authors": [
+                {
+
+                    "full_name": f"{editor.last_name}, {editor.first_name}",
+
+                    "raw_affiliations": [
+                        {
+                            "value": editor.affiliation
+                        }
+                    ]
+                }
+                for editor in self.editors
+            ],
+            "_collections": [
+                "Literature"
+            ],
+            "inspire_categories": [
+                {
+                    "term": "Accelerators"
+                }
+            ],
+            "curated": False,
+            "$schema": "https://inspirehep.net/schemas/records/hep.json",
+            "citeable": True
+        }
+
+        return attributes
 
     def _build_doi_attributes(self) -> dict:
 

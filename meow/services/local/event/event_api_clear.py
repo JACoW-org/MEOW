@@ -34,6 +34,7 @@ async def _event_api_clear(event_id: int) -> None:
         tg.start_soon(_event_clean_pdf_files_task, event_id)
         tg.start_soon(_event_clean_static_site_task, event_id)
         tg.start_soon(_event_clean_doi_jsons, event_id)
+        tg.start_soon(_event_clean_hep_jsons, event_id)
 
     logger.info('event_api_clear - end')
 
@@ -48,20 +49,18 @@ async def _event_clean_pdf_files_task(event_id: str) -> None:
 
 async def _event_clean_static_site_task(event_id: str) -> None:
 
-    static_site_name = f'{event_id}_src'
-    static_site_src = Path('var', 'run', static_site_name)
-
-    site_preview_name = f'{event_id}'
-    site_preview_path = Path('var', 'html', site_preview_name)
-
-    site_archive_name = f"{event_id}.7z"
-    site_archive_path = Path('var', 'html', site_archive_name)
+    site_sources_path = Path('var', 'run', f'{event_id}_src')
+    site_preview_path = Path('var', 'html', f'{event_id}')
+    site_archive_path = Path('var', 'html', f"{event_id}.7z")
 
     if await site_archive_path.exists():
         await site_archive_path.unlink()
 
-    await rmtree(str(site_preview_path))
-    await rmtree(str(static_site_src))
+    if await site_preview_path.exists():
+        await rmtree(str(site_preview_path))
+
+    if await site_sources_path.exists():
+        await rmtree(str(site_sources_path))
 
 
 async def _event_clean_doi_jsons(event_id: str) -> None:
@@ -70,3 +69,11 @@ async def _event_clean_doi_jsons(event_id: str) -> None:
     doi_jsons_path = Path('var', 'run', doi_jsons_name)
 
     await rmtree(str(doi_jsons_path))
+
+
+async def _event_clean_hep_jsons(event_id: str) -> None:
+
+    hep_jsons_name = f'{event_id}_hep'
+    hep_jsons_path = Path('var', 'run', hep_jsons_name)
+
+    await rmtree(str(hep_jsons_path))

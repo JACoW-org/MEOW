@@ -36,6 +36,7 @@ async def _event_api_info(event_id: int) -> dict:
         'pdf_cache': None,
         'pre_press': None,
         'datacite_json': None,
+        'inspirehep_json': None,
         'final_proceedings': None,
         'proceedings_archive': None,
     }
@@ -44,6 +45,7 @@ async def _event_api_info(event_id: int) -> dict:
         tg.start_soon(event_pdf_cache_info_task, event_id, result)
         tg.start_soon(event_pre_press_info_task, event_id, result)
         tg.start_soon(event_datacite_json_info_task, event_id, result)
+        tg.start_soon(event_inspirehep_json_info_task, event_id, result)
         tg.start_soon(event_final_proceedings_info_task, event_id, result)
         tg.start_soon(event_proceedings_archive_info_task, event_id, result)
 
@@ -61,6 +63,10 @@ async def event_pre_press_info_task(event_id: str, result: dict):
 
 
 async def event_datacite_json_info_task(event_id: str, result: dict):
+    result['datacite_json'] = await Path('var', 'run', f"{event_id}_doi").exists()
+
+
+async def event_inspirehep_json_info_task(event_id: str, result: dict):
     result['datacite_json'] = await Path('var', 'run', f"{event_id}_doi").exists()
 
 

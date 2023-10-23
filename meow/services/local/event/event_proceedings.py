@@ -15,6 +15,8 @@ from meow.models.local.event.final_proceedings.contribution_model import (
     ContributionData)
 from meow.models.local.event.final_proceedings.proceedings_data_model import (
     ProceedingsConfig, ProceedingsData)
+from meow.services.local.event.final_proceedings.build_hep_payloads import (
+    build_hep_payloads)
 from meow.services.local.event.final_proceedings.copy_html_partials import (
     copy_html_partials)
 
@@ -361,6 +363,20 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
     await extend_lock(lock)
 
     yield dict(type='progress', value=dict(
+        phase='generate_dois',
+        text='Generate DOIs'
+    ))
+
+    # Blocking
+
+    await generate_dois(proceedings, cookies, settings, config,
+                        filter_published_contributions)
+
+    """ """
+
+    await extend_lock(lock)
+
+    yield dict(type='progress', value=dict(
         phase='write_papers_metadata',
         text='Write Papers Metadata'
     ))
@@ -401,20 +417,6 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
 
     """ """
 
-    await extend_lock(lock)
-
-    yield dict(type='progress', value=dict(
-        phase='generate_dois',
-        text='Generate DOIs'
-    ))
-
-    # Blocking
-
-    await generate_dois(proceedings, cookies, settings, config,
-                        filter_published_contributions)
-
-    """ """
-
     if config.generate_doi_payload:
 
         await extend_lock(lock)
@@ -428,6 +430,22 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
 
         # generation of payloads for DOIs
         await build_doi_payloads(proceedings)
+
+    """ """
+
+    if config.generate_hep_payload:
+
+        await extend_lock(lock)
+
+        yield dict(type='progress', value=dict(
+            phase='generate_inspirehep_payloads',
+            text='Generate Inspirehep payloads'
+        ))
+
+        # Blocking
+
+        # generation of payloads for DOIs
+        await build_hep_payloads(proceedings)
 
     """ """
 

@@ -32,7 +32,10 @@ async def generate_dois(proceedings_data: ProceedingsData, cookies: dict, settin
 
     logger.info('event_final_proceedings - generate_contribution_doi')
 
-    proceedings_data.conference_doi = await generate_conference_doi_task(proceedings_data, settings, config)
+    proceedings_data.conference_doi = await generate_conference_doi_task(
+        proceedings_data, settings, config)
+    proceedings_data.conference_hep = await generate_conference_hep_task(
+        proceedings_data, settings, config)
 
     contributions = [
         c for c in proceedings_data.contributions
@@ -91,6 +94,82 @@ async def generate_dois(proceedings_data: ProceedingsData, cookies: dict, settin
             proceedings_data, results, callable)
 
     return proceedings_data
+
+
+async def generate_conference_hep_task(proceedings_data: ProceedingsData,
+                                       settings: dict,
+                                       config: ProceedingsConfig):
+
+    """ """
+
+    doi_landing_page: str = generate_doi_landing_page_url(
+        organization=settings.get('doi_organization', 'JACoW'),
+        conference=settings.get('doi_conference', 'CONF-YY')
+    )
+
+    conference_hep = {
+        "titles": [{
+            "source": "JACOW",
+            "title": settings.get('booktitle_long', '')
+        }],
+        "imprints": [
+            {
+                "date": format_datetime_range_doi(proceedings_data.event.start, proceedings_data.event.end)
+            }
+        ],
+        "publication_info": [
+            {
+                "conf_acronym": settings.get('doi_conference', 'CONF-YY'),
+                "journal_title": "JACoW",
+                "year": datetime.date.today().year
+            }
+        ],
+        "isbns": [
+            {
+                "value": settings.get('isbn', '')
+            }
+        ],
+        "document_type": [
+            "proceedings"
+        ],
+        "urls": [
+            {
+                "value": doi_landing_page.lower()
+            }
+        ],
+        "license": [
+            {
+                "imposing": "JACOW",
+                "license": "CC-BY-4.0",
+                "url": "https://creativecommons.org/licenses/by/4.0"
+            }
+        ],
+        "authors": [
+            {
+                "full_name": "Pltzeneder, Birgit",
+                "inspire_roles": [
+                    "editor"
+                ],
+                "raw_affiliations": [
+                    {
+                        "value": "ELI, Prague, Czech Republic"
+                    }
+                ]
+            }
+        ],
+        "_collections": [
+            "Literature"
+        ],
+        "inspire_categories": [
+            {
+                "term": "Accelerators"
+            }
+        ],
+        "curated": False,
+        "$schema": "https://inspirehep.net/schemas/records/hep.json"
+    }
+
+    return conference_hep
 
 
 async def generate_conference_doi_task(proceedings_data: ProceedingsData,
@@ -308,6 +387,7 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
     doi_data = ContributionDOI(
         code=contribution.code,
         title=contribution.title,
+        keywords=[k.name for k in contribution.keywords],
         primary_authors=primary_authors,
         authors_groups=contribution.authors_groups,
         abstract=contribution.description,
@@ -315,6 +395,7 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         slides_url=contribution.url,
         reference=contribution.reference,
         conference_code=event.title,
+        conference_doi_name=settings.get('doi_conference', 'CONF-YY'),
         venue=event.location,
         start_date=format_datetime_full(event.start),
         end_date=format_datetime_full(event.end),

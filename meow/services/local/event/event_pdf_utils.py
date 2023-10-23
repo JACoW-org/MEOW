@@ -83,9 +83,9 @@ async def pdf_linearize_qpdf(in_path: str, out_path: str, docinfo: dict | None, 
 async def pdf_metadata_qpdf(file_path: str, docinfo: dict | None, metadata: dict | None):
     """ """
 
-    with open(file_path, allow_overwriting_input=True) as pdf_doc:
+    # print(file_path, docinfo, metadata)
 
-        # print(pdf_doc.docinfo)
+    with open(file_path, allow_overwriting_input=True) as pdf_doc:
 
         if docinfo:
             for key in docinfo:
@@ -95,8 +95,6 @@ async def pdf_metadata_qpdf(file_path: str, docinfo: dict | None, metadata: dict
                                    update_docinfo=False) as pdf_meta:
 
             pdf_meta.clear()
-
-            # print(pdf_meta)
 
             # if docinfo:
             #     pdf_meta.load_from_docinfo(
