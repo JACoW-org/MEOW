@@ -24,14 +24,14 @@ class PubsubRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
     def __init__(self):
         super().__init__('__pubsub_redis_worker_logic')
 
-    async def subscribe(self, on_message: Callable):
+    async def subscribe(self, on_message: Callable) -> Callable:
 
         async def __read(p: PubSub):
 
             logger.debug('__read')
 
             async with create_task_group():
-                with move_on_after(2):
+                with move_on_after(delay=2, shield=True):
                     try:
 
                         payload = await p.get_message(
@@ -43,12 +43,12 @@ class PubsubRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
 
                         return payload
 
-                    except asyncio.CancelledError:
+                    except asyncio.exceptions.CancelledError:
                         logger.debug("__read:CancelledError",
                                      exc_info=False)
                     except ConnectionError:
-                        logger.warning("__read:ConnectionError",
-                                       exc_info=False)
+                        logger.warn("__read:ConnectionError",
+                                    exc_info=False)
                     except BaseException:
                         logger.error("__read:BaseException",
                                      exc_info=True)
@@ -64,7 +64,7 @@ class PubsubRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
                         await on_message(payload['data'])
 
                     # await anyio.sleep(0.01)
-                except asyncio.CancelledError:
+                except asyncio.exceptions.CancelledError:
                     logger.debug("__reader:CancelledError")
                 except ConnectionError:
                     logger.warning("__reader:ConnectionError",
@@ -94,8 +94,8 @@ class PubsubRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
                 except asyncio.CancelledError:
                     logger.info("__task:CancelledError")
                 except ConnectionError:
-                    logger.warning("__reader:ConnectionError",
-                                   exc_info=False)
+                    logger.warn("__task:ConnectionError",
+                                exc_info=False)
                 except BaseException as be:
                     logger.error(be, exc_info=True)
                 finally:

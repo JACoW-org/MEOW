@@ -1,8 +1,11 @@
 import logging as lg
 
+from asyncio.exceptions import CancelledError
+
 from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
+from meow.app.errors.service_error import ProceedingsError
 
 from meow.models.local.event.final_proceedings.event_model import MaterialData
 
@@ -15,7 +18,7 @@ logger = lg.getLogger(__name__)
 
 
 async def download_event_materials(proceedings_data: ProceedingsData, cookies: dict,
-                                     settings: dict) -> ProceedingsData:
+                                   settings: dict) -> ProceedingsData:
     """ """
 
     logger.info('event_final_proceedings - download_event_materials')
@@ -56,8 +59,15 @@ async def download_event_materials(proceedings_data: ProceedingsData, cookies: d
             logger.debug(crs, exc_info=False)
         except EndOfStream as eos:
             logger.debug(eos, exc_info=False)
-        except Exception as ex:
-            logger.error(ex, exc_info=True)
+        except CancelledError as ace:
+            logger.debug(ace, exc_info=False)
+            raise ace
+        except ProceedingsError as pe:
+            logger.error(pe, exc_info=False)
+            raise pe
+        except BaseException as be:
+            logger.error(be, exc_info=True)
+            raise be
 
     return proceedings_data
 
@@ -92,11 +102,12 @@ async def file_download_task(capacity_limiter: CapacityLimiter, total_files: int
             # else:
             #     logger.info(f"cached_file --> {pdf_url}")
 
-        except BaseException as be:
-            logger.error(be, exc_info=True)
+            await res.send({
+                "index": current_index,
+                "total": total_files,
+                "file": current_file
+            })
 
-        await res.send({
-            "index": current_index,
-            "total": total_files,
-            "file": current_file
-        })
+        except BaseException as ex:
+            logger.error(ex, exc_info=True)
+            raise ex

@@ -2,6 +2,8 @@ import logging as lg
 import re
 from os import path
 
+from meow.app.errors.service_error import ProceedingsError
+
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
 from meow.models.local.event.final_proceedings.event_model import EventData
 
@@ -103,13 +105,18 @@ async def generate_contribution_references(proceedings_data: ProceedingsData, co
                         receive_stream.close()
 
         except ClosedResourceError as crs:
-            logger.debug(crs, exc_info=True)
+            logger.debug(crs, exc_info=False)
         except EndOfStream as eos:
-            logger.debug(eos, exc_info=True)
-        except Exception as ex:
-            logger.error(ex, exc_info=True)
+            logger.debug(eos, exc_info=False)
+        except ProceedingsError as pe:
+            logger.error(pe, exc_info=False)
+            raise pe
+        except BaseException as be:
+            logger.error(be, exc_info=True)
+            raise be
 
-    proceedings_data = refill_contribution_reference(proceedings_data, results)
+    proceedings_data = refill_contribution_reference(
+        proceedings_data, results)
 
     return proceedings_data
 
@@ -209,7 +216,8 @@ async def contribution_data_factory(event: EventData, contribution: Contribution
 
     location: str = settings.get('location', '')
 
-    conference_code = re.sub(r'[^a-zA-Z]', '', event.name).lower() + str(event.start.year)
+    conference_code = re.sub(
+        r'[^a-zA-Z]', '', event.name).lower() + str(event.start.year)
 
     return ContributionRef(
         url=contribution.url,

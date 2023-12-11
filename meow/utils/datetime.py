@@ -70,7 +70,7 @@ def format_datetime_range(start: dt.datetime, end: dt.datetime) -> str:
 
 
 def format_datetime_range_doi(start: dt.datetime, end: dt.datetime) -> str:
-    """"""
+    """ """
 
     if start is None or end is None:
         return ''

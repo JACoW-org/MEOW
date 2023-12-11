@@ -1,9 +1,10 @@
 """ """
 from starlette.applications import Starlette
 
+
 def build() -> Starlette:
     """ """
-       
+
     from meow.app.middleware import middleware as app_middleware
     from meow.app.routes import routes as app_routes
     from meow.callbacks.shutdown import app_shutdown

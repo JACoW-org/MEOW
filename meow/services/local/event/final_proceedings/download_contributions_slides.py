@@ -1,5 +1,6 @@
 import logging as lg
 from typing import Callable
+from asyncio.exceptions import CancelledError
 
 from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
@@ -17,7 +18,7 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import Pro
 logger = lg.getLogger(__name__)
 
 
-async def download_contributions_slides(proceedings_data: ProceedingsData, cookies: dict, 
+async def download_contributions_slides(proceedings_data: ProceedingsData, cookies: dict,
                                         settings: dict, callback: Callable):
     """ """
 
@@ -67,6 +68,9 @@ async def download_contributions_slides(proceedings_data: ProceedingsData, cooki
             logger.debug(crs, exc_info=False)
         except EndOfStream as eos:
             logger.debug(eos, exc_info=False)
+        except CancelledError as ace:
+            logger.debug(ace, exc_info=False)
+            raise ace
         except ProceedingsError as pe:
             logger.error(pe, exc_info=False)
             raise pe
@@ -114,12 +118,13 @@ async def file_download_task(capacity_limiter: CapacityLimiter, total_files: int
             # else:
             #     logger.info(f"cached_file --> {pdf_url}")
 
-        except Exception as ex:
-            logger.error(ex, exc_info=True)
+            await res.send({
+                "index": current_index,
+                "total": total_files,
+                "file": current_file,
+                "valid": valid
+            })
 
-        await res.send({
-            "index": current_index,
-            "total": total_files,
-            "file": current_file,
-            "valid": valid
-        })
+        except BaseException as ex:
+            logger.error(ex, exc_info=True)
+            raise ex

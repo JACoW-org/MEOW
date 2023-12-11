@@ -2,10 +2,12 @@ import logging as lg
 import datetime
 
 from typing import Callable
+from meow.app.errors.service_error import ProceedingsError
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
 from meow.models.local.event.final_proceedings.event_model import EventData, PersonData
 
-from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsConfig, ProceedingsData
+from meow.models.local.event.final_proceedings.proceedings_data_model import (
+    ProceedingsConfig, ProceedingsData)
 
 from anyio import create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
@@ -17,8 +19,8 @@ from meow.tasks.local.doi.utils import (generate_doi_external_label, generate_do
                                         generate_doi_landing_page_url, generate_doi_name,
                                         generate_doi_path, paper_size_mb)
 
-from meow.utils.datetime import (
-    format_datetime_doi_iso, format_datetime_full, format_datetime_range_doi, format_datetime_doi)
+from meow.utils.datetime import (format_datetime_dashed, format_datetime_doi,
+                                 format_datetime_doi_iso, format_datetime_full, format_datetime_range_doi)
 from meow.utils.serialization import json_decode
 from meow.models.local.event.final_proceedings.event_factory import event_person_factory
 
@@ -80,15 +82,19 @@ async def generate_dois(proceedings_data: ProceedingsData, cookies: dict, settin
                                 # close stream only when all contributions have been processed
                                 receive_stream.close()
                         else:
-                            logger.error(
-                                f'Received unexpected result type: {result_type}')
+                            logger.error(' '.join(['Received unexpected result',
+                                                   f'type: {result_type}']))
 
             except ClosedResourceError as crs:
                 logger.debug(crs, exc_info=False)
             except EndOfStream as eos:
                 logger.debug(eos, exc_info=False)
-            except Exception as ex:
-                logger.error(ex, exc_info=True)
+            except ProceedingsError as pe:
+                logger.error(pe, exc_info=False)
+                raise pe
+            except BaseException as be:
+                logger.error(be, exc_info=True)
+                raise be
 
         proceedings_data = refill_contribution_doi(
             proceedings_data, results, callable)
@@ -107,64 +113,50 @@ async def generate_conference_hep_task(proceedings_data: ProceedingsData,
         conference=settings.get('doi_conference', 'CONF-YY')
     )
 
+    editors_dict_list = json_decode(settings.get(
+        'editorial_json', '{}'))
+
+    editors: list[PersonData] = [
+        event_person_factory(person)
+        for person in editors_dict_list
+    ]
+
     conference_hep = {
         "titles": [{
             "source": "JACOW",
             "title": settings.get('booktitle_long', '')
         }],
-        "imprints": [
-            {
-                "date": format_datetime_range_doi(proceedings_data.event.start, proceedings_data.event.end)
-            }
+        "imprints": [{
+            "date": format_datetime_dashed(datetime.datetime.now())}
         ],
-        "publication_info": [
-            {
-                "conf_acronym": settings.get('doi_conference', 'CONF-YY'),
-                "journal_title": "JACoW",
-                "year": datetime.date.today().year
-            }
+        "publication_info": [{
+            "conf_acronym": settings.get('doi_conference', 'CONF-YY'),
+            "journal_title": "JACoW",
+            "year": datetime.date.today().year}
         ],
-        "isbns": [
-            {
-                "value": settings.get('isbn', '')
-            }
-        ],
-        "document_type": [
-            "proceedings"
-        ],
-        "urls": [
-            {
-                "value": doi_landing_page.lower()
-            }
-        ],
-        "license": [
-            {
-                "imposing": "JACOW",
-                "license": "CC-BY-4.0",
-                "url": "https://creativecommons.org/licenses/by/4.0"
-            }
-        ],
-        "authors": [
-            {
-                "full_name": "Pltzeneder, Birgit",
-                "inspire_roles": [
-                    "editor"
-                ],
-                "raw_affiliations": [
-                    {
-                        "value": "ELI, Prague, Czech Republic"
-                    }
-                ]
-            }
-        ],
-        "_collections": [
-            "Literature"
-        ],
-        "inspire_categories": [
-            {
-                "term": "Accelerators"
-            }
-        ],
+        "isbns": [{
+            "value": settings.get('isbn', '')
+        }],
+        "document_type": ["proceedings"],
+        "urls": [{
+            "value": doi_landing_page.lower()
+        }],
+        "license": [{
+            "imposing": "JACOW",
+            "license": "CC-BY-4.0",
+            "url": "https://creativecommons.org/licenses/by/4.0"
+        }],
+        "authors": [{
+            'full_name': f'{editor.last}, {editor.first}',
+            "inspire_roles": ["editor"],
+            "raw_affiliations": [{
+                "value": editor.affiliation
+            }]
+        } for editor in editors],
+        "_collections": ["Literature"],
+        "inspire_categories": [{
+            "term": "Accelerators"
+        }],
         "curated": False,
         "$schema": "https://inspirehep.net/schemas/records/hep.json"
     }
@@ -276,9 +268,9 @@ async def generate_conference_doi_task(proceedings_data: ProceedingsData,
         }],
         'sizes': [
             f'{paper_size_mb(proceedings_data.proceedings_volume_size)} MB',
-            # f'{proceedings_data.total_pages} pages'
+            f'{proceedings_data.total_pages} pages'
         ],
-        'formats': ["PDF"],
+        'formats': ['PDF'],
         'rightsList': [{
             'rights': 'Creative Commons Attribution 4.0 International',
             'rightsUri': 'https://creativecommons.org/licenses/by/4.0/legalcode',
@@ -301,8 +293,7 @@ async def generate_conference_doi_task(proceedings_data: ProceedingsData,
 
 async def generate_contribution_doi_task(capacity_limiter: CapacityLimiter, event: EventData,
                                          contribution: ContributionData, settings: dict,
-                                         config: ProceedingsConfig,
-                                         res: MemoryObjectSendStream) -> None:
+                                         config: ProceedingsConfig, res: MemoryObjectSendStream) -> None:
     """ """
 
     async with capacity_limiter:
@@ -373,7 +364,7 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         first_name=author.first,
         last_name=author.last,
         affiliation=author.affiliation
-    ) for author in contribution.authors]
+    ) for author in contribution.authors_list]
 
     track = None
     subtrack = None
@@ -397,14 +388,17 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         conference_code=event.title,
         conference_doi_name=settings.get('doi_conference', 'CONF-YY'),
         venue=event.location,
+
         start_date=format_datetime_full(event.start),
         end_date=format_datetime_full(event.end),
         date=format_datetime_range_doi(event.start, event.end),
+
         editors=[
             EditorDOI(first_name=editor.first, last_name=editor.last,
                       affiliation=editor.affiliation)
             for editor in contribution.editors
         ],
+
         isbn=event_isbn,
         issn=event_issn,
 

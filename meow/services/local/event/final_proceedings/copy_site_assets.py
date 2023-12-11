@@ -10,17 +10,8 @@ from meow.utils.filesystem import copy
 logger = lg.getLogger(__name__)
 
 
-async def copy_html_partials(proceedings_data: ProceedingsData,
-                             cookies: dict, settings: dict) -> ProceedingsData:
-    """ """
-
-    await copy_html_files(proceedings_data, settings)
-    await copy_json_files(proceedings_data, settings)
-
-    return proceedings_data
-
-
-async def copy_json_files(proceedings_data: ProceedingsData, settings: dict):
+async def copy_inspirehep_jsonl(proceedings_data: ProceedingsData,
+                                cookies: dict, settings: dict):
 
     html_dir_name = f"{proceedings_data.event.id}_src"
     html_base_dir: Path = Path("var", "run", html_dir_name)
@@ -42,7 +33,8 @@ async def copy_json_files(proceedings_data: ProceedingsData, settings: dict):
     await copy(str(json_src), str(json_dest))
 
 
-async def copy_html_files(proceedings_data: ProceedingsData, settings: dict):
+async def copy_html_partials(proceedings_data: ProceedingsData,
+                             cookies: dict, settings: dict):
 
     html_dir_name = f"{proceedings_data.event.id}_src"
     html_base_dir: Path = Path("var", "run", html_dir_name)

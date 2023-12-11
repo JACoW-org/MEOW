@@ -1,11 +1,9 @@
 import logging as lg
 
-from concurrent.futures import as_completed
-
-
 from anyio import Path, run_process
 from anyio import create_task_group, CapacityLimiter
-from anyio.from_thread import start_blocking_portal
+
+from meow.utils.filesystem import cptree, rmtree
 
 from meow.models.local.event.final_proceedings.track_model import TrackData
 from meow.models.local.event.final_proceedings.contribution_model import ContributionData
@@ -17,7 +15,6 @@ from meow.tasks.local.doi.models import ContributionDOI
 
 from meow.services.local.event.final_proceedings.abstract_plugin.abstract_final_proceedings_plugin import (
     AbstractFinalProceedingsPlugin)
-from meow.utils.filesystem import cptree, rmtree
 
 
 logger = lg.getLogger(__name__)
@@ -115,24 +112,38 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
         logger.info('event_final_proceedings - plugin.build')
 
-        with start_blocking_portal() as portal:
-            futures = [
-                portal.start_task_soon(self.render_home),
-                portal.start_task_soon(self.render_contributions),
-                portal.start_task_soon(self.render_session),
-                portal.start_task_soon(self.render_classification),
-                portal.start_task_soon(self.render_author),
-                portal.start_task_soon(self.render_institute),
-                portal.start_task_soon(self.render_doi_per_institute),
-                portal.start_task_soon(self.render_keyword),
-                portal.start_task_soon(self.render_doi_contributions),
-                portal.start_task_soon(self.render_references),
-                portal.start_task_soon(self.static),
-                portal.start_task_soon(self.finalize),
-            ]
+        async with create_task_group() as tg:
+            tg.start_soon(self.render_home)
+            tg.start_soon(self.render_contributions)
+            tg.start_soon(self.render_session)
+            tg.start_soon(self.render_classification)
+            tg.start_soon(self.render_author)
+            tg.start_soon(self.render_institute)
+            tg.start_soon(self.render_doi_per_institute)
+            tg.start_soon(self.render_keyword)
+            tg.start_soon(self.render_doi_contributions)
+            tg.start_soon(self.render_references)
+            tg.start_soon(self.static)
+            tg.start_soon(self.finalize)
 
-            for future in as_completed(futures):
-                logger.debug(future.result())
+        # with start_blocking_portal() as portal:
+        #     futures = [
+        #         portal.start_task_soon(self.render_home),
+        #         portal.start_task_soon(self.render_contributions),
+        #         portal.start_task_soon(self.render_session),
+        #         portal.start_task_soon(self.render_classification),
+        #         portal.start_task_soon(self.render_author),
+        #         portal.start_task_soon(self.render_institute),
+        #         portal.start_task_soon(self.render_doi_per_institute),
+        #         portal.start_task_soon(self.render_keyword),
+        #         portal.start_task_soon(self.render_doi_contributions),
+        #         portal.start_task_soon(self.render_references),
+        #         portal.start_task_soon(self.static),
+        #         portal.start_task_soon(self.finalize),
+        #     ]
+        #
+        #     for future in as_completed(futures):
+        #         logger.debug(future.result())
 
         # await self.render_home()
         # await self.render_contributions()
@@ -186,8 +197,8 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
         self.template = JinjaTemplateRenderer()
 
         await Path(self.src_dir, 'config.toml').write_text(
-            await self.template.render_config_toml(self.event, self.logo, 
-                                                   self.poster, self.volumes, 
+            await self.template.render_config_toml(self.event, self.logo,
+                                                   self.poster, self.volumes,
                                                    self.attachments, self.settings)
         )
 

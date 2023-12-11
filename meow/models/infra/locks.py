@@ -1,5 +1,6 @@
 import logging as lg
 from typing import Optional
+from anyio import CancelScope
 
 from redis.asyncio.client import Redis
 from redis.asyncio.lock import Lock
@@ -55,15 +56,25 @@ class RedisLock(Lock):
             blocking_timeout: Optional[float] = None,
             thread_local: bool = True,
     ):
-        super(RedisLock, self).__init__(redis, name, timeout, sleep, blocking, blocking_timeout, thread_local)
+        super(RedisLock, self).__init__(redis, name, timeout, sleep,
+                                        blocking, blocking_timeout, thread_local)
 
     async def __aenter__(self):
-        if await self.acquire():
-            RedisLockList.add_lock_to_static_list(self)
-            return self
+        try:
+            if await self.acquire():
+                RedisLockList.add_lock_to_static_list(self)
+                return self
+
+        except BaseException:
+            logger.error("Generic error", exc_info=True)
 
         raise LockError("Unable to acquire lock")
 
     async def __aexit__(self, exc_type, exc_value, traceback):
-        await self.release()
-        RedisLockList.del_lock_from_static_list(self)
+        with CancelScope(shield=True):
+            try:
+                await self.release()
+                RedisLockList.del_lock_from_static_list(self)
+
+            except BaseException:
+                logger.error("Generic error", exc_info=True)

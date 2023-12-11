@@ -149,7 +149,7 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
 
     """ """
 
-    logger.info(f"{contribution.get('code')}")
+    logger.debug(f"{contribution.get('code')}")
 
     """ """
 
@@ -158,7 +158,7 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
     if contrib_paper:
         peer_reviewing_accepted = contrib_paper.get('state', 0) == 2
 
-    logger.info(f"peer_reviewing: {peer_reviewing_accepted}")
+    logger.debug(f"peer_reviewing: {peer_reviewing_accepted}")
 
     """ """
 
@@ -172,7 +172,7 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
                     is_slides_included = True
                     break
 
-    logger.info(f"is_slides_included: {is_slides_included}")
+    logger.debug(f"is_slides_included: {is_slides_included}")
 
     """ """
 
@@ -195,9 +195,9 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
         elif paper_data.state == EditableData.EditableState.needs_submitter_confirmation:
             is_included_in_pdf_check = True
 
-    logger.info(f"is_prepress: {is_included_in_prepress}")
-    logger.info(f"is_proceedings: {is_included_in_proceedings}")
-    logger.info(f"is_pdf_check: {is_included_in_pdf_check}")
+    logger.debug(f"is_prepress: {is_included_in_prepress}")
+    logger.debug(f"is_proceedings: {is_included_in_proceedings}")
+    logger.debug(f"is_pdf_check: {is_included_in_pdf_check}")
 
     """ """
 

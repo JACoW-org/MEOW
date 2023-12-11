@@ -46,14 +46,14 @@
 </xsl:choose>
 <xsl:text>,
     </xsl:text>
-<xsl:text>\textquotedblleft{</xsl:text>
+<xsl:text>``</xsl:text>
 <xsl:value-of select="contribution/title"/>
-<xsl:text>}\textquotedblright,
+<xsl:text>'',
     </xsl:text>
 
 <xsl:choose>
 <xsl:when test="contribution/status = 'in_proceedings'">
-<xsl:text>in emph{Proc. </xsl:text>
+<xsl:text>in \emph{Proc. </xsl:text>
 <xsl:value-of select="conference/booktitle-short"/>
 <xsl:text>}</xsl:text>
 </xsl:when>

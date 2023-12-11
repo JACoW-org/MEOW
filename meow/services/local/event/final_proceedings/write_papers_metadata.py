@@ -1,7 +1,7 @@
 import logging as lg
 from typing import Any, Callable
 
-from anyio import Path, create_task_group, start_blocking_portal
+from anyio import Path, create_task_group
 
 from rdflib import URIRef
 from rdflib.term import Literal
@@ -15,8 +15,6 @@ from meow.models.local.event.final_proceedings.session_model import SessionData
 from meow.services.local.event.event_pdf_utils import draw_frame_anyio, pdf_metadata_qpdf
 
 from meow.utils.xmp import DC, PDF, XMP, XMPMetadata
-
-from concurrent.futures import as_completed
 
 
 logger = lg.getLogger(__name__)
@@ -43,16 +41,22 @@ async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict
     for session in proceedings_data.sessions:
         sessions_dict[session.code] = session
 
-    with start_blocking_portal() as portal:
-        futures = [
-            portal.start_task_soon(write_metadata_task,
-                                   current_paper, sessions_dict,
-                                   settings, pdf_cache_dir)
-            for current_paper in papers_data
-        ]
+    async with create_task_group() as tg:
+        for current_paper in papers_data:
+            tg.start_soon(write_metadata_task,
+                          current_paper, sessions_dict,
+                          settings, pdf_cache_dir)
 
-        for future in as_completed(futures):
-            pass
+    # with start_blocking_portal() as portal:
+    #     futures = [
+    #         portal.start_task_soon(write_metadata_task,
+    #                                current_paper, sessions_dict,
+    #                                settings, pdf_cache_dir)
+    #         for current_paper in papers_data
+    #     ]
+    #
+    #     for future in as_completed(futures):
+    #         pass
 
     return proceedings_data
 
@@ -77,10 +81,6 @@ async def write_metadata_task(current_paper, sessions, settings, pdf_cache_dir):
 
     if await join_pdf_file.exists():
         await join_pdf_file.unlink()
-
-        # logger.debug(f"{pdf_file} {pdf_name}")
-
-        # await copy(str(original_pdf_file), str(jacow_pdf_file))
 
     header_data: dict | None = get_header_data(contribution)
     footer_data: dict | None = get_footer_data(contribution, session)
