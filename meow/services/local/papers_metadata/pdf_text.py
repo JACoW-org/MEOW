@@ -6,7 +6,7 @@ from fitz.utils import getColor, insert_image, insert_textbox
 PAGE_HORIZONTAL_MARGIN = 57
 PAGE_VERTICAL_MARGIN = 15
 LINE_SPACING = 3
-ANNOTATION_HEIGHT = 10
+ANNOTATION_HEIGHT = 15
 SIDENOTE_LENGTH = 650
 TEXT_COLOR = getColor('GRAY10')
 FONT_SIZE = 7
@@ -41,7 +41,7 @@ def write_page_header(page: Page, data: dict, options: dict = dict()):
                    buffer=data.get('series', 'Series'),
                    fontname=options.get('fontName', FONT_NAME),
                    fontsize=options.get('fontSize', FONT_SIZE),
-                   color=options.get('textColor', TEXT_COLOR)
+                   color=options.get('textColor', TEXT_COLOR),
                    )
 
     # middle
@@ -337,13 +337,14 @@ def write_page_side(page: Page,
     )
 
     # add cc logo
-    insert_image(
-        page=page,
-        rect=rect_even_logo if page_number and page_number % 2 == 0 else rect_odd_logo,
-        # filename='cc_by.png',
-        rotate=90,
-        stream=cc_logo
-    )
+    if cc_logo:
+        insert_image(
+            page=page,
+            rect=rect_even_logo if page_number and page_number % 2 == 0 else rect_odd_logo,
+            # filename='cc_by.png',
+            rotate=90,
+            stream=cc_logo
+        )
 
     # add copyright text
     # page.add_freetext_annot(

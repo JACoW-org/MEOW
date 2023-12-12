@@ -12,9 +12,11 @@ import multiprocessing as mp
 
 from datetime import datetime
 
-from fitz import Document, Page, Rect, Point, Font, LINK_GOTO, LINK_URI
+from fitz import Document, Page, Rect, Point, LINK_GOTO, LINK_URI
 
-from fitz.utils import set_metadata, insert_link, insert_text, insert_textbox, new_page
+from fitz.utils import getColor, draw_rect, insert_textbox
+
+from fitz.utils import set_metadata, insert_link, insert_text, new_page
 
 
 from meow.services.local.papers_metadata.pdf_annots import (
@@ -25,6 +27,8 @@ from meow.services.local.papers_metadata.pdf_annots import (
 )
 
 from anyio import run
+
+from meow.services.local.papers_metadata.pdf_text import write_page_footer, write_page_header, write_page_side
 
 
 def meow_auth(args) -> None:
@@ -275,24 +279,79 @@ def doc_test(args) -> None:
     PAGE_WIDTH = 595
     PAGE_HEIGHT = 792
 
+    TEXT_ALIGN_LEFT = 0
+
+    PAGE_HORIZONTAL_MARGIN = 57
+    PAGE_VERTICAL_MARGIN = 15
+    LINE_SPACING = 3
+    ANNOTATION_HEIGHT = 12
+    SIDENOTE_LENGTH = 650
+    TEXT_COLOR = getColor('GRAY10')
+    TEXT_FILL = getColor('GRAY99')
+    FONT_SIZE = 7
+    # FONT_NAME = 'notos'
+    FONT_NAME = 'helv'
+
     doc = Document()
     page = new_page(doc, width=PAGE_WIDTH, height=PAGE_HEIGHT)
 
-    text = "This is a preprint — the final version is € [published with IOP]"
+    print(page.rect.width)
 
-    font = Font('cjk')
+    rect_width = page.rect.width - 2 * PAGE_HORIZONTAL_MARGIN
 
-    page.insert_font(fontname='cjk', fontbuffer=font.buffer)
+    print(rect_width)
 
-    insert_textbox(page,
-                   rect=Rect(50,
-                             50,
-                             500,
-                             500),
-                   buffer=text,
-                   fontname="cjk",
-                   encoding=0,
-                   fontsize=11)
+    # Rect(57.0, 15.0, 538.0, 25.0)
+
+    rect = Rect(PAGE_HORIZONTAL_MARGIN,
+                PAGE_VERTICAL_MARGIN,
+                PAGE_HORIZONTAL_MARGIN + rect_width,
+                PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT)
+
+    print(rect)
+
+    # text = "This is a preprint --- the final version is --- [published with IOP]"
+
+    # font = Font('cjk')
+
+    # page.insert_font(fontname='cjk', fontbuffer=font.buffer)
+
+    data = dict()
+    opt = dict()
+
+    cc_logo = pathlib.Path('cc_by.png').read_bytes()
+    
+    draw_rect(page=page,
+              rect=rect,
+              color=TEXT_COLOR)
+
+    insert_textbox(page=page,
+                   rect=rect,
+                   # rect=Rect(PAGE_HORIZONTAL_MARGIN,
+                   #           PAGE_VERTICAL_MARGIN, PAGE_HORIZONTAL_MARGIN + rect_width,
+                   #           PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT),
+                   align=TEXT_ALIGN_LEFT,
+                   buffer='Seriesgmpl',
+                   fontname=FONT_NAME,
+                   fontsize=FONT_SIZE,
+                   color=TEXT_COLOR,
+                   )
+
+    write_page_header(page, data, opt)
+
+    write_page_footer(page, 1, data, opt)
+
+    write_page_side(page, '', 1, cc_logo)
+
+    # insert_textbox(page,
+    #                rect=Rect(50,
+    #                          50,
+    #                          500,
+    #                          500),
+    #                buffer=text,
+    #                fontname='helv',
+    #                # encoding=0,
+    #                fontsize=11)
 
     doc.save(filename=args.output)
     del doc

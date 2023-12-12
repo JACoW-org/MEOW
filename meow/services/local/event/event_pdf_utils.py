@@ -2,7 +2,8 @@
 import io
 import pathlib
 import logging as lg
-from anyio import Path, to_process
+
+from anyio import Path, to_process as to_task  # to_thread
 
 from meow.services.local.papers_metadata.pdf_text import (
     write_page_footer, write_page_header, write_page_side)
@@ -52,8 +53,8 @@ def get_pdfunite_cmd():
 
 
 async def pdf_linearize_qpdf(in_path: str, out_path: str, docinfo: dict | None, metadata: dict | None):
-    return await to_process.run_sync(_pdf_linearize_qpdf, in_path, out_path, docinfo,
-                                     metadata, cancellable=True)
+    return await to_task.run_sync(_pdf_linearize_qpdf, in_path, out_path, docinfo,
+                                  metadata, cancellable=True)
 
 
 def _pdf_linearize_qpdf(in_path: str, out_path: str, docinfo: dict | None, metadata: dict | None):
@@ -87,8 +88,8 @@ def _pdf_linearize_qpdf(in_path: str, out_path: str, docinfo: dict | None, metad
 
 async def pdf_metadata_qpdf(file_path: str, docinfo: dict | None, metadata: dict | None):
     # return await sleep(10)
-    return await to_process.run_sync(_pdf_metadata_qpdf, file_path, docinfo,
-                                     metadata, cancellable=True)
+    return await to_task.run_sync(_pdf_metadata_qpdf, file_path, docinfo,
+                                  metadata, cancellable=True)
 
 
 def _pdf_metadata_qpdf(file_path: str, docinfo: dict | None, metadata: dict | None):
@@ -193,8 +194,8 @@ async def read_report(read_path: str, keywords: bool) -> dict | None:
 
 async def read_report_anyio(read_path: str, keywords: bool) -> dict | None:
     # return await sleep(10)
-    return await to_process.run_sync(_read_report_thread, read_path,
-                                     keywords, cancellable=True)
+    return await to_task.run_sync(_read_report_thread, read_path,
+                                  keywords, cancellable=True)
 
 
 def _read_report_thread(input: str, keywords: bool):
@@ -337,9 +338,9 @@ async def draw_frame_anyio(input: str, output: str, page: int,
                            xml_metadata: str | None, annotations: bool = True):
 
     # return await sleep(10)
-    return await to_process.run_sync(_draw_frame_anyio, input, output, page, pre_print,
-                                     header, footer, metadata, xml_metadata, annotations,
-                                     cancellable=True)
+    return await to_task.run_sync(_draw_frame_anyio, input, output, page, pre_print,
+                                  header, footer, metadata, xml_metadata, annotations,
+                                  cancellable=True)
 
 
 def _draw_frame_anyio(input: str, output: str, page_number: int,
