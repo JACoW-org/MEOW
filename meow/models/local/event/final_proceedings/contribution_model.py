@@ -153,23 +153,26 @@ class RevisionData:
         needs_submitter_confirmation = 3
 
     class FinalRevisionState:
-        # __titles__ = [None, _('Replaced'), _('Needs Confirmation'),
-        # _('Needs Changes'), _('Accepted'), _('Rejected'), _('Undone')]
-
-        #: A revision that is awaiting some action
-        none = 0
-        #: A revision that has been replaced by its next revision
-        replaced = 1
-        #: A revision that requires the submitter to confirm the next revision
-        needs_submitter_confirmation = 2
-        #: A revision that requires the submitter to submit a new revision
-        needs_submitter_changes = 3
-        #: A revision that has been accepted (no followup revision)
-        accepted = 4
-        #: A revision that has been rejected (no followup revision)
-        rejected = 5
-        #: A revision that has been undone
-        undone = 6
+        #: A submitter revision that hasn't been exposed to editors yet
+        new = 1
+        #: A submitter revision that can be reviewed by editors
+        ready_for_review = 2
+        #: An editor revision with changes the submitter needs to approve or reject
+        needs_submitter_confirmation = 3
+        #: A submitter revision that accepts the changes made by the editor
+        changes_acceptance = 4
+        #: A submitter revision that rejects the changes made by the editor
+        changes_rejection = 5
+        #: An editor revision that requires the submitter to submit a new revision
+        needs_submitter_changes = 6
+        #: An editor revision that accepts the editable
+        accepted = 7
+        #: An editor revision that rejects the editable
+        rejected = 8
+        #: A system revision that replaces the current revision
+        replacement = 9
+        #: A system revision that resets the state of the editable to "ready for review"
+        reset = 10
 
 
 @dataclass(kw_only=True, slots=True)
