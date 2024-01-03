@@ -100,7 +100,16 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
     acceptance = acceptance_revision.creation_date \
         if acceptance_revision is not None else None
 
-    issuance = datetime.now()
+    issuance = datetime.now()  # TODO: TIMEZONE
+
+    """ """
+    
+    logger.info(f"contribution_code: {contribution.get('code')}")
+
+    logger.info(f"reception: {reception}")
+    logger.info(f"revisitation: {revisitation}")
+    logger.info(f"acceptance: {acceptance}")
+    logger.info(f"issuance: {issuance}")
 
     """ """
 
