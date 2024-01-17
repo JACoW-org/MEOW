@@ -46,7 +46,7 @@ def format_datetime_pdf(d: dt.datetime) -> str:
 
 
 def format_datetime_doi(d: dt.datetime | None) -> str:
-    return d.strftime("%d %B %y") if d else ''
+    return d.strftime("%d %B %Y") if d else ''
 
 
 def format_datetime_doi_iso(d: dt.datetime | None) -> str:

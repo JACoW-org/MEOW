@@ -28,7 +28,9 @@ class WebSocketManager():
 
         try:
 
-            pubsub: Optional[PubSub] = dbs.redis_client.pubsub()
+            pubsub: Optional[PubSub] = dbs.redis_client.pubsub(
+                push_handler_func=lambda x: x
+            )
 
             try:
                 if pubsub is not None:

@@ -78,7 +78,9 @@ class PubsubRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
             logger.debug(f"subscribe >>> topic: {conf.REDIS_CLIENT_NAME}")
 
             try:
-                pubsub: Optional[PubSub] = dbs.redis_client.pubsub()
+                pubsub: Optional[PubSub] = dbs.redis_client.pubsub(
+                    push_handler_func=lambda x: x
+                )
 
                 try:
                     if pubsub is not None:

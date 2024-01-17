@@ -121,14 +121,14 @@ def refill_contribution_report(proceedings_data: ProceedingsData, results: dict)
                     contribution_data.metadata = report
 
                     if report and 'page_count' in report:
-                        current_page += report.get('page_count', 0)
-                        contribution_data.page_count = report.get(
-                            'page_count', 0)
-                        total_pages += report.get('page_count', 0)
+                        page_count: int = report.get('page_count', 0)
+                        contribution_data.page_count = page_count
+                        
+                        current_page += page_count
+                        total_pages += page_count
 
-                        logger.info(f'code {contribution_data.code}')
-                        logger.info(
-                            f'page_count {contribution_data.page_count}')
+                        # logger.info(f'code {contribution_data.code}')
+                        # logger.info(f'page_count {page_count}')
 
         except IndexError as e:
             logger.warning(f'No report for contribution {code}')

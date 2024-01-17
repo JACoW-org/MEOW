@@ -80,64 +80,68 @@ class RevisionData:
 
     creation_date: datetime
 
-    @property
-    def is_included_in_pdf_check(self) -> bool:
-        """
-        qa_approved, sui qa_pending (sono i verdi non ancora in QA)
-        e sui gialli (che non sono sicuramente qa_pending)...
-        """
-        return self.is_green or self.is_yellow
+    # @property
+    # def is_included_in_pdf_check(self) -> bool:
+    #     """
+    #     qa_approved, sui qa_pending (sono i verdi non ancora in QA)
+    #     e sui gialli (che non sono sicuramente qa_pending)...
+    #     """
+    #     return self.is_green or self.is_yellow
+
+    # @property
+    # def is_included_in_proceedings(self) -> bool:
+    #     """ qa_approved, sui qa_pending (sono i verdi non ancora in QA) """
+    #     return self.is_green
+
+    # @property
+    # def is_black(self) -> bool:
+    #     red_status = self.final_state == RevisionData.FinalRevisionState.rejected
+    #     return red_status
+
+    # @property
+    # def is_red(self) -> bool:
+    #     red_status = self.final_state == RevisionData.FinalRevisionState.needs_submitter_changes
+    #     return red_status
+
+    # @property
+    # def is_green(self) -> bool:
+    #     green_status = self.final_state == RevisionData.FinalRevisionState.accepted
+    #     return green_status
+
+    # @property
+    # def is_yellow(self) -> bool:
+    #     yellow_status = not self.is_green and self.final_state == \
+    #         RevisionData.FinalRevisionState.needs_submitter_confirmation
+    #     return yellow_status
 
     @property
-    def is_included_in_proceedings(self) -> bool:
-        """ qa_approved, sui qa_pending (sono i verdi non ancora in QA) """
-        return self.is_green
-
-    @property
-    def is_black(self) -> bool:
-        red_status = self.final_state == RevisionData.FinalRevisionState.rejected
-        return red_status
-
-    @property
-    def is_red(self) -> bool:
-        red_status = self.final_state == RevisionData.FinalRevisionState.needs_submitter_changes
-        return red_status
-
-    @property
-    def is_green(self) -> bool:
-        green_status = self.final_state == RevisionData.FinalRevisionState.accepted
-        return green_status
-
-    @property
-    def is_yellow(self) -> bool:
-        yellow_status = not self.is_green and self.final_state == \
-            RevisionData.FinalRevisionState.needs_submitter_confirmation
-        return yellow_status
-
-    @property
-    def is_qa_approved(self) -> bool:
+    def is_accepted(self) -> bool:
         if self.final_state == RevisionData.FinalRevisionState.accepted:
             return True
 
+        return False
+
+    @property
+    def is_qa_approved(self) -> bool:
         for tag in self.tags:
             if tag.is_qa_approved:
                 return True
 
         return False
 
-    @property
-    def is_qa_pending(self) -> bool:
-        if self.is_qa_approved:
-            return False
-
-        if self.final_state == RevisionData.FinalRevisionState.needs_submitter_confirmation:
-            return True
-
-        for tag in self.tags:
-            if tag.is_qa_pending:
-                return True
-
-        return False
+    # @property
+    # def is_qa_pending(self) -> bool:
+    #     if self.is_qa_approved:
+    #         return False
+    # 
+    #     if self.final_state == RevisionData.FinalRevisionState.needs_submitter_confirmation:
+    #         return True
+    # 
+    #     for tag in self.tags:
+    #         if tag.is_qa_pending:
+    #             return True
+    # 
+    #     return False
 
     def as_dict(self) -> dict:
         return asdict(self)

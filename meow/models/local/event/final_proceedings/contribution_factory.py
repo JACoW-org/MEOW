@@ -75,7 +75,7 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
 
     revisitation_revisions = [
         r for r in paper_data.all_revisions
-        if r.final_state == RevisionData.FinalRevisionState.accepted
+        if r.is_accepted
     ] if paper_data else []
 
     revisitation_revision = revisitation_revisions[0] \

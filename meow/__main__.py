@@ -89,7 +89,7 @@ def meow_auth(args) -> None:
 
                 print('invalid')
 
-        await dbs.redis_client.close()
+        await dbs.redis_client.aclose()
 
     run(_run)
 

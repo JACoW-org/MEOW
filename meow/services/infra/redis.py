@@ -62,7 +62,7 @@ class RedisManager:
             logger.error(e, exc_info=True)
         finally:
             try:
-                await dbs.redis_client.close()
+                await dbs.redis_client.aclose()
             except BaseException as e:
                 logger.error(e, exc_info=True)
 
