@@ -68,17 +68,41 @@ class FileData:
 
 
 @dataclass(kw_only=True, slots=True)
+class UserData:
+    id: str = field()
+    first_name: str = field()
+    last_name: str = field()
+    affiliation: str = field()
+    is_admin: bool = field()
+    is_system: bool = field()
+
+
+@dataclass(kw_only=True, slots=True)
+class RevisionCommentData:
+    id: str = field()
+    text: str = field()
+    internal: bool = field()
+    system: bool = field()
+    created_dt: datetime = field()
+    user: UserData | None = field()
+
+    @property
+    def is_qa_approved(self) -> bool:
+        return self.text == "This revision has passed QA."
+
+
+@dataclass(kw_only=True, slots=True)
 class RevisionData:
     """ Revision Data """
 
-    id: str
-    files: list[FileData]
-    tags: list[TagData]
-    comment: str
-    initial_state: int
-    final_state: int
+    id: str = field()
+    files: list[FileData] = field(default_factory=list)
+    tags: list[TagData] = field(default_factory=list)
+    comments: list[RevisionCommentData] = field(default_factory=list)
+    initial_state: int = field()
+    final_state: int = field()
 
-    creation_date: datetime
+    creation_date: datetime = field()
 
     # @property
     # def is_included_in_pdf_check(self) -> bool:
@@ -123,24 +147,31 @@ class RevisionData:
 
     @property
     def is_qa_approved(self) -> bool:
-        for tag in self.tags:
-            if tag.is_qa_approved:
-                return True
 
+        for comment in self.comments:
+            if comment.is_qa_approved:
+                return True
+        
         return False
+
+        # for tag in self.tags:
+        #     if tag.is_qa_approved:
+        #         return True
+        # 
+        # return False
 
     # @property
     # def is_qa_pending(self) -> bool:
     #     if self.is_qa_approved:
     #         return False
-    # 
+    #
     #     if self.final_state == RevisionData.FinalRevisionState.needs_submitter_confirmation:
     #         return True
-    # 
+    #
     #     for tag in self.tags:
     #         if tag.is_qa_pending:
     #             return True
-    # 
+    #
     #     return False
 
     def as_dict(self) -> dict:

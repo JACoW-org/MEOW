@@ -10,7 +10,7 @@ from meow.models.local.event.final_proceedings.event_model import (
     PersonData,
 )
 from meow.utils.slug import slugify
-from meow.utils.datetime import datedict_to_tz_datetime
+from meow.utils.datetime import datedict_to_tz_datetime, datetime_localize
 
 
 logger = lg.getLogger(__name__)
@@ -35,6 +35,7 @@ def material_data_factory(material: Any) -> MaterialData:
 
 def event_data_factory(event: Any, settings: dict) -> EventData:
     event_id = event.get("id", "")
+    event_timezone = event.get("timezone", "")
 
     primary_color = settings.get("primary_color", "")
 
@@ -62,12 +63,23 @@ def event_data_factory(event: Any, settings: dict) -> EventData:
     series = settings.get("series", "")
     series_number = settings.get("series_number", "")
 
-    start = datedict_to_tz_datetime(event.get("start_dt"))
+    start = datetime_localize(
+        datedict_to_tz_datetime(
+            event.get("start_dt")
+        ),
+        event_timezone
+    )
 
-    end = datedict_to_tz_datetime(event.get("end_dt"))
+    end = datetime_localize(
+        datedict_to_tz_datetime(
+            event.get("end_dt")
+        ),
+        event_timezone
+    )
 
     event_data = EventData(
         id=event_id,
+        timezone=event_timezone,
         color=primary_color,
         name=title_short,
         title=title_long,

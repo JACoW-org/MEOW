@@ -27,6 +27,8 @@ def proceedings_data_factory(event: Any, sessions: list, contributions: list,
 
     logger.info('proceedings_data_factory')
 
+    event_timezone: str = event.get('timezone', '')
+
     """ build editors """
     editors_dict_list = json_decode(settings.get(
         'editorial_json', '{}'))
@@ -39,7 +41,7 @@ def proceedings_data_factory(event: Any, sessions: list, contributions: list,
     """ create sessions data """
 
     sessions_data: list[SessionData] = [
-        session_data_factory(session)
+        session_data_factory(session, event_timezone)
         for session in sessions
     ]
 
@@ -47,7 +49,7 @@ def proceedings_data_factory(event: Any, sessions: list, contributions: list,
 
     contributions_data: list[ContributionData] = [
         c for c in [
-            contribution_data_factory(c, editors) for c in contributions
+            contribution_data_factory(c, editors, event_timezone) for c in contributions
         ] if c and c.cat_publish(settings.get('cat_publish_alias', 'CAT_publish'))
     ]
 

@@ -6,7 +6,7 @@ from meow.tasks.local.reference.models import Reference
 import json
 import datetime
 
-from meow.utils.datetime import format_datetime_dashed
+from meow.utils.datetime import datetime_now, format_datetime_dashed
 
 
 @dataclass
@@ -48,6 +48,7 @@ class ContributionDOI:
 
     code: str = field(default='')
     title: str = field(default='')
+    timezone: str = field(default='')
     primary_authors: list[AuthorDOI] = field(default_factory=list[AuthorDOI])
     authors_groups: list[AuthorsGroup] = field(default_factory=list)
     abstract: str = field(default='')
@@ -127,7 +128,7 @@ class ContributionDOI:
                 "value": self.abstract
             }],
             "imprints": [{
-                "date": format_datetime_dashed(datetime.datetime.now())
+                "date": format_datetime_dashed(datetime_now(self.timezone))
             }],
             "keywords": [{
                 "source": "JACOW",

@@ -554,7 +554,7 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
                         tg.start_soon(_render_reference_contribution,
                                       capacity_limiter, contribution.code,
                                       contribution.title, reference_type,
-                                      reference_dict.get(reference_type))
+                                      reference_dict.get(reference_type, ''))
 
     async def static(self) -> None:
         pass

@@ -19,7 +19,7 @@ from meow.tasks.local.doi.utils import (generate_doi_external_label, generate_do
                                         generate_doi_landing_page_url, generate_doi_name,
                                         generate_doi_path, paper_size_mb)
 
-from meow.utils.datetime import (format_datetime_dashed, format_datetime_doi,
+from meow.utils.datetime import (datetime_now, format_datetime_dashed, format_datetime_doi,
                                  format_datetime_doi_iso, format_datetime_full, format_datetime_range_doi)
 from meow.utils.serialization import json_decode
 from meow.models.local.event.final_proceedings.event_factory import event_person_factory
@@ -108,6 +108,8 @@ async def generate_conference_hep_task(proceedings_data: ProceedingsData,
 
     """ """
 
+    event_timezone: str = proceedings_data.event.timezone
+
     doi_landing_page: str = generate_doi_landing_page_url(
         organization=settings.get('doi_organization', 'JACoW'),
         conference=settings.get('doi_conference', 'CONF-YY')
@@ -127,7 +129,7 @@ async def generate_conference_hep_task(proceedings_data: ProceedingsData,
             "title": settings.get('booktitle_long', '')
         }],
         "imprints": [{
-            "date": format_datetime_dashed(datetime.datetime.now())}
+            "date": format_datetime_dashed(datetime_now(event_timezone))}
         ],
         "publication_info": [{
             "conf_acronym": settings.get('doi_conference', 'CONF-YY'),
@@ -378,6 +380,7 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
     doi_data = ContributionDOI(
         code=contribution.code,
         title=contribution.title,
+        timezone=event.timezone,
         keywords=[k.name for k in contribution.keywords],
         primary_authors=primary_authors,
         authors_groups=contribution.authors_groups,

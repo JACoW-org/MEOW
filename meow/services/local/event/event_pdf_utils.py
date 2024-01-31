@@ -37,7 +37,7 @@ def get_python_cmd():
 
 
 def get_pdftk_cmd():
-    return str(Path("pdftk"))  # str(Path("bin", "pdftk"))
+    return str(Path("bin", "pdftk.sh"))  # str(Path("pdftk")) 
 
 
 def get_mutool_cmd():

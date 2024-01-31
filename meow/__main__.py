@@ -3,6 +3,7 @@ import sys
 import json
 import pathlib
 import argparse
+import pytz
 
 import os
 import gzip
@@ -10,12 +11,10 @@ import tarfile
 import shutil
 import multiprocessing as mp
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 from fitz import Document, Page, Rect, Point, LINK_GOTO, LINK_URI
-
 from fitz.utils import getColor, draw_rect, insert_textbox
-
 from fitz.utils import set_metadata, insert_link, insert_text, new_page
 
 
@@ -30,6 +29,51 @@ from anyio import run
 
 from meow.services.local.papers_metadata.pdf_text import write_page_footer, write_page_header, write_page_side
 
+
+
+def tz_convert(src_datetime, dest_timezone):
+  
+    dest_datetime = src_datetime.astimezone(pytz.timezone(dest_timezone))
+
+    print(f"dest: {dest_timezone} - {dest_datetime.strftime('%Y-%m-%d %H:%M:%S %Z%z')}")
+
+
+
+def meow_tz(args) -> None:
+
+    # "start_dt": {
+    #     "date": "2024-05-19",
+    #     "time": "15:00:00",
+    #     "tz": "Europe/Zurich"
+    # },
+
+    # "start_dt": {
+    #     "date": "2022-08-22",
+    #     "time": "14:15:00",
+    #     "tz": "UTC"
+    # },
+
+    # ./venv/bin/python3 -m meow tz
+    # src: 2024-05-19 15:00:00 CEST+0200
+    # dest: 2024-05-19 08:00:00 CDT-0500
+
+    date_val = "2022-08-22"
+    time_val = "14:15:00"
+    tz_val = "UTC"
+
+    src_timezone = pytz.timezone(tz_val)
+
+    src_datetime = datetime.strptime(f"{date_val} {time_val}",'%Y-%m-%d %H:%M:%S')
+    src_datetime = src_timezone.localize(src_datetime)
+   
+    print(f"src:  {tz_val} - {src_datetime.strftime('%Y-%m-%d %H:%M:%S %Z%z')}")
+
+    # print(date_val, time_val)
+
+    tz_convert(src_datetime, "US/Central")
+    tz_convert(src_datetime, "Europe/Zurich")
+    tz_convert(src_datetime, "Europe/Rome")
+    tz_convert(src_datetime, "UTC")
 
 def meow_auth(args) -> None:
 
@@ -960,6 +1004,16 @@ def main():
     ps_auth.add_argument("-check", required=False, type=str,
                          help="check")
     ps_auth.set_defaults(func=meow_auth)
+
+    # -------------------------------------------------------------------------
+    # 'tz' command
+    # -------------------------------------------------------------------------
+    tz_auth = subps.add_parser(
+        "tz",
+        description="manage meow tz",
+        epilog="manage meow tz",
+    )
+    tz_auth.set_defaults(func=meow_tz)    
 
     # -------------------------------------------------------------------------
     # 'compress' command

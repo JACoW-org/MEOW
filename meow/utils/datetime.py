@@ -91,6 +91,19 @@ def format_datetime_range_doi(start: dt.datetime, end: dt.datetime) -> str:
     return f'{start.strftime("%d %b %Y")}-{end.strftime("%d %b %Y")}'
 
 
+def datetime_localize(src_datetime: dt.datetime, tz_val: str) -> dt.datetime:
+
+    # print(f"src_datetime: {src_datetime.strftime('%Y-%m-%d %H:%M:%S %Z%z')} - tz_val: {tz_val}")
+
+    dest_timezone = tz.timezone(tz_val)
+    
+    dest_datetime = src_datetime.astimezone(dest_timezone)
+
+    # print(f"dest_datetime: {dest_datetime.strftime('%Y-%m-%d %H:%M:%S %Z%z')}")
+
+    return dest_datetime
+
+
 def datedict_to_tz_datetime(date: dict | None) -> dt.datetime:
     """ datedict to utc datetime """
 
@@ -114,8 +127,7 @@ def datedict_to_tz_datetime(date: dict | None) -> dt.datetime:
 
         return tz_date_time_obj
 
-    print('datedict_to_tz_datetime -->')
-    print(date)
+    # print('datedict_to_tz_datetime -->', date)
 
     raise Exception('Invalid date dict')
 
@@ -141,13 +153,27 @@ def datedict_to_utc_datetime(date: dict | None) -> dt.datetime:
 
         tz_date_time_obj: dt.datetime = timezone.localize(date_time_obj)
 
-        utc_date_time_obj = tz_date_time_obj.astimezone(tz.utc)
+        # utc_date_time_obj = tz_date_time_obj.astimezone(tz.utc)
 
         # print(date_time_obj)
 
-        return utc_date_time_obj
+        return tz_date_time_obj
 
     raise Exception('Invalid date dict')
+
+
+def datetime_now(tz_val: str) -> dt.datetime:
+    """ datetime now as tz """
+
+    src_dt = dt.datetime.now(tz.utc)
+
+    dest_tz = tz.timezone(tz_val)
+
+    dest_dt = src_dt.astimezone(dest_tz)
+
+    # print(f'src_dt: {src_dt} - tz_val: {tz_val}')
+
+    return dest_dt
 
 
 def datedict_to_utc_str(date: dict | None) -> str | None:

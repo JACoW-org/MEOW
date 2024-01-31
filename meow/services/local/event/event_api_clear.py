@@ -7,7 +7,7 @@ from meow.utils.filesystem import rmtree
 logger = lg.getLogger(__name__)
 
 
-async def event_api_clear(event_id: int) -> None:
+async def event_api_clear(event_id: str) -> None:
     """ """
 
     try:
@@ -25,7 +25,7 @@ async def event_api_clear(event_id: int) -> None:
         raise ex
 
 
-async def _event_api_clear(event_id: int) -> None:
+async def _event_api_clear(event_id: str) -> None:
     """ """
 
     logger.info('event_api_clear - start')

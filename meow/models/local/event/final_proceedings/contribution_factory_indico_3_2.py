@@ -11,7 +11,7 @@ from meow.models.local.event.final_proceedings.contribution_model import (
     ContributionData, ContributionFieldData, EditableData, FileData, RevisionData, TagData)
 from meow.models.local.event.final_proceedings.event_model import (PersonData)
 
-from meow.utils.datetime import datedict_to_tz_datetime, format_datetime_sec
+from meow.utils.datetime import datedict_to_tz_datetime, datetime_localize, datetime_now, format_datetime_sec
 from meow.utils.list import find
 
 
@@ -49,7 +49,7 @@ def contribution_editable_factory(editable: Any) -> EditableData | None:
     )
 
 
-def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> ContributionData:
+def contribution_data_factory(contribution: Any, editors: list[PersonData], event_timezone: str) -> ContributionData:
 
     editables: list = contribution.get('editables', [])
 
@@ -99,7 +99,7 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
     acceptance = acceptance_revision.creation_date \
         if acceptance_revision is not None else None
 
-    issuance = datetime.now()
+    issuance = datetime_now(event_timezone)
 
     """ """
 
@@ -287,11 +287,15 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
             contribution_field_factory(field)
             for field in contribution.get('field_values')
         ],
-        start=datedict_to_tz_datetime(
-            contribution.get('start_dt')
+        start=datetime_localize(
+            datedict_to_tz_datetime(
+                contribution.get('start_dt')
+            ), event_timezone
         ),
-        end=datedict_to_tz_datetime(
-            contribution.get('end_dt')
+        end=datetime_localize(
+            datedict_to_tz_datetime(
+                contribution.get('end_dt')
+            ), event_timezone
         ),
         is_included_in_proceedings=is_included_in_proceedings,
         is_included_in_prepress=is_included_in_prepress,
