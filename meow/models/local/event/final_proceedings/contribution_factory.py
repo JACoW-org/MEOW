@@ -104,7 +104,7 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData], even
     revisitation = revisitation_revision.creation_date \
         if revisitation_revision is not None else None
 
-    acceptance = acceptance_revision.creation_date \
+    acceptance = acceptance_revision.qa_approved_date \
         if acceptance_revision is not None else None
 
     issuance = datetime_now(event_timezone)

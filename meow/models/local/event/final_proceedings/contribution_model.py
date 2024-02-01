@@ -155,6 +155,15 @@ class RevisionData:
 
         return False
 
+    @property
+    def qa_approved_date(self) -> datetime | None:
+
+        for comment in self.comments:
+            if comment.is_qa_approved:
+                return comment.created_dt
+
+        return None
+
         # for tag in self.tags:
         #     if tag.is_qa_approved:
         #         return True
