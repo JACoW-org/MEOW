@@ -140,7 +140,7 @@ class RevisionData:
 
     @property
     def is_accepted(self) -> bool:
-        if self.final_state == RevisionData.FinalRevisionState.accepted:
+        if self.final_state == RevisionData.FinalRevisionState.changes_acceptance:
             return True
 
         return False
