@@ -140,7 +140,8 @@ class RevisionData:
 
     @property
     def is_accepted(self) -> bool:
-        if self.final_state == RevisionData.FinalRevisionState.changes_acceptance:
+        if self.final_state == RevisionData.FinalRevisionState.accepted \
+                or self.final_state == RevisionData.FinalRevisionState.changes_acceptance:
             return True
 
         return False
@@ -151,13 +152,13 @@ class RevisionData:
         for comment in self.comments:
             if comment.is_qa_approved:
                 return True
-        
+
         return False
 
         # for tag in self.tags:
         #     if tag.is_qa_approved:
         #         return True
-        # 
+        #
         # return False
 
     # @property
