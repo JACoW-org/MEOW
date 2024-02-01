@@ -13,9 +13,8 @@ from meow.utils.filesystem import move
 logger = lg.getLogger(__name__)
 
 
-async def copy_event_materials(
-    proceedings_data: ProceedingsData, cookies: dict, settings: dict
-) -> ProceedingsData:
+async def copy_event_materials(proceedings_data: ProceedingsData,
+                               cookies: dict, settings: dict) -> ProceedingsData:
     """ """
 
     files_data: list[MaterialData] = [
@@ -94,8 +93,9 @@ async def copy_event_materials(
             logger.debug(crs, exc_info=True)
         except EndOfStream as eos:
             logger.debug(eos, exc_info=True)
-        except Exception as ex:
+        except BaseException as ex:
             logger.error(ex, exc_info=True)
+            raise ex
 
     return proceedings_data
 

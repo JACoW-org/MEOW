@@ -1,8 +1,9 @@
-from asyncio import CancelledError
+from asyncio.exceptions import CancelledError
 import logging as lg
 import time
 
 from typing import AsyncGenerator
+
 from meow.app.errors.service_error import ServiceError
 
 from meow.tasks.infra.task_factory import TaskFactory
@@ -108,7 +109,7 @@ class TaskRunner:
 
         try:
 
-            to_send = {
+            to_send = json_encode({
                 'head': {
                     'code': event,
                     'uuid': task_id,
@@ -118,12 +119,15 @@ class TaskRunner:
                     'method': task,
                     'params': params
                 } if task else None
-            }
+            })
 
             # logger.debug(f"send {to_send}")
 
-            await dbs.redis_client.publish("meow:feed",
-                                           json_encode(to_send))
+            await dbs.redis_client.publish("meow:feed", to_send)
 
-        except BaseException as e:
-            logger.error(e, exc_info=True)
+        except CancelledError as ace:
+            logger.debug(ace, exc_info=True)
+            raise ace
+        except BaseException as ex:
+            logger.error(ex, exc_info=True)
+            raise ex

@@ -1,7 +1,8 @@
-from asyncio import CancelledError
 import logging
 
 from typing import Optional
+
+from asyncio.exceptions import CancelledError
 
 from redis.asyncio.client import PubSub
 from redis.exceptions import ConnectionError
@@ -27,7 +28,9 @@ class WebSocketManager():
 
         try:
 
-            pubsub: Optional[PubSub] = dbs.redis_client.pubsub()
+            pubsub: Optional[PubSub] = dbs.redis_client.pubsub(
+                push_handler_func=lambda x: x
+            )
 
             try:
                 if pubsub is not None:
@@ -60,29 +63,36 @@ class WebSocketManager():
         while app.state.webapp_running:
             try:
                 async with create_task_group():
-                    with move_on_after(2):
+                    with move_on_after(delay=2, shield=True):
 
                         logger.debug('__read')
 
-                        payload = await p.get_message(
-                            ignore_subscribe_messages=True,
-                            timeout=5
-                        )
+                        try:
+                            payload = await p.get_message(
+                                ignore_subscribe_messages=True,
+                                timeout=5
+                            )
 
-                        # logger.debug(f"payload {payload}")
+                            # logger.debug(f"payload {payload}")
 
-                        if payload and payload['type'] == 'message':
-                            data = str(payload['data'], 'UTF-8')
-                            # logger.debug(f"broadcast {data}")
-                            await self._send(data)
+                            if payload and payload['type'] == 'message':
+                                data = str(payload['data'], 'UTF-8')
+                                # logger.debug(f"broadcast {data}")
+                                await self._send(data)
+
+                        except CancelledError:
+                            logger.debug("__reader: CancelledError")
+                        except ConnectionError:
+                            logger.warn("__reader: ConnectionError")
+                        except BaseException:
+                            logger.error("__reader", exc_info=True)
 
                         await sleep(0.01)
 
             except CancelledError:
-                logger.debug("__reader:CancelledError",
-                             exc_info=False)
+                logger.debug("__reader:CancelledError")
             except ConnectionError:
-                logger.info("__reader: ConnectionError")
+                logger.warn("__reader: ConnectionError")
             except BaseException:
                 logger.error("__reader", exc_info=True)
 

@@ -1,7 +1,7 @@
 import logging as lg
 
 from typing import Any
-from meow.utils.datetime import datedict_to_tz_datetime, format_datetime_sec
+from meow.utils.datetime import datedict_to_tz_datetime, datetime_localize, format_datetime_sec
 
 
 logger = lg.getLogger(__name__)
@@ -13,15 +13,23 @@ async def create_abstract_booklet_from_event(event: dict, sessions: list, contri
     # for c in contributions:
     #     logger.info(f"{c.get('code')} -> {c.get('session_code')}")
 
+    event_url = event.get('url', '')
+    event_title = event.get('title', '')
+    event_description=event.get('description', ''),
+    event_location=event.get('location', ''),
+    event_address=event.get('address', ''),
+    event_timezone = event.get('timezone', '')
+
     sessions_data = list()
 
     abstract_booklet = dict(
         event=dict(
-            url=event.get('url', ''),
-            title=event.get('title', ''),
-            description=event.get('description', ''),
-            location=event.get('location', ''),
-            address=event.get('address', ''),
+            url=event_url,
+            title=event_title,
+            description=event_description,
+            location=event_location,
+            address=event_address,
+            timezone=event_timezone,
         ),
         sessions=sessions_data
     )
@@ -47,11 +55,15 @@ async def create_abstract_booklet_from_event(event: dict, sessions: list, contri
             room=session_slot.get('room'),
             location=session_slot.get('location'),
             address=session_slot.get('address'),
-            start=datedict_to_tz_datetime(
-                session_slot.get('start_dt')
+            start=datetime_localize(
+                datedict_to_tz_datetime(
+                    session_slot.get('start_dt')
+                ), event_timezone
             ),
-            end=datedict_to_tz_datetime(
-                session_slot.get('end_dt')
+            end=datetime_localize(
+                datedict_to_tz_datetime(
+                    session_slot.get('end_dt')
+                ), event_timezone
             ),
             is_poster=bool(session_event.get('is_poster')),
             conveners=conveners_data,
@@ -100,12 +112,22 @@ async def create_abstract_booklet_from_event(event: dict, sessions: list, contri
                     session=session_slot_contribution.get('session'),
                     room=session_slot_contribution.get('room'),
                     location=session_slot_contribution.get('location'),
-                    start=datedict_to_tz_datetime(
-                        session_slot_contribution.get('start_dt')
+                    start=datetime_localize(
+                        datedict_to_tz_datetime(
+                            session_slot_contribution.get('start_dt')
+                        ), event_timezone
+                    ), 
+                    #datedict_to_tz_datetime(
+                    #    session_slot_contribution.get('start_dt')
+                    #),
+                    end=datetime_localize(
+                        datedict_to_tz_datetime(
+                            session_slot_contribution.get('end_dt')
+                        ), event_timezone
                     ),
-                    end=datedict_to_tz_datetime(
-                        session_slot_contribution.get('end_dt')
-                    ),
+                    # end=datedict_to_tz_datetime(
+                    #     session_slot_contribution.get('end_dt')
+                    # ),
                     speakers=contribution_data_speakers,
                     primary_authors=contribution_data_primary_authors,
                     coauthors=contribution_data_coauthors

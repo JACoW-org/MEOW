@@ -115,6 +115,7 @@ class EventData:
     name: str
     title: str
     hosted: str
+    timezone: str
     editorial: str
     location: str
     date: str

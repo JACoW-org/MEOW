@@ -18,35 +18,36 @@ from meow.utils.serialization import json_encode
 logger = logging.getLogger(__name__)
 
 
-async def publish(message: dict, task_id: str) -> str:
+async def send_message_to_worker_task(message: dict, task_id: str) -> str:
     topic_name: str = await __publish_key()
 
     message_id = await dbs.redis_client.publish(
         channel=topic_name, message=json_encode(message)
     )
 
-    logger.debug(f"publish_task {topic_name} {task_id} {message_id}")
+    logger.debug(
+        f"send_message_to_worker_task {topic_name} {task_id} {message_id}")
 
     return topic_name
 
 
-async def kill(topic_name: str, task_id: str) -> None:
+async def send_kill_to_worker_task(topic_name: str, task_id: str) -> str:
     message_id = await dbs.redis_client.publish(
         channel=topic_name, message=json_encode(dict(
-            head=dict(
-                code='task:kill',
-                uuid=task_id,
-            )
+            head=dict(code='task:kill', uuid=task_id)
         ))
     )
 
-    logger.debug(f"kill_task {topic_name} {task_id} {message_id}")
+    logger.warn(
+        f"send_kill_to_worker_task {topic_name} {task_id} {message_id}")
+
+    return message_id
 
 
 async def __publish_key() -> str:
     counter: int = await dbs.redis_client.incr('workers:stream:counter')
 
-    workers: list[str] = await __workers()
+    workers: list[str] = await __worker_topics()
 
     if len(workers) == 0:
         raise Exception("No PURR worker available.")
@@ -58,7 +59,7 @@ async def __publish_key() -> str:
     return topic_name
 
 
-async def __workers():
+async def __worker_topics():
 
     def client_filter(c) -> bool:
         return (str(c['name']).startswith('worker_'))
@@ -101,34 +102,34 @@ async def __websocket_error(ws: WebSocket, uuid: str, error: BaseException):
         logger.error(e, exc_info=True)
 
 
-async def __websocket_task(ws: WebSocket, id: str) -> None:
+async def __websocket_task(ws: WebSocket, task_id: str) -> None:
     """ """
 
     logger.debug("__websocket_task >>> BEGIN")
 
-    worker: str = ''
-    connected: bool = True
+    worker_topic: str = ''
+    is_connected: bool = True
 
     async def monitor():
-        logger.debug(f"start_monitor_{id}")
+        logger.debug(f"start_monitor_{task_id}")
 
-        while app.state.webapp_running and connected:
+        while app.state.webapp_running and is_connected:
 
-            if worker != '':
+            if worker_topic != '':
 
-                exists = worker in (await __workers())
+                topic_exists = worker_topic in (await __worker_topics())
 
-                logger.debug(f"check {worker} {exists}")
+                logger.debug(f"check {worker_topic} {topic_exists}")
 
-                if not exists:
+                if not topic_exists:
                     await ws.close()
                     break
 
             await sleep(2)
 
-        logger.debug(f"stop_monitor_{id}")
+        logger.debug(f"stop_monitor_{task_id}")
 
-    monitor_task = create_task(monitor(), name=f"monitor_task_{id}")
+    monitor_task = create_task(monitor(), name=f"monitor_task_{task_id}")
 
     try:
         while app.state.webapp_running:
@@ -139,48 +140,51 @@ async def __websocket_task(ws: WebSocket, id: str) -> None:
             if message:
                 # logger.debug(f"ws_to_r {message}")
                 try:
-                    worker = await publish(message, id)
+                    worker_topic = await send_message_to_worker_task(message, task_id)
                 except BaseException as e:
                     logger.error("__websocket_task", e, exc_info=True)
-                    await __websocket_error(ws, id, e)
+                    await __websocket_error(ws, task_id, e)
 
     except WebSocketDisconnect:
         logger.info("__websocket_task >>> DISCONNECTED")
     except BaseException:
         logger.error("__websocket_task", exc_info=True)
     finally:
+        is_connected = False
         try:
-            connected = False
             monitor_task.cancel()
-            await kill(worker, id)
+        except BaseException as e:
+            logger.error("__websocket_task", e, exc_info=True)
+        try:
+            await send_kill_to_worker_task(worker_topic, task_id)
         except BaseException as e:
             logger.error("__websocket_task", e, exc_info=True)
 
     logger.warning("__websocket_task >>> END")
 
 
-async def __open_websocket(ws: WebSocket, id: str):
+async def __open_websocket(ws: WebSocket, task_id: str):
     logger.info('open_websocket')
 
     await ws.accept()
 
     # app.active_connections.append(ws)
-    app.active_connections[id] = ws
+    app.active_connections[task_id] = ws
 
 
-async def __close_websocket(ws: WebSocket, id: str):
+async def __close_websocket(ws: WebSocket, task_id: str):
     logger.info('close_websocket')
 
     # app.active_connections.remove(ws)
-    del app.active_connections[id]
+    del app.active_connections[task_id]
 
 
 async def websocket_endpoint(ws: WebSocket):
     try:
 
-        id: str = ws.path_params.get("task_id", None)
+        task_id: str = ws.path_params.get("task_id", None)
 
-        assert isinstance(id, str), f"Invalid task_id: {id}"
+        assert isinstance(task_id, str), f"Invalid task_id: {task_id}"
 
         # cookie_api_key = ws.cookies.get('X-API-KEY', None)
         # header_api_key = ws.headers.get('X-API-KEY', None)
@@ -196,9 +200,9 @@ async def websocket_endpoint(ws: WebSocket):
 
         if credential is not None:
 
-            await __open_websocket(ws, id)
-            await __websocket_task(ws, id)
-            await __close_websocket(ws, id)
+            await __open_websocket(ws, task_id)
+            await __websocket_task(ws, task_id)
+            await __close_websocket(ws, task_id)
 
         else:
             raise HTTPException(status_code=401, detail="Invalid API Key")

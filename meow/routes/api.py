@@ -43,7 +43,7 @@ async def api_info_endpoint(req: Request) -> JSONResponse:
 
     if credential is not None:
 
-        result = await event_api_info(event_id)
+        result = await event_api_info(str(event_id))
         params = result.get('value') if result else None
 
         return JSONResponse({
@@ -63,7 +63,7 @@ async def api_clear_endpoint(req: Request) -> JSONResponse:
 
     if credential:
 
-        await event_api_clear(event_id)
+        await event_api_clear(str(event_id))
 
         return JSONResponse({
             'method': 'clear',

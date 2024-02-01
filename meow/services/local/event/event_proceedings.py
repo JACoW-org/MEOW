@@ -17,8 +17,8 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import (
     ProceedingsConfig, ProceedingsData)
 from meow.services.local.event.final_proceedings.build_hep_payloads import (
     build_hep_payloads)
-from meow.services.local.event.final_proceedings.copy_html_partials import (
-    copy_html_partials)
+from meow.services.local.event.final_proceedings.copy_site_assets import (
+    copy_html_partials, copy_inspirehep_jsonl)
 
 from meow.services.local.event.final_proceedings.collecting_contributions_and_files import (
     collecting_contributions_and_files)
@@ -50,15 +50,21 @@ from meow.services.local.event.final_proceedings.generate_contribution_reference
     generate_contribution_references)
 from meow.services.local.event.final_proceedings.generate_contributions_groups import (
     generate_contributions_groups)
-from meow.services.local.event.final_proceedings.generate_contribution_doi import generate_dois
-from meow.services.local.event.final_proceedings.build_doi_payloads import build_doi_payloads
-from meow.services.local.event.final_proceedings.manage_duplicates import manage_duplicates
+from meow.services.local.event.final_proceedings.generate_contribution_doi import (
+    generate_dois)
+from meow.services.local.event.final_proceedings.build_doi_payloads import (
+    build_doi_payloads)
+from meow.services.local.event.final_proceedings.manage_duplicates import (
+    manage_duplicates)
 
 from meow.services.local.event.final_proceedings.link_static_site import (
     clean_static_site, link_static_site)
-from meow.services.local.event.final_proceedings.read_papers_metadata import read_papers_metadata
-from meow.services.local.event.final_proceedings.write_papers_metadata import write_papers_metadata
-from meow.services.local.event.final_proceedings.write_slides_metadata import write_slides_metadata
+from meow.services.local.event.final_proceedings.read_papers_metadata import (
+    read_papers_metadata)
+from meow.services.local.event.final_proceedings.write_papers_metadata import (
+    write_papers_metadata)
+from meow.services.local.event.final_proceedings.write_slides_metadata import (
+    write_slides_metadata)
 
 from meow.services.local.event.final_proceedings.hugo_plugin.hugo_final_proceedings_plugin import (
     HugoProceedingsPlugin)
@@ -472,6 +478,9 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
         phase='copy_event_pdf',
         text='Copy event PDF'
     ))
+
+    if config.generate_hep_payload:
+        await copy_inspirehep_jsonl(proceedings, cookies, settings)
 
     await copy_html_partials(proceedings, cookies, settings)
     await copy_event_materials(proceedings, cookies, settings)

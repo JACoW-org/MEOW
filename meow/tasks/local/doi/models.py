@@ -6,6 +6,8 @@ from meow.tasks.local.reference.models import Reference
 import json
 import datetime
 
+from meow.utils.datetime import datetime_now, format_datetime_dashed
+
 
 @dataclass
 class AuthorsGroup:
@@ -46,6 +48,7 @@ class ContributionDOI:
 
     code: str = field(default='')
     title: str = field(default='')
+    timezone: str = field(default='')
     primary_authors: list[AuthorDOI] = field(default_factory=list[AuthorDOI])
     authors_groups: list[AuthorsGroup] = field(default_factory=list)
     abstract: str = field(default='')
@@ -97,99 +100,74 @@ class ContributionDOI:
         return asdict(self)
 
     def as_json(self) -> str:
-
-        data = dict()
-
-        data['id'] = self.doi_identifier
-        data['type'] = 'dois'
-
-        data['attributes'] = self._build_doi_attributes()
-
-        return json.dumps(dict(data=data))
+        return json.dumps(dict(data=dict(
+            type='dois',
+            id=self.doi_identifier,
+            attributes=self._build_doi_attributes()
+        )))
 
     def as_hep_json(self) -> str:
-
         return json.dumps(self._build_hep_attributes())
 
     def _build_hep_attributes(self) -> dict:
 
+        # print(self.code)
+        # for author in self.primary_authors:
+        #     print(author.first_name, ' ', author.last_name)
+        #
+        # print()
+        # print()
+
         attributes = {
-            "titles": [
-                {
-                    "source": "JACOW",
-                    "title": self.title
-                }
-            ],
-            "abstracts": [
-                {
-                    "source": "JACOW",
-                    "value": self.abstract
-                }
-            ],
-            "imprints": [
-                {
-                    "date": self.start_date
-                }
-            ],
+            "titles": [{
+                "source": "JACOW",
+                "title": self.title
+            }],
+            "abstracts": [{
+                "source": "JACOW",
+                "value": self.abstract
+            }],
+            "imprints": [{
+                "date": format_datetime_dashed(datetime_now(self.timezone))
+            }],
             "keywords": [{
-                "value": k,
-                "source": "JACOW"
+                "source": "JACOW",
+                "value": k
             } for k in self.keywords],
-            "publication_info": [
-                {
-                    "artid": self.code,
-                    "conf_acronym": self.conference_doi_name,
-                    "journal_title": "JACoW",
-                    "journal_volume": self.conference_doi_name,
-                    "year": datetime.date.today().year
-                }
-            ],
-            "dois": [
-                {
-                    "source": "JACOW",
-                    "value": self.doi_name
-                }
-            ],
+            "publication_info": [{
+                "artid": self.code,
+                "conf_acronym": self.conference_doi_name,
+                "journal_title": "JACoW",
+                "journal_volume": self.conference_doi_name,
+                "year": datetime.date.today().year
+            }],
+            "dois": [{
+                "source": "JACOW",
+                "value": self.doi_name
+            }],
             "number_of_pages": self.num_of_pages,
-            "document_type": [
-                "conference paper"
-            ],
-            "documents": [
-                {
-                    "key": "document",
-                    "fulltext": True,
-                    "url": f"https://jacow.org/{self.conference_doi_name.lower()}/pdf/{self.code}.pdf",
-                    "source": "JACOW"
-                }
-            ],
-            "license": [
-                {
-                    "imposing": "JACOW",
-                    "license": "CC-BY-4.0",
-                    "url": "https://creativecommons.org/licenses/by/4.0"
-                }
-            ],
-            "authors": [
-                {
-
-                    "full_name": f"{editor.last_name}, {editor.first_name}",
-
-                    "raw_affiliations": [
-                        {
-                            "value": editor.affiliation
-                        }
-                    ]
-                }
-                for editor in self.editors
-            ],
-            "_collections": [
-                "Literature"
-            ],
-            "inspire_categories": [
-                {
-                    "term": "Accelerators"
-                }
-            ],
+            "document_type": ["conference paper"],
+            "documents": [{
+                "key": "document",
+                "fulltext": True,
+                "url": f"https://jacow.org/{self.conference_doi_name.lower()}/pdf/{self.code}.pdf",
+                "source": "JACOW"
+            }],
+            "license": [{
+                "imposing": "JACOW",
+                "license": "CC-BY-4.0",
+                "url": "https://creativecommons.org/licenses/by/4.0"
+            }],
+            "authors": [{
+                "full_name": f"{author.last_name}, {author.first_name}",
+                "raw_affiliations": [{
+                    "value": author.affiliation
+                }]
+            } for author in self.primary_authors],
+            "_collections": ["Literature"],
+            "inspire_categories": [{
+                "term": "Accelerators"
+            }],
             "curated": False,
             "$schema": "https://inspirehep.net/schemas/records/hep.json",
             "citeable": True

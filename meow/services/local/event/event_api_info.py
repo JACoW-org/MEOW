@@ -1,6 +1,7 @@
 
 from asyncio import CancelledError
 import logging as lg
+from typing import Any
 
 from anyio import Path, create_task_group
 
@@ -8,7 +9,7 @@ from anyio import Path, create_task_group
 logger = lg.getLogger(__name__)
 
 
-async def event_api_info(event_id: int) -> dict | None:
+async def event_api_info(event_id: str) -> dict | None:
     """ """
 
     try:
@@ -26,12 +27,12 @@ async def event_api_info(event_id: int) -> dict | None:
         raise be
 
 
-async def _event_api_info(event_id: int) -> dict:
+async def _event_api_info(event_id: str) -> dict:
     """ """
 
     logger.info('event_api_info - start')
 
-    result: dict = {
+    result: dict[str, Any] = {
         'event_id': event_id,
         'pdf_cache': None,
         'pre_press': None,
@@ -54,25 +55,25 @@ async def _event_api_info(event_id: int) -> dict:
     return dict(type='result', value=result)
 
 
-async def event_pdf_cache_info_task(event_id: str, result: dict):
+async def event_pdf_cache_info_task(event_id: str, result: dict[str, Any]):
     result['pdf_cache'] = await Path('var', 'run', f"{event_id}_tmp").exists()
 
 
-async def event_pre_press_info_task(event_id: str, result: dict):
+async def event_pre_press_info_task(event_id: str, result: dict[str, Any]):
     result['pre_press'] = await Path('var', 'html', f"{event_id}", 'prepress').exists()
 
 
-async def event_datacite_json_info_task(event_id: str, result: dict):
+async def event_datacite_json_info_task(event_id: str, result: dict[str, Any]):
     result['datacite_json'] = await Path('var', 'run', f"{event_id}_doi").exists()
 
 
-async def event_inspirehep_json_info_task(event_id: str, result: dict):
+async def event_inspirehep_json_info_task(event_id: str, result: dict[str, Any]):
     result['datacite_json'] = await Path('var', 'run', f"{event_id}_doi").exists()
 
 
-async def event_final_proceedings_info_task(event_id: str, result: dict):
+async def event_final_proceedings_info_task(event_id: str, result: dict[str, Any]):
     result['final_proceedings'] = await Path('var', 'html', f"{event_id}", 'proceedings').exists()
 
 
-async def event_proceedings_archive_info_task(event_id: str, result: dict):
+async def event_proceedings_archive_info_task(event_id: str, result: dict[str, Any]):
     result['proceedings_archive'] = await Path('var', 'html', f"{event_id}.7z").exists()

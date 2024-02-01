@@ -1,12 +1,15 @@
 import logging as lg
-from typing import Callable
 
+from asyncio.exceptions import CancelledError
+
+from typing import Callable
 from nltk import download
 
 from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 
 from anyio.streams.memory import MemoryObjectSendStream
+from meow.app.errors.service_error import ProceedingsError
 from meow.models.local.event.final_proceedings.contribution_model import ContributionPaperData, FileData
 from meow.models.local.event.final_proceedings.event_factory import event_keyword_factory
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_contributions_papers
@@ -74,11 +77,18 @@ async def read_papers_metadata(proceedings_data: ProceedingsData, cookies: dict,
             logger.debug(crs, exc_info=False)
         except EndOfStream as eos:
             logger.debug(eos, exc_info=False)
+        except CancelledError as ace:
+            logger.debug(ace, exc_info=False)
+            raise ace
+        except ProceedingsError as pe:
+            logger.error(pe, exc_info=False)
+            raise pe
         except BaseException as be:
             logger.error(be, exc_info=True)
-            raise BaseException('Error reading papers metadata')
+            raise be
 
-    proceedings_data = await refill_contribution_metadata(proceedings_data, results, file_cache_dir)
+    proceedings_data = await refill_contribution_metadata(
+        proceedings_data, results, file_cache_dir)
 
     return proceedings_data
 
@@ -112,8 +122,7 @@ async def read_metadata_task(capacity_limiter: CapacityLimiter, total_files: int
 
         except BaseException as be:
             logger.error(be, exc_info=True)
-
-        return await stream.send(None)
+            raise be
 
 
 async def refill_contribution_metadata(proceedings_data: ProceedingsData,
@@ -178,6 +187,7 @@ async def refill_contribution_metadata(proceedings_data: ProceedingsData,
             logger.error(e, exc_info=True)
         except BaseException as be:
             logger.error(be, exc_info=True)
+            raise be
 
     proceedings_data.total_pages = total_pages
 

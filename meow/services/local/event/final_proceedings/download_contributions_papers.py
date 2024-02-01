@@ -1,4 +1,6 @@
 import logging as lg
+
+from asyncio.exceptions import CancelledError
 from typing import Callable
 
 from anyio import Path, create_task_group, CapacityLimiter
@@ -68,6 +70,9 @@ async def download_contributions_papers(proceedings_data: ProceedingsData, cooki
             logger.debug(crs, exc_info=False)
         except EndOfStream as eos:
             logger.debug(eos, exc_info=False)
+        except CancelledError as ace:
+            logger.debug(ace, exc_info=False)
+            raise ace
         except ProceedingsError as pe:
             logger.error(pe, exc_info=False)
             raise pe
@@ -115,12 +120,13 @@ async def file_download_task(capacity_limiter: CapacityLimiter, total_files: int
             # else:
             #     logger.info(f"cached_file --> {pdf_url}")
 
+            await res.send({
+                "index": current_index,
+                "total": total_files,
+                "file": current_file,
+                "valid": valid
+            })
+
         except BaseException as ex:
             logger.error(ex, exc_info=True)
-
-        await res.send({
-            "index": current_index,
-            "total": total_files,
-            "file": current_file,
-            "valid": valid
-        })
+            raise ex

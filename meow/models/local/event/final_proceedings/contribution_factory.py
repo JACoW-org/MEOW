@@ -8,23 +8,23 @@ from meow.models.local.event.final_proceedings.track_factory import track_data_f
 from meow.models.local.event.final_proceedings.event_factory import (
     event_affiliation_factory, event_person_factory)
 from meow.models.local.event.final_proceedings.contribution_model import (
-    ContributionData, ContributionFieldData, EditableData, FileData, RevisionData, TagData)
+    ContributionData, ContributionFieldData, EditableData, FileData, RevisionCommentData, RevisionData, TagData, UserData)
 from meow.models.local.event.final_proceedings.event_model import (PersonData)
 
-from meow.utils.datetime import datedict_to_tz_datetime, format_datetime_sec
+from meow.utils.datetime import datedict_to_tz_datetime, datetime_localize, datetime_now, format_datetime_sec
 from meow.utils.list import find
 
 
 logger = lg.getLogger(__name__)
 
 
-def contribution_editable_factory(editable: Any) -> EditableData | None:
+def contribution_editable_factory(editable: Any, event_timezone: str) -> EditableData | None:
 
     if editable is None:
         return None
 
     all_revisions = [
-        contribution_revision_factory(revision)
+        contribution_revision_factory(revision, event_timezone)
         for revision in editable.get('all_revisions', [])
         if revision is not None
     ]
@@ -37,7 +37,7 @@ def contribution_editable_factory(editable: Any) -> EditableData | None:
     ))
 
     latest_revision = contribution_revision_factory(
-        editable.get('latest_revision', None)
+        editable.get('latest_revision', None), event_timezone
     ) if editable.get('latest_revision', None) else None
 
     return EditableData(
@@ -49,7 +49,9 @@ def contribution_editable_factory(editable: Any) -> EditableData | None:
     )
 
 
-def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> ContributionData:
+def contribution_data_factory(contribution: Any, editors: list[PersonData], event_timezone: str) -> ContributionData:
+
+    logger.info(f"contribution_code: {contribution.get('code')}")
 
     contrib_editables: list = contribution.get('editables', [])
     contrib_paper: dict = contribution.get('paper', None)
@@ -61,9 +63,14 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
     poster_editable: Any = find(contrib_editables, lambda x: x.get('type', 0) ==
                                 EditableData.EditableType.poster)
 
-    paper_data = contribution_editable_factory(paper_editable)
-    slides_data = contribution_editable_factory(slides_editable)
-    poster_data = contribution_editable_factory(poster_editable)
+    paper_data = contribution_editable_factory(
+        paper_editable, event_timezone)
+    slides_data = contribution_editable_factory(
+        slides_editable, event_timezone)
+    poster_data = contribution_editable_factory(
+        poster_editable, event_timezone)
+
+    # logger.info(paper_data)
 
     reception_revisions = [
         r for r in paper_data.all_revisions
@@ -75,7 +82,7 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
 
     revisitation_revisions = [
         r for r in paper_data.all_revisions
-        if r.final_state == RevisionData.FinalRevisionState.accepted
+        if r.is_accepted
     ] if paper_data else []
 
     revisitation_revision = revisitation_revisions[0] \
@@ -100,7 +107,20 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
     acceptance = acceptance_revision.creation_date \
         if acceptance_revision is not None else None
 
-    issuance = datetime.now()
+    issuance = datetime_now(event_timezone)
+
+    """ """
+
+    logger.info(f"reception: {reception}")
+    logger.info(f"revisitation: {revisitation}")
+    logger.info(f"acceptance: {acceptance}")
+    logger.info(f"issuance: {issuance}")
+
+    # contribution_code: MOA03
+    # reception: 2022-08-17 13:51:09+00:00
+    # revisitation: 2022-08-24 07:00:13+00:00
+    # acceptance: 2022-08-24 07:00:13+00:00
+    # issuance: 2024-01-29 16:40:34.277376
 
     """ """
 
@@ -149,7 +169,7 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
 
     """ """
 
-    logger.info(f"{contribution.get('code')}")
+    logger.debug(f"{contribution.get('code')}")
 
     """ """
 
@@ -158,7 +178,7 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
     if contrib_paper:
         peer_reviewing_accepted = contrib_paper.get('state', 0) == 2
 
-    logger.info(f"peer_reviewing: {peer_reviewing_accepted}")
+    logger.debug(f"peer_reviewing: {peer_reviewing_accepted}")
 
     """ """
 
@@ -172,7 +192,7 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
                     is_slides_included = True
                     break
 
-    logger.info(f"is_slides_included: {is_slides_included}")
+    logger.debug(f"is_slides_included: {is_slides_included}")
 
     """ """
 
@@ -195,9 +215,9 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
         elif paper_data.state == EditableData.EditableState.needs_submitter_confirmation:
             is_included_in_pdf_check = True
 
-    logger.info(f"is_prepress: {is_included_in_prepress}")
-    logger.info(f"is_proceedings: {is_included_in_proceedings}")
-    logger.info(f"is_pdf_check: {is_included_in_pdf_check}")
+    logger.debug(f"is_prepress: {is_included_in_prepress}")
+    logger.debug(f"is_proceedings: {is_included_in_proceedings}")
+    logger.debug(f"is_pdf_check: {is_included_in_pdf_check}")
 
     """ """
 
@@ -281,11 +301,15 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
             contribution_field_factory(field)
             for field in contribution.get('field_values')
         ],
-        start=datedict_to_tz_datetime(
-            contribution.get('start_dt')
+        start=datetime_localize(
+            datedict_to_tz_datetime(
+                contribution.get('start_dt')
+            ), event_timezone
         ),
-        end=datedict_to_tz_datetime(
-            contribution.get('end_dt')
+        end=datetime_localize(
+            datedict_to_tz_datetime(
+                contribution.get('end_dt')
+            ), event_timezone
         ),
         is_slides_included=is_slides_included,
         is_included_in_proceedings=is_included_in_proceedings,
@@ -336,14 +360,20 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData]) -> C
     return contribution_data
 
 
-def contribution_revision_factory(revision: Any) -> RevisionData:
+def contribution_revision_factory(revision: Any, event_timezone: str) -> RevisionData:
     return RevisionData(
         id=revision.get('id'),
-        comment=revision.get('comment'),
+        # comment=revision.get('comment'),
+        comments=[
+            contribution_revision_comment_factory(comment, event_timezone)
+            for comment in revision.get('comments', [])
+        ],
         initial_state=revision.get('initial_state'),
         final_state=revision.get('final_state'),
-        creation_date=datedict_to_tz_datetime(
-            revision.get('created_dt')
+        creation_date=datetime_localize(
+            datedict_to_tz_datetime(
+                revision.get('created_dt')
+            ), event_timezone
         ),
         files=[
             contribution_file_factory(file)
@@ -354,6 +384,32 @@ def contribution_revision_factory(revision: Any) -> RevisionData:
             for tag in revision.get('tags', [])
         ]
     )
+
+
+def contribution_revision_comment_factory(comment: Any, event_timezone: str) -> RevisionCommentData:
+    return RevisionCommentData(
+        id=comment.get('id'),
+        internal=comment.get('internal'),
+        system=comment.get('system'),
+        text=comment.get('text'),
+        created_dt=datetime_localize(
+            datedict_to_tz_datetime(
+                comment.get('created_dt')
+            ), event_timezone
+        ),
+        user=contribution_user_factory(comment.get('user', None))
+    )
+
+
+def contribution_user_factory(user: Any) -> UserData | None:
+    return UserData(
+        id=user.get('id'),
+        first_name=user.get('first_name'),
+        last_name=user.get('last_name'),
+        affiliation=user.get('affiliation'),
+        is_admin=user.get('is_admin'),
+        is_system=user.get('is_system'),
+    ) if user else None
 
 
 def contribution_file_factory(file: Any) -> FileData:

@@ -2,7 +2,8 @@
 import io
 import pathlib
 import logging as lg
-from anyio import Path, to_thread
+
+from anyio import Path, to_process as to_task  # to_thread
 
 from meow.services.local.papers_metadata.pdf_text import (
     write_page_footer, write_page_header, write_page_side)
@@ -36,7 +37,7 @@ def get_python_cmd():
 
 
 def get_pdftk_cmd():
-    return str(Path("pdftk"))  # str(Path("bin", "pdftk"))
+    return str(Path("bin", "pdftk.sh"))  # str(Path("pdftk")) 
 
 
 def get_mutool_cmd():
@@ -52,6 +53,11 @@ def get_pdfunite_cmd():
 
 
 async def pdf_linearize_qpdf(in_path: str, out_path: str, docinfo: dict | None, metadata: dict | None):
+    return await to_task.run_sync(_pdf_linearize_qpdf, in_path, out_path, docinfo,
+                                  metadata, cancellable=True)
+
+
+def _pdf_linearize_qpdf(in_path: str, out_path: str, docinfo: dict | None, metadata: dict | None):
     """ """
 
     with open(in_path) as pdf_doc:
@@ -81,6 +87,12 @@ async def pdf_linearize_qpdf(in_path: str, out_path: str, docinfo: dict | None, 
 
 
 async def pdf_metadata_qpdf(file_path: str, docinfo: dict | None, metadata: dict | None):
+    # return await sleep(10)
+    return await to_task.run_sync(_pdf_metadata_qpdf, file_path, docinfo,
+                                  metadata, cancellable=True)
+
+
+def _pdf_metadata_qpdf(file_path: str, docinfo: dict | None, metadata: dict | None):
     """ """
 
     # print(file_path, docinfo, metadata)
@@ -180,6 +192,12 @@ async def read_report(read_path: str, keywords: bool) -> dict | None:
         res.returncode == 0) else None
 
 
+async def read_report_anyio(read_path: str, keywords: bool) -> dict | None:
+    # return await sleep(10)
+    return await to_task.run_sync(_read_report_thread, read_path,
+                                  keywords, cancellable=True)
+
+
 def _read_report_thread(input: str, keywords: bool):
 
     doc: Document | None = None
@@ -251,10 +269,6 @@ def _read_report_thread(input: str, keywords: bool):
             del doc
 
 
-async def read_report_anyio(read_path: str, keywords: bool) -> dict | None:
-    return await to_thread.run_sync(_read_report_thread, read_path, keywords)
-
-
 async def pdf_to_text(read_path: str) -> str:
     """ """
 
@@ -322,9 +336,11 @@ async def draw_frame_anyio(input: str, output: str, page: int,
                            pre_print: str | None, header: dict | None,
                            footer: dict | None, metadata: dict | None,
                            xml_metadata: str | None, annotations: bool = True):
-    return await to_thread.run_sync(_draw_frame_anyio, input, output,
-                                    page, pre_print, header, footer, metadata,
-                                    xml_metadata, annotations)
+
+    # return await sleep(10)
+    return await to_task.run_sync(_draw_frame_anyio, input, output, page, pre_print,
+                                  header, footer, metadata, xml_metadata, annotations,
+                                  cancellable=True)
 
 
 def _draw_frame_anyio(input: str, output: str, page_number: int,
