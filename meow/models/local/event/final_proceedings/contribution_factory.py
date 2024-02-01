@@ -63,7 +63,8 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData], even
     poster_editable: Any = find(contrib_editables, lambda x: x.get('type', 0) ==
                                 EditableData.EditableType.poster)
 
-    paper_data = contribution_editable_factory(paper_editable, event_timezone)
+    paper_data = contribution_editable_factory(
+        paper_editable, event_timezone)
     slides_data = contribution_editable_factory(
         slides_editable, event_timezone)
     poster_data = contribution_editable_factory(

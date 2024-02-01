@@ -30,6 +30,7 @@ def proceedings_data_factory(event: Any, sessions: list, contributions: list,
     event_timezone: str = event.get('timezone', '')
 
     """ build editors """
+    
     editors_dict_list = json_decode(settings.get(
         'editorial_json', '{}'))
 
