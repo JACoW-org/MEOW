@@ -67,7 +67,7 @@ async def contributions_group_by_classification(capacity_limiter: CapacityLimite
         classification_list: list[TrackData] = []
 
         for contribution in proceedings_data.contributions:
-            if contribution.track is not None and contribution.track not in classification_list:
+            if contribution.track and contribution.track not in classification_list:
                 classification_list.append(contribution.track)
 
         classification_list = list(set(classification_list))
@@ -93,7 +93,7 @@ async def contributions_group_by_author(capacity_limiter: CapacityLimiter, proce
 
         for contribution in proceedings_data.contributions:
             for author in contribution.authors:
-                if author is not None and author not in author_list:
+                if author and author not in author_list:
                     author_list.append(author)
 
         author_list = list(set(author_list))
@@ -116,7 +116,7 @@ async def contributions_group_by_institute(capacity_limiter: CapacityLimiter, pr
 
         for contribution in proceedings_data.contributions:
             for institute in contribution.institutes:
-                if institute is not None and institute not in institute_list:
+                if institute and institute not in institute_list:
                     institute_list.append(institute)
 
         institute_list = list(set(institute_list))
@@ -145,7 +145,7 @@ async def contributions_group_by_keyword(capacity_limiter: CapacityLimiter, proc
 
         for contribution in proceedings_data.contributions:
             for keyword in contribution.keywords:
-                if keyword is not None and keyword not in keyword_list:
+                if keyword and keyword not in keyword_list:
                     keyword_list.append(keyword)
 
         keyword_list = list(set(keyword_list))

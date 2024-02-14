@@ -33,7 +33,7 @@ def create_task(
     using the provided ``logger``, with additional context provided by ``message`` and optionally
     ``message_args``.
     """
-    if loop is None:
+    if not loop:
         loop = asyncio.get_running_loop()
     task = loop.create_task(name=name, coro=coro)
     task.add_done_callback(

@@ -83,7 +83,7 @@ class PubsubRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
                 )
 
                 try:
-                    if pubsub is not None:
+                    if pubsub:
                         async with pubsub as p:
                             await p.subscribe(conf.REDIS_NODE_TOPIC)
 
@@ -101,7 +101,7 @@ class PubsubRedisWorkerLogicComponent(AbsRedisWorkerLogicComponent):
                 except BaseException as be:
                     logger.error(be, exc_info=True)
                 finally:
-                    if pubsub is not None:
+                    if pubsub:
                         logger.debug('pubsub.close()')
                         await pubsub.close()
 

@@ -261,19 +261,19 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
                 contributions = [
                     c for c in self.contributions
-                    if c.session_code == session.code
+                    if c.session_id == session.id
                 ]
 
                 # logger.info(f"{session} -> {len(contributions)}")
 
-                await Path(self.src_session_dir, f'{session.code.lower()}.md').write_text(
+                await Path(self.src_session_dir, f'{session.id}-{session.code.lower()}.md').write_text(
                     await self.template.render_session_page(self.event, session, contributions)
                 )
 
         capacity_limiter = CapacityLimiter(16)
         async with create_task_group() as tg:
             for session in self.sessions:
-                if session and session.code:
+                if session and session.id and session.code:
                     tg.start_soon(_render_contribution,
                                   capacity_limiter, session)
 
@@ -282,8 +282,8 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
         logger.info(f'render_classification - {len(self.classifications)}')
 
-        classification_partial_dir = Path(
-            self.src_dir, 'layouts', 'partials', 'classification', 'list.html')
+        classification_partial_dir = Path(self.src_dir, 'layouts', 'partials',
+                                          'classification', 'list.html')
 
         await classification_partial_dir.write_text(
             await self.template.render_classification_partial(self.classifications)
@@ -315,8 +315,8 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
         logger.info(f'render_author - {len(self.authors)}')
 
-        author_partial_dir = Path(
-            self.src_dir, 'layouts', 'partials', 'author', 'list.html')
+        author_partial_dir = Path(self.src_dir, 'layouts', 'partials',
+                                  'author', 'list.html')
 
         await author_partial_dir.write_text(
             await self.template.render_author_partial(self.authors)
@@ -348,8 +348,8 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
         logger.info(f'render_institute - {len(self.institutes)}')
 
-        institute_partial_dir = Path(
-            self.src_dir, 'layouts', 'partials', 'institute', 'list.html')
+        institute_partial_dir = Path(self.src_dir, 'layouts', 'partials',
+                                     'institute', 'list.html')
 
         authorsGroups: dict[str, list[dict]] = {}
 
@@ -411,8 +411,8 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
         logger.info(f'render_doi_per_institute - {len(self.institutes)}')
 
-        doi_per_institute_partial_dir = Path(
-            self.src_dir, 'layouts', 'partials', 'doi_per_institute', 'list.html')
+        doi_per_institute_partial_dir = Path(self.src_dir, 'layouts', 'partials',
+                                             'doi_per_institute', 'list.html')
 
         contributionsGroups: dict[str, list[dict]] = {}
 
@@ -475,8 +475,8 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
         logger.info(f'render_keyword - {len(self.keywords)}')
 
-        keyword_partial_dir = Path(
-            self.src_dir, 'layouts', 'partials', 'keyword', 'list.html')
+        keyword_partial_dir = Path(self.src_dir, 'layouts', 'partials',
+                                   'keyword', 'list.html')
 
         await keyword_partial_dir.write_text(
             await self.template.render_keyword_partial(self.keywords)
@@ -526,8 +526,8 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
         async with create_task_group() as tg:
             for contribution in self.contributions:
                 if contribution.is_included_in_proceedings and contribution.code and contribution.doi_data:
-                    tg.start_soon(_render_doi_contribution, capacity_limiter,
-                                  contribution.doi_data)
+                    tg.start_soon(_render_doi_contribution,
+                                  capacity_limiter, contribution.doi_data)
 
     async def render_references(self) -> None:
         """"""

@@ -34,9 +34,7 @@ async def clean_static_site(proceedings_data: ProceedingsData, cookies: dict,
     site_archive_name = f"{proceedings_data.event.id}.7z"
     site_archive_path = Path('var', 'html', site_archive_name)
 
-    if await site_archive_path.exists():
-        await site_archive_path.unlink()
-
+    await site_archive_path.unlink(missing_ok=True)
     await rmtree(str(site_preview_path))
     await rmtree(str(static_site_src))
 
@@ -59,9 +57,7 @@ async def link_static_site(proceedings_data: ProceedingsData, cookies: dict,
 
     logger.info(f"{static_site_path} --> {site_preview_path}")
 
-    if await site_archive_path.exists():
-        await site_archive_path.unlink()
-
+    await site_archive_path.unlink(missing_ok=True)
     await rmtree(str(site_preview_path))
     await move(str(static_site_path), str(site_preview_path))
     # await rmtree(str(static_site_src))

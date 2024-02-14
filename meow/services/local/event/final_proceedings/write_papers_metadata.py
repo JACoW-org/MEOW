@@ -37,9 +37,9 @@ async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict
     pdf_cache_dir: Path = Path('var', 'run', dir_name)
     await pdf_cache_dir.mkdir(exist_ok=True, parents=True)
 
-    sessions_dict: dict[str, SessionData] = dict()
+    sessions_dict: dict[int, SessionData] = dict()
     for session in proceedings_data.sessions:
-        sessions_dict[session.code] = session
+        sessions_dict[session.id] = session
 
     async with create_task_group() as tg:
         for current_paper in papers_data:
@@ -61,10 +61,14 @@ async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict
     return proceedings_data
 
 
-async def write_metadata_task(current_paper, sessions, settings, pdf_cache_dir):
+async def write_metadata_task(current_paper, sessions: dict[int, SessionData], settings, pdf_cache_dir):
     contribution: ContributionData = current_paper.contribution
 
-    session: SessionData = sessions.get(contribution.session_code)
+    session = sessions.get(contribution.session_id)
+
+    if not session:
+        return None
+
     current_file = current_paper.paper
 
     original_pdf_name = f"{current_file.filename}"
@@ -73,14 +77,12 @@ async def write_metadata_task(current_paper, sessions, settings, pdf_cache_dir):
     jacow_pdf_name = f"{current_file.filename}_jacow"
     jacow_pdf_file = Path(pdf_cache_dir, jacow_pdf_name)
 
-    if await jacow_pdf_file.exists():
-        await jacow_pdf_file.unlink()
+    await jacow_pdf_file.unlink(missing_ok=True)
 
     join_pdf_name = f"{current_file.filename}_join"
     join_pdf_file = Path(pdf_cache_dir, join_pdf_name)
 
-    if await join_pdf_file.exists():
-        await join_pdf_file.unlink()
+    await join_pdf_file.unlink(missing_ok=True)
 
     header_data: dict | None = get_header_data(contribution)
     footer_data: dict | None = get_footer_data(contribution, session)
@@ -94,8 +96,8 @@ async def write_metadata_task(current_paper, sessions, settings, pdf_cache_dir):
     pre_print: str = settings.get('pre_print', 'This is a preprint') \
         if contribution.peer_reviewing_accepted else ''
 
-    if pre_print != '':
-        logger.info(f"code: {contribution.code} - preprint: {pre_print}")
+    # if pre_print != '':
+    #     logger.info(f"code: {contribution.code} - preprint: {pre_print}")
 
     async def _task_jacow_files():
         await draw_frame_anyio(str(original_pdf_file), str(jacow_pdf_file),
@@ -231,10 +233,10 @@ def get_xml_metatdata_pikepdf(contribution: ContributionData) -> dict | None:
 
 def get_footer_data(contribution: ContributionData, session: SessionData) -> dict[str, str] | None:
 
-    classificationHeader = unidecode(
-        f'{contribution.track.title}' if contribution.track else '')
-    sessionHeader = unidecode(
-        f'{session.code}: {session.title}')
+    contrib_track = contribution.track.title if contribution.track else None
+
+    classificationHeader = unidecode(contrib_track if contrib_track else '')
+    sessionHeader = unidecode(f'{session.code}: {session.title}')
 
     footer_data = dict(
         classificationHeader=classificationHeader,

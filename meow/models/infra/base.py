@@ -93,7 +93,7 @@ class BaseModel(AbstractModel):
     @classmethod
     async def find_one(cls, query: Query):
         result = await cls.search(query)
-        if result is None or len(result.docs) == 0:
+        if not result or len(result.docs) == 0:
             return None
         one = result.docs[0].json
         return cls(**json_decode(one))

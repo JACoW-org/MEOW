@@ -36,7 +36,7 @@ async def build_doi_payloads(proceedings_data: ProceedingsData) -> ProceedingsDa
 
         # contributions DOIs
         for contribution in proceedings_data.contributions:
-            if contribution.doi_data is not None:
+            if contribution.doi_data:
                 tg.start_soon(generate_doi_payload_task,
                               capacity_limiter, contribution.doi_data, doi_dir)
 
@@ -52,8 +52,7 @@ async def generate_conference_doi_payload_task(capacity_limiter: CapacityLimiter
     async with capacity_limiter:
         doi_file = Path(doi_dir, f'{proceedings_data.event.id}.json')
 
-        if await doi_file.exists():
-            await doi_file.unlink()
+        await doi_file.unlink(missing_ok=True)
 
         # JSON string
         payload = proceedings_data.conference_doi_payload
@@ -71,8 +70,7 @@ async def generate_doi_payload_task(capacity_limiter: CapacityLimiter,
 
         doi_file = Path(doi_dir, f'{contribution_doi.code}.json')
 
-        if await doi_file.exists():
-            await doi_file.unlink()
+        await doi_file.unlink(missing_ok=True)
 
         # generate JSON string
         json_text = contribution_doi.as_json()

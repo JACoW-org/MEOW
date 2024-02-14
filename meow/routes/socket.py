@@ -192,13 +192,13 @@ async def websocket_endpoint(ws: WebSocket):
         # logger.info(f'header_api_key->{header_api_key}')
 
         # credential = await find_credential_by_secret(
-        #     cookie_api_key if cookie_api_key is not None else header_api_key
+        #     cookie_api_key if cookie_api_key else header_api_key
         # )
 
         api_key: str = ws.path_params.get("api_key", None)
         credential = await find_credential_by_secret(api_key)
 
-        if credential is not None:
+        if credential:
 
             await __open_websocket(ws, task_id)
             await __websocket_task(ws, task_id)

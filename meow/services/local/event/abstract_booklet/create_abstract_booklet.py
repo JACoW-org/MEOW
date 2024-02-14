@@ -38,6 +38,7 @@ async def create_abstract_booklet_from_event(event: dict, sessions: list, contri
 
         session_event: dict = session_slot.get('session', dict())
 
+        session_id = session_slot.get('id', 0)
         session_slot_code = session_slot.get('code', '')
         session_event_code = session_event.get('code', '')
 
@@ -49,6 +50,7 @@ async def create_abstract_booklet_from_event(event: dict, sessions: list, contri
         contributions_data = list()
 
         session_slot_data: dict[str, Any] = dict(
+            id=session_id,
             code=session_code,
             title=session_slot.get('title'),
             description=session_slot.get('description'),
@@ -84,7 +86,7 @@ async def create_abstract_booklet_from_event(event: dict, sessions: list, contri
 
         session_slot_contributions: list[dict] = [
             c for c in contributions
-            if c.get('session_code') == session_code
+            if c.get('session_id') == session_id
         ]
 
         # session_slot_contributions_len = len(session_slot_contributions)
@@ -189,7 +191,8 @@ async def create_abstract_booklet_from_event(event: dict, sessions: list, contri
 
     sessions_data.sort(key=lambda x: (
         format_datetime_sec(x.get('start', '')),
-        x.get('code', '')
+        x.get('code', ''),
+        x.get('id', 0),
     ))
 
     return abstract_booklet

@@ -37,7 +37,7 @@
 #     """ """
 # 
 #     def merge_results(results: list[list[Any]] | None, current: list[list[Any]]) -> list[list[Any]]:
-#         return current if results is None else [
+#         return current if not results else [
 #             results[idx] + lst for idx, lst in enumerate(current)
 #         ]
 # 

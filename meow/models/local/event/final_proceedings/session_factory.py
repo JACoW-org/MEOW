@@ -17,9 +17,11 @@ def session_data_factory(session_slot: Any, event_timezone: str) -> SessionData:
     session_event_code = session_event.get('code', '')
     session_slot_code = session_slot.get('code', '')
 
+    session_id : int = session_slot.get('id', 0)
     session_code: str = session_slot_code or session_event_code
 
     session_data = SessionData(
+        id=session_id,
         code=session_code,
         title=session_slot.get('title'),
         url=session_slot.get('url'),

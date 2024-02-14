@@ -15,7 +15,7 @@ async def find_credential_by_secret(key: str | None) -> Credential | None:
 
     try:
 
-        if key is None:
+        if not key or key == '':
             raise ServiceError('Invalid secret')
 
         res = await dbs.redis_client.hgetall(f'meow:credential:{key}')  # type: ignore

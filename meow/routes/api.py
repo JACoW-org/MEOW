@@ -22,7 +22,7 @@ async def api_ping_endpoint(req: Request) -> JSONResponse:
     api_key: str = str(req.path_params['api_key'])
     credential = await find_credential_by_secret(api_key)
 
-    if credential is not None:
+    if credential:
         return JSONResponse({
             'method': 'ping',
             'params': {
@@ -41,7 +41,7 @@ async def api_info_endpoint(req: Request) -> JSONResponse:
     api_key: str = str(req.path_params['api_key'])
     credential = await find_credential_by_secret(api_key)
 
-    if credential is not None:
+    if credential:
 
         result = await event_api_info(str(event_id))
         params = result.get('value') if result else None
@@ -123,11 +123,11 @@ async def api_clear_endpoint(req: Request) -> JSONResponse:
 #             req.headers.get('X-API-KEY', None)
 #         )
 #
-#         if credential is not None:
+#         if credential:
 #             conference_id: str = req.path_params['id']
 #             conference = await get_conference_entity(conference_id)
 #
-#             if conference is not None:
+#             if conference:
 #                 return await create_json_response(
 #                     ok=True, body=dict(conference)
 #                 )

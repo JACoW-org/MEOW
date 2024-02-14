@@ -53,7 +53,7 @@ async def read_papers_report(proceedings_data: ProceedingsData, cookies: dict,
 
                     file_data: FileData = result.get('file', None)
 
-                    if file_data is not None:
+                    if file_data:
                         results[file_data.uuid] = result.get('meta', None)
 
                     if processed_files >= total_files:
@@ -112,7 +112,7 @@ def refill_contribution_report(proceedings_data: ProceedingsData, results: dict)
                     if len(revision_data.files) > 0 \
                     else None
 
-                if file_data is not None:
+                if file_data:
 
                     result: dict = results.get(file_data.uuid, {})
                     report: dict = result.get('report', {})

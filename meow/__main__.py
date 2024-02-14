@@ -520,7 +520,7 @@ def doc_toc_vol(args) -> None:
     event: dict = toc_data.get('event', None)
     pre_pdf: str = toc_data.get('pre_pdf', None)
 
-    if pre_pdf is None:
+    if not pre_pdf:
         start_page = 0
     else:
         pre_doc: Document = Document(filename=pre_pdf)

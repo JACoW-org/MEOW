@@ -86,21 +86,21 @@ class ServerSentEvent:
         self.comment = comment
         self.DEFAULT_SEPARATOR = "\r\n"
         self.LINE_SEP_EXPR = re.compile(r"\r\n|\r|\n")
-        self._sep = sep if sep is not None else self.DEFAULT_SEPARATOR
+        self._sep = sep if sep else self.DEFAULT_SEPARATOR
 
     def encode(self) -> bytes:
         buffer = io.StringIO()
-        if self.comment is not None:
+        if self.comment:
             for chunk in self.LINE_SEP_EXPR.split(str(self.comment)):
                 buffer.write(f": {chunk}")
                 buffer.write(self._sep)
             return buffer.getvalue().encode("utf-8")
 
-        if self.id is not None:
+        if self.id:
             buffer.write(self.LINE_SEP_EXPR.sub("", f"id: {self.id}"))
             buffer.write(self._sep)
 
-        if self.event is not None:
+        if self.event:
             buffer.write(self.LINE_SEP_EXPR.sub("", f"event: {self.event}"))
             buffer.write(self._sep)
 
@@ -108,7 +108,7 @@ class ServerSentEvent:
             buffer.write(f"data: {chunk}")
             buffer.write(self._sep)
 
-        if self.retry is not None:
+        if self.retry:
             if not isinstance(self.retry, int):
                 raise TypeError("retry argument must be int")
             buffer.write(f"retry: {self.retry}")
@@ -160,12 +160,12 @@ class EventSourceResponse(Response):
         else:
             self.body_iterator = iterate_in_threadpool(content)  # type: ignore
         self.status_code = status_code
-        self.media_type = self.media_type if media_type is None else media_type
+        self.media_type = self.media_type if not media_type else media_type
         # type: ignore  # follows https://github.com/encode/starlette/blob/master/starlette/responses.py
         self.background = background
 
         _headers = {}
-        if headers is not None:  # pragma: no cover
+        if headers:  # pragma: no cover
             _headers.update(headers)
 
         # mandatory for servers-sent events headers
@@ -177,7 +177,7 @@ class EventSourceResponse(Response):
 
         self.init_headers(_headers)
 
-        self.ping_interval = self.DEFAULT_PING_INTERVAL if ping is None else ping
+        self.ping_interval = self.DEFAULT_PING_INTERVAL if not ping else ping
         self.active = True
 
         self._ping_task = None
@@ -224,7 +224,7 @@ class EventSourceResponse(Response):
             task_group.start_soon(wrap, self.listen_for_exit_signal)
             await wrap(partial(self.listen_for_disconnect, receive))
 
-        if self.background is not None: 
+        if self.background: 
             await self.background()
 
     def enable_compression(self, force: bool = False) -> None:
@@ -262,7 +262,7 @@ class EventSourceResponse(Response):
                 assert isinstance(self.ping_message_factory, Callable)
             ping = (
                 ServerSentEvent(datetime.utcnow(), event="ping").encode()
-                if self.ping_message_factory is None
+                if not self.ping_message_factory
                 else ensure_bytes(self.ping_message_factory())
             )
             _log.debug(f"ping: {ping.decode()}")

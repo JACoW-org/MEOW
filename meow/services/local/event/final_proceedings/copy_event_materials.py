@@ -43,8 +43,7 @@ async def copy_event_materials(proceedings_data: ProceedingsData,
     vol_pdf: Path = Path(file_cache_dir, vol_pdf_name)
     vol_dest: Path = Path(pdf_dest_dir, vol_dest_name)
 
-    if await vol_dest.exists():
-        await vol_dest.unlink()
+    await vol_dest.unlink(missing_ok=True)
 
     if await vol_pdf.exists():
         # await vol_dest.hardlink_to(vol_pdf)
@@ -56,8 +55,7 @@ async def copy_event_materials(proceedings_data: ProceedingsData,
     brief_pdf: Path = Path(file_cache_dir, brief_pdf_name)
     brief_dest: Path = Path(pdf_dest_dir, brief_dest_name)
 
-    if await brief_dest.exists():
-        await brief_dest.unlink()
+    await brief_dest.unlink(missing_ok=True)
 
     if await brief_pdf.exists():
         # await brief_dest.hardlink_to(brief_pdf)
@@ -122,11 +120,9 @@ async def file_copy_task(
             dest_name = f"{current_file.filename}"
             dest_path = Path(dest_dir, dest_name)
 
-            dest_exists = await dest_path.exists()
             file_exists = await file_path.exists()
 
-            if dest_exists:
-                await dest_path.unlink()
+            await dest_path.unlink(missing_ok=True)
 
             # logger.info(f"{pdf_file} ({'exists!' if pdf_exists else 'not exists!!!'}) -> {pdf_dest}")
 
@@ -139,11 +135,9 @@ async def file_copy_task(
         except Exception as ex:
             logger.error(ex, exc_info=True)
 
-        await res.send(
-            {
-                "index": current_index,
-                "total": total_files,
-                "file": current_file,
-                "exists": file_exists,
-            }
-        )
+        await res.send({
+            "index": current_index,
+            "total": total_files,
+            "file": current_file,
+            "exists": file_exists,
+        })

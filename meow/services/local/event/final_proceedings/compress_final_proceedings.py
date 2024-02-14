@@ -14,13 +14,12 @@ async def compress_proceedings(proceedings: ProceedingsData, cookies: dict, sett
     site_preview_ctx = f'{proceedings.event.id}'
     site_preview_dir = Path(site_preview_ctx)
     site_preview_zip = Path(f"{site_preview_ctx}.7z")
-    working_dir = Path('var', 'html')
+    site_working_dir = Path('var', 'html')
 
-    zip_cmd = await Path('bin', '7zzs').absolute()
+    zip_cmd = Path('bin', '7zzs')
 
-    full_dest_path = await Path(working_dir, f"{site_preview_ctx}.7z").absolute()
-    if await full_dest_path.exists():
-        await full_dest_path.unlink()
+    full_dest_path = Path(site_working_dir, f"{site_preview_ctx}.7z")
+    await full_dest_path.unlink(missing_ok=True)
 
     zip_args = [f"{zip_cmd}", "a",
                 "-t7z", "-m0=Deflate",
@@ -31,7 +30,7 @@ async def compress_proceedings(proceedings: ProceedingsData, cookies: dict, sett
 
     logger.info(" ".join(zip_args))
 
-    result = await run_process(zip_args, cwd=str(working_dir))
+    result = await run_process(zip_args, cwd=str(site_working_dir))
 
     if result.returncode == 0:
         logger.info(result.stdout.decode())

@@ -58,4 +58,4 @@ class ContributionRef:
         return dict_obj
 
     def is_citable(self) -> bool:
-        return self.authors_list is not None and len(self.authors_list) > 0
+        return self.authors_list and len(self.authors_list) > 0

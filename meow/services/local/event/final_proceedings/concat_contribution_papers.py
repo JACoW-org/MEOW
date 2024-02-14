@@ -145,8 +145,7 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
         raise be
     finally:
         for pdf_part in [Path(p) for p in pdf_parts]:
-            if await pdf_part.exists():
-                await pdf_part.unlink()
+            await pdf_part.unlink(missing_ok=True)
 
     try:
         if await brief_links(str(brief_pdf_chunk_path), str(brief_pdf_links_path), brief_pdf_links) != 0:
@@ -155,8 +154,7 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
         logger.error(be, exc_info=True)
         raise be
     finally:
-        if await brief_pdf_chunk_path.exists():
-            await brief_pdf_chunk_path.unlink()
+        await brief_pdf_chunk_path.unlink(missing_ok=True)
 
     try:
         if await pdf_linearize_qpdf(str(brief_pdf_links_path), str(brief_pdf_meta_path), docinfo, metadata) != 0:
@@ -165,8 +163,7 @@ async def brief_pdf_task(proceedings_data: ProceedingsData, files_data: list[Fil
         logger.error(be, exc_info=True)
         raise be
     finally:
-        if await brief_pdf_links_path.exists():
-            await brief_pdf_links_path.unlink()
+        await brief_pdf_links_path.unlink(missing_ok=True)
 
     proceedings_data.proceedings_brief_size = (await brief_pdf_meta_path.stat()).st_size
 
@@ -225,8 +222,7 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
         raise be
     finally:
         for pdf_part in [Path(p) for p in pdf_parts]:
-            if await pdf_part.exists():
-                await pdf_part.unlink()
+            await pdf_part.unlink(missing_ok=True)
 
     try:
         if await vol_toc_links(str(vol_pdf_chunk_path), str(vol_pdf_links_path), str(vol_toc_links_path)) != 0:
@@ -235,10 +231,8 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
         logger.error(be, exc_info=True)
         raise be
     finally:
-        if await vol_pdf_chunk_path.exists():
-            await vol_pdf_chunk_path.unlink()
-        if vol_toc_links_path and await vol_toc_links_path.exists():
-            await vol_toc_links_path.unlink()
+        await vol_pdf_chunk_path.unlink(missing_ok=True)
+        await vol_toc_links_path.unlink(missing_ok=True)
 
     try:
         if await pdf_linearize_qpdf(str(vol_pdf_links_path), str(vol_pdf_meta_path), docinfo, metadata) != 0:
@@ -247,8 +241,7 @@ async def vol_pdf_task(proceedings_data: ProceedingsData, files_data: list[FileD
         logger.error(be, exc_info=True)
         raise be
     finally:
-        if await vol_pdf_links_path.exists():
-            await vol_pdf_links_path.unlink()
+        await vol_pdf_links_path.unlink(missing_ok=True)
 
     proceedings_data.proceedings_volume_size = (await vol_pdf_meta_path.stat()).st_size
 
@@ -261,8 +254,7 @@ async def unlink_files(files_data: list[FileData], cache_dir: Path):
     pdf_files: list[str] = await get_pdf_files(cache_dir, files_data)
 
     async def _unlink_file(vol_pdf: Path):
-        if await vol_pdf.exists():
-            await vol_pdf.unlink()
+        await vol_pdf.unlink(missing_ok=True)
 
     async with create_task_group() as tg:
         for vol_pdf in [Path(p) for p in pdf_files]:
@@ -291,52 +283,63 @@ async def get_vol_pre_pdf_path(proceedings_data: ProceedingsData, cache_dir: Pat
 async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, vol_pre_pdf_path: Path | None,
                                cache_dir: Path, callback: Callable, toc_grouping: list[str]):
 
-    vol_toc_pdf_path: Path | None = None
-    vol_toc_links_path: Path | None = None
-    vol_toc_conf_path: Path | None = None
+    session_ids = dict()
+    toc_items = list()
+
+    vol_toc_name = f'{proceedings_data.event.id}_proceedings_volume_toc'
+
+    vol_toc_pdf_path = Path(cache_dir, f"{vol_toc_name}.pdf")
+    vol_toc_links_path = Path(cache_dir, f"{vol_toc_name}.meta.json")
+    vol_toc_conf_path = Path(cache_dir, f"{vol_toc_name}.conf.json")
 
     # logger.info(toc_grouping)
 
     try:
-        vol_toc_name = f'{proceedings_data.event.id}_proceedings_volume_toc'
-
-        vol_toc_pdf_path = Path(cache_dir, f"{vol_toc_name}.pdf")
-        vol_toc_links_path = Path(cache_dir, f"{vol_toc_name}.meta.json")
-        vol_toc_conf_path = Path(cache_dir, f"{vol_toc_name}.conf.json")
-
-        sessions = dict()
 
         for session in proceedings_data.sessions:
-            sessions[session.code] = dict(
+            session_ids[session.id] = dict(
                 session_data=session,
-                contributions=[]
+                contributions=[],
+                page=0
             )
 
         for contribution in proceedings_data.contributions:
-            if callback(contribution) is False or contribution.session_code is None:
+            if callback(contribution) is False or not contribution.session_code:
                 continue
 
-            if contribution.session_code in sessions:
-                if len(sessions[contribution.session_code]['contributions']) == 0:
-                    sessions[contribution.session_code]['page'] = contribution.page
-                sessions[contribution.session_code]['contributions'].append(
-                    contribution)
+            if contribution.session_id in session_ids:
+                session_dict = session_ids[contribution.session_id]
+                if len(session_dict['contributions']) == 0:
+                    session_dict['page'] = contribution.page
+                session_dict['contributions'].append(contribution)
 
-        toc_items = list()
         toc_settings = dict(
             include_sessions='session' in toc_grouping,
             include_contributions='contribution' in toc_grouping
         )
 
-        for session_code, session in sessions.items():
+        for session_id, session in session_ids.items():
             if toc_settings.get('include_sessions') and session.get('page', False):
-                toc_items.append({'type': 'session', 'code': session_code, 'title': session.get(
-                    'session_data').title, 'page': session.get('page')})
+                current = {
+                    'type': 'session',
+                    'id': session_id,
+                    'code': session.get('code'),
+                    'title': session.get('session_data').title,
+                    'page': session.get('page')
+                }
+
+                toc_items.append(current)
 
             if toc_settings.get('include_contributions'):
                 for contribution in session.get('contributions'):
-                    toc_items.append({'type': 'contribution', 'code': contribution.code,
-                                     'title': contribution.title, 'page': contribution.page})
+                    current = {
+                        'type': 'contribution',
+                        'code': contribution.code,
+                        'title': contribution.title,
+                        'page': contribution.page
+                    }
+
+                    toc_items.append(current)
 
         # logger.info(toc_items)
 
@@ -346,14 +349,14 @@ async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, vol_pre_pdf_pa
             "vol_file": f"{proceedings_data.event.id}_proceedings_volume.pdf",
             "toc_items": toc_items,
             "toc_settings": toc_settings,
-            "event": dict(
-                name=proceedings_data.event.name,
-                title=proceedings_data.event.title,
-                series=proceedings_data.event.series,
-                isbn=proceedings_data.event.isbn,
-                doi=proceedings_data.event.doi_label,
-                issn=proceedings_data.event.issn,
-            )
+            "event": {
+                "name": proceedings_data.event.name,
+                "title": proceedings_data.event.title,
+                "series": proceedings_data.event.series,
+                "isbn": proceedings_data.event.isbn,
+                "doi": proceedings_data.event.doi_label,
+                "issn": proceedings_data.event.issn,
+            }
         }
 
         await vol_toc_conf_path.write_text(json_encode(toc_data).decode('utf-8'))
@@ -364,8 +367,7 @@ async def get_vol_toc_pdf_path(proceedings_data: ProceedingsData, vol_pre_pdf_pa
     except Exception as e:
         logger.error(e, exc_info=True)
     finally:
-        if vol_toc_conf_path and await vol_toc_conf_path.exists():
-            await vol_toc_conf_path.unlink()
+        await vol_toc_conf_path.unlink(missing_ok=True)
 
     return [vol_toc_pdf_path, vol_toc_links_path]
 

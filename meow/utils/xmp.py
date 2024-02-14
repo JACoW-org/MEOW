@@ -65,7 +65,7 @@ def adjustTriple(triple, node_map, check_predicates=False):
 
 
 def adjustNodes(node_map, source_graph, destination_graph=None, check_predicates=False):
-    if destination_graph is None:
+    if not destination_graph:
         destination_graph = type(source_graph)()
     for triple in source_graph:
         destination_graph.add(adjustTriple(

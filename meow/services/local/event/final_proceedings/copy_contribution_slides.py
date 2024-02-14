@@ -84,11 +84,9 @@ async def file_copy_task(capacity_limiter: CapacityLimiter, total_files: int, cu
             dest_name = f"{current_file.filename}"
             dest_path = Path(dest_dir, dest_name)
 
-            dest_exists = await dest_path.exists()
             file_exists = await file_path.exists()
 
-            if dest_exists:
-                await dest_path.unlink()
+            await dest_path.unlink(missing_ok=True)
 
             # logger.info(f"{pdf_file} ({'exists!' if pdf_exists else 'not exists!!!'}) -> {pdf_dest}")
 

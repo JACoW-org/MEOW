@@ -26,7 +26,7 @@ async def collecting_contributions_and_files(event: dict, sessions: list, cookie
     return [contributions]
 
 
-async def download_contributions(event_url: str, session_id: int, cookies: dict, settings: dict,
+async def download_contributions(event_url: str | None, session_id: int, cookies: dict, settings: dict,
                                  contributions: list, limiter: CapacityLimiter) -> None:
     async with limiter:
 
