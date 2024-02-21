@@ -16,7 +16,7 @@ async def compress_proceedings(proceedings: ProceedingsData, cookies: dict, sett
     site_preview_zip = Path(f"{site_preview_ctx}.7z")
     site_working_dir = Path('var', 'html')
 
-    zip_cmd = Path('bin', '7zzs')
+    zip_cmd = Path('bin', '7zzs').absolute()
 
     full_dest_path = Path(site_working_dir, f"{site_preview_ctx}.7z")
     await full_dest_path.unlink(missing_ok=True)
