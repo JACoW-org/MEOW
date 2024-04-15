@@ -356,19 +356,6 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
     await extend_lock(lock)
 
     yield dict(type='progress', value=dict(
-        phase='manage_duplicates',
-        text='Managing duplicates'
-    ))
-
-    # Blocking
-
-    await manage_duplicates(proceedings, settings)
-
-    """ """
-
-    await extend_lock(lock)
-
-    yield dict(type='progress', value=dict(
         phase='generate_dois',
         text='Generate DOIs'
     ))
@@ -377,6 +364,19 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
 
     await generate_dois(proceedings, cookies, settings, config,
                         filter_published_contributions)
+
+    """ """
+
+    await extend_lock(lock)
+
+    yield dict(type='progress', value=dict(
+        phase='manage_duplicates',
+        text='Managing duplicates'
+    ))
+
+    # Blocking
+
+    await manage_duplicates(proceedings, settings)
 
     """ """
 

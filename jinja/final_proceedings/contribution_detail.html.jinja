@@ -103,25 +103,9 @@
 
 {% if contribution.duplicate_of.has_metadata %}
 
-    <div>
-        &nbsp;contribution.duplicate_of.has_metadata<br>
-        
-        &nbsp;doi_url: {{ contribution.duplicate_of.doi_url }}<br>
-        &nbsp;doi_name: {{ contribution.duplicate_of.doi_name }}<br>
-        &nbsp;doi_label: {{ contribution.duplicate_of.doi_label }}<br>
-        &nbsp;doi_path: {{ contribution.duplicate_of.doi_path }}<br>
-        &nbsp;doi_identifier: {{ contribution.duplicate_of.doi_identifier }}<br>
-
-        &nbsp;reception: {{ contribution.duplicate_of.reception }}<br>
-        &nbsp;revisitation: {{ contribution.duplicate_of.revisitation }}<br>
-        &nbsp;acceptance: {{ contribution.duplicate_of.acceptance }}<br>
-        &nbsp;issuance: {{ contribution.duplicate_of.issuance }}<br>
-    </div>
-
     <div class="contrib-doi">
         <b>DOI:</b>
-        <span title="{{ contribution.duplicate_of.doi_url }}">
-            &nbsp;reference for this paper:&nbsp;</span>
+        <span>&nbsp;reference for this paper:&nbsp;</span>
         <a data-href="{{ contribution.duplicate_of.doi_url }}" 
             onclick="openUrl(`{{ contribution.duplicate_of.doi_url }}`)" 
             href="javascript:void(0);">{{ contribution.duplicate_of.doi_name }}</a>
