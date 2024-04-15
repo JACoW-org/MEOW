@@ -53,8 +53,7 @@ async def _event_clean_static_site_task(event_id: str) -> None:
     site_preview_path = Path('var', 'html', f'{event_id}')
     site_archive_path = Path('var', 'html', f"{event_id}.7z")
 
-    if await site_archive_path.exists():
-        await site_archive_path.unlink()
+    await site_archive_path.unlink(missing_ok=True)
 
     if await site_preview_path.exists():
         await rmtree(str(site_preview_path))

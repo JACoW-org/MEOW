@@ -63,7 +63,7 @@ async def read_papers_metadata(proceedings_data: ProceedingsData, cookies: dict,
 
                     file_data: FileData = result.get('file', None)
 
-                    if file_data is not None:
+                    if file_data:
                         results[file_data.uuid] = result.get('report', None)
 
                         if not results[file_data.uuid]:
@@ -148,7 +148,7 @@ async def refill_contribution_metadata(proceedings_data: ProceedingsData,
                         if len(revision_data.files) > 0 \
                         else None
 
-                    if file_data is not None:
+                    if file_data:
 
                         pdf_path = Path(pdf_cache_dir, file_data.filename)
 

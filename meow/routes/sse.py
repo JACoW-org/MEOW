@@ -28,10 +28,10 @@ async def sse_endpoint(req: Request) -> Response:
         logger.info(f'header_api_key->{header_api_key}')
 
         credential = await find_credential_by_secret(
-            cookie_api_key if cookie_api_key is not None else header_api_key
+            cookie_api_key if cookie_api_key else header_api_key
         )
 
-        if credential is not None:
+        if credential:
 
             # await __open_websocket(ws)
             # await __websocket_tasks(ws)

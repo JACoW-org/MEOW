@@ -38,7 +38,7 @@ async def build_hep_payloads(proceedings_data: ProceedingsData) -> ProceedingsDa
 
         # contributions DOIs
         for contribution in proceedings_data.contributions:
-            if contribution.doi_data is not None:
+            if contribution.doi_data:
                 tg.start_soon(generate_hep_payload_task,
                               capacity_limiter, contribution.doi_data, hep_dir)
 
@@ -58,7 +58,7 @@ async def concat_hep_files(proceedings_data: ProceedingsData,
     hep_contrib_paths = [
         Path(hep_dir, f'{contribution.code}.json')
         for contribution in proceedings_data.contributions
-        if contribution.doi_data is not None
+        if contribution.doi_data
     ]
 
     hep_paths = hep_event_path + hep_contrib_paths
@@ -81,8 +81,7 @@ async def generate_conference_hep_payload_task(capacity_limiter: CapacityLimiter
     async with capacity_limiter:
         hep_file = Path(hep_dir, hep_name)
 
-        if await hep_file.exists():
-            await hep_file.unlink()
+        await hep_file.unlink(missing_ok=True)
 
         # JSON string
         payload = proceedings_data.conference_hep_payload
@@ -100,8 +99,7 @@ async def generate_hep_payload_task(capacity_limiter: CapacityLimiter,
 
         hep_file = Path(hep_dir, f'{contribution_doi.code}.json')
 
-        if await hep_file.exists():
-            await hep_file.unlink()
+        await hep_file.unlink(missing_ok=True)
 
         # generate JSON string
         json_text = contribution_doi.as_hep_json()

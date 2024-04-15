@@ -166,7 +166,7 @@ async def extract_event_pdf_files(event: dict) -> list:
         latest_revision = contribution.get('latest_revision', None)
 
         revisions_files = latest_revision.get('files', []) \
-            if latest_revision is not None else []
+            if latest_revision else []
 
         event_files.extend(revisions_files)
 
@@ -264,7 +264,7 @@ def _read_report_thread(input: str, keywords: bool):
         logger.error(be, exc_info=True)
         raise be
     finally:
-        if doc is not None:
+        if doc:
             doc.close()
             del doc
 
@@ -278,7 +278,7 @@ async def pdf_to_text(read_path: str) -> str:
 
     res = await run_cmd(cmd)
 
-    if res is not None and res.returncode == 0:
+    if res and res.returncode == 0:
 
         # print(res.returncode)
         # print(res.stdout.decode())
@@ -415,7 +415,7 @@ def _draw_frame_anyio(input: str, output: str, page_number: int,
         logger.error(be, exc_info=True)
         raise be
     finally:
-        if doc is not None:
+        if doc:
             doc.close()
             del doc
 
@@ -429,7 +429,7 @@ async def write_metadata(read_path: str, write_path: str, metadata: dict) -> int
 
     for key in metadata.keys():
         val = metadata.get(key, None)
-        if val is not None and val != '':
+        if val and val != '':
             cmd.append(f"-{key}")
             cmd.append(val)
 

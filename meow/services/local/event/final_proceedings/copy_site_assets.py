@@ -27,9 +27,7 @@ async def copy_inspirehep_jsonl(proceedings_data: ProceedingsData,
     json_src = Path(inspirehep_dir, 'inspirehep.jsonl')
     json_dest = Path(json_dest_dir, f'inspire-{json_dest_name}.jsonl')
 
-    if await json_dest.exists():
-        await json_dest.unlink()
-
+    await json_dest.unlink(missing_ok=True)
     await copy(str(json_src), str(json_dest))
 
 
@@ -63,7 +61,6 @@ async def copy_html_partials(proceedings_data: ProceedingsData,
         html_src = Path(html_base_dir, partial.get('src', ''))
         html_dest = Path(html_dest_dir, partial.get('name', ''))
 
-        if await html_dest.exists():
-            await html_dest.unlink()
+        await html_dest.unlink(missing_ok=True)
 
         await copy(str(html_src), str(html_dest))

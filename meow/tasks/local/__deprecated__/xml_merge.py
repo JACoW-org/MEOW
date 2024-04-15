@@ -123,7 +123,7 @@ Merge spms_summary.xml and sessions
 #         ])
 # 
 #         for result in results:
-#             if result is not None:
+#             if result:
 #                 new_root.append(result)
 # 
 #         # await asyncio.gather(*[

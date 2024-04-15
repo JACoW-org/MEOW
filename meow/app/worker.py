@@ -95,14 +95,14 @@ class RedisWorkerManager():
 
                     head: dict = data.get('head', None)
 
-                    if head is not None:
+                    if head:
 
                         code: str = head.get('code', None)
                         uuid: str = head.get('uuid', None)
                         time: str = head.get('time', None)
 
-                        if code is None:
-                            logger.error("Code is None")
+                        if not code:
+                            logger.error("Invalid Code")
 
                         if code == 'task:kill':
 
@@ -182,7 +182,7 @@ class RedisWorkerManager():
                             task = json_decode(raw)
                             task_id = task.get('task_id', None)
 
-                            if task_id is not None:
+                            if task_id:
                                 logger.debug(f"Worker {worker_id}: Begin")
 
                                 tasks_cancel_scopes[task_id] = scope
@@ -201,7 +201,7 @@ class RedisWorkerManager():
                                          exc_info=True)
                         finally:
                             try:
-                                if task_id is not None:
+                                if task_id:
                                     if task_id in tasks_cancel_scopes:
                                         del tasks_cancel_scopes[task_id]
                             except BaseException as bex:
@@ -219,7 +219,7 @@ class RedisWorkerManager():
     async def execute_in_current_thread(self, worker_id: int, method: str, params: dict, context: dict):
         await self.exec_in_loop(worker_id, method, params, context)
 
-    async def execute_in_worker_thread(self, worker_id: int, method: dict, params: dict, context: dict):
+    async def execute_in_worker_thread(self, worker_id: int, method: str, params: dict, context: dict):
         def in_thread(portal: BlockingPortal):
             portal.start_task_soon(
                 self.exec_in_loop, worker_id, method, params, context)

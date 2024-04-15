@@ -98,7 +98,7 @@ async def generate_contribution_references(proceedings_data: ProceedingsData, co
                     result_code: str = result.get('code', None)
                     result_value: Reference | None = result.get('value', None)
 
-                    if result_value is not None:
+                    if result_value:
                         results[result_code] = result_value
 
                     if processed_files >= total_files:
@@ -212,7 +212,7 @@ async def contribution_data_factory(event: EventData, contribution: Contribution
     series_number: str = settings.get('series_number', '')
 
     number_of_pages = contribution.metadata.get(
-        'page_count', 0) if contribution.metadata is not None else 0
+        'page_count', 0) if contribution.metadata else 0
 
     location: str = settings.get('location', '')
 

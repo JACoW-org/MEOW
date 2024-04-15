@@ -55,7 +55,7 @@ def format_datetime_doi_iso(d: dt.datetime | None) -> str:
 
 def format_datetime_range(start: dt.datetime, end: dt.datetime) -> str:
 
-    if start is None or end is None:
+    if not start or not end:
         return ''
 
     def _format_datetime_range_same_day(s: dt.datetime, e: dt.datetime) -> str:
@@ -72,7 +72,7 @@ def format_datetime_range(start: dt.datetime, end: dt.datetime) -> str:
 def format_datetime_range_doi(start: dt.datetime, end: dt.datetime) -> str:
     """ """
 
-    if start is None or end is None:
+    if not start or not end:
         return ''
 
     # same day

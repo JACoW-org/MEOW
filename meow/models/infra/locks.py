@@ -36,7 +36,7 @@ class RedisLockList:
 
         for lock in cls.__locks:
             try:
-                if lock is not None:
+                if lock:
                     await lock.release()
                     # logger.debug(f'>>>>>>>>>>> release_all_locks - {lock.name} released')
             except Exception as e:

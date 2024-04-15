@@ -28,8 +28,8 @@
 {% if contribution.duplicate_of %}
 <div class="contrib-subheader">
     <div class="contrib-code">
-        <a data-href="session/{{ contribution.duplicate_of.session_code|lower }}/index.html#{{ contribution.duplicate_of.code|lower }}" 
-            onclick="openUrl(`session/{{ contribution.duplicate_of.session_code|lower }}/index.html#{{ contribution.duplicate_of.code|lower }}`)" 
+        <a data-href="session/{{ contribution.duplicate_of.session_id|lower }}-{{ contribution.duplicate_of.session_code|lower }}/index.html#{{ contribution.duplicate_of.code|lower }}" 
+            onclick="openUrl(`session/{{ contribution.duplicate_of.session_id|lower }}-{{ contribution.duplicate_of.session_code|lower }}/index.html#{{ contribution.duplicate_of.code|lower }}`)" 
             href="javascript:void(0);">{{ contribution.duplicate_of.code|e }}</a>
     </div>
     <div class="description"><i>use link to access more material from this paper's primary code</i></div>
@@ -97,7 +97,6 @@
             {% endif %}
         </span>
     </div>
-
 {% endif %}
 
 {% endif %}

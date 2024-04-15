@@ -29,7 +29,7 @@
 # 
 #         entities_len = sum(len(el) for el in entities_ids) if entities_ids else 0
 # 
-#         if entities_ids is not None and not entities_len == 0:
+#         if entities_ids and not entities_len == 0:
 #             logger.info(f"entities_len -> {entities_len} -> delete")
 # 
 #             [Creator.delete(doc.id, pipe) for doc in entities_ids[0]]

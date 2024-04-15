@@ -1,5 +1,6 @@
 ---
 type: "session"
+id: "{{ session.id|e }}"
 name: "{{ session.code|e }}"
 title: "{{ session.title|e }}"
 start: "{{ session.start.strftime('%d %b %Y, %H:%M') }}"

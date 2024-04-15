@@ -75,7 +75,7 @@ async def generate_dois(proceedings_data: ProceedingsData, cookies: dict, settin
                             result_code = result.get('code', None)
                             result_value = result.get('value', None)
 
-                            if result_value is not None:
+                            if result_value:
                                 results[result_code] = result_value
 
                             if processed_files >= total_files:
@@ -451,7 +451,7 @@ def refill_contribution_doi(proceedings_data: ProceedingsData, results: dict, ca
         if callable(contribution_data):
             code: str = contribution_data.code
 
-            if code in results and results[code] is not None:
+            if code in results and results[code]:
                 contribution_data.doi_data = results[code]
                 contribution_data.doi_data.start_page = start_page
                 start_page = start_page + contribution_data.doi_data.num_of_pages

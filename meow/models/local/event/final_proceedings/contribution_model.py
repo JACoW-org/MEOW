@@ -11,8 +11,8 @@ from meow.tasks.local.reference.models import Reference
 class ContributionFieldData:
     """ Contribution Field """
 
-    name: str
-    value: str
+    name: str = field()
+    value: str = field()
 
     def as_dict(self) -> dict:
         return asdict(self)
@@ -20,12 +20,12 @@ class ContributionFieldData:
 
 @dataclass(kw_only=True, slots=True)
 class TagData:
-    """ Revision Tag """
+    """ Tag Data """
 
-    code: str
-    color: str
-    system: bool
-    title: str
+    code: str = field()
+    color: str = field()
+    system: bool = field()
+    title: str = field()
 
     @property
     def is_qa_approved(self):
@@ -51,13 +51,13 @@ class TagData:
 class FileData:
     """ File Data """
 
-    file_type: int
-    content_type: str
-    download_url: str
-    external_download_url: str
-    filename: str
-    md5sum: str
-    uuid: str
+    file_type: int = field()
+    content_type: str = field()
+    download_url: str = field()
+    external_download_url: str = field()
+    filename: str = field()
+    md5sum: str = field()
+    uuid: str = field()
 
     class FileType:
         # __titles__ = [None, _('Paper'), _('Slides'), _('Poster')]
@@ -69,6 +69,8 @@ class FileData:
 
 @dataclass(kw_only=True, slots=True)
 class UserData:
+    """ User Data """
+
     id: str = field()
     first_name: str = field()
     last_name: str = field()
@@ -79,6 +81,8 @@ class UserData:
 
 @dataclass(kw_only=True, slots=True)
 class RevisionCommentData:
+    """ Revision Comment Data """
+
     id: str = field()
     text: str = field()
     internal: bool = field()
@@ -104,88 +108,38 @@ class RevisionData:
 
     creation_date: datetime = field()
 
-    # @property
-    # def is_included_in_pdf_check(self) -> bool:
-    #     """
-    #     qa_approved, sui qa_pending (sono i verdi non ancora in QA)
-    #     e sui gialli (che non sono sicuramente qa_pending)...
-    #     """
-    #     return self.is_green or self.is_yellow
-
-    # @property
-    # def is_included_in_proceedings(self) -> bool:
-    #     """ qa_approved, sui qa_pending (sono i verdi non ancora in QA) """
-    #     return self.is_green
-
-    # @property
-    # def is_black(self) -> bool:
-    #     red_status = self.final_state == RevisionData.FinalRevisionState.rejected
-    #     return red_status
-
-    # @property
-    # def is_red(self) -> bool:
-    #     red_status = self.final_state == RevisionData.FinalRevisionState.needs_submitter_changes
-    #     return red_status
-
-    # @property
-    # def is_green(self) -> bool:
-    #     green_status = self.final_state == RevisionData.FinalRevisionState.accepted
-    #     return green_status
-
-    # @property
-    # def is_yellow(self) -> bool:
-    #     yellow_status = not self.is_green and self.final_state == \
-    #         RevisionData.FinalRevisionState.needs_submitter_confirmation
-    #     return yellow_status
-
     @property
     def is_accepted(self) -> bool:
-        if self.final_state == RevisionData.FinalRevisionState.accepted:
+        if self.final_state == RevisionData.FinalRevisionState.accepted \
+                or self.final_state == RevisionData.FinalRevisionState.changes_acceptance:
             return True
 
         return False
 
     @property
     def is_qa_approved(self) -> bool:
-
         for comment in self.comments:
             if comment.is_qa_approved:
                 return True
-        
+
         return False
+
+    @property
+    def qa_approved_date(self) -> datetime | None:
+        for comment in self.comments:
+            if comment.is_qa_approved:
+                return comment.created_dt
+
+        return None
 
         # for tag in self.tags:
         #     if tag.is_qa_approved:
         #         return True
-        # 
+        #
         # return False
-
-    # @property
-    # def is_qa_pending(self) -> bool:
-    #     if self.is_qa_approved:
-    #         return False
-    #
-    #     if self.final_state == RevisionData.FinalRevisionState.needs_submitter_confirmation:
-    #         return True
-    #
-    #     for tag in self.tags:
-    #         if tag.is_qa_pending:
-    #             return True
-    #
-    #     return False
 
     def as_dict(self) -> dict:
         return asdict(self)
-
-    class InitialRevisionState:
-        # __titles__ = [None, _('New'), _('Ready for Review'), _('Needs Confirmation')]
-
-        #: A revision that has been submitted by the user but isn't exposed to editors yet
-        new = 1
-        #: A revision that can be reviewed by editors
-        ready_for_review = 2
-        #: A revision with changes the submitter needs to approve or reject
-        needs_submitter_confirmation = 3
 
     class FinalRevisionState:
         #: A submitter revision that hasn't been exposed to editors yet
@@ -212,11 +166,11 @@ class RevisionData:
 
 @dataclass(kw_only=True, slots=True)
 class EditableData:
-    """ Contribution Data """
+    """ Editable Data """
 
-    id: str
-    type: int
-    state: int
+    id: str = field()
+    type: int = field()
+    state: int = field()
 
     all_revisions: list[RevisionData] = field(default_factory=list)
     latest_revision: RevisionData | None = field(default=None)
@@ -245,8 +199,9 @@ class EditableData:
 class DuplicateContributionData:
     """Duplicate Contribution Data"""
 
-    code: str
-    session_code: str
+    code: str = field()
+    session_id: int = field()
+    session_code: str = field()
 
     has_metadata: bool = field(default=False)
     doi_url: str = field(default='')
@@ -267,15 +222,16 @@ class DuplicateContributionData:
 class ContributionData:
     """ Contribution Data """
 
-    code: str
-    type: str
-    url: str
-    title: str
-    description: str
-    session_code: str
+    code: str = field()
+    type: str = field()
+    url: str = field()
+    title: str = field()
+    description: str = field()
+    session_id: int = field()
+    session_code: str = field()
 
-    start: datetime
-    end: datetime
+    start: datetime = field()
+    end: datetime = field()
 
     is_slides_included: bool = field(default=False)
     is_included_in_pdf_check: bool = field(default=False)
@@ -380,7 +336,7 @@ class ContributionData:
         field_value: str = ''
 
         for _field in self.field_values:
-            if _field.name == cat_publish_alias and _field.value is not None:
+            if _field.name == cat_publish_alias and _field.value:
                 field_value = _field.value.lower()
                 break
 
@@ -388,11 +344,11 @@ class ContributionData:
 
     def duplicate_of_code(self, duplicate_of_alias: str) -> str | None:
         # after duplicate of is initialized, use this condition
-        if self.duplicate_of is not None:
+        if self.duplicate_of:
             return self.duplicate_of.code
 
         for _field in self.field_values:
-            if _field.name == duplicate_of_alias and _field.value is not None:
+            if _field.name == duplicate_of_alias and _field.value:
                 return _field.value
 
         return None
@@ -408,7 +364,7 @@ class ContributionData:
             'paper_name': self.paper_name(),
             'slides_name': self.slides_name(),
             'poster_name': self.poster_name(),
-            'duplicate_of': self.duplicate_of.as_dict() if self.duplicate_of is not None else None
+            'duplicate_of': self.duplicate_of.as_dict() if self.duplicate_of else None
         }
 
     def has_paper(self) -> bool:
@@ -455,7 +411,7 @@ class ContributionData:
 
     # def duplicate_of(self) -> str:
     #     for field in self.field_values:
-    #         if field.name == "duplicate_of" and field.value is not None:
+    #         if field.name == "duplicate_of" and field.value:
     #             return field.value
     #     return None
 

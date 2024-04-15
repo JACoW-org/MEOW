@@ -33,7 +33,7 @@ class WebSocketManager():
             )
 
             try:
-                if pubsub is not None:
+                if pubsub:
                     async with pubsub as p:
                         # logger.debug('subscribe -- meow:feed')
                         await p.subscribe("meow:feed")
@@ -48,7 +48,7 @@ class WebSocketManager():
             except BaseException:
                 logger.error("subscribe", exc_info=True)
             finally:
-                if pubsub is not None:
+                if pubsub:
                     logger.debug('pubsub.close()')
                     await pubsub.close()
 

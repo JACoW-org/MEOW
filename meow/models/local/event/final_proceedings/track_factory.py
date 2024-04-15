@@ -13,7 +13,7 @@ logger = lg.getLogger(__name__)
 
 def track_data_factory(track: Any) -> TrackData | None:
 
-    if track is None:
+    if not track:
         return None
 
     track_code: str = track.get('code')
@@ -40,7 +40,7 @@ def track_data_factory(track: Any) -> TrackData | None:
 
 def track_group_data_factory(track_group) -> TrackGroupData | None:
 
-    if track_group is None:
+    if not track_group:
         return None
 
     track_group_code: str = track_group.get('code')

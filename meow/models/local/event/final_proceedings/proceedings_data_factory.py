@@ -58,13 +58,14 @@ def proceedings_data_factory(event: Any, sessions: list, contributions: list,
 
     sessions_data.sort(key=lambda x: (
         format_datetime_sec(x.start),
-        x.code
+        x.code,
+        x.id
     ))
 
     """ filter sessions with no contributions"""
 
-    sessions_counts: dict[str, int] = {
-        f'{s.code}': sum(map(lambda c: c.session_code == s.code, contributions_data))
+    sessions_counts: dict[int, int] = {
+        s.id: sum(map(lambda c: c.session_id == s.id, contributions_data))
         for s in sessions_data
     }
 
@@ -72,7 +73,7 @@ def proceedings_data_factory(event: Any, sessions: list, contributions: list,
 
     sessions_data = [
         s for s in sessions_data
-        if sessions_counts[s.code] > 0
+        if sessions_counts[s.id] > 0
     ]
 
     """ resolve contributions duplicates_of """
@@ -82,16 +83,17 @@ def proceedings_data_factory(event: Any, sessions: list, contributions: list,
 
     """ sort contributions data """
 
-    sessions_dates: dict[str, datetime] = {
-        f'{session.code}': session.start
+    sessions_dates: dict[int, datetime] = {
+        session.id: session.start
         for session in sessions_data
     }
 
-    contributions_data.sort(key=lambda x: (
+    contributions_data.sort(key=lambda c: (
         format_datetime_sec(
-            sessions_dates.get(x.session_code)),                    # session date
-        x.session_code,                                             # session code
-        x.code                                                      # contribution code
+            sessions_dates.get(c.session_id)),                    # session date
+        c.session_code,                                           # session id
+        c.session_id,                                             # session code
+        c.code                                                    # contribution code
     ))
 
     materials_data = [
@@ -120,6 +122,7 @@ def resolve_duplicates_of(contributions: list[ContributionData], settings: dict)
                     f"Contribution {contribution.code} has duplicate {duplicate_of_code} with metadata")
             contribution.duplicate_of = DuplicateContributionData(
                 code=duplicate_contribution.code,
+                session_id=duplicate_contribution.session_id,
                 session_code=duplicate_contribution.session_code,
                 has_metadata=True if duplicate_contribution.metadata else False,
                 doi_url=duplicate_contribution.doi_data.doi_url if duplicate_contribution.doi_data else '',

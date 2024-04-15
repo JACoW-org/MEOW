@@ -3,7 +3,7 @@ from typing import Optional
 
 
 def exception_to_string(ex: Optional[BaseException]) -> dict | None:
-    if ex is None:
+    if not ex:
         return None
 
     stack = traceback.extract_stack()[:-3] + traceback.extract_tb(ex.__traceback__)  # add limit=??

@@ -14,7 +14,8 @@ async def manage_duplicates(proceedings_data: ProceedingsData, settings: dict) -
 
     logger.info('event_final_proceedings - manage_duplicates')
 
-    proceedings_data = resolve_duplicate_contributions(proceedings_data, settings.get('duplicate_of_alias', 'duplicate_of'))
+    proceedings_data = resolve_duplicate_contributions(
+        proceedings_data, settings.get('duplicate_of_alias', 'duplicate_of'))
 
     return proceedings_data
 
@@ -23,13 +24,18 @@ def resolve_duplicate_contributions(proceedings_data: ProceedingsData, duplicate
     """ """
 
     for contribution in proceedings_data.contributions:
-        duplicate_of_code: str | None = contribution.duplicate_of_code(duplicate_of_alias)
+        duplicate_of_code: str | None = contribution.duplicate_of_code(
+            duplicate_of_alias)
         if duplicate_of_code:
             predicate = find_predicate(duplicate_of_code)
+
             duplicate: ContributionData | None = find(
-                proceedings_data.contributions, predicate)
+                proceedings_data.contributions,
+                predicate)
+
             contribution.duplicate_of = DuplicateContributionData(
                 code=duplicate.code,
+                session_id=duplicate.session_id,
                 session_code=duplicate.session_code,
                 has_metadata=True if duplicate.metadata else False,
                 doi_url=duplicate.doi_data.doi_url if duplicate.doi_data else '',

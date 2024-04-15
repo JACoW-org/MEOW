@@ -20,13 +20,13 @@ logger = lg.getLogger(__name__)
 
 def contribution_editable_factory(editable: Any, event_timezone: str) -> EditableData | None:
 
-    if editable is None:
+    if not editable:
         return None
 
     all_revisions = [
         contribution_revision_factory(revision, event_timezone)
         for revision in editable.get('all_revisions', [])
-        if revision is not None
+        if revision
     ]
 
     # all_revisions.sort(key=sort_revision_list_by_date)
@@ -99,13 +99,13 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData], even
     """ """
 
     reception = reception_revision.creation_date \
-        if reception_revision is not None else None
+        if reception_revision else None
 
     revisitation = revisitation_revision.creation_date \
-        if revisitation_revision is not None else None
+        if revisitation_revision else None
 
-    acceptance = acceptance_revision.creation_date \
-        if acceptance_revision is not None else None
+    acceptance = acceptance_revision.qa_approved_date \
+        if acceptance_revision else None
 
     issuance = datetime_now(event_timezone)
 
@@ -285,6 +285,7 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData], even
         title=contribution.get('title'),
         duration=contribution.get('duration'),
         description=contribution.get('description'),
+        session_id=contribution.get('session_id'),
         session_code=contribution.get('session_code'),
         track=track_data_factory(
             contribution.get('track')
@@ -363,7 +364,6 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData], even
 def contribution_revision_factory(revision: Any, event_timezone: str) -> RevisionData:
     return RevisionData(
         id=revision.get('id'),
-        # comment=revision.get('comment'),
         comments=[
             contribution_revision_comment_factory(comment, event_timezone)
             for comment in revision.get('comments', [])

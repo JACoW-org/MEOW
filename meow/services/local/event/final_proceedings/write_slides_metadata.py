@@ -62,8 +62,7 @@ async def write_metadata_task(current_slide: FileData, sessions, settings, pdf_c
     jacow_pdf_name = f"{current_slide.filename}_jacow"
     jacow_pdf_file = Path(pdf_cache_dir, jacow_pdf_name)
 
-    if await jacow_pdf_file.exists():
-        await jacow_pdf_file.unlink()
+    await jacow_pdf_file.unlink(missing_ok=True)
 
     # print(f"{original_pdf_file} --> {jacow_pdf_file}")
 

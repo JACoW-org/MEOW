@@ -109,11 +109,11 @@ async def migrate_model_schema(cls: type[BaseModel]) -> None:
         meta: RedisIndexMeta = create_search_index_meta(cls)
         hash_val: bytes | None = await dbs.redis_client.get(meta.hash_key)
 
-        if hash_val is not None and str(hash_val, 'utf-8') == meta.hash_val:
+        if hash_val and str(hash_val, 'utf-8') == meta.hash_val:
             logger.debug(f'migrate_model_schema >>> {cls} >>> exit')
             return
 
-        if hash_val is not None:
+        if hash_val:
             logger.debug(f'migrate_model_schema >>> {cls} >>> drop')
             await cls.ft().dropindex()
 

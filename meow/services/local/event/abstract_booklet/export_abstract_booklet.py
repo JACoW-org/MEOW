@@ -178,25 +178,35 @@ def _abstract_booklet_idx(ab: dict):
 
         # print(">", session.get('code'), ' - ', session.get('title'), ' - ',
         #       session.get('start'), ' - ', session.get('end'))
+        
+        session_id = session.get('id')
+        session_code = session.get('code')
+        session_title = session.get('title')
 
-        idx[session.get('code')] = dict(
+        idx[session_id] = dict(
             uuid=str(ULID()),
-            code=session.get('code'),
-            title=session.get('title')
+            id=session_id,
+            code=session_code,
+            title=session_title
         )
 
         for contribution in session.get('contributions'):
+            
+            contribution_id = contribution.get('id')
+            contribution_code = contribution.get('code')
+            contribution_title = contribution.get('title')
 
-            idx[contribution.get('code')] = dict(
+            idx[contribution_id] = dict(
                 uuid=str(ULID()),
-                code=contribution.get('code'),
-                title=contribution.get('title')
+                id=contribution_id,
+                code=contribution_code,
+                title=contribution_title
             )
 
     return idx
 
 
-def _abstract_booklet_toc(odt: OpenDocument, ab: dict, styles: dict, idx: dict):
+def _abstract_booklet_toc(odt: OpenDocument, ab: dict, styles: dict,):
     """ Index """
 
     odt_toc = TableOfContent(name="Table of Contents", protected=True)
@@ -326,13 +336,14 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
         # print(">", session.get('code'), ' - ', session.get('title'), ' - ',
         #       session.get('start'), ' - ', session.get('end'))
 
+        session_id = session.get('id')
         session_code = session.get('code')
         session_title = session.get('title')
 
         session_start = format_datetime_full(session.get('start'))
         session_end = format_datetime_time(session.get('end'))
 
-        session_idx = idx[session_code]
+        session_idx = idx[session_id]
 
         session_h1 = ab_session_h1 \
             .replace("{code}", session_code) \
@@ -391,10 +402,11 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
             #        contribution.get('start'), ' - ', contribution.get('end'))
             # print("")
 
+            contribution_id = contribution.get('id')
             contribution_code = contribution.get('code')
             contribution_title = contribution.get('title')
 
-            contribution_idx = idx.get(contribution_code, {})
+            contribution_idx = idx.get(contribution_id, {})
 
             contribution_start = format_datetime_time(
                 contribution.get('start'))
@@ -545,33 +557,6 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
 
                 contribution_primary_authors_groups.append(
                     {'key': key, 'items': sorted_items})
-
-            # odt.text.addElement(  # type: ignore
-            #     P(stylename=styles.get('h5'), text='speakers')
-            # )
-            #
-            # if len(contribution_speakers_ids) > 0:
-            #     contribution_speakers_para = P(stylename=styles.get('h5'))
-            #
-            #     for index, item in enumerate(contribution.get('speakers', [])):
-            #
-            #         affiliation = f" ({item.get('affiliation')})" if item.get('affiliation') != '' else ''
-            #
-            #         speaker = f"{item.get('first')} {item.get('last')}"
-            #
-            #         text = f"{speaker}{affiliation}"
-            #
-            #         contribution_speakers_para.addElement(  # type: ignore
-            #             Span(stylename=styles.get('h6'), text=text)
-            #         )
-            #
-            #         contribution_speakers_para.addElement(  # type: ignore
-            #             Span(text="." if index == len(contribution.get('speakers', [])) - 1 else ", ")
-            #         )
-            #
-            #     odt.text.addElement(  # type: ignore
-            #         contribution_speakers_para
-            #     )
 
             if len(contribution_primary_authors_groups) > 0:
 
@@ -807,7 +792,7 @@ def export_abstract_booklet_to_odt(ab: dict, cookies: dict, settings: dict) -> i
 
     idx = _abstract_booklet_idx(ab)
 
-    odt = _abstract_booklet_toc(odt, ab, styles, idx)
+    odt = _abstract_booklet_toc(odt, ab, styles)
 
     odt = _abstract_booklet_body(odt, ab, styles, idx, settings)
 
