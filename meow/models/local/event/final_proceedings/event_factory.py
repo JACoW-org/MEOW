@@ -56,12 +56,21 @@ def event_data_factory(event: Any, settings: dict) -> EventData:
     doi_conference = settings.get("doi_conference", "FEL2022")
 
     # https://doi.org/10.18429/JACoW-PCaPAC2022
-    doi_url = f'{doi_proto}://{doi_domain}/{doi_context}/{doi_organization}-{doi_conference}'
+    doi_url = f'{
+        doi_proto}://{doi_domain}/{doi_context}/{doi_organization}-{doi_conference}'
     # DOI:10.18429/JACoW-PCaPAC2022
     doi_label = f'{doi_context}/{doi_organization}-{doi_conference}'
 
     series = settings.get("series", "")
     series_number = settings.get("series_number", "")
+
+    copyright_year = settings.get("copyright_year", "")
+
+    site_license_text = settings.get("site_license_text", "")
+    site_license_url = settings.get("site_license_url", "")
+
+    paper_license_icon_url = settings.get("paper_license_icon_url", "")
+    paper_license_text = settings.get("paper_license_text", "")
 
     start = datetime_localize(
         datedict_to_tz_datetime(
@@ -95,6 +104,11 @@ def event_data_factory(event: Any, settings: dict) -> EventData:
         end=end,
         series=series,
         series_number=series_number,
+        copyright_year=copyright_year,
+        site_license_text=site_license_text,
+        site_license_url=site_license_url,
+        paper_license_icon_url=paper_license_icon_url,
+        paper_license_text=paper_license_text
     )
 
     # logger.info(event_data.as_dict())
@@ -109,29 +123,36 @@ def event_keyword_factory(keyword: str) -> KeywordData:
 
     return keyword_data
 
+def _generate_affiliations(affiliation: str, multiple_affiliations: list[str]) -> set[str]:
+    affiliations = [affiliation] if affiliation else []
 
-def event_person_factory(person: Any) -> PersonData:
+    return set(affiliations + multiple_affiliations)
+
+def event_person_factory(person: dict) -> PersonData:
     first = person.get("first_name").strip()
     last = person.get("last_name").strip()
-    affiliation = person.get("affiliation").strip()
     email = person.get("email").strip() if person.get("email") else ""
+    affiliation = person.get("affiliation").strip()
+    multiple_affiliations = person.get("multiple_affiliations", [])
 
-    id = slugify("-".join([first, last, affiliation]))
+    # id = slugify("-".join([first, last, affiliation]))
+    id = slugify(email)
 
     event_person_data = PersonData(
         id=id,
         first=first,
         last=last,
-        affiliation=affiliation,
+        affiliations=_generate_affiliations(affiliation, multiple_affiliations),
         email=email,
     )
 
-    # logger.info(event_person_data.as_dict())
+    logger.info(event_person_data.as_dict())
 
     return event_person_data
 
 
-def event_affiliation_factory(affiliation: Any) -> AffiliationData:
+def event_affiliation_factory(affiliation: dict) -> AffiliationData:
+
     affiliation_data = AffiliationData(
         id=slugify(affiliation.get("name")),
         name=affiliation.get("name").strip(),

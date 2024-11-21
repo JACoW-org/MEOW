@@ -7,16 +7,24 @@
 </div>
 
 {% for lastname_initial, group in authors_groups|dictsort %}
-  <h2 class="group-header" id="group-{{ lastname_initial|lower }}">{{ lastname_initial|upper }}</h2>
-  <ul class="authors">
-    {% for author in group %}
-      {% if author.id %}
-        <li class="author">
-          <a data-href="author/{{ author.id|lower }}/index.html" 
-            onclick="openUrl(`author/{{ author.id|lower }}/index.html`)" 
-            href="javascript:void(0);"><b>{{ author.last }} {{ author.first }}</b>&nbsp;({{ author.affiliation }})</a>
-        </li>
-      {% endif %}
-    {% endfor %}
-  </ul>
+<h2 class="group-header" id="group-{{ lastname_initial|lower }}">{{ lastname_initial|upper }}</h2>
+<ul class="authors">
+  {% for author in group %}
+  {% if author.id %}
+  <li class="author">
+    <div>
+      <a data-href="author/{{ author.id|lower }}/index.html"
+        onclick="openUrl(`author/{{ author.id|lower }}/index.html`)" href="javascript:void(0);">
+        <b>{{ author.last }} {{ author.first }}</b>
+      </a>
+    </div>
+    {% if author.affiliations | length %}
+    <div>
+      ({{ ", ".join(author.affiliations) }})
+    </div>
+    {% endif %}
+  </li>
+  {% endif %}
+  {% endfor %}
+</ul>
 {% endfor %}

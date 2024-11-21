@@ -11,7 +11,7 @@ class PersonData:
     id: str
     first: str
     last: str
-    affiliation: str
+    affiliations: set[str]
     email: str
 
     @property
@@ -28,18 +28,25 @@ class PersonData:
 
     @property
     def long(self) -> str:
-        return f"{self.first} {self.last} ({self.affiliation})"
+        return f"{self.first} {self.last} ({self.affiliations_str})"
+    
+    @property
+    def affiliations_str(self) -> str:
+        affiliations_str = ", ".join(self.affiliations)
+        return affiliations_str
 
-    def __eq__(self, other):
-        return self.first == other.first and \
-            self.last == other.last and \
-            self.affiliation == other.affiliation and \
+    def __eq__(self, other: 'PersonData'):
+        return (
+            self.first == other.first and
+            self.last == other.last and
+            # set(self.affiliations) == set(other.affiliations) and
             self.id == other.id
+        )
 
     def __hash__(self):
         return hash(('first', self.first,
                      'last', self.last,
-                     'affiliation', self.affiliation,
+                     'affiliations', ','.join(self.affiliations),
                      'id', self.id))
 
     def as_dict(self) -> dict:
@@ -50,6 +57,10 @@ class PersonData:
             "long": self.long,
             "code": self.code,
         }
+    
+    def sort_key(self):
+        sorted_affiliations = sorted(self.affiliations)
+        return f"{self.last} {self.first} {" ".join(sorted_affiliations).lower()}"
 
 
 @dataclass(kw_only=True, slots=True)
@@ -125,6 +136,14 @@ class EventData:
 
     series: str
     series_number: str
+
+    copyright_year: str
+
+    site_license_text: str
+    site_license_url: str
+
+    paper_license_icon_url: str
+    paper_license_text: str
 
     doi_url: str
     doi_label: str

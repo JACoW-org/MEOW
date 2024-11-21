@@ -88,18 +88,34 @@ async def contributions_group_by_author(capacity_limiter: CapacityLimiter, proce
     """ """
 
     async with capacity_limiter:
-
-        author_list: list[PersonData] = []
-
+        
+        proceedings_authors: dict[str, PersonData] = {}
         for contribution in proceedings_data.contributions:
             for author in contribution.authors:
-                if author and author not in author_list:
-                    author_list.append(author)
+                if not author:
+                    continue
+                if author.id in proceedings_authors:
+                    # update author affiliations
+                    proceedings_authors[author.id].affiliations = proceedings_authors[author.id].affiliations | author.affiliations
+                else:
+                    proceedings_authors[author.id] = author
 
-        author_list = list(set(author_list))
+        # author_list: list[PersonData] = []
 
-        author_list.sort(
-            key=lambda x: f"{x.last} {x.first} {x.affiliation}".lower())
+        # for contribution in proceedings_data.contributions:
+        #     for author in contribution.authors:
+        #         if not author:
+        #             continue                
+
+        #         if author not in author_list:
+        #             author_list.append(author)
+
+        author_list = list(proceedings_authors.values())
+
+        author_list.sort(key=lambda author: author.sort_key())
+
+        # author_list.sort(
+        #     key=lambda x: f"{x.last} {x.first} {x.affiliations[0]}".lower())
 
         proceedings_data.author = author_list
 

@@ -354,12 +354,21 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
         authorsGroups: dict[str, list[dict]] = {}
 
         for author in self.authors:
-            if not (author.affiliation in authorsGroups):
-                authorsGroups[author.affiliation] = []
-            authorsGroups[author.affiliation].append(dict(
-                code=author.code,
-                short=author.short
-            ))
+            for affiliation in author.affiliations:
+                if not (affiliation in authorsGroups):
+                    authorsGroups[affiliation] = []
+                authorsGroups[affiliation].append({
+                    "code": author.code,
+                    "short": author.short
+                })
+
+        # for author in self.authors:
+        #     if not (author.affiliations in authorsGroups):
+        #         authorsGroups[author.affiliations] = []
+        #     authorsGroups[author.affiliations].append(dict(
+        #         code=author.code,
+        #         short=author.short
+        #     ))
 
         await institute_partial_dir.write_text(
             await self.template.render_institute_partial(self.institutes, authorsGroups)
@@ -385,7 +394,7 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
                 authors = [
                     c for c in self.authors
-                    if c.affiliation == institute.name
+                    if institute.name in c.affiliations
                 ]
 
                 # logger.info(f"{institute} -> {len(authors)}")

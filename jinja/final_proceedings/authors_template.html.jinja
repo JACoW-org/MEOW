@@ -11,7 +11,7 @@
                     {% endif %}
                 {% endfor %}
                 <br>
-                {{ group.affiliation }}
+                {{ ', '.join(group.affiliations) }}
             </li>
         {% endfor %}
     </ul>

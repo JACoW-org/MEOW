@@ -9,16 +9,38 @@ from meow.models.local.event.final_proceedings.event_model import (AffiliationDa
 def group_authors_by_last_initial_for_render(authors: list[PersonData]) -> dict:
     """ """
 
+    # reduce authors that appear with different instances (for example with different affiliations)
+    flat_authors: dict[str, dict] = {}
+    for author in authors:
+        if author.id in flat_authors:
+            flat_authors[author.id]['affiliations'] = list(set(author.affiliations + flat_authors[author.id]['affiliations']))
+        else:
+            flat_authors[author.id] = author.as_dict()
+
     # set with letters from the alphabet
     alphabet = set(string.ascii_lowercase)
 
     groups = {}
-    for author in authors:
-        key = get_initial(author.last, alphabet) if author.last else get_initial(
-            author.first, alphabet)
+
+    for author in flat_authors.values():
+        if author['last']:
+            key = get_initial(author['last'], alphabet)
+        else:
+            key = get_initial(author['first'], alphabet)
+
         if key not in groups:
             groups[key] = []
-        groups[key].append(author.as_dict())
+
+        groups[key].append(author)
+    
+    # for author in authors:
+    #     key = get_initial(author.last, alphabet) if author.last else get_initial(
+    #         author.first, alphabet)
+    #     if key not in groups:
+    #         groups[key] = []
+    #     groups[key].append(author.as_dict())
+
+
     return groups
 
 

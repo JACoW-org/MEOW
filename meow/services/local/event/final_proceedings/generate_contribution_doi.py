@@ -152,8 +152,8 @@ async def generate_conference_hep_task(proceedings_data: ProceedingsData,
             'full_name': f'{editor.last}, {editor.first}',
             "inspire_roles": ["editor"],
             "raw_affiliations": [{
-                "value": editor.affiliation
-            }]
+                "value": affiliation
+            } for affiliation in editor.affiliations]
         } for editor in editors],
         "_collections": ["Literature"],
         "inspire_categories": [{
@@ -214,8 +214,8 @@ async def generate_conference_doi_task(proceedings_data: ProceedingsData,
             'name': f'{editor.last},{editor.first}',
             'nameType': 'Personal',
             'affiliation': [{
-                'name': editor.affiliation
-            }],
+                'name': affiliation
+            } for affiliation in editor.affiliations],
             'contributorType': 'Editor',
             'nameIdentifiers': [{
                 'nameIdentifier': index,
@@ -237,8 +237,8 @@ async def generate_conference_doi_task(proceedings_data: ProceedingsData,
             'name': f'{editor.last},{editor.first}',
             'nameType': 'Personal',
             'affiliation': [{
-                'name': editor.affiliation
-            }],
+                'name': affiliation
+            } for affiliation in editor.affiliations],
             'contributorType': 'Editor',
             'nameIdentifiers': [{
                 'nameIdentifier': index,
@@ -365,7 +365,7 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
         id=author.id,
         first_name=author.first,
         last_name=author.last,
-        affiliation=author.affiliation
+        affiliations=author.affiliations
     ) for author in contribution.authors_list]
 
     track = None
@@ -398,7 +398,7 @@ async def build_contribution_doi(event: EventData, contribution: ContributionDat
 
         editors=[
             EditorDOI(first_name=editor.first, last_name=editor.last,
-                      affiliation=editor.affiliation)
+                      affiliations=editor.affiliations)
             for editor in contribution.editors
         ],
 

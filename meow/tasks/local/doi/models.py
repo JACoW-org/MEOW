@@ -11,11 +11,14 @@ from meow.utils.datetime import datetime_now, format_datetime_dashed
 
 @dataclass
 class AuthorsGroup:
-    affiliation: str = field(default='')
+    affiliations: set[str] = field(default_factory=set)
     authors: list[str] = field(default_factory=list)
 
     def as_dict(self) -> dict:
         return asdict(self)
+    
+    def __eq__(self, other: 'AuthorsGroup') -> bool:
+        return self.affiliations == other.affiliations
 
 
 @dataclass
@@ -23,7 +26,7 @@ class AuthorDOI:
     id: str = field(default='')
     first_name: str = field(default='')
     last_name: str = field(default='')
-    affiliation: str = field(default='')
+    affiliations: set[str] = field(default_factory=set)
 
     def as_dict(self) -> dict:
         return asdict(self)
@@ -33,10 +36,10 @@ class AuthorDOI:
 class EditorDOI:
     first_name: str = field(default='')
     last_name: str = field(default='')
-    affiliation: str = field(default='')
+    affiliations: set[str] = field(default_factory=set)
 
     def format(self):
-        return f'{self.first_name} {self.last_name} ({self.affiliation})'
+        return f'{self.first_name} {self.last_name} ({', '.join(self.affiliations)})'
 
     def as_dict(self) -> dict:
         return asdict(self)
@@ -161,7 +164,7 @@ class ContributionDOI:
             "authors": [{
                 "full_name": f"{author.last_name}, {author.first_name}",
                 "raw_affiliations": [{
-                    "value": author.affiliation
+                    "value": author.affiliations
                 }]
             } for author in self.primary_authors],
             "_collections": ["Literature"],
@@ -191,7 +194,7 @@ class ContributionDOI:
         attributes['creators'] = [dict(
             name=f'{author.last_name},{author.first_name}',
             affiliation=[dict(
-                name=author.affiliation
+                name=list(author.affiliations)
             )],
             nameIdentifiers=[dict(
                 nameIdentifier=author.id,
@@ -230,7 +233,7 @@ class ContributionDOI:
             name=f'{editor.last_name},{editor.first_name}',
             contributorType='Editor',
             affiliation=[dict(
-                name=editor.affiliation
+                name=list[editor.affiliations]
             )],
             nameIdentifiers=[dict(
                 nameIdentifier=f'{index}',

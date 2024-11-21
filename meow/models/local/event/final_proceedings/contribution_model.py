@@ -1,3 +1,4 @@
+from collections import defaultdict
 from dataclasses import dataclass, asdict, field
 from datetime import datetime
 
@@ -281,22 +282,17 @@ class ContributionData:
 
     @property
     def authors_groups(self) -> list[AuthorsGroup]:
-        authors_groups: list[AuthorsGroup] = list()
+
+        # subclass of dict that inits element with an empty list
+        authors_groups_dict = defaultdict(list)
 
         for author in self.authors_list:
-
-            is_new_author = True
-            for group in authors_groups:
-                if author.affiliation == group.affiliation:
-                    group.authors.append(author.short)
-                    is_new_author = False
-                    break
-
-            if is_new_author:
-                authors_groups.append(AuthorsGroup(
-                    affiliation=author.affiliation,
-                    authors=[author.short]
-                ))
+            authors_groups_dict[frozenset(author.affiliations)].append(author.short)
+        
+        authors_groups = [
+            AuthorsGroup(affiliations=list(affiliations), authors=authors)
+            for affiliations, authors in authors_groups_dict.items()
+        ]
 
         return authors_groups
 
