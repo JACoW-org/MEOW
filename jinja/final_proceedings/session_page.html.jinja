@@ -8,7 +8,7 @@ end: "{{ session.end.strftime('%H:%M') }}"
 
 {% if session.conveners|length>0 %}
 {% set convener = session.conveners|first %}
-chair: "{{ convener.first|e }} {{ convener.last|e }} ({{ convener.affiliation|e }})"
+chair: "{{ convener.first|e }} {{ convener.last|e }} ({{ ", ".join(convener.affiliations)|e }})"
 {% endif %}
 
 {% if contributions|length>0 %}
