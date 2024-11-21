@@ -1,8 +1,10 @@
 import logging as lg
-from typing import Any, Callable
+import pathlib
+from typing import Any, Callable, Optional
 
 from anyio import Path, create_task_group
 
+from meow.utils.http import download_file
 from rdflib import URIRef
 from rdflib.term import Literal
 from unidecode import unidecode
@@ -36,6 +38,13 @@ async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict
     dir_name = f"{proceedings_data.event.id}_tmp"
     pdf_cache_dir: Path = Path('var', 'run', dir_name)
     await pdf_cache_dir.mkdir(exist_ok=True, parents=True)
+
+    # Download license logo based on settings
+    license_icon_url: Optional[str] = settings.get("paper_license_icon_url")
+    if license_icon_url:
+        filename = license_icon_url.split("/")[-1]
+        path = Path(pdf_cache_dir, filename)
+        await download_file(license_icon_url, path)
 
     sessions_dict: dict[int, SessionData] = dict()
     for session in proceedings_data.sessions:
@@ -86,6 +95,7 @@ async def write_metadata_task(current_paper, sessions: dict[int, SessionData], s
 
     header_data: dict | None = get_header_data(contribution)
     footer_data: dict | None = get_footer_data(contribution, session)
+    side_data = await get_side_data(settings, pdf_cache_dir)
 
     # metadata_mutool = get_metadata_mutool(contribution)
     metadata_pikepdf: dict | None = get_metadata_pikepdf(contribution)
@@ -102,7 +112,7 @@ async def write_metadata_task(current_paper, sessions: dict[int, SessionData], s
     async def _task_jacow_files():
         await draw_frame_anyio(str(original_pdf_file), str(jacow_pdf_file),
                                contribution.page, pre_print, header_data,
-                               footer_data, None, None, True)
+                               footer_data, side_data, None, None, True)
 
         await pdf_metadata_qpdf(str(jacow_pdf_file), metadata_pikepdf,
                                 xml_metadata_pikepdf)
@@ -110,7 +120,7 @@ async def write_metadata_task(current_paper, sessions: dict[int, SessionData], s
     async def _task_concat_files():
         await draw_frame_anyio(str(original_pdf_file), str(join_pdf_file),
                                contribution.page, pre_print, header_data,
-                               footer_data, None, None, False)
+                               footer_data, side_data, None, None, False)
 
     async with create_task_group() as tg:
         tg.start_soon(_task_jacow_files)
@@ -259,3 +269,22 @@ def get_header_data(contribution: ContributionData) -> dict[str, str] | None:
     ) if contribution.doi_data else None
 
     return header_data
+
+
+async def get_side_data(settings: dict, pdf_cache_dir: Path) -> dict[str, str]:
+
+    license_filename: str = settings.get("paper_license_icon_url", None)
+    license_logo = None
+    if license_filename:
+        license_logo = await Path(pdf_cache_dir, license_filename.split("/")[-1]).read_bytes()
+    else:
+        license_logo = pathlib.Path('cc_by.png').read_bytes()
+    side_data = {
+        "license_text": settings.get("paper_license_text",
+                                     "Content from this work may be used under the terms of the CC BY 4.0 licence (© 2022)." +
+                                     "Any distribution of this work must maintain attribution to the author(s), " +
+                                     "title of the work, publisher, and DOI."),
+        "license_logo": license_logo
+    }
+
+    return side_data

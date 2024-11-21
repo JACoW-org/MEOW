@@ -301,7 +301,8 @@ def write_page_footer(page: Page, page_number: int, data: dict, options: dict = 
 def write_page_side(page: Page,
                     pre_print: str | None,
                     page_number: int | None,
-                    cc_logo: Any | None,
+                    license_icon: Any | None,
+                    license_text: str,
                     options: dict = dict()):
     """ """
 
@@ -337,13 +338,13 @@ def write_page_side(page: Page,
     )
 
     # add cc logo
-    if cc_logo:
+    if license_icon:
         insert_image(
             page=page,
             rect=rect_even_logo if page_number and page_number % 2 == 0 else rect_odd_logo,
             # filename='cc_by.png',
             rotate=90,
-            stream=cc_logo
+            stream=license_icon
         )
 
     # add copyright text

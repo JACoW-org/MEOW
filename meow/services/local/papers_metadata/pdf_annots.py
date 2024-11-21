@@ -309,7 +309,8 @@ def annot_page_footer(page: Page, page_number: int, data: dict, options: dict = 
 def annot_page_side(page: Page,
                     pre_print: str | None,
                     page_number: int | None,
-                    cc_logo: Any | None,
+                    license_icon: Any | None,
+                    license_text: str,
                     options: dict = dict()):
 
     page_width = page.rect.width
@@ -349,7 +350,7 @@ def annot_page_side(page: Page,
         rect=rect_even_logo if page_number and page_number % 2 == 0 else rect_odd_logo,
         # filename='cc_by.png',
         rotate=90,
-        stream=cc_logo
+        stream=license_icon
     )
 
     # add copyright text
@@ -357,9 +358,10 @@ def annot_page_side(page: Page,
         rect=rect_even_text if page_number and page_number % 2 == 0 else rect_odd_text,
         align=TEXT_ALIGN_JUSTIFY,
         rotate=90,
-        text='Content from this work may be used under the terms of the CC BY 4.0 licence (© 2022). ' +
-             'Any distribution of this work must maintain attribution to the author(s), ' +
-             'title of the work, publisher, and DOI.',
+        text=license_text,
+        # text='Content from this work may be used under the terms of the CC BY 4.0 licence (© 2022). ' +
+        #      'Any distribution of this work must maintain attribution to the author(s), ' +
+        #      'title of the work, publisher, and DOI.',
         fontname=options.get('fontName', FONT_NAME),
         fontsize=options.get('fontSize', FONT_SIZE),
         text_color=options.get('textColor', TEXT_COLOR),

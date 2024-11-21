@@ -29,7 +29,7 @@ from meow.services.local.papers_metadata.pdf_annots import (
 logger = lg.getLogger(__name__)
 
 
-cc_logo = pathlib.Path('cc_by.png').read_bytes()
+# cc_logo = pathlib.Path('cc_by.png').read_bytes()
 
 
 def get_python_cmd():
@@ -334,18 +334,18 @@ async def draw_frame(read_path: str, write_path: str, page: int,
 
 async def draw_frame_anyio(input: str, output: str, page: int,
                            pre_print: str | None, header: dict | None,
-                           footer: dict | None, metadata: dict | None,
+                           footer: dict | None, side: dict, metadata: dict | None,
                            xml_metadata: str | None, annotations: bool = True):
 
     # return await sleep(10)
     return await to_task.run_sync(_draw_frame_anyio, input, output, page, pre_print,
-                                  header, footer, metadata, xml_metadata, annotations,
+                                  header, footer, side, metadata, xml_metadata, annotations,
                                   cancellable=True)
 
 
 def _draw_frame_anyio(input: str, output: str, page_number: int,
                       pre_print: str | None, header: dict | None,
-                      footer: dict | None, metadata: dict | None,
+                      footer: dict | None, side: dict, metadata: dict | None,
                       xml_metadata: str | None,
                       annotations: bool = True):
 
@@ -398,13 +398,15 @@ def _draw_frame_anyio(input: str, output: str, page_number: int,
                 page=page,
                 pre_print=pre_print,
                 page_number=page_number,
-                cc_logo=cc_logo
+                license_icon=side.get("license_logo"),
+                license_text=side.get("license_text")
             ) if annotations \
                 else write_page_side(
                 page=page,
                 pre_print=pre_print,
                 page_number=page_number,
-                cc_logo=cc_logo
+                license_icon=side.get("license_logo"),
+                license_text=side.get("license_text")
             )
 
             page_number += 1
@@ -418,6 +420,12 @@ def _draw_frame_anyio(input: str, output: str, page_number: int,
         if doc:
             doc.close()
             del doc
+
+async def get_license_icon(path: Path):
+    if path:
+        return await path.read_bytes()
+    
+    return None
 
 
 async def write_metadata(read_path: str, write_path: str, metadata: dict) -> int:

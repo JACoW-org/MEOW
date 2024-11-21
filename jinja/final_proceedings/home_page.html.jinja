@@ -118,10 +118,10 @@
     </div>
 
     <div class="event-copy">
-        Copyright &copy; {{ datetime_now.strftime('%Y') }} by
+        Copyright &copy; {% raw %}{{.Site.Params.copyright_year}}{% endraw %} by
         <a href="https://www.jacow.org/" target="_blank">JACoW</a>
-        — <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">
-            Creative Commons Attribution 4.0</a>
+        — {% raw %}<a href="{{.Site.Params.site_license_url}}" target="_blank">
+          {{.Site.Params.site_license_text}}</a>{% endraw %}
         — <a href="https://www.jacow.org/About/PublishingPoliciesEthics">Publishing Policies &amp; Ethics</a>
     </div>
 
