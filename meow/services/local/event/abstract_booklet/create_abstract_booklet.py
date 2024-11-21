@@ -79,9 +79,10 @@ async def create_abstract_booklet_from_event(event: dict, sessions: list, contri
             session_slot_convener_data = dict(
                 first=session_slot_convener.get('first_name'),
                 last=session_slot_convener.get('last_name'),
-                affiliation=session_slot_convener.get('affiliation')
-                # TODO currently conveners can't have multiple affiliations.
-                # Handle when it is implemented in indico
+                affiliations=_get_affiliations(
+                    session_slot_convener.get('affiliation', None),
+                    session_slot_convener.get('multiple_affiliations', [])
+                )
             )
 
             conveners_data.append(session_slot_convener_data)

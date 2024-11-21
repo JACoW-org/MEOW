@@ -386,7 +386,7 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
             for convener in session_conveners:
                 session_chair.addText(
                     f"{convener.get('first')} {convener.get('last')} " +
-                    f"({convener.get('affiliation')})"
+                    f"({', '.join(convener.get('affiliations'))})" if len(convener.get('affiliations')) else "" 
                 )
 
             odt.text.addElement(  # type: ignore
