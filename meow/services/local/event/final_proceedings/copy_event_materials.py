@@ -49,6 +49,8 @@ async def copy_event_materials(proceedings_data: ProceedingsData,
         # await vol_dest.hardlink_to(vol_pdf)
         await move(str(vol_pdf), str(vol_dest))
 
+        await vol_dest.chmod(0o644)
+
     brief_pdf_name = f"{proceedings_data.event.id}_proceedings_brief.pdf"
     brief_dest_name = f"{proceedings_data.event.path}_proceedings_brief.pdf"
 
@@ -60,6 +62,8 @@ async def copy_event_materials(proceedings_data: ProceedingsData,
     if await brief_pdf.exists():
         # await brief_dest.hardlink_to(brief_pdf)
         await move(str(brief_pdf), str(brief_dest))
+
+        await brief_pdf.chmod(0o644)
 
     send_stream, receive_stream = create_memory_object_stream()
     capacity_limiter = CapacityLimiter(16)
@@ -129,6 +133,8 @@ async def file_copy_task(
             if file_exists:
                 # await dest_path.hardlink_to(file_path)
                 await move(str(file_path), str(dest_path))
+
+                await file_path.chmod(0o644)
             else:
                 logger.warning(f"{file_path} not exists")
 

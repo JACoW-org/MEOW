@@ -64,3 +64,5 @@ async def copy_html_partials(proceedings_data: ProceedingsData,
         await html_dest.unlink(missing_ok=True)
 
         await copy(str(html_src), str(html_dest))
+
+        await html_dest.chmod(0o644)
