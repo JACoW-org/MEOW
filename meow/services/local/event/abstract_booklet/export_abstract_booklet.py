@@ -178,7 +178,7 @@ def _abstract_booklet_idx(ab: dict):
 
         # print(">", session.get('code'), ' - ', session.get('title'), ' - ',
         #       session.get('start'), ' - ', session.get('end'))
-        
+
         session_id = session.get('id')
         session_code = session.get('code')
         session_title = session.get('title')
@@ -191,7 +191,7 @@ def _abstract_booklet_idx(ab: dict):
         )
 
         for contribution in session.get('contributions'):
-            
+
             contribution_id = contribution.get('id')
             contribution_code = contribution.get('code')
             contribution_title = contribution.get('title')
@@ -530,7 +530,8 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
             contribution_primary_authors_dict: dict[str, list] = {}
 
             for item in contribution.get('primary_authors', []):
-                key = item.get('affiliation', '')
+                # key = item.get('affiliation', '')
+                key = frozenset(item.get('affiliations', {}))
 
                 if key not in contribution_primary_authors_dict:
                     contribution_primary_authors_dict[key] = []
@@ -572,12 +573,18 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
                         stylename = styles.get('h6') if int(item.get('id')) \
                             in contribution_speakers_ids else None
 
-                        affiliation = f" ({item.get('affiliation')})" if item.get(
-                            'affiliation') != '' else ''
+                        # affiliation = f" ({item.get('affiliation')})" if item.get(
+                        #     'affiliation') != '' else ''
+
+                        affiliations = (
+                            f"({', '.join(item.get('affiliations'))})"
+                            if len(item.get('affiliations'))
+                            else ""
+                        )
 
                         author = f"{item.get('first')} {item.get('last')}"
 
-                        text = f"{author}{affiliation}" \
+                        text = f"{author}{affiliations}" \
                             if contribution_primary_authors_item_idx \
                             == len(group.get('items', [])) - 1 \
                             else author
@@ -603,7 +610,8 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
             contribution_coauthors_dict: dict[str, list] = {}
 
             for item in contribution.get('coauthors', []):
-                key = item.get('affiliation', '')
+                # key = item.get('affiliation', '')
+                key = frozenset(item.get('affiliations', {}))
 
                 if key not in contribution_coauthors_dict:
                     contribution_coauthors_dict[key] = []
@@ -627,12 +635,17 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
                         stylename = styles.get('h6') if int(item.get('id')) \
                             in contribution_speakers_ids else None
 
-                        affiliation = f" ({item.get('affiliation')})" if item.get(
-                            'affiliation') != '' else ''
+                        # affiliation = f" ({item.get('affiliation')})" if item.get(
+                        #     'affiliation') != '' else ''
+                        affiliations = (
+                            f"({', '.join(item.get('affiliations'))})"
+                            if len(item.get('affiliations'))
+                            else ""
+                        )
 
                         author = f"{item.get('first')} {item.get('last')}"
 
-                        text = f"{author}{affiliation}" \
+                        text = f"{author}{affiliations}" \
                             if contribution_coauthors_item_idx \
                             == len(group.get('items', [])) - 1 \
                             else author
@@ -658,7 +671,8 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
             contribution_speakers_dict: dict[str, list] = {}
 
             for item in contribution.get('speakers', []):
-                key = item.get('affiliation', '')
+                # key = item.get('affiliation', '')
+                key = frozenset(item.get('affiliations', {}))
 
                 if key not in contribution_speakers_dict:
                     contribution_speakers_dict[key] = []
@@ -683,12 +697,17 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
 
                         stylename = styles.get('h6')
 
-                        affiliation = f" ({item.get('affiliation')})" if item.get(
-                            'affiliation') != '' else ''
+                        # affiliation = f" ({item.get('affiliation')})" if item.get(
+                        #     'affiliation') != '' else ''
+                        affiliations = (
+                            f"({', '.join(item.get('affiliations'))})"
+                            if len(item.get('affiliations'))
+                            else ""
+                        )
 
                         author = f"{item.get('first')} {item.get('last')}"
 
-                        text = f"{author}{affiliation}" \
+                        text = f"{author}{affiliations}" \
                             if contribution_speakers_item_idx \
                             == len(group.get('items', [])) - 1 \
                             else author

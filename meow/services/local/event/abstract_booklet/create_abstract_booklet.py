@@ -15,9 +15,9 @@ async def create_abstract_booklet_from_event(event: dict, sessions: list, contri
 
     event_url = event.get('url', '')
     event_title = event.get('title', '')
-    event_description=event.get('description', ''),
-    event_location=event.get('location', ''),
-    event_address=event.get('address', ''),
+    event_description = event.get('description', ''),
+    event_location = event.get('location', ''),
+    event_address = event.get('address', ''),
     event_timezone = event.get('timezone', '')
 
     sessions_data = list()
@@ -80,6 +80,8 @@ async def create_abstract_booklet_from_event(event: dict, sessions: list, contri
                 first=session_slot_convener.get('first_name'),
                 last=session_slot_convener.get('last_name'),
                 affiliation=session_slot_convener.get('affiliation')
+                # TODO currently conveners can't have multiple affiliations.
+                # Handle when it is implemented in indico
             )
 
             conveners_data.append(session_slot_convener_data)
@@ -118,10 +120,10 @@ async def create_abstract_booklet_from_event(event: dict, sessions: list, contri
                         datedict_to_tz_datetime(
                             session_slot_contribution.get('start_dt')
                         ), event_timezone
-                    ), 
-                    #datedict_to_tz_datetime(
+                    ),
+                    # datedict_to_tz_datetime(
                     #    session_slot_contribution.get('start_dt')
-                    #),
+                    # ),
                     end=datetime_localize(
                         datedict_to_tz_datetime(
                             session_slot_contribution.get('end_dt')
@@ -144,7 +146,11 @@ async def create_abstract_booklet_from_event(event: dict, sessions: list, contri
                             id=speaker.get('id'),
                             first=speaker.get('first_name'),
                             last=speaker.get('last_name'),
-                            affiliation=speaker.get('affiliation'),
+                            # affiliation=speaker.get('affiliation'),
+                            affiliations=_get_affiliations(
+                                speaker.get('affiliation', None),
+                                speaker.get('multiple_affiliations', [])
+                            ),
                             email=speaker.get('email'),
                         )
 
@@ -159,7 +165,11 @@ async def create_abstract_booklet_from_event(event: dict, sessions: list, contri
                             id=primary_author.get('id'),
                             first=primary_author.get('first_name'),
                             last=primary_author.get('last_name'),
-                            affiliation=primary_author.get('affiliation'),
+                            # affiliation=primary_author.get('affiliation'),
+                            affiliations=_get_affiliations(
+                                primary_author.get('affiliation', None),
+                                primary_author.get('multiple_affiliations', [])
+                            ),
                             email=primary_author.get('email'),
                         )
 
@@ -175,7 +185,11 @@ async def create_abstract_booklet_from_event(event: dict, sessions: list, contri
                             id=coauthor.get('id'),
                             first=coauthor.get('first_name'),
                             last=coauthor.get('last_name'),
-                            affiliation=coauthor.get('affiliation'),
+                            # affiliation=coauthor.get('affiliation'),
+                            affiliations=_get_affiliations(
+                                coauthor.get('affiliation', None),
+                                coauthor.get('multiple_affiliations', [])
+                            ),
                             email=coauthor.get('email'),
                         )
 
@@ -196,3 +210,9 @@ async def create_abstract_booklet_from_event(event: dict, sessions: list, contri
     ))
 
     return abstract_booklet
+
+
+def _get_affiliations(affiliation: str, multiple_affiliations: list[str]) -> set[str]:
+    affiliations = [affiliation] if affiliation else []
+
+    return set(affiliations + multiple_affiliations)
