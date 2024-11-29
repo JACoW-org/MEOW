@@ -3,10 +3,12 @@ from starlette.middleware.cors import CORSMiddleware
 from starlette.middleware.gzip import GZipMiddleware
 # from starlette.middleware.trustedhost import TrustedHostMiddleware
 
-origins = [
-    'http://127.0.0.1:8005',
+origins = [    
     'https://indico.jacow.org',
-    'https://indico.akera.net'
+    'https://indico.akera.net',
+    'http://indico:8000',
+    'http://localhost:8000',
+    'http://localhost:8005',
 ]
 
 methods = ['*']
@@ -19,8 +21,12 @@ middleware: list[Middleware] = [
     # Middleware(TrustedHostMiddleware,
     #            allowed_hosts=['*.jacow.org']),
     # Middleware(CORSMiddleware, allow_origins=['*'])
-    Middleware(GZipMiddleware, minimum_size=512, compresslevel=1),
-    Middleware(CORSMiddleware, allow_origins=origins,
-               allow_methods=methods, allow_headers=headers,
+    Middleware(GZipMiddleware, 
+               minimum_size=512, 
+               compresslevel=1),
+    Middleware(CORSMiddleware, 
+               allow_origins=origins,
+               allow_methods=methods, 
+               allow_headers=headers,
                allow_credentials=credentials)
 ]
