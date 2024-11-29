@@ -39,7 +39,8 @@
 
         {{ range $idx, $val := .Params.contents }}
         <div class="contrib">
-            {{ readFile ( printf "/layouts/partials/%s" $val ) | safeHTML }}
+            {{ $contribution_html := readFile ( printf "/layouts/partials/%s" $val ) }}
+            {{ $contribution_html | safeHTML }}
         </div>
         {{ end }}
     </div>

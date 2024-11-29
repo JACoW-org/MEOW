@@ -391,7 +391,6 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
 
     await write_papers_metadata(proceedings, cookies, settings,
                                 filter_published_contributions)
-
     """ """
 
     await extend_lock(lock)
