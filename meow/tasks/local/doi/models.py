@@ -164,8 +164,8 @@ class ContributionDOI:
             "authors": [{
                 "full_name": f"{author.last_name}, {author.first_name}",
                 "raw_affiliations": [{
-                    "value": author.affiliations
-                }]
+                    "value": str(a)
+                } for a in author.affiliations]
             } for author in self.primary_authors],
             "_collections": ["Literature"],
             "inspire_categories": [{
