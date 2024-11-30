@@ -201,8 +201,15 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData], even
     is_included_in_pdf_check: bool = False
 
     if paper_data and paper_data.state:
+        
+        is_paper_data_accepted = (
+            paper_data.state == EditableData.EditableState.accepted or 
+            paper_data.state == EditableData.EditableState.accepted_by_submitter)
+        
+        is_paper_data_waiting = (
+            paper_data.state == EditableData.EditableState.needs_submitter_confirmation)
 
-        if paper_data.state == EditableData.EditableState.accepted:
+        if is_paper_data_accepted:
             is_included_in_prepress = True
 
             for r in paper_data.all_revisions:
@@ -212,7 +219,7 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData], even
 
             is_included_in_pdf_check = True
 
-        elif paper_data.state == EditableData.EditableState.needs_submitter_confirmation:
+        elif is_paper_data_waiting:
             is_included_in_pdf_check = True
 
     logger.debug(f"is_prepress: {is_included_in_prepress}")

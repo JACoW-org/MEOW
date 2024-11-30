@@ -133,10 +133,20 @@ li {
   margin-bottom: 0.2rem;
 }
 
+.home .event-body .event-menu .event-volumes a {
+  font-weight: bold;
+  color: var(--primary-color, '#333');
+}
+
 .home .event-body .event-menu .event-attachments {
   border-bottom: 0.1rem solid #999;
   padding-bottom: 0.1rem;
   margin-bottom: 0.2rem;
+}
+
+.home .event-body .event-menu .event-attachments a {
+  font-weight: bold;
+  color: var(--primary-color, '#333');
 }
 
 .home .event-footer {
@@ -234,6 +244,10 @@ li {
   border-bottom: 0.2rem solid #999;
   padding-bottom: 0.5rem;
   margin-bottom: 0.5rem;
+}
+
+.content .left a {
+  color: var(--primary-color, '#333');
 }
 
 .content .left ul {
@@ -338,6 +352,10 @@ li {
   border-top: 0.1rem solid #999;
   padding-bottom: 0.1rem;
   margin-bottom: 0.2rem;
+}
+
+.content .right .contrib a {
+  color: var(--primary-color, '#333');
 }
 
 .content .right .contrib .contrib-ancor {

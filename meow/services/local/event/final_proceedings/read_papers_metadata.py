@@ -3,7 +3,6 @@ import logging as lg
 from asyncio.exceptions import CancelledError
 
 from typing import Callable
-from nltk import download
 
 from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
@@ -37,9 +36,6 @@ async def read_papers_metadata(proceedings_data: ProceedingsData, cookies: dict,
     dir_name = f"{proceedings_data.event.id}_tmp"
     file_cache_dir: Path = Path('var', 'run', dir_name)
     await file_cache_dir.mkdir(exist_ok=True, parents=True)
-
-    download('punkt')
-    download('stopwords')
 
     send_stream, receive_stream = create_memory_object_stream()
     capacity_limiter = CapacityLimiter(64)

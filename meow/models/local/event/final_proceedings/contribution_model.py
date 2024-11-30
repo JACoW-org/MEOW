@@ -177,16 +177,12 @@ class EditableData:
     latest_revision: RevisionData | None = field(default=None)
 
     class EditableType:
-        # __titles__ = [None, _('Paper'), _('Slides'), _('Poster')]
 
         paper = 1
         slides = 2
         poster = 3
 
     class EditableState:
-        # __titles__ = [None, _('New'), _('Ready for Review'), _('Needs Confirmation'), _('Needs Changes'),
-        #             _('Accepted'), _('Rejected')]
-        # __css_classes__ = [None, 'highlight', 'ready', 'warning', 'warning', 'success', 'error']
 
         new = 1
         ready_for_review = 2
@@ -194,6 +190,7 @@ class EditableData:
         needs_submitter_changes = 4
         accepted = 5
         rejected = 6
+        accepted_by_submitter = 7
 
 
 @dataclass

@@ -60,7 +60,8 @@ class PersonData:
     
     def sort_key(self):
         sorted_affiliations = sorted(self.affiliations)
-        return f"{self.last} {self.first} {" ".join(sorted_affiliations).lower()}"
+        affiliations = " ".join(sorted_affiliations).lower()
+        return f"{self.last} {self.first} {affiliations}"
 
 
 @dataclass(kw_only=True, slots=True)

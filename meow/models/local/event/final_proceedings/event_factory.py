@@ -56,8 +56,7 @@ def event_data_factory(event: Any, settings: dict) -> EventData:
     doi_conference = settings.get("doi_conference", "FEL2022")
 
     # https://doi.org/10.18429/JACoW-PCaPAC2022
-    doi_url = f'{
-        doi_proto}://{doi_domain}/{doi_context}/{doi_organization}-{doi_conference}'
+    doi_url = f'{doi_proto}://{doi_domain}/{doi_context}/{doi_organization}-{doi_conference}'
     # DOI:10.18429/JACoW-PCaPAC2022
     doi_label = f'{doi_context}/{doi_organization}-{doi_conference}'
 

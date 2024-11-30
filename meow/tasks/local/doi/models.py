@@ -39,7 +39,8 @@ class EditorDOI:
     affiliations: set[str] = field(default_factory=set)
 
     def format(self):
-        return f'{self.first_name} {self.last_name} ({', '.join(self.affiliations)})'
+        affiliations = ', '.join(self.affiliations)
+        return f'{self.first_name} {self.last_name} ({affiliations})'
 
     def as_dict(self) -> dict:
         return asdict(self)
