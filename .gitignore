@@ -4,6 +4,8 @@ tmp
 var
 venv
 
+nltk_data
+
 .idea
 .vscode
 
