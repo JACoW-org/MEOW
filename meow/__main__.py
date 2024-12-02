@@ -30,13 +30,12 @@ from anyio import run
 from meow.services.local.papers_metadata.pdf_text import write_page_footer, write_page_header, write_page_side
 
 
-
 def tz_convert(src_datetime, dest_timezone):
-  
+
     dest_datetime = src_datetime.astimezone(pytz.timezone(dest_timezone))
 
-    print(f"dest: {dest_timezone} - {dest_datetime.strftime('%Y-%m-%d %H:%M:%S %Z%z')}")
-
+    print(
+        f"dest: {dest_timezone} - {dest_datetime.strftime('%Y-%m-%d %H:%M:%S %Z%z')}")
 
 
 def meow_tz(args) -> None:
@@ -63,9 +62,10 @@ def meow_tz(args) -> None:
 
     src_timezone = pytz.timezone(tz_val)
 
-    src_datetime = datetime.strptime(f"{date_val} {time_val}",'%Y-%m-%d %H:%M:%S')
+    src_datetime = datetime.strptime(
+        f"{date_val} {time_val}", '%Y-%m-%d %H:%M:%S')
     src_datetime = src_timezone.localize(src_datetime)
-   
+
     print(f"src:  {tz_val} - {src_datetime.strftime('%Y-%m-%d %H:%M:%S %Z%z')}")
 
     # print(date_val, time_val)
@@ -74,6 +74,7 @@ def meow_tz(args) -> None:
     tz_convert(src_datetime, "Europe/Zurich")
     tz_convert(src_datetime, "Europe/Rome")
     tz_convert(src_datetime, "UTC")
+
 
 def meow_auth(args) -> None:
 
@@ -84,9 +85,29 @@ def meow_auth(args) -> None:
 
         if args.list:
 
-            res = await dbs.redis_client.keys('meow:credential:*')
+            keys = await dbs.redis_client.keys(
+                'meow:credential:*')
 
-            print(res)
+            for k in keys:
+
+                key = k.decode('utf-8')
+
+                auth = key.split(":")[2]
+
+                res = await dbs.redis_client.hmget(
+                    key, 'user', 'host', 'date')  # type: ignore
+
+                # print(res)
+
+                user = res[0].decode('utf-8')
+                host = res[1].decode('utf-8')
+                date = res[2].decode('utf-8')
+
+                print(f"{user}:{auth}@{host} ({date})")
+
+            # res = [{key:key} for key in keys]
+
+            # print(res)
 
         elif args.login:
 
@@ -103,31 +124,35 @@ def meow_auth(args) -> None:
             res = await dbs.redis_client.hset(
                 f'meow:credential:{key}', 'date', date)  # type: ignore
 
-            print(user, host, key)
+            print(f"{user}:{key}@{host} ({date})")
 
         elif args.logout:
 
-            key = str(args.logout)
+            auth = str(args.logout)
 
-            res = await dbs.redis_client.delete(f'meow:credential:{key}')
+            key = f'meow:credential:{auth}'
+
+            res = await dbs.redis_client.delete(
+                key)  # type: ignore
 
             print(res)
 
         elif args.check:
 
-            key = str(args.check)
+            auth = str(args.check)
 
-            res = await dbs.redis_client.hgetall(
-                f'meow:credential:{key}')  # type: ignore
+            key = f'meow:credential:{auth}'
+
+            res = await dbs.redis_client.hmget(
+                key, 'user', 'host', 'date')  # type: ignore
 
             if res:
 
-                user: bytes = res.get(b'user', None)
-                host: bytes = res.get(b'host', None)
-                date: bytes = res.get(b'date', None)
+                user = res[0].decode('utf-8')
+                host = res[1].decode('utf-8')
+                date = res[2].decode('utf-8')
 
-                print(user.decode('utf-8'),
-                      host.decode('utf-8'), date.decode('utf-8'))
+                print(f"{user}:{auth}@{host} ({date})")
 
             else:
 
@@ -364,7 +389,7 @@ def doc_test(args) -> None:
     opt = dict()
 
     cc_logo = pathlib.Path('cc_by.png').read_bytes()
-    
+
     draw_rect(page=page,
               rect=rect,
               color=TEXT_COLOR)
@@ -1013,7 +1038,7 @@ def main():
         description="manage meow tz",
         epilog="manage meow tz",
     )
-    tz_auth.set_defaults(func=meow_tz)    
+    tz_auth.set_defaults(func=meow_tz)
 
     # -------------------------------------------------------------------------
     # 'compress' command
