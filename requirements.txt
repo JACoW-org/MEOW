@@ -18,7 +18,7 @@ MarkupSafe==2.1.5
 mccabe==0.7.0
 minify_html==0.15.0
 multidict==6.0.5
-nltk==3.9
+nltk==3.9.1
 numpy==1.26.4
 odfpy==1.4.1
 orjson==3.9.15
