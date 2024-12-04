@@ -8,8 +8,8 @@ from anyio.abc import CancelScope
 import logging as lg
 import os
 
-import nltk
-nltk.download()
+# import nltk
+# nltk.download()
 
 os.environ["CLIENT_TYPE"] = "worker"
 
