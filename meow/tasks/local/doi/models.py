@@ -195,7 +195,7 @@ class ContributionDOI:
         attributes['creators'] = [dict(
             name=f'{author.last_name},{author.first_name}',
             affiliation=[dict(
-                name=list(author.affiliations)[0]
+                name=list(author.affiliations)
             )],
             nameIdentifiers=[dict(
                 nameIdentifier=author.id,
@@ -234,8 +234,7 @@ class ContributionDOI:
             name=f'{editor.last_name},{editor.first_name}',
             contributorType='Editor',
             affiliation=[dict(
-                #name=list[editor.affiliations]
-                name=list(editor.affiliations)[0]
+                name=list(editor.affiliations)
             )],
             nameIdentifiers=[dict(
                 nameIdentifier=f'{index}',
