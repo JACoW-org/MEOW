@@ -104,14 +104,14 @@ class ContributionDOI:
         return asdict(self)
 
     def as_json(self) -> str:
-        return json.dumps(dict(data=dict(
+        return json.dumps(asdict(dict(data=dict(
             type='dois',
             id=self.doi_identifier,
             attributes=self._build_doi_attributes()
-        )))
+        ))))
 
     def as_hep_json(self) -> str:
-        return json.dumps(self._build_hep_attributes())
+        return json.dumps(asdict(self._build_hep_attributes()))
 
     def _build_hep_attributes(self) -> dict:
 
