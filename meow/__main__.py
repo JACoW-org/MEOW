@@ -103,7 +103,14 @@ def meow_auth(args) -> None:
                 host = res[1].decode('utf-8')
                 date = res[2].decode('utf-8')
 
-                print(f"{user}:{auth}@{host} ({date})")
+                # OLD
+                #print(f"{user}:{auth}@{host} ({date})")
+                
+                # URI
+                print(f"[{date}] - user={user} host={host} auth={auth}")
+                
+                # CONF2038 indico.jacow.org XXXXXXXXXXXXXXXXXXXXXXXXXX
+                #print(f"{user} {host} {auth}")
 
             # res = [{key:key} for key in keys]
 
@@ -115,16 +122,23 @@ def meow_auth(args) -> None:
 
             [user, host] = args.login.split('@')
 
-            key = ULID()
+            auth = ULID()
 
             res = await dbs.redis_client.hset(
-                f'meow:credential:{key}', 'user', user)  # type: ignore
+                f'meow:credential:{auth}', 'user', user)  # type: ignore
             res = await dbs.redis_client.hset(
-                f'meow:credential:{key}', 'host', host)  # type: ignore
+                f'meow:credential:{auth}', 'host', host)  # type: ignore
             res = await dbs.redis_client.hset(
-                f'meow:credential:{key}', 'date', date)  # type: ignore
+                f'meow:credential:{auth}', 'date', date)  # type: ignore
+            
+            # OLD
+            #print(f"{user}:{auth}@{host} ({date})")
+                
+            # URI
+            print(f"[{date}] - user={user} host={host} auth={auth}")
 
-            print(f"{user}:{key}@{host} ({date})")
+            # CONF2038 indico.jacow.org XXXXXXXXXXXXXXXXXXXXXXXXXX
+            #print(f"{user}:{key}@{host} ({date})")
 
         elif args.logout:
 
@@ -146,17 +160,19 @@ def meow_auth(args) -> None:
             res = await dbs.redis_client.hmget(
                 key, 'user', 'host', 'date')  # type: ignore
 
-            if res:
+            if res and len(res) == 3 and res[0] and res[1] and res[2]:
 
                 user = res[0].decode('utf-8')
                 host = res[1].decode('utf-8')
                 date = res[2].decode('utf-8')
+                
+                # CONF2038 indico.jacow.org XXXXXXXXXXXXXXXXXXXXXXXXXX
 
-                print(f"{user}:{auth}@{host} ({date})")
+                print(f"[{date}] - user={user} host={host} auth={auth}")
 
             else:
 
-                print('invalid')
+                print('invalid auth key')
 
         await dbs.redis_client.aclose()
 
