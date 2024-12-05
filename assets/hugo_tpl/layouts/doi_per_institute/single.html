@@ -30,10 +30,16 @@
         <br>
         
         {{ range $idx, $val := .Params.contents }}
+
+        <!-- ### begin-region-contrib ### {{ printf "/layouts/partials/contributions/%s_doi.html" $val }} ### -->
+
         <div class="contrib">
-            {{ $contribution_html := readFile ( printf "/layouts/partials/%s" $val ) }}
+            {{ $contribution_html := readFile ( printf "/layouts/partials/contributions/%s_doi.html" $val ) }}
             {{ $contribution_html | safeHTML }}
         </div>
+
+        <!-- ### end-region-contrib ### {{ printf "/layouts/partials/contributions/%s_doi.html" $val }} ### -->
+
         {{ end }}
     </div>
 </div>

@@ -73,7 +73,7 @@ class JinjaTemplateRenderer:
                 .render_async(params))
 
         html = (html if minify is False else minify_html.minify(
-            html, remove_processing_instructions=True))
+            html, remove_processing_instructions=True, keep_comments=True))
 
         html = (escape_special_characters(html)
                 if escape else html)
