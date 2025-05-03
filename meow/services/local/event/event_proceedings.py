@@ -1,4 +1,4 @@
-""" Module responsible to generate the proceedings """
+"""Module responsible to generate the proceedings"""
 
 import logging as lg
 
@@ -12,81 +12,116 @@ from meow.models.infra.locks import RedisLock
 
 
 from meow.models.local.event.final_proceedings.contribution_model import (
-    ContributionData)
+    ContributionData,
+)
 from meow.models.local.event.final_proceedings.proceedings_data_model import (
-    ProceedingsConfig, ProceedingsData)
+    ProceedingsConfig,
+    ProceedingsData,
+)
 from meow.services.local.event.final_proceedings.build_hep_payloads import (
-    build_hep_payloads)
+    build_hep_payloads,
+)
 from meow.services.local.event.final_proceedings.copy_site_assets import (
-    copy_html_partials, copy_inspirehep_jsonl)
+    copy_html_partials,
+    copy_inspirehep_jsonl,
+    copy_references_jsonl,
+)
 
 from meow.services.local.event.final_proceedings.collecting_contributions_and_files import (
-    collecting_contributions_and_files)
+    collecting_contributions_and_files,
+)
 from meow.services.local.event.final_proceedings.collecting_sessions_and_materials import (
-    collecting_sessions_and_materials)
+    collecting_sessions_and_materials,
+)
 
 from meow.services.local.event.common.adapting_final_proceedings import (
-    adapting_proceedings)
+    adapting_proceedings,
+)
 from meow.services.local.event.common.validate_proceedings_data import (
-    validate_proceedings_data)
+    validate_proceedings_data,
+)
 
 from meow.services.local.event.final_proceedings.concat_contribution_papers import (
-    concat_contribution_papers)
+    concat_contribution_papers,
+)
 from meow.services.local.event.final_proceedings.copy_contribution_papers import (
-    copy_contribution_papers)
+    copy_contribution_papers,
+)
 from meow.services.local.event.final_proceedings.copy_contribution_slides import (
-    copy_contribution_slides)
+    copy_contribution_slides,
+)
 from meow.services.local.event.final_proceedings.copy_event_materials import (
-    copy_event_materials)
+    copy_event_materials,
+)
 
 from meow.services.local.event.final_proceedings.download_contributions_slides import (
-    download_contributions_slides)
+    download_contributions_slides,
+)
 from meow.services.local.event.final_proceedings.download_event_materials import (
-    download_event_materials)
+    download_event_materials,
+)
 from meow.services.local.event.final_proceedings.download_contributions_papers import (
-    download_contributions_papers)
+    download_contributions_papers,
+)
 
 from meow.services.local.event.final_proceedings.generate_contribution_references import (
-    generate_contribution_references)
+    generate_contribution_references,
+)
 from meow.services.local.event.final_proceedings.generate_contributions_groups import (
-    generate_contributions_groups)
+    generate_contributions_groups,
+)
 from meow.services.local.event.final_proceedings.generate_contribution_doi import (
-    generate_dois)
+    generate_dois,
+)
 from meow.services.local.event.final_proceedings.build_doi_payloads import (
-    build_doi_payloads)
+    build_doi_payloads,
+)
 from meow.services.local.event.final_proceedings.manage_duplicates import (
-    manage_duplicates)
+    manage_duplicates,
+)
 
 from meow.services.local.event.final_proceedings.link_static_site import (
-    clean_static_site, link_static_site)
+    clean_static_site,
+    link_static_site,
+)
 from meow.services.local.event.final_proceedings.read_papers_metadata import (
-    read_papers_metadata)
+    read_papers_metadata,
+)
 from meow.services.local.event.final_proceedings.write_papers_metadata import (
-    write_papers_metadata)
+    write_papers_metadata,
+)
 from meow.services.local.event.final_proceedings.write_slides_metadata import (
-    write_slides_metadata)
+    write_slides_metadata,
+)
 
 from meow.services.local.event.final_proceedings.hugo_plugin.hugo_final_proceedings_plugin import (
-    HugoProceedingsPlugin)
-from meow.models.local.event.final_proceedings.client_log import ClientLog, ClientLogSeverity
+    HugoProceedingsPlugin,
+)
+from meow.models.local.event.final_proceedings.client_log import (
+    ClientLog,
+    ClientLogSeverity,
+)
 from meow.app.errors.service_error import ProceedingsError
+from meow.services.local.event.final_proceedings.build_refs_payloads import (
+    build_refs_payloads,
+)
 
 
 logger = lg.getLogger(__name__)
 
 
-async def event_proceedings(event: dict, cookies: dict, settings: dict,
-                            config: ProceedingsConfig) -> AsyncGenerator:
-    """ event_proceedings """
+async def event_proceedings(
+    event: dict, cookies: dict, settings: dict, config: ProceedingsConfig
+) -> AsyncGenerator:
+    """event_proceedings"""
 
     try:
-        event_id: str = event.get('id', '')
+        event_id: str = event.get("id", "")
 
-        if not event_id or event_id == '':
-            raise BaseException('Invalid event id')
+        if not event_id or event_id == "":
+            raise BaseException("Invalid event id")
 
         async with acquire_lock(event_id) as lock:
-
             logger.debug(f"acquire_lock -> {lock.name}")
 
             async for r in _event_proceedings(event, cookies, settings, config, lock):
@@ -111,7 +146,7 @@ async def event_proceedings(event: dict, cookies: dict, settings: dict,
 
 
 def acquire_lock(key: str) -> RedisLock:
-    """ Create event lock """
+    """Create event lock"""
 
     redis_lock = RedisLock(
         redis=dbs.redis_client,
@@ -127,17 +162,22 @@ def acquire_lock(key: str) -> RedisLock:
 
 
 async def extend_lock(lock: RedisLock) -> RedisLock:
-    """ Reset lock timeout (conf.REDIS_LOCK_TIMEOUT_SECONDS) """
+    """Reset lock timeout (conf.REDIS_LOCK_TIMEOUT_SECONDS)"""
 
     await lock.reacquire()
     return lock
 
 
-async def _event_proceedings(event: dict, cookies: dict, settings: dict,
-                             config: ProceedingsConfig, lock: RedisLock) -> AsyncGenerator:
+async def _event_proceedings(
+    event: dict,
+    cookies: dict,
+    settings: dict,
+    config: ProceedingsConfig,
+    lock: RedisLock,
+) -> AsyncGenerator:
     """ """
 
-    logger.info('event_proceedings - create_proceedings')
+    logger.info("event_proceedings - create_proceedings")
 
     """ """
 
@@ -153,80 +193,100 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
 
     await extend_lock(lock)
 
-    yield dict(type='progress', value=dict(
-        phase='collecting_sessions_and_materials',
-        text="Collecting sessions and materials"
-    ))
+    yield dict(
+        type="progress",
+        value=dict(
+            phase="collecting_sessions_and_materials",
+            text="Collecting sessions and materials",
+        ),
+    )
 
     # Blocking
 
-    [sessions, materials] = await collecting_sessions_and_materials(event, cookies, settings)
+    [sessions, materials] = await collecting_sessions_and_materials(
+        event, cookies, settings
+    )
 
     # log number of sessions and materials
-    yield dict(type='log', value=ClientLog(
-        severity=ClientLogSeverity.INFO,
-        message=f'Found {len(sessions)} sessions.'
-    ))
+    yield dict(
+        type="log",
+        value=ClientLog(
+            severity=ClientLogSeverity.INFO, message=f"Found {len(sessions)} sessions."
+        ),
+    )
 
-    yield dict(type='log', value=ClientLog(
-        severity=ClientLogSeverity.INFO,
-        message=f'Found {len(materials)} materials.'
-    ))
+    yield dict(
+        type="log",
+        value=ClientLog(
+            severity=ClientLogSeverity.INFO,
+            message=f"Found {len(materials)} materials.",
+        ),
+    )
 
     """ """
 
     await extend_lock(lock)
 
-    yield dict(type='progress', value=dict(
-        phase='collecting_contributions_and_files',
-        text="Collecting contributions and files"
-    ))
+    yield dict(
+        type="progress",
+        value=dict(
+            phase="collecting_contributions_and_files",
+            text="Collecting contributions and files",
+        ),
+    )
 
     # Blocking
 
-    [contributions] = await collecting_contributions_and_files(event, sessions, cookies, settings)
+    [contributions] = await collecting_contributions_and_files(
+        event, sessions, cookies, settings
+    )
 
     # log number of contributions
-    yield dict(type='log', value=ClientLog(
-        severity=ClientLogSeverity.INFO,
-        message=f'Found {len(contributions)} contributions.'
-    ))
+    yield dict(
+        type="log",
+        value=ClientLog(
+            severity=ClientLogSeverity.INFO,
+            message=f"Found {len(contributions)} contributions.",
+        ),
+    )
 
     """ """
 
     await extend_lock(lock)
 
-    yield dict(type='progress', value=dict(
-        phase='adapting_proceedings',
-        text="Adapting proceedings"
-    ))
+    yield dict(
+        type="progress",
+        value=dict(phase="adapting_proceedings", text="Adapting proceedings"),
+    )
 
     # Blocking
 
     # Deserialization process that builds a proceedings object that includes all the data of the conference
-    proceedings = await adapting_proceedings(event, sessions, contributions, materials, cookies, settings)
+    proceedings = await adapting_proceedings(
+        event, sessions, contributions, materials, cookies, settings
+    )
 
     """ """
 
     await extend_lock(lock)
 
-    yield dict(type='progress', value=dict(
-        phase='clean_static_site',
-        text='Clean Static site'
-    ))
+    yield dict(
+        type="progress", value=dict(phase="clean_static_site", text="Clean Static site")
+    )
 
     await clean_static_site(proceedings, cookies, settings, config)
 
     """ """
 
     try:
-
         await extend_lock(lock)
 
-        yield dict(type='progress', value=dict(
-            phase='download_event_materials',
-            text="Download event materials"
-        ))
+        yield dict(
+            type="progress",
+            value=dict(
+                phase="download_event_materials", text="Download event materials"
+            ),
+        )
 
         # Blocking
 
@@ -238,10 +298,13 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
         # Produzione logs
 
         # Produzione result
-        yield dict(type='result', value=dict(
-            # metadata=metadata,
-            # errors=errors
-        ))
+        yield dict(
+            type="result",
+            value=dict(
+                # metadata=metadata,
+                # errors=errors
+            ),
+        )
 
         # If blocking error
         return
@@ -250,129 +313,149 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
 
     await extend_lock(lock)
 
-    yield dict(type='progress', value=dict(
-        phase='download_contributions_papers',
-        text="Download Contributions Papers"
-    ))
+    yield dict(
+        type="progress",
+        value=dict(
+            phase="download_contributions_papers", text="Download Contributions Papers"
+        ),
+    )
 
     # Blocking
 
-    [proceedings, papers_data] = await download_contributions_papers(proceedings, cookies, settings,
-                                                                     filter_published_contributions)
+    [proceedings, papers_data] = await download_contributions_papers(
+        proceedings, cookies, settings, filter_published_contributions
+    )
 
     # log number of files
-    yield dict(type='log', value=ClientLog(
-        severity=ClientLogSeverity.INFO,
-        message=f'Downloaded {len(papers_data)} papers.'
-    ))
+    yield dict(
+        type="log",
+        value=ClientLog(
+            severity=ClientLogSeverity.INFO,
+            message=f"Downloaded {len(papers_data)} papers.",
+        ),
+    )
 
     """ """
 
     if config.include_event_slides:
-
         await extend_lock(lock)
 
-        yield dict(type='progress', value=dict(
-            phase='download_contributions_slides',
-            text="Download Contributions Slides"
-        ))
+        yield dict(
+            type="progress",
+            value=dict(
+                phase="download_contributions_slides",
+                text="Download Contributions Slides",
+            ),
+        )
 
         # Blocking
 
-        [proceedings, slides_data] = await download_contributions_slides(proceedings, cookies, settings,
-                                                                         filter_contributions_with_slides)
+        [proceedings, slides_data] = await download_contributions_slides(
+            proceedings, cookies, settings, filter_contributions_with_slides
+        )
 
         # log number of files
-        yield dict(type='log', value=ClientLog(
-            severity=ClientLogSeverity.INFO,
-            message=f'Downloaded {len(slides_data)} slides.'
-        ))
+        yield dict(
+            type="log",
+            value=ClientLog(
+                severity=ClientLogSeverity.INFO,
+                message=f"Downloaded {len(slides_data)} slides.",
+            ),
+        )
 
     """ """
 
     await extend_lock(lock)
 
-    yield dict(type='progress', value=dict(
-        phase='read_papers_metadata',
-        text='Read Papers Metadata'
-    ))
+    yield dict(
+        type="progress",
+        value=dict(phase="read_papers_metadata", text="Read Papers Metadata"),
+    )
 
     # Blocking
 
-    await read_papers_metadata(proceedings, cookies, settings,
-                               filter_published_contributions)
+    await read_papers_metadata(
+        proceedings, cookies, settings, filter_published_contributions
+    )
 
     """ """
 
     await extend_lock(lock)
 
-    yield dict(type='progress', value=dict(
-        phase='validate_contributions_papers',
-        text='Validate Contributions Papers'
-    ))
+    yield dict(
+        type="progress",
+        value=dict(
+            phase="validate_contributions_papers", text="Validate Contributions Papers"
+        ),
+    )
 
     # Blocking if strict_pdf_check is True
 
-    [metadata, errors] = await validate_proceedings_data(proceedings, cookies, settings,
-                                                         filter_published_contributions)
+    [metadata, errors] = await validate_proceedings_data(
+        proceedings, cookies, settings, filter_published_contributions
+    )
 
     if len(errors) > 0:
         if config.strict_pdf_check:
+            yield dict(
+                type="log",
+                value=ClientLog(
+                    severity=ClientLogSeverity.ERROR,
+                    message="Errors when validating proceedings data.",
+                ),
+            )
 
-            yield dict(type='log', value=ClientLog(
-                severity=ClientLogSeverity.ERROR,
-                message='Errors when validating proceedings data.'
-            ))
-
-            yield dict(type='result', value=dict(
-                metadata=metadata,
-                errors=errors
-            ))
+            yield dict(type="result", value=dict(metadata=metadata, errors=errors))
 
             return
 
         else:
-            yield dict(type='log', value=ClientLog(
-                severity=ClientLogSeverity.WARNING,
-                message='Errors when validating proceedings data.'
-            ))
+            yield dict(
+                type="log",
+                value=ClientLog(
+                    severity=ClientLogSeverity.WARNING,
+                    message="Errors when validating proceedings data.",
+                ),
+            )
 
     """ """
 
     await extend_lock(lock)
 
-    yield dict(type='progress', value=dict(
-        phase='extract_contribution_references',
-        text='Extract Contribution References'
-    ))
+    yield dict(
+        type="progress",
+        value=dict(
+            phase="extract_contribution_references",
+            text="Extract Contribution References",
+        ),
+    )
 
     # Blocking
 
-    await generate_contribution_references(proceedings, cookies, settings, config,
-                                           filter_published_contributions)
+    await generate_contribution_references(
+        proceedings, cookies, settings, config, filter_published_contributions
+    )
 
     """ """
 
     await extend_lock(lock)
 
-    yield dict(type='progress', value=dict(
-        phase='generate_dois',
-        text='Generate DOIs'
-    ))
+    yield dict(type="progress", value=dict(phase="generate_dois", text="Generate DOIs"))
 
     # Blocking
 
-    await generate_dois(proceedings, cookies, settings, config,
-                        filter_published_contributions)
+    await generate_dois(
+        proceedings, cookies, settings, config, filter_published_contributions
+    )
 
     """ """
 
     await extend_lock(lock)
 
-    yield dict(type='progress', value=dict(
-        phase='manage_duplicates',
-        text='Managing duplicates'
-    ))
+    yield dict(
+        type="progress",
+        value=dict(phase="manage_duplicates", text="Managing duplicates"),
+    )
 
     # Blocking
 
@@ -382,30 +465,34 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
 
     await extend_lock(lock)
 
-    yield dict(type='progress', value=dict(
-        phase='write_papers_metadata',
-        text='Write Papers Metadata'
-    ))
+    yield dict(
+        type="progress",
+        value=dict(phase="write_papers_metadata", text="Write Papers Metadata"),
+    )
 
     # Blocking
 
-    await write_papers_metadata(proceedings, cookies, settings,
-                                filter_published_contributions)
+    await write_papers_metadata(
+        proceedings, cookies, settings, filter_published_contributions
+    )
     """ """
 
     await extend_lock(lock)
 
-    await write_slides_metadata(proceedings, cookies, settings,
-                                filter_contributions_with_slides)
+    await write_slides_metadata(
+        proceedings, cookies, settings, filter_contributions_with_slides
+    )
 
     """ """
 
     await extend_lock(lock)
 
-    yield dict(type='progress', value=dict(
-        phase='generate_contributions_groups',
-        text='Generate Contributions Groups'
-    ))
+    yield dict(
+        type="progress",
+        value=dict(
+            phase="generate_contributions_groups", text="Generate Contributions Groups"
+        ),
+    )
 
     await generate_contributions_groups(proceedings, cookies, settings)
 
@@ -413,23 +500,26 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
 
     await extend_lock(lock)
 
-    yield dict(type='progress', value=dict(
-        phase='concat_contribution_papers',
-        text='Concat Contributions Papers'
-    ))
+    yield dict(
+        type="progress",
+        value=dict(
+            phase="concat_contribution_papers", text="Concat Contributions Papers"
+        ),
+    )
 
-    await concat_contribution_papers(proceedings, cookies, settings, config, filter_published_contributions)
+    await concat_contribution_papers(
+        proceedings, cookies, settings, config, filter_published_contributions
+    )
 
     """ """
 
     if config.generate_doi_payload:
-
         await extend_lock(lock)
 
-        yield dict(type='progress', value=dict(
-            phase='generate_doi_payloads',
-            text='Generate DOI payloads'
-        ))
+        yield dict(
+            type="progress",
+            value=dict(phase="generate_doi_payloads", text="Generate DOI payloads"),
+        )
 
         # Blocking
 
@@ -439,13 +529,15 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
     """ """
 
     if config.generate_hep_payload:
-
         await extend_lock(lock)
 
-        yield dict(type='progress', value=dict(
-            phase='generate_inspirehep_payloads',
-            text='Generate Inspirehep payloads'
-        ))
+        yield dict(
+            type="progress",
+            value=dict(
+                phase="generate_inspirehep_payloads",
+                text="Generate Inspirehep payloads",
+            ),
+        )
 
         # Blocking
 
@@ -456,13 +548,21 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
 
     await extend_lock(lock)
 
-    yield dict(type='progress', value=dict(
-        phase='generate_site_pages',
-        text='Generate Site Pages'
-    ))
+    # Blocking
 
-    plugin = HugoProceedingsPlugin(
-        proceedings, cookies, settings, config)
+    # generation of payloads for REFs
+    await build_refs_payloads(proceedings)
+
+    """ """
+
+    await extend_lock(lock)
+
+    yield dict(
+        type="progress",
+        value=dict(phase="generate_site_pages", text="Generate Site Pages"),
+    )
+
+    plugin = HugoProceedingsPlugin(proceedings, cookies, settings, config)
 
     await plugin.run_prepare()
     await plugin.run_build()
@@ -471,33 +571,35 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
 
     await extend_lock(lock)
 
-    logger.info('event_proceedings - copy_event_materials')
+    logger.info("event_proceedings - copy_event_materials")
 
-    yield dict(type='progress', value=dict(
-        phase='copy_event_pdf',
-        text='Copy event PDF'
-    ))
+    yield dict(
+        type="progress", value=dict(phase="copy_event_pdf", text="Copy event PDF")
+    )
 
     if config.generate_hep_payload:
         await copy_inspirehep_jsonl(proceedings, cookies, settings)
 
+    await copy_references_jsonl(proceedings, cookies, settings)
     await copy_html_partials(proceedings, cookies, settings)
     await copy_event_materials(proceedings, cookies, settings)
-    await copy_contribution_papers(proceedings, cookies, settings,
-                                   filter_published_contributions)
+    await copy_contribution_papers(
+        proceedings, cookies, settings, filter_published_contributions
+    )
 
     if config.include_event_slides:
-        await copy_contribution_slides(proceedings, cookies, settings,
-                                       filter_contributions_with_slides)
+        await copy_contribution_slides(
+            proceedings, cookies, settings, filter_contributions_with_slides
+        )
 
     """ """
 
     await extend_lock(lock)
 
-    yield dict(type='progress', value=dict(
-        phase='generate_proceedings',
-        text='Generate Proceedings'
-    ))
+    yield dict(
+        type="progress",
+        value=dict(phase="generate_proceedings", text="Generate Proceedings"),
+    )
 
     await plugin.generate()
 
@@ -505,10 +607,9 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
 
     await extend_lock(lock)
 
-    yield dict(type='progress', value=dict(
-        phase='link_static_site',
-        text='Link Static site'
-    ))
+    yield dict(
+        type="progress", value=dict(phase="link_static_site", text="Link Static site")
+    )
 
     await link_static_site(proceedings, cookies, settings, config)
 
@@ -516,7 +617,7 @@ async def _event_proceedings(event: dict, cookies: dict, settings: dict,
 
     await extend_lock(lock)
 
-    logger.info('event_proceedings - get_proceedings')
+    logger.info("event_proceedings - get_proceedings")
 
     result = await get_proceedings(proceedings)
 
@@ -532,23 +633,23 @@ async def get_proceedings(proceedings: ProceedingsData) -> dict:
     event_path = proceedings.event.path
 
     return dict(
-        type='result',
+        type="result",
         value=dict(
             event_code=event_code,
             event_name=event_name,
             event_title=event_title,
-            event_path=event_path
-        )
+            event_path=event_path,
+        ),
     )
 
 
 async def handle_proceedings_error(error: ProceedingsError):
-    """ Handle proceedings error """
+    """Handle proceedings error"""
 
-    yield dict(type='log', value=ClientLog(
-        severity=ClientLogSeverity.ERROR,
-        message=str(error)
-    ))
+    yield dict(
+        type="log",
+        value=ClientLog(severity=ClientLogSeverity.ERROR, message=str(error)),
+    )
 
     # stop generation
-    yield dict(type='error', value=error)
+    yield dict(type="error", value=error)

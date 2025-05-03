@@ -51,7 +51,7 @@ def contribution_editable_factory(editable: Any, event_timezone: str) -> Editabl
 
 def contribution_data_factory(contribution: Any, editors: list[PersonData], event_timezone: str) -> ContributionData:
 
-    logger.info(f"contribution_code: {contribution.get('code')}")
+    # logger.info(f"contribution_code: {contribution.get('code')}")
 
     contrib_editables: list = contribution.get('editables', [])
     contrib_paper: dict = contribution.get('paper', None)
@@ -111,10 +111,10 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData], even
 
     """ """
 
-    logger.info(f"reception: {reception}")
-    logger.info(f"revisitation: {revisitation}")
-    logger.info(f"acceptance: {acceptance}")
-    logger.info(f"issuance: {issuance}")
+    # logger.info(f"reception: {reception}")
+    # logger.info(f"revisitation: {revisitation}")
+    # logger.info(f"acceptance: {acceptance}")
+    # logger.info(f"issuance: {issuance}")
 
     # contribution_code: MOA03
     # reception: 2022-08-17 13:51:09+00:00
@@ -169,7 +169,7 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData], even
 
     """ """
 
-    logger.debug(f"{contribution.get('code')}")
+    # logger.debug(f"{contribution.get('code')}")
 
     """ """
 
@@ -178,7 +178,7 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData], even
     if contrib_paper:
         peer_reviewing_accepted = contrib_paper.get('state', 0) == 2
 
-    logger.debug(f"peer_reviewing: {peer_reviewing_accepted}")
+    # logger.debug(f"peer_reviewing: {peer_reviewing_accepted}")
 
     """ """
 
@@ -192,7 +192,7 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData], even
                     is_slides_included = True
                     break
 
-    logger.debug(f"is_slides_included: {is_slides_included}")
+    # logger.debug(f"is_slides_included: {is_slides_included}")
 
     """ """
 
@@ -222,9 +222,9 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData], even
         elif is_paper_data_waiting:
             is_included_in_pdf_check = True
 
-    logger.debug(f"is_prepress: {is_included_in_prepress}")
-    logger.debug(f"is_proceedings: {is_included_in_proceedings}")
-    logger.debug(f"is_pdf_check: {is_included_in_pdf_check}")
+    # logger.debug(f"is_prepress: {is_included_in_prepress}")
+    # logger.debug(f"is_proceedings: {is_included_in_proceedings}")
+    # logger.debug(f"is_pdf_check: {is_included_in_pdf_check}")
 
     """ """
 
@@ -286,6 +286,7 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData], even
     # issue: date of proceedings
 
     contribution_data = ContributionData(
+        id=contribution.get('id'),
         code=contribution.get('code'),
         type=contribution.get('type'),
         url=contribution_url,

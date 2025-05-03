@@ -145,7 +145,7 @@ def event_person_factory(person: dict) -> PersonData:
         email=email,
     )
 
-    logger.info(event_person_data.as_dict())
+    # logger.info(event_person_data.as_dict())
 
     return event_person_data
 

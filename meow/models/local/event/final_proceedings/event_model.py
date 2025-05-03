@@ -29,25 +29,34 @@ class PersonData:
     @property
     def long(self) -> str:
         return f"{self.first} {self.last} ({self.affiliations_str})"
-    
+
     @property
     def affiliations_str(self) -> str:
         affiliations_str = ", ".join(self.affiliations)
         return affiliations_str
 
-    def __eq__(self, other: 'PersonData'):
+    def __eq__(self, other: "PersonData"):
         return (
-            self.first == other.first and
-            self.last == other.last and
+            self.first == other.first
+            and self.last == other.last
+            and
             # set(self.affiliations) == set(other.affiliations) and
             self.id == other.id
         )
 
     def __hash__(self):
-        return hash(('first', self.first,
-                     'last', self.last,
-                     'affiliations', ','.join(self.affiliations),
-                     'id', self.id))
+        return hash(
+            (
+                "first",
+                self.first,
+                "last",
+                self.last,
+                "affiliations",
+                ",".join(self.affiliations),
+                "id",
+                self.id,
+            )
+        )
 
     def as_dict(self) -> dict:
         return {
@@ -57,7 +66,7 @@ class PersonData:
             "long": self.long,
             "code": self.code,
         }
-    
+
     def sort_key(self):
         sorted_affiliations = sorted(self.affiliations)
         affiliations = " ".join(sorted_affiliations).lower()
@@ -66,7 +75,6 @@ class PersonData:
 
 @dataclass(kw_only=True, slots=True)
 class AffiliationData:
-
     id: str
     name: str
     street: str
@@ -78,7 +86,7 @@ class AffiliationData:
         return self.id == other.id
 
     def __hash__(self):
-        return hash(('id', self.id))
+        return hash(("id", self.id))
 
     def as_dict(self) -> dict:
         return asdict(self)
@@ -86,7 +94,6 @@ class AffiliationData:
 
 @dataclass(kw_only=True, slots=True)
 class KeywordData:
-
     code: str
     name: str
 
@@ -94,7 +101,7 @@ class KeywordData:
         return self.code == other.code
 
     def __hash__(self):
-        return hash(('code', self.code))
+        return hash(("code", self.code))
 
     def as_dict(self) -> dict:
         return asdict(self)
@@ -102,7 +109,6 @@ class KeywordData:
 
 @dataclass(kw_only=True, slots=True)
 class MaterialData:
-
     file_type: str
     content_type: str
     filename: str
@@ -112,7 +118,7 @@ class MaterialData:
     title: str
     description: str
     external_download_url: str
-    section: str = field(default='')
+    section: str = field(default="")
     index: int = field(default=0)
 
     def as_dict(self) -> dict:
@@ -164,13 +170,31 @@ class EventData:
         return self.id == other.id
 
     def __hash__(self):
-        return hash(('id', self.id,
-                     'title', self.title,
-                     'path', self.path))
+        return hash(("id", self.id, "title", self.title, "path", self.path))
 
     def as_dict(self) -> dict:
         return {
-            **
-            asdict(self),
+            **asdict(self),
             "path": self.path,
+        }
+
+    def as_ref(self) -> dict:
+        return {
+            "eventId": self.id,
+            "code": self.name,
+            "name": self.title,
+            "location": self.location,
+            "conferenceStart": str(self.start),
+            "conferenceEnd": str(self.end),
+            "date": self.date,
+            "series": self.series,
+            "seriesNumber": self.series_number,
+            "issn": self.issn,
+            "isbn": self.isbn,
+            "copyrightYear": self.copyright_year,
+            "doiCode": self,
+            "useDoi": True,
+            "baseUrl": f"https://jacow.org/{self.name}/",
+            # "isPublished": False,
+            "timestamp": str(datetime.now()),
         }

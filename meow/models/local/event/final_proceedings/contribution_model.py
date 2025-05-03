@@ -5,7 +5,7 @@ from datetime import datetime
 from meow.models.local.event.final_proceedings.event_model import AffiliationData, KeywordData, PersonData
 from meow.models.local.event.final_proceedings.track_model import TrackData
 from meow.tasks.local.doi.models import AuthorsGroup, ContributionDOI
-from meow.tasks.local.reference.models import Reference
+from meow.tasks.local.reference.models import ContributionRef, Reference
 
 
 @dataclass(kw_only=True, slots=True)
@@ -220,6 +220,7 @@ class DuplicateContributionData:
 class ContributionData:
     """ Contribution Data """
 
+    id:str = field()
     code: str = field()
     type: str = field()
     url: str = field()
@@ -268,6 +269,7 @@ class ContributionData:
     page_count: int = field(default=0)
     paper_size: int = field(default=0)
     metadata: dict | None = field(default=None)
+    contribution_ref: ContributionRef | None = field(default=None)
     reference: Reference | None = field(default=None)
     doi_data: ContributionDOI | None = field(default=None)
 
