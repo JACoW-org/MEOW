@@ -31,6 +31,7 @@ class EventPrePressProceedingsTask(AbstractTask):
             generate_doi_payload=False,
             generate_external_doi_url=False,
             generate_hep_payload=False,
+            generate_ref_payload=True,
             include_only_qa_green_contributions=False,
             absolute_pdf_link=False,
             static_site_type='prepress'

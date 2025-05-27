@@ -24,13 +24,14 @@ from meow.models.local.event.final_proceedings.contribution_model import (
 from meow.models.local.event.final_proceedings.proceedings_data_model import (
     ProceedingsConfig,
 )
+from meow.utils.serialization import json_encode
 
 
 logger = lg.getLogger(__name__)
 
 
 async def event_api_refs(
-    event_id: str, event_url: str, indico_token: str, include_only_qa_green: bool
+    event_id: str, event_url: str, indico_token: str
 ) -> AsyncGenerator:
     """ """
 
@@ -71,9 +72,10 @@ async def event_api_refs(
             generate_doi_payload=False,
             generate_external_doi_url=False,
             generate_hep_payload=False,
-            include_only_qa_green_contributions=include_only_qa_green,
+            generate_ref_payload=True,
+            include_only_qa_green_contributions=False,
             absolute_pdf_link=False,
-            static_site_type="prepress",
+            static_site_type="references",
         )
 
         async for r in _event_api_refs(event_id, event_url, indico_token, config):
@@ -93,11 +95,6 @@ async def _event_api_refs(
 ) -> AsyncGenerator:
     """ """
 
-    def filter_published_contributions(c: ContributionData) -> bool:
-        if config.include_only_qa_green_contributions:
-            return c.is_included_in_proceedings
-        return c.is_included_in_prepress
-
     [
         event,
         settings,
@@ -106,6 +103,46 @@ async def _event_api_refs(
     ] = await collecting_event_sessions_and_contributions(
         event_id, event_url, indico_token
     )
+
+    # region FILTER
+    duplicate_of_alias: str = settings.get("duplicate_of_alias", "duplicate_of")
+
+    cat_publish_alias: str | None = settings.get("cat_publish_alias", "CAT_publish")
+
+    def filter_published_contributions(c: ContributionData) -> bool:
+        if config.include_only_qa_green_contributions:
+            return c.is_included_in_proceedings
+        return c.is_included_in_prepress
+
+    def filter_referenceable_contributions(c: ContributionData) -> bool:
+        # schedulate (timeline ora e data)
+        is_schedulated: bool = c.is_schedulated()
+
+        # cat_duplicated
+        duplicate_of_code: str | None = contribution.duplicate_of_code(
+            duplicate_of_alias
+        )
+
+        is_deduplicated: bool = not (duplicate_of_code and len(duplicate_of_code) > 0)
+
+        # cat_publish
+        is_publish: bool = c.cat_publish(cat_publish_alias)
+
+        logger.info(
+            json_encode(
+                {
+                    "code": c.code,
+                    "is_schedulated": is_schedulated,
+                    "is_deduplicated": is_deduplicated,
+                    "is_publish": is_publish,
+                }
+            ).decode()
+        )
+
+        # is_referenceable
+        return is_schedulated and is_deduplicated and is_publish
+
+    # endregion
 
     proceedings = await adapting_proceedings(
         event, sessions, contributions, [], {}, settings
@@ -152,15 +189,22 @@ async def _event_api_refs(
     yield proceedings.event.as_ref()
 
     for contribution in proceedings.contributions:
-        contribution_ref = await contribution_data_factory(
-            proceedings.event, contribution, {}, config, filter_published_contributions
-        )
+        if filter_referenceable_contributions(contribution):
+            contribution_ref = await contribution_data_factory(
+                proceedings.event,
+                contribution,
+                {},
+                config,
+                filter_published_contributions,
+            )
 
-        # logger.info(contribution_ref.code)
+            # logger.info(contribution_ref.code)
 
-        yield contribution_ref.as_ref()
+            yield contribution_ref.as_ref()
 
-    # for contribution in proceedings.contributions:
-    #     if contribution.reference:
-    #         yield contribution.reference.as_dict()
-    #     # await anyio.sleep(0.01)
+        else:
+            logger.warning(f"not_referenceable={contribution.code}")
+
+            # logger.warning(contribution.as_dict())
+
+            logger.warning("\n\n")

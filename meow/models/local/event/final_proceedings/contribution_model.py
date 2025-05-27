@@ -2,15 +2,20 @@ from collections import defaultdict
 from dataclasses import dataclass, asdict, field
 from datetime import datetime
 
-from meow.models.local.event.final_proceedings.event_model import AffiliationData, KeywordData, PersonData
+from meow.models.local.event.final_proceedings.event_model import (
+    AffiliationData,
+    KeywordData,
+    PersonData,
+)
 from meow.models.local.event.final_proceedings.track_model import TrackData
 from meow.tasks.local.doi.models import AuthorsGroup, ContributionDOI
 from meow.tasks.local.reference.models import ContributionRef, Reference
+from meow.utils.serialization import json_encode
 
 
 @dataclass(kw_only=True, slots=True)
 class ContributionFieldData:
-    """ Contribution Field """
+    """Contribution Field"""
 
     name: str = field()
     value: str = field()
@@ -21,7 +26,7 @@ class ContributionFieldData:
 
 @dataclass(kw_only=True, slots=True)
 class TagData:
-    """ Tag Data """
+    """Tag Data"""
 
     code: str = field()
     color: str = field()
@@ -46,11 +51,14 @@ class TagData:
 
     def as_dict(self) -> dict:
         return asdict(self)
+    
+    def as_json(self) -> str:
+        return json_encode(self.as_dict()).decode()
 
 
 @dataclass(kw_only=True, slots=True)
 class FileData:
-    """ File Data """
+    """File Data"""
 
     file_type: int = field()
     content_type: str = field()
@@ -70,7 +78,7 @@ class FileData:
 
 @dataclass(kw_only=True, slots=True)
 class UserData:
-    """ User Data """
+    """User Data"""
 
     id: str = field()
     first_name: str = field()
@@ -82,7 +90,7 @@ class UserData:
 
 @dataclass(kw_only=True, slots=True)
 class RevisionCommentData:
-    """ Revision Comment Data """
+    """Revision Comment Data"""
 
     id: str = field()
     text: str = field()
@@ -98,7 +106,7 @@ class RevisionCommentData:
 
 @dataclass(kw_only=True, slots=True)
 class RevisionData:
-    """ Revision Data """
+    """Revision Data"""
 
     id: str = field()
     files: list[FileData] = field(default_factory=list)
@@ -111,8 +119,10 @@ class RevisionData:
 
     @property
     def is_accepted(self) -> bool:
-        if self.final_state == RevisionData.FinalRevisionState.accepted \
-                or self.final_state == RevisionData.FinalRevisionState.changes_acceptance:
+        if (
+            self.final_state == RevisionData.FinalRevisionState.accepted
+            or self.final_state == RevisionData.FinalRevisionState.changes_acceptance
+        ):
             return True
 
         return False
@@ -141,6 +151,9 @@ class RevisionData:
 
     def as_dict(self) -> dict:
         return asdict(self)
+    
+    def as_json(self) -> str:
+        return json_encode(self.as_dict()).decode()
 
     class FinalRevisionState:
         #: A submitter revision that hasn't been exposed to editors yet
@@ -167,7 +180,7 @@ class RevisionData:
 
 @dataclass(kw_only=True, slots=True)
 class EditableData:
-    """ Editable Data """
+    """Editable Data"""
 
     id: str = field()
     type: int = field()
@@ -177,13 +190,11 @@ class EditableData:
     latest_revision: RevisionData | None = field(default=None)
 
     class EditableType:
-
         paper = 1
         slides = 2
         poster = 3
 
     class EditableState:
-
         new = 1
         ready_for_review = 2
         needs_submitter_confirmation = 3
@@ -202,11 +213,11 @@ class DuplicateContributionData:
     session_code: str = field()
 
     has_metadata: bool = field(default=False)
-    doi_url: str = field(default='')
-    doi_label: str = field(default='')
-    doi_name: str = field(default='')
-    doi_path: str = field(default='')
-    doi_identifier: str = field(default='')
+    doi_url: str = field(default="")
+    doi_label: str = field(default="")
+    doi_name: str = field(default="")
+    doi_path: str = field(default="")
+    doi_identifier: str = field(default="")
     reception: datetime | None = field(default=None)
     revisitation: datetime | None = field(default=None)
     acceptance: datetime | None = field(default=None)
@@ -214,13 +225,16 @@ class DuplicateContributionData:
 
     def as_dict(self):
         return asdict(self)
+    
+    def as_json(self) -> str:
+        return json_encode(self.as_dict()).decode()
 
 
 @dataclass(kw_only=True, slots=True)
 class ContributionData:
-    """ Contribution Data """
+    """Contribution Data"""
 
-    id:str = field()
+    id: str = field()
     code: str = field()
     type: str = field()
     url: str = field()
@@ -236,6 +250,7 @@ class ContributionData:
     is_included_in_pdf_check: bool = field(default=False)
     is_included_in_proceedings: bool = field(default=False)
     is_included_in_prepress: bool = field(default=False)
+    is_included_in_references: bool = field(default=False)
 
     peer_reviewing_accepted: bool = field(default=False)
 
@@ -281,13 +296,12 @@ class ContributionData:
 
     @property
     def authors_groups(self) -> list[AuthorsGroup]:
-
         # subclass of dict that inits element with an empty list
         authors_groups_dict = defaultdict(list)
 
         for author in self.authors_list:
             authors_groups_dict[frozenset(author.affiliations)].append(author.short)
-        
+
         authors_groups = [
             AuthorsGroup(affiliations=list(affiliations), authors=authors)
             for affiliations, authors in authors_groups_dict.items()
@@ -328,14 +342,14 @@ class ContributionData:
         return self.track.full_name if self.track else ""
 
     def cat_publish(self, cat_publish_alias: str) -> bool:
-        field_value: str = ''
+        field_value: str = ""
 
         for _field in self.field_values:
             if _field.name == cat_publish_alias and _field.value:
                 field_value = _field.value.lower()
                 break
 
-        return field_value in ['', 'yes', 'true', '1']
+        return field_value in ["", "yes", "true", "1"]
 
     def duplicate_of_code(self, duplicate_of_alias: str) -> str | None:
         # after duplicate of is initialized, use this condition
@@ -348,57 +362,87 @@ class ContributionData:
 
         return None
 
+    def is_schedulated(self) -> bool:
+        return self.start is not None and self.end is not None and self.duration is not None and self.duration > 0
+
     def as_dict(self) -> dict:
         return {
             **asdict(self),
-            'authors_list': [g.as_dict() for g in self.authors_list],
-            'authors_groups': [g.as_dict() for g in self.authors_groups],
-            'has_paper': self.has_paper(),
-            'has_slides': self.has_slides(),
-            'has_poster': self.has_poster(),
-            'paper_name': self.paper_name(),
-            'slides_name': self.slides_name(),
-            'poster_name': self.poster_name(),
-            'duplicate_of': self.duplicate_of.as_dict() if self.duplicate_of else None
+            "authors_list": [g.as_dict() for g in self.authors_list],
+            "authors_groups": [g.as_dict() for g in self.authors_groups],
+            "has_paper": self.has_paper(),
+            "has_slides": self.has_slides(),
+            "has_poster": self.has_poster(),
+            "paper_name": self.paper_name(),
+            "slides_name": self.slides_name(),
+            "poster_name": self.poster_name(),
+            "duplicate_of": self.duplicate_of.as_dict() if self.duplicate_of else None,
         }
+    
+    def as_json(self) -> str:
+        return json_encode(self.as_dict()).decode()
 
     def has_paper(self) -> bool:
-        if self.paper and self.paper.latest_revision and self.paper.latest_revision.files:
+        if (
+            self.paper
+            and self.paper.latest_revision
+            and self.paper.latest_revision.files
+        ):
             for file in self.paper.latest_revision.files:
                 if file.file_type == FileData.FileType.paper:
                     return True
         return False
 
     def paper_name(self) -> str | None:
-        if self.paper and self.paper.latest_revision and self.paper.latest_revision.files:
+        if (
+            self.paper
+            and self.paper.latest_revision
+            and self.paper.latest_revision.files
+        ):
             for file in self.paper.latest_revision.files:
                 if file.file_type == FileData.FileType.paper:
                     return file.filename
         return None
 
     def has_slides(self) -> bool:
-        if self.slides and self.slides.latest_revision and self.slides.latest_revision.files:
+        if (
+            self.slides
+            and self.slides.latest_revision
+            and self.slides.latest_revision.files
+        ):
             for file in self.slides.latest_revision.files:
                 if file.file_type == FileData.FileType.slides:
                     return True
         return False
 
     def slides_name(self) -> str | None:
-        if self.slides and self.slides.latest_revision and self.slides.latest_revision.files:
+        if (
+            self.slides
+            and self.slides.latest_revision
+            and self.slides.latest_revision.files
+        ):
             for file in self.slides.latest_revision.files:
                 if file.file_type == FileData.FileType.slides:
                     return file.filename
         return None
 
     def has_poster(self) -> bool:
-        if self.poster and self.poster.latest_revision and self.poster.latest_revision.files:
+        if (
+            self.poster
+            and self.poster.latest_revision
+            and self.poster.latest_revision.files
+        ):
             for file in self.poster.latest_revision.files:
                 if file.file_type == FileData.FileType.poster:
                     return True
         return False
 
     def poster_name(self) -> str | None:
-        if self.poster and self.poster.latest_revision and self.poster.latest_revision.files:
+        if (
+            self.poster
+            and self.poster.latest_revision
+            and self.poster.latest_revision.files
+        ):
             for file in self.poster.latest_revision.files:
                 if file.file_type == FileData.FileType.poster:
                     return file.filename
@@ -413,10 +457,13 @@ class ContributionData:
 
 @dataclass(kw_only=True, slots=True)
 class ContributionPaperData:
-    """ File Data """
+    """File Data"""
 
     contribution: ContributionData
     paper: FileData
 
     def as_dict(self) -> dict:
         return asdict(self)
+    
+    def as_json(self) -> str:
+        return json_encode(self.as_dict()).decode()

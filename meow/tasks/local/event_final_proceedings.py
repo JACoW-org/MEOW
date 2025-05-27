@@ -31,6 +31,7 @@ class EventFinalProceedingsTask(AbstractTask):
             generate_doi_payload=True,
             generate_external_doi_url=True,
             generate_hep_payload=True,
+            generate_ref_payload=True,
             include_only_qa_green_contributions=True,
             absolute_pdf_link=True,
             static_site_type='proceedings'

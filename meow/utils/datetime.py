@@ -91,7 +91,10 @@ def format_datetime_range_doi(start: dt.datetime, end: dt.datetime) -> str:
     return f'{start.strftime("%d %b %Y")}-{end.strftime("%d %b %Y")}'
 
 
-def datetime_localize(src_datetime: dt.datetime, tz_val: str) -> dt.datetime:
+def datetime_localize(src_datetime: dt.datetime, tz_val: str) -> dt.datetime | None:
+
+    if src_datetime is None:
+        return None
 
     # print(f"src_datetime: {src_datetime.strftime('%Y-%m-%d %H:%M:%S %Z%z')} - tz_val: {tz_val}")
 

@@ -48,10 +48,12 @@ def proceedings_data_factory(event: Any, sessions: list, contributions: list,
 
     """ create contributions data """
 
+    cat_publish_alias: str | None = settings.get('cat_publish_alias', 'CAT_publish')
+
     contributions_data: list[ContributionData] = [
         c for c in [
             contribution_data_factory(c, editors, event_timezone) for c in contributions
-        ] if c and c.cat_publish(settings.get('cat_publish_alias', 'CAT_publish'))
+        ] if c and c.cat_publish(cat_publish_alias)
     ]
 
     """ sort sessions data """

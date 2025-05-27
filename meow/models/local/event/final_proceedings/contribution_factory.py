@@ -11,8 +11,9 @@ from meow.models.local.event.final_proceedings.contribution_model import (
     ContributionData, ContributionFieldData, EditableData, FileData, RevisionCommentData, RevisionData, TagData, UserData)
 from meow.models.local.event.final_proceedings.event_model import (PersonData)
 
-from meow.utils.datetime import datedict_to_tz_datetime, datetime_localize, datetime_now, format_datetime_sec
 from meow.utils.list import find
+from meow.utils.serialization import json_encode
+from meow.utils.datetime import datedict_to_tz_datetime, datetime_localize, datetime_now, format_datetime_sec
 
 
 logger = lg.getLogger(__name__)
@@ -51,7 +52,8 @@ def contribution_editable_factory(editable: Any, event_timezone: str) -> Editabl
 
 def contribution_data_factory(contribution: Any, editors: list[PersonData], event_timezone: str) -> ContributionData:
 
-    # logger.info(f"contribution_code: {contribution.get('code')}")
+    logger.info(f"contribution_code: {contribution.get('code')}")
+    # logger.info(f"contribution: {json_encode(contribution)}")
 
     contrib_editables: list = contribution.get('editables', [])
     contrib_paper: dict = contribution.get('paper', None)
@@ -199,8 +201,13 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData], even
     is_included_in_proceedings: bool = False
     is_included_in_prepress: bool = False
     is_included_in_pdf_check: bool = False
+    is_included_in_references: bool = False
 
     if paper_data and paper_data.state:
+
+        is_included_in_references = (
+            paper_data.state != EditableData.EditableState.rejected
+        )
         
         is_paper_data_accepted = (
             paper_data.state == EditableData.EditableState.accepted or 
@@ -324,6 +331,7 @@ def contribution_data_factory(contribution: Any, editors: list[PersonData], even
         is_included_in_proceedings=is_included_in_proceedings,
         is_included_in_prepress=is_included_in_prepress,
         is_included_in_pdf_check=is_included_in_pdf_check,
+        is_included_in_references=is_included_in_references,
         peer_reviewing_accepted=peer_reviewing_accepted,
         paper=paper_data,
         slides=slides_data,

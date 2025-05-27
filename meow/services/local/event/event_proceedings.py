@@ -546,12 +546,21 @@ async def _event_proceedings(
 
     """ """
 
-    await extend_lock(lock)
+    if config.generate_ref_payload:
+        await extend_lock(lock)
 
-    # Blocking
+        # yield dict(
+        #     type="progress",
+        #     value=dict(
+        #         phase="generate_inspirehep_payloads",
+        #         text="Generate Inspirehep payloads",
+        #     ),
+        # )
 
-    # generation of payloads for REFs
-    await build_refs_payloads(proceedings)
+        # Blocking
+
+        # generation of payloads for REFs
+        await build_refs_payloads(proceedings)
 
     """ """
 
@@ -580,7 +589,9 @@ async def _event_proceedings(
     if config.generate_hep_payload:
         await copy_inspirehep_jsonl(proceedings, cookies, settings)
 
-    await copy_references_jsonl(proceedings, cookies, settings)
+    if config.generate_ref_payload:
+        await copy_references_jsonl(proceedings, cookies, settings)
+
     await copy_html_partials(proceedings, cookies, settings)
     await copy_event_materials(proceedings, cookies, settings)
     await copy_contribution_papers(

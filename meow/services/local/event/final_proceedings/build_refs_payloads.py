@@ -1,7 +1,5 @@
 import logging as lg
 
-import orjson
-
 from anyio import open_file, create_task_group, CapacityLimiter, Path
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import (
@@ -10,6 +8,7 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import (
 
 from meow.utils.filesystem import rmtree
 from meow.tasks.local.reference.models import ContributionRef
+from meow.utils.serialization import json_encode
 
 logger = lg.getLogger(__name__)
 
@@ -30,7 +29,7 @@ async def build_refs_payloads(proceedings_data: ProceedingsData) -> ProceedingsD
 
     total_contributions: int = len(proceedings_data.contributions)
 
-    logger.info("build_refs_payloads - " + f"contributions: {total_contributions}")
+    logger.info(f"build_refs_payloads - contributions: {total_contributions}")
 
     capacity_limiter = CapacityLimiter(16)
 
@@ -91,7 +90,7 @@ async def generate_conference_refs_payload_task(
         await hep_file.unlink(missing_ok=True)
 
         # JSON string
-        payload = orjson.dumps(proceedings_data.event.as_ref()).decode()
+        payload = json_encode(proceedings_data.event.as_ref()).decode()
 
         # write to file
         await hep_file.write_text(payload)
@@ -108,7 +107,7 @@ async def generate_refs_payload_task(
         await refs_file.unlink(missing_ok=True)
 
         # generate JSON string
-        json_text = orjson.dumps(contribution_ref.as_ref()).decode()
+        json_text = json_encode(contribution_ref.as_ref()).decode()
 
         # write to a file
         await refs_file.write_text(json_text)

@@ -79,10 +79,9 @@ async def api_refs_endpoint(req: Request) -> StreamingResponse:
 
         event_url: str = str(json_body.get("event_url"))
         indico_token: str = str(json_body.get("indico_token"))
-        include_only_qa_green: bool = bool(json_body.get("include_only_qa_green"))
 
         return StreamingResponse(
-            event_api_refs(event_id, event_url, indico_token, include_only_qa_green),
+            event_api_refs(event_id, event_url, indico_token),
             media_type="application/jsonl",
         )
 

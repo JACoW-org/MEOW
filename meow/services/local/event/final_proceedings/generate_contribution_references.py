@@ -277,7 +277,7 @@ async def contribution_data_factory(
         event.start.year
     )
 
-    logger.info(f"start_page={contribution.page}")
+    # logger.info(f"start_page={contribution.page}")
 
     return ContributionRef(
         id=contribution.id,

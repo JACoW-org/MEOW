@@ -2,6 +2,7 @@ from dataclasses import dataclass, asdict, field
 from enum import Enum
 
 from meow.models.local.event.final_proceedings.event_model import PersonData
+from meow.utils.serialization import json_encode
 
 
 @dataclass
@@ -60,6 +61,9 @@ class ContributionRef:
     def as_dict(self) -> dict:
         dict_obj = asdict(self)
         return dict_obj
+
+    def as_json(self) -> str:
+        return json_encode(self.as_dict()).decode()
 
     def as_ref(self) -> dict:
         return {

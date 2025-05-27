@@ -6,6 +6,7 @@ from meow.models.local.event.final_proceedings.session_model import SessionData
 from meow.models.local.event.final_proceedings.track_model import TrackData
 from meow.models.local.event.final_proceedings.event_model import (
     AffiliationData, MaterialData, EventData, KeywordData, PersonData)
+from meow.utils.serialization import json_encode
 
 
 @dataclass(kw_only=True, slots=True)
@@ -47,8 +48,14 @@ class ProceedingsConfig:
     # indica se includere la generazione dei json relativi a inspirehep
     generate_hep_payload: bool = field()
 
+    # indica se includere la generazione dei json relativi alle references
+    generate_ref_payload: bool = field()
+
     def as_dict(self) -> dict:
         return asdict(self)
+    
+    def as_json(self) -> str:
+        return json_encode(self.as_dict()).decode()
 
 
 @dataclass(kw_only=True, slots=True)
@@ -121,3 +128,6 @@ class ProceedingsData:
 
     def as_dict(self) -> dict:
         return asdict(self)
+    
+    def as_json(self) -> str:
+        return json_encode(self.as_dict()).decode()
