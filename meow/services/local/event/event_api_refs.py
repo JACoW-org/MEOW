@@ -37,10 +37,12 @@ async def event_api_refs(
 
     try:
         if not event_id or event_id == "":
-            raise BaseException("Invalid event id")
+            #raise BaseException("Invalid event id")
+            yield orjson.dumps({"status": 400, "error": "Invalid event id"}).decode() + "\n"
 
         if not indico_token or indico_token == "":
-            raise BaseException("Invalid indico token")
+            #raise BaseException("Invalid indico token")
+            yield orjson.dumps({"status": 401, "error": "Invalid indico token"}).decode() + "\n"
 
         ### Final Proceedings
         # config = ProceedingsConfig(
@@ -81,13 +83,28 @@ async def event_api_refs(
         async for r in _event_api_refs(event_id, event_url, indico_token, config):
             yield orjson.dumps(r).decode() + "\n"
 
+        yield orjson.dumps({"status": 200}).decode() + "\n"
+
     except GeneratorExit:
         logger.error("Generator Exit")
     except CancelledError:
         logger.error("Task Cancelled")
     except BaseException as ex:
-        logger.error("Generic error", exc_info=True)
-        raise ex
+        # logger.error("Generic error", exc_info=True)
+
+        # logger.info("ex.args:")
+        # logger.info(orjson.dumps(ex.args).decode())
+        # logger.info(ex.args)
+
+        ex_arg = ex.args[0]
+
+        if (isinstance(ex_arg, dict)):
+            yield orjson.dumps({"status": ex_arg.get('code'), "error": ex_arg.get('message')}).decode() + "\n"
+        elif (isinstance(ex_arg, str)):
+            yield orjson.dumps({"status": 500, "error": ex_arg}).decode() + "\n"
+        else:
+            yield orjson.dumps({"status": 500, "error": "Generic error"}).decode() + "\n"
+
 
 
 async def _event_api_refs(

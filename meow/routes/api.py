@@ -4,7 +4,6 @@ from starlette.routing import Route
 from starlette.requests import Request
 from starlette.responses import JSONResponse
 from starlette.responses import StreamingResponse
-from starlette.exceptions import HTTPException
 
 from meow.services.local.credential.find_credential import find_credential_by_secret
 
@@ -20,10 +19,19 @@ async def api_root_endpoint() -> JSONResponse:
 
 
 async def api_ping_endpoint(req: Request) -> JSONResponse:
-    api_key: str = str(req.path_params["api_key"])
-    credential = await find_credential_by_secret(api_key)
+    """Ping endpoint"""
 
-    if credential:
+    try:
+        headers: dict = req.headers
+        params: dict = req.path_params
+
+        event_id, api_key = get_event_id_and_api_key(headers, params)
+        credential = await find_credential_by_secret(api_key)
+
+        if not credential:
+            # raise HTTPException(status_code=401, detail="Invalid API Key")
+            return JSONResponse(content={"error": "Invalid API Key"}, status_code=401)
+
         return JSONResponse(
             {
                 "method": "ping",
@@ -34,47 +42,69 @@ async def api_ping_endpoint(req: Request) -> JSONResponse:
                 },
             }
         )
-
-    raise HTTPException(status_code=401, detail="Invalid API Key")
+    except BaseException as ex:
+        return response_for_base_exception(ex)
+    except Exception as ex:
+        return response_for_exception(ex)
 
 
 async def api_info_endpoint(req: Request) -> JSONResponse:
-    event_id: int = int(req.path_params["event_id"])
-    api_key: str = str(req.path_params["api_key"])
-    credential = await find_credential_by_secret(api_key)
+    """Info endpoint"""
 
-    if credential:
+    try:
+        headers: dict = req.headers
+        params: dict = req.path_params
+
+        event_id, api_key = get_event_id_and_api_key(headers, params)
+        credential = await find_credential_by_secret(api_key)
+
+        if not credential:
+            # raise HTTPException(status_code=401, detail="Invalid API Key")
+            return JSONResponse(content={"error": "Invalid API Key"}, status_code=401)
+
         result = await event_api_info(str(event_id))
         params = result.get("value") if result else None
-
         return JSONResponse({"method": "info", "params": params})
-
-    raise HTTPException(status_code=401, detail="Invalid API Key")
+    except BaseException as ex:
+        return response_for_base_exception(ex)
+    except Exception as ex:
+        return response_for_exception(ex)
 
 
 async def api_clear_endpoint(req: Request) -> JSONResponse:
     """This function clears the subfolders related to the given event id"""
 
-    event_id: int = int(req.path_params["event_id"])
-    api_key: str = str(req.path_params["api_key"])
-    credential = await find_credential_by_secret(api_key)
+    try:
+        headers: dict = req.headers
+        params: dict = req.path_params
 
-    if credential:
+        event_id, api_key = get_event_id_and_api_key(headers, params)
+        credential = await find_credential_by_secret(api_key)
+
+        if not credential:
+            return JSONResponse(content={"error": "Invalid API Key"}, status_code=401)
+
         await event_api_clear(str(event_id))
-
         return JSONResponse({"method": "clear", "status": "success"})
-
-    raise HTTPException(status_code=401, detail="Invalid API Key")
+    except BaseException as ex:
+        return response_for_base_exception(ex)
+    except Exception as ex:
+        return response_for_exception(ex)
 
 
 async def api_refs_endpoint(req: Request) -> StreamingResponse:
     """This function returns a stream of contributions references"""
 
-    event_id: int = int(req.path_params["event_id"])
-    api_key: str = str(req.path_params["api_key"])
-    credential = await find_credential_by_secret(api_key)
+    try:
+        headers: dict = req.headers
+        params: dict = req.path_params
 
-    if credential:
+        event_id, api_key = get_event_id_and_api_key(headers, params)
+        credential = await find_credential_by_secret(api_key)
+
+        if not credential:
+            return JSONResponse(content={"error": "Invalid API Key"}, status_code=401)
+
         json_body: dict = await req.json()
 
         event_url: str = str(json_body.get("event_url"))
@@ -84,8 +114,51 @@ async def api_refs_endpoint(req: Request) -> StreamingResponse:
             event_api_refs(event_id, event_url, indico_token),
             media_type="application/jsonl",
         )
+    except BaseException as ex:
+        return response_for_base_exception(ex)
+    except Exception as ex:
+        return response_for_exception(ex)
 
-    raise HTTPException(status_code=401, detail="Invalid API Key")
+
+def response_for_exception(ex):
+    """return a json response for an exception"""
+
+    logger.error(ex, exc_info=True)
+    return JSONResponse(content={"error": "Generic error"}, status_code=500)
+
+
+def response_for_base_exception(ex):
+    """return a json response for a base exception"""
+
+    logger.error(ex, exc_info=True)
+
+    ex_arg = ex.args[0]
+
+    if isinstance(ex_arg, dict):
+        return JSONResponse(
+            content={"error": ex_arg.get("message")}, status_code=ex_arg.get("code")
+        )
+
+    return JSONResponse(content={"error": str(ex)}, status_code=500)
+
+
+def get_event_id_and_api_key(headers: dict, params: dict):
+    """ """
+    
+    event_id: int = int(params.get("event_id", 0))
+    api_key: str = str(params.get("api_key", ""))
+
+    if api_key and len(api_key) > 0:
+        return event_id, api_key
+
+    auth_header: str = headers.get("Authorization", "Bearer ")
+
+    auth_parts = auth_header.split()
+
+    if len(auth_parts) > 1:
+        return event_id, auth_parts[1]
+
+    return event_id, ""
 
 
 routes = [
@@ -95,8 +168,18 @@ routes = [
         methods=["GET", "OPTIONS"],
     ),
     Route(
+        "/ping",
+        api_ping_endpoint,
+        methods=["GET", "OPTIONS"],
+    ),
+    Route(
         "/ping/{api_key}",
         api_ping_endpoint,
+        methods=["GET", "OPTIONS"],
+    ),
+    Route(
+        "/info/{event_id}",
+        api_info_endpoint,
         methods=["GET", "OPTIONS"],
     ),
     Route(
@@ -105,9 +188,19 @@ routes = [
         methods=["GET", "OPTIONS"],
     ),
     Route(
+        "/clear/{event_id}",
+        api_clear_endpoint,
+        methods=["GET", "OPTIONS"],
+    ),
+    Route(
         "/clear/{event_id}/{api_key}",
         api_clear_endpoint,
         methods=["GET", "OPTIONS"],
+    ),
+    Route(
+        "/refs/{event_id}",
+        api_refs_endpoint,
+        methods=["PUT", "OPTIONS"],
     ),
     Route(
         "/refs/{event_id}/{api_key}",
