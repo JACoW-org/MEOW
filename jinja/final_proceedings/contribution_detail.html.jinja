@@ -1,6 +1,6 @@
 {% import 'authors_template.html.jinja' as authors_template %}
 
-{% macro render(contribution, include_event_slides) -%}
+{% macro render(contribution, include_event_slides, is_published) -%}
 
 <div id="{{ contribution.code|lower }}" class="contrib-ancor"></div>
 
