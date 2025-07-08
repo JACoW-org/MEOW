@@ -626,9 +626,9 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
         async with create_task_group() as tg:
             for contribution in self.contributions:
                 if (
-                    contribution.is_included_in_proceedings
-                    and contribution.code
+                    contribution.code
                     and contribution.doi_data
+                    and self.filter_published_contributions(contribution)
                 ):
                     tg.start_soon(
                         _render_doi_contribution,
