@@ -28,7 +28,7 @@ def annot_toc_header(page: Page, data: dict, options: dict = dict()):
     #     issn=proceedings_data.event.issn,
     # )
 
-    rect_width = page.rect.width - 2 * PAGE_HORIZONTAL_MARGIN
+    rect_width = page.mediabox.width - 2 * PAGE_HORIZONTAL_MARGIN
 
     # top line
 
@@ -119,7 +119,7 @@ def annot_toc_header(page: Page, data: dict, options: dict = dict()):
 def annot_page_header(page: Page, data: dict, options: dict = dict()):
     """ """
 
-    rect_width = page.rect.width - 2 * PAGE_HORIZONTAL_MARGIN
+    rect_width = page.mediabox.width - 2 * PAGE_HORIZONTAL_MARGIN
 
     # top line
 
@@ -209,8 +209,8 @@ def annot_page_header(page: Page, data: dict, options: dict = dict()):
 def annot_toc_footer(page: Page, page_number: int, data: dict, options: dict = dict()):
     """ """
 
-    rect_width = page.rect.width - 2 * PAGE_HORIZONTAL_MARGIN
-    page_height = page.rect.height
+    rect_width = page.mediabox.width - 2 * PAGE_HORIZONTAL_MARGIN
+    page_height = page.mediabox.height
 
     # left
     page.add_freetext_annot(
@@ -246,8 +246,8 @@ def annot_page_footer(page: Page, page_number: int, data: dict, options: dict = 
     contrib_code = data.get('contributionCode', 'Contribution Code')
     track_header = data.get('classificationHeader', 'Classification Header')
 
-    rect_width = page.rect.width - 2 * PAGE_HORIZONTAL_MARGIN
-    page_height = page.rect.height
+    rect_width = page.mediabox.width - 2 * PAGE_HORIZONTAL_MARGIN
+    page_height = page.mediabox.height
 
     # bottom line
 
@@ -313,8 +313,8 @@ def annot_page_side(page: Page,
                     license_text: str,
                     options: dict = dict()):
 
-    page_width = page.rect.width
-    page_height = page.rect.height
+    page_width = page.mediabox.width
+    page_height = page.mediabox.height
 
     rect_even_logo = Rect(
         PAGE_HORIZONTAL_MARGIN / 2,

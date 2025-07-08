@@ -237,8 +237,11 @@ def _read_report_thread(input: str, keywords: bool):
                     fonts_report.append(dict(name=font_name, emb=font_emb,
                                              ext=font_ext, type=font_type))
 
-            page_width = page.rect.width
-            page_height = page.rect.height
+            # page_width = page.rect.width
+            # page_height = page.rect.height
+
+            page_width = page.mediabox.width
+            page_height = page.mediabox.height            
 
             page_report = dict(sizes=dict(width=page_width,
                                           height=page_height))

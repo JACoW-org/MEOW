@@ -84,7 +84,7 @@ async def read_papers_metadata(proceedings_data: ProceedingsData, cookies: dict,
             raise be
 
     proceedings_data = await refill_contribution_metadata(
-        proceedings_data, results, file_cache_dir)
+        proceedings_data, results, file_cache_dir, callback)
 
     return proceedings_data
 
@@ -122,17 +122,19 @@ async def read_metadata_task(capacity_limiter: CapacityLimiter, total_files: int
 
 
 async def refill_contribution_metadata(proceedings_data: ProceedingsData,
-                                       results: dict, pdf_cache_dir: Path) -> ProceedingsData:
+                                       results: dict, pdf_cache_dir: Path,
+                                       callback: Callable) -> ProceedingsData:
 
     current_page = 1
     total_pages = 0
 
     for contribution_data in proceedings_data.contributions:
+
         code: str = ''
 
         try:
 
-            if contribution_data and contribution_data.is_included_in_proceedings:
+            if contribution_data and callback(contribution_data):
 
                 code = contribution_data.code
 
@@ -168,6 +170,9 @@ async def refill_contribution_metadata(proceedings_data: ProceedingsData,
                                 current_page += page_count
                                 contribution_data.page_count = page_count
                                 total_pages += page_count
+
+                                logger.info(f"code={code} page_count={page_count} current_page={current_page} total_pages={total_pages}")
+
 
                     else:
                         logger.error(f"SKIPPED - no file_data: {code}")

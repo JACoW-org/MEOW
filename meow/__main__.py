@@ -19,27 +19,31 @@ from fitz.utils import set_metadata, insert_link, insert_text, new_page
 
 
 from meow.services.local.papers_metadata.pdf_annots import (
-    annot_page_footer, annot_page_header, annot_page_side
+    annot_page_footer,
+    annot_page_header,
+    annot_page_side,
 )
 from meow.services.local.papers_metadata.pdf_annots import (
-    annot_toc_footer, annot_toc_header
+    annot_toc_footer,
+    annot_toc_header,
 )
 
 from anyio import run
 
-from meow.services.local.papers_metadata.pdf_text import write_page_footer, write_page_header, write_page_side
+from meow.services.local.papers_metadata.pdf_text import (
+    write_page_footer,
+    write_page_header,
+    write_page_side,
+)
 
 
 def tz_convert(src_datetime, dest_timezone):
-
     dest_datetime = src_datetime.astimezone(pytz.timezone(dest_timezone))
 
-    print(
-        f"dest: {dest_timezone} - {dest_datetime.strftime('%Y-%m-%d %H:%M:%S %Z%z')}")
+    print(f"dest: {dest_timezone} - {dest_datetime.strftime('%Y-%m-%d %H:%M:%S %Z%z')}")
 
 
 def meow_tz(args) -> None:
-
     # "start_dt": {
     #     "date": "2024-05-19",
     #     "time": "15:00:00",
@@ -62,8 +66,7 @@ def meow_tz(args) -> None:
 
     src_timezone = pytz.timezone(tz_val)
 
-    src_datetime = datetime.strptime(
-        f"{date_val} {time_val}", '%Y-%m-%d %H:%M:%S')
+    src_datetime = datetime.strptime(f"{date_val} {time_val}", "%Y-%m-%d %H:%M:%S")
     src_datetime = src_timezone.localize(src_datetime)
 
     print(f"src:  {tz_val} - {src_datetime.strftime('%Y-%m-%d %H:%M:%S %Z%z')}")
@@ -77,102 +80,87 @@ def meow_tz(args) -> None:
 
 
 def meow_auth(args) -> None:
-
     async def _run():
         # from meow.app.instances.application import app
         from meow.app.instances.databases import dbs
         from ulid import ulid as ULID
 
         if args.list:
-
-            keys = await dbs.redis_client.keys(
-                'meow:credential:*')
+            keys = await dbs.redis_client.keys("meow:credential:*")
 
             for k in keys:
-
-                key = k.decode('utf-8')
+                key = k.decode("utf-8")
 
                 auth = key.split(":")[2]
 
-                res = await dbs.redis_client.hmget(
-                    key, 'user', 'host', 'date')  # type: ignore
+                res = await dbs.redis_client.hmget(key, "user", "host", "date")  # type: ignore
 
                 # print(res)
 
-                user = res[0].decode('utf-8')
-                host = res[1].decode('utf-8')
-                date = res[2].decode('utf-8')
+                user = res[0].decode("utf-8")
+                host = res[1].decode("utf-8")
+                date = res[2].decode("utf-8")
 
                 # OLD
-                #print(f"{user}:{auth}@{host} ({date})")
-                
+                # print(f"{user}:{auth}@{host} ({date})")
+
                 # URI
                 print(f"[{date}] - user={user} host={host} auth={auth}")
-                
+
                 # CONF2038 indico.jacow.org XXXXXXXXXXXXXXXXXXXXXXXXXX
-                #print(f"{user} {host} {auth}")
+                # print(f"{user} {host} {auth}")
 
             # res = [{key:key} for key in keys]
 
             # print(res)
 
         elif args.login:
-
             date = datetime.now().isoformat()  # type: ignore
 
-            [user, host] = args.login.split('@')
+            [user, host] = args.login.split("@")
 
             auth = ULID()
 
-            res = await dbs.redis_client.hset(
-                f'meow:credential:{auth}', 'user', user)  # type: ignore
-            res = await dbs.redis_client.hset(
-                f'meow:credential:{auth}', 'host', host)  # type: ignore
-            res = await dbs.redis_client.hset(
-                f'meow:credential:{auth}', 'date', date)  # type: ignore
-            
+            res = await dbs.redis_client.hset(f"meow:credential:{auth}", "user", user)  # type: ignore
+            res = await dbs.redis_client.hset(f"meow:credential:{auth}", "host", host)  # type: ignore
+            res = await dbs.redis_client.hset(f"meow:credential:{auth}", "date", date)  # type: ignore
+
             # OLD
-            #print(f"{user}:{auth}@{host} ({date})")
-                
+            # print(f"{user}:{auth}@{host} ({date})")
+
             # URI
             print(f"[{date}] - user={user} host={host} auth={auth}")
 
             # CONF2038 indico.jacow.org XXXXXXXXXXXXXXXXXXXXXXXXXX
-            #print(f"{user}:{key}@{host} ({date})")
+            # print(f"{user}:{key}@{host} ({date})")
 
         elif args.logout:
-
             auth = str(args.logout)
 
-            key = f'meow:credential:{auth}'
+            key = f"meow:credential:{auth}"
 
-            res = await dbs.redis_client.delete(
-                key)  # type: ignore
+            res = await dbs.redis_client.delete(key)  # type: ignore
 
             print(res)
 
         elif args.check:
-
             auth = str(args.check)
 
-            key = f'meow:credential:{auth}'
+            key = f"meow:credential:{auth}"
 
-            res = await dbs.redis_client.hmget(
-                key, 'user', 'host', 'date')  # type: ignore
+            res = await dbs.redis_client.hmget(key, "user", "host", "date")  # type: ignore
 
             if res and len(res) == 3 and res[0] and res[1] and res[2]:
+                user = res[0].decode("utf-8")
+                host = res[1].decode("utf-8")
+                date = res[2].decode("utf-8")
 
-                user = res[0].decode('utf-8')
-                host = res[1].decode('utf-8')
-                date = res[2].decode('utf-8')
-                
                 # CONF2038 indico.jacow.org XXXXXXXXXXXXXXXXXXXXXXXXXX
 
                 print(f"[{date}] - user={user} host={host} auth={auth}")
 
             else:
-
-                print('invalid auth key')
+                print("invalid auth key")
 
         await dbs.redis_client.aclose()
 
@@ -246,14 +234,13 @@ def get_list(rlist, limit, what="page"):
 
 
 def doc_join(args) -> None:
-    """ Join pages from several PDF documents. """
+    """Join pages from several PDF documents."""
 
     doc = Document()  # output PDF
 
     # print(args.input)
 
     for src_item in args.input:  # process one input PDF
-
         # print(src_item)
 
         src_list = src_item.split(",")
@@ -285,7 +272,7 @@ def doc_join(args) -> None:
 
 
 def doc_links(args) -> None:
-    """ Add page links. """
+    """Add page links."""
 
     # print(args.input)
     # print(args.links)
@@ -306,7 +293,7 @@ def doc_links(args) -> None:
         # print(page_index, link, page.mediabox_size.x, page.mediabox_size.y)
 
         rect = Rect(0, 0, page.mediabox_size.x, page.mediabox_size.y)
-        insert_link(page, {'kind': LINK_URI, 'from': rect, 'uri': f"{link}"})
+        insert_link(page, {"kind": LINK_URI, "from": rect, "uri": f"{link}"})
 
     doc.save(args.output)
 
@@ -315,7 +302,6 @@ def doc_links(args) -> None:
 
 
 def doc_frame(args) -> None:
-
     doc = Document(filename=args.input)
 
     page_number = int(args.page)
@@ -327,28 +313,17 @@ def doc_frame(args) -> None:
     if args.metadata:
         set_metadata(doc, json.loads(args.metadata))
 
-    cc_logo = pathlib.Path('cc_by.png').read_bytes()
+    cc_logo = pathlib.Path("cc_by.png").read_bytes()
 
     # print([args.input, page_number, pre_print])
 
     for page in doc:
+        annot_page_header(page=page, data=header)
 
-        annot_page_header(
-            page=page,
-            data=header
-        )
-
-        annot_page_footer(
-            page=page,
-            page_number=page_number,
-            data=footer
-        )
+        annot_page_footer(page=page, page_number=page_number, data=footer)
 
         annot_page_side(
-            page=page,
-            pre_print=pre_print,
-            page_number=page_number,
-            cc_logo=cc_logo
+            page=page, pre_print=pre_print, page_number=page_number, cc_logo=cc_logo
         )
 
         page_number += 1
@@ -360,7 +335,6 @@ def doc_frame(args) -> None:
 
 
 def doc_test(args) -> None:
-
     PAGE_WIDTH = 595
     PAGE_HEIGHT = 792
 
@@ -371,11 +345,11 @@ def doc_test(args) -> None:
     LINE_SPACING = 3
     ANNOTATION_HEIGHT = 12
     SIDENOTE_LENGTH = 650
-    TEXT_COLOR = getColor('GRAY10')
-    TEXT_FILL = getColor('GRAY99')
+    TEXT_COLOR = getColor("GRAY10")
+    TEXT_FILL = getColor("GRAY99")
     FONT_SIZE = 7
     # FONT_NAME = 'notos'
-    FONT_NAME = 'helv'
+    FONT_NAME = "helv"
 
     doc = Document()
     page = new_page(doc, width=PAGE_WIDTH, height=PAGE_HEIGHT)
@@ -388,10 +362,12 @@ def doc_test(args) -> None:
 
     # Rect(57.0, 15.0, 538.0, 25.0)
 
-    rect = Rect(PAGE_HORIZONTAL_MARGIN,
-                PAGE_VERTICAL_MARGIN,
-                PAGE_HORIZONTAL_MARGIN + rect_width,
-                PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT)
+    rect = Rect(
+        PAGE_HORIZONTAL_MARGIN,
+        PAGE_VERTICAL_MARGIN,
+        PAGE_HORIZONTAL_MARGIN + rect_width,
+        PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT,
+    )
 
     print(rect)
 
@@ -404,29 +380,28 @@ def doc_test(args) -> None:
     data = dict()
     opt = dict()
 
-    cc_logo = pathlib.Path('cc_by.png').read_bytes()
+    cc_logo = pathlib.Path("cc_by.png").read_bytes()
 
-    draw_rect(page=page,
-              rect=rect,
-              color=TEXT_COLOR)
+    draw_rect(page=page, rect=rect, color=TEXT_COLOR)
 
-    insert_textbox(page=page,
-                   rect=rect,
-                   # rect=Rect(PAGE_HORIZONTAL_MARGIN,
-                   #           PAGE_VERTICAL_MARGIN, PAGE_HORIZONTAL_MARGIN + rect_width,
-                   #           PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT),
-                   align=TEXT_ALIGN_LEFT,
-                   buffer='Seriesgmpl',
-                   fontname=FONT_NAME,
-                   fontsize=FONT_SIZE,
-                   color=TEXT_COLOR,
-                   )
+    insert_textbox(
+        page=page,
+        rect=rect,
+        # rect=Rect(PAGE_HORIZONTAL_MARGIN,
+        #           PAGE_VERTICAL_MARGIN, PAGE_HORIZONTAL_MARGIN + rect_width,
+        #           PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT),
+        align=TEXT_ALIGN_LEFT,
+        buffer="Seriesgmpl",
+        fontname=FONT_NAME,
+        fontsize=FONT_SIZE,
+        color=TEXT_COLOR,
+    )
 
     write_page_header(page, data, opt)
 
     write_page_footer(page, 1, data, opt)
 
-    write_page_side(page, '', 1, cc_logo)
+    write_page_side(page, "", 1, cc_logo)
 
     # insert_textbox(page,
     #                rect=Rect(50,
@@ -443,7 +418,6 @@ def doc_test(args) -> None:
 
 
 def doc_text(args) -> None:
-
     doc = Document(filename=args.input)
 
     out = io.StringIO()
@@ -461,11 +435,11 @@ def doc_text(args) -> None:
 
 
 def doc_report(args) -> None:
-
     from meow.utils.keywords import KEYWORDS
     from nltk.stem.snowball import SnowballStemmer
     from meow.services.local.papers_metadata.pdf_keywords import (
-        get_keywords_from_text, stem_keywords_as_tree
+        get_keywords_from_text,
+        stem_keywords_as_tree,
     )
 
     doc = Document(filename=args.input)
@@ -476,53 +450,57 @@ def doc_report(args) -> None:
     fonts_report = []
     xref_list = []
 
-    stemmer = SnowballStemmer("english") if args.keywords == 'True' else None
-    stem_keywords = stem_keywords_as_tree(
-        KEYWORDS, stemmer) if stemmer else None
+    stemmer = SnowballStemmer("english") if args.keywords == "True" else None
+    stem_keywords = stem_keywords_as_tree(KEYWORDS, stemmer) if stemmer else None
 
     for page in doc:
-
-        if args.keywords == 'True':
+        if args.keywords == "True":
             # get plain text (is in UTF-8)
             pdf_value.write(page.get_textpage().extractText())
 
         for font in page.get_fonts(True):
-
             xref = font[0]
 
             if xref not in xref_list:
-
                 xref_list.append(xref)
 
                 font_name, font_ext, font_type, buffer = doc.extract_font(xref)
-                font_emb = not ((font_ext == "n/a" or not buffer)
-                                and font_type != "Type3")
-                fonts_report.append(dict(name=font_name, emb=font_emb,
-                                         ext=font_ext, type=font_type))
+                font_emb = not (
+                    (font_ext == "n/a" or not buffer) and font_type != "Type3"
+                )
+                fonts_report.append(
+                    dict(name=font_name, emb=font_emb, ext=font_ext, type=font_type)
+                )
 
-        page_width = page.rect.width
-        page_height = page.rect.height
+        print("rect", page.rect)
+        print("cropbox", page.cropbox)
+        print("trimbox", page.trimbox)
+        print("mediabox", page.mediabox)
 
-        # print(page.rect)
-        # print(page.mediabox_size)
+        page_width = page.mediabox.width
+        page_height = page.mediabox.height
 
-        page_report = dict(sizes=dict(width=page_width,
-                                      height=page_height))
+        page_report = dict(sizes=dict(width=page_width, height=page_height))
 
         pages_report.append(page_report)
 
-    fonts_report.sort(key=lambda x: x.get('name'))
+    fonts_report.sort(key=lambda x: x.get("name"))
 
-    pdf_text = str(pdf_value.getvalue()) if stemmer else ''
-    keywords = get_keywords_from_text(pdf_text, stemmer, stem_keywords) \
-        if stemmer and stem_keywords else []
+    pdf_text = str(pdf_value.getvalue()) if stemmer else ""
+    keywords = (
+        get_keywords_from_text(pdf_text, stemmer, stem_keywords)
+        if stemmer and stem_keywords
+        else []
+    )
 
-    report = json.dumps(dict(
-        page_count=doc.page_count,
-        pages_report=pages_report,
-        fonts_report=fonts_report,
-        keywords=keywords
-    ))
+    report = json.dumps(
+        dict(
+            page_count=doc.page_count,
+            pages_report=pages_report,
+            fonts_report=fonts_report,
+            keywords=keywords,
+        )
+    )
 
     sys.stdout.write(f"{report}\n")
 
@@ -531,7 +509,6 @@ def doc_report(args) -> None:
 
 
 def doc_toc_vol(args) -> None:
-
     toc_data: dict | None = None
 
     # print(args.config)
@@ -542,7 +519,7 @@ def doc_toc_vol(args) -> None:
         toc_data = json.loads(contents)
 
     if not toc_data:
-        raise RuntimeError('Invalid config')
+        raise RuntimeError("Invalid config")
 
     PAGE_WIDTH = 595
     PAGE_HEIGHT = 792
@@ -558,8 +535,8 @@ def doc_toc_vol(args) -> None:
 
     RECT_WIDTH = PAGE_WIDTH - 2 * PAGE_HORIZONTAL_MARGIN
 
-    event: dict = toc_data.get('event', None)
-    pre_pdf: str = toc_data.get('pre_pdf', None)
+    event: dict = toc_data.get("event", None)
+    pre_pdf: str = toc_data.get("pre_pdf", None)
 
     if not pre_pdf:
         start_page = 0
@@ -569,17 +546,19 @@ def doc_toc_vol(args) -> None:
         pre_doc.close()
         del pre_doc
 
-    items = [{}, {}] + toc_data.get('toc_items', [])
-    settings = toc_data.get('toc_settings', {})
+    items = [{}, {}] + toc_data.get("toc_items", [])
+    settings = toc_data.get("toc_settings", {})
 
     # track_group_indent is added just as a reference, if it's left at 0, it's not really necessary
     track_group_indent = 0
-    track_indent = track_group_indent + \
-        (2 if settings.get('include_track_group') else 0)
+    track_indent = track_group_indent + (
+        2 if settings.get("include_track_group") else 0
+    )
 
     session_indent = 0
-    contribution_indent: int = session_indent + \
-        (2 if settings.get('include_sessions') else 0)
+    contribution_indent: int = session_indent + (
+        2 if settings.get("include_sessions") else 0
+    )
 
     # total_pages = math.ceil(len(items) / ITEMS_PER_PAGE)
 
@@ -589,10 +568,7 @@ def doc_toc_vol(args) -> None:
 
     page: Page = new_page(doc, width=PAGE_WIDTH, height=PAGE_HEIGHT)
 
-    annot_toc_header(
-        page=page,
-        data=event
-    )
+    annot_toc_header(page=page, data=event)
 
     annot_toc_footer(
         page=page,
@@ -600,22 +576,19 @@ def doc_toc_vol(args) -> None:
         page_number=start_page + (page.number or 0) + 1,
     )
 
-    toc_title = toc_data.get('toc_title', 'Table of Contents')
+    toc_title = toc_data.get("toc_title", "Table of Contents")
 
-    toc_title_point = Point(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN +
-                            PAGE_VERTICAL_SPACE + LINE_SPACING)
+    toc_title_point = Point(
+        PAGE_HORIZONTAL_MARGIN,
+        PAGE_VERTICAL_MARGIN + PAGE_VERTICAL_SPACE + LINE_SPACING,
+    )
 
-    insert_text(page,
-                toc_title_point,
-                f"{toc_title}",
-                fontname="CoBo",
-                fontsize=11)
+    insert_text(page, toc_title_point, f"{toc_title}", fontname="CoBo", fontsize=11)
 
     item_index = 0
     page_number = start_page + (page.number or 0)
 
     for i, item in enumerate(items):
-
         if i < 2:
             continue
 
@@ -626,10 +599,7 @@ def doc_toc_vol(args) -> None:
 
             page_number = start_page + (page.number or 0)
 
-            annot_toc_header(
-                page=page,
-                data=event
-            )
+            annot_toc_header(page=page, data=event)
 
             annot_toc_footer(
                 page=page,
@@ -637,105 +607,110 @@ def doc_toc_vol(args) -> None:
                 page_number=page_number + 1,
             )
 
-        space = (item_index * (LINE_SPACING + ANNOTATION_HEIGHT)) + \
-            (PAGE_VERTICAL_SPACE)
+        space = (item_index * (LINE_SPACING + ANNOTATION_HEIGHT)) + (
+            PAGE_VERTICAL_SPACE
+        )
 
         def truncate_text(initial_text: str, text_indent: int) -> str:
-            truncated_sign = ' [...]'
-            truncated_text = ''
+            truncated_sign = " [...]"
+            truncated_text = ""
 
             for word in initial_text.split():
-                if len(truncated_text) + len(word) < LINE_LENGTH - text_indent - len(truncated_sign):
-                    truncated_text += ' ' + word
+                if len(truncated_text) + len(word) < LINE_LENGTH - text_indent - len(
+                    truncated_sign
+                ):
+                    truncated_text += " " + word
                 else:
                     break
 
             if len(truncated_text) < len(initial_text):
                 truncated_text += truncated_sign
 
-            truncated_text = ' ' * text_indent + truncated_text
+            truncated_text = " " * text_indent + truncated_text
 
             return truncated_text
 
-        if item.get('type') == 'contribution':
+        if item.get("type") == "contribution":
+            contribution_text_point = Point(
+                PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN + space
+            )
 
-            contribution_text_point = Point(PAGE_HORIZONTAL_MARGIN,
-                                            PAGE_VERTICAL_MARGIN + space)
+            contribution_title = item.get("code", "") + " - " + item.get("title", "")
 
-            contribution_title = item.get(
-                'code', '') + ' - ' + item.get('title', '')
-
-            contribution_text = truncate_text(
-                contribution_title, contribution_indent)
+            contribution_text = truncate_text(contribution_title, contribution_indent)
 
             contribution_text = f"{contribution_text:.<{LINE_LENGTH}}"
 
-            insert_text(page, contribution_text_point,
-                        contribution_text,
-                        fontname="Cour",
-                        fontsize=9)
+            insert_text(
+                page,
+                contribution_text_point,
+                contribution_text,
+                fontname="Cour",
+                fontsize=9,
+            )
 
-        elif item.get('type') == 'session':
-            session_text_point = Point(PAGE_HORIZONTAL_MARGIN,
-                                       PAGE_VERTICAL_MARGIN + space)
+        elif item.get("type") == "session":
+            session_text_point = Point(
+                PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN + space
+            )
 
-            session_title = (' ' * session_indent) + \
-                item.get('title', '').upper()
+            session_title = (" " * session_indent) + item.get("title", "").upper()
 
-            session_text = truncate_text(
-                session_title, session_indent)
+            session_text = truncate_text(session_title, session_indent)
 
             session_text = f"{session_text:.<{LINE_LENGTH}}"
 
-            insert_text(page, session_text_point,
-                        session_text,
-                        fontname="CoBo",
-                        fontsize=9)
+            insert_text(
+                page, session_text_point, session_text, fontname="CoBo", fontsize=9
+            )
 
-        elif item.get('type') == 'track':
-            track_text_point = Point(PAGE_HORIZONTAL_MARGIN,
-                                     PAGE_VERTICAL_MARGIN + space)
+        elif item.get("type") == "track":
+            track_text_point = Point(
+                PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN + space
+            )
 
-            track_title = (' ' * track_indent) + item.get('title', '').upper()
+            track_title = (" " * track_indent) + item.get("title", "").upper()
 
-            track_text = truncate_text(
-                track_title, track_indent)
+            track_text = truncate_text(track_title, track_indent)
 
-            insert_text(page, track_text_point,
-                        track_text,
-                        fontname="CoBo",
-                        fontsize=9)
+            insert_text(page, track_text_point, track_text, fontname="CoBo", fontsize=9)
 
-        elif item.get('type') == 'track_group':
-            track_group_title_point = Point(PAGE_HORIZONTAL_MARGIN,
-                                            PAGE_VERTICAL_MARGIN + space)
+        elif item.get("type") == "track_group":
+            track_group_title_point = Point(
+                PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN + space
+            )
 
-            track_group_title = (' ' * track_group_indent) + \
-                item.get('title', '').upper()
+            track_group_title = (" " * track_group_indent) + item.get(
+                "title", ""
+            ).upper()
 
             track_group_title = f"{track_group_title:.<{LINE_LENGTH}}"
 
-            insert_text(page, track_group_title_point,
-                        track_group_title,
-                        fontname="CoBo",
-                        fontsize=9)
+            insert_text(
+                page,
+                track_group_title_point,
+                track_group_title,
+                fontname="CoBo",
+                fontsize=9,
+            )
 
-        link_point = Point(PAGE_HORIZONTAL_MARGIN + RECT_WIDTH - 24,
-                           PAGE_VERTICAL_MARGIN + space)
+        link_point = Point(
+            PAGE_HORIZONTAL_MARGIN + RECT_WIDTH - 24, PAGE_VERTICAL_MARGIN + space
+        )
 
-        insert_text(page,
-                    link_point,
-                    f"{item.get('page', 0):4d}",
-                    fontname="CoBo",
-                    fontsize=9)
+        insert_text(
+            page, link_point, f"{item.get('page', 0):4d}", fontname="CoBo", fontsize=9
+        )
 
-        to_file = toc_data.get('vol_file', None)
-        to_page = item.get('page', 0)
+        to_file = toc_data.get("vol_file", None)
+        to_page = item.get("page", 0)
 
-        link_rect = Rect(PAGE_HORIZONTAL_MARGIN, PAGE_VERTICAL_MARGIN
-                         + space - 10, PAGE_HORIZONTAL_MARGIN +
-                         RECT_WIDTH, PAGE_VERTICAL_MARGIN +
-                         space + ANNOTATION_HEIGHT - 5)
+        link_rect = Rect(
+            PAGE_HORIZONTAL_MARGIN,
+            PAGE_VERTICAL_MARGIN + space - 10,
+            PAGE_HORIZONTAL_MARGIN + RECT_WIDTH,
+            PAGE_VERTICAL_MARGIN + space + ANNOTATION_HEIGHT - 5,
+        )
 
         link_rect_json = dict(
             x0=link_rect.x0,
@@ -744,10 +719,15 @@ def doc_toc_vol(args) -> None:
             y1=link_rect.y1,
         )
 
-        json_link = {'kind': LINK_GOTO, 'from_rect': link_rect_json,
-                     "from_page": page_number, "to_page": to_page,
-                     "to_file": to_file, "to_point": (0, 0),
-                     "code": item.get('title', '')}
+        json_link = {
+            "kind": LINK_GOTO,
+            "from_rect": link_rect_json,
+            "from_page": page_number,
+            "to_page": to_page,
+            "to_file": to_file,
+            "to_point": (0, 0),
+            "code": item.get("title", ""),
+        }
 
         json_links.append(json_link)
 
@@ -759,12 +739,11 @@ def doc_toc_vol(args) -> None:
         "json_links": json_links,
     }
 
-    with open(args.links, 'w') as f:
+    with open(args.links, "w") as f:
         f.write(json.dumps(meta))
 
 
 def doc_toc_links(args) -> None:
-
     toc_data: dict | None = None
 
     # print(args.config)
@@ -779,12 +758,11 @@ def doc_toc_links(args) -> None:
 
     doc: Document = Document(filename=args.input)
 
-    start_page = toc_data.get('start_page', 1) - 1
-    total_pages = toc_data.get('total_pages', 0)
-    json_links = toc_data.get('json_links', [])
+    start_page = toc_data.get("start_page", 1) - 1
+    total_pages = toc_data.get("total_pages", 0)
+    json_links = toc_data.get("json_links", [])
 
     for json_link in json_links:
-
         # json_link = {'kind': LINK_GOTO, 'from_rect': link_rect_json,
         #              "from_page": page_number, "to_page": to_page,
         #              "to_file": to_file, "to_point": (0, 0),
@@ -792,16 +770,20 @@ def doc_toc_links(args) -> None:
 
         # print(json_link)
 
-        link_kind = json_link.get('kind', 1)
-        link_from = json_link.get('from_rect', {})
+        link_kind = json_link.get("kind", 1)
+        link_from = json_link.get("from_rect", {})
 
-        from_page = json_link.get('from_page', 0)
-        to_page = json_link.get('to_page', 0) + start_page + total_pages
+        from_page = json_link.get("from_page", 0)
+        to_page = json_link.get("to_page", 0) + start_page + total_pages
 
-        link_rect = Rect(link_from.get('x0'), link_from.get('y0'),
-                         link_from.get('x1'), link_from.get('y1'))
+        link_rect = Rect(
+            link_from.get("x0"),
+            link_from.get("y0"),
+            link_from.get("x1"),
+            link_from.get("y1"),
+        )
 
-        link: dict = {'kind': link_kind, 'from': link_rect, "page": to_page}
+        link: dict = {"kind": link_kind, "from": link_rect, "page": to_page}
 
         page = doc.load_page(from_page)
 
@@ -815,7 +797,6 @@ def doc_toc_links(args) -> None:
 
 
 def doc_metadata(args) -> None:
-
     doc = Document(filename=args.input)
 
     meta = dict(
@@ -829,7 +810,7 @@ def doc_metadata(args) -> None:
         modDate=args.modDate,
         subject=args.subject,
         keywords=args.keywords,
-        trapped=args.trapped
+        trapped=args.trapped,
     )
 
     doc.del_xml_metadata()
@@ -845,27 +826,27 @@ def doc_metadata(args) -> None:
 # https://www.driftinginrecursion.com/post/parallel_archiving/
 # https://docs.python.org/3/library/tarfile.html#examples
 def gzip_compress_file(p):
-    print('gzip_compress_file', p, p + '.gz')
-    with open(p, 'rb') as f:
-        with gzip.open(p + '.gz', 'wb', compresslevel=1) as gz:
+    print("gzip_compress_file", p, p + ".gz")
+    with open(p, "rb") as f:
+        with gzip.open(p + ".gz", "wb", compresslevel=1) as gz:
             shutil.copyfileobj(f, gz)  # type: ignore
     # os.remove(p)
 
 
 def search_fs(p):
-    file_list = [os.path.join(dp, f) for dp, dn, fn in os.walk(
-        os.path.expanduser(p)) for f in fn]
+    file_list = [
+        os.path.join(dp, f) for dp, dn, fn in os.walk(os.path.expanduser(p)) for f in fn
+    ]
     return file_list
 
 
 def tar_dir(s):
-    with tarfile.open(s + '.tar', 'w') as tar:
+    with tarfile.open(s + ".tar", "w") as tar:
         for f in search_fs(s):
-            tar.add(f, f[len(s):])
+            tar.add(f, f[len(s) :])
 
 
 def compress_dir(args):
-
     folder = args.input
 
     files = search_fs(folder)
@@ -880,7 +861,7 @@ def compress_dir(args):
         #
         #                   total=len(files), desc='Compressing Files'))
 
-    print('Adding Compressed Files to TAR....')
+    print("Adding Compressed Files to TAR....")
     tar_dir(folder)
 
     # if rmbool == True:
@@ -896,8 +877,7 @@ def main():
     )
 
     subps = parser.add_subparsers(
-        title="Subcommands",
-        help="Enter 'command -h' for subcommand specific help"
+        title="Subcommands", help="Enter 'command -h' for subcommand specific help"
     )
 
     # -------------------------------------------------------------------------
@@ -931,8 +911,7 @@ def main():
         epilog="specify input file",
     )
     ps_report.add_argument("-input", required=True, help="input filename")
-    ps_report.add_argument("-keywords", required=False,
-                           help="extract keywords")
+    ps_report.add_argument("-keywords", required=False, help="extract keywords")
     ps_report.set_defaults(func=doc_report)
 
     # -------------------------------------------------------------------------
@@ -1036,14 +1015,15 @@ def main():
         description="manage meow auth",
         epilog="manage meow auth",
     )
-    ps_auth.add_argument("-list", required=False, help="list credentials",
-                         action=argparse.BooleanOptionalAction)
-    ps_auth.add_argument("-login", required=False, type=str,
-                         help="login")
-    ps_auth.add_argument("-logout", required=False, type=str,
-                         help="logout")
-    ps_auth.add_argument("-check", required=False, type=str,
-                         help="check")
+    ps_auth.add_argument(
+        "-list",
+        required=False,
+        help="list credentials",
+        action=argparse.BooleanOptionalAction,
+    )
+    ps_auth.add_argument("-login", required=False, type=str, help="login")
+    ps_auth.add_argument("-logout", required=False, type=str, help="logout")
+    ps_auth.add_argument("-check", required=False, type=str, help="check")
     ps_auth.set_defaults(func=meow_auth)
 
     # -------------------------------------------------------------------------

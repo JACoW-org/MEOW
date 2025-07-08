@@ -17,7 +17,7 @@ FONT_NAME = 'helv'
 def write_page_header(page: Page, data: dict, options: dict = dict()):
     """ """
 
-    rect_width = page.rect.width - 2 * PAGE_HORIZONTAL_MARGIN
+    rect_width = page.mediabox.width - 2 * PAGE_HORIZONTAL_MARGIN
 
     # top line
 
@@ -180,8 +180,8 @@ def write_page_header(page: Page, data: dict, options: dict = dict()):
 def write_page_footer(page: Page, page_number: int, data: dict, options: dict = dict()):
     """ """
 
-    rect_width = page.rect.width - 2 * PAGE_HORIZONTAL_MARGIN
-    page_height = page.rect.height
+    rect_width = page.mediabox.width - 2 * PAGE_HORIZONTAL_MARGIN
+    page_height = page.mediabox.height
 
     # bottom line
 
@@ -306,8 +306,8 @@ def write_page_side(page: Page,
                     options: dict = dict()):
     """ """
 
-    page_width = page.rect.width
-    page_height = page.rect.height
+    page_width = page.mediabox.width
+    page_height = page.mediabox.height
 
     rect_even_logo = Rect(
         PAGE_HORIZONTAL_MARGIN / 2,
