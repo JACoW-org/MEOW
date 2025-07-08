@@ -119,6 +119,11 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
         self.src_doi_dir = Path(self.src_dir, "content", "doi")
         self.src_ref_dir = Path(self.src_dir, "content", "reference")
 
+    def filter_published_contributions(self, c: ContributionData) -> bool:
+        if self.config.include_only_qa_green_contributions:
+            return c.is_included_in_proceedings
+        return c.is_included_in_prepress
+
     async def run_prepare(self) -> None:
         await self.prepare()
 
@@ -255,13 +260,14 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
                 if contribution.code:
                     await Path(base_path, f"{code}.html").write_text(
                         await self.template.render_contribution_partial(
-                            contribution, self.config.include_event_slides
+                            contribution, self.config.include_event_slides,
+                            self.filter_published_contributions(contribution)
                         )
                     )
 
                 if (
                     contribution.code
-                    and contribution.is_included_in_proceedings
+                    and self.filter_published_contributions(contribution)
                     and contribution.doi_data
                 ):
                     await Path(base_path, f"{code}_doi.html").write_text(
@@ -476,11 +482,6 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
         logger.info(f"render_doi_per_institute - {len(self.institutes)}")
 
-        def filter_published_contributions(c: ContributionData) -> bool:
-            if self.config.include_only_qa_green_contributions:
-                return c.is_included_in_proceedings
-            return c.is_included_in_prepress
-
         doi_per_institute_partial_dir = Path(
             self.src_dir, "layouts", "partials", "doi_per_institute", "list.html"
         )
@@ -498,7 +499,7 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
                     doi_data=c.doi_data,
                 )
                 for c in self.contributions
-                if filter_published_contributions(c)
+                if self.filter_published_contributions(c)
                 and c.doi_data
                 and institute in c.institutes
             ]

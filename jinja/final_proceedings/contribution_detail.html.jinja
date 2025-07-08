@@ -4,7 +4,7 @@
 
 <div id="{{ contribution.code|lower }}" class="contrib-ancor"></div>
 
-{% if contribution.is_included_in_proceedings and contribution.metadata: %}
+{% if is_published and contribution.metadata: %}
 
 <div class="contrib-header">
     <div class="contrib-code">{{ contribution.code|e }}</div>
@@ -58,7 +58,7 @@
 </div>
 {% endif %}
 
-{% if contribution.is_included_in_proceedings or contribution.is_included_in_prepress: %}
+{% if is_published: %}
 <div class="contrib-paper">
     <b>Paper:</b>
     <span>&nbsp;</span>

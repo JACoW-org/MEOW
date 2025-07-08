@@ -108,10 +108,12 @@ class JinjaTemplateRenderer:
         ))
 
     async def render_contribution_partial(self, contribution: ContributionData,
-                                          include_event_slides: bool) -> str:
+                                          include_event_slides: bool,
+                                          is_published: bool) -> str:
         return await self.render("contribution_partial.html.jinja", minify=True, escape=True, params=dict(
             contribution=contribution.as_dict(),
-            include_event_slides=include_event_slides
+            include_event_slides=include_event_slides,
+            is_published=is_published
         ))
 
     async def render_session_partial(self, sessions: list[SessionData]) -> str:
