@@ -189,9 +189,9 @@ def contribution_data_factory(
     peer_reviewing_accepted: bool = False
 
     if contrib_paper:
+        logger.debug(f"contrib_paper.state: {contrib_paper.get('state', 0)}")
         peer_reviewing_accepted = contrib_paper.get("state", 0) == 2
 
-    logger.debug(f"contrib_paper.state: {contrib_paper.get('state', 0)}")
     logger.debug(f"peer_reviewing_accepted: {peer_reviewing_accepted}")
 
     """ """
@@ -243,7 +243,7 @@ def contribution_data_factory(
         elif is_paper_data_waiting:
             is_included_in_pdf_check = True
 
-    logger.debug(f"paper_data.state: {paper_data.state}")
+        logger.debug(f"paper_data.state: {paper_data.state}")
 
     logger.debug(f"is_prepress: {is_included_in_prepress}")
     logger.debug(f"is_proceedings: {is_included_in_proceedings}")
