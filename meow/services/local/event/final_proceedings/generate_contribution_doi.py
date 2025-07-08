@@ -101,7 +101,7 @@ async def generate_dois(
                             result_code = result.get("code", None)
                             result_value = result.get("value", None)
 
-                            logger.info(f"doi: {result_code} - {result_value}")
+                            logger.info(f"doi: {result_code}")
 
                             if result_value:
                                 results[result_code] = result_value

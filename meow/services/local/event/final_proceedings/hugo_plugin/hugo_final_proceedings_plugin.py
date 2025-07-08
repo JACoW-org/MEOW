@@ -258,23 +258,22 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
                 base_path = Path(self.src_dir, "layouts", "partials", "contributions")
 
                 if contribution.code:
+
+                    is_published = self.filter_published_contributions(contribution)
+
                     await Path(base_path, f"{code}.html").write_text(
                         await self.template.render_contribution_partial(
                             contribution, self.config.include_event_slides,
-                            self.filter_published_contributions(contribution)
+                            is_published
                         )
                     )
 
-                if (
-                    contribution.code
-                    and self.filter_published_contributions(contribution)
-                    and contribution.doi_data
-                ):
-                    await Path(base_path, f"{code}_doi.html").write_text(
-                        await self.template.render_doi_partial(
-                            self.event, contribution.doi_data
+                    if (contribution.doi_data):
+                        await Path(base_path, f"{code}_doi.html").write_text(
+                            await self.template.render_doi_partial(
+                                self.event, contribution.doi_data
+                            )
                         )
-                    )
 
         capacity_limiter = CapacityLimiter(16)
         async with create_task_group() as tg:
