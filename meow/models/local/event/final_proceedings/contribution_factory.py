@@ -189,10 +189,10 @@ def contribution_data_factory(
     peer_reviewing_accepted: bool = False
 
     if contrib_paper:
-        logger.debug(f"contrib_paper.state: {contrib_paper.get('state', 0)}")
+        logger.info(f"contrib_paper.state: {contrib_paper.get('state', 0)}")
         peer_reviewing_accepted = contrib_paper.get("state", 0) == 2
 
-    logger.debug(f"peer_reviewing_accepted: {peer_reviewing_accepted}")
+    logger.info(f"peer_reviewing_accepted: {peer_reviewing_accepted}")
 
     """ """
 
@@ -205,7 +205,7 @@ def contribution_data_factory(
                     is_slides_included = True
                     break
 
-    logger.debug(f"is_slides_included: {is_slides_included}")
+    logger.info(f"is_slides_included: {is_slides_included}")
 
     """ """
 
@@ -245,9 +245,9 @@ def contribution_data_factory(
 
         logger.debug(f"paper_data.state: {paper_data.state}")
 
-    logger.debug(f"is_prepress: {is_included_in_prepress}")
-    logger.debug(f"is_proceedings: {is_included_in_proceedings}")
-    logger.debug(f"is_pdf_check: {is_included_in_pdf_check}")
+    logger.info(f"is_prepress: {is_included_in_prepress}")
+    logger.info(f"is_proceedings: {is_included_in_proceedings}")
+    logger.info(f"is_pdf_check: {is_included_in_pdf_check}")
 
     """ """
 
