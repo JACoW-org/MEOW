@@ -70,6 +70,8 @@ async def generate_doi_payload_task(capacity_limiter: CapacityLimiter,
 
         doi_file = Path(doi_dir, f'{contribution_doi.code}.json')
 
+        logger.info(f"doi_file={doi_file}")
+
         await doi_file.unlink(missing_ok=True)
 
         # generate JSON string
