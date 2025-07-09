@@ -14,7 +14,7 @@ from meow.models.local.event.final_proceedings.event_factory import event_keywor
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_contributions_papers
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
-from meow.services.local.event.event_pdf_utils import read_report_anyio
+from meow.services.local.event.final_proceedings.event_pdf_utils import read_report_anyio
 
 
 logger = lg.getLogger(__name__)

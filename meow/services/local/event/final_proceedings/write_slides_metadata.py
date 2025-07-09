@@ -8,7 +8,7 @@ from meow.models.local.event.final_proceedings.proceedings_data_utils import ext
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 from meow.models.local.event.final_proceedings.session_model import SessionData
-from meow.services.local.event.event_pdf_utils import pdf_linearize_qpdf
+from meow.services.local.event.final_proceedings.event_pdf_utils import pdf_linearize_qpdf
 
 
 logger = lg.getLogger(__name__)

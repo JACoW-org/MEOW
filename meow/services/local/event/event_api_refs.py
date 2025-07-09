@@ -27,6 +27,9 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import (
 from meow.utils.serialization import json_encode
 
 
+from contextvars import Token
+from meow.utils.logger import event_id_var
+
 logger = lg.getLogger(__name__)
 
 
@@ -34,15 +37,25 @@ async def event_api_refs(
     event_id: str, event_url: str, indico_token: str
 ) -> AsyncGenerator:
     """ """
+    
+    token: Token = None
 
     try:
         if not event_id or event_id == "":
-            #raise BaseException("Invalid event id")
-            yield orjson.dumps({"status": 400, "error": "Invalid event id"}).decode() + "\n"
+            # raise BaseException("Invalid event id")
+            yield (
+                orjson.dumps({"status": 400, "error": "Invalid event id"}).decode()
+                + "\n"
+            )
+        
+        token = event_id_var.set(event_id)
 
         if not indico_token or indico_token == "":
-            #raise BaseException("Invalid indico token")
-            yield orjson.dumps({"status": 401, "error": "Invalid indico token"}).decode() + "\n"
+            # raise BaseException("Invalid indico token")
+            yield (
+                orjson.dumps({"status": 401, "error": "Invalid indico token"}).decode()
+                + "\n"
+            )
 
         ### Final Proceedings
         # config = ProceedingsConfig(
@@ -98,13 +111,21 @@ async def event_api_refs(
 
         ex_arg = ex.args[0]
 
-        if (isinstance(ex_arg, dict)):
-            yield orjson.dumps({"status": ex_arg.get('code'), "error": ex_arg.get('message')}).decode() + "\n"
-        elif (isinstance(ex_arg, str)):
+        if isinstance(ex_arg, dict):
+            yield (
+                orjson.dumps(
+                    {"status": ex_arg.get("code"), "error": ex_arg.get("message")}
+                ).decode()
+                + "\n"
+            )
+        elif isinstance(ex_arg, str):
             yield orjson.dumps({"status": 500, "error": ex_arg}).decode() + "\n"
         else:
-            yield orjson.dumps({"status": 500, "error": "Generic error"}).decode() + "\n"
-
+            yield (
+                orjson.dumps({"status": 500, "error": "Generic error"}).decode() + "\n"
+            )
+    finally:
+        event_id_var.reset(token)
 
 
 async def _event_api_refs(

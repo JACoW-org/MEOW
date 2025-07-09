@@ -1,7 +1,6 @@
 import logging as lg
 
 from typing import Any
-from datetime import datetime
 
 from meow.models.local.event.final_proceedings.track_factory import track_data_factory
 
@@ -22,7 +21,7 @@ from meow.models.local.event.final_proceedings.contribution_model import (
 from meow.models.local.event.final_proceedings.event_model import PersonData
 
 from meow.utils.list import find
-from meow.utils.serialization import json_encode
+
 from meow.utils.datetime import (
     datedict_to_tz_datetime,
     datetime_localize,
@@ -45,8 +44,6 @@ def contribution_editable_factory(
         for revision in editable.get("all_revisions", [])
         if revision
     ]
-
-    # all_revisions.sort(key=sort_revision_list_by_date)
 
     all_revisions.sort(key=lambda x: (format_datetime_sec(x.creation_date), x.id))
 
@@ -71,7 +68,6 @@ def contribution_data_factory(
     contribution: Any, editors: list[PersonData], event_timezone: str
 ) -> ContributionData:
     logger.info(f"contribution_code: {contribution.get('code')}")
-    # logger.info(f"contribution: {json_encode(contribution)}")
 
     contrib_editables: list = contribution.get("editables", [])
     contrib_paper: dict = contribution.get("paper", None)
@@ -186,16 +182,6 @@ def contribution_data_factory(
 
     """ """
 
-    peer_reviewing_accepted: bool = False
-
-    if contrib_paper:
-        logger.info(f"contrib_paper.state: {contrib_paper.get('state', 0)}")
-        peer_reviewing_accepted = contrib_paper.get("state", 0) == 2
-
-    logger.info(f"peer_reviewing_accepted: {peer_reviewing_accepted}")
-
-    """ """
-
     is_slides_included: bool = False
 
     if slides_data and slides_data.state:
@@ -251,15 +237,24 @@ def contribution_data_factory(
 
     """ """
 
+    peer_reviewing_accepted: bool = False
+
+    if contrib_paper:
+        logger.info(f"contrib_paper.state: {contrib_paper.get('state', 0)}")
+        peer_reviewing_accepted = contrib_paper.get("state", 0) == 2
+
+    logger.info(f"peer_reviewing_accepted: {peer_reviewing_accepted}")
+
+    """ """
+
     # if is_included_in_proceedings != editable_is_included_in_proceedings:
     #     logger.warning(f"{contribution.get('code')}: in_proceedings ERROR")
-    #
     #
     # logger.debug(f"in_pdf_check: {is_included_in_pdf_check} {editable_is_included_in_pdf_check}")
     #
     # if is_included_in_pdf_check != editable_is_included_in_pdf_check:
     #     logger.warning(f"{contribution.get('code')}: in_pdf_check ERROR")
-
+    #
     # is_not_included = len([
     #     r for r in revisions
     #     if r.is_black
@@ -270,7 +265,6 @@ def contribution_data_factory(
     #         r for r in revisions
     #         if r.is_green
     #     ]) > 0
-    #
     #
     # if not is_not_included and not is_included_in_proceedings:
     #

@@ -11,7 +11,7 @@ from meow.models.local.event.final_proceedings.event_model import MaterialData
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_proceedings_papers
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsConfig
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
-from meow.services.local.event.event_pdf_utils import (
+from meow.services.local.event.final_proceedings.event_pdf_utils import (
     brief_links, pdf_linearize_qpdf, vol_toc_links, vol_toc_pdf, pdf_unite_pdftk)
 from meow.utils.datetime import format_datetime_doi_iso
 # from meow.utils.filesystem import copy

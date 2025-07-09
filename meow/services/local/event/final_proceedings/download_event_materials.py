@@ -10,7 +10,7 @@ from meow.app.errors.service_error import ProceedingsError
 from meow.models.local.event.final_proceedings.event_model import MaterialData
 
 from meow.utils.http import download_file
-from meow.services.local.event.event_pdf_utils import is_to_download
+from meow.services.local.event.final_proceedings.event_pdf_utils import is_to_download
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 
 

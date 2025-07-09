@@ -11,7 +11,7 @@ from meow.models.local.event.final_proceedings.contribution_model import FileDat
 from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_proceedings_slides
 
 from meow.utils.http import download_file
-from meow.services.local.event.event_pdf_utils import is_file_valid, is_to_download
+from meow.services.local.event.final_proceedings.event_pdf_utils import is_file_valid, is_to_download
 from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
 
 

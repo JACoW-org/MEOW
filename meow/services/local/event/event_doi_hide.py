@@ -18,18 +18,24 @@ from meow.services.local.event.final_proceedings.collecting_sessions_and_materia
     collecting_sessions_and_materials)
 from meow.services.local.event.doi.event_doi_hide import hide_contribution_doi
 
+from contextvars import Token
+from meow.utils.logger import event_id_var
 
 logger = lg.getLogger(__name__)
 
 
 async def event_doi_hide(event: dict, cookies: dict, settings: dict) -> AsyncGenerator:
     """ """
+    
+    token: Token = None
 
     try:
         event_id: str = event.get('id', '')
 
         if not event_id or event_id == '':
             raise BaseException('Invalid event id')
+        
+        token = event_id_var.set(event_id)
 
         async with acquire_lock(event_id) as lock:
 
@@ -50,6 +56,8 @@ async def event_doi_hide(event: dict, cookies: dict, settings: dict) -> AsyncGen
     except BaseException as be:
         logger.error("Generic error", exc_info=True)
         raise be
+    finally:
+        event_id_var.reset(token)
 
 
 def acquire_lock(key: str) -> RedisLock:

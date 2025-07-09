@@ -8,18 +8,24 @@ from anyio.abc import CancelScope
 import logging as lg
 import os
 
-# import nltk
-# nltk.download()
+from meow.utils.logger import initLogger
 
 os.environ["CLIENT_TYPE"] = "worker"
 
+# import nltk
+# nltk.download()
+
 # lg.basicConfig(level=lg.INFO)
 
-lg.basicConfig(
-    level=lg.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S'
-)
+# lg.basicConfig(
+#     level=lg.INFO,
+#     format='%(asctime)s - %(name)s - %(levelname)s - [event_id=%(event_id)s] - %(message)s',
+#     datefmt='%Y-%m-%d %H:%M:%S'
+# )
+
+
+initLogger(lg.INFO)
+
 
 logger = lg.getLogger(__name__)
 
@@ -37,24 +43,27 @@ async def app_wrap(scope: CancelScope):
 
 async def app_pre():
     from meow.app.instances.application import app
+
     app.state.worker_running = True
 
 
 async def app_run():
     from meow.app.instances.services import srs
+
     await srs.workers_manager.run()
 
 
 async def app_post():
     from meow.app.instances.services import srs
+
     await srs.redis_manager.destroy()
 
     from meow.app.instances.application import app
+
     app.state.worker_running = False
 
 
 async def main() -> None:
-
     logger.info(f"Started worker process [{os.getpid()}]")
 
     try:

@@ -16,7 +16,7 @@ joblib==1.3.2
 lxml==5.1.0
 MarkupSafe==2.1.5
 mccabe==0.7.0
-minify_html==0.15.0
+minify_html==0.16.4
 multidict==6.0.5
 nltk==3.9.1
 numpy==1.26.4
