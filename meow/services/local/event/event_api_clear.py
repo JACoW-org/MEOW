@@ -35,16 +35,17 @@ async def _event_api_clear(event_id: str) -> None:
         tg.start_soon(_event_clean_static_site_task, event_id)
         tg.start_soon(_event_clean_doi_jsons, event_id)
         tg.start_soon(_event_clean_hep_jsons, event_id)
+        tg.start_soon(_event_clean_refs_jsons, event_id)
 
     logger.info('event_api_clear - end')
 
 
 async def _event_clean_pdf_files_task(event_id: str) -> None:
 
-    pdf_cache_name = f'{event_id}_tmp'
-    pdf_cache_src = Path('var', 'run', pdf_cache_name)
+    dir_name = f'{event_id}_tmp'
+    dir_path = Path('var', 'run', dir_name)
 
-    await rmtree(str(pdf_cache_src))
+    await rmtree(str(dir_path))
 
 
 async def _event_clean_static_site_task(event_id: str) -> None:
@@ -64,15 +65,25 @@ async def _event_clean_static_site_task(event_id: str) -> None:
 
 async def _event_clean_doi_jsons(event_id: str) -> None:
 
-    doi_jsons_name = f'{event_id}_doi'
-    doi_jsons_path = Path('var', 'run', doi_jsons_name)
+    dir_name = f'{event_id}_doi'
+    dir_path = Path('var', 'run', dir_name)
 
-    await rmtree(str(doi_jsons_path))
+    await rmtree(str(dir_path))
 
 
 async def _event_clean_hep_jsons(event_id: str) -> None:
 
-    hep_jsons_name = f'{event_id}_hep'
-    hep_jsons_path = Path('var', 'run', hep_jsons_name)
+    dir_name = f'{event_id}_hep'
+    dir_path = Path('var', 'run', dir_name)
 
-    await rmtree(str(hep_jsons_path))
+    await rmtree(str(dir_path))
+
+
+async def _event_clean_refs_jsons(event_id: str) -> None:
+
+    dir_name = f'{event_id}_refs'
+    dir_path = Path('var', 'run', dir_name)
+
+    await rmtree(str(dir_path))
+
+

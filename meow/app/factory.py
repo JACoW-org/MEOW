@@ -1,4 +1,5 @@
 """ """
+
 from starlette.applications import Starlette
 
 
@@ -15,8 +16,9 @@ def build() -> Starlette:
         routes=app_routes,
         middleware=app_middleware,
         on_startup=[app_startup],
-        on_shutdown=[app_shutdown]
+        on_shutdown=[app_shutdown],
     )
+
 
 # logger = lg.getLogger(__name__)
 
