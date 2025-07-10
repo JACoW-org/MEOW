@@ -70,7 +70,6 @@ def contribution_data_factory(
     logger.info(f"contribution_code: {contribution.get('code')}")
 
     contrib_editables: list = contribution.get("editables", [])
-    contrib_paper: dict = contribution.get("paper", None)
 
     paper_editable: Any = find(
         contrib_editables, lambda x: x.get("type", 0) == EditableData.EditableType.paper
@@ -238,6 +237,8 @@ def contribution_data_factory(
     """ """
 
     peer_reviewing_accepted: bool = False
+
+    contrib_paper: dict = contribution.get("paper", None)
 
     if contrib_paper:
         logger.info(f"contrib_paper.state: {contrib_paper.get('state', 0)}")
