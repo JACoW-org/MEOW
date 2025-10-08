@@ -27,6 +27,9 @@ class ProceedingsConfig:
     # indica se le slide sono da includere o meno
     include_event_slides: bool = field()
 
+    # indica se i poster sono da includere o meno
+    include_event_posters: bool = field()
+
     # indica se il link al paper debba essere assoluto o relativo
     absolute_pdf_link: bool = field()
 

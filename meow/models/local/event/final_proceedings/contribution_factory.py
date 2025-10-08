@@ -71,8 +71,9 @@ def contribution_data_factory(
 
     contrib_editables: list = contribution.get("editables", [])
 
-    paper_editable: Any = find(
-        contrib_editables, lambda x: x.get("type", 0) == EditableData.EditableType.paper
+    papers_editable: Any = find(
+        contrib_editables,
+        lambda x: x.get("type", 0) == EditableData.EditableType.papers,
     )
     slides_editable: Any = find(
         contrib_editables,
@@ -80,23 +81,36 @@ def contribution_data_factory(
     )
     poster_editable: Any = find(
         contrib_editables,
-        lambda x: x.get("type", 0) == EditableData.EditableType.poster,
+        lambda x: x.get("type", 0) == EditableData.EditableType.posters,
     )
 
-    paper_data = contribution_editable_factory(paper_editable, event_timezone)
+    papers_data = contribution_editable_factory(papers_editable, event_timezone)
     slides_data = contribution_editable_factory(slides_editable, event_timezone)
-    poster_data = contribution_editable_factory(poster_editable, event_timezone)
+    posters_data = contribution_editable_factory(poster_editable, event_timezone)
 
-    # logger.info(paper_data)
+    logger.info(
+        "papers_data=%s",
+        papers_data.as_json() if papers_data is not None else "Undefined",
+    )
+    logger.info(
+        "slides_data=%s",
+        slides_data.as_json() if slides_data is not None else "Undefined",
+    )
+    logger.info(
+        "posters_data=%s",
+        posters_data.as_json() if posters_data is not None else "Undefined",
+    )
 
     reception_revisions = (
-        [r for r in paper_data.all_revisions if len(r.files) > 0] if paper_data else []
+        [r for r in papers_data.all_revisions if len(r.files) > 0]
+        if papers_data
+        else []
     )
 
     reception_revision = reception_revisions[0] if len(reception_revisions) else None
 
     revisitation_revisions = (
-        [r for r in paper_data.all_revisions if r.is_accepted] if paper_data else []
+        [r for r in papers_data.all_revisions if r.is_accepted] if papers_data else []
     )
 
     revisitation_revision = (
@@ -104,7 +118,9 @@ def contribution_data_factory(
     )
 
     acceptance_revisions = (
-        [r for r in paper_data.all_revisions if r.is_qa_approved] if paper_data else []
+        [r for r in papers_data.all_revisions if r.is_qa_approved]
+        if papers_data
+        else []
     )
 
     acceptance_revision = acceptance_revisions[0] if len(acceptance_revisions) else None
@@ -182,15 +198,18 @@ def contribution_data_factory(
     """ """
 
     is_slides_included: bool = False
+    is_posters_included: bool = False
 
     if slides_data and slides_data.state:
         if slides_data.state == EditableData.EditableState.accepted:
             for r in slides_data.all_revisions:
                 if r.is_qa_approved:
                     is_slides_included = True
+                    is_posters_included = True
                     break
 
     logger.info(f"is_slides_included: {is_slides_included}")
+    logger.info(f"is_posters_included: {is_posters_included}")
 
     """ """
 
@@ -199,26 +218,26 @@ def contribution_data_factory(
     is_included_in_pdf_check: bool = False
     is_included_in_references: bool = False
 
-    if paper_data and paper_data.state:
+    if papers_data and papers_data.state:
         is_included_in_references = (
-            paper_data.state != EditableData.EditableState.rejected
+            papers_data.state != EditableData.EditableState.rejected
         )
 
         is_paper_data_accepted = (
-            paper_data.state == EditableData.EditableState.accepted
-            or paper_data.state == EditableData.EditableState.accepted_by_submitter
+            papers_data.state == EditableData.EditableState.accepted
+            or papers_data.state == EditableData.EditableState.accepted_by_submitter
         )
 
         # is_paper_data_accepted = paper_data.state == EditableData.EditableState.accepted
 
         is_paper_data_waiting = (
-            paper_data.state == EditableData.EditableState.needs_submitter_confirmation
+            papers_data.state == EditableData.EditableState.needs_submitter_confirmation
         )
 
         if is_paper_data_accepted:
             is_included_in_prepress = True
 
-            for r in paper_data.all_revisions:
+            for r in papers_data.all_revisions:
                 if r.is_qa_approved:
                     is_included_in_proceedings = True
                     break
@@ -228,7 +247,7 @@ def contribution_data_factory(
         elif is_paper_data_waiting:
             is_included_in_pdf_check = True
 
-        logger.debug(f"paper_data.state: {paper_data.state}")
+        logger.debug(f"paper_data.state: {papers_data.state}")
 
     logger.info(f"is_prepress: {is_included_in_prepress}")
     logger.info(f"is_proceedings: {is_included_in_proceedings}")
@@ -338,14 +357,15 @@ def contribution_data_factory(
             datedict_to_tz_datetime(contribution.get("end_dt")), event_timezone
         ),
         is_slides_included=is_slides_included,
+        is_posters_included=is_posters_included,
         is_included_in_proceedings=is_included_in_proceedings,
         is_included_in_prepress=is_included_in_prepress,
         is_included_in_pdf_check=is_included_in_pdf_check,
         is_included_in_references=is_included_in_references,
         peer_reviewing_accepted=peer_reviewing_accepted,
-        paper=paper_data,
+        papers=papers_data,
         slides=slides_data,
-        poster=poster_data,
+        posters=posters_data,
         reception=reception,
         revisitation=revisitation,
         acceptance=acceptance,

@@ -51,7 +51,7 @@ class TagData:
 
     def as_dict(self) -> dict:
         return asdict(self)
-    
+
     def as_json(self) -> str:
         return json_encode(self.as_dict()).decode()
 
@@ -151,7 +151,7 @@ class RevisionData:
 
     def as_dict(self) -> dict:
         return asdict(self)
-    
+
     def as_json(self) -> str:
         return json_encode(self.as_dict()).decode()
 
@@ -190,9 +190,9 @@ class EditableData:
     latest_revision: RevisionData | None = field(default=None)
 
     class EditableType:
-        paper = 1
+        papers = 1
         slides = 2
-        poster = 3
+        posters = 3
 
     class EditableState:
         new = 1
@@ -202,6 +202,12 @@ class EditableData:
         accepted = 5
         rejected = 6
         accepted_by_submitter = 7
+
+    def as_dict(self):
+        return asdict(self)
+
+    def as_json(self) -> str:
+        return json_encode(self.as_dict()).decode()
 
 
 @dataclass
@@ -225,7 +231,7 @@ class DuplicateContributionData:
 
     def as_dict(self):
         return asdict(self)
-    
+
     def as_json(self) -> str:
         return json_encode(self.as_dict()).decode()
 
@@ -247,6 +253,7 @@ class ContributionData:
     end: datetime = field()
 
     is_slides_included: bool = field(default=False)
+    is_posters_included: bool = field(default=False)
     is_included_in_pdf_check: bool = field(default=False)
     is_included_in_proceedings: bool = field(default=False)
     is_included_in_prepress: bool = field(default=False)
@@ -265,9 +272,9 @@ class ContributionData:
     primary_authors: list[PersonData] = field(default_factory=list)
     coauthors: list[PersonData] = field(default_factory=list)
 
-    paper: EditableData | None = field(default=None)
+    papers: EditableData | None = field(default=None)
     slides: EditableData | None = field(default=None)
-    poster: EditableData | None = field(default=None)
+    posters: EditableData | None = field(default=None)
 
     keywords: list[KeywordData] = field(default_factory=list)
     authors: list[PersonData] = field(default_factory=list)
@@ -363,7 +370,12 @@ class ContributionData:
         return None
 
     def is_schedulated(self) -> bool:
-        return self.start is not None and self.end is not None and self.duration is not None and self.duration > 0
+        return (
+            self.start is not None
+            and self.end is not None
+            and self.duration is not None
+            and self.duration > 0
+        )
 
     def as_dict(self) -> dict:
         return {
@@ -378,28 +390,28 @@ class ContributionData:
             "poster_name": self.poster_name(),
             "duplicate_of": self.duplicate_of.as_dict() if self.duplicate_of else None,
         }
-    
+
     def as_json(self) -> str:
         return json_encode(self.as_dict()).decode()
 
     def has_paper(self) -> bool:
         if (
-            self.paper
-            and self.paper.latest_revision
-            and self.paper.latest_revision.files
+            self.papers
+            and self.papers.latest_revision
+            and self.papers.latest_revision.files
         ):
-            for file in self.paper.latest_revision.files:
+            for file in self.papers.latest_revision.files:
                 if file.file_type == FileData.FileType.paper:
                     return True
         return False
 
     def paper_name(self) -> str | None:
         if (
-            self.paper
-            and self.paper.latest_revision
-            and self.paper.latest_revision.files
+            self.papers
+            and self.papers.latest_revision
+            and self.papers.latest_revision.files
         ):
-            for file in self.paper.latest_revision.files:
+            for file in self.papers.latest_revision.files:
                 if file.file_type == FileData.FileType.paper:
                     return file.filename
         return None
@@ -428,31 +440,25 @@ class ContributionData:
 
     def has_poster(self) -> bool:
         if (
-            self.poster
-            and self.poster.latest_revision
-            and self.poster.latest_revision.files
+            self.posters
+            and self.posters.latest_revision
+            and self.posters.latest_revision.files
         ):
-            for file in self.poster.latest_revision.files:
+            for file in self.posters.latest_revision.files:
                 if file.file_type == FileData.FileType.poster:
                     return True
         return False
 
     def poster_name(self) -> str | None:
         if (
-            self.poster
-            and self.poster.latest_revision
-            and self.poster.latest_revision.files
+            self.posters
+            and self.posters.latest_revision
+            and self.posters.latest_revision.files
         ):
-            for file in self.poster.latest_revision.files:
+            for file in self.posters.latest_revision.files:
                 if file.file_type == FileData.FileType.poster:
                     return file.filename
         return None
-
-    # def duplicate_of(self) -> str:
-    #     for field in self.field_values:
-    #         if field.name == "duplicate_of" and field.value:
-    #             return field.value
-    #     return None
 
 
 @dataclass(kw_only=True, slots=True)
@@ -464,6 +470,6 @@ class ContributionPaperData:
 
     def as_dict(self) -> dict:
         return asdict(self)
-    
+
     def as_json(self) -> str:
         return json_encode(self.as_dict()).decode()
