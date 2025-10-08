@@ -11,6 +11,8 @@ from meow.services.local.event.event_api_refs import event_api_refs
 from meow.services.local.event.event_api_clear import event_api_clear
 from meow.services.local.event.event_api_info import event_api_info
 
+from shutil import disk_usage
+
 logger = lg.getLogger(__name__)
 
 
@@ -39,6 +41,42 @@ async def api_ping_endpoint(req: Request) -> JSONResponse:
                     "user": credential.user,
                     "host": credential.host,
                     "date": credential.date,
+                },
+            }
+        )
+    except BaseException as ex:
+        return response_for_base_exception(ex)
+    except Exception as ex:
+        return response_for_exception(ex)
+
+
+async def api_df_endpoint(req: Request) -> JSONResponse:
+    """Disk Free endpoint"""
+
+    try:
+        headers: dict = req.headers
+        params: dict = req.path_params
+
+        event_id, api_key = get_event_id_and_api_key(headers, params)
+        credential = await find_credential_by_secret(api_key)
+
+        if not credential:
+            # raise HTTPException(status_code=401, detail="Invalid API Key")
+            return JSONResponse(content={"error": "Invalid API Key"}, status_code=401)
+
+        total, used, free = disk_usage("/")
+
+        def gb(x):
+            return round(x / (1024**3), 2)  # due cifre decimali al massimo
+
+        return JSONResponse(
+            {
+                "method": "df",
+                "params": {
+                    "total_gb": gb(total),
+                    "used_gb": gb(used),
+                    "free_gb": gb(free),
+                    "used_pct": round(used / total * 100, 2),
                 },
             }
         )
@@ -144,7 +182,7 @@ def response_for_base_exception(ex):
 
 def get_event_id_and_api_key(headers: dict, params: dict):
     """ """
-    
+
     event_id: int = int(params.get("event_id", 0))
     api_key: str = str(params.get("api_key", ""))
 
@@ -175,6 +213,16 @@ routes = [
     Route(
         "/ping/{api_key}",
         api_ping_endpoint,
+        methods=["GET", "OPTIONS"],
+    ),
+    Route(
+        "/df",
+        api_df_endpoint,
+        methods=["GET", "OPTIONS"],
+    ),
+    Route(
+        "/df/{api_key}",
+        api_df_endpoint,
         methods=["GET", "OPTIONS"],
     ),
     Route(
