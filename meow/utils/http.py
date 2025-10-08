@@ -63,6 +63,41 @@ async def fetch_chunks(
             HttpClientSessions.del_client_session(client)
 
 
+async def http_post(
+    url: str, headers: dict = {}, cookies: dict = {}, data: dict = {}
+) -> Any:
+    """Http post function"""
+
+    async with aiohttp.ClientSession(
+        headers=headers,
+        cookies=cookies,
+        timeout=aiohttp.ClientTimeout(total=conf.HTTP_REQUEST_TIMEOUT_SECONDS),
+    ) as client:
+        try:
+            HttpClientSessions.add_client_session(client)
+            async with client.post(url, data=data) as resp:
+                try:
+                    if resp.ok:
+                        return await resp.text()
+                    raise BaseException(
+                        dict(
+                            code=resp.status,
+                            message=f"invalid response status {resp.status}",
+                        )
+                    )
+                except BaseException as ex:
+                    logger.error(url)
+                    logger.error(resp.content_length)
+                    logger.error(resp.content_type)
+                    logger.error(ex, exc_info=True)
+                    raise ex
+        except asyncio.TimeoutError as ex:
+            logger.error(ex, exc_info=True)
+            raise BaseException(dict(code=504, message="timeout exception"))
+        finally:
+            HttpClientSessions.del_client_session(client)
+
+
 async def fetch_json(
     url: str, headers: dict = {}, cookies: dict = {}, auth: BasicAuthData | None = None
 ) -> Any:

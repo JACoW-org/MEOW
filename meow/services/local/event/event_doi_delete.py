@@ -1,5 +1,3 @@
-
-
 from asyncio import CancelledError
 import logging as lg
 
@@ -11,11 +9,15 @@ from meow.models.infra.locks import RedisLock
 
 from redis.exceptions import LockError
 
-from meow.services.local.event.common.adapting_final_proceedings import adapting_proceedings
+from meow.services.local.event.common.adapting_final_proceedings import (
+    adapting_proceedings,
+)
 from meow.services.local.event.final_proceedings.collecting_contributions_and_files import (
-    collecting_contributions_and_files)
+    collecting_contributions_and_files,
+)
 from meow.services.local.event.final_proceedings.collecting_sessions_and_materials import (
-    collecting_sessions_and_materials)
+    collecting_sessions_and_materials,
+)
 from meow.services.local.event.doi.event_doi_delete import delete_contribution_doi
 
 from contextvars import Token
@@ -24,24 +26,30 @@ from meow.utils.logger import event_id_var
 logger = lg.getLogger(__name__)
 
 
-async def event_doi_delete(event: dict, cookies: dict, settings: dict) -> AsyncGenerator:
+async def event_doi_delete(
+    event: dict, cookies: dict, settings: dict
+) -> AsyncGenerator:
     """ """
-    
+
     token: Token = None
 
     try:
-        event_id: str = event.get('id', '')
+        event_id: str = event.get("id", "")
 
-        if not event_id or event_id == '':
-            raise BaseException('Invalid event id')
-        
+        if not event_id or event_id == "":
+            raise BaseException("Invalid event id")
+
         token = event_id_var.set(event_id)
 
         async with acquire_lock(event_id) as lock:
-
             logger.debug(f"acquire_lock -> {lock.name}")
 
-            async for r in _event_doi_delete(event, cookies, settings, lock):
+            async for r in _event_doi_delete(
+                event,
+                cookies,
+                settings,
+                lock,
+            ):
                 yield r
 
             logger.debug(f"release_lock -> {lock.name}")
@@ -61,7 +69,7 @@ async def event_doi_delete(event: dict, cookies: dict, settings: dict) -> AsyncG
 
 
 def acquire_lock(key: str) -> RedisLock:
-    """ Create event lock """
+    """Create event lock"""
 
     redis_lock = RedisLock(
         redis=dbs.redis_client,
@@ -77,62 +85,76 @@ def acquire_lock(key: str) -> RedisLock:
 
 
 async def extend_lock(lock: RedisLock) -> RedisLock:
-    """ Reset lock timeout (conf.REDIS_LOCK_TIMEOUT_SECONDS) """
+    """Reset lock timeout (conf.REDIS_LOCK_TIMEOUT_SECONDS)"""
 
     await lock.reacquire()
     return lock
 
 
-async def _event_doi_delete(event: dict, cookies: dict, settings: dict, lock: RedisLock) -> AsyncGenerator:
+async def _event_doi_delete(
+    event: dict, cookies: dict, settings: dict, lock: RedisLock
+) -> AsyncGenerator:
     """ """
 
-    logger.info('event_doi_delete - create_final_proceedings')
-
-    """ """
-
-    await extend_lock(lock)
-
-    yield dict(type='progress', value=dict(
-        phase='collecting_sessions_and_materials',
-        text="Collecting Sessions and Materials"
-    ))
-
-    [sessions, materials] = await collecting_sessions_and_materials(event, cookies, settings)
+    logger.info("event_doi_delete - create_final_proceedings")
 
     """ """
 
     await extend_lock(lock)
 
-    yield dict(type='progress', value=dict(
-        phase='collecting_contributions_and_files',
-        text="Collecting contributions and files"
-    ))
+    yield dict(
+        type="progress",
+        value=dict(
+            phase="collecting_sessions_and_materials",
+            text="Collecting Sessions and Materials",
+        ),
+    )
 
-    [contributions] = await collecting_contributions_and_files(event, sessions, cookies, settings)
+    [sessions, materials] = await collecting_sessions_and_materials(
+        event, cookies, settings
+    )
 
     """ """
 
     await extend_lock(lock)
 
-    yield dict(type='progress', value=dict(
-        phase='adapting_proceedings',
-        text="Adapting proceedings"
-    ))
+    yield dict(
+        type="progress",
+        value=dict(
+            phase="collecting_contributions_and_files",
+            text="Collecting contributions and files",
+        ),
+    )
 
-    proceedings = await adapting_proceedings(event, sessions, contributions, materials, cookies, settings)
+    [contributions] = await collecting_contributions_and_files(
+        event, sessions, cookies, settings
+    )
 
-    logger.info('event_doi_delete - event_doi_delete - begin')
+    """ """
 
     await extend_lock(lock)
 
-    yield dict(type='progress', value=dict(
-        phase='delete_contribution_doi',
-        text="Delete contribution doi"
-    ))
+    yield dict(
+        type="progress",
+        value=dict(phase="adapting_proceedings", text="Adapting proceedings"),
+    )
+
+    proceedings = await adapting_proceedings(
+        event, sessions, contributions, materials, cookies, settings
+    )
+
+    logger.info("event_doi_delete - event_doi_delete - begin")
+
+    await extend_lock(lock)
+
+    yield dict(
+        type="progress",
+        value=dict(phase="delete_contribution_doi", text="Delete contribution doi"),
+    )
 
     async for result in delete_contribution_doi(proceedings, cookies, settings):
-        yield dict(type='progress', value=dict(phase='doi_result', result=result))
+        yield dict(type="progress", value=dict(phase="doi_result", result=result))
 
-    logger.info('event_doi_delete - event_doi_delete - end')
+    logger.info("event_doi_delete - event_doi_delete - end")
 
-    yield dict(type='result', value={})
+    yield dict(type="result", value={})
