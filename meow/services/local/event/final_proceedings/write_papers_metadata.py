@@ -9,12 +9,22 @@ from rdflib import URIRef
 from rdflib.term import Literal
 from unidecode import unidecode
 
-from meow.models.local.event.final_proceedings.contribution_model import ContributionData, ContributionPaperData
-from meow.models.local.event.final_proceedings.proceedings_data_utils import extract_contributions_papers
+from meow.models.local.event.final_proceedings.contribution_model import (
+    ContributionData,
+    ContributionPaperData,
+)
+from meow.models.local.event.final_proceedings.proceedings_data_utils import (
+    extract_contributions_papers,
+)
 
-from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
+from meow.models.local.event.final_proceedings.proceedings_data_model import (
+    ProceedingsData,
+)
 from meow.models.local.event.final_proceedings.session_model import SessionData
-from meow.services.local.event.final_proceedings.event_pdf_utils import draw_frame_anyio, pdf_metadata_qpdf
+from meow.services.local.event.final_proceedings.event_pdf_utils import (
+    draw_frame_anyio,
+    pdf_metadata_qpdf,
+)
 
 from meow.utils.xmp import DC, PDF, XMP, XMPMetadata
 
@@ -22,21 +32,23 @@ from meow.utils.xmp import DC, PDF, XMP, XMPMetadata
 logger = lg.getLogger(__name__)
 
 
-async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict,
-                                settings: dict, callback: Callable) -> ProceedingsData:
+async def write_papers_metadata(
+    proceedings_data: ProceedingsData, cookies: dict, settings: dict, callback: Callable
+) -> ProceedingsData:
     """ """
 
-    logger.info('event_final_proceedings - write_papers_metadata')
+    logger.info("event_final_proceedings - write_papers_metadata")
 
     papers_data: list[ContributionPaperData] = await extract_contributions_papers(
-        proceedings_data, callback)
+        proceedings_data, callback
+    )
 
     total_files: int = len(papers_data)
 
-    logger.info(f'write_papers_metadata - files: {total_files}')
+    logger.info(f"write_papers_metadata - files: {total_files}")
 
     dir_name = f"{proceedings_data.event.id}_tmp"
-    pdf_cache_dir: Path = Path('var', 'run', dir_name)
+    pdf_cache_dir: Path = Path("var", "run", dir_name)
     await pdf_cache_dir.mkdir(exist_ok=True, parents=True)
 
     # Download license logo based on settings
@@ -52,9 +64,13 @@ async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict
 
     async with create_task_group() as tg:
         for current_paper in papers_data:
-            tg.start_soon(write_metadata_task,
-                          current_paper, sessions_dict,
-                          settings, pdf_cache_dir)
+            tg.start_soon(
+                write_metadata_task,
+                current_paper,
+                sessions_dict,
+                settings,
+                pdf_cache_dir,
+            )
 
     # with start_blocking_portal() as portal:
     #     futures = [
@@ -70,7 +86,9 @@ async def write_papers_metadata(proceedings_data: ProceedingsData, cookies: dict
     return proceedings_data
 
 
-async def write_metadata_task(current_paper, sessions: dict[int, SessionData], settings, pdf_cache_dir):
+async def write_metadata_task(
+    current_paper, sessions: dict[int, SessionData], settings, pdf_cache_dir
+):
     contribution: ContributionData = current_paper.contribution
 
     session = sessions.get(contribution.session_id)
@@ -103,24 +121,46 @@ async def write_metadata_task(current_paper, sessions: dict[int, SessionData], s
     # xml_metadata_mutool = get_xml_metatdata_mutool(contribution)
     xml_metadata_pikepdf: dict | None = get_xml_metatdata_pikepdf(contribution)
 
-    pre_print: str = settings.get('pre_print', 'This is a preprint') \
-        if contribution.peer_reviewing_accepted else ''
+    pre_print: str = (
+        settings.get("pre_print", "This is a preprint")
+        if contribution.peer_reviewing_accepted
+        else ""
+    )
 
     # if pre_print != '':
     #     logger.info(f"code: {contribution.code} - preprint: {pre_print}")
 
     async def _task_jacow_files():
-        await draw_frame_anyio(str(original_pdf_file), str(jacow_pdf_file),
-                               contribution.page, pre_print, header_data,
-                               footer_data, side_data, None, None, True)
+        await draw_frame_anyio(
+            str(original_pdf_file),
+            str(jacow_pdf_file),
+            contribution.page,
+            pre_print,
+            header_data,
+            footer_data,
+            side_data,
+            None,
+            None,
+            True,
+        )
 
-        await pdf_metadata_qpdf(str(jacow_pdf_file), metadata_pikepdf,
-                                xml_metadata_pikepdf)
+        await pdf_metadata_qpdf(
+            str(jacow_pdf_file), metadata_pikepdf, xml_metadata_pikepdf
+        )
 
     async def _task_concat_files():
-        await draw_frame_anyio(str(original_pdf_file), str(join_pdf_file),
-                               contribution.page, pre_print, header_data,
-                               footer_data, side_data, None, None, False)
+        await draw_frame_anyio(
+            str(original_pdf_file),
+            str(join_pdf_file),
+            contribution.page,
+            pre_print,
+            header_data,
+            footer_data,
+            side_data,
+            None,
+            None,
+            False,
+        )
 
     async with create_task_group() as tg:
         tg.start_soon(_task_jacow_files)
@@ -128,7 +168,6 @@ async def write_metadata_task(current_paper, sessions: dict[int, SessionData], s
 
 
 def get_metadata_mutool(contribution: ContributionData) -> dict[str, Any] | None:
-
     if not contribution.doi_data:
         return None
 
@@ -149,7 +188,7 @@ def get_metadata_mutool(contribution: ContributionData) -> dict[str, Any] | None
         producer=contribution.producer_meta,
         creator=contribution.creator_meta,
         title=contribution.title_meta,
-        format='application/pdf',
+        format="application/pdf",
         encryption=None,
         creationDate=contribution.doi_data.reception_date_iso,
         modDate=contribution.doi_data.acceptance_date_iso,
@@ -162,19 +201,18 @@ def get_metadata_mutool(contribution: ContributionData) -> dict[str, Any] | None
 
 
 def get_metadata_pikepdf(contribution: ContributionData) -> dict[str, Any] | None:
-
     if not contribution.doi_data:
         return None
 
     metadata = {
-        '/Author': contribution.authors_meta,
-        '/Producer': contribution.producer_meta,
-        '/Creator': contribution.creator_meta,
-        '/Title': contribution.title_meta,
-        '/CreationDate': contribution.doi_data.reception_date_iso,
-        '/ModDate': contribution.doi_data.acceptance_date_iso,
-        '/Subject': contribution.track_meta,
-        '/Keywords': contribution.keywords_meta,
+        "/Author": contribution.authors_meta,
+        "/Producer": contribution.producer_meta,
+        "/Creator": contribution.creator_meta,
+        "/Title": contribution.title_meta,
+        "/CreationDate": contribution.doi_data.reception_date_iso,
+        "/ModDate": contribution.doi_data.acceptance_date_iso,
+        "/Subject": contribution.track_meta,
+        "/Keywords": contribution.keywords_meta,
     }
 
     # "/Author": "F. Pannek, S. Ackermann, E. Ferrari, L. Schaper, W. Hillert",
@@ -190,7 +228,6 @@ def get_metadata_pikepdf(contribution: ContributionData) -> dict[str, Any] | Non
 
 
 def get_xml_metatdata_mutool(contribution: ContributionData) -> str | None:
-
     if not contribution.doi_data:
         return None
 
@@ -200,40 +237,36 @@ def get_xml_metatdata_mutool(contribution: ContributionData) -> str | None:
     meta.set(DC.subject, Literal(contribution.track_meta))
     meta.set(DC.description, Literal(contribution.doi_data.abstract))
     meta.set(DC.language, Literal("en-us"))
-    meta.set(URIRef('http://purl.org/dc/terms/format'),
-             Literal("application/pdf"))
+    meta.set(URIRef("http://purl.org/dc/terms/format"), Literal("application/pdf"))
     meta.set(DC.creator, Literal(contribution.authors_meta))
     meta.set(PDF.Keywords, Literal(contribution.keywords_meta))
     meta.set(PDF.Producer, Literal(contribution.producer_meta))
     meta.set(XMP.CreatorTool, Literal(contribution.creator_tool_meta))
     meta.set(XMP.Identifier, Literal(contribution.doi_data.doi_identifier))
-    meta.set(XMP.ModifyDate, Literal(
-        contribution.doi_data.acceptance_date_iso))
-    meta.set(XMP.MetadataDate, Literal(
-        contribution.doi_data.acceptance_date_iso))
+    meta.set(XMP.ModifyDate, Literal(contribution.doi_data.acceptance_date_iso))
+    meta.set(XMP.MetadataDate, Literal(contribution.doi_data.acceptance_date_iso))
     meta.set(XMP.CreateDate, Literal(contribution.doi_data.reception_date_iso))
 
     return meta.to_xml()
 
 
 def get_xml_metatdata_pikepdf(contribution: ContributionData) -> dict | None:
-
     if not contribution.doi_data:
         return None
 
     meta: dict = {
-        'dc:title': contribution.title_meta,
-        'dc:subject': contribution.track_meta,
-        'dc:description': contribution.doi_data.abstract,
-        'dc:language': 'en-us',
-        'dc:creator': [contribution.authors_meta],
-        'pdf:keywords': contribution.keywords_meta,
+        "dc:title": contribution.title_meta,
+        "dc:subject": contribution.track_meta,
+        "dc:description": contribution.doi_data.abstract,
+        "dc:language": "en-us",
+        "dc:creator": [contribution.authors_meta],
+        "pdf:keywords": contribution.keywords_meta,
         # 'pdf:producer': contribution.producer_meta,
-        'xmp:CreatorTool': contribution.creator_tool_meta,
-        'xmp:Identifier': contribution.doi_data.doi_identifier,
-        'xmp:ModifyDate': contribution.doi_data.acceptance_date_iso,
+        "xmp:CreatorTool": contribution.creator_tool_meta,
+        "xmp:Identifier": contribution.doi_data.doi_identifier,
+        "xmp:ModifyDate": contribution.doi_data.acceptance_date_iso,
         # 'xmp:MetadataDate': contribution.doi_data.acceptance_date_iso,
-        'xmp:CreateDate': contribution.doi_data.reception_date_iso,
+        "xmp:CreateDate": contribution.doi_data.reception_date_iso,
     }
 
     # print(meta)
@@ -241,50 +274,58 @@ def get_xml_metatdata_pikepdf(contribution: ContributionData) -> dict | None:
     return meta
 
 
-def get_footer_data(contribution: ContributionData, session: SessionData) -> dict[str, str] | None:
-
+def get_footer_data(
+    contribution: ContributionData, session: SessionData
+) -> dict[str, str] | None:
     contrib_track = contribution.track.title if contribution.track else None
 
-    classificationHeader = unidecode(contrib_track if contrib_track else '')
-    sessionHeader = unidecode(f'{session.code}: {session.title}')
+    classificationHeader = unidecode(contrib_track if contrib_track else "")
+    sessionHeader = unidecode(f"{session.code}: {session.title}")
 
     footer_data = dict(
         classificationHeader=classificationHeader,
         sessionHeader=sessionHeader,
-        contributionCode=contribution.code
+        contributionCode=contribution.code,
     )
 
     return footer_data
 
 
 def get_header_data(contribution: ContributionData) -> dict[str, str] | None:
-
-    header_data = dict(
-        series=unidecode(contribution.doi_data.series),
-        venue=unidecode(
-            f'{contribution.doi_data.conference_code},{contribution.doi_data.venue}'),
-        isbn=contribution.doi_data.isbn,
-        issn=contribution.doi_data.issn,
-        doi=contribution.doi_data.doi_name
-    ) if contribution.doi_data else None
+    header_data = (
+        dict(
+            series=unidecode(contribution.doi_data.series),
+            venue=unidecode(
+                f"{contribution.doi_data.conference_code},{contribution.doi_data.venue}"
+            ),
+            isbn=contribution.doi_data.isbn,
+            issn=contribution.doi_data.issn,
+            doi=contribution.doi_data.doi_name,
+        )
+        if contribution.doi_data
+        else None
+    )
 
     return header_data
 
 
 async def get_side_data(settings: dict, pdf_cache_dir: Path) -> dict[str, str]:
-
     license_filename: str = settings.get("paper_license_icon_url", None)
     license_logo = None
     if license_filename:
-        license_logo = await Path(pdf_cache_dir, license_filename.split("/")[-1]).read_bytes()
+        license_logo = await Path(
+            pdf_cache_dir, license_filename.split("/")[-1]
+        ).read_bytes()
     else:
-        license_logo = pathlib.Path('cc_by.png').read_bytes()
+        license_logo = pathlib.Path("cc_by.png").read_bytes()
     side_data = {
-        "license_text": settings.get("paper_license_text",
-                                     "Content from this work may be used under the terms of the CC BY 4.0 licence (© 2022)." +
-                                     "Any distribution of this work must maintain attribution to the author(s), " +
-                                     "title of the work, publisher, and DOI."),
-        "license_logo": license_logo
+        "license_text": settings.get(
+            "paper_license_text",
+            "Content from this work may be used under the terms of the CC BY 4.0 licence (© 2022)."
+            + "Any distribution of this work must maintain attribution to the author(s), "
+            + "title of the work, publisher, and DOI.",
+        ),
+        "license_logo": license_logo,
     }
 
     return side_data

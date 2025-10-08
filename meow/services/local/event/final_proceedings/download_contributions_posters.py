@@ -9,7 +9,7 @@ from meow.app.errors.service_error import ProceedingsError
 
 from meow.models.local.event.final_proceedings.contribution_model import FileData
 from meow.models.local.event.final_proceedings.proceedings_data_utils import (
-    extract_proceedings_slides,
+    extract_proceedings_posters,
 )
 
 from meow.utils.http import download_file
@@ -25,21 +25,21 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import (
 logger = lg.getLogger(__name__)
 
 
-async def download_contributions_slides(
+async def download_contributions_posters(
     proceedings_data: ProceedingsData, cookies: dict, settings: dict, callback: Callable
 ):
     """ """
 
-    logger.info("event_final_proceedings - download_contributions_slides")
+    logger.info("event_final_proceedings - download_contributions_posters")
 
-    files_data: list[FileData] = await extract_proceedings_slides(
+    files_data: list[FileData] = await extract_proceedings_posters(
         proceedings_data, callback
     )
 
     total_files: int = len(files_data)
     downloaded_files: int = 0
 
-    logger.info(f"download_contributions_slides - files: {total_files}")
+    logger.info(f"download_contributions_posters - files: {total_files}")
 
     dir_name = f"{proceedings_data.event.id}_tmp"
     file_cache_dir: Path = Path("var", "run", dir_name)
@@ -74,6 +74,7 @@ async def download_contributions_slides(
                         )
 
                     downloaded_files = downloaded_files + 1
+
                     # logger.info(
                     #     f"downloaded_files: {downloaded_files} - {total_files}")
 

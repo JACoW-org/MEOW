@@ -5,7 +5,7 @@ from anyio import Path, create_task_group
 
 from meow.models.local.event.final_proceedings.contribution_model import FileData
 from meow.models.local.event.final_proceedings.proceedings_data_utils import (
-    extract_proceedings_slides,
+    extract_proceedings_posters,
 )
 
 from meow.models.local.event.final_proceedings.proceedings_data_model import (
@@ -20,21 +20,21 @@ from meow.services.local.event.final_proceedings.event_pdf_utils import (
 logger = lg.getLogger(__name__)
 
 
-async def write_slides_metadata(
+async def write_posters_metadata(
     proceedings_data: ProceedingsData, cookies: dict, settings: dict, callback: Callable
 ) -> ProceedingsData:
     """ """
 
-    logger.info("event_final_proceedings - write_slides_metadata")
+    logger.info("event_final_proceedings - write_posters_metadata")
 
-    slides_data: list[FileData] = await extract_proceedings_slides(
+    slides_data: list[FileData] = await extract_proceedings_posters(
         proceedings_data,
         callback,
     )
 
     total_files: int = len(slides_data)
 
-    logger.info(f"write_slides_metadata - files: {total_files}")
+    logger.info(f"write_posters_metadata - files: {total_files}")
 
     dir_name = f"{proceedings_data.event.id}_tmp"
     pdf_cache_dir: Path = Path("var", "run", dir_name)

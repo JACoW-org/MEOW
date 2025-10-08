@@ -1,8 +1,6 @@
 import logging as lg
 from typing import Callable
 
-from meow.utils.filesystem import move
-
 from anyio import Path, create_task_group, CapacityLimiter
 from anyio import create_memory_object_stream, ClosedResourceError, EndOfStream
 from anyio.streams.memory import MemoryObjectSendStream
@@ -13,19 +11,20 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import (
     ProceedingsData,
 )
 from meow.models.local.event.final_proceedings.proceedings_data_utils import (
-    extract_proceedings_papers,
+    extract_proceedings_posters,
 )
+from meow.utils.filesystem import move
 
 
 logger = lg.getLogger(__name__)
 
 
-async def copy_contribution_papers(
+async def copy_contribution_posters(
     proceedings_data: ProceedingsData, cookies: dict, settings: dict, callback: Callable
 ) -> ProceedingsData:
     """ """
 
-    files_data: list[FileData] = await extract_proceedings_papers(
+    files_data: list[FileData] = await extract_proceedings_posters(
         proceedings_data,
         callback,
     )
@@ -77,7 +76,7 @@ async def copy_contribution_papers(
             logger.debug(crs, exc_info=False)
         except EndOfStream as eos:
             logger.debug(eos, exc_info=False)
-        except BaseException as ex:
+        except Exception as ex:
             logger.error(ex, exc_info=True)
 
     return proceedings_data
@@ -113,7 +112,6 @@ async def file_copy_task(
 
             if file_exists:
                 # await dest_path.hardlink_to(file_path)
-                # await copy(str(file_path), str(dest_path))
                 await move(str(file_path), str(dest_path))
 
                 await dest_path.chmod(0o644)
