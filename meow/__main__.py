@@ -11,30 +11,145 @@ import tarfile
 import shutil
 import multiprocessing as mp
 
-from datetime import datetime, timezone
+from datetime import datetime
 
 from fitz import Document, Page, Rect, Point, LINK_GOTO, LINK_URI
-from fitz.utils import getColor, draw_rect, insert_textbox
-from fitz.utils import set_metadata, insert_link, insert_text, new_page
 
+from fitz.utils import (
+    getColor,
+    draw_rect,
+    insert_textbox,
+    set_metadata,
+    insert_link,
+    insert_text,
+    new_page,
+)
 
 from meow.services.local.papers_metadata.pdf_annots import (
     annot_page_footer,
     annot_page_header,
     annot_page_side,
 )
-from meow.services.local.papers_metadata.pdf_annots import (
-    annot_toc_footer,
-    annot_toc_header,
+
+from meow.services.local.papers_metadata.pdf_text import (
+    write_toc_footer,
+    write_toc_header,
+)
+
+from meow.fonts import (
+    FiraGO_Regular as Helvetica_Regular,
+    FiraMono_Regular as Courier_Regular,
+    FiraMono_Bold as Courier_Bold,
 )
 
 from anyio import run
 
-from meow.services.local.papers_metadata.pdf_text import (
-    write_page_footer,
-    write_page_header,
-    write_page_side,
-)
+
+def doc_test(args) -> None:
+    """ """
+
+    PAGE_WIDTH = 595
+    PAGE_HEIGHT = 792
+
+    def add_pdf_page(insert_rect_and_text, doc):
+        """ """
+
+        print("##### Add Pdf Page")
+
+        page: Page = new_page(doc, width=PAGE_WIDTH, height=PAGE_HEIGHT)
+
+        page.insert_font(
+            fontname=Helvetica_Regular.fontalias,
+            fontbuffer=Helvetica_Regular.fontbuffer,
+        )
+        page.insert_font(
+            fontname=Courier_Regular.fontalias,
+            fontbuffer=Courier_Regular.fontbuffer,
+        )
+        page.insert_font(
+            fontname=Courier_Bold.fontalias,
+            fontbuffer=Courier_Bold.fontbuffer,
+        )
+
+        insert_rect_and_text(
+            60,
+            30,
+            600,
+            20,
+            Helvetica_Regular.fontalias,
+            page,
+        )
+        insert_rect_and_text(
+            60,
+            130,
+            600,
+            20,
+            Courier_Regular.fontalias,
+            page,
+        )
+        insert_rect_and_text(
+            60,
+            230,
+            600,
+            20,
+            Courier_Bold.fontalias,
+            page,
+        )
+
+    def insert_rect_and_text(
+        left_margin: int,
+        top_margin: int,
+        rect_width: int,
+        rect_height: int,
+        fontname: str,
+        page: Page,
+    ):
+        """ """
+
+        rect = Rect(
+            left_margin,
+            top_margin,
+            left_margin + rect_width,
+            top_margin + rect_height,
+        )
+
+        draw_rect(page=page, rect=rect, color=getColor("GRAY10"))
+
+        insert_textbox(
+            page=page,
+            rect=rect,
+            buffer=f"This is a preprint - {fontname}",
+            fontname=fontname,
+            fontsize=10,
+            color=getColor("GRAY10"),
+        )
+
+    print("##### New Pdf Doc")
+    doc: Document = Document()
+
+    add_pdf_page(insert_rect_and_text, doc)
+    add_pdf_page(insert_rect_and_text, doc)
+    add_pdf_page(insert_rect_and_text, doc)
+
+    doc.save(filename=args.output)
+    del doc
+
+
+def doc_text(args) -> None:
+    doc = Document(filename=args.input)
+
+    out = io.StringIO()
+
+    for page in doc:  # iterate the document pages
+        text = page.get_textpage().extractText()  # get UTF-8 txt
+        out.write(text)  # write text of page
+
+    txt = out.getvalue()
+
+    sys.stdout.write(f"{txt}\n")
+
+    doc.close()
+    del doc
 
 
 def tz_convert(src_datetime, dest_timezone):
@@ -318,117 +433,40 @@ def doc_frame(args) -> None:
     # print([args.input, page_number, pre_print])
 
     for page in doc:
-        annot_page_header(page=page, data=header)
+        page.insert_font(
+            fontname=Helvetica_Regular.fontalias,
+            fontbuffer=Helvetica_Regular.fontbuffer,
+        )
+        page.insert_font(
+            fontname=Courier_Regular.fontalias,
+            fontbuffer=Courier_Regular.fontbuffer,
+        )
+        page.insert_font(
+            fontname=Courier_Bold.fontalias,
+            fontbuffer=Courier_Bold.fontbuffer,
+        )
 
-        annot_page_footer(page=page, page_number=page_number, data=footer)
+        annot_page_header(
+            page=page,
+            data=header,
+        )
+
+        annot_page_footer(
+            page=page,
+            page_number=page_number,
+            data=footer,
+        )
 
         annot_page_side(
-            page=page, pre_print=pre_print, page_number=page_number, cc_logo=cc_logo
+            page=page,
+            pre_print=pre_print,
+            page_number=page_number,
+            cc_logo=cc_logo,
         )
 
         page_number += 1
 
     doc.save(filename=args.output)
-
-    doc.close()
-    del doc
-
-
-def doc_test(args) -> None:
-    PAGE_WIDTH = 595
-    PAGE_HEIGHT = 792
-
-    TEXT_ALIGN_LEFT = 0
-
-    PAGE_HORIZONTAL_MARGIN = 57
-    PAGE_VERTICAL_MARGIN = 15
-    LINE_SPACING = 3
-    ANNOTATION_HEIGHT = 12
-    SIDENOTE_LENGTH = 650
-    TEXT_COLOR = getColor("GRAY10")
-    TEXT_FILL = getColor("GRAY99")
-    FONT_SIZE = 7
-    # FONT_NAME = 'notos'
-    FONT_NAME = "helv"
-
-    doc = Document()
-    page = new_page(doc, width=PAGE_WIDTH, height=PAGE_HEIGHT)
-
-    print(page.rect.width)
-
-    rect_width = page.rect.width - 2 * PAGE_HORIZONTAL_MARGIN
-
-    print(rect_width)
-
-    # Rect(57.0, 15.0, 538.0, 25.0)
-
-    rect = Rect(
-        PAGE_HORIZONTAL_MARGIN,
-        PAGE_VERTICAL_MARGIN,
-        PAGE_HORIZONTAL_MARGIN + rect_width,
-        PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT,
-    )
-
-    print(rect)
-
-    # text = "This is a preprint --- the final version is --- [published with IOP]"
-
-    # font = Font('cjk')
-
-    # page.insert_font(fontname='cjk', fontbuffer=font.buffer)
-
-    data = dict()
-    opt = dict()
-
-    cc_logo = pathlib.Path("cc_by.png").read_bytes()
-
-    draw_rect(page=page, rect=rect, color=TEXT_COLOR)
-
-    insert_textbox(
-        page=page,
-        rect=rect,
-        # rect=Rect(PAGE_HORIZONTAL_MARGIN,
-        #           PAGE_VERTICAL_MARGIN, PAGE_HORIZONTAL_MARGIN + rect_width,
-        #           PAGE_VERTICAL_MARGIN + ANNOTATION_HEIGHT),
-        align=TEXT_ALIGN_LEFT,
-        buffer="Seriesgmpl",
-        fontname=FONT_NAME,
-        fontsize=FONT_SIZE,
-        color=TEXT_COLOR,
-    )
-
-    write_page_header(page, data, opt)
-
-    write_page_footer(page, 1, data, opt)
-
-    write_page_side(page, "", 1, cc_logo)
-
-    # insert_textbox(page,
-    #                rect=Rect(50,
-    #                          50,
-    #                          500,
-    #                          500),
-    #                buffer=text,
-    #                fontname='helv',
-    #                # encoding=0,
-    #                fontsize=11)
-
-    doc.save(filename=args.output)
-    del doc
-
-
-def doc_text(args) -> None:
-    doc = Document(filename=args.input)
-
-    out = io.StringIO()
-
-    for page in doc:  # iterate the document pages
-        text = page.get_textpage().extractText()  # get UTF-8 txt
-        out.write(text)  # write text of page
-
-    txt = out.getvalue()
-
-    sys.stdout.write(f"{txt}\n")
 
     doc.close()
     del doc
@@ -477,8 +515,8 @@ def doc_report(args) -> None:
         print("trimbox", page.trimbox)
         print("mediabox", page.mediabox)
 
-        page_width = page.mediabox.width
-        page_height = page.mediabox.height
+        page_width = float(round(page.mediabox.width))
+        page_height = float(round(page.mediabox.height))
 
         page_report = dict(sizes=dict(width=page_width, height=page_height))
 
@@ -566,11 +604,31 @@ def doc_toc_vol(args) -> None:
 
     doc: Document = Document()
 
-    page: Page = new_page(doc, width=PAGE_WIDTH, height=PAGE_HEIGHT)
+    page: Page = new_page(
+        doc,
+        width=PAGE_WIDTH,
+        height=PAGE_HEIGHT,
+    )
 
-    annot_toc_header(page=page, data=event)
+    page.insert_font(
+        fontname=Helvetica_Regular.fontalias,  ##
+        fontbuffer=Helvetica_Regular.fontbuffer,  ##
+    )
+    page.insert_font(
+        fontname=Courier_Regular.fontalias,  ##
+        fontbuffer=Courier_Regular.fontbuffer,  ##
+    )
+    page.insert_font(
+        fontname=Courier_Bold.fontalias,  ##
+        fontbuffer=Courier_Bold.fontbuffer,  ##
+    )
 
-    annot_toc_footer(
+    write_toc_header(
+        page=page,
+        data=event,
+    )
+
+    write_toc_footer(
         page=page,
         data=event,
         page_number=start_page + (page.number or 0) + 1,
@@ -583,7 +641,13 @@ def doc_toc_vol(args) -> None:
         PAGE_VERTICAL_MARGIN + PAGE_VERTICAL_SPACE + LINE_SPACING,
     )
 
-    insert_text(page, toc_title_point, f"{toc_title}", fontname="CoBo", fontsize=11)
+    insert_text(
+        page,
+        toc_title_point,
+        f"{toc_title}",
+        fontname=Courier_Bold.fontalias,
+        fontsize=11,
+    )
 
     item_index = 0
     page_number = start_page + (page.number or 0)
@@ -595,13 +659,33 @@ def doc_toc_vol(args) -> None:
         item_index = i % ITEMS_PER_PAGE
 
         if item_index == 0:
-            page = new_page(doc, width=PAGE_WIDTH, height=PAGE_HEIGHT)
+            page: Page = new_page(
+                doc,
+                width=PAGE_WIDTH,
+                height=PAGE_HEIGHT,
+            )
+
+            page.insert_font(
+                fontname=Helvetica_Regular.fontalias,
+                fontbuffer=Helvetica_Regular.fontbuffer,
+            )
+            page.insert_font(
+                fontname=Courier_Regular.fontalias,
+                fontbuffer=Courier_Regular.fontbuffer,
+            )
+            page.insert_font(
+                fontname=Courier_Bold.fontalias,
+                fontbuffer=Courier_Bold.fontbuffer,
+            )
 
             page_number = start_page + (page.number or 0)
 
-            annot_toc_header(page=page, data=event)
+            write_toc_header(
+                page=page,
+                data=event,
+            )
 
-            annot_toc_footer(
+            write_toc_footer(
                 page=page,
                 data=event,
                 page_number=page_number + 1,
@@ -645,7 +729,7 @@ def doc_toc_vol(args) -> None:
                 page,
                 contribution_text_point,
                 contribution_text,
-                fontname="Cour",
+                fontname=Courier_Regular.fontalias,
                 fontsize=9,
             )
 
@@ -661,7 +745,11 @@ def doc_toc_vol(args) -> None:
             session_text = f"{session_text:.<{LINE_LENGTH}}"
 
             insert_text(
-                page, session_text_point, session_text, fontname="CoBo", fontsize=9
+                page,
+                session_text_point,
+                session_text,
+                fontname=Courier_Bold.fontalias,
+                fontsize=9,
             )
 
         elif item.get("type") == "track":
@@ -673,7 +761,13 @@ def doc_toc_vol(args) -> None:
 
             track_text = truncate_text(track_title, track_indent)
 
-            insert_text(page, track_text_point, track_text, fontname="CoBo", fontsize=9)
+            insert_text(
+                page,
+                track_text_point,
+                track_text,
+                fontname=Courier_Bold.fontalias,
+                fontsize=9,
+            )
 
         elif item.get("type") == "track_group":
             track_group_title_point = Point(
@@ -690,7 +784,7 @@ def doc_toc_vol(args) -> None:
                 page,
                 track_group_title_point,
                 track_group_title,
-                fontname="CoBo",
+                fontname=Courier_Bold.fontalias,
                 fontsize=9,
             )
 
@@ -699,7 +793,11 @@ def doc_toc_vol(args) -> None:
         )
 
         insert_text(
-            page, link_point, f"{item.get('page', 0):4d}", fontname="CoBo", fontsize=9
+            page,
+            link_point,
+            f"{item.get('page', 0):4d}",
+            fontname=Courier_Bold.fontalias,
+            fontsize=9,
         )
 
         to_file = toc_data.get("vol_file", None)
@@ -731,8 +829,6 @@ def doc_toc_vol(args) -> None:
 
         json_links.append(json_link)
 
-    doc.save(args.output)
-
     meta = {
         "start_page": start_page,
         "total_pages": doc.page_count,
@@ -741,6 +837,10 @@ def doc_toc_vol(args) -> None:
 
     with open(args.links, "w") as f:
         f.write(json.dumps(meta))
+
+    doc.save(args.output)
+    doc.close()
+    del doc
 
 
 def doc_toc_links(args) -> None:
