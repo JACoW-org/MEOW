@@ -2,36 +2,73 @@ import logging as lg
 
 from anyio import create_task_group, CapacityLimiter
 
-from meow.models.local.event.final_proceedings.event_model import AffiliationData, KeywordData, PersonData
+from meow.models.local.event.final_proceedings.event_model import (
+    AffiliationData,
+    KeywordData,
+    PersonData,
+)
 
-from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
+from meow.models.local.event.final_proceedings.proceedings_data_model import (
+    ProceedingsData,
+)
 from meow.models.local.event.final_proceedings.track_model import TrackData
 
 
 logger = lg.getLogger(__name__)
 
 
-async def generate_contributions_groups(proceedings_data: ProceedingsData,
-                                        cookies: dict, settings: dict) -> ProceedingsData:
+async def generate_contributions_groups(
+    proceedings_data: ProceedingsData, cookies: dict, settings: dict
+) -> ProceedingsData:
     """ """
 
-    logger.info('event_final_proceedings - generate_contributions_groups')
+    logger.info("event_final_proceedings - generate_contributions_groups")
 
     capacity_limiter = CapacityLimiter(16)
 
     async with create_task_group() as tg:
-        tg.start_soon(contributions_group_by_session,
-                      capacity_limiter, proceedings_data, cookies, settings)
-        tg.start_soon(contributions_group_by_classification,
-                      capacity_limiter, proceedings_data, cookies, settings)
-        tg.start_soon(contributions_group_by_author,
-                      capacity_limiter, proceedings_data, cookies, settings)
-        tg.start_soon(contributions_group_by_institute,
-                      capacity_limiter, proceedings_data, cookies, settings)
-        tg.start_soon(contributions_group_by_doi_per_institute,
-                      capacity_limiter, proceedings_data, cookies, settings)
-        tg.start_soon(contributions_group_by_keyword,
-                      capacity_limiter, proceedings_data, cookies, settings)
+        tg.start_soon(
+            contributions_group_by_session,
+            capacity_limiter,
+            proceedings_data,
+            cookies,
+            settings,
+        )
+        tg.start_soon(
+            contributions_group_by_classification,
+            capacity_limiter,
+            proceedings_data,
+            cookies,
+            settings,
+        )
+        tg.start_soon(
+            contributions_group_by_author,
+            capacity_limiter,
+            proceedings_data,
+            cookies,
+            settings,
+        )
+        tg.start_soon(
+            contributions_group_by_institute,
+            capacity_limiter,
+            proceedings_data,
+            cookies,
+            settings,
+        )
+        tg.start_soon(
+            contributions_group_by_doi_per_institute,
+            capacity_limiter,
+            proceedings_data,
+            cookies,
+            settings,
+        )
+        tg.start_soon(
+            contributions_group_by_keyword,
+            capacity_limiter,
+            proceedings_data,
+            cookies,
+            settings,
+        )
 
     # proceedings_data = await contributions_group_by_session(proceedings_data, cookies, settings)
     # proceedings_data = await contributions_group_by_classification(proceedings_data, cookies, settings)
@@ -48,8 +85,12 @@ async def generate_contributions_groups(proceedings_data: ProceedingsData,
     return proceedings_data
 
 
-async def contributions_group_by_session(capacity_limiter: CapacityLimiter, proceedings_data: ProceedingsData,
-                                         cookies: dict, settings: dict) -> ProceedingsData:
+async def contributions_group_by_session(
+    capacity_limiter: CapacityLimiter,
+    proceedings_data: ProceedingsData,
+    cookies: dict,
+    settings: dict,
+) -> ProceedingsData:
     """ """
 
     async with capacity_limiter:
@@ -58,12 +99,15 @@ async def contributions_group_by_session(capacity_limiter: CapacityLimiter, proc
     return proceedings_data
 
 
-async def contributions_group_by_classification(capacity_limiter: CapacityLimiter, proceedings_data: ProceedingsData,
-                                                cookies: dict, settings: dict) -> ProceedingsData:
+async def contributions_group_by_classification(
+    capacity_limiter: CapacityLimiter,
+    proceedings_data: ProceedingsData,
+    cookies: dict,
+    settings: dict,
+) -> ProceedingsData:
     """ """
 
     async with capacity_limiter:
-
         classification_list: list[TrackData] = []
 
         for contribution in proceedings_data.contributions:
@@ -73,8 +117,11 @@ async def contributions_group_by_classification(capacity_limiter: CapacityLimite
         classification_list = list(set(classification_list))
 
         def classification_sort(x: TrackData) -> str:
-            return (f"{x.track_group.position:03d}_{x.track_group.name}_{x.position:03d}_{x.name}"
-                    if x.track_group else f"default_000_{x.position:03d}_{x.name}").lower()
+            return (
+                f"{x.track_group.position:03d}_{x.track_group.name}_{x.position:03d}_{x.name}"
+                if x.track_group
+                else f"default_000_{x.position:03d}_{x.name}"
+            ).lower()
 
         classification_list.sort(key=classification_sort)
 
@@ -83,12 +130,15 @@ async def contributions_group_by_classification(capacity_limiter: CapacityLimite
     return proceedings_data
 
 
-async def contributions_group_by_author(capacity_limiter: CapacityLimiter, proceedings_data: ProceedingsData,
-                                        cookies: dict, settings: dict) -> ProceedingsData:
+async def contributions_group_by_author(
+    capacity_limiter: CapacityLimiter,
+    proceedings_data: ProceedingsData,
+    cookies: dict,
+    settings: dict,
+) -> ProceedingsData:
     """ """
 
     async with capacity_limiter:
-        
         proceedings_authors: dict[str, PersonData] = {}
         for contribution in proceedings_data.contributions:
             for author in contribution.authors:
@@ -96,7 +146,10 @@ async def contributions_group_by_author(capacity_limiter: CapacityLimiter, proce
                     continue
                 if author.id in proceedings_authors:
                     # update author affiliations
-                    proceedings_authors[author.id].affiliations = proceedings_authors[author.id].affiliations | author.affiliations
+                    proceedings_authors[author.id].affiliations = (
+                        proceedings_authors[author.id].affiliations
+                        | author.affiliations
+                    )
                 else:
                     proceedings_authors[author.id] = author
 
@@ -105,14 +158,14 @@ async def contributions_group_by_author(capacity_limiter: CapacityLimiter, proce
         # for contribution in proceedings_data.contributions:
         #     for author in contribution.authors:
         #         if not author:
-        #             continue                
+        #             continue
 
         #         if author not in author_list:
         #             author_list.append(author)
 
         author_list = list(proceedings_authors.values())
 
-        author_list.sort(key=lambda author: author.sort_key())
+        author_list.sort(key=lambda author: author.sort_key().lower())
 
         # author_list.sort(
         #     key=lambda x: f"{x.last} {x.first} {x.affiliations[0]}".lower())
@@ -122,12 +175,15 @@ async def contributions_group_by_author(capacity_limiter: CapacityLimiter, proce
     return proceedings_data
 
 
-async def contributions_group_by_institute(capacity_limiter: CapacityLimiter, proceedings_data: ProceedingsData,
-                                           cookies: dict, settings: dict) -> ProceedingsData:
+async def contributions_group_by_institute(
+    capacity_limiter: CapacityLimiter,
+    proceedings_data: ProceedingsData,
+    cookies: dict,
+    settings: dict,
+) -> ProceedingsData:
     """ """
 
     async with capacity_limiter:
-
         institute_list: list[AffiliationData] = []
 
         for contribution in proceedings_data.contributions:
@@ -144,19 +200,26 @@ async def contributions_group_by_institute(capacity_limiter: CapacityLimiter, pr
     return proceedings_data
 
 
-async def contributions_group_by_doi_per_institute(capacity_limiter: CapacityLimiter, proceedings_data: ProceedingsData,
-                                                   cookies: dict, settings: dict) -> ProceedingsData:
+async def contributions_group_by_doi_per_institute(
+    capacity_limiter: CapacityLimiter,
+    proceedings_data: ProceedingsData,
+    cookies: dict,
+    settings: dict,
+) -> ProceedingsData:
     """ """
 
     return proceedings_data
 
 
-async def contributions_group_by_keyword(capacity_limiter: CapacityLimiter, proceedings_data: ProceedingsData,
-                                         cookies: dict, settings: dict) -> ProceedingsData:
+async def contributions_group_by_keyword(
+    capacity_limiter: CapacityLimiter,
+    proceedings_data: ProceedingsData,
+    cookies: dict,
+    settings: dict,
+) -> ProceedingsData:
     """ """
 
     async with capacity_limiter:
-
         keyword_list: list[KeywordData] = []
 
         for contribution in proceedings_data.contributions:

@@ -121,7 +121,7 @@ async def generate_contribution_references(
                     # logger.info(result)
 
                     result_code: str = result.get("code", None)
-                    result_value: list = result.get("value", [None,None])
+                    result_value: list = result.get("value", [None, None])
 
                     results[result_code] = result_value
 
@@ -164,7 +164,7 @@ async def reference_task(
     capacity_limiter: CapacityLimiter,
     event: EventData,
     contribution: ContributionData,
-    xml_builder,
+    xml_builder: JinjaXMLBuilder,
     xslt_functions: dict,
     settings: dict,
     config: ProceedingsConfig,
@@ -199,7 +199,7 @@ async def get_xslt(xslt_path: str) -> XSLT:
 async def build_contribution_reference(
     event: EventData,
     contribution: ContributionData,
-    xml_builder,
+    xml_builder: JinjaXMLBuilder,
     xslt_functions: dict,
     settings: dict,
     config: ProceedingsConfig,
@@ -214,6 +214,10 @@ async def build_contribution_reference(
         contribution_ref = await contribution_data_factory(
             event, contribution, settings, config, callable
         )
+
+        # logger.info(
+        #     f"contribution_ref {contribution_ref.start_date} {contribution_ref.end_date}"
+        # )
 
         if contribution_ref.is_citable():
             xml_val = await xml_builder.build_reference_xml(contribution_ref)
@@ -232,7 +236,7 @@ async def build_contribution_reference(
         logger.error(ex, exc_info=True)
         logger.error(xml_val)
 
-    return [ contribution_ref, reference]
+    return [contribution_ref, reference]
 
 
 async def contribution_data_factory(
@@ -320,7 +324,6 @@ def refill_contribution_reference(
         code: str = contribution_data.code
 
         if code in results:
-
             [contribution_ref, reference] = results[code]
             contribution_data.contribution_ref = contribution_ref
             contribution_data.reference = reference

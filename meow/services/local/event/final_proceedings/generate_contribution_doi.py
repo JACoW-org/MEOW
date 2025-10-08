@@ -101,7 +101,7 @@ async def generate_dois(
                             result_code = result.get("code", None)
                             result_value = result.get("value", None)
 
-                            logger.info(f"doi: {result_code}")
+                            # logger.info(f"doi: {result_code}")
 
                             if result_value:
                                 results[result_code] = result_value
@@ -514,7 +514,7 @@ def refill_contribution_doi(
         if callable(contribution_data):
             code: str = contribution_data.code
 
-            logger.info(f"code={code} doi_data")
+            # logger.info(f"code={code} doi_data")
 
             if code in results and results[code]:
                 contribution_data.doi_data = results[code]

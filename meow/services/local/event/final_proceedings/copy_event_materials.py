@@ -6,20 +6,23 @@ from anyio.streams.memory import MemoryObjectSendStream
 
 from meow.models.local.event.final_proceedings.event_model import MaterialData
 from meow.models.local.event.final_proceedings.proceedings_data_model import (
-    ProceedingsData)
+    ProceedingsData,
+)
 from meow.utils.filesystem import move
 
 
 logger = lg.getLogger(__name__)
 
 
-async def copy_event_materials(proceedings_data: ProceedingsData,
-                               cookies: dict, settings: dict) -> ProceedingsData:
+async def copy_event_materials(
+    proceedings_data: ProceedingsData, cookies: dict, settings: dict
+) -> ProceedingsData:
     """ """
 
     files_data: list[MaterialData] = [
-        i for i in proceedings_data.materials
-        if i.section not in ['final-proceedings-cover', 'at-a-glance-cover']
+        i
+        for i in proceedings_data.materials
+        if i.section not in ["final-proceedings-cover", "at-a-glance-cover"]
     ]
 
     total_files: int = len(files_data)
@@ -141,9 +144,11 @@ async def file_copy_task(
         except Exception as ex:
             logger.error(ex, exc_info=True)
 
-        await res.send({
-            "index": current_index,
-            "total": total_files,
-            "file": current_file,
-            "exists": file_exists,
-        })
+        await res.send(
+            {
+                "index": current_index,
+                "total": total_files,
+                "file": current_file,
+                "exists": file_exists,
+            }
+        )

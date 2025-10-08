@@ -444,7 +444,6 @@ li {
 
 .content .left .authors a {
   text-decoration: none;
-  /* color: var(--primary-color, '#333'); */
 }
 
 .content .right .contrib .contrib-header {

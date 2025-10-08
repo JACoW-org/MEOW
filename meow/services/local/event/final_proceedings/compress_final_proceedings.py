@@ -2,31 +2,42 @@ import logging as lg
 
 from anyio import Path, run_process
 
-from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
+from meow.models.local.event.final_proceedings.proceedings_data_model import (
+    ProceedingsData,
+)
 
 
 logger = lg.getLogger(__name__)
 
 
-async def compress_proceedings(proceedings: ProceedingsData, cookies: dict, settings: dict):
+async def compress_proceedings(
+    proceedings: ProceedingsData, cookies: dict, settings: dict
+):
     """ """
 
-    site_preview_ctx = f'{proceedings.event.id}'
+    site_preview_ctx = f"{proceedings.event.id}"
     site_preview_dir = Path(site_preview_ctx)
     site_preview_zip = Path(f"{site_preview_ctx}.7z")
-    site_working_dir = Path('var', 'html')
+    site_working_dir = Path("var", "html")
 
-    zip_cmd = await Path('bin', '7zzs').absolute()
+    zip_cmd = await Path("bin", "7zzs").absolute()
 
     full_dest_path = Path(site_working_dir, f"{site_preview_ctx}.7z")
     await full_dest_path.unlink(missing_ok=True)
 
-    zip_args = [f"{zip_cmd}", "a",
-                "-t7z", "-m0=Deflate",
-                "-ms=16m", "-mmt=4",
-                "-bd", "-mx=1", "--",
-                f"{site_preview_zip}",
-                f"{site_preview_dir}"]
+    zip_args = [
+        f"{zip_cmd}",
+        "a",
+        "-t7z",
+        "-m0=Deflate",
+        "-ms=16m",
+        "-mmt=4",
+        "-bd",
+        "-mx=1",
+        "--",
+        f"{site_preview_zip}",
+        f"{site_preview_dir}",
+    ]
 
     logger.info(" ".join(zip_args))
 

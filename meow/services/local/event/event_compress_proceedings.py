@@ -9,9 +9,15 @@ from meow.models.infra.locks import RedisLock
 
 from redis.exceptions import LockError
 
-from meow.models.local.event.final_proceedings.proceedings_data_model import ProceedingsData
-from meow.services.local.event.common.adapting_final_proceedings import adapting_proceedings
-from meow.services.local.event.final_proceedings.compress_final_proceedings import compress_proceedings
+from meow.models.local.event.final_proceedings.proceedings_data_model import (
+    ProceedingsData,
+)
+from meow.services.local.event.common.adapting_final_proceedings import (
+    adapting_proceedings,
+)
+from meow.services.local.event.final_proceedings.compress_final_proceedings import (
+    compress_proceedings,
+)
 
 
 from contextvars import Token
@@ -20,24 +26,30 @@ from meow.utils.logger import event_id_var
 logger = lg.getLogger(__name__)
 
 
-async def event_compress_proceedings(event: dict, cookies: dict, settings: dict) -> AsyncGenerator:
+async def event_compress_proceedings(
+    event: dict, cookies: dict, settings: dict
+) -> AsyncGenerator:
     """ """
-    
+
     token: Token = None
 
     try:
-        event_id: str = event.get('id', '')
+        event_id: str = event.get("id", "")
 
-        if not event_id or event_id == '':
-            raise BaseException('Invalid event id')
-        
+        if not event_id or event_id == "":
+            raise BaseException("Invalid event id")
+
         token = event_id_var.set(event_id)
 
         async with acquire_lock(event_id) as lock:
-
             logger.debug(f"acquire_lock -> {lock.name}")
 
-            async for r in _event_compress_proceedings(event, cookies, settings, lock):
+            async for r in _event_compress_proceedings(
+                event,
+                cookies,
+                settings,
+                lock,
+            ):
                 yield r
 
             logger.debug(f"release_lock -> {lock.name}")
@@ -57,7 +69,7 @@ async def event_compress_proceedings(event: dict, cookies: dict, settings: dict)
 
 
 def acquire_lock(key: str) -> RedisLock:
-    """ Create event lock """
+    """Create event lock"""
 
     redis_lock = RedisLock(
         redis=dbs.redis_client,
@@ -73,16 +85,18 @@ def acquire_lock(key: str) -> RedisLock:
 
 
 async def extend_lock(lock: RedisLock) -> RedisLock:
-    """ Reset lock timeout (conf.REDIS_LOCK_TIMEOUT_SECONDS) """
+    """Reset lock timeout (conf.REDIS_LOCK_TIMEOUT_SECONDS)"""
 
     await lock.reacquire()
     return lock
 
 
-async def _event_compress_proceedings(event: dict, cookies: dict, settings: dict, lock: RedisLock) -> AsyncGenerator:
+async def _event_compress_proceedings(
+    event: dict, cookies: dict, settings: dict, lock: RedisLock
+) -> AsyncGenerator:
     """ """
 
-    logger.info('_event_compress_proceedings - _event_compress_proceedings')
+    logger.info("_event_compress_proceedings - _event_compress_proceedings")
 
     """ """
 
@@ -94,21 +108,23 @@ async def _event_compress_proceedings(event: dict, cookies: dict, settings: dict
 
     await extend_lock(lock)
 
-    yield dict(type='progress', value=dict(
-        phase='adapting_proceedings',
-        text="Adaptin proceedings"
-    ))
+    yield dict(
+        type="progress",
+        value=dict(phase="adapting_proceedings", text="Adaptin proceedings"),
+    )
 
-    proceedings = await adapting_proceedings(event, sessions, contributions, materials, cookies, settings)
+    proceedings = await adapting_proceedings(
+        event, sessions, contributions, materials, cookies, settings
+    )
 
     """ """
 
     await extend_lock(lock)
 
-    yield dict(type='progress', value=dict(
-        phase='compress_static_site',
-        text='Compress Static site'
-    ))
+    yield dict(
+        type="progress",
+        value=dict(phase="compress_static_site", text="Compress Static site"),
+    )
 
     await compress_proceedings(proceedings, cookies, settings)
 
@@ -126,11 +142,11 @@ async def get_proceedings(proceedings: ProceedingsData) -> dict:
     event_path = proceedings.event.path
 
     return dict(
-        type='result',
+        type="result",
         value=dict(
             event_code=event_code,
             event_name=event_name,
             event_title=event_title,
-            event_path=event_path
-        )
+            event_path=event_path,
+        ),
     )

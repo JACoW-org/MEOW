@@ -17,13 +17,22 @@ async def collecting_event_sessions_and_contributions(
     logger.info("event_final_proceedings - collecting_event_sessions_and_contributions")
 
     [event, settings] = await collect_event_and_settings(
-        event_id, event_url, indico_token
+        event_id,
+        event_url,
+        indico_token,
     )
+
     sessions_list: list = await collect_sessions_data_list(
-        event_id, event_url, indico_token
+        event_id,
+        event_url,
+        indico_token,
     )
+
     contributions_list: list = await collect_contributions_data_list(
-        event_id, event_url, indico_token, sessions_list
+        event_id,
+        event_url,
+        indico_token,
+        sessions_list,
     )
 
     return [event, settings, sessions_list, contributions_list]

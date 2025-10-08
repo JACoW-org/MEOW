@@ -258,7 +258,7 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
                 base_path = Path(self.src_dir, "layouts", "partials", "contributions")
 
                 if contribution.code:
-                    logger.info(f"render_contribution {code}")
+                    # logger.info(f"render_contribution {code}")
 
                     is_published = self.filter_published_contributions(contribution)
 
@@ -269,7 +269,7 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
                     )
 
                     if contribution.doi_data:
-                        logger.info(f"render_contribution_doi {code}")
+                        # logger.info(f"render_contribution_doi {code}")
 
                         await Path(base_path, f"{code}_doi.html").write_text(
                             await self.template.render_doi_partial(
@@ -495,6 +495,7 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
                     code=c.code,
                     title=c.title,
                     is_slides_included=c.is_slides_included,
+                    is_posters_included=c.is_posters_included,
                     is_included_in_prepress=c.is_included_in_prepress,
                     is_included_in_proceedings=c.is_included_in_proceedings,
                     doi_data=c.doi_data,
