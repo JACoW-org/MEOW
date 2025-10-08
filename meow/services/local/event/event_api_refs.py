@@ -37,7 +37,7 @@ async def event_api_refs(
     event_id: str, event_url: str, indico_token: str
 ) -> AsyncGenerator:
     """ """
-    
+
     token: Token = None
 
     try:
@@ -47,7 +47,7 @@ async def event_api_refs(
                 orjson.dumps({"status": 400, "error": "Invalid event id"}).decode()
                 + "\n"
             )
-        
+
         token = event_id_var.set(event_id)
 
         if not indico_token or indico_token == "":
@@ -93,7 +93,12 @@ async def event_api_refs(
             static_site_type="references",
         )
 
-        async for r in _event_api_refs(event_id, event_url, indico_token, config):
+        async for r in _event_api_refs(
+            event_id,
+            event_url,
+            indico_token,
+            config,
+        ):
             yield orjson.dumps(r).decode() + "\n"
 
         yield orjson.dumps({"status": 200}).decode() + "\n"

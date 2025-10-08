@@ -44,7 +44,9 @@ async def event_abstract_booklet(
         )
 
         [sessions, contributions] = await collect_sessions_and_contributions(
-            event, cookies, settings
+            event,
+            cookies,
+            settings,
         )
 
         logger.info(
@@ -64,7 +66,11 @@ async def event_abstract_booklet(
             ),
         )
 
-        ab = await create_abstract_booklet_from_event(event, sessions, contributions)
+        ab = await create_abstract_booklet_from_event(
+            event,
+            sessions,
+            contributions,
+        )
 
         """ """
 
@@ -78,7 +84,11 @@ async def event_abstract_booklet(
             ),
         )
 
-        odt = export_abstract_booklet_to_odt(ab, cookies, settings)
+        odt = export_abstract_booklet_to_odt(
+            ab,
+            cookies,
+            settings,
+        )
 
         result = dict(
             b64=base64.b64encode(odt.getvalue()).decode("utf-8"),

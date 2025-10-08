@@ -12,13 +12,13 @@ logger = lg.getLogger(__name__)
 
 async def event_api_info(event_id: str) -> dict | None:
     """ """
-    
+
     token: Token = None
 
     try:
         if not event_id or event_id == "":
             raise BaseException("Invalid event id")
-        
+
         token = event_id_var.set(event_id)
 
         return await _event_api_info(event_id)
