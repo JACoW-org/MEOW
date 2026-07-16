@@ -363,7 +363,7 @@ class ContributionData:
         field_value: str = ""
 
         for _field in self.field_values:
-            if preprint_marking_alias.lower() in _field.name.lower() ==  and _field.value:
+            if preprint_marking_alias.lower() in _field.name.lower() and _field.value:
                 field_value = _field.value.lower()
                 break
 
