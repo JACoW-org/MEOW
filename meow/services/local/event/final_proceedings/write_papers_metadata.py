@@ -122,14 +122,15 @@ async def write_metadata_task(
     # xml_metadata_mutool = get_xml_metatdata_mutool(contribution)
     xml_metadata_pikepdf: dict | None = get_xml_metatdata_pikepdf(contribution)
 
+    logger.info(f"preprint_marking_requested {preprint_marking_requested} / contribution.peer_reviewing_accepted {contribution.peer_reviewing_accepted} ")
     pre_print: str = (
         settings.get("pre_print", "This is a preprint")
-        if contribution.peer_reviewing_accepted
+        if contribution.peer_reviewing_accepted or preprint_marking_requested
         else ""
     )
 
-    # if pre_print != '':
-    #     logger.info(f"code: {contribution.code} - preprint: {pre_print}")
+    if pre_print != '':
+         logger.info(f"code: {contribution.code} - preprint: {pre_print}")
 
     async def _task_jacow_files():
         await draw_frame_anyio(

@@ -260,6 +260,7 @@ class ContributionData:
     is_included_in_references: bool = field(default=False)
 
     peer_reviewing_accepted: bool = field(default=False)
+    preprint_marking_requested: bool = field(default=False)
 
     reception: datetime | None = field(default=None)
     revisitation: datetime | None = field(default=None)
@@ -357,6 +358,16 @@ class ContributionData:
                 break
 
         return field_value in ["", "yes", "true", "1"]
+
+    def preprint_marking(self, preprint_marking_alias: str, preprint_request_alias: str) -> bool:
+        field_value: str = ""
+
+        for _field in self.field_values:
+            if preprint_marking_alias.lower() in _field.name.lower() ==  and _field.value:
+                field_value = _field.value.lower()
+                break
+
+        return preprint_request_alias.lower() in field_value
 
     def duplicate_of_code(self, duplicate_of_alias: str) -> str | None:
         # after duplicate of is initialized, use this condition

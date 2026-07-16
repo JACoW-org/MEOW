@@ -281,6 +281,12 @@ def contribution_data_factory(
 
     logger.info(f"peer_reviewing_accepted: {peer_reviewing_accepted}")
 
+    logger.info(f"checking preprint marking request:")
+    logger.info(f"preprint_marking_alias {preprint_marking_alias}")
+    logger.info(f"preprint_request_alias {preprint_request_alias}")
+    preprint_marking_requested=contribution.preprint_marking( preprint_marking_alias, preprint_request_alias)
+    logger.info(f"preprint_marking_requested {preprint_marking_requested}")
+
     """ """
 
     # if is_included_in_proceedings != editable_is_included_in_proceedings:
