@@ -122,10 +122,10 @@ async def write_metadata_task(
     # xml_metadata_mutool = get_xml_metatdata_mutool(contribution)
     xml_metadata_pikepdf: dict | None = get_xml_metatdata_pikepdf(contribution)
 
-    logger.info(f"preprint_marking_requested {preprint_marking_requested} / contribution.peer_reviewing_accepted {contribution.peer_reviewing_accepted} ")
+    logger.info(f"preprint_marking_requested {contribution.preprint_marking_requested} / contribution.peer_reviewing_accepted {contribution.peer_reviewing_accepted} ")
     pre_print: str = (
         settings.get("pre_print", "This is a preprint")
-        if contribution.peer_reviewing_accepted or preprint_marking_requested
+        if contribution.peer_reviewing_accepted or contribution.preprint_marking_requested
         else ""
     )
 

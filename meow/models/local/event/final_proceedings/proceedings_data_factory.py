@@ -52,11 +52,10 @@ def proceedings_data_factory(event: Any, sessions: list, contributions: list,
 
     preprint_marking_alias: str | None = settings.get('preprint_marking_alias', 'CAT_preprint_marking')
     preprint_request_alias: str | None = settings.get('preprint_request_alias', 'i wish my paper to be marked as preprint')
-    
 
     contributions_data: list[ContributionData] = [
         c for c in [
-            contribution_data_factory(c, editors, event_timezone) for c in contributions
+            contribution_data_factory(c, editors, event_timezone, preprint_marking_alias, preprint_request_alias) for c in contributions
         ] if c and c.cat_publish(cat_publish_alias)
     ]
 

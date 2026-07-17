@@ -359,16 +359,6 @@ class ContributionData:
 
         return field_value in ["", "yes", "true", "1"]
 
-    def preprint_marking(self, preprint_marking_alias: str, preprint_request_alias: str) -> bool:
-        field_value: str = ""
-
-        for _field in self.field_values:
-            if preprint_marking_alias.lower() in _field.name.lower() and _field.value:
-                field_value = _field.value.lower()
-                break
-
-        return preprint_request_alias.lower() in field_value
-
     def duplicate_of_code(self, duplicate_of_alias: str) -> str | None:
         # after duplicate of is initialized, use this condition
         if self.duplicate_of:
@@ -498,3 +488,14 @@ class ContributionPosterData:
 
     def as_json(self) -> str:
         return json_encode(self.as_dict()).decode()
+
+
+def preprint_marking(contribution_dict, preprint_marking_alias: str, preprint_request_alias: str) -> bool:
+    field_value: str = ""
+
+    for _field in contribution_dict.get("field_values", []):
+        if preprint_marking_alias.lower() in _field.get("name").lower() and _field.get("value"):
+            field_value = _field.get("value").lower()
+            break
+
+    return preprint_request_alias.lower() in field_value

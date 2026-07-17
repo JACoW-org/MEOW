@@ -4,6 +4,8 @@ from typing import Any
 
 from meow.models.local.event.final_proceedings.track_factory import track_data_factory
 
+from meow.models.local.event.final_proceedings.contribution_model import preprint_marking
+
 from meow.models.local.event.final_proceedings.event_factory import (
     event_affiliation_factory,
     event_person_factory,
@@ -65,7 +67,8 @@ def contribution_editable_factory(
 
 
 def contribution_data_factory(
-    contribution: Any, editors: list[PersonData], event_timezone: str
+    contribution: Any, editors: list[PersonData], event_timezone: str,
+    preprint_marking_alias: str | None = None, preprint_request_alias: str | None = None
 ) -> ContributionData:
     logger.info(f"contribution_code: {contribution.get('code')}")
 
@@ -284,7 +287,7 @@ def contribution_data_factory(
     logger.info(f"checking preprint marking request:")
     logger.info(f"preprint_marking_alias {preprint_marking_alias}")
     logger.info(f"preprint_request_alias {preprint_request_alias}")
-    preprint_marking_requested=contribution.preprint_marking( preprint_marking_alias, preprint_request_alias)
+    preprint_marking_requested=preprint_marking(contribution, preprint_marking_alias, preprint_request_alias)
     logger.info(f"preprint_marking_requested {preprint_marking_requested}")
 
     """ """
