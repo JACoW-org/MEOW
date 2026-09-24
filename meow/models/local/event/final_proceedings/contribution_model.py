@@ -491,11 +491,14 @@ class ContributionPosterData:
 
 
 def preprint_marking(contribution_dict, preprint_marking_alias: str, preprint_request_alias: str) -> bool:
-    field_value: str = ""
+    field_name = (preprint_marking_alias or 'CAT_preprint_marking').strip().casefold()
+    requested_value = (preprint_request_alias or 'ATTIVO').strip().casefold()
+    accepted_values = {requested_value}
+    if not preprint_request_alias:
+        accepted_values.add('i wish my paper to be marked as preprint')
 
-    for _field in contribution_dict.get("field_values", []):
-        if preprint_marking_alias.lower() in _field.get("name").lower() and _field.get("value"):
-            field_value = _field.get("value").lower()
-            break
+    for field in contribution_dict.get("field_values") or []:
+        if (field.get("name") or "").strip().casefold() == field_name:
+            return (field.get("value") or "").strip().casefold() in accepted_values
 
-    return preprint_request_alias.lower() in field_value
+    return False
