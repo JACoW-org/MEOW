@@ -17,6 +17,7 @@ Detailed documentation is organized within the `docs/` directory:
 | [`docs/REQUIREMENTS.md`](docs/REQUIREMENTS.md) | System-level dependencies (C-libraries, Redis) and categorized Python runtime and development package dependencies. |
 | [`docs/EXTERNAL_TOOLS.md`](docs/EXTERNAL_TOOLS.md) | External CLI tools and binaries (`bin/`), Java/JRE requirements (`pdftk`), bundled libraries (`lib/`), and subprocess wrappers. |
 | [`docs/DOCKER.md`](docs/DOCKER.md) | Containerization guide, Dockerfile base image (`python:3.11`), helper scripts (`docker/*.sh`), and environment variables. |
+| [`docs/PROPOSAL_INFRASTRUCTURE_EVOLUTION.md`](docs/PROPOSAL_INFRASTRUCTURE_EVOLUTION.md) | **[Proposal]** Infrastructure evolution: Systemd multi-instance lifecycle, Cgroups v2 VFS metrics, Valkey migration/backup, and telemetry dashboards (#19, #22, #23). |
 
 ---
 
