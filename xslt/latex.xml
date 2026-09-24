@@ -87,7 +87,7 @@
         <xsl:text>.</xsl:text>
         <xsl:if test="contribution/doi != ''">
             <xsl:text>
-    \url{doi:</xsl:text>
+    \doi{</xsl:text>
             <xsl:value-of select="contribution/doi"/>
             <xsl:text>}
             </xsl:text>
