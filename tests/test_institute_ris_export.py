@@ -16,7 +16,7 @@ def test_institute_ris_export(tmp_path):
         id="43", name="Other", street="", postcode="", city="", country_code=""
     )
 
-    def contribution(code, affiliations, published=True, doi=True, ris=None):
+    def contribution(code, institutes, published=True, doi=True, ris=None):
         return SimpleNamespace(
             code=code,
             title=code,
@@ -26,8 +26,10 @@ def test_institute_ris_export(tmp_path):
             is_included_in_proceedings=published,
             doi_data=object() if doi else None,
             reference=SimpleNamespace(ris=ris) if ris else None,
-            authors_list=[SimpleNamespace(affiliations=affiliations)] * 2,
-            institutes=[institute] if "Lab" in affiliations else [other],
+            # author affiliations deliberately differ from contribution institutes:
+            # the RIS export must follow the same grouping as the DOI list
+            authors_list=[SimpleNamespace(affiliations={"Unrelated"})],
+            institutes=institutes,
         )
 
     plugin = HugoProceedingsPlugin.__new__(HugoProceedingsPlugin)
@@ -35,17 +37,19 @@ def test_institute_ris_export(tmp_path):
     plugin.src_doi_per_institute_dir = Path(tmp_path, "content", "doi_per_institute")
     plugin.institutes = [institute, other]
     plugin.contributions = [
-        contribution("A", {"Lab"}, ris="TY  - JOUR\nER  - "),
-        contribution("B", {"Lab"}, ris="TY  - CONF\nER  - "),
-        contribution("C", {"Lab"}, published=False, ris="excluded"),
-        contribution("D", {"Lab"}, doi=False, ris="excluded"),
-        contribution("E", {"Other"}, ris=None),
+        contribution("A", [institute], ris="TY  - JOUR\nER  - "),
+        contribution("B", [institute], ris="TY  - CONF\nER  - "),
+        contribution("C", [institute], published=False, ris="excluded"),
+        contribution("D", [institute], doi=False, ris="excluded"),
+        contribution("E", [other], ris=None),
     ]
-    plugin.filter_published_contributions = lambda c: True
+    plugin.filter_published_contributions = lambda c: c.is_included_in_proceedings
     rendered = []
 
     async def render_partial(institutes, groups, ris_ids):
         rendered.extend(institutes)
+        assert [c["code"] for c in groups["Lab"]] == ["A", "B"]
+        assert [c["code"] for c in groups["Other"]] == ["E"]
         assert ris_ids == {"42"}
         return "partial"
 
