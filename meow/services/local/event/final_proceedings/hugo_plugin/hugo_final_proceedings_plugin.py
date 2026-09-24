@@ -494,8 +494,20 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
         )
 
         contributionsGroups: dict[str, list[dict]] = {}
+        ris_institute_ids: set[str] = set()
+
+        ris_dir = Path(self.src_dir, "static", "ris", "institute")
+        await ris_dir.mkdir(parents=True, exist_ok=True)
 
         for institute in self.institutes:
+            institute_contributions = [
+                c
+                for c in self.contributions
+                if self.filter_published_contributions(c)
+                and c.doi_data
+                and institute in c.institutes
+            ]
+
             contributionsGroups[institute.name] = [
                 dict(
                     code=c.code,
@@ -506,11 +518,19 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
                     is_included_in_proceedings=c.is_included_in_proceedings,
                     doi_data=c.doi_data,
                 )
-                for c in self.contributions
-                if self.filter_published_contributions(c)
-                and c.doi_data
-                and institute in c.institutes
+                for c in institute_contributions
             ]
+
+            ris_records = [
+                c.reference.ris.strip()
+                for c in institute_contributions
+                if c.reference and c.reference.ris and c.reference.ris.strip()
+            ]
+            if ris_records and institute.id:
+                await Path(ris_dir, f"{institute.id}.ris").write_text(
+                    "\n\n".join(ris_records) + "\n"
+                )
+                ris_institute_ids.add(institute.id)
 
         institutes: list = [
             i for i in self.institutes if len(contributionsGroups[i.name]) > 0
@@ -520,7 +540,9 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
         await doi_per_institute_partial_dir.write_text(
             await self.template.render_doi_per_institute_partial(
-                institutes, contributionsGroups
+                institutes,
+                contributionsGroups,
+                ris_institute_ids,
             )
         )
 

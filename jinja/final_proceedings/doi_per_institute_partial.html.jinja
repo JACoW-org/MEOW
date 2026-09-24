@@ -6,6 +6,9 @@
   <li class="doi-per-institute">
 
     <b>{{ institute.name|e }}</b>
+    {% if institute.id in ris_institute_ids %}
+    <a data-href="ris/institute/{{ institute.id|urlencode }}.ris" href="javascript:void(0);" download>Download RIS</a>
+    {% endif %}
 
     <ul class="contributions">
       {% for contribution in contributionsGroups[institute.name] %}
