@@ -44,8 +44,9 @@ def test_institute_ris_export(tmp_path):
     plugin.filter_published_contributions = lambda c: True
     rendered = []
 
-    async def render_partial(institutes, groups):
+    async def render_partial(institutes, groups, ris_ids):
         rendered.extend(institutes)
+        assert ris_ids == {"42"}
         return "partial"
 
     async def render_page(event, institute, contribution):
@@ -67,6 +68,6 @@ def test_institute_ris_export(tmp_path):
             "TY  - JOUR\nER  -\n\nTY  - CONF\nER  -\n"
         )
         assert not await Path(tmp_path, "static", "ris", "institute", "43.ris").exists()
-        assert rendered == [institute]
+        assert rendered == [institute, other]
 
     run(check)

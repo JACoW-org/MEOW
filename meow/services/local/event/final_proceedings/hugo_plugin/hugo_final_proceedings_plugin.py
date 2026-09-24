@@ -494,7 +494,7 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
         )
 
         contributionsGroups: dict[str, list[dict]] = {}
-        ris_institutes: list[AffiliationData] = []
+        ris_institute_ids: set[str] = set()
 
         ris_dir = Path(self.src_dir, "static", "ris", "institute")
         await ris_dir.mkdir(parents=True, exist_ok=True)
@@ -529,21 +529,23 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
                     for author in c.authors_list
                 )
             ]
-            if ris_records:
+            if ris_records and institute.id:
                 await Path(ris_dir, f"{institute.id}.ris").write_text(
                     "\n\n".join(ris_records) + "\n"
                 )
-                ris_institutes.append(institute)
+                ris_institute_ids.add(institute.id)
 
         institutes: list = [
-            i for i in ris_institutes if len(contributionsGroups[i.name]) > 0
+            i for i in self.institutes if len(contributionsGroups[i.name]) > 0
         ]
 
         # logger.info(f'render_doi_per_institute - {contributionsGroups}')
 
         await doi_per_institute_partial_dir.write_text(
             await self.template.render_doi_per_institute_partial(
-                institutes, contributionsGroups
+                institutes,
+                contributionsGroups,
+                ris_institute_ids,
             )
         )
 
