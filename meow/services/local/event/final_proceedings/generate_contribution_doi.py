@@ -272,7 +272,7 @@ async def generate_conference_doi_task(
                 ],
                 "nameIdentifiers": [
                     {
-                        "nameIdentifier": index,
+                        "nameIdentifier": f"{index}",
                         "schemeUri": "https://jacow.org",
                         "nameIdentifierScheme": "JACoW-ID",
                     }
@@ -294,7 +294,7 @@ async def generate_conference_doi_task(
                 "contributorType": "Editor",
                 "nameIdentifiers": [
                     {
-                        "nameIdentifier": index,
+                        "nameIdentifier": f"{index}",
                         "schemeUri": "https://jacow.org",
                         "nameIdentifierScheme": "JACoW-ID",
                     }
