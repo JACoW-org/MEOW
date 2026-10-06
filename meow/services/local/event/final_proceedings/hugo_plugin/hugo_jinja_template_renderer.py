@@ -31,7 +31,7 @@ from meow.utils.collections import (
     group_keywords_by_initial,
 )
 
-from meow.utils.escape import escape_special_characters
+from meow.utils.escape import escape_special_characters, toml_string
 
 
 logger = lg.getLogger(__name__)
@@ -67,6 +67,7 @@ class JinjaTemplateRenderer:
             bytecode_cache=FileSystemCache("var/cache/final_proceedings"),
             loader=FileSystemLoader("jinja/final_proceedings"),
         )
+        self.env.filters["toml_string"] = toml_string
 
     async def render(
         self, template: str, params: dict, minify: bool = False, escape: bool = False
@@ -332,7 +333,10 @@ class JinjaTemplateRenderer:
         return await self.render(
             "doi_page.html.jinja",
             minify=False,
-            params=dict(contribution=contribution.as_dict()),
+            params=dict(
+                contribution=contribution.as_dict(),
+                pdf_url=contribution.pdf_url,
+            ),
         )
 
     async def render_doi_partial(
