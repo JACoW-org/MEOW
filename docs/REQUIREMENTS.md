@@ -6,53 +6,52 @@ This document details the system prerequisites and Python dependencies required 
 
 ## 1. System Requirements
 
-- **Operating System**: Linux (Ubuntu 20.04+, Debian 11+, RHEL/Rocky 8+) or macOS.
-- **Python**: Python 3.10 or Python 3.11 (Python 3.11 recommended).
-- **Redis**: Redis 6.0+ or Redis 7.0+ (used as message broker and state store).
-- **System Libraries**:
-  - `libxml2-dev`, `libxslt1-dev` (for `lxml`)
-  - `zlib1g-dev`, `libjpeg-dev`, `libfreetype6-dev` (for `pillow` / image processing)
-  - Standard C/C++ compiler toolchain (for building C-extensions if wheels are unavailable)
+- **Operating System**: Linux x86_64. The bundled binaries in `bin/` and `lib/` are x86_64 ELF executables, so macOS and other architectures are not supported by the bundled tools.
+- **Python**: 3.12 (see [`INSTALL.md`](INSTALL.md) for what has and has not been verified).
+- **Redis**: a reachable Redis server, used as message broker (Pub/Sub) and store for API keys. The helper scripts use `redis/redis-stack` and `redis:alpine` images; no minimum Redis version has been verified.
+- **Java runtime**: required by `bin/pdftk.sh`.
+- **Binaries in `bin/`**: `hugo`, `7zzs` and `pdftk.sh` are used by the active code path (see [`EXTERNAL_TOOLS.md`](EXTERNAL_TOOLS.md)).
+- **System libraries**: none are documented as required. The pinned Python packages provide binary wheels for Linux x86_64 on Python 3.12; a C/C++ toolchain and `-dev` libraries are only needed if you build from source.
 
 ---
 
 ## 2. Python Package Requirements
 
+The authoritative list is `requirements.txt` (pinned versions). The groups below describe the packages that MEOW imports directly.
+
 ### Core Runtime (`requirements.txt`)
 - **Async Web & Networking**:
-  - `starlette`: Web framework and routing.
-  - `uvicorn`: ASGI server.
-  - `websockets`: WebSocket server & client support.
+  - `starlette`: Web framework and routing (HTTP and WebSocket; no FastAPI).
+  - `uvicorn`: ASGI server (`websockets` is its WebSocket implementation).
   - `anyio` & `uvloop`: Structured concurrency and fast event loop implementation.
   - `aiohttp`: Asynchronous HTTP client.
   - `redis`: Async Redis client.
 - **Document & PDF Processing**:
-  - `PyMuPDF` (`fitz`), `PyMuPDFb`, `pymupdf-fonts`: PDF inspection and text/image extraction.
+  - `PyMuPDF` (`fitz`), `PyMuPDFb`, `pymupdf-fonts`: PDF inspection, text/image extraction and stamping.
   - `pikepdf`: PDF parsing and modification.
   - `pillow`: Image processing.
   - `odfpy`: OpenDocument (ODT) generation.
 - **XML, HTML & Templating**:
   - `lxml`: XML / XSLT transformations.
-  - `defusedxml`: Secure XML parsing.
   - `Jinja2`: Templating engine.
   - `minify_html`: HTML minification.
 - **Data & Text Serialization**:
   - `orjson`: Fast JSON serialization.
-  - `pyarrow` & `numpy`: Tabular and numerical data handling.
   - `rdflib`: RDF metadata manipulation.
   - `nltk` & `Unidecode`: Text normalization.
   - `ulid`: Unique ID generation.
+  - `pytz`: Time zone conversion.
 - **Process Management**:
   - `supervisor`: Multi-process management daemon.
 
-### Development & Testing (`requirements-dev.txt`)
-- `pytest`: Test runner and testing framework.
-- `flake8`: Linting and style enforcement.
-- `autopep8`: Automatic code formatting.
-- `pylance`: Static analysis support.
+Other packages in `requirements.txt` (for example `pyarrow`, `numpy`, `defusedxml`, `pylance`) are not imported by MEOW's code; they are pinned as dependencies of other packages or for historical reasons. `pylance` is the Lance data-format library, **not** the Microsoft language server.
+
+### Development & Testing
+- `flake8` and `autopep8` are listed in `requirements.txt` as well.
+- `pytest` is only listed in `requirements-dev.txt`, which is an older freeze of `requirements.txt`. Install `pytest` separately (see [`INSTALL.md`](INSTALL.md)).
 
 ---
 
 ## 3. External Command-Line Tools & Binaries
 
-MEOW also relies on external tools and bundled binaries located in `bin/` and `lib/` (such as `pdftk`, `qpdf`, `mutool`, `hugo`, `7zzs`, and a Java JRE). For full details and system requirements, see [`docs/EXTERNAL_TOOLS.md`](EXTERNAL_TOOLS.md).
+See [`docs/EXTERNAL_TOOLS.md`](EXTERNAL_TOOLS.md) for the tools executed by the code (`pdftk` + Java, `hugo`, `7zzs`), the optional ones (`qpdf`, `mutool`, `pdfunite` from the `PATH`) and the files in `bin/` that nothing references.

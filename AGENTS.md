@@ -10,13 +10,13 @@ Detailed documentation is organized within the `docs/` directory:
 
 | Document | Description |
 |---|---|
-| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | High-level system architecture, webapp & worker components, Redis message flow, task services, and Indico integration. |
-| [`docs/TECH_STACK.md`](docs/TECH_STACK.md) | Technology stack details including Python, Starlette, AnyIO, Redis, PyMuPDF, pikepdf, Jinja2, and Supervisor. |
+| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | High-level system architecture, webapp & worker components, Redis Pub/Sub message flow, task services, and Indico integration. |
+| [`docs/TECH_STACK.md`](docs/TECH_STACK.md) | Technology stack details including Python, Starlette, AnyIO, Redis, PyMuPDF, pikepdf, Jinja2, Hugo, and Supervisor. |
 | [`docs/WORKFLOW.md`](docs/WORKFLOW.md) | Development workflow, English language rule, GitHub issue tracking, pull request (PR) template, and testing standards. |
-| [`docs/INSTALL.md`](docs/INSTALL.md) | Step-by-step local environment setup, virtualenv initialization, running Redis, webapp, worker, and test suite. |
-| [`docs/REQUIREMENTS.md`](docs/REQUIREMENTS.md) | System-level dependencies (C-libraries, Redis) and categorized Python runtime and development package dependencies. |
-| [`docs/EXTERNAL_TOOLS.md`](docs/EXTERNAL_TOOLS.md) | External CLI tools and binaries (`bin/`), Java/JRE requirements (`pdftk`), bundled libraries (`lib/`), and subprocess wrappers. |
-| [`docs/DOCKER.md`](docs/DOCKER.md) | Containerization guide, Dockerfile base image (`python:3.11`), helper scripts (`docker/*.sh`), and environment variables. |
+| [`docs/INSTALL.md`](docs/INSTALL.md) | Step-by-step local environment setup, virtualenv initialization, running Redis, webapp, worker, creating an API key, and the test suite. |
+| [`docs/REQUIREMENTS.md`](docs/REQUIREMENTS.md) | System-level requirements (Linux x86_64, Redis, Java) and the Python packages MEOW imports. |
+| [`docs/EXTERNAL_TOOLS.md`](docs/EXTERNAL_TOOLS.md) | External CLI tools actually executed by the code (`pdftk` + Java, `hugo`, `7zzs`), optional ones, unreferenced files in `bin/`, and bundled libraries (`lib/`). |
+| [`docs/DOCKER.md`](docs/DOCKER.md) | Docker status (no maintained `Dockerfile`; the Redis helper scripts in `docker/` are usable, the image scripts are legacy) and environment variables. |
 | [`docs/PROPOSAL_INFRASTRUCTURE_EVOLUTION.md`](docs/PROPOSAL_INFRASTRUCTURE_EVOLUTION.md) | **[Proposal]** Infrastructure evolution: Systemd multi-instance lifecycle, Cgroups v2 VFS metrics, Valkey migration/backup, and telemetry dashboards (#19, #22, #23). |
 
 ---

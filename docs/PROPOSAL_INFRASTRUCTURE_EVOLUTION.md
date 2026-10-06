@@ -1,7 +1,7 @@
 # [Proposal] Infrastructure Evolution: Systemd Lifecycle, Cgroups v2 Monitoring, Valkey Migration, & Dashboards
 
 > **Status:** Proposal / Draft  
-> **Related Issues:** [#19 (Structured Logs & Systemd Service Adoption)](https://github.com/JACoW-org/MEOW/issues/19), [#22 (Resource Monitoring via Cgroups v2 VFS & Multi-Replica Management)](https://github.com/JACoW-org/MEOW/issues/22), [#23 (Application-Level State Backup, Valkey Migration Pipeline & S3 Export)](https://github.com/JACoW-org/MEOW/issues/23)
+> **Related Issues:** [#19 (Structured systemd-journald logging with event_id filtering and REST API/dashboard integration)](https://github.com/JACoW-org/MEOW/issues/19), [#22 (Resource monitoring via systemd cgroups vfs and multi-replica service management for dashboard integration)](https://github.com/JACoW-org/MEOW/issues/22), [#23 (Application-level state backup and Redis-to-Valkey migration pipeline with AnyIO, Boto3, Zstandard, and Systemd Timers)](https://github.com/JACoW-org/MEOW/issues/23)
 
 ---
 
@@ -35,7 +35,7 @@ This proposal outlines the architectural evolution of MEOW's execution and opera
 +---------------------------------------------------------------------------------------------------+
 |                                     MEOW WEBAPP POOL (Systemd)                                    |
 |                                    `meow-webapp@<port>.service`                                   |
-|  - FastAPI / Starlette Async Engine (Uvicorn / AnyIO)                                             |
+|  - Starlette Async Engine (Uvicorn / AnyIO)                                                       |
 |  - Token Authentication & Event Dispatch                                                          |
 |  - Metrics Aggregator (`GET /api/system/metrics` & `GET /sse/system`)                             |
 +---------------------------------------------------------------------------------------------------+
@@ -45,7 +45,7 @@ This proposal outlines the architectural evolution of MEOW's execution and opera
              v                                                                       |
 +-----------------------------------------+                 +----------------------------------------+
 |          REDIS / VALKEY STORE           |                 |          KERNEL CGROUP V2 VFS          |
-|  - Task Queues / PubSub Streams         |                 |  `/sys/fs/cgroup/system.slice/`        |
+|  - Task Queues / PubSub Streams         |                 |  `/sys/fs/cgroup/meow-*.slice/`        |
 |  - Ephemeral Status & Channel Mapping   |                 |  - `meow-worker@*.service/cpu.stat`    |
 |  - API Keys & Config State              |                 |  - `meow-worker@*.service/memory.*`    |
 +-----------------------------------------+                 |  - `meow-worker@*.service/pids.current`|
@@ -57,7 +57,7 @@ This proposal outlines the architectural evolution of MEOW's execution and opera
 |             MEOW WORKER POOL (Systemd)             |                           |
 |      `meow-worker@<id>.service` in Slice           |---------------------------+
 |  - Isolated worker daemons (AnyIO / uvloop)        |
-|  - Heavy tasks: PyMuPDF, Ghostscript, LaTeX, ODT   |
+|  - Heavy tasks: PyMuPDF, pdftk, Hugo, ODT          |
 |  - Structured Logging -> `journald` stdout         |
 +----------------------------------------------------+
                            ^
@@ -87,10 +87,10 @@ This proposal outlines the architectural evolution of MEOW's execution and opera
 
 ### 3.2. Zero-Overhead Cgroups v2 VFS Telemetry
 - **Direct Kernel File Access**:
-  - WebApp reads metrics directly from `/sys/fs/cgroup/system.slice/meow-worker@*.service/` without spawning polling subprocesses (`ps`, `top`) or depending on heavy external agents.
+  - WebApp reads metrics directly from `/sys/fs/cgroup/meow-worker.slice/meow-worker@*.service/` (the exact path depends on how the slice is nested; to be verified) without spawning polling subprocesses (`ps`, `top`) or depending on heavy external agents.
   - **Memory Usage & Peaks**: `memory.current` (bytes currently allocated) and `memory.peak` (historical max).
   - **CPU Utilization**: `cpu.stat` (microsecond counters `usage_usec`, `user_usec`, `system_usec`).
-  - **Subprocess Tracking**: `pids.current` captures all transient child processes spawned by tasks (LaTeX engines, Ghostscript conversions, `pdftk`, PyMuPDF).
+  - **Subprocess Tracking**: `pids.current` captures all transient child processes spawned by tasks (`pdftk` and its JVM, Hugo, 7-Zip).
 - **Streaming Telemetry**:
   - Polling API: `GET /api/system/metrics` for structured point-in-time snapshots.
   - Real-Time Streaming: `GET /sse/system` for low-latency Server-Sent Events pushed to management frontends.
@@ -98,7 +98,7 @@ This proposal outlines the architectural evolution of MEOW's execution and opera
 ### 3.3. Logical Backup & Valkey Migration Subsystem
 - **Application-Level State Extraction**:
   - An asynchronous scanner script using AnyIO and redis-py/valkey drivers scans logical keys (API credentials, active conference configurations, state registries) and serializes them into structured JSON/NDJSON.
-  - Avoids binary `dump.rdb` vendor lock-in, enabling frictionless migration between Redis and Valkey.
+  - Avoids reliance on Redis' binary persistence files (RDB/AOF) and the vendor lock-in they imply, enabling frictionless migration between Redis and Valkey.
 - **High-Throughput Zstandard Compression**:
   - Logical datasets and local configurations are packed into streaming `tar.zst` archives with minimal CPU overhead and optimal compression ratios.
 - **Automated S3 Offloading & Timers**:
@@ -162,5 +162,5 @@ The proposed architecture feeds three specialized operational dashboards:
 | **Process Management** | Manual scripts / Single Supervisor instance | Systemd templates (`meow-*@.service`) + Slice | Fault isolation, auto-restart, unified `meow.target` |
 | **Resource Telemetry** | External forks (`ps`, `top`) or ad-hoc tools | Direct Cgroups v2 VFS (`/sys/fs/cgroup`) | Zero CPU overhead, full subprocess tree accounting |
 | **Logging** | Flat local text files | Structured JSON stdout $\to$ Journald | Centralized indexing, rotation, instant filtering |
-| **Data Backup** | Redis-dependent binary `dump.rdb` | AnyIO logical extraction + `tar.zst` to S3 | Engine-agnostic (Valkey ready), compact, automated |
+| **Data Backup** | Redis-dependent binary persistence (RDB/AOF) | AnyIO logical extraction + `tar.zst` to S3 | Engine-agnostic (Valkey ready), compact, automated |
 | **Telemetry Delivery** | Generic polling endpoints | REST snapshot + streaming SSE (`/sse/system`) | Real-time responsiveness with minimal bandwidth |
