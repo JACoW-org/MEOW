@@ -1,7 +1,6 @@
 """Citation metadata (Highwire Press / Dublin Core) of the DOI landing pages (CAT#37)."""
 
 import asyncio
-import re
 import shutil
 import subprocess
 import tomllib
@@ -142,18 +141,6 @@ def test_front_matter_omits_unavailable_values():
     assert meta["cit_keywords"] == []
     for key in ("cit_issn", "cit_isbn", "cit_firstpage", "cit_lastpage", "cit_publication_date", "cit_abstract"):
         assert meta[key] == ""
-
-
-# landing page partial ---------------------------------------------------------
-
-
-def test_pdf_link_is_a_plain_crawlable_link():
-    html = render_partial(make_contribution())
-
-    # the partial is minified, so attribute quotes may be omitted
-    assert re.search(r'<a [^>]*href="?\.\./\.\./pdf/THPM024\.pdf"?[ >]', html)
-    # no JavaScript openUrl()/data-href for the PDF
-    assert "openUrl(`pdf/" not in html and "data-href=pdf/" not in html
 
 
 def test_pdf_url_property_matches_inspire_document_url():

@@ -21,7 +21,9 @@
         <tr class="doi-paper">
             <th>Paper</th>
             <td>
-                download: <a href="../../pdf/{{ contribution.code|upper }}.pdf" download>{{ contribution.code|upper }}.pdf</a>
+                download: <a data-href="pdf/{{ contribution.code|upper }}.pdf" 
+                    onclick="openUrl(`pdf/{{ contribution.code|upper }}.pdf`)" 
+                    href="javascript:void(0);" download>{{ contribution.code|upper }}.pdf</a>
             </td>
         </tr>
         <tr class="doi-cite">
