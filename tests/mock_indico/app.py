@@ -9,8 +9,14 @@ a fixture therefore mirrors the URLs MEOW calls, e.g.::
 
 Adding support for new endpoints (final proceedings, PDF downloads, ...) only
 requires adding files to the fixture, not code to the mock.
+
+Fixtures are verbatim snapshots of a real Indico (see ``tools/snapshot_indico.py``)
+and still contain the original host (e.g. ``http://indico:8000``). The host is
+declared in ``snapshot.json`` (``origin``) and replaced, in JSON bodies, with the
+address the mock is reached at, so that file URLs point back to the mock.
 """
 
+import json
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -37,6 +43,10 @@ class IndicoMock:
 
     def __post_init__(self) -> None:
         self.fixture_dir = Path(self.fixture_dir).resolve()
+        manifest = self.fixture_dir / "snapshot.json"
+        self.origin: str | None = (
+            json.loads(manifest.read_text()).get("origin") if manifest.is_file() else None
+        )
         self.app = Starlette(
             routes=[Route("/{path:path}", self._handle, methods=["GET"])]
         )
@@ -44,6 +54,12 @@ class IndicoMock:
     @property
     def paths(self) -> list[str]:
         return [r.path for r in self.requests]
+
+    def rewrite(self, body: bytes, base_url: str) -> bytes:
+        """Replace the snapshot's original host with ``base_url``."""
+        if not self.origin:
+            return body
+        return body.replace(self.origin.encode(), base_url.rstrip("/").encode())
 
     def _resolve(self, path: str) -> Path | None:
         for candidate in (self.fixture_dir / path, self.fixture_dir / f"{path}.json"):
@@ -66,5 +82,6 @@ class IndicoMock:
             return JSONResponse({"error": True, "message": "not found"}, status_code=404)
 
         if file.suffix == ".json":
-            return Response(file.read_bytes(), media_type="application/json")
+            body = self.rewrite(file.read_bytes(), str(request.base_url))
+            return Response(body, media_type="application/json")
         return FileResponse(file)
