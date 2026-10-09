@@ -1,0 +1,87 @@
+{
+  "sessions": [
+    {
+      "id": 11,
+      "code": "MOA",
+      "title": "Opening Session",
+      "slot_title": "",
+      "address": "",
+      "room_name": "Aula Magna",
+      "location": "Test Venue",
+      "start_dt": {
+        "date": "2026-05-10",
+        "time": "09:00:00",
+        "tz": "Europe/Rome"
+      },
+      "end_dt": {
+        "date": "2026-05-10",
+        "time": "10:30:00",
+        "tz": "Europe/Rome"
+      },
+      "url": "http://mock-indico.invalid/event/1/sessions/1/",
+      "conveners": [
+        {
+          "id": 901,
+          "title": "",
+          "last_name": "Rossi",
+          "first_name": "Giulia",
+          "affiliation": "Test Laboratory A",
+          "person_id": 901,
+          "address": "",
+          "phone": "",
+          "email": "giulia.rossi@example.org",
+          "multiple_affiliations": []
+        }
+      ],
+      "session": {
+        "id": "1",
+        "friendly_id": 1,
+        "code": "MOA",
+        "title": "Opening Session",
+        "description": "",
+        "is_poster": false,
+        "type": null,
+        "room_name": "Aula Magna",
+        "location": "Test Venue",
+        "address": "",
+        "num_slots": 1,
+        "session_conveners": []
+      }
+    },
+    {
+      "id": 12,
+      "code": "MOP",
+      "title": "Poster Session",
+      "slot_title": "",
+      "address": "",
+      "room_name": "Foyer",
+      "location": "Test Venue",
+      "start_dt": {
+        "date": "2026-05-10",
+        "time": "16:00:00",
+        "tz": "Europe/Rome"
+      },
+      "end_dt": {
+        "date": "2026-05-10",
+        "time": "18:00:00",
+        "tz": "Europe/Rome"
+      },
+      "url": "http://mock-indico.invalid/event/1/sessions/2/",
+      "conveners": [],
+      "session": {
+        "id": "2",
+        "friendly_id": 2,
+        "code": "MOP",
+        "title": "Poster Session",
+        "description": "",
+        "is_poster": true,
+        "type": null,
+        "room_name": "Foyer",
+        "location": "Test Venue",
+        "address": "",
+        "num_slots": 1,
+        "session_conveners": []
+      }
+    }
+  ]
+}
