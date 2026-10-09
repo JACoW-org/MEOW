@@ -87,3 +87,20 @@ snapshot (230 contributions, 73 papers) both pipelines take about 20 s each.
 
 Tools required on the host: those in `bin/` (hugo, qpdf, mutool, gs, ...) and `java`
 for `pdftk`.
+
+### Generating proceedings from a snapshot
+
+To inspect the output (the tests discard it), `tools/run_proceedings.py` runs the
+same task and keeps the result in `--workdir`:
+
+```
+./venv/bin/python tools/run_proceedings.py \
+    --snapshot var/snapshots/fel2024 --kind final --workdir var/work/fel2024
+# open var/work/fel2024/var/html/1/index.html
+```
+
+`--kind prepress` generates the pre-press instead. Outputs under `<workdir>/var/`:
+`html/<event_id>/` (site, with `pdf/` volume and brief), `run/<event_id>_doi` and
+`run/<event_id>_hep` (DOI and INSPIRE payloads), `run/<event_id>_refs`,
+`run/<event_id>_tmp` (downloaded PDFs, reused by re-runs). The `.7z` archive is
+produced by a separate task (compress proceedings) and is not part of this run.

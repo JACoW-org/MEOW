@@ -22,8 +22,13 @@ class IndicoMockServer:
         self._sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self._sock.bind(("127.0.0.1", 0))
         self.base_url = f"http://127.0.0.1:{self._sock.getsockname()[1]}"
+        # loop="asyncio": the default ("auto") would install uvloop as the
+        # *global* event loop policy from the server thread, breaking the
+        # subprocess support of loops created afterwards in the main thread.
         self._server = uvicorn.Server(
-            uvicorn.Config(self.mock.app, log_level="warning", lifespan="off")
+            uvicorn.Config(
+                self.mock.app, log_level="warning", lifespan="off", loop="asyncio"
+            )
         )
         self._thread = threading.Thread(
             target=self._server.run, kwargs={"sockets": [self._sock]}, daemon=True
