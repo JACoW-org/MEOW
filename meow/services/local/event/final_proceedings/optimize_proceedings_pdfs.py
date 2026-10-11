@@ -9,6 +9,7 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import (
     ProceedingsData,
 )
 from meow.services.local.event.final_proceedings.event_pdf_utils import (
+    pdf_linearize_final_qpdf,
     pdf_optimize_with_metadata,
 )
 from meow.utils.datetime import format_datetime_doi_iso
@@ -67,6 +68,29 @@ def get_brief_metadata(event_title):
     }
 
 
+GARBAGE_AGGRESSIVE = 4
+GARBAGE_LIGHT = 2
+
+
+def get_garbage_level(settings: dict) -> int:
+    """Garbage collection level from the PURR flag `pdf_optimize_aggressive`.
+
+    On (default): level 4, merges duplicate objects and streams. The best
+    reduction, but slower. Off: level 2, only removes unused objects and
+    compacts the xref table. If the optimization fails, switch the flag off
+    and generate again.
+    """
+    value = settings.get("pdf_optimize_aggressive")
+
+    if value is None or value == "":
+        return GARBAGE_AGGRESSIVE
+
+    if isinstance(value, str):
+        value = value.strip().lower() not in ("0", "false", "no", "off")
+
+    return GARBAGE_AGGRESSIVE if value else GARBAGE_LIGHT
+
+
 async def optimize_proceedings_pdfs(
     proceedings_data: ProceedingsData,
     cookies: dict,
@@ -80,6 +104,7 @@ async def optimize_proceedings_pdfs(
     event_title = proceedings_data.event.title
     cache_dir = Path("var", "run", f"{event_id}_tmp")
     client_logs: list[str] = []
+    garbage = get_garbage_level(settings)
 
     for pdf_name, label, size_attr, docinfo_fn, xmp_fn in [
         (
@@ -99,6 +124,7 @@ async def optimize_proceedings_pdfs(
     ]:
         src = Path(cache_dir, pdf_name)
         tmp = Path(cache_dir, f"{pdf_name}.opt.pdf")
+        lin = Path(cache_dir, f"{pdf_name}.lin.pdf")
 
         if not await src.exists():
             continue
@@ -112,20 +138,32 @@ async def optimize_proceedings_pdfs(
                 str(tmp),
                 docinfo_fn(event_title),
                 xmp_fn(event_title),
+                garbage,
             ) != 0:
-                raise RuntimeError(f"Error optimizing {pdf_name}")
+                raise RuntimeError(f"Error optimizing {pdf_name} (garbage={garbage})")
 
+            # linearization last: any later rewrite of the file would drop it
+            if await pdf_linearize_final_qpdf(str(tmp), str(lin)) != 0:
+                raise RuntimeError(f"Error linearizing {pdf_name}")
+
+            await tmp.unlink()
             await src.unlink()
-            await tmp.rename(src)
+            await lin.rename(src)
 
             size_after = (await src.stat()).st_size
             reduction = (1 - size_after / size_before) * 100
             logger.info(f"{label} [{pdf_name}] after:  {size_after:,} bytes ({size_after / 1_000_000:.2f} MB) — reduction: {reduction:.1f}%")
 
             setattr(proceedings_data, size_attr, size_after)
-            client_logs.append(f"{label}: {size_before / 1_000_000:.2f} MB → {size_after / 1_000_000:.2f} MB ({reduction:.1f}% reduction)")
+            client_logs.append(f"{label}: {size_before / 1_000_000:.2f} MB → {size_after / 1_000_000:.2f} MB ({reduction:.1f}% reduction, garbage={garbage})")
         except Exception as be:
             logger.error(be, exc_info=True)
             await tmp.unlink(missing_ok=True)
+            await lin.unlink(missing_ok=True)
+            client_logs.append(
+                f"{label}: optimization failed, the original file is kept"
+                f" (garbage={garbage}; to retry with a lighter garbage collection"
+                f" turn off the setting pdf_optimize_aggressive)"
+            )
 
     return proceedings_data, client_logs

@@ -135,6 +135,14 @@ Other values (HTTP timeout of 360 s, event lock timeout of 1 h) are constants in
 same file. Per-event settings (paper license, editors, DOI, ...) are not configured
 in MEOW: they come from the PURR settings of the event, in the task request.
 
+One of them tunes the optimization of the `brief` and `volume` PDFs (last step of the
+generation: garbage collection and metadata with PyMuPDF, then linearization with qpdf,
+each in an external process):
+
+| Setting | Default | Meaning |
+|---|---|---|
+| `pdf_optimize_aggressive` | on | On: garbage collection level 4, merges duplicate objects and streams (the best reduction, e.g. -44% on the IPAC'26 brief, -17% on the volume, but slow on big volumes). Off: level 2, only unused objects are removed. If the optimization fails, turn it off and generate again: on error the original file is kept. |
+
 ## Docker
 
 `Dockerfile` (in the parent directory of this repository) builds on `base-meow`

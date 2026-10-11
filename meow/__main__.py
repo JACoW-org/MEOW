@@ -946,7 +946,7 @@ def doc_optimize_pdf(args) -> None:
     if args.xmp:
         doc.set_xml_metadata(_build_xmp_xml(json.loads(args.xmp)))
 
-    doc.save(args.output, deflate=1, linear=True)
+    doc.save(args.output, garbage=args.garbage, deflate=True)
     doc.close()
     del doc
 
@@ -1118,13 +1118,15 @@ def main():
     # -------------------------------------------------------------------------
     ps_optimize_pdf = subps.add_parser(
         "optimize_pdf",
-        description="optimize PDF: garbage=4 + metadata + linearize in one pass",
+        description="optimize PDF: garbage collection + metadata (linearization is done by qpdf)",
         epilog="specify input/output files and metadata as JSON strings",
     )
     ps_optimize_pdf.add_argument("-input",   required=True,  help="input filename")
     ps_optimize_pdf.add_argument("-output",  required=True,  help="output filename")
     ps_optimize_pdf.add_argument("-docinfo", required=False, help="docinfo as JSON")
     ps_optimize_pdf.add_argument("-xmp",     required=False, help="XMP metadata as JSON")
+    ps_optimize_pdf.add_argument("-garbage", required=False, type=int, default=4,
+                                 choices=range(0, 5), help="garbage collection level (0-4)")
     ps_optimize_pdf.set_defaults(func=doc_optimize_pdf)
 
     # -------------------------------------------------------------------------
