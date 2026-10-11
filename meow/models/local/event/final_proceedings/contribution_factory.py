@@ -388,6 +388,7 @@ def contribution_data_factory(
         is_included_in_pdf_check=is_included_in_pdf_check,
         is_included_in_references=is_included_in_references,
         peer_reviewing_accepted=peer_reviewing_accepted,
+        preprint_marking_requested=preprint_marking_requested,
         papers=papers_data,
         slides=slides_data,
         posters=posters_data,
