@@ -68,31 +68,27 @@ def get_brief_metadata(event_title):
     }
 
 
-DEFAULT_GARBAGE = 4
+GARBAGE_AGGRESSIVE = 4
+GARBAGE_LIGHT = 2
 
 
 def get_garbage_level(settings: dict) -> int:
-    """Garbage collection level (0-4) from the PURR setting `pdf_optimize_garbage`.
+    """Garbage collection level from the PURR flag `pdf_optimize_aggressive`.
 
-    4 (default) merges duplicate objects and streams: the best reduction, but
-    slower. If the optimization fails, a lower level (e.g. 2) can be set and
-    the generation repeated.
+    On (default): level 4, merges duplicate objects and streams. The best
+    reduction, but slower. Off: level 2, only removes unused objects and
+    compacts the xref table. If the optimization fails, switch the flag off
+    and generate again.
     """
-    value = settings.get("pdf_optimize_garbage")
+    value = settings.get("pdf_optimize_aggressive")
 
-    if value in (None, ""):
-        return DEFAULT_GARBAGE
+    if value is None or value == "":
+        return GARBAGE_AGGRESSIVE
 
-    try:
-        level = int(value)
-    except (TypeError, ValueError):
-        level = -1
+    if isinstance(value, str):
+        value = value.strip().lower() not in ("0", "false", "no", "off")
 
-    if not 0 <= level <= 4:
-        logger.warning(f"invalid pdf_optimize_garbage={value!r}, using {DEFAULT_GARBAGE}")
-        return DEFAULT_GARBAGE
-
-    return level
+    return GARBAGE_AGGRESSIVE if value else GARBAGE_LIGHT
 
 
 async def optimize_proceedings_pdfs(
@@ -166,8 +162,8 @@ async def optimize_proceedings_pdfs(
             await lin.unlink(missing_ok=True)
             client_logs.append(
                 f"{label}: optimization failed, the original file is kept"
-                f" (pdf_optimize_garbage={garbage}; to retry with a lighter"
-                f" garbage collection set the setting to 2 or lower)"
+                f" (garbage={garbage}; to retry with a lighter garbage collection"
+                f" turn off the setting pdf_optimize_aggressive)"
             )
 
     return proceedings_data, client_logs

@@ -64,12 +64,12 @@ def _qpdf_check(path):
 @pytest.mark.parametrize(
     "value, expected",
     [
-        (None, 4), ("", 4), (4, 4), ("2", 2), (0, 0),
-        (5, 4), (-1, 4), ("aggressive", 4), ([], 4),
+        (None, 4), ("", 4), (True, 4), ("true", 4), ("1", 4), (1, 4),
+        (False, 2), ("false", 2), ("False", 2), ("0", 2), (0, 2), ("off", 2),
     ],
 )
 def test_garbage_level(value, expected):
-    settings = {} if value is None else {"pdf_optimize_garbage": value}
+    settings = {} if value is None else {"pdf_optimize_aggressive": value}
     assert get_garbage_level(settings) == expected
 
 
@@ -105,7 +105,7 @@ def test_garbage_setting_changes_the_result(meow_workdir):
     cache, _, _ = _run(meow_workdir, {})
     aggressive = os.path.getsize(cache / volume)
 
-    cache, _, logs = _run(meow_workdir, {"pdf_optimize_garbage": 2})
+    cache, _, logs = _run(meow_workdir, {"pdf_optimize_aggressive": False})
     light = os.path.getsize(cache / volume)
 
     assert all("garbage=2" in m for m in logs)
@@ -132,5 +132,5 @@ def test_failure_keeps_the_original_and_suggests_a_retry(meow_workdir, monkeypat
     )
 
     assert pdf.read_bytes() == before
-    assert any("pdf_optimize_garbage" in m for m in logs)
+    assert any("pdf_optimize_aggressive" in m for m in logs)
     assert data.proceedings_volume_size == 0

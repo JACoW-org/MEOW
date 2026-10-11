@@ -141,7 +141,7 @@ each in an external process):
 
 | Setting | Default | Meaning |
 |---|---|---|
-| `pdf_optimize_garbage` | `4` | Garbage collection level, 0-4. `4` merges duplicate objects and streams (the best reduction, e.g. -44% on the IPAC'26 brief, -17% on the volume, but slow on big volumes). If the optimization fails, set `2` (or lower) and generate again: on error the original file is kept. |
+| `pdf_optimize_aggressive` | on | On: garbage collection level 4, merges duplicate objects and streams (the best reduction, e.g. -44% on the IPAC'26 brief, -17% on the volume, but slow on big volumes). Off: level 2, only unused objects are removed. If the optimization fails, turn it off and generate again: on error the original file is kept. |
 
 ## Docker
 
