@@ -290,6 +290,7 @@ class JinjaTemplateRenderer:
         self,
         institutes: list[AffiliationData],
         contributionsGroups: dict[str, list[dict]],
+        ris_institute_ids: set[str],
     ) -> str:
         return await self.render(
             "doi_per_institute_partial.html.jinja",
@@ -297,6 +298,7 @@ class JinjaTemplateRenderer:
             params=dict(
                 institutes=[s.as_dict() for s in institutes],
                 contributionsGroups=contributionsGroups,
+                ris_institute_ids=ris_institute_ids,
             ),
         )
 
