@@ -66,3 +66,41 @@ MEOW_INDICO_SNAPSHOT=$PWD/var/snapshots/fel2024 ./venv/bin/pytest ./tests
 ```
 
 Their expectations are derived from the snapshot itself, so they work with any event.
+
+## Pre-press and final proceedings
+
+`tests/test_proceedings_snapshot.py` runs `EventPrePressProceedingsTask` and
+`EventFinalProceedingsTask` end to end on a snapshot: download of papers from
+the mock, PDF checks and metadata, concatenation, site generation with `bin/hugo`.
+It needs no Indico and no Redis: Redis is [fakeredis](https://github.com/cunla/fakeredis-py)
+(`dbs.redis_client` is replaced, so the event lock works as usual).
+
+The pipelines use paths relative to the repository root (`var/`, `bin/`,
+`jinja/`, `venv/bin/python3`, ...) and some tools from `PATH`. The `meow_workdir`
+fixture runs the test in a scratch directory that links to those resources, so
+output goes to a throw-away `var/` and the repository is left untouched.
+
+The checks are consistency checks between the generated files (every included
+paper is in the volume and in the site, positions match page counts, the brief
+has one page per paper, ...), so they work with any event. On the FEL 2024
+snapshot (230 contributions, 73 papers) both pipelines take about 20 s each.
+
+Tools required on the host: those in `bin/` (hugo, qpdf, mutool, gs, ...) and `java`
+for `pdftk`.
+
+### Generating proceedings from a snapshot
+
+To inspect the output (the tests discard it), `tools/run_proceedings.py` runs the
+same task and keeps the result in `--workdir`:
+
+```
+./venv/bin/python tools/run_proceedings.py \
+    --snapshot var/snapshots/fel2024 --kind final --workdir var/work/fel2024
+# open var/work/fel2024/var/html/1/index.html
+```
+
+`--kind prepress` generates the pre-press instead. Outputs under `<workdir>/var/`:
+`html/<event_id>/` (site, with `pdf/` volume and brief), `run/<event_id>_doi` and
+`run/<event_id>_hep` (DOI and INSPIRE payloads), `run/<event_id>_refs`,
+`run/<event_id>_tmp` (downloaded PDFs, reused by re-runs). The `.7z` archive is
+produced by a separate task (compress proceedings) and is not part of this run.
