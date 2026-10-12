@@ -130,6 +130,8 @@ Settings come from environment variables (`meow/app/config.py`):
 | `LOG_LEVEL` | `info` | Log level |
 | `REDIS_HOST` | `127.0.0.1` | Redis host |
 | `REDIS_PORT` | `6379` | Redis port |
+| `PDFTK_CONCURRENCY` | CPUs, up to 6 | Number of `pdftk` processes run in parallel to join the PDFs (each JVM keeps a good part of its PDFs in memory) |
+| `PDFTK_JAVA_OPTS` | empty | Options for the JVM of `pdftk` (read by `bin/pdftk.sh`), e.g. `-Xmx1g` to cap its heap. Too small a heap makes the final join of a big volume fail with `OutOfMemoryError` |
 
 Other values (HTTP timeout of 360 s, event lock timeout of 1 h) are constants in the
 same file. Per-event settings (paper license, editors, DOI, ...) are not configured
