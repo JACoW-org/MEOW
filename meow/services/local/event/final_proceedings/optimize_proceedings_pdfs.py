@@ -71,6 +71,12 @@ def get_brief_metadata(event_title):
 GARBAGE_AGGRESSIVE = 4
 GARBAGE_LIGHT = 2
 
+# The offsets of the linearization hint tables are 32-bit fields: a file of 4 GiB
+# or more cannot be linearized (qpdf would truncate them). Files between 2 and
+# 4 GiB are valid, but `qpdf --check` reports two false mismatches there, because
+# it reads those fields as signed integers. The margin covers the hint stream.
+LINEARIZATION_MAX_BYTES = 2**32 - 64 * 1024 * 1024
+
 
 def get_garbage_level(settings: dict) -> int:
     """Garbage collection level from the PURR flag `pdf_optimize_aggressive`.
@@ -142,11 +148,17 @@ async def optimize_proceedings_pdfs(
             ) != 0:
                 raise RuntimeError(f"Error optimizing {pdf_name} (garbage={garbage})")
 
-            # linearization last: any later rewrite of the file would drop it
-            if await pdf_linearize_final_qpdf(str(tmp), str(lin)) != 0:
-                raise RuntimeError(f"Error linearizing {pdf_name}")
+            linearize = (await tmp.stat()).st_size < LINEARIZATION_MAX_BYTES
 
-            await tmp.unlink()
+            if linearize:
+                # linearization last: any later rewrite of the file would drop it
+                if await pdf_linearize_final_qpdf(str(tmp), str(lin)) != 0:
+                    raise RuntimeError(f"Error linearizing {pdf_name}")
+                await tmp.unlink()
+            else:
+                logger.warning(f"{pdf_name} is too large to be linearized (offsets are 32 bit): optimized only")
+                await tmp.rename(lin)
+
             await src.unlink()
             await lin.rename(src)
 
@@ -155,7 +167,11 @@ async def optimize_proceedings_pdfs(
             logger.info(f"{label} [{pdf_name}] after:  {size_after:,} bytes ({size_after / 1_000_000:.2f} MB) — reduction: {reduction:.1f}%")
 
             setattr(proceedings_data, size_attr, size_after)
-            client_logs.append(f"{label}: {size_before / 1_000_000:.2f} MB → {size_after / 1_000_000:.2f} MB ({reduction:.1f}% reduction, garbage={garbage})")
+            client_logs.append(
+                f"{label}: {size_before / 1_000_000:.2f} MB → {size_after / 1_000_000:.2f} MB"
+                f" ({reduction:.1f}% reduction, garbage={garbage}"
+                f"{'' if linearize else ', not linearized: larger than 4 GiB'})"
+            )
         except Exception as be:
             logger.error(be, exc_info=True)
             await tmp.unlink(missing_ok=True)

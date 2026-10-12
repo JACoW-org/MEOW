@@ -145,6 +145,17 @@ each in an external process):
 |---|---|---|
 | `pdf_optimize_aggressive` | on | On: garbage collection level 4, merges duplicate objects and streams (the best reduction, e.g. -44% on the IPAC'26 brief, -17% on the volume, but slow on big volumes). Off: level 2, only unused objects are removed. If the optimization fails, turn it off and generate again: on error the original file is kept. |
 
+Linearization (fast web view) applies to every PDF published: papers, slides, posters
+and the two optimized PDFs. Its hint tables store file offsets in 32 bits, so:
+
+- a `brief`/`volume` of **4 GiB or more cannot be linearized** and is only optimized
+  (the log of the task says so);
+- between **2 and 4 GiB the file is valid**, but `qpdf --check` reports two bogus
+  mismatches (first shared object, outlines) because it reads those fields as signed
+  integers: each one is exactly the length of the hint stream (`hint + 2**32 + H_length
+  == computed`). Do not treat them as errors; `tests/test_optimize_proceedings_pdfs.py`
+  proves it on a real 2.5 GB file (`MEOW_TEST_LARGE_PDF=<dir on disk> pytest ...`).
+
 ## Docker
 
 `Dockerfile` (in the parent directory of this repository) builds on `base-meow`
