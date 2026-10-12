@@ -249,3 +249,11 @@ def test_linearization_between_2_and_4_gib_is_valid(meow_workdir):
         m = re.search(r"hint table = (-?\d+); computed = (\d+)", w)
         assert m, f"unexpected warning: {w}"
         assert int(m.group(1)) + 2**32 + h_length == int(m.group(2))
+
+
+def test_pikepdf_bundles_a_qpdf_with_valid_hint_tables():
+    """pikepdf 8.x bundled qpdf 11.8, whose hint tables were wrong for about a
+    quarter of the real papers ("object count mismatch for page N")."""
+    import pikepdf
+
+    assert tuple(int(x) for x in pikepdf.__libqpdf_version__.split(".")[:2]) >= (12, 0)
