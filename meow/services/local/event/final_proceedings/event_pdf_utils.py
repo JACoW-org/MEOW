@@ -63,7 +63,8 @@ def get_pdfunite_cmd():
     return str(Path("pdfunite"))  # str(Path("bin", "pdfunite"))
 
 
-# Ancora usata da write_slides_metadata e write_posters_metadata (con None, None).
+# Ancora usata da write_slides_metadata e write_posters_metadata (con None, None):
+# slide e poster devono essere linearizzati come i paper (pdf_metadata_qpdf).
 # Per brief/volume è sostituita da pdf_optimize_with_metadata (single-pass fitz).
 async def pdf_linearize_qpdf(
     in_path: str, out_path: str, docinfo: dict | None, metadata: dict | None
@@ -89,7 +90,7 @@ def _pdf_linearize_qpdf(
                 for key in metadata:
                     pdf_meta[key] = metadata[key]
 
-        pdf_doc.save(out_path, fix_metadata_version=True)
+        pdf_doc.save(out_path, linearize=True, fix_metadata_version=True)
 
     return 0
 
