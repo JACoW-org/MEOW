@@ -2,7 +2,24 @@
 from dataclasses import dataclass
 from ulid import ulid as ULID
 
-from os import environ
+from os import environ, sched_getaffinity
+
+PDFTK_MAX_CONCURRENCY = 6
+
+
+def pdftk_concurrency() -> int:
+    """Number of pdftk processes (JVMs) run in parallel to join the PDFs.
+
+    From PDFTK_CONCURRENCY, otherwise the CPUs available to the process up to
+    PDFTK_MAX_CONCURRENCY: every JVM holds a good part of the PDFs it joins in
+    memory.
+    """
+    try:
+        value = int(environ["PDFTK_CONCURRENCY"])
+    except (KeyError, ValueError):
+        value = min(len(sched_getaffinity(0)), PDFTK_MAX_CONCURRENCY)
+
+    return max(1, value)
 
 
 @dataclass
@@ -11,6 +28,8 @@ class __Config:
 
     SERVER_PORT: int = int(environ.get('SERVER_PORT', '8080'))
     LOG_LEVEL: str = environ.get('LOG_LEVEL', 'info')
+
+    PDFTK_CONCURRENCY: int = pdftk_concurrency()
 
     ADMIN_EMAIL: str = 'meneghetti.fabio@gmail.com'
 

@@ -1,5 +1,40 @@
 {{ define "title" }}{{ .Page.Title }}{{ end }}
 
+{{ define "head" }}
+{{- /* Highwire Press (Google Scholar) and Dublin Core metadata of the contribution */ -}}
+{{ with .Params.cit_title }}<meta name="citation_title" content="{{ . }}">{{ end }}
+{{ range .Params.cit_authors }}<meta name="citation_author" content="{{ . }}">
+{{ end }}
+{{- with .Params.cit_publication_date }}<meta name="citation_publication_date" content="{{ . }}">
+<meta name="citation_date" content="{{ . }}">{{ end }}
+{{ with .Params.cit_conference_title }}<meta name="citation_conference_title" content="{{ . }}">{{ end }}
+{{ with .Params.cit_journal_title }}<meta name="citation_journal_title" content="{{ . }}">{{ end }}
+{{ with .Params.cit_publisher }}<meta name="citation_publisher" content="{{ . }}">{{ end }}
+{{ with .Params.cit_firstpage }}<meta name="citation_firstpage" content="{{ . }}">{{ end }}
+{{ with .Params.cit_lastpage }}<meta name="citation_lastpage" content="{{ . }}">{{ end }}
+{{ with .Params.cit_doi }}<meta name="citation_doi" content="{{ . }}">{{ end }}
+{{ with .Params.cit_isbn }}<meta name="citation_isbn" content="{{ . }}">{{ end }}
+{{ with .Params.cit_issn }}<meta name="citation_issn" content="{{ . }}">{{ end }}
+{{ with .Params.cit_keywords }}<meta name="citation_keywords" content="{{ delimit . ", " }}">{{ end }}
+{{ with .Params.cit_language }}<meta name="citation_language" content="{{ . }}">{{ end }}
+{{ with .Params.cit_abstract }}<meta name="citation_abstract" content="{{ . }}">{{ end }}
+{{ with .Params.cit_pdf_url }}<meta name="citation_pdf_url" content="{{ . }}">{{ end }}
+{{ with .Params.cit_title }}<meta name="DC.title" content="{{ . }}">{{ end }}
+{{ range .Params.cit_authors }}<meta name="DC.creator" content="{{ . }}">
+{{ end }}
+{{- with .Params.cit_publication_date }}<meta name="DC.issued" content="{{ . }}">
+<meta name="dcterms:issued" content="{{ substr . 0 4 }}">{{ end }}
+{{ with .Params.cit_publisher }}<meta name="DC.publisher" content="{{ . }}">{{ end }}
+{{ with .Params.cit_firstpage }}<meta name="DC.citation.spage" content="{{ . }}">{{ end }}
+{{ with .Params.cit_lastpage }}<meta name="DC.citation.epage" content="{{ . }}">{{ end }}
+{{ with .Params.cit_doi }}<meta name="DC.identifier" content="info:doi/{{ . }}">{{ end }}
+{{ with .Params.cit_pdf_url }}<meta name="DC.identifier" content="{{ . }}">{{ end }}
+{{ with .Params.cit_issn }}<meta name="dcterms:isPartOf" content="urn:ISSN:{{ . }}">{{ end }}
+{{ with .Params.cit_isbn }}<meta name="dcterms:isPartOf" content="urn:ISBN:{{ . }}">{{ end }}
+{{ with .Params.cit_keywords }}<meta name="DC.subject" content="{{ delimit . ", " }}">{{ end }}
+{{ with .Params.cit_conference_title }}<meta name="dcterms:bibliographicCitation" content="{{ . }}">{{ end }}
+{{ end }}
+
 {{ define "type" }}"doi"{{ end }}
 
 {{ define "main" }}

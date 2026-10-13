@@ -63,7 +63,8 @@ def get_pdfunite_cmd():
     return str(Path("pdfunite"))  # str(Path("bin", "pdfunite"))
 
 
-# Ancora usata da write_slides_metadata e write_posters_metadata (con None, None).
+# Ancora usata da write_slides_metadata e write_posters_metadata (con None, None):
+# slide e poster devono essere linearizzati come i paper (pdf_metadata_qpdf).
 # Per brief/volume è sostituita da pdf_optimize_with_metadata (single-pass fitz).
 async def pdf_linearize_qpdf(
     in_path: str, out_path: str, docinfo: dict | None, metadata: dict | None
@@ -89,7 +90,7 @@ def _pdf_linearize_qpdf(
                 for key in metadata:
                     pdf_meta[key] = metadata[key]
 
-        pdf_doc.save(out_path, fix_metadata_version=True)
+        pdf_doc.save(out_path, linearize=True, fix_metadata_version=True)
 
     return 0
 
@@ -707,14 +708,21 @@ async def pdf_clean_mutool(read_path: str, write_path: str) -> int:
 
 
 async def pdf_optimize_with_metadata(
-    read_path: str, write_path: str, docinfo: dict, xmp: dict
+    read_path: str, write_path: str, docinfo: dict, xmp: dict, garbage: int = 4
 ) -> int:
+    """Rewrite the PDF in an external process: metadata + garbage collection.
+
+    garbage: 0 none, 1 unused objects, 2 + compact xref, 3 + merge duplicate
+    objects, 4 + merge duplicate streams (aggressive, default).
+    The output is NOT linearized: see pdf_linearize_final_qpdf.
+    """
     from meow.utils.serialization import json_encode
 
     cmd = [
         get_python_cmd(), "-m", "meow", "optimize_pdf",
         "-input",   read_path,
         "-output",  write_path,
+        "-garbage", str(garbage),
         "-docinfo", json_encode(docinfo).decode("utf-8"),
         "-xmp",     json_encode(xmp).decode("utf-8"),
     ]
@@ -726,9 +734,22 @@ async def pdf_optimize_with_metadata(
     return 0 if res and res.returncode == 0 else 1
 
 
-# DEPRECATED — sostituito da pdf_optimize_with_metadata (single-pass fitz)
-async def pdf_optimize_pymupdf(read_path: str, write_path: str) -> int:
-    cmd = [get_python_cmd(), "-m", "fitz", "clean", "-garbage", "4", "-linear", read_path, write_path]
+async def pdf_linearize_final_qpdf(read_path: str, write_path: str) -> int:
+    """Linearize (fast web view) with qpdf, in an external process.
+
+    MuPDF writes linearization hint tables that qpdf rejects, so the
+    linearization is done by qpdf as the very last step on the file.
+    Streams are not recompressed and the metadata are preserved.
+    """
+    cmd = [
+        get_qpdf_cmd(),
+        "--linearize",
+        "--object-streams=preserve",
+        "--warning-exit-0",
+        read_path,
+        "--",
+        write_path,
+    ]
 
     logger.info(" ".join(cmd))
 

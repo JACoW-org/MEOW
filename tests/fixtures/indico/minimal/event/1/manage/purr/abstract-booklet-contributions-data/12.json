@@ -1,0 +1,69 @@
+{
+  "contributions": [
+    {
+      "id": "3",
+      "friendly_id": 3,
+      "field_values": [
+        {
+          "name": "Funding Agency",
+          "value": "Other Agency"
+        }
+      ],
+      "title": "A Poster on Vacuum Systems",
+      "paper": null,
+      "start_dt": {
+        "date": "2026-05-10",
+        "time": "16:00:00",
+        "tz": "Europe/Rome"
+      },
+      "end_dt": {
+        "date": "2026-05-10",
+        "time": "18:00:00",
+        "tz": "Europe/Rome"
+      },
+      "duration": 120,
+      "room_name": "Foyer",
+      "location": "Test Venue",
+      "type": "Poster",
+      "description": "Poster abstract.",
+      "url": "http://mock-indico.invalid/event/1/contributions/3/",
+      "speakers": [
+        {
+          "id": "5",
+          "email": "sara.gialli@example.org",
+          "first_name": "Sara",
+          "last_name": "Gialli",
+          "affiliation": "Test Laboratory A",
+          "multiple_affiliations": []
+        }
+      ],
+      "primary_authors": [
+        {
+          "id": "5",
+          "email": "sara.gialli@example.org",
+          "first_name": "Sara",
+          "last_name": "Gialli",
+          "affiliation": "Test Laboratory A",
+          "multiple_affiliations": []
+        }
+      ],
+      "coauthors": [
+        {
+          "id": "6",
+          "email": "paolo.blu@example.org",
+          "first_name": "Paolo",
+          "last_name": "Blu",
+          "affiliation": "Test Laboratory A",
+          "multiple_affiliations": []
+        }
+      ],
+      "track": null,
+      "institutes": [],
+      "code": "MOP01",
+      "session_id": 12,
+      "session_code": "MOP",
+      "sub_contributions": [],
+      "editables": []
+    }
+  ]
+}

@@ -13,6 +13,8 @@
         {{ block "title" . }}{{ .Site.Title }}{{ end }}
     </title>
 
+    {{ block "head" . }}{{ end }}
+
     <style type="text/css">
         body { --primary-color: {{.Site.Params.color}} } .body { opacity: 0 }
     </style>
