@@ -16,9 +16,11 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import (
 from meow.services.local.event.final_proceedings.manage_duplicates import (
     extract_target_identifier,
     find_duplicate_contribution,
+    get_duplicate_of_code,
     is_duplicate_metadata_sync_enabled,
     manage_duplicates,
     resolve_duplicate_contributions,
+    resolve_duplicate_contributions_dicts,
 )
 from meow.models.local.event.final_proceedings.proceedings_data_factory import (
     resolve_duplicates_of,
@@ -478,6 +480,127 @@ class ManageDuplicatesTest(unittest.IsolatedAsyncioTestCase):
         )
         self.assertEqual(dup.title, "Old Title")
         self.assertIsNotNone(dup.duplicate_of)
+
+    def test_get_duplicate_of_code(self):
+        # 1. Dict with field_values
+        d1 = {
+            "field_values": [{"name": "CAT_duplicate_of", "value": "THP123"}],
+        }
+        self.assertEqual(get_duplicate_of_code(d1, "CAT_duplicate_of"), "THP123")
+        self.assertEqual(get_duplicate_of_code(d1, "duplicate_of"), "THP123")
+
+        # 2. Dict with duplicate_of field directly
+        d2 = {"duplicate_of": "THP123"}
+        self.assertEqual(get_duplicate_of_code(d2), "THP123")
+
+        # 3. Object
+        c = make_contribution(code="SUP456", contrib_id="202", duplicate_of_value="THP123")
+        self.assertEqual(get_duplicate_of_code(c, "CAT_duplicate_of"), "THP123")
+
+    def test_resolve_duplicate_contributions_dicts_enabled(self):
+        orig = {
+            "id": "101",
+            "code": "THP123",
+            "title": "Original Dict Title",
+            "description": "Original Dict Description",
+            "primary_authors": [{"first_name": "Bob", "last_name": "Dylan", "affiliation": "Lab"}],
+            "coauthors": [{"first_name": "Alice", "last_name": "Wonder", "affiliation": "Univ"}],
+            "institutes": [{"name": "Lab"}],
+            "keywords": ["optics", "fel"],
+            "speakers": [{"first_name": "Bob", "last_name": "Dylan"}],
+        }
+        dup = {
+            "id": "202",
+            "code": "SUP456",
+            "title": "Old Dict Title",
+            "description": "Old Dict Description",
+            "primary_authors": [],
+            "coauthors": [],
+            "institutes": [],
+            "keywords": [],
+            "field_values": [{"name": "CAT_duplicate_of", "value": "THP123"}],
+        }
+
+        contributions = [orig, dup]
+        resolve_duplicate_contributions_dicts(contributions, {"duplicate_of_alias": "CAT_duplicate_of"})
+
+        self.assertEqual(dup["duplicate_of"], "THP123")
+        self.assertEqual(dup["title"], "Original Dict Title")
+        self.assertEqual(dup["description"], "Original Dict Description")
+        self.assertEqual(len(dup["primary_authors"]), 1)
+        self.assertEqual(dup["primary_authors"][0]["first_name"], "Bob")
+        self.assertEqual(len(dup["coauthors"]), 1)
+        self.assertEqual(dup["coauthors"][0]["first_name"], "Alice")
+        self.assertEqual(dup["keywords"], ["optics", "fel"])
+        # Speaker fallback when duplicate has no speaker
+        self.assertEqual(len(dup["speakers"]), 1)
+
+    def test_resolve_duplicate_contributions_dicts_disabled(self):
+        orig = {
+            "id": "101",
+            "code": "THP123",
+            "title": "Original Dict Title",
+            "description": "Original Dict Description",
+            "primary_authors": [{"first_name": "Bob", "last_name": "Dylan"}],
+        }
+        dup = {
+            "id": "202",
+            "code": "SUP456",
+            "title": "Old Dict Title",
+            "description": "Old Dict Description",
+            "primary_authors": [],
+            "field_values": [{"name": "CAT_duplicate_of", "value": "THP123"}],
+        }
+
+        contributions = [orig, dup]
+        resolve_duplicate_contributions_dicts(
+            contributions,
+            {"duplicate_of_alias": "CAT_duplicate_of", "sync_duplicate_metadata": False},
+        )
+
+        self.assertEqual(dup["duplicate_of"], "THP123")
+        self.assertEqual(dup["title"], "Old Dict Title")
+        self.assertEqual(dup["description"], "Old Dict Description")
+        self.assertEqual(dup["primary_authors"], [])
+
+    def test_resolve_duplicate_contributions_dicts_matching_strategies(self):
+        orig = {
+            "id": "12952",
+            "code": "THP123",
+            "title": "Matching Title",
+            "description": "Matching Description",
+            "primary_authors": [{"first_name": "Jane", "last_name": "Doe"}],
+        }
+
+        # Case 1: ID with text description
+        dup1 = {
+            "id": "202",
+            "code": "SUP01",
+            "title": "Old 1",
+            "field_values": [{"name": "CAT_duplicate_of", "value": "Cloned from contribution: 12952"}],
+        }
+        resolve_duplicate_contributions_dicts([orig, dup1], {})
+        self.assertEqual(dup1["title"], "Matching Title")
+
+        # Case 2: numeric ID string
+        dup2 = {
+            "id": "203",
+            "code": "SUP02",
+            "title": "Old 2",
+            "field_values": [{"name": "CAT_duplicate_of", "value": "12952"}],
+        }
+        resolve_duplicate_contributions_dicts([orig, dup2], {})
+        self.assertEqual(dup2["title"], "Matching Title")
+
+        # Case 3: lowercase code
+        dup3 = {
+            "id": "204",
+            "code": "SUP03",
+            "title": "Old 3",
+            "field_values": [{"name": "CAT_duplicate_of", "value": "thp123"}],
+        }
+        resolve_duplicate_contributions_dicts([orig, dup3], {})
+        self.assertEqual(dup3["title"], "Matching Title")
 
 
 if __name__ == "__main__":
