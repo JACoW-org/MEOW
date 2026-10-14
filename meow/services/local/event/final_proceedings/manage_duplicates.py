@@ -29,6 +29,33 @@ def extract_target_identifier(raw: str) -> str:
     return val.strip(" .:#")
 
 
+def is_duplicate_metadata_sync_enabled(settings: dict) -> bool:
+    """Check if duplicate metadata synchronisation is enabled in settings (default True)."""
+    candidate_keys = [
+        "sync_duplicate_metadata",
+        "duplicate_sync_metadata",
+        "sync_duplicates",
+        "sync_duplicate_of",
+        "duplicate_of_sync",
+    ]
+    for key in candidate_keys:
+        if key in settings:
+            val = settings[key]
+            if val is None:
+                continue
+            if isinstance(val, bool):
+                return val
+            if isinstance(val, (int, float)):
+                return bool(val)
+            if isinstance(val, str):
+                v = val.strip().lower()
+                if v in ("false", "0", "no", "off", "disable", "disabled"):
+                    return False
+                if v in ("true", "1", "yes", "on", "enable", "enabled"):
+                    return True
+    return True
+
+
 def find_duplicate_contribution(
     contributions: list[ContributionData],
     duplicate_of_raw: str,
@@ -91,15 +118,20 @@ async def manage_duplicates(
 
     logger.info("event_final_proceedings - manage_duplicates")
 
+    duplicate_of_alias = settings.get("duplicate_of_alias", "duplicate_of")
+    sync_metadata = is_duplicate_metadata_sync_enabled(settings)
+
     proceedings_data = resolve_duplicate_contributions(
-        proceedings_data, settings.get("duplicate_of_alias", "duplicate_of")
+        proceedings_data, duplicate_of_alias, sync_metadata=sync_metadata
     )
 
     return proceedings_data
 
 
 def resolve_duplicate_contributions(
-    proceedings_data: ProceedingsData, duplicate_of_alias: str
+    proceedings_data: ProceedingsData,
+    duplicate_of_alias: str,
+    sync_metadata: bool = True,
 ) -> ProceedingsData:
     """Resolve duplicate contributions and synchronise metadata from original."""
 
@@ -140,24 +172,25 @@ def resolve_duplicate_contributions(
                     issuance=duplicate.issuance,
                 )
 
-                # Synchronise metadata (CAT issue #35)
-                # 1. Title
-                if duplicate.title is not None:
-                    contribution.title = duplicate.title
+                # Synchronise metadata (CAT issue #35) if enabled
+                if sync_metadata:
+                    # 1. Title
+                    if duplicate.title is not None:
+                        contribution.title = duplicate.title
 
-                # 2. Abstract (description)
-                if duplicate.description is not None:
-                    contribution.description = duplicate.description
+                    # 2. Abstract (description)
+                    if duplicate.description is not None:
+                        contribution.description = duplicate.description
 
-                # 3. Authors and affiliations
-                contribution.primary_authors = list(duplicate.primary_authors)
-                contribution.coauthors = list(duplicate.coauthors)
-                contribution.authors = list(duplicate.authors)
-                contribution.institutes = list(duplicate.institutes)
+                    # 3. Authors and affiliations
+                    contribution.primary_authors = list(duplicate.primary_authors)
+                    contribution.coauthors = list(duplicate.coauthors)
+                    contribution.authors = list(duplicate.authors)
+                    contribution.institutes = list(duplicate.institutes)
 
-                # 4. Keywords
-                if duplicate.keywords:
-                    contribution.keywords = list(duplicate.keywords)
+                    # 4. Keywords
+                    if duplicate.keywords:
+                        contribution.keywords = list(duplicate.keywords)
             else:
                 logger.warning(
                     f"Could not resolve duplicate contribution for {contribution.code}: "

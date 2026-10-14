@@ -16,6 +16,7 @@ from meow.utils.datetime import format_datetime_sec
 
 from meow.services.local.event.final_proceedings.manage_duplicates import (
     find_duplicate_contribution,
+    is_duplicate_metadata_sync_enabled,
 )
 from meow.utils.serialization import json_decode
 from meow.models.local.event.final_proceedings.event_model import PersonData
@@ -32,7 +33,7 @@ def proceedings_data_factory(event: Any, sessions: list, contributions: list,
     event_timezone: str = event.get('timezone', '')
 
     """ build editors """
-    
+
     editors_dict_list = json_decode(settings.get(
         'editorial_json', '{}'))
 
@@ -57,7 +58,9 @@ def proceedings_data_factory(event: Any, sessions: list, contributions: list,
 
     contributions_data: list[ContributionData] = [
         c for c in [
-            contribution_data_factory(c, editors, event_timezone, preprint_marking_alias, preprint_request_alias) for c in contributions
+            contribution_data_factory(
+                c, editors, event_timezone, preprint_marking_alias, preprint_request_alias
+            ) for c in contributions
         ] if c and c.cat_publish(cat_publish_alias)
     ]
 
@@ -118,6 +121,7 @@ def proceedings_data_factory(event: Any, sessions: list, contributions: list,
 
 def resolve_duplicates_of(contributions: list[ContributionData], settings: dict) -> list[ContributionData]:
     duplicate_of_alias = settings.get('duplicate_of_alias', 'duplicate_of')
+    sync_metadata = is_duplicate_metadata_sync_enabled(settings)
     for contribution in contributions:
         duplicate_of_code: str | None = contribution.duplicate_of_code(duplicate_of_alias)
         if duplicate_of_code:
@@ -139,16 +143,17 @@ def resolve_duplicates_of(contributions: list[ContributionData], settings: dict)
                     acceptance=duplicate_contribution.acceptance,
                     issuance=duplicate_contribution.issuance
                 )
-                if duplicate_contribution.title is not None:
-                    contribution.title = duplicate_contribution.title
-                if duplicate_contribution.description is not None:
-                    contribution.description = duplicate_contribution.description
-                contribution.primary_authors = list(duplicate_contribution.primary_authors)
-                contribution.coauthors = list(duplicate_contribution.coauthors)
-                contribution.authors = list(duplicate_contribution.authors)
-                contribution.institutes = list(duplicate_contribution.institutes)
-                if duplicate_contribution.keywords:
-                    contribution.keywords = list(duplicate_contribution.keywords)
+                if sync_metadata:
+                    if duplicate_contribution.title is not None:
+                        contribution.title = duplicate_contribution.title
+                    if duplicate_contribution.description is not None:
+                        contribution.description = duplicate_contribution.description
+                    contribution.primary_authors = list(duplicate_contribution.primary_authors)
+                    contribution.coauthors = list(duplicate_contribution.coauthors)
+                    contribution.authors = list(duplicate_contribution.authors)
+                    contribution.institutes = list(duplicate_contribution.institutes)
+                    if duplicate_contribution.keywords:
+                        contribution.keywords = list(duplicate_contribution.keywords)
             else:
                 contribution.duplicate_of = None
     return contributions

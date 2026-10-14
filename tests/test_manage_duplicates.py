@@ -16,8 +16,12 @@ from meow.models.local.event.final_proceedings.proceedings_data_model import (
 from meow.services.local.event.final_proceedings.manage_duplicates import (
     extract_target_identifier,
     find_duplicate_contribution,
+    is_duplicate_metadata_sync_enabled,
     manage_duplicates,
     resolve_duplicate_contributions,
+)
+from meow.models.local.event.final_proceedings.proceedings_data_factory import (
+    resolve_duplicates_of,
 )
 
 
@@ -359,6 +363,121 @@ class ManageDuplicatesTest(unittest.IsolatedAsyncioTestCase):
 
         self.assertIs(res, proceedings)
         self.assertEqual(duplicate.title, "Async Title")
+
+    def test_sync_disabled_by_setting(self):
+        author1 = make_person("Alice", "Smith")
+        original = make_contribution(
+            code="THP123",
+            contrib_id="101",
+            title="Original Title",
+            description="Original Description",
+            primary_authors=[author1],
+        )
+        duplicate = make_contribution(
+            code="SUP456",
+            contrib_id="202",
+            title="Duplicate Custom Title",
+            description="Duplicate Custom Description",
+            duplicate_of_value="THP123",
+        )
+
+        proceedings = MagicMock(spec=ProceedingsData)
+        proceedings.contributions = [original, duplicate]
+
+        # Disabled via sync_metadata=False
+        resolve_duplicate_contributions(proceedings, "CAT_duplicate_of", sync_metadata=False)
+
+        # duplicate_of link is established
+        self.assertIsNotNone(duplicate.duplicate_of)
+        self.assertEqual(duplicate.duplicate_of.code, "THP123")
+        # But metadata is NOT overwritten
+        self.assertEqual(duplicate.title, "Duplicate Custom Title")
+        self.assertEqual(duplicate.description, "Duplicate Custom Description")
+        self.assertEqual(duplicate.primary_authors, [])
+
+    async def test_manage_duplicates_respects_settings(self):
+        # 1. Default (enabled)
+        orig = make_contribution(code="THP123", contrib_id="101", title="New Title")
+        dup = make_contribution(code="SUP456", contrib_id="202", title="Old Title", duplicate_of_value="THP123")
+        proc = MagicMock(spec=ProceedingsData)
+        proc.contributions = [orig, dup]
+        await manage_duplicates(proc, {"duplicate_of_alias": "CAT_duplicate_of"})
+        self.assertEqual(dup.title, "New Title")
+
+        # 2. Explicitly disabled via boolean
+        orig = make_contribution(code="THP123", contrib_id="101", title="New Title")
+        dup = make_contribution(code="SUP456", contrib_id="202", title="Old Title", duplicate_of_value="THP123")
+        proc = MagicMock(spec=ProceedingsData)
+        proc.contributions = [orig, dup]
+        await manage_duplicates(
+            proc,
+            {"duplicate_of_alias": "CAT_duplicate_of", "sync_duplicate_metadata": False},
+        )
+        self.assertEqual(dup.title, "Old Title")
+        self.assertIsNotNone(dup.duplicate_of)
+
+        # 3. Explicitly disabled via string "false" / "0" / "no"
+        for val in ["false", "FALSE", "0", "no", "off", "disabled"]:
+            orig = make_contribution(code="THP123", contrib_id="101", title="New Title")
+            dup = make_contribution(code="SUP456", contrib_id="202", title="Old Title", duplicate_of_value="THP123")
+            proc = MagicMock(spec=ProceedingsData)
+            proc.contributions = [orig, dup]
+            await manage_duplicates(
+                proc,
+                {"duplicate_of_alias": "CAT_duplicate_of", "sync_duplicate_metadata": val},
+            )
+            self.assertEqual(dup.title, "Old Title", f"Failed for setting value {val}")
+            self.assertIsNotNone(dup.duplicate_of)
+
+        # 4. Explicitly enabled via string "true" / "1" / "yes"
+        for val in ["true", "TRUE", "1", "yes", "on", "enabled"]:
+            orig = make_contribution(code="THP123", contrib_id="101", title="New Title")
+            dup = make_contribution(code="SUP456", contrib_id="202", title="Old Title", duplicate_of_value="THP123")
+            proc = MagicMock(spec=ProceedingsData)
+            proc.contributions = [orig, dup]
+            await manage_duplicates(
+                proc,
+                {"duplicate_of_alias": "CAT_duplicate_of", "sync_duplicate_metadata": val},
+            )
+            self.assertEqual(dup.title, "New Title", f"Failed for setting value {val}")
+
+        # 5. Setting alias "sync_duplicates"
+        orig = make_contribution(code="THP123", contrib_id="101", title="New Title")
+        dup = make_contribution(code="SUP456", contrib_id="202", title="Old Title", duplicate_of_value="THP123")
+        proc = MagicMock(spec=ProceedingsData)
+        proc.contributions = [orig, dup]
+        await manage_duplicates(
+            proc,
+            {"duplicate_of_alias": "CAT_duplicate_of", "sync_duplicates": False},
+        )
+        self.assertEqual(dup.title, "Old Title")
+
+    def test_is_duplicate_metadata_sync_enabled_helper(self):
+        self.assertTrue(is_duplicate_metadata_sync_enabled({}))
+        self.assertTrue(is_duplicate_metadata_sync_enabled({"sync_duplicate_metadata": True}))
+        self.assertTrue(is_duplicate_metadata_sync_enabled({"sync_duplicate_metadata": "true"}))
+        self.assertFalse(is_duplicate_metadata_sync_enabled({"sync_duplicate_metadata": False}))
+        self.assertFalse(is_duplicate_metadata_sync_enabled({"sync_duplicate_metadata": "false"}))
+        self.assertFalse(is_duplicate_metadata_sync_enabled({"duplicate_sync_metadata": "0"}))
+        self.assertFalse(is_duplicate_metadata_sync_enabled({"sync_duplicates": "no"}))
+
+    def test_resolve_duplicates_of_proceedings_factory(self):
+        orig = make_contribution(code="THP123", contrib_id="101", title="Factory Title")
+        dup = make_contribution(code="SUP456", contrib_id="202", title="Old Title", duplicate_of_value="THP123")
+
+        # Enabled by default
+        resolve_duplicates_of([orig, dup], {"duplicate_of_alias": "CAT_duplicate_of"})
+        self.assertEqual(dup.title, "Factory Title")
+
+        # Disabled
+        orig = make_contribution(code="THP123", contrib_id="101", title="Factory Title")
+        dup = make_contribution(code="SUP456", contrib_id="202", title="Old Title", duplicate_of_value="THP123")
+        resolve_duplicates_of(
+            [orig, dup],
+            {"duplicate_of_alias": "CAT_duplicate_of", "sync_duplicate_metadata": False},
+        )
+        self.assertEqual(dup.title, "Old Title")
+        self.assertIsNotNone(dup.duplicate_of)
 
 
 if __name__ == "__main__":
