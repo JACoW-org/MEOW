@@ -48,6 +48,19 @@ def read_references(html: Path) -> list[dict]:
     return [json.loads(line) for line in lines[1:]]
 
 
+def session_without_code_warnings(events: list[dict]) -> set[str]:
+    """Codes of the contributions reported by check_sessions_without_code."""
+    prefix = "Session without code: "
+    messages = [
+        getattr(e["value"], "message", "") for e in events if e["type"] == "log"
+    ]
+    return {
+        code.strip(" .")
+        for m in messages if m.startswith(prefix)
+        for code in m.rsplit(": ", 1)[1].split(",")
+    }
+
+
 @pytest.mark.parametrize("kind", ["prepress", "final"])
 async def test_proceedings_are_generated(kind, snapshot_task_params, meow_workdir):
     event_id = snapshot_task_params["event"]["id"]
@@ -93,6 +106,8 @@ async def test_proceedings_are_generated(kind, snapshot_task_params, meow_workdi
     assert fitz.open(volume).page_count >= paper_pages
     assert fitz.open(brief).page_count == len(papers)
 
-    # every included paper is listed in a session page
+    # every included paper is listed in a session page, except those of the
+    # sessions without a code, which have no page: the editors are warned (MEOW#39)
     session_pages = "".join(p.read_text() for p in (html / "session").rglob("*.html"))
-    assert [r["paperId"] for r in included if r["paperId"] not in session_pages] == []
+    not_listed = {r["paperId"] for r in included if r["paperId"] not in session_pages}
+    assert not_listed <= session_without_code_warnings(events)
