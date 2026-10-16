@@ -41,6 +41,15 @@ async def run_task(kind: str, params: dict) -> list[dict]:
         TaskStatus.stop_task(TASK_ID)
 
 
+def paper_file_name_warnings(events: list[dict]) -> set[str]:
+    """Codes of the contributions reported by check_paper_file_names."""
+    prefix = "Paper file name mismatch: contribution "
+    messages = [
+        getattr(e["value"], "message", "") for e in events if e["type"] == "log"
+    ]
+    return {m[len(prefix):].split()[0] for m in messages if m.startswith(prefix)}
+
+
 def read_references(html: Path) -> list[dict]:
     """Per-contribution records (the first line describes the event)."""
     [jsonl] = (html / "json").glob("references-*.jsonl")
@@ -75,16 +84,25 @@ async def test_proceedings_are_generated(kind, snapshot_task_params, meow_workdi
     pdfs = {p.stem: p for p in (html / "pdf").glob("*.pdf")}
     [volume] = [p for n, p in pdfs.items() if n.endswith("_proceedings_volume")]
     [brief] = [p for n, p in pdfs.items() if n.endswith("_proceedings_brief")]
+    # slides and posters are copied to the same directory (JACoW file type
+    # templates "{code}_talk" and "{code}_poster")
     papers = {
         n: p for n, p in pdfs.items()
-        if not n.endswith(("_proceedings_volume", "_proceedings_brief"))
+        if not n.endswith(("_proceedings_volume", "_proceedings_brief", "_talk", "_poster"))
     }
     included = [r for r in read_references(html) if r["position"] != "0-0"]
     assert papers
-    assert {r["paperId"] for r in included} == set(papers)
+    # a paper not named after its code (code changed after the upload) is in
+    # the site with its file name, and the editors are warned (MEOW#37)
+    missing = {r["paperId"] for r in included} - set(papers)
+    extra = set(papers) - {r["paperId"] for r in included}
+    assert missing <= paper_file_name_warnings(events)
+    assert len(extra) == len(missing)
 
     # position "start-end" in the volume is consistent with the paper's pages
     for r in included:
+        if r["paperId"] in missing:
+            continue
         start, end = map(int, r["position"].split("-"))
         assert end - start == fitz.open(papers[r["paperId"]]).page_count, r["paperId"]
 
