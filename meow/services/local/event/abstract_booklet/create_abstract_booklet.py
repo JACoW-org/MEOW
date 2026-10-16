@@ -1,14 +1,22 @@
 import logging as lg
 
 from typing import Any
+from meow.services.local.event.final_proceedings.manage_duplicates import (
+    resolve_duplicate_contributions_dicts,
+)
 from meow.utils.datetime import datedict_to_tz_datetime, datetime_localize, format_datetime_sec
 
 
 logger = lg.getLogger(__name__)
 
 
-async def create_abstract_booklet_from_event(event: dict, sessions: list, contributions: list) -> dict:
+async def create_abstract_booklet_from_event(
+    event: dict, sessions: list, contributions: list, settings: dict | None = None
+) -> dict:
     """ """
+
+    if settings:
+        resolve_duplicate_contributions_dicts(contributions, settings)
 
     # for c in contributions:
     #     logger.info(f"{c.get('code')} -> {c.get('session_code')}")

@@ -1,6 +1,6 @@
 import logging as lg
 
-from typing import Any, Callable
+from typing import Any
 
 from datetime import datetime
 
@@ -14,7 +14,10 @@ from meow.models.local.event.final_proceedings.contribution_model import Contrib
 
 from meow.utils.datetime import format_datetime_sec
 
-from meow.utils.list import find
+from meow.services.local.event.final_proceedings.manage_duplicates import (
+    find_duplicate_contribution,
+    is_duplicate_metadata_sync_enabled,
+)
 from meow.utils.serialization import json_decode
 from meow.models.local.event.final_proceedings.event_model import PersonData
 
@@ -30,7 +33,7 @@ def proceedings_data_factory(event: Any, sessions: list, contributions: list,
     event_timezone: str = event.get('timezone', '')
 
     """ build editors """
-    
+
     editors_dict_list = json_decode(settings.get(
         'editorial_json', '{}'))
 
@@ -55,7 +58,9 @@ def proceedings_data_factory(event: Any, sessions: list, contributions: list,
 
     contributions_data: list[ContributionData] = [
         c for c in [
-            contribution_data_factory(c, editors, event_timezone, preprint_marking_alias, preprint_request_alias) for c in contributions
+            contribution_data_factory(
+                c, editors, event_timezone, preprint_marking_alias, preprint_request_alias
+            ) for c in contributions
         ] if c and c.cat_publish(cat_publish_alias)
     ]
 
@@ -115,33 +120,40 @@ def proceedings_data_factory(event: Any, sessions: list, contributions: list,
 
 
 def resolve_duplicates_of(contributions: list[ContributionData], settings: dict) -> list[ContributionData]:
+    duplicate_of_alias = settings.get('duplicate_of_alias', 'duplicate_of')
+    sync_metadata = is_duplicate_metadata_sync_enabled(settings)
     for contribution in contributions:
-        duplicate_of_code: str | None = contribution.duplicate_of_code(
-            settings.get('duplicate_of_alias', 'duplicate_of'))
+        duplicate_of_code: str | None = contribution.duplicate_of_code(duplicate_of_alias)
         if duplicate_of_code:
-            predicate = find_predicate(duplicate_of_code)
-            duplicate_contribution: ContributionData | None = find(
-                contributions, predicate)
+            duplicate_contribution: ContributionData | None = find_duplicate_contribution(
+                contributions, duplicate_of_code, current_contribution=contribution
+            )
             if duplicate_contribution and duplicate_contribution.metadata:
                 logger.info(
                     f"Contribution {contribution.code} has duplicate {duplicate_of_code} with metadata")
-            contribution.duplicate_of = DuplicateContributionData(
-                code=duplicate_contribution.code,
-                session_id=duplicate_contribution.session_id,
-                session_code=duplicate_contribution.session_code,
-                has_metadata=True if duplicate_contribution.metadata else False,
-                doi_url=duplicate_contribution.doi_data.doi_url if duplicate_contribution.doi_data else '',
-                reception=duplicate_contribution.reception,
-                revisitation=duplicate_contribution.revisitation,
-                acceptance=duplicate_contribution.acceptance,
-                issuance=duplicate_contribution.issuance
-            ) if duplicate_contribution else None
+            if duplicate_contribution:
+                contribution.duplicate_of = DuplicateContributionData(
+                    code=duplicate_contribution.code,
+                    session_id=duplicate_contribution.session_id,
+                    session_code=duplicate_contribution.session_code,
+                    has_metadata=True if duplicate_contribution.metadata else False,
+                    doi_url=duplicate_contribution.doi_data.doi_url if duplicate_contribution.doi_data else '',
+                    reception=duplicate_contribution.reception,
+                    revisitation=duplicate_contribution.revisitation,
+                    acceptance=duplicate_contribution.acceptance,
+                    issuance=duplicate_contribution.issuance
+                )
+                if sync_metadata:
+                    if duplicate_contribution.title is not None:
+                        contribution.title = duplicate_contribution.title
+                    if duplicate_contribution.description is not None:
+                        contribution.description = duplicate_contribution.description
+                    contribution.primary_authors = list(duplicate_contribution.primary_authors)
+                    contribution.coauthors = list(duplicate_contribution.coauthors)
+                    contribution.authors = list(duplicate_contribution.authors)
+                    contribution.institutes = list(duplicate_contribution.institutes)
+                    if duplicate_contribution.keywords:
+                        contribution.keywords = list(duplicate_contribution.keywords)
+            else:
+                contribution.duplicate_of = None
     return contributions
-
-
-def find_predicate(code: str) -> Callable[..., bool]:
-
-    def _predicate(c: ContributionData) -> bool:
-        return c.code == code
-
-    return _predicate
