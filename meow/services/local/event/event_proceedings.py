@@ -84,6 +84,9 @@ from meow.services.local.event.final_proceedings.build_doi_payloads import (
 from meow.services.local.event.final_proceedings.manage_duplicates import (
     manage_duplicates,
 )
+from meow.services.local.event.final_proceedings.check_sessions_without_code import (
+    check_sessions_without_code,
+)
 from meow.services.local.event.final_proceedings.link_static_site import (
     clean_static_site,
     link_static_site,
@@ -321,6 +324,19 @@ async def _event_proceedings(
     duplicate_warnings = await check_duplicate_authors(proceedings)
 
     for warning in duplicate_warnings:
+        yield dict(
+            type="log",
+            value=ClientLog(
+                severity=ClientLogSeverity.WARNING,
+                message=warning,
+            ),
+        )
+
+    # Not blocking: the editors are warned, the site is generated anyway
+
+    session_warnings = await check_sessions_without_code(proceedings)
+
+    for warning in session_warnings:
         yield dict(
             type="log",
             value=ClientLog(
