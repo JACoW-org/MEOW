@@ -359,14 +359,22 @@ class ContributionData:
 
         return field_value in ["", "yes", "true", "1"]
 
-    def duplicate_of_code(self, duplicate_of_alias: str) -> str | None:
+    def duplicate_of_code(self, duplicate_of_alias: str | None = None) -> str | None:
         # after duplicate of is initialized, use this condition
         if self.duplicate_of:
             return self.duplicate_of.code
 
-        for _field in self.field_values:
-            if _field.name == duplicate_of_alias and _field.value:
-                return _field.value
+        aliases: list[str] = []
+        for candidate in [duplicate_of_alias, "CAT_duplicate_of", "duplicate_of"]:
+            if candidate and candidate.strip():
+                c_norm = candidate.strip().casefold()
+                if c_norm not in aliases:
+                    aliases.append(c_norm)
+
+        for alias in aliases:
+            for _field in self.field_values:
+                if _field.name and _field.name.strip().casefold() == alias and _field.value:
+                    return _field.value
 
         return None
 

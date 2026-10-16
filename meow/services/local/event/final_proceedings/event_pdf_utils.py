@@ -56,7 +56,9 @@ def get_mutool_cmd():
 
 
 def get_qpdf_cmd():
-    return str(Path("qpdf"))  # str(Path("bin", "qpdf"))
+    # the bundled qpdf 12 (bin/ + lib/), not the one in PATH: qpdf 11 cannot
+    # linearize files larger than 2 GiB ("integer out of range converting ...")
+    return str(Path("bin", "qpdf"))
 
 
 def get_pdfunite_cmd():
