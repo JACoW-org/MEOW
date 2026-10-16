@@ -97,7 +97,8 @@ def test_optimize_is_valid_linearized_and_keeps_metadata(meow_workdir):
 
         assert not list(cache.glob("*.opt.pdf")) and not list(cache.glob("*.lin.pdf"))
 
-    assert len(logs) == 2 and all("garbage=4" in m for m in logs)
+    assert len(logs) == 2 and all("garbage=4" in m.message for m in logs)
+    assert all(m.severity.value == "info" for m in logs)
 
 
 def test_garbage_setting_changes_the_result(meow_workdir):
@@ -109,13 +110,13 @@ def test_garbage_setting_changes_the_result(meow_workdir):
     cache, _, logs = _run(meow_workdir, {"pdf_optimize_aggressive": False})
     light = os.path.getsize(cache / volume)
 
-    assert all("garbage=2" in m for m in logs)
+    assert all("garbage=2" in m.message for m in logs)
     # level 4 merges the duplicated image streams, level 2 does not
     assert aggressive < light
     assert "File is linearized" in _qpdf_check(cache / volume).stdout
 
 
-def test_failure_keeps_the_original_and_suggests_a_retry(meow_workdir, monkeypatch):
+def test_optimization_failure_keeps_the_original(meow_workdir, monkeypatch):
     import meow.services.local.event.final_proceedings.optimize_proceedings_pdfs as step
 
     async def failing(*args, **kwargs):
@@ -133,8 +134,42 @@ def test_failure_keeps_the_original_and_suggests_a_retry(meow_workdir, monkeypat
     )
 
     assert pdf.read_bytes() == before
-    assert any("pdf_optimize_aggressive" in m for m in logs)
+    assert any("optimization failed" in m.message and m.severity.value == "warning" for m in logs)
     assert data.proceedings_volume_size == 0
+    assert not list(cache.glob("*.opt.pdf"))
+
+
+def test_linearization_failure_keeps_the_optimized_file(meow_workdir, monkeypatch):
+    """The optimization can take a long time on big volumes: a failure of qpdf
+    must not throw it away (IPAC'26 volume, qpdf 11 above 2 GiB)."""
+    import meow.services.local.event.final_proceedings.optimize_proceedings_pdfs as step
+
+    async def failing(*args, **kwargs):
+        return 1
+
+    monkeypatch.setattr(step, "pdf_linearize_final_qpdf", failing)
+    cache, data, logs = _run(meow_workdir, {})
+
+    for kind, size_attr in (("brief", "proceedings_brief_size"),
+                            ("volume", "proceedings_volume_size")):
+        pdf = cache / f"{EVENT_ID}_proceedings_{kind}.pdf"
+        assert "File is linearized" not in _qpdf_check(pdf).stdout
+        assert getattr(data, size_attr) == os.path.getsize(pdf)
+        with fitz.open(pdf) as doc:
+            assert "Test Conference" in doc.metadata["title"]
+
+    assert not list(cache.glob("*.opt.pdf")) and not list(cache.glob("*.lin.pdf"))
+    assert all("qpdf failed" in m.message and m.severity.value == "warning" for m in logs)
+
+
+def test_the_bundled_qpdf_is_used():
+    """qpdf 11 (the one in PATH on the production host) aborts on files larger
+    than 2 GiB: the linearization must use the bundled qpdf 12."""
+    from meow.services.local.event.final_proceedings.event_pdf_utils import get_qpdf_cmd
+
+    out = subprocess.run([get_qpdf_cmd(), "--version"], capture_output=True, text=True).stdout
+    version = tuple(int(x) for x in out.split()[2].split(".")[:2])
+    assert version >= (12, 0), out
 
 
 def test_slides_and_posters_are_linearized(meow_workdir, tmp_path):
@@ -170,7 +205,7 @@ def test_file_too_large_to_linearize_is_only_optimized(meow_workdir, monkeypatch
             assert "Test Conference" in doc.metadata["title"]
 
     assert not list(cache.glob("*.opt.pdf")) and not list(cache.glob("*.lin.pdf"))
-    assert all("not linearized" in m for m in logs)
+    assert all("not linearized" in m.message for m in logs)
 
 
 def _write_big_pdf(path, pages=3, stream_mb=800):

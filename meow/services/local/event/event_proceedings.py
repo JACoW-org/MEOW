@@ -705,14 +705,8 @@ async def _event_proceedings(
         filter_published_contributions,
     )
 
-    for msg in opt_logs:
-        yield dict(
-            type="log",
-            value=ClientLog(
-                severity=ClientLogSeverity.INFO,
-                message=msg,
-            ),
-        )
+    for log in opt_logs:
+        yield dict(type="log", value=log)
 
     """ """
 

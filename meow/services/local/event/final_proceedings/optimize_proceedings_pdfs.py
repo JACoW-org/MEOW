@@ -4,6 +4,10 @@ from typing import Callable
 
 from anyio import Path
 
+from meow.models.local.event.final_proceedings.client_log import (
+    ClientLog,
+    ClientLogSeverity,
+)
 from meow.models.local.event.final_proceedings.proceedings_data_model import (
     ProceedingsConfig,
     ProceedingsData,
@@ -75,6 +79,7 @@ GARBAGE_LIGHT = 2
 # or more cannot be linearized (qpdf would truncate them). Files between 2 and
 # 4 GiB are valid, but `qpdf --check` reports two false mismatches there, because
 # it reads those fields as signed integers. The margin covers the hint stream.
+# qpdf 11 aborts above 2 GiB instead: get_qpdf_cmd must be the bundled qpdf 12.
 LINEARIZATION_MAX_BYTES = 2**32 - 64 * 1024 * 1024
 
 
@@ -103,13 +108,13 @@ async def optimize_proceedings_pdfs(
     settings: dict,
     config: ProceedingsConfig,
     callback: Callable,
-) -> tuple[ProceedingsData, list[str]]:
+) -> tuple[ProceedingsData, list[ClientLog]]:
     logger.info("event_final_proceedings - optimize_proceedings_pdfs")
 
     event_id = proceedings_data.event.id
     event_title = proceedings_data.event.title
     cache_dir = Path("var", "run", f"{event_id}_tmp")
-    client_logs: list[str] = []
+    client_logs: list[ClientLog] = []
     garbage = get_garbage_level(settings)
 
     for pdf_name, label, size_attr, docinfo_fn, xmp_fn in [
@@ -147,17 +152,32 @@ async def optimize_proceedings_pdfs(
                 garbage,
             ) != 0:
                 raise RuntimeError(f"Error optimizing {pdf_name} (garbage={garbage})")
+        except Exception as be:
+            logger.error(be, exc_info=True)
+            await tmp.unlink(missing_ok=True)
+            client_logs.append(ClientLog(
+                severity=ClientLogSeverity.WARNING,
+                message=f"{label}: optimization failed (garbage={garbage}), the original file is kept",
+            ))
+            continue
 
-            linearize = (await tmp.stat()).st_size < LINEARIZATION_MAX_BYTES
+        try:
+            not_linearized = ""
 
-            if linearize:
-                # linearization last: any later rewrite of the file would drop it
-                if await pdf_linearize_final_qpdf(str(tmp), str(lin)) != 0:
-                    raise RuntimeError(f"Error linearizing {pdf_name}")
-                await tmp.unlink()
-            else:
+            # linearization last: any later rewrite of the file would drop it
+            if (await tmp.stat()).st_size >= LINEARIZATION_MAX_BYTES:
                 logger.warning(f"{pdf_name} is too large to be linearized (offsets are 32 bit): optimized only")
+                not_linearized = ", not linearized: larger than 4 GiB"
+            elif await pdf_linearize_final_qpdf(str(tmp), str(lin)) != 0:
+                # the optimization is kept: it can take a long time on big volumes
+                logger.error(f"Error linearizing {pdf_name}: optimized only")
+                await lin.unlink(missing_ok=True)
+                not_linearized = ", not linearized: qpdf failed"
+
+            if not_linearized:
                 await tmp.rename(lin)
+            else:
+                await tmp.unlink()
 
             await src.unlink()
             await lin.rename(src)
@@ -167,19 +187,20 @@ async def optimize_proceedings_pdfs(
             logger.info(f"{label} [{pdf_name}] after:  {size_after:,} bytes ({size_after / 1_000_000:.2f} MB) — reduction: {reduction:.1f}%")
 
             setattr(proceedings_data, size_attr, size_after)
-            client_logs.append(
-                f"{label}: {size_before / 1_000_000:.2f} MB → {size_after / 1_000_000:.2f} MB"
-                f" ({reduction:.1f}% reduction, garbage={garbage}"
-                f"{'' if linearize else ', not linearized: larger than 4 GiB'})"
-            )
+            client_logs.append(ClientLog(
+                severity=ClientLogSeverity.WARNING if not_linearized else ClientLogSeverity.INFO,
+                message=(
+                    f"{label}: {size_before / 1_000_000:.2f} MB → {size_after / 1_000_000:.2f} MB"
+                    f" ({reduction:.1f}% reduction, garbage={garbage}{not_linearized})"
+                ),
+            ))
         except Exception as be:
             logger.error(be, exc_info=True)
             await tmp.unlink(missing_ok=True)
             await lin.unlink(missing_ok=True)
-            client_logs.append(
-                f"{label}: optimization failed, the original file is kept"
-                f" (garbage={garbage}; to retry with a lighter garbage collection"
-                f" turn off the setting pdf_optimize_aggressive)"
-            )
+            client_logs.append(ClientLog(
+                severity=ClientLogSeverity.WARNING,
+                message=f"{label}: optimization failed, the original file is kept",
+            ))
 
     return proceedings_data, client_logs
