@@ -373,7 +373,7 @@ async def get_vol_toc_pdf_path(
             )
 
         for contribution in proceedings_data.contributions:
-            if callback(contribution) is False or not contribution.session_code:
+            if callback(contribution) is False:
                 continue
 
             if contribution.session_id in session_ids:

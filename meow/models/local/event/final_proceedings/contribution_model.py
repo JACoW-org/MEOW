@@ -7,6 +7,7 @@ from meow.models.local.event.final_proceedings.event_model import (
     KeywordData,
     PersonData,
 )
+from meow.models.local.event.final_proceedings.session_model import session_page_name
 from meow.models.local.event.final_proceedings.track_model import TrackData
 from meow.tasks.local.doi.models import AuthorsGroup, ContributionDOI
 from meow.tasks.local.reference.models import ContributionRef, Reference
@@ -228,6 +229,10 @@ class DuplicateContributionData:
     revisitation: datetime | None = field(default=None)
     acceptance: datetime | None = field(default=None)
     issuance: datetime | None = field(default=None)
+
+    @property
+    def session_page_name(self) -> str:
+        return session_page_name(self.session_id, self.session_code)
 
     def as_dict(self):
         return asdict(self)

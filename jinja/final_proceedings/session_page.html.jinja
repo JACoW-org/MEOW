@@ -1,7 +1,9 @@
 ---
 type: "session"
 id: "{{ session.id|e }}"
+{% if session.code %}
 name: "{{ session.code|e }}"
+{% endif %}
 title: "{{ session.title|e }}"
 start: "{{ session.start.strftime('%d %b %Y, %H:%M') }}"
 end: "{{ session.end.strftime('%H:%M') }}"
