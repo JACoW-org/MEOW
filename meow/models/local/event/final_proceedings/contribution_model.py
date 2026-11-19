@@ -68,6 +68,10 @@ class FileData:
     md5sum: str = field()
     uuid: str = field()
 
+    # name of the file in Indico, when `filename` has been changed by MEOW
+    # (paper named after the contribution code, JACoW-org/MEOW#37)
+    original_filename: str = field(default="")
+
     class FileType:
         # __titles__ = [None, _('Paper'), _('Slides'), _('Poster')]
 
@@ -415,6 +419,7 @@ class ContributionData:
         return False
 
     def paper_name(self) -> str | None:
+        """Name of the paper in the site: ``{CODE}.pdf``."""
         if (
             self.papers
             and self.papers.latest_revision
@@ -423,6 +428,18 @@ class ContributionData:
             for file in self.papers.latest_revision.files:
                 if file.file_type == FileData.FileType.paper:
                     return file.filename
+        return None
+
+    def paper_original_name(self) -> str | None:
+        """Name of the paper file in Indico, as uploaded."""
+        if (
+            self.papers
+            and self.papers.latest_revision
+            and self.papers.latest_revision.files
+        ):
+            for file in self.papers.latest_revision.files:
+                if file.file_type == FileData.FileType.paper:
+                    return file.original_filename or file.filename
         return None
 
     def has_slides(self) -> bool:

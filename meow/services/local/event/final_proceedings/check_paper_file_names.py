@@ -24,7 +24,7 @@ async def check_paper_file_names(proceedings_data: ProceedingsData,
         if not callback(contribution):
             continue
 
-        paper_name: str | None = contribution.paper_name()
+        paper_name: str | None = contribution.paper_original_name()
         if not paper_name or not contribution.code:
             continue
 
