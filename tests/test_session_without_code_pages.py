@@ -15,6 +15,9 @@ from meow.models.local.event.final_proceedings.session_model import (
     SessionData,
     session_page_name,
 )
+from meow.services.local.event.abstract_booklet.export_abstract_booklet import (
+    without_empty_code,
+)
 from meow.services.local.event.final_proceedings import concat_contribution_papers
 from meow.services.local.event.final_proceedings.write_metadata_utils import (
     get_footer_data,
@@ -83,6 +86,12 @@ def test_footer_has_the_title_only_without_session_code():
 
     footer = get_footer_data(contribution, make_session(62, "TU2", "Photon"))
     assert footer["sessionHeader"] == "TU2: Photon"
+
+
+def test_booklet_header_drops_the_empty_code_and_its_separator():
+    assert without_empty_code("{code} - {title}", "") == "{title}"
+    assert without_empty_code("{code}: {title}", None) == "{title}"
+    assert without_empty_code("{code} - {title}", "TU2") == "{code} - {title}"
 
 
 @pytest.mark.anyio
