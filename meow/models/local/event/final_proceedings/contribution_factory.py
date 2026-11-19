@@ -20,7 +20,10 @@ from meow.models.local.event.final_proceedings.contribution_model import (
     TagData,
     UserData,
 )
-from meow.models.local.event.final_proceedings.event_model import PersonData
+from meow.models.local.event.final_proceedings.event_model import (
+    AffiliationData,
+    PersonData,
+)
 
 from meow.utils.list import find
 
@@ -361,13 +364,8 @@ def contribution_data_factory(
         track=track_data_factory(contribution.get("track")),
         keywords=list(set([])),
         authors=list(set(authors)),
-        institutes=list(
-            set(
-                [
-                    event_affiliation_factory(institute)
-                    for institute in contribution.get("institutes", [])
-                ]
-            )
+        institutes=contribution_institutes_factory(
+            contribution.get("institutes", []), authors
         ),
         room=contribution.get("room"),
         location=contribution.get("location"),
@@ -476,6 +474,37 @@ def contribution_user_factory(user: Any) -> UserData | None:
         if user
         else None
     )
+
+
+def contribution_institutes_factory(
+    institutes: list[dict], authors: list[PersonData]
+) -> list[AffiliationData]:
+    """Institutes of a contribution: one for every affiliation of its authors.
+
+    PURR sends the institutes of the primary authors only, and the free text
+    of their affiliation as it is: the institute of a coauthor is missing
+    (CAT#41) and "A; B", for an author with two affiliations, is listed as an
+    institute of its own, without authors (CAT#42). The names are split on
+    ``;`` and the affiliations of every author are added; the data sent by
+    Indico (city, country...) is kept when there is any.
+    """
+    result: dict[str, AffiliationData] = {}
+
+    for institute in institutes:
+        data = event_affiliation_factory(institute)
+        for name in (n.strip() for n in data.name.split(";")):
+            if name:
+                candidate = event_affiliation_factory({**institute, "name": name})
+                result.setdefault(candidate.id, candidate)
+
+    for author in authors:
+        for name in author.affiliations if author else []:
+            name = name.strip()
+            if name:
+                candidate = event_affiliation_factory({"name": name})
+                result.setdefault(candidate.id, candidate)
+
+    return list(result.values())
 
 
 def contribution_file_factory(file: Any) -> FileData:
