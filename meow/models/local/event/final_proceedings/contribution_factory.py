@@ -481,32 +481,44 @@ def contribution_user_factory(user: Any) -> UserData | None:
 def contribution_institutes_factory(
     institutes: list[dict], authors: list[PersonData]
 ) -> list[AffiliationData]:
-    """Institutes of a contribution: one for every affiliation of its authors.
+    """Institutes of a contribution: the affiliations of its authors.
 
-    PURR sends the institutes of the primary authors only, and the free text
-    of their affiliation as it is: the institute of a coauthor is missing
-    (CAT#41) and "A; B", for an author with two affiliations, is listed as an
-    institute of its own, without authors (CAT#42). The names are split on
-    ``;`` and the affiliations of every author are added; the data sent by
-    Indico (city, country...) is kept when there is any.
+    PURR sends the institutes of the primary authors only, and for each of them
+    both the linked affiliations and the free text of the affiliation as it is.
+    The free text is not what the authors use when they have linked
+    affiliations ("Paul Scherrer Institut" vs "Paul Scherrer Institute"), and
+    "A; B" is the free text of an author with two affiliations: they would be
+    institutes without authors (CAT#42, CAT#43). The institute of a coauthor is
+    missing (CAT#41).
+
+    The institutes are the affiliations of all the authors, the same used for
+    the author pages and indexes. The data sent by PURR for the same institute
+    (name spelling, city, country...) is kept when there is any; the names sent
+    by PURR are split on ``;``. If no author has an affiliation, the institutes
+    sent by PURR are used as they are.
     """
-    result: dict[str, AffiliationData] = {}
+    purr: dict[str, AffiliationData] = {}
 
     for institute in institutes:
         data = event_affiliation_factory(institute)
         for name in (n.strip() for n in data.name.split(";")):
             if name:
                 candidate = event_affiliation_factory({**institute, "name": name})
-                result.setdefault(candidate.id, candidate)
+                purr.setdefault(candidate.id, candidate)
+
+    result: dict[str, AffiliationData] = {}
 
     for author in authors:
         for name in author.affiliations if author else []:
             name = name.strip()
             if name:
-                candidate = event_affiliation_factory({"name": name})
-                result.setdefault(candidate.id, candidate)
+                institute_id = event_affiliation_factory({"name": name}).id
+                result.setdefault(
+                    institute_id,
+                    purr.get(institute_id) or event_affiliation_factory({"name": name}),
+                )
 
-    return list(result.values())
+    return list(result.values()) or list(purr.values())
 
 
 def name_papers_after_code(papers: EditableData | None, code: str | None) -> None:
