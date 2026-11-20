@@ -397,7 +397,7 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
             for convener in session_conveners:
                 session_chair.addText(
                     f"{convener.get('first')} {convener.get('last')} " +
-                    f"({', '.join(convener.get('affiliations'))})" if len(convener.get('affiliations')) else ""
+                    f"({', '.join(sorted(convener.get('affiliations')))})" if len(convener.get('affiliations')) else ""
                 )
 
             odt.text.addElement(  # type: ignore
@@ -588,7 +588,7 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
                         #     'affiliation') != '' else ''
 
                         affiliations = (
-                            f"({', '.join(item.get('affiliations'))})"
+                            f"({', '.join(sorted(item.get('affiliations')))})"
                             if len(item.get('affiliations'))
                             else ""
                         )
@@ -649,7 +649,7 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
                         # affiliation = f" ({item.get('affiliation')})" if item.get(
                         #     'affiliation') != '' else ''
                         affiliations = (
-                            f"({', '.join(item.get('affiliations'))})"
+                            f"({', '.join(sorted(item.get('affiliations')))})"
                             if len(item.get('affiliations'))
                             else ""
                         )
@@ -711,7 +711,7 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
                         # affiliation = f" ({item.get('affiliation')})" if item.get(
                         #     'affiliation') != '' else ''
                         affiliations = (
-                            f"({', '.join(item.get('affiliations'))})"
+                            f"({', '.join(sorted(item.get('affiliations')))})"
                             if len(item.get('affiliations'))
                             else ""
                         )
