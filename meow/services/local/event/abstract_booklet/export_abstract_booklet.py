@@ -394,11 +394,17 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
 
             session_chair = P(stylename=styles.get('h2'), text="Chair: ")
 
+            chairs: list[str] = []
+
             for convener in session_conveners:
-                session_chair.addText(
-                    f"{convener.get('first')} {convener.get('last')} " +
-                    f"({', '.join(convener.get('affiliations'))})" if len(convener.get('affiliations')) else ""
+                name = f"{convener.get('first')} {convener.get('last')}"
+                affiliations = sorted(convener.get('affiliations') or [])
+
+                chairs.append(
+                    f"{name} ({', '.join(affiliations)})" if affiliations else name
                 )
+
+            session_chair.addText(", ".join(chairs))
 
             odt.text.addElement(  # type: ignore
                 session_chair
@@ -588,7 +594,7 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
                         #     'affiliation') != '' else ''
 
                         affiliations = (
-                            f"({', '.join(item.get('affiliations'))})"
+                            f"({', '.join(sorted(item.get('affiliations')))})"
                             if len(item.get('affiliations'))
                             else ""
                         )
@@ -649,7 +655,7 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
                         # affiliation = f" ({item.get('affiliation')})" if item.get(
                         #     'affiliation') != '' else ''
                         affiliations = (
-                            f"({', '.join(item.get('affiliations'))})"
+                            f"({', '.join(sorted(item.get('affiliations')))})"
                             if len(item.get('affiliations'))
                             else ""
                         )
@@ -711,7 +717,7 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
                         # affiliation = f" ({item.get('affiliation')})" if item.get(
                         #     'affiliation') != '' else ''
                         affiliations = (
-                            f"({', '.join(item.get('affiliations'))})"
+                            f"({', '.join(sorted(item.get('affiliations')))})"
                             if len(item.get('affiliations'))
                             else ""
                         )
