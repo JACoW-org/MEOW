@@ -22,27 +22,33 @@
 <xsl:when test="$monthNumber = 12">December</xsl:when>
 </xsl:choose>
 </xsl:variable>
-<xsl:text>TY - </xsl:text><xsl:choose><xsl:when test="contribution/status = 'in_proceedings'"><xsl:text>CONF</xsl:text></xsl:when><xsl:otherwise><xsl:text>UNPB</xsl:text></xsl:otherwise></xsl:choose>
+<xsl:text>TY  - </xsl:text><xsl:choose><xsl:when test="contribution/status = 'in_proceedings'"><xsl:text>CONF</xsl:text></xsl:when><xsl:otherwise><xsl:text>UNPB</xsl:text></xsl:otherwise></xsl:choose>
 <xsl:for-each select="contribution/authors-list/author">
 <xsl:text>
-AU - </xsl:text>
+AU  - </xsl:text>
 <xsl:value-of select="last-name"/>
 <xsl:text>, </xsl:text>
 <xsl:value-of select="substring(first-name, 1, 1)"/>
 <xsl:text>.</xsl:text>
 </xsl:for-each>
-<xsl:for-each select="contribution/editors-list/editor">
+<xsl:for-each select="contribution/editors-list/editor[normalize-space(last-name) != '']">
 <xsl:text>
-ED - </xsl:text>
+ED  - </xsl:text>
 <xsl:value-of select="last-name"/>
 <xsl:text>, </xsl:text>
 <xsl:value-of select="substring(first-name, 1, 1)"/>
 <xsl:text>.</xsl:text>
 </xsl:for-each>
 <xsl:text>
-TI - </xsl:text><xsl:value-of select="contribution/title"/>
+TI  - </xsl:text><xsl:value-of select="contribution/title"/>
+<xsl:choose>
+<xsl:when test="normalize-space(conference/booktitle-short) != ''">
 <xsl:text>
-J2 - Proc. of </xsl:text>
+J2  - Proc. </xsl:text><xsl:value-of select="normalize-space(conference/booktitle-short)"/>
+</xsl:when>
+<xsl:otherwise>
+<xsl:text>
+J2  - Proc. of </xsl:text>
 <xsl:value-of select="conference/code"/><xsl:text>, </xsl:text>
 <xsl:value-of select="conference/venue"/><xsl:text>, </xsl:text>
 <xsl:value-of select="substring($dateString, 9, 2)"/>
@@ -52,42 +58,44 @@ J2 - Proc. of </xsl:text>
 <xsl:value-of select="$month"/>
 <xsl:text> </xsl:text>
 <xsl:value-of select="substring($dateString, 1, 4)"/>
+</xsl:otherwise>
+</xsl:choose>
 <xsl:text>
-CY - </xsl:text><xsl:value-of select="conference/venue"/>
-<xsl:if test="conference/series"><xsl:text>
-T2 - </xsl:text><xsl:value-of select="conference/series"/></xsl:if>
-<xsl:if test="conference/series-number"><xsl:text>
-T3 - </xsl:text><xsl:value-of select="conference/series-number"/></xsl:if>
+CY  - </xsl:text><xsl:value-of select="conference/venue"/>
+<xsl:if test="normalize-space(conference/series) != ''"><xsl:text>
+T2  - </xsl:text><xsl:value-of select="conference/series"/></xsl:if>
+<xsl:if test="normalize-space(conference/series-number) != ''"><xsl:text>
+T3  - </xsl:text><xsl:value-of select="conference/series-number"/></xsl:if>
 <xsl:text>
-LA - </xsl:text><xsl:value-of select="language"/>
+LA  - </xsl:text><xsl:value-of select="language"/>
 <xsl:text>
-AB - </xsl:text><xsl:value-of select="contribution/abstract"/>
+AB  - </xsl:text><xsl:value-of select="contribution/abstract"/>
 <xsl:text>
-PB - </xsl:text><xsl:value-of select="publisher"/>
+PB  - </xsl:text><xsl:value-of select="publisher"/>
 <xsl:text>
-CP - </xsl:text><xsl:value-of select="publisher-venue"/>
+CP  - </xsl:text><xsl:value-of select="publisher-venue"/>
 <xsl:if test="contribution/pages/number > 0">
 <xsl:text>
-SP - </xsl:text><xsl:value-of select="contribution/pages/start-page"/>
+SP  - </xsl:text><xsl:value-of select="contribution/pages/start-page"/>
 <xsl:text>
-EP - </xsl:text><xsl:value-of select="contribution/pages/start-page + contribution/pages/number - 1"/>
+EP  - </xsl:text><xsl:value-of select="contribution/pages/start-page + contribution/pages/number - 1"/>
 </xsl:if>
-<xsl:for-each select="contribution/keywords/keyword">
+<xsl:for-each select="contribution/keywords/keyword[normalize-space(.) != '']">
 <xsl:text>
-KW - </xsl:text><xsl:value-of select="."/>
+KW  - </xsl:text><xsl:value-of select="."/>
 </xsl:for-each>
 <xsl:text>
-DA - </xsl:text><xsl:value-of select="substring($dateString, 1, 4)"/><xsl:text>/</xsl:text><xsl:value-of select="substring($dateString, 6, 2)"/>
+DA  - </xsl:text><xsl:value-of select="substring($dateString, 1, 4)"/><xsl:text>/</xsl:text><xsl:value-of select="substring($dateString, 6, 2)"/>
 <xsl:text>
-PY - </xsl:text><xsl:value-of select="substring($dateString, 1, 4)"/>
+PY  - </xsl:text><xsl:value-of select="substring($dateString, 1, 4)"/>
 <xsl:if test="conference/issn != '' and conference/issn != '0000-0000'"><xsl:text>
-SN - </xsl:text><xsl:value-of select="conference/issn"/></xsl:if>
+SN  - </xsl:text><xsl:value-of select="conference/issn"/></xsl:if>
 <xsl:if test="contribution/doi != ''"><xsl:text>
-DO - </xsl:text><xsl:value-of select="contribution/doi"/></xsl:if>
+DO  - </xsl:text><xsl:value-of select="contribution/doi"/></xsl:if>
 <xsl:text>
-UR - </xsl:text><xsl:value-of select="contribution/url"/>
+UR  - </xsl:text><xsl:value-of select="contribution/url"/>
 <xsl:text>
-ER - </xsl:text>
+ER  - </xsl:text>
 </xsl:template>
 
 </xsl:stylesheet>
