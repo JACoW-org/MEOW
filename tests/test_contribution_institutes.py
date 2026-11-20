@@ -126,3 +126,51 @@ def test_institute_list_shows_the_authors_of_every_spelling():
     )
 
     assert html.count('<li class="author">') == 2
+
+
+# --- institutes no author uses are not listed (CAT#43, follow-up of CAT#42) ---
+
+
+def test_free_text_different_from_the_linked_affiliation_is_not_an_institute():
+    # PURR sends the linked name ("Institute") and the free text ("Institut"):
+    # authors use the linked one, the free text would be an institute without authors
+    institutes = contribution_institutes_factory(
+        [{"name": "Paul Scherrer Institute"}, {"name": "Paul Scherrer Institut"}],
+        [person("Paul Scherrer Institute")],
+    )
+
+    assert names(institutes) == ["Paul Scherrer Institute"]
+
+
+def test_generic_free_text_is_not_an_institute_when_authors_use_the_linked_ones():
+    institutes = contribution_institutes_factory(
+        [
+            {"name": "INFN, Laboratori Nazionali di Legnaro"},
+            {"name": "Facility for Rare Isotope Beams"},
+            {"name": "Istituto Nazionale di Fisica Nucleare"},
+        ],
+        [person("INFN, Laboratori Nazionali di Legnaro", "Facility for Rare Isotope Beams")],
+    )
+
+    assert names(institutes) == [
+        "Facility for Rare Isotope Beams",
+        "INFN, Laboratori Nazionali di Legnaro",
+    ]
+
+
+def test_indico_data_of_the_institute_used_by_the_authors_is_kept():
+    institutes = contribution_institutes_factory(
+        [{"name": "CERN", "city": "Meyrin", "country_code": "CH"}, {"name": "Other"}],
+        [person("CERN")],
+    )
+
+    [cern] = institutes
+    assert (cern.name, cern.city) == ("CERN", "Meyrin")
+
+
+def test_institutes_sent_by_purr_are_kept_when_no_author_has_an_affiliation():
+    institutes = contribution_institutes_factory(
+        [{"name": "CERN"}, {"name": "A; B"}], [person(), person()]
+    )
+
+    assert names(institutes) == ["A", "B", "CERN"]
