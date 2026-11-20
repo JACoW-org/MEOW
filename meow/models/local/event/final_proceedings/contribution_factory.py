@@ -348,6 +348,8 @@ def contribution_data_factory(
     # accepted: qa ok
     # issue: date of proceedings
 
+    name_papers_after_code(papers_data, contribution.get("code"))
+
     contribution_data = ContributionData(
         id=contribution.get("id"),
         code=contribution.get("code"),
@@ -476,6 +478,29 @@ def contribution_user_factory(user: Any) -> UserData | None:
         if user
         else None
     )
+
+
+def name_papers_after_code(papers: EditableData | None, code: str | None) -> None:
+    """Name the paper files ``{CODE}.pdf``, whatever the uploaded name.
+
+    Indico names the paper after the code at upload time: if the code changes
+    afterwards the file keeps the old one. The paper is always named after the
+    contribution code, so that the site, the DOI landing page and the
+    references use the same name (JACoW-org/MEOW#37). The uploaded name is
+    kept in ``original_filename``.
+    """
+    if not papers or not code:
+        return
+
+    revisions = list(papers.all_revisions)
+    if papers.latest_revision:
+        revisions.append(papers.latest_revision)
+
+    for revision in revisions:
+        for file in revision.files:
+            if file.file_type == FileData.FileType.paper and not file.original_filename:
+                file.original_filename = file.filename
+                file.filename = f"{code.strip().upper()}.pdf"
 
 
 def contribution_file_factory(file: Any) -> FileData:
