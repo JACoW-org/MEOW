@@ -68,8 +68,8 @@ T2  - </xsl:text><xsl:value-of select="conference/series"/></xsl:if>
 T3  - </xsl:text><xsl:value-of select="conference/series-number"/></xsl:if>
 <xsl:text>
 LA  - </xsl:text><xsl:value-of select="language"/>
-<xsl:text>
-AB  - </xsl:text><xsl:value-of select="contribution/abstract"/>
+<xsl:if test="normalize-space(contribution/abstract) != ''"><xsl:text>
+AB  - </xsl:text><xsl:value-of select="normalize-space(contribution/abstract)"/></xsl:if>
 <xsl:text>
 PB  - </xsl:text><xsl:value-of select="publisher"/>
 <xsl:text>
