@@ -7,6 +7,7 @@ from meow.models.local.event.final_proceedings.event_model import (
     KeywordData,
     PersonData,
 )
+from meow.models.local.event.final_proceedings.session_model import session_page_name
 from meow.models.local.event.final_proceedings.track_model import TrackData
 from meow.tasks.local.doi.models import AuthorsGroup, ContributionDOI
 from meow.tasks.local.reference.models import ContributionRef, Reference
@@ -67,6 +68,10 @@ class FileData:
     filename: str = field()
     md5sum: str = field()
     uuid: str = field()
+
+    # name of the file in Indico, when `filename` has been changed by MEOW
+    # (paper named after the contribution code, JACoW-org/MEOW#37)
+    original_filename: str = field(default="")
 
     class FileType:
         # __titles__ = [None, _('Paper'), _('Slides'), _('Poster')]
@@ -228,6 +233,10 @@ class DuplicateContributionData:
     revisitation: datetime | None = field(default=None)
     acceptance: datetime | None = field(default=None)
     issuance: datetime | None = field(default=None)
+
+    @property
+    def session_page_name(self) -> str:
+        return session_page_name(self.session_id, self.session_code)
 
     def as_dict(self):
         return asdict(self)
@@ -415,6 +424,7 @@ class ContributionData:
         return False
 
     def paper_name(self) -> str | None:
+        """Name of the paper in the site: ``{CODE}.pdf``."""
         if (
             self.papers
             and self.papers.latest_revision
@@ -423,6 +433,18 @@ class ContributionData:
             for file in self.papers.latest_revision.files:
                 if file.file_type == FileData.FileType.paper:
                     return file.filename
+        return None
+
+    def paper_original_name(self) -> str | None:
+        """Name of the paper file in Indico, as uploaded."""
+        if (
+            self.papers
+            and self.papers.latest_revision
+            and self.papers.latest_revision.files
+        ):
+            for file in self.papers.latest_revision.files:
+                if file.file_type == FileData.FileType.paper:
+                    return file.original_filename or file.filename
         return None
 
     def has_slides(self) -> bool:

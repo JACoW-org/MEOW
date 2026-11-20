@@ -4,6 +4,7 @@ from anyio import Path, run_process
 from anyio import create_task_group, CapacityLimiter
 
 from meow.utils.filesystem import cptree, rmtree
+from meow.utils.collections import authors_of_institute, group_authors_by_institute
 
 from meow.models.local.event.final_proceedings.track_model import TrackData
 from meow.models.local.event.final_proceedings.contribution_model import (
@@ -313,7 +314,7 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
                 # logger.info(f"{session} -> {len(contributions)}")
 
                 await Path(
-                    self.src_session_dir, f"{session.id}-{session.code.lower()}.md"
+                    self.src_session_dir, f"{session.page_name}.md"
                 ).write_text(
                     await self.template.render_session_page(
                         self.event, session, contributions
@@ -323,7 +324,7 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
         capacity_limiter = CapacityLimiter(16)
         async with create_task_group() as tg:
             for session in self.sessions:
-                if session and session.id and session.code:
+                if session and session.id:
                     tg.start_soon(_render_contribution, capacity_limiter, session)
 
     async def render_classification(self) -> None:
@@ -413,15 +414,8 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
             self.src_dir, "layouts", "partials", "institute", "list.html"
         )
 
-        authorsGroups: dict[str, list[dict]] = {}
-
-        for author in self.authors:
-            for affiliation in author.affiliations:
-                if not (affiliation in authorsGroups):
-                    authorsGroups[affiliation] = []
-                authorsGroups[affiliation].append(
-                    {"code": author.code, "short": author.short}
-                )
+        # by institute id: the spellings of an institute share the same id
+        authorsGroups: dict[str, list[dict]] = group_authors_by_institute(self.authors)
 
         # for author in self.authors:
         #     if not (author.affiliations in authorsGroups):
@@ -461,7 +455,7 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
             institute_capacity_limiter: CapacityLimiter, institute: AffiliationData
         ) -> None:
             async with institute_capacity_limiter:
-                authors = [c for c in self.authors if institute.name in c.affiliations]
+                authors = authors_of_institute(self.authors, institute.id)
 
                 # logger.info(f"{institute} -> {len(authors)}")
 
