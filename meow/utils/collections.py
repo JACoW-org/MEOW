@@ -7,6 +7,7 @@ from meow.models.local.event.final_proceedings.event_model import (
     KeywordData,
     PersonData,
 )
+from meow.utils.slug import slugify
 
 
 def group_authors_by_last_initial_for_render(authors: list[PersonData]) -> dict:
@@ -62,6 +63,30 @@ def group_keywords_by_initial(keywords: list[KeywordData]) -> dict:
         groups[key].append(keyword.as_dict())
 
     return groups
+
+
+def group_authors_by_institute(authors: list[PersonData]) -> dict[str, list[dict]]:
+    """Authors of every institute, by institute id (slug of its name).
+
+    Two spellings of an institute ("SAES Getters S.p.A." / "S.p.A") have the
+    same id and are one institute: their authors are listed together, and an
+    author is listed once for an institute (CAT#41).
+    """
+    groups: dict[str, list[dict]] = {}
+    for author in authors:
+        for institute_id in dict.fromkeys(slugify(a) for a in author.affiliations):
+            groups.setdefault(institute_id, []).append(
+                {"code": author.code, "short": author.short}
+            )
+    return groups
+
+
+def authors_of_institute(authors: list[PersonData], institute_id: str) -> list[PersonData]:
+    """Authors with an affiliation whose id is ``institute_id``."""
+    return [
+        author for author in authors
+        if any(slugify(a) == institute_id for a in author.affiliations)
+    ]
 
 
 def group_institutes_by_initial(institutes: list[AffiliationData]) -> dict:

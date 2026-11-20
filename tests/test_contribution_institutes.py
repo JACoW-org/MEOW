@@ -59,3 +59,70 @@ def test_empty_and_duplicate_names_are_ignored():
     )
 
     assert names(institutes) == ["CERN"]
+
+
+# --- authors are matched to an institute by id (slug), not by exact name ---
+
+from pathlib import Path
+
+from jinja2 import Environment, FileSystemLoader
+
+from meow.models.local.event.final_proceedings.event_model import AffiliationData
+from meow.utils.collections import (
+    authors_of_institute,
+    group_authors_by_institute,
+    group_institutes_by_initial,
+)
+from meow.utils.slug import slugify
+
+
+def institute(name: str) -> AffiliationData:
+    return AffiliationData(
+        id=slugify(name), name=name, street=None, postcode=None, city=None,
+        country_code=None,
+    )
+
+
+def test_authors_with_different_spellings_of_an_institute_are_grouped_together():
+    # CAT#41: "SAES Getters S.p.A" and "SAES Getters S.p.A." are one institute
+    a, b = person("SAES Getters S.p.A."), person("SAES Getters S.p.A")
+    b.id = "other"
+
+    groups = group_authors_by_institute([a, b])
+
+    assert list(groups) == [slugify("SAES Getters S.p.A.")]
+    assert [x["code"] for x in groups[slugify("SAES Getters S.p.A")]] == [a.code, b.code]
+
+
+def test_author_with_two_spellings_of_the_same_institute_is_listed_once():
+    a = person("Fusion For Energy", "Fusion for Energy")
+
+    [group] = group_authors_by_institute([a]).values()
+
+    assert [x["code"] for x in group] == [a.code]
+
+
+def test_authors_of_an_institute_are_found_by_id_whatever_the_spelling():
+    a, b, c = person("Synchrotron Soleil"), person("Synchrotron SOLEIL"), person("CERN")
+    b.id, c.id = "b", "c"
+
+    found = authors_of_institute([a, b, c], institute("Synchrotron Soleil").id)
+
+    assert found == [a, b]
+
+
+def test_institute_list_shows_the_authors_of_every_spelling():
+    a, b = person("SAES Getters S.p.A."), person("SAES Getters S.p.A")
+    b.id = "other"
+    institutes = [institute("SAES Getters S.p.A.")]
+    jinja = Environment(
+        loader=FileSystemLoader(Path(__file__).parent.parent / "jinja" / "final_proceedings")
+    )
+
+    html = jinja.get_template("institute_partial.html.jinja").render(
+        authorsGroups=group_authors_by_institute([a, b]),
+        institutes_groups=group_institutes_by_initial(institutes),
+        initials={"s": True},
+    )
+
+    assert html.count('<li class="author">') == 2
