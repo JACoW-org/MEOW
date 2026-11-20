@@ -314,7 +314,7 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
                 # logger.info(f"{session} -> {len(contributions)}")
 
                 await Path(
-                    self.src_session_dir, f"{session.id}-{session.code.lower()}.md"
+                    self.src_session_dir, f"{session.page_name}.md"
                 ).write_text(
                     await self.template.render_session_page(
                         self.event, session, contributions
@@ -324,7 +324,7 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
         capacity_limiter = CapacityLimiter(16)
         async with create_task_group() as tg:
             for session in self.sessions:
-                if session and session.id and session.code:
+                if session and session.id:
                     tg.start_soon(_render_contribution, capacity_limiter, session)
 
     async def render_classification(self) -> None:

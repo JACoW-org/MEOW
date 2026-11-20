@@ -13,6 +13,7 @@
 
     <div class="right">
         <div class="title">
+            {{ if (.Params.name) }}
             <div class="code">
                 <b>{{ .Params.name | safeHTML }}</b>
             </div>
@@ -20,6 +21,7 @@
             <div class="sep">
                 -
             </div>
+            {{ end }}
 
             <div class="name">
                 {{ .Params.title | safeHTML }}

@@ -2,11 +2,11 @@
 
 <ul class="sessions">
   {% for session in sessions %}
-  {% if session.id and session.code %}
+  {% if session.id %}
   <li class="session">
-    <a data-href="session/{{ session.id }}-{{ session.code|lower }}/index.html" 
-      onclick="openUrl(`session/{{ session.id }}-{{ session.code|lower }}/index.html`)" 
-      href="javascript:void(0);"><b>{{ session.code }}</b> - <span>{{ session.title }}</span></a>
+    <a data-href="session/{{ session.page_name }}/index.html" 
+      onclick="openUrl(`session/{{ session.page_name }}/index.html`)" 
+      href="javascript:void(0);">{% if session.code %}<b>{{ session.code }}</b> - {% endif %}<span>{{ session.title }}</span></a>
   </li>
   {% endif %}
   {% endfor %}
