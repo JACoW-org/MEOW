@@ -156,3 +156,25 @@ def test_endnote_has_no_proceedings_title_without_a_short_title():
     titles = endnote(booktitle_short="").find("records/record/titles")
 
     assert titles.find("secondary-title") is None
+
+
+# --- RIS abstract (CAT#46) ---
+
+
+def test_ris_has_no_ab_line_without_an_abstract():
+    for abstract in ("", "   ", "\n"):
+        assert "AB" not in tags(ris(abstract=abstract))
+
+
+def test_ris_abstract_is_a_single_line():
+    lines = ris(abstract="First paragraph.\n\nSecond *paragraph*.\r\nThird\tline.")
+
+    assert [line for line in lines if line.startswith("AB")] == [
+        "AB  - First paragraph. Second *paragraph*. Third line."
+    ]
+    # every line of the record is a tag line
+    assert all(re.match(r"^[A-Z][A-Z0-9]  - ", line) for line in lines if line.strip())
+
+
+def test_ris_abstract_is_written_as_it_is_when_it_is_one_line():
+    assert "AB  - An abstract" in ris(abstract="An abstract")
