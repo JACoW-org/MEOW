@@ -111,6 +111,7 @@ async def test_proceedings_are_generated(kind, snapshot_task_params, meow_workdi
     assert fitz.open(volume).page_count >= paper_pages
     assert fitz.open(brief).page_count == len(papers)
 
-    # every included paper is listed in a session page
+    # every included paper is listed in a session page, also those of the
+    # sessions without a code (published under the id only, MEOW#39)
     session_pages = "".join(p.read_text() for p in (html / "session").rglob("*.html"))
     assert [r["paperId"] for r in included if r["paperId"] not in session_pages] == []

@@ -133,7 +133,9 @@ def get_footer_data(
     contrib_track = contribution.track.title if contribution.track else None
 
     classificationHeader = unidecode(contrib_track if contrib_track else "")
-    sessionHeader = unidecode(f"{session.code}: {session.title}")
+    sessionHeader = unidecode(
+        f"{session.code}: {session.title}" if session.code else session.title
+    )
 
     footer_data = dict(
         classificationHeader=classificationHeader,
