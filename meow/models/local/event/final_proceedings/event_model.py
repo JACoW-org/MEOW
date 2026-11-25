@@ -24,8 +24,10 @@ class PersonData:
 
     @property
     def short(self) -> str:
-        return f"{f'{self.first[0]}.' if len(self.first) > 0 else ''} {self.last}"
-
+        #return f"{f'{self.first[0]}.' if len(self.first) > 0 else ''} {self.last}"
+        #For IPAC'26 use full initials
+        return f"{extract_initials(self.first)} {self.last}"
+    
     @property
     def long(self) -> str:
         return f"{self.first} {self.last} ({self.affiliations_str})"
