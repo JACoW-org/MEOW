@@ -13,6 +13,9 @@ from meow.services.local.event.abstract_booklet.create_abstract_booklet import (
 from meow.services.local.event.abstract_booklet.export_abstract_booklet import (
     export_abstract_booklet_to_odt,
 )
+from meow.services.local.event.final_proceedings.manage_duplicates import (
+    resolve_duplicate_contributions_dicts,
+)
 
 from meow.utils.logger import event_id_var
 
@@ -58,6 +61,8 @@ async def event_abstract_booklet(
 
         """ """
 
+        resolve_duplicate_contributions_dicts(contributions, settings)
+
         logger.info("event_abstract_booklet - create_abstract_booklet_from_event")
 
         yield dict(
@@ -72,6 +77,7 @@ async def event_abstract_booklet(
             event,
             sessions,
             contributions,
+            settings,
         )
 
         """ """

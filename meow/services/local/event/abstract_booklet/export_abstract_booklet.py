@@ -1,5 +1,6 @@
 import io
 import logging as lg
+import re
 
 from ulid import ulid as ULID
 from operator import itemgetter
@@ -19,6 +20,16 @@ from meow.utils.datetime import format_datetime_time, format_datetime_full
 
 
 logger = lg.getLogger(__name__)
+
+
+def without_empty_code(template: str, code: str | None) -> str:
+    """Drop ``{code}`` and its separator from a header template when the
+    session has no code, so that "{code} - {title}" does not become " - title"
+    (JACoW-org/MEOW#39)."""
+    if code:
+        return template
+    return re.sub(r"\{code\}\s*[-:\u2013\u2014]*\s*", "", template)
+
 
 
 def _serialize_abstract_booklet(odt: OpenDocument):
@@ -345,14 +356,14 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
 
         session_idx = idx[session_id]
 
-        session_h1 = ab_session_h1 \
-            .replace("{code}", session_code) \
+        session_h1 = without_empty_code(ab_session_h1, session_code) \
+            .replace("{code}", session_code or "") \
             .replace("{title}", session_title) \
             .replace("{start}", session_start) \
             .replace("{end}", session_end)
 
-        session_h2 = ab_session_h2 \
-            .replace("{code}", session_code) \
+        session_h2 = without_empty_code(ab_session_h2, session_code) \
+            .replace("{code}", session_code or "") \
             .replace("{title}", session_title) \
             .replace("{start}", session_start) \
             .replace("{end}", session_end)
@@ -383,11 +394,17 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
 
             session_chair = P(stylename=styles.get('h2'), text="Chair: ")
 
+            chairs: list[str] = []
+
             for convener in session_conveners:
-                session_chair.addText(
-                    f"{convener.get('first')} {convener.get('last')} " +
-                    f"({', '.join(convener.get('affiliations'))})" if len(convener.get('affiliations')) else "" 
+                name = f"{convener.get('first')} {convener.get('last')}"
+                affiliations = sorted(convener.get('affiliations') or [])
+
+                chairs.append(
+                    f"{name} ({', '.join(affiliations)})" if affiliations else name
                 )
+
+            session_chair.addText(", ".join(chairs))
 
             odt.text.addElement(  # type: ignore
                 session_chair
@@ -577,7 +594,7 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
                         #     'affiliation') != '' else ''
 
                         affiliations = (
-                            f"({', '.join(item.get('affiliations'))})"
+                            f"({', '.join(sorted(item.get('affiliations')))})"
                             if len(item.get('affiliations'))
                             else ""
                         )
@@ -638,7 +655,7 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
                         # affiliation = f" ({item.get('affiliation')})" if item.get(
                         #     'affiliation') != '' else ''
                         affiliations = (
-                            f"({', '.join(item.get('affiliations'))})"
+                            f"({', '.join(sorted(item.get('affiliations')))})"
                             if len(item.get('affiliations'))
                             else ""
                         )
@@ -700,7 +717,7 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
                         # affiliation = f" ({item.get('affiliation')})" if item.get(
                         #     'affiliation') != '' else ''
                         affiliations = (
-                            f"({', '.join(item.get('affiliations'))})"
+                            f"({', '.join(sorted(item.get('affiliations')))})"
                             if len(item.get('affiliations'))
                             else ""
                         )
@@ -753,7 +770,7 @@ def _abstract_booklet_body(odt: OpenDocument, ab: dict, styles: dict, idx: dict,
                 if f.get('name', None)
             ]
 
-            field_values = contribution.get('field_values', list())
+            field_values = contribution.get('field_values', list()) or []
 
             for field in field_values:
 

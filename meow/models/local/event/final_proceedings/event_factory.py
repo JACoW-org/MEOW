@@ -177,7 +177,7 @@ def event_affiliation_factory(affiliation: dict) -> AffiliationData:
         city=affiliation.get("city"),
         country_code=affiliation.get("country_code"),
         postcode=affiliation.get("postcode"),
-        street=affiliation.get("postcode"),
+        street=affiliation.get("street"),
     )
 
     # logger.info(affiliation_data.as_dict())

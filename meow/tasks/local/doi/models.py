@@ -100,6 +100,10 @@ class ContributionDOI:
     def paper_size_mb(self) -> float:
         return paper_size_mb(self.paper_size)
 
+    @property
+    def pdf_url(self) -> str:
+        return f"https://jacow.org/{self.conference_doi_name.lower()}/pdf/{self.code}.pdf"
+
     def as_dict(self) -> dict:
         return asdict(self)
 
@@ -139,7 +143,7 @@ class ContributionDOI:
                 {
                     "key": "document",
                     "fulltext": True,
-                    "url": f"https://jacow.org/{self.conference_doi_name.lower()}/pdf/{self.code}.pdf",
+                    "url": self.pdf_url,
                     "source": "JACOW",
                 }
             ],

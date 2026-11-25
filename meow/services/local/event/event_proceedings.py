@@ -84,6 +84,9 @@ from meow.services.local.event.final_proceedings.build_doi_payloads import (
 from meow.services.local.event.final_proceedings.manage_duplicates import (
     manage_duplicates,
 )
+from meow.services.local.event.final_proceedings.check_sessions_without_code import (
+    check_sessions_without_code,
+)
 from meow.services.local.event.final_proceedings.link_static_site import (
     clean_static_site,
     link_static_site,
@@ -115,6 +118,9 @@ from meow.services.local.event.final_proceedings.build_refs_payloads import (
 )
 from meow.services.local.event.final_proceedings.check_duplicate_authors import (
     check_duplicate_authors,
+)
+from meow.services.local.event.final_proceedings.check_paper_file_names import (
+    check_paper_file_names,
 )
 
 from meow.utils.logger import event_id_var
@@ -329,6 +335,19 @@ async def _event_proceedings(
             ),
         )
 
+    # Not blocking: the editors are warned, the site is generated anyway
+
+    session_warnings = await check_sessions_without_code(proceedings)
+
+    for warning in session_warnings:
+        yield dict(
+            type="log",
+            value=ClientLog(
+                severity=ClientLogSeverity.WARNING,
+                message=warning,
+            ),
+        )
+
     """ """
 
     await extend_lock(lock)
@@ -515,6 +534,22 @@ async def _event_proceedings(
         settings,
         filter_published_contributions,
     )
+
+    # Not blocking: the editors are warned, the site is generated anyway
+
+    paper_file_name_warnings = await check_paper_file_names(
+        proceedings,
+        filter_published_contributions,
+    )
+
+    for warning in paper_file_name_warnings:
+        yield dict(
+            type="log",
+            value=ClientLog(
+                severity=ClientLogSeverity.WARNING,
+                message=warning,
+            ),
+        )
 
     if len(errors) > 0:
         if config.strict_pdf_check:
@@ -705,14 +740,8 @@ async def _event_proceedings(
         filter_published_contributions,
     )
 
-    for msg in opt_logs:
-        yield dict(
-            type="log",
-            value=ClientLog(
-                severity=ClientLogSeverity.INFO,
-                message=msg,
-            ),
-        )
+    for log in opt_logs:
+        yield dict(type="log", value=log)
 
     """ """
 

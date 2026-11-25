@@ -16,7 +16,7 @@ from shutil import disk_usage
 logger = lg.getLogger(__name__)
 
 
-async def api_root_endpoint() -> JSONResponse:
+async def api_root_endpoint(req: Request) -> JSONResponse:
     return JSONResponse({"method": "root"})
 
 

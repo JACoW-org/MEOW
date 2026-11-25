@@ -5,6 +5,18 @@
     <xml>
         <records>
             <record>
+                <ref-type>
+                    <xsl:choose>
+                        <xsl:when test="contribution/status = 'in_proceedings'">
+                            <xsl:attribute name="name">Conference Paper</xsl:attribute>
+                            <xsl:text>47</xsl:text>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="name">Unpublished Work</xsl:attribute>
+                            <xsl:text>34</xsl:text>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </ref-type>
                 <contributors>
                     <authors>
                         <xsl:for-each select="contribution/authors-list/author">
@@ -21,6 +33,12 @@
                     <title>
                         <xsl:value-of select="contribution/title"/>
                     </title>
+                    <xsl:if test="normalize-space(conference/booktitle-short) != ''">
+                        <secondary-title>
+                            <xsl:text>Proc. </xsl:text>
+                            <xsl:value-of select="normalize-space(conference/booktitle-short)"/>
+                        </secondary-title>
+                    </xsl:if>
                 </titles>
                 <publisher><xsl:value-of select="publisher"/></publisher>
                 <pub-location><xsl:value-of select="publisher-venue"/></pub-location>

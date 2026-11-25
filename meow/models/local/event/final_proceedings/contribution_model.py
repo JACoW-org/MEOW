@@ -7,6 +7,7 @@ from meow.models.local.event.final_proceedings.event_model import (
     KeywordData,
     PersonData,
 )
+from meow.models.local.event.final_proceedings.session_model import session_page_name
 from meow.models.local.event.final_proceedings.track_model import TrackData
 from meow.tasks.local.doi.models import AuthorsGroup, ContributionDOI
 from meow.tasks.local.reference.models import ContributionRef, Reference
@@ -67,6 +68,10 @@ class FileData:
     filename: str = field()
     md5sum: str = field()
     uuid: str = field()
+
+    # name of the file in Indico, when `filename` has been changed by MEOW
+    # (paper named after the contribution code, JACoW-org/MEOW#37)
+    original_filename: str = field(default="")
 
     class FileType:
         # __titles__ = [None, _('Paper'), _('Slides'), _('Poster')]
@@ -229,6 +234,10 @@ class DuplicateContributionData:
     acceptance: datetime | None = field(default=None)
     issuance: datetime | None = field(default=None)
 
+    @property
+    def session_page_name(self) -> str:
+        return session_page_name(self.session_id, self.session_code)
+
     def as_dict(self):
         return asdict(self)
 
@@ -359,24 +368,22 @@ class ContributionData:
 
         return field_value in ["", "yes", "true", "1"]
 
-    def preprint_marking(self, preprint_marking_alias: str, preprint_request_alias: str) -> bool:
-        field_value: str = ""
-
-        for _field in self.field_values:
-            if preprint_marking_alias.lower() in _field.name.lower() ==  and _field.value:
-                field_value = _field.value.lower()
-                break
-
-        return preprint_request_alias.lower() in field_value
-
-    def duplicate_of_code(self, duplicate_of_alias: str) -> str | None:
+    def duplicate_of_code(self, duplicate_of_alias: str | None = None) -> str | None:
         # after duplicate of is initialized, use this condition
         if self.duplicate_of:
             return self.duplicate_of.code
 
-        for _field in self.field_values:
-            if _field.name == duplicate_of_alias and _field.value:
-                return _field.value
+        aliases: list[str] = []
+        for candidate in [duplicate_of_alias, "CAT_duplicate_of", "duplicate_of"]:
+            if candidate and candidate.strip():
+                c_norm = candidate.strip().casefold()
+                if c_norm not in aliases:
+                    aliases.append(c_norm)
+
+        for alias in aliases:
+            for _field in self.field_values:
+                if _field.name and _field.name.strip().casefold() == alias and _field.value:
+                    return _field.value
 
         return None
 
@@ -417,6 +424,7 @@ class ContributionData:
         return False
 
     def paper_name(self) -> str | None:
+        """Name of the paper in the site: ``{CODE}.pdf``."""
         if (
             self.papers
             and self.papers.latest_revision
@@ -425,6 +433,18 @@ class ContributionData:
             for file in self.papers.latest_revision.files:
                 if file.file_type == FileData.FileType.paper:
                     return file.filename
+        return None
+
+    def paper_original_name(self) -> str | None:
+        """Name of the paper file in Indico, as uploaded."""
+        if (
+            self.papers
+            and self.papers.latest_revision
+            and self.papers.latest_revision.files
+        ):
+            for file in self.papers.latest_revision.files:
+                if file.file_type == FileData.FileType.paper:
+                    return file.original_filename or file.filename
         return None
 
     def has_slides(self) -> bool:
@@ -498,3 +518,17 @@ class ContributionPosterData:
 
     def as_json(self) -> str:
         return json_encode(self.as_dict()).decode()
+
+
+def preprint_marking(contribution_dict, preprint_marking_alias: str, preprint_request_alias: str) -> bool:
+    field_name = (preprint_marking_alias or 'CAT_preprint_marking').strip().casefold()
+    requested_value = (preprint_request_alias or 'ATTIVO').strip().casefold()
+    accepted_values = {requested_value}
+    if not preprint_request_alias:
+        accepted_values.add('i wish my paper to be marked as preprint')
+
+    for field in contribution_dict.get("field_values") or []:
+        if (field.get("name") or "").strip().casefold() == field_name:
+            return (field.get("value") or "").strip().casefold() in accepted_values
+
+    return False

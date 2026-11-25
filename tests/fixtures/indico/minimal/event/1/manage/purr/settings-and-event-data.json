@@ -1,0 +1,43 @@
+{
+  "event": {
+    "address": "Via Test 1\n34149 Trieste\nItaly",
+    "category": "Home",
+    "chairs": [],
+    "description": "<p>Mock conference used by the MEOW test suite.</p>",
+    "start_dt": {
+      "date": "2026-05-10",
+      "time": "09:00:00",
+      "tz": "Europe/Rome"
+    },
+    "end_dt": {
+      "date": "2026-05-12",
+      "time": "18:00:00",
+      "tz": "Europe/Rome"
+    },
+    "id": "1",
+    "keywords": [],
+    "location": "Trieste",
+    "organizer": "",
+    "references": [],
+    "room": "",
+    "room_name": "",
+    "timezone": "Europe/Rome",
+    "title": "MOCK2026 - Test Conference",
+    "url": "http://mock-indico.invalid/event/1/"
+  },
+  "settings": {
+    "ab_session_h1": "{code} - {title}",
+    "ab_session_h2": "{start} / {end}",
+    "ab_contribution_h1": "| {code} | / | {start} |",
+    "ab_contribution_h2": "| {code} | / | {start} |",
+    "booktitle_long": "Mock Test Conference (MOCK2026)",
+    "booktitle_short": "MOCK2026",
+    "connected": true,
+    "custom_fields": [
+      {
+        "name": "Funding Agency"
+      }
+    ],
+    "materials": []
+  }
+}

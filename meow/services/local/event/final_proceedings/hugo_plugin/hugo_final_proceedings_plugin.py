@@ -4,6 +4,7 @@ from anyio import Path, run_process
 from anyio import create_task_group, CapacityLimiter
 
 from meow.utils.filesystem import cptree, rmtree
+from meow.utils.collections import authors_of_institute, group_authors_by_institute
 
 from meow.models.local.event.final_proceedings.track_model import TrackData
 from meow.models.local.event.final_proceedings.contribution_model import (
@@ -313,7 +314,7 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
                 # logger.info(f"{session} -> {len(contributions)}")
 
                 await Path(
-                    self.src_session_dir, f"{session.id}-{session.code.lower()}.md"
+                    self.src_session_dir, f"{session.page_name}.md"
                 ).write_text(
                     await self.template.render_session_page(
                         self.event, session, contributions
@@ -323,7 +324,7 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
         capacity_limiter = CapacityLimiter(16)
         async with create_task_group() as tg:
             for session in self.sessions:
-                if session and session.id and session.code:
+                if session and session.id:
                     tg.start_soon(_render_contribution, capacity_limiter, session)
 
     async def render_classification(self) -> None:
@@ -413,15 +414,8 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
             self.src_dir, "layouts", "partials", "institute", "list.html"
         )
 
-        authorsGroups: dict[str, list[dict]] = {}
-
-        for author in self.authors:
-            for affiliation in author.affiliations:
-                if not (affiliation in authorsGroups):
-                    authorsGroups[affiliation] = []
-                authorsGroups[affiliation].append(
-                    {"code": author.code, "short": author.short}
-                )
+        # by institute id: the spellings of an institute share the same id
+        authorsGroups: dict[str, list[dict]] = group_authors_by_institute(self.authors)
 
         # for author in self.authors:
         #     if not (author.affiliations in authorsGroups):
@@ -461,7 +455,7 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
             institute_capacity_limiter: CapacityLimiter, institute: AffiliationData
         ) -> None:
             async with institute_capacity_limiter:
-                authors = [c for c in self.authors if institute.name in c.affiliations]
+                authors = authors_of_institute(self.authors, institute.id)
 
                 # logger.info(f"{institute} -> {len(authors)}")
 
@@ -494,8 +488,20 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
         )
 
         contributionsGroups: dict[str, list[dict]] = {}
+        ris_institute_ids: set[str] = set()
+
+        ris_dir = Path(self.src_dir, "static", "ris", "institute")
+        await ris_dir.mkdir(parents=True, exist_ok=True)
 
         for institute in self.institutes:
+            institute_contributions = [
+                c
+                for c in self.contributions
+                if self.filter_published_contributions(c)
+                and c.doi_data
+                and institute in c.institutes
+            ]
+
             contributionsGroups[institute.name] = [
                 dict(
                     code=c.code,
@@ -506,11 +512,19 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
                     is_included_in_proceedings=c.is_included_in_proceedings,
                     doi_data=c.doi_data,
                 )
-                for c in self.contributions
-                if self.filter_published_contributions(c)
-                and c.doi_data
-                and institute in c.institutes
+                for c in institute_contributions
             ]
+
+            ris_records = [
+                c.reference.ris.strip()
+                for c in institute_contributions
+                if c.reference and c.reference.ris and c.reference.ris.strip()
+            ]
+            if ris_records and institute.id:
+                await Path(ris_dir, f"{institute.id}.ris").write_text(
+                    "\n\n".join(ris_records) + "\n"
+                )
+                ris_institute_ids.add(institute.id)
 
         institutes: list = [
             i for i in self.institutes if len(contributionsGroups[i.name]) > 0
@@ -520,7 +534,9 @@ class HugoProceedingsPlugin(AbstractFinalProceedingsPlugin):
 
         await doi_per_institute_partial_dir.write_text(
             await self.template.render_doi_per_institute_partial(
-                institutes, contributionsGroups
+                institutes,
+                contributionsGroups,
+                ris_institute_ids,
             )
         )
 

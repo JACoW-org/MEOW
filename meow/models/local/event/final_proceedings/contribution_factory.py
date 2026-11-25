@@ -4,6 +4,8 @@ from typing import Any
 
 from meow.models.local.event.final_proceedings.track_factory import track_data_factory
 
+from meow.models.local.event.final_proceedings.contribution_model import preprint_marking
+
 from meow.models.local.event.final_proceedings.event_factory import (
     event_affiliation_factory,
     event_person_factory,
@@ -18,7 +20,10 @@ from meow.models.local.event.final_proceedings.contribution_model import (
     TagData,
     UserData,
 )
-from meow.models.local.event.final_proceedings.event_model import PersonData
+from meow.models.local.event.final_proceedings.event_model import (
+    AffiliationData,
+    PersonData,
+)
 
 from meow.utils.list import find
 
@@ -65,7 +70,8 @@ def contribution_editable_factory(
 
 
 def contribution_data_factory(
-    contribution: Any, editors: list[PersonData], event_timezone: str
+    contribution: Any, editors: list[PersonData], event_timezone: str,
+    preprint_marking_alias: str | None = None, preprint_request_alias: str | None = None
 ) -> ContributionData:
     logger.info(f"contribution_code: {contribution.get('code')}")
 
@@ -284,7 +290,7 @@ def contribution_data_factory(
     logger.info(f"checking preprint marking request:")
     logger.info(f"preprint_marking_alias {preprint_marking_alias}")
     logger.info(f"preprint_request_alias {preprint_request_alias}")
-    preprint_marking_requested=contribution.preprint_marking( preprint_marking_alias, preprint_request_alias)
+    preprint_marking_requested=preprint_marking(contribution, preprint_marking_alias, preprint_request_alias)
     logger.info(f"preprint_marking_requested {preprint_marking_requested}")
 
     """ """
@@ -345,6 +351,8 @@ def contribution_data_factory(
     # accepted: qa ok
     # issue: date of proceedings
 
+    name_papers_after_code(papers_data, contribution.get("code"))
+
     contribution_data = ContributionData(
         id=contribution.get("id"),
         code=contribution.get("code"),
@@ -358,13 +366,8 @@ def contribution_data_factory(
         track=track_data_factory(contribution.get("track")),
         keywords=list(set([])),
         authors=list(set(authors)),
-        institutes=list(
-            set(
-                [
-                    event_affiliation_factory(institute)
-                    for institute in contribution.get("institutes", [])
-                ]
-            )
+        institutes=contribution_institutes_factory(
+            contribution.get("institutes", []), authors
         ),
         room=contribution.get("room"),
         location=contribution.get("location"),
@@ -385,6 +388,7 @@ def contribution_data_factory(
         is_included_in_pdf_check=is_included_in_pdf_check,
         is_included_in_references=is_included_in_references,
         peer_reviewing_accepted=peer_reviewing_accepted,
+        preprint_marking_requested=preprint_marking_requested,
         papers=papers_data,
         slides=slides_data,
         posters=posters_data,
@@ -472,6 +476,72 @@ def contribution_user_factory(user: Any) -> UserData | None:
         if user
         else None
     )
+
+
+def contribution_institutes_factory(
+    institutes: list[dict], authors: list[PersonData]
+) -> list[AffiliationData]:
+    """Institutes of a contribution: the affiliations of its authors.
+
+    PURR sends the institutes of the primary authors only, and for each of them
+    both the linked affiliations and the free text of the affiliation as it is.
+    The free text is not what the authors use when they have linked
+    affiliations ("Paul Scherrer Institut" vs "Paul Scherrer Institute"), and
+    "A; B" is the free text of an author with two affiliations: they would be
+    institutes without authors (CAT#42, CAT#43). The institute of a coauthor is
+    missing (CAT#41).
+
+    The institutes are the affiliations of all the authors, the same used for
+    the author pages and indexes. The data sent by PURR for the same institute
+    (name spelling, city, country...) is kept when there is any; the names sent
+    by PURR are split on ``;``. If no author has an affiliation, the institutes
+    sent by PURR are used as they are.
+    """
+    purr: dict[str, AffiliationData] = {}
+
+    for institute in institutes:
+        data = event_affiliation_factory(institute)
+        for name in (n.strip() for n in data.name.split(";")):
+            if name:
+                candidate = event_affiliation_factory({**institute, "name": name})
+                purr.setdefault(candidate.id, candidate)
+
+    result: dict[str, AffiliationData] = {}
+
+    for author in authors:
+        for name in author.affiliations if author else []:
+            name = name.strip()
+            if name:
+                institute_id = event_affiliation_factory({"name": name}).id
+                result.setdefault(
+                    institute_id,
+                    purr.get(institute_id) or event_affiliation_factory({"name": name}),
+                )
+
+    return list(result.values()) or list(purr.values())
+
+
+def name_papers_after_code(papers: EditableData | None, code: str | None) -> None:
+    """Name the paper files ``{CODE}.pdf``, whatever the uploaded name.
+
+    Indico names the paper after the code at upload time: if the code changes
+    afterwards the file keeps the old one. The paper is always named after the
+    contribution code, so that the site, the DOI landing page and the
+    references use the same name (JACoW-org/MEOW#37). The uploaded name is
+    kept in ``original_filename``.
+    """
+    if not papers or not code:
+        return
+
+    revisions = list(papers.all_revisions)
+    if papers.latest_revision:
+        revisions.append(papers.latest_revision)
+
+    for revision in revisions:
+        for file in revision.files:
+            if file.file_type == FileData.FileType.paper and not file.original_filename:
+                file.original_filename = file.filename
+                file.filename = f"{code.strip().upper()}.pdf"
 
 
 def contribution_file_factory(file: Any) -> FileData:

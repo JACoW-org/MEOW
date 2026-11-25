@@ -1,14 +1,25 @@
 import logging as lg
 
 from typing import Any
+from meow.models.local.event.final_proceedings.event_factory import (
+    _generate_affiliations,
+)
+from meow.services.local.event.final_proceedings.manage_duplicates import (
+    resolve_duplicate_contributions_dicts,
+)
 from meow.utils.datetime import datedict_to_tz_datetime, datetime_localize, format_datetime_sec
 
 
 logger = lg.getLogger(__name__)
 
 
-async def create_abstract_booklet_from_event(event: dict, sessions: list, contributions: list) -> dict:
+async def create_abstract_booklet_from_event(
+    event: dict, sessions: list, contributions: list, settings: dict | None = None
+) -> dict:
     """ """
+
+    if settings:
+        resolve_duplicate_contributions_dicts(contributions, settings)
 
     # for c in contributions:
     #     logger.info(f"{c.get('code')} -> {c.get('session_code')}")
@@ -213,7 +224,10 @@ async def create_abstract_booklet_from_event(event: dict, sessions: list, contri
     return abstract_booklet
 
 
-def _get_affiliations(affiliation: str, multiple_affiliations: list[str]) -> set[str]:
-    affiliations = [affiliation] if affiliation else []
+def _get_affiliations(affiliation: str | None, multiple_affiliations: list[str] | None) -> set[str]:
+    """Affiliations of a person: the same rule as the proceedings (CAT#47).
 
-    return set(affiliations + multiple_affiliations)
+    The linked affiliations when there are any; otherwise the free text, split
+    on ";".
+    """
+    return _generate_affiliations(affiliation or "", multiple_affiliations or [])

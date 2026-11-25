@@ -6,6 +6,8 @@ from typing import Callable
 
 from anyio import CapacityLimiter, Path, create_task_group
 
+from meow.app.config import conf
+
 from meow.models.local.event.final_proceedings.contribution_model import FileData
 from meow.models.local.event.final_proceedings.event_model import MaterialData
 from meow.models.local.event.final_proceedings.proceedings_data_utils import (
@@ -136,7 +138,7 @@ async def brief_pdf_task(
 
     brief_pdf_results: list[str] = []
 
-    capacity_limiter = CapacityLimiter(12)
+    capacity_limiter = CapacityLimiter(conf.PDFTK_CONCURRENCY)
 
     chunk_size = int(sqrt(len(files_data))) + 1
 
@@ -243,7 +245,7 @@ async def vol_pdf_task(
 
     vol_pdf_results: list[str] = []
 
-    capacity_limiter = CapacityLimiter(12)
+    capacity_limiter = CapacityLimiter(conf.PDFTK_CONCURRENCY)
 
     chunk_size = int(sqrt(len(files_data))) + 1
 
@@ -371,7 +373,7 @@ async def get_vol_toc_pdf_path(
             )
 
         for contribution in proceedings_data.contributions:
-            if callback(contribution) is False or not contribution.session_code:
+            if callback(contribution) is False:
                 continue
 
             if contribution.session_id in session_ids:

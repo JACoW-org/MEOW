@@ -1,0 +1,139 @@
+{
+  "contributions": [
+    {
+      "id": "1",
+      "friendly_id": 1,
+      "field_values": [
+        {
+          "name": "Funding Agency",
+          "value": "Mock Foundation grant 42"
+        },
+        {
+          "name": "Footnotes",
+          "value": "Footnote that must not appear"
+        }
+      ],
+      "title": "First Light from the Mock Source",
+      "paper": null,
+      "start_dt": {
+        "date": "2026-05-10",
+        "time": "09:00:00",
+        "tz": "Europe/Rome"
+      },
+      "end_dt": {
+        "date": "2026-05-10",
+        "time": "09:30:00",
+        "tz": "Europe/Rome"
+      },
+      "duration": 30,
+      "room_name": "Aula Magna",
+      "location": "Test Venue",
+      "type": "Oral Presentation",
+      "description": "We report the first light.\nThe second paragraph of the abstract.",
+      "url": "http://mock-indico.invalid/event/1/contributions/1/",
+      "speakers": [
+        {
+          "id": "1",
+          "email": "anna.bianchi@example.org",
+          "first_name": "Anna",
+          "last_name": "Bianchi",
+          "affiliation": "Test Laboratory A",
+          "multiple_affiliations": []
+        }
+      ],
+      "primary_authors": [
+        {
+          "id": "1",
+          "email": "anna.bianchi@example.org",
+          "first_name": "Anna",
+          "last_name": "Bianchi",
+          "affiliation": "Test Laboratory A",
+          "multiple_affiliations": []
+        },
+        {
+          "id": "2",
+          "email": "marco.verdi@example.org",
+          "first_name": "Marco",
+          "last_name": "Verdi",
+          "affiliation": "Test University B",
+          "multiple_affiliations": [
+            "Test Laboratory A"
+          ]
+        }
+      ],
+      "coauthors": [
+        {
+          "id": "3",
+          "email": "zoë.müller-žďárský@example.org",
+          "first_name": "Zoë",
+          "last_name": "Müller-Žďárský",
+          "affiliation": "Test Institute C",
+          "multiple_affiliations": []
+        }
+      ],
+      "track": null,
+      "institutes": [],
+      "code": "MOA01",
+      "session_id": 11,
+      "session_code": "MOA",
+      "sub_contributions": [],
+      "editables": []
+    },
+    {
+      "id": "2",
+      "friendly_id": 2,
+      "field_values": [
+        {
+          "name": "Funding Agency",
+          "value": ""
+        }
+      ],
+      "title": "Beam Dynamics & Stability <Preliminary>",
+      "paper": null,
+      "start_dt": {
+        "date": "2026-05-10",
+        "time": "09:30:00",
+        "tz": "Europe/Rome"
+      },
+      "end_dt": {
+        "date": "2026-05-10",
+        "time": "10:00:00",
+        "tz": "Europe/Rome"
+      },
+      "duration": 30,
+      "room_name": "Aula Magna",
+      "location": "Test Venue",
+      "type": "Oral Presentation",
+      "description": "Single-line abstract with special characters: & < > \" '.",
+      "url": "http://mock-indico.invalid/event/1/contributions/2/",
+      "speakers": [
+        {
+          "id": "4",
+          "email": "luca.neri@example.org",
+          "first_name": "Luca",
+          "last_name": "Neri",
+          "affiliation": "Test University B",
+          "multiple_affiliations": []
+        }
+      ],
+      "primary_authors": [
+        {
+          "id": "4",
+          "email": "luca.neri@example.org",
+          "first_name": "Luca",
+          "last_name": "Neri",
+          "affiliation": "Test University B",
+          "multiple_affiliations": []
+        }
+      ],
+      "coauthors": [],
+      "track": null,
+      "institutes": [],
+      "code": "MOA02",
+      "session_id": 11,
+      "session_code": "MOA",
+      "sub_contributions": [],
+      "editables": []
+    }
+  ]
+}
