@@ -37,15 +37,17 @@ def proceedings_data_factory(event: Any, sessions: list, contributions: list,
     editors_dict_list = json_decode(settings.get(
         'editorial_json', '{}'))
 
+    initials_style: str = settings.get('initials_style', 'single')
+
     editors: list[PersonData] = [
-        event_person_factory(person)
+        event_person_factory(person, initials_style)
         for person in editors_dict_list
     ]
 
     """ create sessions data """
 
     sessions_data: list[SessionData] = [
-        session_data_factory(session, event_timezone)
+        session_data_factory(session, event_timezone, initials_style)
         for session in sessions
     ]
 
@@ -59,7 +61,8 @@ def proceedings_data_factory(event: Any, sessions: list, contributions: list,
     contributions_data: list[ContributionData] = [
         c for c in [
             contribution_data_factory(
-                c, editors, event_timezone, preprint_marking_alias, preprint_request_alias
+                c, editors, event_timezone, preprint_marking_alias, preprint_request_alias,
+                initials_style
             ) for c in contributions
         ] if c and c.cat_publish(cat_publish_alias)
     ]

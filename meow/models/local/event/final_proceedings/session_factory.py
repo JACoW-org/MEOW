@@ -11,7 +11,8 @@ from meow.models.local.event.final_proceedings.session_model import SessionData
 logger = lg.getLogger(__name__)
 
 
-def session_data_factory(session_slot: Any, event_timezone: str) -> SessionData:
+def session_data_factory(session_slot: Any, event_timezone: str,
+                         initials_style: str = "single") -> SessionData:
 
     session_event = session_slot.get('session')
     session_event_code = session_event.get('code', '')
@@ -37,7 +38,7 @@ def session_data_factory(session_slot: Any, event_timezone: str) -> SessionData:
         ),
         is_poster=bool(session_event.get('is_poster')),
         conveners=[
-            event_person_factory(person)
+            event_person_factory(person, initials_style)
             for person in session_slot.get('conveners', [])
         ]
     )

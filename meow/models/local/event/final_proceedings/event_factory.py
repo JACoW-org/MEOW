@@ -139,7 +139,7 @@ def _generate_affiliations(
     return set()
 
 
-def event_person_factory(person: dict) -> PersonData:
+def event_person_factory(person: dict, initials_style: str = "single") -> PersonData:
     first = _normalize_name(person.get("first_name").strip())
     last = _normalize_name(person.get("last_name").strip())
     email = person.get("email").strip() if person.get("email") else ""
@@ -163,6 +163,7 @@ def event_person_factory(person: dict) -> PersonData:
         last=last,
         affiliations=affiliations,
         email=email,
+        initials_style=initials_style,
     )
 
     # logger.info(event_person_data.as_dict())
