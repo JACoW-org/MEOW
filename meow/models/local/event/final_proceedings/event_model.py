@@ -16,7 +16,7 @@ class PersonData:
     email: str
     # "single" (default) -> single first initial; "multiple" -> full initials (extract_initials).
     # Anything else falls back to the "single" behavior.
-    initials_style: str = "single"
+    initials_style: str = "multiple"
 
     @property
     def code(self) -> str:
