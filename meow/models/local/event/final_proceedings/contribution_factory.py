@@ -71,7 +71,8 @@ def contribution_editable_factory(
 
 def contribution_data_factory(
     contribution: Any, editors: list[PersonData], event_timezone: str,
-    preprint_marking_alias: str | None = None, preprint_request_alias: str | None = None
+    preprint_marking_alias: str | None = None, preprint_request_alias: str | None = None,
+    initials_style: str = "single"
 ) -> ContributionData:
     logger.info(f"contribution_code: {contribution.get('code')}")
 
@@ -338,7 +339,7 @@ def contribution_data_factory(
     """ """
 
     authors = [
-        event_person_factory(person)
+        event_person_factory(person, initials_style)
         for person in (
             contribution.get("primary_authors", []) + contribution.get("coauthors", [])
         )
@@ -397,14 +398,14 @@ def contribution_data_factory(
         acceptance=acceptance,
         issuance=issuance,
         speakers=[
-            event_person_factory(person) for person in contribution.get("speakers", [])
+            event_person_factory(person, initials_style) for person in contribution.get("speakers", [])
         ],
         primary_authors=[
-            event_person_factory(person)
+            event_person_factory(person, initials_style)
             for person in contribution.get("primary_authors", [])
         ],
         coauthors=[
-            event_person_factory(person) for person in contribution.get("coauthors", [])
+            event_person_factory(person, initials_style) for person in contribution.get("coauthors", [])
         ],
         editors=editors,
     )

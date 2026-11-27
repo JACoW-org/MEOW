@@ -198,9 +198,11 @@ async def contributions_group_by_institute(
         institute_list: list[AffiliationData] = []
 
         for contribution in proceedings_data.contributions:
-            for institute in contribution.institutes:
-                if institute and institute not in institute_list:
-                    institute_list.append(institute)
+            for institutes in contribution.institutes:
+                #handles multiple institutes
+                for institute in institutes.split(";"):
+                    if institute and institute not in institute_list:
+                        institute_list.append(institute)
 
         institute_list = list(set(institute_list))
 

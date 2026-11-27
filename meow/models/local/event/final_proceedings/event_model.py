@@ -2,6 +2,7 @@ from dataclasses import dataclass, field, asdict
 from datetime import datetime
 
 from meow.utils.slug import slugify
+from meow.models.local.event.final_proceedings.extract_initials import extract_initials
 
 
 @dataclass(kw_only=True, slots=True)
@@ -13,6 +14,9 @@ class PersonData:
     last: str
     affiliations: set[str]
     email: str
+    # "single" (default) -> single first initial; "multiple" -> full initials (extract_initials).
+    # Anything else falls back to the "single" behavior.
+    initials_style: str = "multiple"
 
     @property
     def code(self) -> str:
@@ -24,8 +28,12 @@ class PersonData:
 
     @property
     def short(self) -> str:
+        # "multiple": For IPAC'26 use full initials
+        if self.initials_style == "multiple":
+            return f"{extract_initials(self.first)} {self.last}"
+        # default ("single" or anything else): single first initial
         return f"{f'{self.first[0]}.' if len(self.first) > 0 else ''} {self.last}"
-
+    
     @property
     def long(self) -> str:
         return f"{self.first} {self.last} ({self.affiliations_str})"
@@ -42,8 +50,11 @@ class PersonData:
         return hash(("id", self.id))
 
     def as_dict(self) -> dict:
+        data = asdict(self)
+        # initials_style is configuration, not author data
+        data.pop("initials_style", None)
         return {
-            **asdict(self),
+            **data,
             "name": self.name,
             "short": self.short,
             "long": self.long,

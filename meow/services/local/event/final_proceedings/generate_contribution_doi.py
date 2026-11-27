@@ -151,8 +151,10 @@ async def generate_conference_hep_task(
 
     editors_dict_list = json_decode(settings.get("editorial_json", "{}"))
 
+    initials_style: str = settings.get("initials_style", "single")
+
     editors: list[PersonData] = [
-        event_person_factory(person) for person in editors_dict_list
+        event_person_factory(person, initials_style) for person in editors_dict_list
     ]
 
     conference_hep = {
@@ -229,8 +231,10 @@ async def generate_conference_doi_task(
 
     editors_dict_list = json_decode(settings.get("editorial_json", "{}"))
 
+    initials_style: str = settings.get("initials_style", "single")
+
     editors: list[PersonData] = [
-        event_person_factory(person) for person in editors_dict_list
+        event_person_factory(person, initials_style) for person in editors_dict_list
     ]
 
     relatedIdentifiers = []
